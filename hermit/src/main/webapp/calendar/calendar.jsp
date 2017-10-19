@@ -305,10 +305,12 @@
 		<form id="eventForm">
 			<fieldset>
 				<input id="eventId" name="eventId"type="hidden"/>
-				預約會員：<input id="member"type="text" name="member"value="" readonly/><br/>
+				預約會員：<input id="member"type="text"value="" disabled/><br/>
+					   <input id="member"type="hidden" name="member"value="" readonly/>
 				開始時間：<input id="startTime"type="text" name="start"value=""readonly/><br/>
 				結束時間：<input id="endTime"type="text" name="end"value=""readonly/><br/>
-				預約房屋：<input id="house"type="text" name="house"value="" readonly/><br/>
+				預約房屋：<input id="house"type="text" value="" disabled/><br/>
+					   <input id="house"type="hidden" name="house"value="" readonly/>
 				<p style="float:left">備註內容：</p><textarea id="ps" name="ps"style="resize:none"> </textarea><br/>
 			</fieldset>
 		</form>
