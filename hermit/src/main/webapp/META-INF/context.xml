@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?> 
+<!-- allowCasualMultipartParsing="true"用了才能接收multipart -->
+<Context allowCasualMultipartParsing="true">
+                  
+  <Resource name="jdbc/JNDI" type="javax.sql.DataSource"
+      username="sa" password="P@ssw0rd"
+      driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+      url="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=hermit"
+      maxIdle="2"
+  />
+</Context>

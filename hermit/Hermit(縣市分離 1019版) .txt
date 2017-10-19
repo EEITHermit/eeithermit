@@ -1,0 +1,424 @@
+﻿use hermit
+go
+
+drop table Infraction
+drop table Favorite
+drop table DispatchList
+drop table QandA
+drop table TeamArea
+drop table TeamMemberList
+drop table BusinTeam
+drop table ADManager
+drop table Reservation
+drop table CalendarEvent
+drop table equipmentCondition
+drop table HousePicture
+drop table Lease
+drop table house
+drop table houseform
+drop table housetype
+drop table Boroughs
+drop table city
+drop table Emp
+drop table Post
+drop table Member
+go
+
+CREATE TABLE HouseForm(
+	formNO decimal(4,0)IDENTITY(2010,10) primary key NOT NULL,
+	hForm varchar(50) NOT NULL
+)
+go
+insert into HouseForm values('獨立套房');
+insert into HouseForm values('整層住家');
+insert into HouseForm values('分租套房');
+insert into HouseForm values('雅房');
+go
+
+CREATE TABLE HouseType(
+	typeNO decimal(4,0) IDENTITY(2010,10) primary key NOT NULL,
+	hType varchar(50) NOT NULL
+	)
+go
+insert into HouseType values('公寓');
+insert into HouseType values('電梯大樓');
+insert into HouseType values('透天厝');
+insert into HouseType values('別墅');
+GO
+
+CREATE TABLE city(
+	cityNO decimal(3 ,0) NOT NULL identity(1,1),
+	cityName varchar(50) NOT NULL,
+	constraint city_cityNO_pk primary key (cityNO)
+)
+GO
+insert into city values('臺北市');
+insert into city values('新北市');
+insert into city values('基隆市');
+insert into city values('桃園市');
+insert into city values('新竹市');
+insert into city values('新竹縣');
+insert into city values('苗栗縣');
+insert into city values('台中市');
+insert into city values('彰化縣');
+insert into city values('雲林縣');
+insert into city values('南投縣');
+insert into city values('高雄市');
+insert into city values('台南市');
+insert into city values('嘉義市');
+insert into city values('嘉義縣');
+insert into city values('屏東縣');
+insert into city values('台東縣');
+insert into city values('花蓮縣');
+insert into city values('宜蘭縣');
+insert into city values('澎湖縣');
+insert into city values('金門縣');
+insert into city values('連江縣');
+
+GO
+
+CREATE TABLE Boroughs
+	(
+	boroughNO decimal(4,0)  NOT NULL IDENTITY(1,1),
+	boroughName varchar(50) NOT NULL,
+	cityNO decimal(3,0) NOT NULL,
+
+	CONSTRAINT Boroughs_City_fk FOREIGN KEY(cityNO) REFERENCES city(cityNO),
+	constraint boroughs_boroughNO_pk primary key (boroughNO)
+	)
+GO
+insert into boroughs values('中正區','1');
+insert into boroughs values('大同區','1');
+insert into boroughs values('中山區','1');
+insert into boroughs values('松山區','1');
+insert into boroughs values('大安區','1');
+insert into boroughs values('萬華區','1');
+insert into boroughs values('信義區','1');
+insert into boroughs values('士林區','1');
+insert into boroughs values('北投區','1');
+insert into boroughs values('內湖區','1');
+insert into boroughs values('南港區','1');
+insert into boroughs values('文山區','1');
+GO
+insert into boroughs values('萬里區','2');
+insert into boroughs values('金山區','2');
+insert into boroughs values('板橋區','2');
+insert into boroughs values('汐止區','2');
+insert into boroughs values('深坑區','2');
+insert into boroughs values('石碇區','2');
+insert into boroughs values('瑞芳區','2');
+insert into boroughs values('平溪區','2');
+insert into boroughs values('雙溪區','2');
+insert into boroughs values('貢寮區','2');
+insert into boroughs values('新店區','2');
+insert into boroughs values('坪林區','2');
+insert into boroughs values('烏來區','2');
+insert into boroughs values('永和區','2');
+insert into boroughs values('中和區','2');
+insert into boroughs values('土城區','2');
+insert into boroughs values('三峽區','2');
+insert into boroughs values('樹林區','2');
+insert into boroughs values('鶯歌區','2');
+insert into boroughs values('三重區','2');
+insert into boroughs values('新莊區','2');
+insert into boroughs values('泰山區','2');
+insert into boroughs values('林口區','2');
+insert into boroughs values('蘆洲區','2');
+insert into boroughs values('五股區','2');
+insert into boroughs values('八里區','2');
+insert into boroughs values('淡水區','2');
+insert into boroughs values('三芝區','2');
+insert into boroughs values('石門區','2');
+GO
+
+CREATE TABLE House(
+	houseNO decimal(5,0) IDENTITY(20001,1) primary key NOT NULL,
+	houseTitle varchar(50) NOT NULL,
+	cityNO decimal(3,0)  NOT NULL,
+	boroughNO decimal(4,0)  NOT NULL,
+	highestFloor decimal(2,0) NOT NULL,
+	nowFloor decimal(2,0) NOT NULL,
+	houseStatus varchar(10) NOT NULL,
+	houseRent int NOT NULL,
+	houseCharge int NULL,
+	waterRate varchar(16) NOT NULL,
+	powerRate varchar(16) NOT NULL,												---修改過
+	houseVideo varchar(200) NULL,												---修改過
+	typeNO decimal(4,0) NOT NULL,
+	formNO decimal(4,0) NOT NULL,
+	houseAddr varchar(100) not null,
+	houseSize decimal (6,2) not null, 
+	CONSTRAINT House_HouseForm_fk FOREIGN KEY(formNO) REFERENCES HouseForm(formNO),
+	CONSTRAINT House_HouseType_fk FOREIGN KEY(typeNO) REFERENCES HouseType(typeNO),
+	CONSTRAINT House_borough_fk FOREIGN KEY(boroughNO) REFERENCES boroughs(boroughNO),
+	CONSTRAINT House_city_fk FOREIGN KEY(cityNO) REFERENCES city(cityNO)
+	)
+
+go
+
+insert into house values('精美小套房',1,1,15,5,'已出租',15000,1000,'包水','按帳單計費','123',2010,2010,'大馬路1號',17.23);
+GO
+
+CREATE TABLE Post
+	(
+	postNO decimal(3,0) NOT NULL IDENTITY (310, 10),
+	postName varchar(20) NOT NULL,
+	constraint Post_PostNo_pk primary key (postNO)
+	)  
+GO
+insert into Post values ('系統管理員');
+insert into Post values ('業務人員');
+insert into Post values ('客服人員');
+insert into Post values ('修繕人員');
+GO
+
+CREATE TABLE Emp
+	(
+	empNO decimal(5,0) NOT NULL IDENTITY (30001, 1),
+	empAccount varchar(12) NOT NULL,
+	empPwd varchar(12) NOT NULL,
+	empPhone varchar(12) NOT NULL,
+	empName varchar(20) NOT NULL,
+	postNO decimal(3,0) NOT NULL,
+	empStatus bit NOT NULL,
+	constraint Emp_Post_fk foreign key (postNO) references Post (postNO),
+	constraint Emp_empno_pk primary key (empNO)
+	)
+GO
+insert into emp values('MKLiu','sa123456','0912-345-678','劉明凱','310',0);
+insert into emp values('Vir1','sa123456','0912-345-678','虛擬人物1','320',0);
+insert into emp values('Vir2','sa123456','0912-345-678','虛擬人物2','330',0);
+insert into emp values('Vir3','sa123456','0912-345-678','虛擬人物3','340',0);
+GO
+
+
+CREATE TABLE ADManager
+	(
+	adNO decimal(4,0) NOT NULL IDENTITY (5001, 1),
+	adImage varbinary(max) NOT NULL,
+	adLink varchar(200) NOT NULL,
+	adMessage varchar(200) NOT NULL,
+	adTimeStart DATE NOT NULL,
+	adTimeEnd DATE NOT NULL,
+	adStatus bit NOT NULL,
+	adBrowse int NOT NULL,
+	adModify decimal(5,0) NOT NULL,
+	constraint admanager_Emp_fk foreign key (adModify) references Emp (empNO),
+	constraint admanager_adNo_pk primary key (adNO)
+	)
+GO
+
+
+CREATE TABLE BusinTeam
+	(
+	businNO decimal(5,0) NOT NULL IDENTITY (30010, 10),
+	businName varchar(20) NOT NULL,
+	manager decimal(5,0) NOT NULL,
+	constraint BusinTeam_Emp_fk foreign key (manager) references Emp (empNO),
+	constraint BusinTeam_businNo_pk primary key (businNO)
+	) 
+GO
+
+CREATE TABLE TeamMemberList
+(
+	memberListNO decimal(5,0) Not Null IDENTITY(30001,1),
+	empNO decimal(5,0) NOT NULL,
+	businNO decimal(5,0) NOT NULL,
+	tmlStartTime date NOT NULL,
+	tmlEndTime date,
+	tmlStatus bit NOT NULL,
+	constraint TeamMemberList_Emp_fk foreign key (empNO) references Emp (empNO),
+	constraint TeamMemberList_BusinTeam_fk foreign key (businNO) references BusinTeam (businNO),
+	constraint TeamMemberList_MemberListNo_pk primary key (memberListNO)
+)
+GO
+
+
+
+CREATE TABLE TeamArea
+(
+	businNO decimal(5,0) NOT NULL,
+	cityNO decimal(3,0)  NOT NULL,
+	boroughNO decimal(4,0)  NOT NULL,
+	constraint TeamArea_BusinTeam_fk foreign key (businNO) references BusinTeam (businNO),
+	constraint TeamArea_boroughs_fk foreign key (boroughNO) references boroughs (boroughNO),
+	constraint TeamArea_city_fk foreign key (cityNO) references city (cityNO)
+)
+GO
+
+CREATE TABLE Member
+(
+	memNO     decimal(5, 0) NOT NULL IDENTITY(40001,1),
+	memTel        VARCHAR(16),
+	memAccount    VARCHAR(32),
+	memPwd        VARCHAR(16),
+	memName       VARCHAR(32),
+	memGender     VARCHAR(4),
+	memEmail      VARCHAR(64),
+	memRegister   DATETIME,
+	memStatus    VARCHAR(16),
+	memInfract    TINYINT,
+	memImage     VARBINARY(MAX),
+	CONSTRAINT pk_member PRIMARY KEY (memNO)
+)
+GO
+insert into member values('0912-345-687','Vir1','sa654321','虛擬會員1','男性','vir123456@cc.cc','2017-10-10 14:24:41','已註冊通過','0',000101);
+insert into member values('0912-345-687','Vir2','sa654321','虛擬會員2','女性','vir123556@cc.cc','2017-10-10 14:24:42','未通過驗證','0',010101);
+insert into member values('0912-345-687','Vir3','sa654321','虛擬會員3','女性','vir123656@cc.cc','2017-10-10 14:24:43','已註冊通過','0',100101);
+insert into member values('0912-345-687','Vir4','sa654321','虛擬會員4','男性','vir123756@cc.cc','2017-10-10 14:24:44','已註冊通過','0',110101);
+GO
+
+
+create table QandA(
+	qaNO		decimal(8, 0) IDENTITY(60000001,1)	NOT NULL,	--問與答編號
+	memNO	decimal(5, 0)		NOT NULL,		--會員編號
+	empNO		decimal(5,0),						--員工編號
+	houseNO		decimal(5,0)		NOT NULL,		--房屋編號
+	qTime		date				NOT NULL,		--發問時間
+	aTime		date,								--回覆時間
+	qaType		bit		NOT NULL,		--問答類型
+	qDetail	varchar(max)		NOT NULL,		--問答內容
+	aDetail	varchar(max),
+	constraint QandA_Member_fk foreign key(memNO) references Member(memNO),
+	constraint QandA_Emp_fk foreign key(empNO) references Emp(empNO),
+	constraint QandA_Houseno_fk foreign key(houseNO) references House(houseNO),
+	constraint QandA_qano_pk primary key(qaNO)
+)
+go
+insert into QandA(memno,empno,houseno,qtime,qatype,qdetail) values(40001,30001,20001,'2017-10-10',0,'我家水管漏水漏到都淹水啦');
+GO
+
+
+create table DispatchList(
+	dlNO		decimal(8,0) IDENTITY(70000001,1)	NOT NULL,	--派工單號
+	dempNO		decimal(5,0)		NOT NULL,					--指派人
+	aempNO		decimal(5,0)		NOT NULL,					--負責人
+	qaNO		decimal(8, 0)		NOT NULL,					--問與答編號
+	dlStime		date				NOT NULL,					--起始時間
+	dlEtime		date,											--結束時間
+	elesign		varchar(max),									--電子簽名
+	dlNote		varchar(200),									--派工單備註
+	
+
+	constraint DispatchList_Emp_fk foreign key(dempNO) references Emp(empNO),
+	constraint DispatchList_Emp2_fk foreign key(aempNO) references Emp(empNO),
+	constraint DispatchList_QandA_fk foreign key(qaNO) references QandA(qaNO),
+	constraint DispatchList_dlno_pk primary key(dlNO)
+)
+GO
+insert into DispatchList values(30001,30002,60000001,'2017-10-10','2017-10-11','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAEsCAYAAACbnn2RAAAbxUlEQVR4Xu3dz4+d51UH8Od5x45bFydQQaFNC1VxSaBNo9wbAaGVMCxg0w0sWMGCPf8JC9Ys4A/ALNiwgA2LJATZufnhKkat+mNBoiSkLUrSxq4dvw96hjFyLTue4ybO5JzPlV7N2HPm3vd8zlHG39z73unNjQABAgQIECBAgAABAgRKCvSSXWuaAAECBAgQIECAAAECBJpAaAkIECBAgAABAgQIECBQVEAgLDp4bRMgQIAAAQIECBAgQEAgtAMECBAgQIAAAQIECBAoKiAQFh28tgkQIECAAAECBAgQICAQ2gECBAgQIECAAAECBAgUFRAIiw5e2wQIECBAgAABAgQIEBAI7QABAgQIECBAgAABAgSKCgiERQevbQIECBAgQIAAAQIECAiEdoAAAQIECBAgQIAAAQJFBQTCooPXNgECBAgQIECAAAECBARCO0CAAAECBAgQIECAAIGiAgJh0cFrmwABAgQIECBAgAABAgKhHSBAgAABAgQIECBAgEBRAYGw6OC1TYAAAQIECBAgQIAAAYHQDhAgQIAAAQIECBAgQKCogEBYdPDaJkCAAAECBAgQIECAgEBoBwgQIECAAAECBAgQIFBUQCAsOnhtEyBAgAABAgQIECBAQCC0AwQIECBAgAABAgQIECgqIBAWHby2CRAgQIAAAQIECBAgIBDaAQIECBAgQIAAAQIECBQVEAiLDl7bBAgQIECAAAECBAgQEAjtAAECBAgQIECAAAECBIoKCIRFB69tAgQIECBAgAABAgQICIR2gAABAgQIECBAgAABAkUFBMKig9c2AQIECBAgQIAAAQIEBEI7QIAAAQIECBAgQIAAgaICAmHRwWubAAECBAgQIECAAAECAqEdIECAAAECBAgQIECAQFEBgbDo4LVNgAABAgQIECBAgAABgdAOECBAgAABAgQIECBAoKiAQFh08NomQIAAAQIECBAgQICAQGgHCBAgQIAAAQIECBAgUFRAICw6eG0TIECAAAECBAgQIEBAILQDBAgQIECAAAECBAgQKCogEBYdvLYJECBAgAABAgQIECAgENoBAgQIECBAgAABAgQIFBUQCIsOXtsECBAgQIAAAQIECBAQCO0AAQIECBAgQIAAAQIEigoIhEUHr20CBAgQIECAAAECBAgIhHaAAAECBAgQIECAAAECRQUEwqKD1zYBAgQIECBAgAABAgQEQjtAgAABAgQIECBAgACBogICYdHBa5sAAQIECBAgQIAAAQICoR0gQIAAAQIECBAgQIBAUQGBsOjgtU2AAAECBAgQIECAAAGB0A4QIECAAAECBAgQIECgqIBAWHTw2iZAgAABAgQIECBAgIBAaAcIECBAgAABAgQIECBQVEAgLDp4bRMgQIAAAQIECBAgQEAgtAMECBAgQIAAAQIECBAoKiAQFh28tgkQIECAAAECBAgQICAQ2gECBAgQIECAAAECBAgUFRAIiw5e2wQIECBAgAABAgQIEBAI7QABAgQIECBAgAABAgSKCgiERQevbQIECBAgQIAAAQIECAiEdoAAAQIECBAgQIAAAQJFBQTCooPXNgECBAgQIECAAAECBARCO0CAAAECBAgQIECAAIGiAgJh0cFrmwABAgQIECBAgAABAgKhHSBAgAABAgQIECBAgEBRAYGw6OC1TYAAAQIECBAgQIAAAYHQDhAgQIAAAQIECBAgQKCogEBYdPDaJkCAAAECBAgQIECAgEBoBwgQIECAAAECBAgQIFBUQCAsOnhtEyBAgAABAgQIECBAQCC0AwQIECBAgAABAgQIECgqIBAWHby2CRAgQIAAAQIECBAgIBDaAQIECBAgQIAAAQIECBQVEAiLDl7bBAgQIECAAAECBAgQEAjtAAECBAgQIECAAAECBIoKCIRFB69tAgQIECBAgAABAgQICIR2gAABAgQIECBAgAABAkUFBMKig9c2AQIECBAgQIAAAQIEBEI7QIAAAQIECBAgQIAAgaICAmHRwWubAAECBAgQIECAAAECAqEdIECAAAECBAgQIECAQFEBgbDo4LVNgAABAgQIECBAgAABgdAOECBAgAABAgQIECBAoKiAQFh08NomQIAAAQIECBAgQICAQGgHCBAgQIAAAQIECBAgUFRAICw6eG0TIECAAAECBAgQIEBAILQDBAgQIECAAAECBAgQKCogEBYdvLYJECBAgAABAgQIECAgENoBAgQIECBAgAABAgQIFBUQCIsOXtsECBAgQIAAAQIECBAQCO0AAQIECBAgQIAAAQIEigoIhEUHr20CBAgQIECAAAECBAgIhHaAAAECBAgQIECAAAECRQUEwqKD1zYBAgQIECBAgAABAgQEQjtAgAABAgQIECBAgACBogICYdHBa5sAAQIECBAgQIAAAQICoR0gQIAAAQIECBAgQIBAUQGBsOjgtU2AAAECBAgQIECAAAGB0A4QIECAAAECBAgQIECgqIBAWHTw2iZAgAABAgQIECBAgIBAaAcIECBAgAABAgQIECBQVEAgLDp4bRMgQIAAAQIECBAgQEAgtAMECBAgQIAAAQIECBAoKiAQFh28tgkQIECAAAECBAgQICAQ2gECBAgQIECAAAECBAgUFRAIiw5e2wQIECBAgAABAgQIEBAI7QABAgQIECBAgAABAgSKCgiERQevbQIECBAgQIAAAQIECAiEdoAAAQIECBAgQIAAAQJFBQTCooPXNgECBAgQIECAAAECBARCO0CAAAECBAgQIECAAIGiAgJh0cFrmwABAgQIECBAgAABAgKhHSBAgAABAgQIECBAgEBRAYGw6OC1TYAAAQIECBAgQIAAAYHQDhAgQIAAAQIECBAgQKCogEBYdPDaJkCAAAECBAgQIECAgEBoBwgQIECAAAECBAgQIFBUQCAsOnhtEyBAgAABAgQIECBAQCC0AwQIECBAgAABAgQIECgqIBAWHby2CRAgQIAAAQIECBAgIBDaAQIECBAgQIAAAQIECBQVEAiLDl7bBAgQIECAAAECBAgQEAjtAAECBAgQIECAAAECBIoKCIRFB69tAgQIECBAgAABAgQICIR2gAABAgQIECBAgAABAkUFBMKig9c2AQIECBAgQIAAAQIEBEI7QIAAAQIECBAgQIAAgaICAmHRwWubAAECBAgQIECAAAECAqEdIECAAAECBAgQIECAQFEBgbDo4LVNgAABAgQIECBAgAABgdAOECBAgAABAgQIECBAoKiAQFh08NomQIAAAQIECBAgQICAQGgHCBAgQIAAAQIECBAgUFRAICw6eG0TIECAAAECBAgQIEBAILQDBAgQIECAAAECBAgQKCogEBYdvLYJECBAgAABAgQIECAgENoBAgQIECBAgAABAgQIFBUQCIsOXtsECBAgQIAAAQIECBAQCO0AAQIECBAgQIAAAQIEigoIhEUHr20CBAgQIECAAAECBAgIhHaAAAECBAgQIECAAAECRQUEwqKD1zYBAgQIECBAgAABAgQEQjtAgAABAgQIECBAgACBogICYdHBa5sAAQIECBAgQIAAAQICoR0gQIAAAQIECBAgQIBAUQGBsOjgtU2AAAECBAgQIECAAAGB0A4QIECAAAECBAgQIECgqIBAWHTw2iZAgAABAgQIECBAgIBAaAcIECBAgAABAgQIECBQVEAgLDp4bRMgQIAAAQIECBAgQEAgtAMECBA44gLb7fb4GOOPl2X5hdbapXVdT/Xe72+tnRpjHLvV6ffef9J7vzzGuDTGuDy/b1mW/T/33q/cqeXe+2fHGO+21l67U+2NXx9j3DfGOLEsy4l1XU+01u7rvc+PJ+bX5ue99zHPaR7Xz+n65+u6zr9bb37MeT7Xrl17Z1mWb40x3rpy5crbDz/88Ftnz569Fjk/tQQIECBAgMBPCwiENoIAAQJHRGCz2WyXZfniGOPzrbVf671/fozxG621LxyRUzyKp/HqGON7y7J8d348+Px767q+fOLEiVeeeeaZS0fxpJ0TAQIECBA4KgIC4VGZhPMgQKCMwBNPPPHJK1euzOD36LIs2zHGtrU2j1vdRmvNf6v/T2Y+cziftZweS2tt7xBL88PW2stjjFd6768cfHxtjPH63t7e6+u6vn7p0qXXL168+KND3JcSAgQIECCQTsA/MtKNVEMECBwlgc1m86d7e3tfWNf14dbal1trX2ytffIuznGGoRlu3mqtvX3w8W5eLjlD1Cducdx3F+d087f8pLU2X446P14/bv7znc75Y621kzcc81zny2M/6J9X0/W/Zng8CJAv995/MMaY5sent5ervg8b4i4IECBA4MgJfNA/YI9cw06IAAEC77fA6dOnT9x///1f7r3PwPdQa+3TrbXPtNZ+u7X284HHe633/sIY44Xe+4u99+9cvXr1jXVd37hw4cKPA/eTrnQanzp16v5lWWY4fGBeQ7mu66eWZfnUGGP/6L3/8jzGGA+21j578Czie1nMkD0D6gzJ8xnH6G1em/nODcec0TvzOs1lWeZLVfc/n9dvzuPg+s0f997fXtf1R8uyzGD/wLVr1149efLkU08//fT8sxsBAgQIELinAgLhPeX2YAQIfNQFNpvNb7bWHjkIfzMAXn/WL9LavN7t+d77fIOUeXzz+PHj3zp37twPInei9r0Fttvtp9d1fXBZlvkGOQ/23j/XWvv1g2Nel/lAwPBuXq4auPv90jdaa99trX2jtfb8siwvHDt27HnXQUYZ1RMgQIBAREAgjGipJUCglMBms/mzZVk+M8Z4aIzxld77V1prPxdEmNe8PdVa2/Xenxlj/Ptut3s1eB/KPwCB7Xb7iwfh8Ffnu5iu6/q5+fHgGd75jq7z+JW7fPYwcsbXr4u83TWR3+y9v7Su67d77/ONc354+fLlf7p48eId3y02chJqCRAgQKCmgEBYc+66JkDgJoEzZ8587M033/xq7/1rvfevttZ+7+A6u8NazWvNLsxjvtxzjPHSu++++/KLL774ymHvQN3RFLjVy1UPrnH8+E3XO55c1/Xjvff59/vHwef7f78syyfGGPN/KJw6OGbgvN1LVeczkjPwzWsqb3f7z4NnE7/Re98/zp8/P59hdCNAgAABAocWEAgPTaWQAIFMAo8++uiDe3t7MwDO8Pc7B9f7Hfa/iTP4zX+A73+8evXqBcEv03bcu15ueMfZ0/MNh3rv89eMXD9mcLzV7fp1j7f62v/03v91jPHfrbV/2e12/3zvuvFIBAgQIPBRFDjsP34+ir05ZwIECPy/wHa7fWSM8bu99+vh75FD8MxnaZ5urc03etm/puvZZ599/hDfp4TAzywwr4HsvT+0ruuZ3vvvt9a+1lo7dps7nu/qOl9y+lNfH2P8be/9r3e73Xd+5hNyBwQIECCQUkAgTDlWTREgsNls5jV/f3DDs3/zzUTudLvYWjvXWju/LMv5ebvTN/g6gXsp8Nhjj/3WsixfGmN8ab6hUe99/o+N+Yzizbf5+yvnbf/n/Bjjb/b29v7u/PnzL93L8/VYBAgQIHD0BQTCoz8jZ0iAwF0IbLfb6/8gvu13jzFm4Htqhr91Xc8/99xz376Lh/ItBD5UgYNrHOc7387rX+cziV+/6ZnC+asx5u92nLd/bK39w263O/uhnrQHJ0CAAIEjIyAQHplROBECBN4vge12+2+ttTM33d98J8cn59F7/48ZBne73fffr8d0PwSOksDjjz/+F2OMP2+t/dHBec3fcTjf6Gb/JaW73c7P/6M0MOdCgACBD1HAD4QPEd9DEyDwwQhst9tnW2vzTTpm+Hvy2rVrT54+ffrc2bNn55txuBEoI7DZbP6k9/5XrbU/vKHp7+92u18qg6BRAgQIEHhPAYHQghAgQIAAgeQCm83mL3vvfz/b9Oxg8mFrjwABAkEBgTAIppwAAQIECBAgQIAAAQJZBATCLJPUBwECBAgQIECAAAECBIICAmEQTDkBAgQIECBAgAABAgSyCAiEWSapDwIECBAgQIAAAQIECAQFBMIgmHICBAgQIECAAAECBAhkERAIs0xSHwQIECBAgAABAgQIEAgKCIRBMOUECBAgQIAAAQIECBDIIiAQZpmkPggQIECAAAECBAgQIBAUEAiDYMoJECBAgAABAgQIECCQRUAgzDJJfRAgQIAAAQIECBAgQCAoIBAGwZQTIECAAAECBAgQIEAgi4BAmGWS+iBAgAABAgQIECBAgEBQQCAMgiknQIAAAQIECBAgQIBAFgGBMMsk9UGAAAECBAgQIECAAIGggEAYBFNOgAABAgQIECBAgACBLAICYZZJ6oMAAQIECBAgQIAAAQJBAYEwCKacAAECBAgQIECAAAECWQQEwiyT1AcBAgQIECBAgAABAgSCAgJhEEw5AQIECBAgQIAAAQIEsggIhFkmqQ8CBAgQIECAAAECBAgEBQTCIJhyAgQIECBAgAABAgQIZBEQCLNMUh8ECBAgQIAAAQIECBAICgiEQTDlBAgQIECAAAECBAgQyCIgEGaZpD4IECBAgAABAgQIECAQFBAIg2DKCRAgQIAAAQIECBAgkEVAIMwySX0QIECAAAECBAgQIEAgKCAQBsGUEyBAgAABAgQIECBAIIuAQJhlkvogQIAAAQIECBAgQIBAUEAgDIIpJ0CAAAECBAgQIECAQBYBgTDLJPVBgAABAgQIECBAgACBoIBAGARTToAAAQIECBAgQIAAgSwCAmGWSeqDAAECBAgQIECAAAECQQGBMAimnAABAgQIECBAgAABAlkEBMIsk9QHAQIECBAgQIAAAQIEggICYRBMOQECBAgQIECAAAECBLIICIRZJqkPAgQIECBAgAABAgQIBAUEwiCYcgIECBAgQIAAAQIECGQREAizTFIfBAgQIECAAAECBAgQCAoIhEEw5QQIECBAgAABAgQIEMgiIBBmmaQ+CBAgQIAAAQIECBAgEBQQCINgygkQIECAAAECBAgQIJBFQCDMMkl9ECBAgAABAgQIECBAICggEAbBlBMgQIAAAQIECBAgQCCLgECYZZL6IECAAAECBAgQIECAQFBAIAyCKSdAgAABAgQIECBAgEAWAYEwyyT1QYAAAQIECBAgQIAAgaCAQBgEU06AAAECBAgQIECAAIEsAgJhlknqgwABAgQIECBAgAABAkEBgTAIppwAAQIECBAgQIAAAQJZBATCLJPUBwECBAgQIECAAAECBIICAmEQTDkBAgQIECBAgAABAgSyCAiEWSapDwIECBAgQIAAAQIECAQFBMIgmHICBAgQIECAAAECBAhkERAIs0xSHwQIECBAgAABAgQIEAgKCIRBMOUECBAgQIAAAQIECBDIIiAQZpmkPggQIECAAAECBAgQIBAUEAiDYMoJECBAgAABAgQIECCQRUAgzDJJfRAgQIAAAQIECBAgQCAoIBAGwZQTIECAAAECBAgQIEAgi4BAmGWS+iBAgAABAgQIECBAgEBQQCAMgiknQIAAAQIECBAgQIBAFgGBMMsk9UGAAAECBAgQIECAAIGggEAYBFNOgAABAgQIECBAgACBLAICYZZJ6oMAAQIECBAgQIAAAQJBAYEwCKacAAECBAgQIECAAAECWQQEwiyT1AcBAgQIECBAgAABAgSCAgJhEEw5AQIECBAgQIAAAQIEsggIhFkmqQ8CBAgQIECAAAECBAgEBQTCIJhyAgQIECBAgAABAgQIZBEQCLNMUh8ECBAgQIAAAQIECBAICgiEQTDlBAgQIECAAAECBAgQyCIgEGaZpD4IECBAgAABAgQIECAQFBAIg2DKCRAgQIAAAQIECBAgkEVAIMwySX0QIECAAAECBAgQIEAgKCAQBsGUEyBAgAABAgQIECBAIIuAQJhlkvogQIAAAQIECBAgQIBAUEAgDIIpJ0CAAAECBAgQIECAQBYBgTDLJPVBgAABAgQIECBAgACBoIBAGARTToAAAQIECBAgQIAAgSwCAmGWSeqDAAECBAgQIECAAAECQQGBMAimnAABAgQIECBAgAABAlkEBMIsk9QHAQIECBAgQIAAAQIEggICYRBMOQECBAgQIECAAAECBLIICIRZJqkPAgQIECBAgAABAgQIBAUEwiCYcgIECBAgQIAAAQIECGQREAizTFIfBAgQIECAAAECBAgQCAoIhEEw5QQIECBAgAABAgQIEMgiIBBmmaQ+CBAgQIAAAQIECBAgEBQQCINgygkQIECAAAECBAgQIJBFQCDMMkl9ECBAgAABAgQIECBAICggEAbBlBMgQIAAAQIECBAgQCCLgECYZZL6IECAAAECBAgQIECAQFBAIAyCKSdAgAABAgQIECBAgEAWAYEwyyT1QYAAAQIECBAgQIAAgaCAQBgEU06AAAECBAgQIECAAIEsAgJhlknqgwABAgQIECBAgAABAkEBgTAIppwAAQIECBAgQIAAAQJZBATCLJPUBwECBAgQIECAAAECBIICAmEQTDkBAgQIECBAgAABAgSyCAiEWSapDwIECBAgQIAAAQIECAQFBMIgmHICBAgQIECAAAECBAhkERAIs0xSHwQIECBAgAABAgQIEAgKCIRBMOUECBAgQIAAAQIECBDIIiAQZpmkPggQIECAAAECBAgQIBAUEAiDYMoJECBAgAABAgQIECCQRUAgzDJJfRAgQIAAAQIECBAgQCAoIBAGwZQTIECAAAECBAgQIEAgi4BAmGWS+iBAgAABAgQIECBAgEBQQCAMgiknQIAAAQIECBAgQIBAFgGBMMsk9UGAAAECBAgQIECAAIGggEAYBFNOgAABAgQIECBAgACBLAICYZZJ6oMAAQIECBAgQIAAAQJBAYEwCKacAAECBAgQIECAAAECWQQEwiyT1AcBAgQIECBAgAABAgSCAgJhEEw5AQIECBAgQIAAAQIEsggIhFkmqQ8CBAgQIECAAAECBAgEBQTCIJhyAgQIECBAgAABAgQIZBEQCLNMUh8ECBAgQIAAAQIECBAICgiEQTDlBAgQIECAAAECBAgQyCIgEGaZpD4IECBAgAABAgQIECAQFBAIg2DKCRAgQIAAAQIECBAgkEVAIMwySX0QIECAAAECBAgQIEAgKCAQBsGUEyBAgAABAgQIECBAIIuAQJhlkvogQIAAAQIECBAgQIBAUEAgDIIpJ0CAAAECBAgQIECAQBYBgTDLJPVBgAABAgQIECBAgACBoIBAGARTToAAAQIECBAgQIAAgSwCAmGWSeqDAAECBAgQIECAAAECQQGBMAimnAABAgQIECBAgAABAlkEBMIsk9QHAQIECBAgQIAAAQIEggICYRBMOQECBAgQIECAAAECBLIICIRZJqkPAgQIECBAgAABAgQIBAUEwiCYcgIECBAgQIAAAQIECGQREAizTFIfBAgQIECAAAECBAgQCAoIhEEw5QQIECBAgAABAgQIEMgiIBBmmaQ+CBAgQIAAAQIECBAgEBQQCINgygkQIECAAAECBAgQIJBF4H8Bt74WS3F3DPgAAAAASUVORK5CYII=','已修理完畢，老鼠咬破洞，換了一條水管')
+GO
+
+
+
+CREATE TABLE Infraction
+(
+	inNO    decimal(5, 0) NOT NULL IDENTITY(40001,1),
+	memNO     decimal(5, 0) NOT NULL,
+	reason     VARCHAR(256),
+	inDate     DATETIME,
+	empNO      decimal(5,0) NOT NULL,
+	CONSTRAINT pk_infraction PRIMARY KEY (inNO),
+	CONSTRAINT fk_Infraction_to_member FOREIGN KEY(memNO) REFERENCES Member(memNO),
+	CONSTRAINT fk_Infraction_to_employee FOREIGN KEY(empNO) REFERENCES Emp(empNO)
+)
+GO
+
+CREATE TABLE Favorite
+(
+	memNO     decimal(5, 0) NOT NULL,
+	houseNO     decimal(5,0) NOT NULL,
+	CONSTRAINT fk_Favorite_to_member FOREIGN KEY(memNO) REFERENCES Member(memNO),
+	CONSTRAINT fk_Favorite_to_house FOREIGN KEY(houseNO) REFERENCES house(houseNO)
+)
+GO
+
+
+
+
+
+create table equipmentCondition(
+	houseNO decimal(5,0) PRIMARY KEY,
+	TV bit not null,
+	aircondition bit not null,
+	refrigerator bit not null,
+	waterHeater bit not null,
+	gas bit not null,
+	theFourthStation bit not null,
+	net bit not null,
+	washing bit not null,
+	bed bit not null,
+	wardrobe bit not null,
+	sofa bit not null,
+	parking bit not null,
+	elevator bit not null,
+	balcony bit not null,
+	permitCook bit not null,
+	pet bit not null,
+	closeMRT bit not null,
+	CONSTRAINT equipmentCondition_house_fk FOREIGN KEY(houseNO) REFERENCES house(houseNO)
+)
+GO
+insert into equipmentCondition values(20001,0,1,0,1,0,0,1,0,1,0,0,1,0,1,1,1,0);
+GO
+
+
+
+CREATE TABLE HousePicture(
+	housePictureNO int  primary key identity NOT NULL,
+	hPicture varbinary(max) NOT NULL,
+	houseNO decimal(5,0) NOT NULL,
+CONSTRAINT Picture_house_fk FOREIGN KEY(houseNO) REFERENCES house(houseNO)
+)
+GO
+
+CREATE TABLE Lease(
+	leaseNO decimal(6,0) primary key IDENTITY(200001,1) NOT NULL,
+	houseNO decimal(5,0) NOT NULL,
+	leaseBeginDate date NOT NULL,
+	leaseEndDate date NOT NULL,
+	memNO decimal(5, 0) NOT NULL,
+	empNO decimal(5,0) NOT NULL,
+	Rent int NULL,
+	Deposit int NULL,          --押金
+	Relief int NULL,           --減免租金
+	leaseDate Date not null,
+	leasePic varbinary(max) null,
+	houseNote varchar(100) null,   --房屋備註:例如設備損壞、點交狀況
+    	Refund bit not null,          --押金已退金額    
+
+	CONSTRAINT Rate_house_fk FOREIGN KEY(houseNO) REFERENCES house(houseNO),
+	CONSTRAINT Rate_Member_fk FOREIGN KEY(memNO) REFERENCES Member(memNO),
+	CONSTRAINT Rate_Emp_fk FOREIGN KEY(empNO) REFERENCES Emp(empNO)
+) 
+
+GO
+
+create table Reservation (
+	reservationNO decimal(8,0) primary Key identity(80000001,1),
+	memNO decimal(5, 0) not null,
+	houseNO decimal(5, 0) not null,
+	areaNO decimal(4,0) not null,
+	exceptTime varchar(100),
+	takedOver bit  not null,
+	empNO decimal(5,0),
+	applyTime smalldatetime not null,
+	CONSTRAINT Reservation_to_Emp FOREIGN KEY(empNO) REFERENCES Emp(empNO),
+	CONSTRAINT Reservation_to_Member FOREIGN KEY(memNO) REFERENCES Member(memNO),
+	CONSTRAINT Reservation_to_house FOREIGN KEY(houseNO) REFERENCES house(houseNO)
+)
+go
+
+create table CalendarEvent(
+	eventNO decimal(8,0) primary Key identity(80000001,1),
+	empNO decimal(5,0),
+	memNO decimal(5, 0) not null,
+	houseNO decimal(5, 0) not null,
+	eventStartTime smalldatetime not null,
+	eventEndTime smalldatetime not null,
+	PS varchar(100),
+	CONSTRAINT Calendar_to_Emp FOREIGN KEY(empNO) REFERENCES Emp(empNO),
+	CONSTRAINT Calendar_to_Member FOREIGN KEY(memNO) REFERENCES Member(memNO),
+	CONSTRAINT Calendar_to_house FOREIGN KEY(houseNO) REFERENCES house(houseNO)
+)
+go
