@@ -35,11 +35,12 @@ public class infractionServlet extends HttpServlet {
 				inVO.setReason(request.getParameter("reason"));
 				result = inDAO.insert(inVO);
 				result = memDAO.infractPlus1(memNO);
+				memDAO.checkInfraction(memNO);
 				if(result==1){
 					out.print("申請成功");
 					return;
 				}else{
-					out.print("此會員不存在");
+					out.print("此會員不存在或已為黑名單成員");
 					return;
 				}
 			}
