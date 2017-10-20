@@ -1,4 +1,4 @@
-package com.hermit.iii.tomer;
+package com.hermit.iii.timer;
 
 import java.sql.Timestamp;
 
@@ -17,7 +17,7 @@ public class Timer extends HttpServlet{
 		//取得今天日期
 		String a = (new Timestamp(System.currentTimeMillis())).toString();
 		//設定為凌晨00:00
-		Timestamp time = Timestamp.valueOf(a.substring(0,10)+" 00:00:00");
+		Timestamp time = Timestamp.valueOf(a.substring(0,10)+" 00:43:00");
 		//設定行程，一天執行一次dotime
 		timer.scheduleAtFixedRate(dotime,time,1000*60*60*24);
 	}
