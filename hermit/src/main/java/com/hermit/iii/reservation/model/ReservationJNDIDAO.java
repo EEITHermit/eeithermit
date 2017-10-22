@@ -44,7 +44,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 		return result;
 	}
 	//推播功能用
-	String select = "select * from reservation where (boroughNO = ?) AND (takedOver = false)";
+	String select = "select * from reservation where (boroughNO = ?) AND (takedOver = 'false')";
 	@Override
 	public ArrayList<ReservationVO> selectByArea(Integer areaNo) {
 		ArrayList<ReservationVO> array = new ArrayList<ReservationVO>();
