@@ -398,14 +398,15 @@ create table Reservation (
 	reservationNO decimal(8,0) primary Key identity(80000001,1),
 	memNO decimal(5, 0) not null,
 	houseNO decimal(5, 0) not null,
-	areaNO decimal(4,0) not null,
-	exceptTime varchar(100),
+	boroughNO decimal(4,0) not null,
+	exceptTime varchar(150),
 	takedOver bit  not null,
 	empNO decimal(5,0),
 	applyTime smalldatetime not null,
 	CONSTRAINT Reservation_to_Emp FOREIGN KEY(empNO) REFERENCES Emp(empNO),
 	CONSTRAINT Reservation_to_Member FOREIGN KEY(memNO) REFERENCES Member(memNO),
-	CONSTRAINT Reservation_to_house FOREIGN KEY(houseNO) REFERENCES house(houseNO)
+	CONSTRAINT Reservation_to_house FOREIGN KEY(houseNO) REFERENCES house(houseNO),
+	CONSTRAINT Reservation_to_Boroughs FOREIGN KEY(boroughNO) REFERENCES Boroughs(boroughNO)
 )
 go
 

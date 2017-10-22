@@ -19,7 +19,7 @@ public class ReservationDAO implements ReservationDAO_interface{
 	}
 	// 會員確認預約後的新增
 	String insert = "insert into reservation("
-			+ "memNO,houseNO,areaNO,exceptTime,applyTime,takedOver) values(?,?,?,?,?,?)";
+			+ "memNO,houseNO,boroughNO,exceptTime,applyTime,takedOver) values(?,?,?,?,?,?)";
 	@Override
 	public Integer insert(ReservationVO rlVO) {
 		int result = 0;
@@ -27,7 +27,7 @@ public class ReservationDAO implements ReservationDAO_interface{
 			PreparedStatement ps = conn.prepareStatement(insert);
 			ps.setInt(1, rlVO.getMemberVO().getMemNO());
 			ps.setInt(2, rlVO.getHouseVO().getHouseNO());
-			ps.setInt(3, rlVO.getAreaNO());
+			ps.setInt(3, rlVO.getBoroughNO());
 			ps.setString(4,rlVO.getExceptTime());
 			ps.setTimestamp(5, rlVO.getApplyTime());
 			ps.setBoolean(6, false);
@@ -38,7 +38,7 @@ public class ReservationDAO implements ReservationDAO_interface{
 		return result;
 	}
 	//推播功能用
-	String select = "select * from reservation where (areaNO = ?) AND (takedOver = false)";
+	String select = "select * from reservation where (boroughNO = ?) AND (takedOver = false)";
 	@Override
 	public ArrayList<ReservationVO> selectByArea(Integer areaNo) {
 		ArrayList<ReservationVO> array = new ArrayList<ReservationVO>();
@@ -52,7 +52,7 @@ public class ReservationDAO implements ReservationDAO_interface{
 				rlVO.getMemberVO().setMemNO(rs.getInt("memNO"));
 				rlVO.getHouseVO().setHouseNO(rs.getInt("houseNO"));
 				rlVO.setExceptTime(rs.getString("exceptTime"));
-				rlVO.setAreaNO(rs.getInt("areaNO"));
+				rlVO.setBoroughNO(rs.getInt("boroughNO"));
 				rlVO.setApplyTime(rs.getTimestamp("applyTime"));
 				array.add(rlVO);
 			}
