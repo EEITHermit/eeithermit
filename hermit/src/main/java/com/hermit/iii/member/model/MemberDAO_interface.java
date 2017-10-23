@@ -31,4 +31,13 @@ public interface MemberDAO_interface {
 
 	// AJAX 帳號檢查
 	public String count_MemAccount_AJAX(String memAccount);
+
+	// 驗證帳號是否存在
+	public MemberVO findByAccount(String memAccount);
+
+	// 忘記帳號查詢
+	public MemberVO findByTel(String memTel);
+
+	// 忘記密碼查詢
+	public MemberVO findByEmail(String memEmail);
 }

@@ -28,6 +28,10 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	// AJAX 帳號檢查 ，求總數
 	private static final String COUNT_MEMACCOUNT_STMT = "SELECT count(*) FROM Member WHERE memAccount = ?";
 
+	private static final String SELECT_BY_ACCOUNT = "SELECT memNO,memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract FROM Member where memAccount = ?";
+	private static final String SELECT_BY_TEL = "SELECT memNO,memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract FROM Member where memTel = ?";
+	private static final String SELECT_BY_EMAIL = "SELECT memNO,memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract FROM Member where memEmail = ?";
+
 	@Override
 	public void insert(MemberVO memberVO) { // register由資料庫系統給
 		Connection con = null;
@@ -502,6 +506,208 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		return result;
 	}
 
+	@Override
+	public MemberVO findByAccount(String memAccount) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_BY_ACCOUNT);
+
+			pstmt.setString(1, memAccount);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				memVO = new MemberVO();
+				memVO.setMemNO(rs.getInt("memNO"));
+				memVO.setMemTel(rs.getString("memTel"));
+				memVO.setMemAccount(rs.getString("memAccount"));
+				memVO.setMemPwd(rs.getString("memPwd"));
+				memVO.setMemName(rs.getString("memName"));
+				memVO.setMemGender(rs.getString("memGender"));
+				memVO.setMemEmail(rs.getString("memEmail"));
+				memVO.setMemRegister(rs.getDate("memRegister"));
+				memVO.setMemStatus(rs.getString("memStatus"));
+				memVO.setMemInfract(rs.getInt("memInfract"));
+				memVO.setMemImage(rs.getString("memImage"));
+				// memVO.setMemImage(rs.getBinaryStream("memImage"));
+
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+
+	@Override
+	public MemberVO findByTel(String memTel) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_BY_TEL);
+
+			pstmt.setString(1, memTel);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				memVO = new MemberVO();
+				memVO.setMemNO(rs.getInt("memNO"));
+				memVO.setMemTel(rs.getString("memTel"));
+				memVO.setMemAccount(rs.getString("memAccount"));
+				memVO.setMemPwd(rs.getString("memPwd"));
+				memVO.setMemName(rs.getString("memName"));
+				memVO.setMemGender(rs.getString("memGender"));
+				memVO.setMemEmail(rs.getString("memEmail"));
+				memVO.setMemRegister(rs.getDate("memRegister"));
+				memVO.setMemStatus(rs.getString("memStatus"));
+				memVO.setMemInfract(rs.getInt("memInfract"));
+				memVO.setMemImage(rs.getString("memImage"));
+				// memVO.setMemImage(rs.getBinaryStream("memImage"));
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+
+	@Override
+	public MemberVO findByEmail(String memEmail) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_BY_EMAIL);
+
+			pstmt.setString(1, memEmail);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				memVO = new MemberVO();
+				memVO.setMemNO(rs.getInt("memNO"));
+				memVO.setMemTel(rs.getString("memTel"));
+				memVO.setMemAccount(rs.getString("memAccount"));
+				memVO.setMemPwd(rs.getString("memPwd"));
+				memVO.setMemName(rs.getString("memName"));
+				memVO.setMemGender(rs.getString("memGender"));
+				memVO.setMemEmail(rs.getString("memEmail"));
+				memVO.setMemRegister(rs.getDate("memRegister"));
+				memVO.setMemStatus(rs.getString("memStatus"));
+				memVO.setMemInfract(rs.getInt("memInfract"));
+				memVO.setMemImage(rs.getString("memImage"));
+				// memVO.setMemImage(rs.getBinaryStream("memImage"));
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
 
@@ -566,6 +772,51 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		//
 		// // 刪除初始資料一筆
 		// dao.delete(40002);
+
+		// select by account
+		// MemberVO memVO4 = dao.findByAccount("eeit9704");
+		// System.out.print(memVO4.getMemNO() + ",");
+		// System.out.print(memVO4.getMemTel() + ",");
+		// System.out.print(memVO4.getMemAccount() + ",");
+		// System.out.print(memVO4.getMemPwd() + ",");
+		// System.out.print(memVO4.getMemName() + ",");
+		// System.out.print(memVO4.getMemGender() + ",");
+		// System.out.print(memVO4.getMemEmail() + ",");
+		// System.out.print(memVO4.getMemRegister() + ",");
+		// System.out.print(memVO4.getMemMstatus() + ",");
+		// System.out.print(memVO4.getInfract()+",");
+		// System.out.println(memVO4.getMemImage());
+		// System.out.println("--------------------");
+
+		// select by tel
+		MemberVO memVO5 = dao.findByTel("0928265804");
+		System.out.print(memVO5.getMemNO() + ",");
+		System.out.print(memVO5.getMemTel() + ",");
+		System.out.print(memVO5.getMemAccount() + ",");
+		System.out.print(memVO5.getMemPwd() + ",");
+		System.out.print(memVO5.getMemName() + ",");
+		System.out.print(memVO5.getMemGender() + ",");
+		System.out.print(memVO5.getMemEmail() + ",");
+		System.out.print(memVO5.getMemRegister() + ",");
+		System.out.print(memVO5.getMemStatus() + ",");
+		System.out.print(memVO5.getMemInfract() + ",");
+		System.out.println(memVO5.getMemImage());
+		System.out.println("--------------------");
+
+		// select by email
+		// MemberVO memVO6 = dao.findByEmail("eeit9704@gmail.com");
+		// System.out.print(memVO6.getMemNO() + ",");
+		// System.out.print(memVO6.getMemTel() + ",");
+		// System.out.print(memVO6.getMemAccount() + ",");
+		// System.out.print(memVO6.getMemPwd() + ",");
+		// System.out.print(memVO6.getMemName() + ",");
+		// System.out.print(memVO6.getMemGender() + ",");
+		// System.out.print(memVO6.getMemEmail() + ",");
+		// System.out.print(memVO6.getMemRegister() + ",");
+		// System.out.print(memVO6.getMemStatus() + ",");
+		// System.out.print(memVO6.getMemInfract()+",");
+		// System.out.println(memVO6.getMemImage());
+		// System.out.println("--------------------");
 
 		System.out.println("Done");
 	}

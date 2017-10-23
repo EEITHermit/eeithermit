@@ -40,6 +40,10 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 	// AJAX 帳號檢查 ，求總數
 	private static final String COUNT_MEMACCOUNT_STMT = "SELECT count(*) FROM Member WHERE memAccount = ?";
 
+	private static final String SELECT_BY_ACCOUNT = "SELECT memNO,memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract FROM Member where memAccount = ?";
+	private static final String SELECT_BY_TEL = "SELECT memNO,memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract FROM Member where memTel = ?";
+	private static final String SELECT_BY_EMAIL = "SELECT memNO,memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract FROM Member where memEmail = ?";
+
 	@Override
 	public void insert(MemberVO memberVO) {
 		PreparedStatement pstmt = null;
@@ -337,5 +341,188 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 			e.printStackTrace();
 		}
 		return str;
+	}
+
+	@Override
+	public MemberVO findByAccount(String memAccount) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_BY_ACCOUNT);
+
+			pstmt.setString(1, memAccount);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				memVO = new MemberVO();
+				memVO.setMemNO(rs.getInt("memNO"));
+				memVO.setMemTel(rs.getString("memTel"));
+				memVO.setMemAccount(rs.getString("memAccount"));
+				memVO.setMemPwd(rs.getString("memPwd"));
+				memVO.setMemName(rs.getString("memName"));
+				memVO.setMemGender(rs.getString("memGender"));
+				memVO.setMemEmail(rs.getString("memEmail"));
+				memVO.setMemRegister(rs.getDate("memRegister"));
+				memVO.setMemStatus(rs.getString("memStatus"));
+				memVO.setMemInfract(rs.getInt("memInfract"));
+				// memVO.setMemImage(rs.getBinaryStream("memberImage"));
+			}
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+
+	@Override
+	public MemberVO findByTel(String memTel) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_BY_TEL);
+
+			pstmt.setString(1, memTel);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				memVO = new MemberVO();
+				memVO.setMemNO(rs.getInt("memNO"));
+				memVO.setMemTel(rs.getString("memTel"));
+				memVO.setMemAccount(rs.getString("memAccount"));
+				memVO.setMemPwd(rs.getString("memPwd"));
+				memVO.setMemName(rs.getString("memName"));
+				memVO.setMemGender(rs.getString("memGender"));
+				memVO.setMemEmail(rs.getString("memEmail"));
+				memVO.setMemRegister(rs.getDate("memRegister"));
+				memVO.setMemStatus(rs.getString("memStatus"));
+				memVO.setMemInfract(rs.getInt("memInfract"));
+				// memVO.setMemImage(rs.getBinaryStream("memImage"));
+			}
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+
+	@Override
+	public MemberVO findByEmail(String memEmail) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_BY_EMAIL);
+
+			pstmt.setString(1, memEmail);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				memVO = new MemberVO();
+				memVO.setMemNO(rs.getInt("memNO"));
+				memVO.setMemTel(rs.getString("memTel"));
+				memVO.setMemAccount(rs.getString("memAccount"));
+				memVO.setMemPwd(rs.getString("memPwd"));
+				memVO.setMemName(rs.getString("memName"));
+				memVO.setMemGender(rs.getString("memGender"));
+				memVO.setMemEmail(rs.getString("memEmail"));
+				memVO.setMemRegister(rs.getDate("memRegister"));
+				memVO.setMemStatus(rs.getString("memStatus"));
+				memVO.setMemInfract(rs.getInt("memInfract"));
+				// memVO.setMemImage(rs.getBinaryStream("memImage"));
+			}
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
 	}
 }
