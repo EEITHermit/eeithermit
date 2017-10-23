@@ -257,23 +257,23 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		List<HouseVO> list;
 		
 //Insert Test Start		
-//		vo.setHouseTitle("甜蜜小套房");
-//		vo.setCityNO(1);
-//		vo.setBoroughNO(1);
-//		vo.setHighestFloor(15);
-//		vo.setNowFloor(10);
-//		vo.setHouseStatus("未出租");
-//		vo.setHouseRent(15000);
-//		vo.setHouseCharge(30000);
-//		vo.setWaterRate("依帳單繳費");
-//		vo.setPowerRate("依帳單繳費");
-//		vo.setHouseVideo("http://www.youtube.com");
-//		vo.setTypeNO(2010);
-//		vo.setFormNO(2010);
-//		vo.setHouseAddr("新北市板橋區大馬路1號");
-//		vo.setHouseSize(10.32);
-//		dao.insert(vo);
-//		System.out.println("Insert Success");
+		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
+		vo.setCityNO(1);
+		vo.setBoroughNO(1);
+		vo.setHighestFloor(13);
+		vo.setNowFloor(5);
+		vo.setHouseStatus("未出租");
+		vo.setHouseRent(20000);
+		vo.setHouseCharge(40000);     //押金
+		vo.setWaterRate("依帳單繳費");
+		vo.setPowerRate("依帳單繳費");
+		vo.setHouseVideo("http://www.youtube.com");
+		vo.setTypeNO(2010);
+		vo.setFormNO(2010);
+		vo.setHouseAddr("新北市板橋區大馬路3號");
+		vo.setHouseSize(10.32);
+		dao.insert(vo);
+		System.out.println("Insert Success");
 //Insert Test End	
 		
 		
