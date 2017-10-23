@@ -1,5 +1,6 @@
 package com.hermit.iii.house.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HouseService {
@@ -62,5 +63,12 @@ public class HouseService {
 	public List<HouseVO> getAllHouse(){
 		return dao.getAll();
 	}
-
+	//漢勳加，autocomplete功能用
+    public ArrayList<HouseVO> autoCompleteH(String address){
+    	return dao.autoCompleteH(address);
+    };
+    //漢勳加，搜尋所負責鄉鎮區用
+    public Integer findAreaNoByHouseNo(Integer houseNo){
+    	return dao.findAreaNoByHouseNo(houseNo);
+    }; 
 }
