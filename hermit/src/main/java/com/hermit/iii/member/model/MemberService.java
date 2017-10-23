@@ -1,6 +1,5 @@
 package com.hermit.iii.member.model;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 
 public class MemberService {
