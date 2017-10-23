@@ -73,7 +73,7 @@ public class reservationServlet extends HttpServlet {
 				}
 				rlVO.getMemberVO().setMemNO(Integer.valueOf(memberNo));
 				rlVO.getHouseVO().setHouseNO(Integer.valueOf(houseNo));
-				rlVO.setAreaNO(areaNo);
+				rlVO.setBoroughNO(areaNo);
 				rlVO.setApplyTime(currentTime);
 				rlVO.setExceptTime(expectTime);
 				result = rlDAO.insert(rlVO);

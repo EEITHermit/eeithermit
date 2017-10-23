@@ -43,7 +43,7 @@ public class HouseDAO {
 	public Integer findAreaNoByHouseNo(Integer houseNo){
 		Integer areaNo = null;
 		Connection conn = null;
-		String find = "select areaNo from house where houseNO = ?";
+		String find = "select boroughNO from house where houseNO = ?";
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,"sa","P@ssw0rd");

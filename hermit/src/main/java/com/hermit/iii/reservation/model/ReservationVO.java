@@ -14,7 +14,7 @@ public class ReservationVO implements Serializable{
 	private MemberVO memberVO = new MemberVO();
 	private HouseVO houseVO = new HouseVO();
 	private EmpVO empVO = new EmpVO();
-	private Integer areaNO;
+	private Integer boroughNO;
 	private String exceptTime;
 	private Timestamp applyTime;
 	public Integer getReservationNo() {
@@ -41,11 +41,11 @@ public class ReservationVO implements Serializable{
 	public void setEmpVO(EmpVO empVO) {
 		this.empVO = empVO;
 	}
-	public Integer getAreaNO() {
-		return areaNO;
+	public Integer getBoroughNO() {
+		return boroughNO;
 	}
-	public void setAreaNO(Integer areaNO) {
-		this.areaNO = areaNO;
+	public void setBoroughNO(Integer boroughNO) {
+		this.boroughNO = boroughNO;
 	}
 	public String getExceptTime() {
 		return exceptTime;
@@ -59,7 +59,6 @@ public class ReservationVO implements Serializable{
 	public void setApplyTime(Timestamp applyTime) {
 		this.applyTime = applyTime;
 	}
-	
-	
+		
 	
 }
