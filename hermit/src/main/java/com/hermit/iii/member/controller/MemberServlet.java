@@ -15,29 +15,7 @@ public class MemberServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Integer MemberNo = Integer.valueOf(request.getParameter("member"));
-
-		MemberService dao = new MemberService();
-		MemberVO memberVO = dao.findByPrimaryKey(MemberNo);
-		try {
-			request.setAttribute("memNO", memberVO.getMemNO());
-			request.setAttribute("memTel", memberVO.getMemTel());
-			request.setAttribute("memAccount", memberVO.getMemAccount());
-			request.setAttribute("memPwd", memberVO.getMemPwd());
-			request.setAttribute("memName", memberVO.getMemName());
-			request.setAttribute("memGender", memberVO.getMemGender());
-			request.setAttribute("memEmail", memberVO.getMemEmail());
-			request.setAttribute("memRegister", memberVO.getMemRegister());
-			request.setAttribute("memStatus", memberVO.getMemStatus());
-			request.setAttribute("memInfract", memberVO.getMemInfract());
-			request.setAttribute("memImage", memberVO.getMemImage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("/Member/member.jsp");
-		rd.forward(request, response);
-
-		return;
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -571,6 +549,32 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher failureView = request.getRequestDispatcher("/management/manage_member_page.jsp");
 				failureView.forward(request, response);
 			}
+		}
+
+		if ("member_search".equals(action)) {
+			Integer MemberNo = Integer.valueOf(request.getParameter("member"));
+
+			MemberService dao = new MemberService();
+			MemberVO memberVO = dao.findByPrimaryKey(MemberNo);
+			try {
+				request.setAttribute("memNO", memberVO.getMemNO());
+				request.setAttribute("memTel", memberVO.getMemTel());
+				request.setAttribute("memAccount", memberVO.getMemAccount());
+				request.setAttribute("memPwd", memberVO.getMemPwd());
+				request.setAttribute("memName", memberVO.getMemName());
+				request.setAttribute("memGender", memberVO.getMemGender());
+				request.setAttribute("memEmail", memberVO.getMemEmail());
+				request.setAttribute("memRegister", memberVO.getMemRegister());
+				request.setAttribute("memStatus", memberVO.getMemStatus());
+				request.setAttribute("memInfract", memberVO.getMemInfract());
+				request.setAttribute("memImage", memberVO.getMemImage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("/Member/member.jsp");
+			rd.forward(request, response);
+
+			return;
 		}
 
 		if ("management_getAll_Action".equals(action)) {

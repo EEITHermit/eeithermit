@@ -42,7 +42,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="<%=request.getContextPath()%>/Member/index.jsp">首頁</a>
-				<li><a href="<%=request.getContextPath()%>/MemberServlet?member=40001">會員管理</a></li>
+				<li><a href="<%=request.getContextPath()%>/member.do?action=member_search&member=40001">會員管理</a></li>
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
@@ -57,7 +57,7 @@
 							<li><a href="login.jsp">登入</a></li>
 							<li><a href="register.jsp">註冊</a></li> 
 							<!-- member=40001是假資料，等統整時要拿掉 -->
-							<li><a href="<%=request.getContextPath()%>/MemberServlet?member=40001">會員管理</a></li> 
+							<li><a href="<%=request.getContextPath()%>/member.do?action=member_search&member=40001">會員管理</a></li> 
 							<li><a href="#">登出</a></li>
 						</ul>
 			</div>
