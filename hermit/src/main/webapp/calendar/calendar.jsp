@@ -162,6 +162,11 @@
 		    			})
 		    			dialog.dialog("close");
 		    		}
+		    	},
+		    	"檢舉會員":function(){
+		    		var member = $("#member").val();
+		    		window.location = "<%=request.getContextPath()%>/infraction/infraction.jsp?member=" + encodeURI(member);
+		    		
 		    	}
 		      }
 		    });
