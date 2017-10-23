@@ -4,6 +4,7 @@ public class BoroughsVO {
 	private Integer boroughNO;
 	private String boroughName;
 	private Integer cityNO;
+	
 	public Integer getBoroughNO() {
 		return boroughNO;
 	}
