@@ -102,8 +102,8 @@ public class HouseServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("SignatureUpdate.jsp");
 			rd.forward(request,response);
 		}
-		
 		if("getAllHouseForJson".equals(action)){
+			System.out.println("asd");
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			List<HouseVO> list = svc.getAllHouse();

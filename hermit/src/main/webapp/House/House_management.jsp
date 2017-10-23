@@ -60,7 +60,44 @@
 			</tr>
 		</tfoot>
 	</table>
-
+<script>
+$(document).ready(function(){
+	var dataJson;
+	
+	var table=$("#myTable");
+	var tbody=$("#myTable>tbody");
+	function ajaxPost(){
+		$.post("/hermit/House.do",{action:"getAllHouseForJson"},function(data){
+			dataJson=$.parseJSON(data).list;
+			console.log(data);
+			console.log(dataJson);
+			tbody.empty();
+			$.each(dataJosn,function(index,VO){
+				var cell1=$("<td></td>").text(VO.houseNO);
+				var cell2=$("<td></td>").text(VO.houseTitle)
+				var cell3=$("<td></td>").text(VO.cityNO)
+				var cell4=$("<td></td>").text(VO.boroughNO);
+				var cell5=$("<td></td>").text(VO.highestFloor);
+				var cell6=$("<td></td>").text(VO.nowfloor);
+				var cell7=$("<td></td>").text(VO.houseStatus);
+				var cell8=$("<td></td>").text(VO.houseRent);
+				var cell9=$("<td></td>").text(VO.housecharge);
+				var cell10=$("<td></td>").text(VO.waterRate);
+				var cell11=$("<td></td>").text(VO.powerRate)
+				var cell12=$("<td></td>").text(VO.housevideo);
+				var cell13=$("<td></td>").text(VO.typeNO);
+				var cell14=$("<td></td>").text(VO.formNO);
+				var cell15=$("<td></td>").text(VO.houseAddr);
+				var cell16=$("<td></td>").text(VO.houseSize);
+				var row=$("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,cell14,cell15,cell16]);
+				tbodt.append(row);
+			})
+			
+		})
+	}
+	
+})
+</script>
 
 </body>
 </html>
