@@ -7,4 +7,5 @@ public interface CityDAO_interface {
      public void delete(Integer cityNO);
      public CityVO findByPrimaryKey(Integer cityNO);
      public List<CityVO> getAll();
+     
 }
