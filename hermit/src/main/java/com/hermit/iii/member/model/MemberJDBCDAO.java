@@ -3,6 +3,8 @@ package com.hermit.iii.member.model;
 import java.sql.*;
 import java.util.*;
 
+import com.hermit.iii.util.*;
+
 public class MemberJDBCDAO implements MemberDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=Hermit";
@@ -45,7 +47,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				pstmt = con.prepareStatement(INSERT_WITHDATE_STMT);
 				pstmt.setString(1, memberVO.getMemTel());
 				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, memberVO.getMemPwd());
+				pstmt.setString(3, new SecurityCipher().encryptString((memberVO.getMemPwd())));
 				pstmt.setString(4, memberVO.getMemName());
 				pstmt.setString(5, memberVO.getMemGender());
 				pstmt.setString(6, memberVO.getMemEmail());
@@ -57,7 +59,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				pstmt = con.prepareStatement(INSERT_STMT);
 				pstmt.setString(1, memberVO.getMemTel());
 				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, memberVO.getMemPwd());
+				pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
 				pstmt.setString(4, memberVO.getMemName());
 				pstmt.setString(5, memberVO.getMemGender());
 				pstmt.setString(6, memberVO.getMemEmail());
@@ -102,7 +104,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 			pstmt.setString(1, memberVO.getMemTel());
 			pstmt.setString(2, memberVO.getMemAccount());
-			pstmt.setString(3, memberVO.getMemPwd());
+			pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
 			pstmt.setString(4, memberVO.getMemName());
 			pstmt.setString(5, memberVO.getMemGender());
 			pstmt.setString(6, memberVO.getMemEmail());

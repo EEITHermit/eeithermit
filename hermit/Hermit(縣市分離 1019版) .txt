@@ -253,7 +253,7 @@ CREATE TABLE Member
 	memNO     decimal(5, 0) NOT NULL IDENTITY(40001,1),
 	memTel        VARCHAR(16),
 	memAccount    VARCHAR(32),
-	memPwd        VARCHAR(32),
+	memPwd        VARCHAR(64),
 	memName       VARCHAR(32),
 	memGender     VARCHAR(4),
 	memEmail      VARCHAR(64),
