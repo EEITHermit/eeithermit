@@ -1,0 +1,12 @@
+package com.hermit.iii.house.model;
+
+import java.util.List;
+
+
+public interface HouseDAO_interface {
+	 public void insert(HouseVO houseVO);
+     public void update(HouseVO houseVO);
+     public void delete(Integer houseNO);
+     public HouseVO findByPrimaryKey(Integer houseNO);
+     public List<HouseVO> getAll();
+}
