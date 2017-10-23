@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hermit.iii.infraction.model.InfractionService;
 import com.hermit.iii.infraction.model.InfractionVO;
-import com.hermit.iii.member.model.MemberDAO;
+import com.hermit.iii.member.model.*;
 @WebServlet(value="/infractionServlet")
 public class infractionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class infractionServlet extends HttpServlet {
 			if("insert".equals(mission)){
 				InfractionService inDAO = new InfractionService();
 				InfractionVO inVO = new InfractionVO();
-				MemberDAO memDAO = new MemberDAO();
+				MemberJNDIDAO memDAO = new MemberJNDIDAO();
 				int memNO = Integer.valueOf(request.getParameter("memNO").split("\t")[0]);
 				inVO.setEmpNO(Integer.valueOf(request.getParameter("empNO")));
 				inVO.setMemNO(memNO);
