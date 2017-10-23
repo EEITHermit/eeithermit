@@ -6,12 +6,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>員工首頁</title>
+<script src='<%= request.getContextPath() %>/js/jquery.min.js'></script>
 <script>
+	document.addEventListener("DOMContentLoader",work);
 	
+	function work(){
+		var exceptTime = $($("#resTable>tbody>tr").find("td")[2]).text();
+		console.log(exceptTime);
+	};
 </script>
 </head>
 <body>
-	<table>
+	<table id="resTable">
+		<thead>
 		<tr>
 			<th>預約編號</th>
 			<th>預約人</th>
@@ -19,12 +26,18 @@
 			<th>房屋地址</th>
 			<th>預約日期</th>
 		</tr>
+		</thead>
+		<tbody>
 		<c:forEach var="resVO" items="${resArray}">
 			<tr>
-				<td>${resVO.reservationNO}</td>
-				<td>${resVO.memVO.}</td>
+				<td>${resVO.reservationNo}</td>
+				<td>${resVO.memberVO.memName}</td>
+				<td>${resVO.exceptTime}</td>
+				<td>${resVO.houseVO.houseAddr}</td>
+				<td>${resVO.applyTime}</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 </body>
 </html>

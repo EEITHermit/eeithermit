@@ -6,6 +6,6 @@
       username="sa" password="P@ssw0rd"
       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
       url="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=hermit"
-      maxIdle="2"
+      maxIdle="10"
   />
 </Context>

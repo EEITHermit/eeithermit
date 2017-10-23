@@ -271,16 +271,13 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 		}
 	}
 	
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=hermit";
 	@Override
 	public ArrayList<HouseVO> autoCompleteH(String address) {
 		HouseVO houseVO = new HouseVO();
 		ArrayList<HouseVO> array = new ArrayList<HouseVO>();
 		Connection conn = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
+			conn = ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(AUTO_COMPLETE);
 			ps.setString(1, "%"+address+"%");
 			ResultSet rs = ps.executeQuery();
@@ -289,8 +286,6 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 				houseVO.setHouseAddr(rs.getString("houseAddr"));
 				array.add(houseVO);
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}finally{
@@ -309,15 +304,12 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 		Integer areaNo = null;
 		Connection conn = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
+			conn = ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(FIND_BOROUGHNO_BY_HOUSENO);
 			ps.setInt(1, houseNo);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			areaNo = rs.getInt(1);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
