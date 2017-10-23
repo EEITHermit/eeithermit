@@ -62,4 +62,5 @@ public class HouseService {
 	public List<HouseVO> getAllHouse(){
 		return dao.getAll();
 	}
+
 }
