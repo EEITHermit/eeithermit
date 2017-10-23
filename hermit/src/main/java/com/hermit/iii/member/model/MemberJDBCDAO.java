@@ -791,19 +791,19 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		// System.out.println("--------------------");
 
 		// select by tel
-		MemberVO memVO5 = dao.findByTel("0928265804");
-		System.out.print(memVO5.getMemNO() + ",");
-		System.out.print(memVO5.getMemTel() + ",");
-		System.out.print(memVO5.getMemAccount() + ",");
-		System.out.print(memVO5.getMemPwd() + ",");
-		System.out.print(memVO5.getMemName() + ",");
-		System.out.print(memVO5.getMemGender() + ",");
-		System.out.print(memVO5.getMemEmail() + ",");
-		System.out.print(memVO5.getMemRegister() + ",");
-		System.out.print(memVO5.getMemStatus() + ",");
-		System.out.print(memVO5.getMemInfract() + ",");
-		System.out.println(memVO5.getMemImage());
-		System.out.println("--------------------");
+//		MemberVO memVO5 = dao.findByTel("0928265804");
+//		System.out.print(memVO5.getMemNO() + ",");
+//		System.out.print(memVO5.getMemTel() + ",");
+//		System.out.print(memVO5.getMemAccount() + ",");
+//		System.out.print(memVO5.getMemPwd() + ",");
+//		System.out.print(memVO5.getMemName() + ",");
+//		System.out.print(memVO5.getMemGender() + ",");
+//		System.out.print(memVO5.getMemEmail() + ",");
+//		System.out.print(memVO5.getMemRegister() + ",");
+//		System.out.print(memVO5.getMemStatus() + ",");
+//		System.out.print(memVO5.getMemInfract() + ",");
+//		System.out.println(memVO5.getMemImage());
+//		System.out.println("--------------------");
 
 		// select by email
 		// MemberVO memVO6 = dao.findByEmail("eeit9704@gmail.com");

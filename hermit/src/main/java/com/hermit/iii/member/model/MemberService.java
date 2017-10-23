@@ -3,7 +3,7 @@ package com.hermit.iii.member.model;
 import java.util.*;
 
 public class MemberService {
-	private MemberDAO_interface dao;
+	private MemberDAO_interface dao ;
 
 	public MemberService() {
 		dao = new MemberJNDIDAO();
