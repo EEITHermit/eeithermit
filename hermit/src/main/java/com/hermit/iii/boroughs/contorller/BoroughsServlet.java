@@ -56,7 +56,5 @@ public class BoroughsServlet extends HttpServlet {
 			rd.forward(request,response);
 			
 		}
-		
 	}
-
 }

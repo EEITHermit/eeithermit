@@ -195,7 +195,7 @@ GO
 CREATE TABLE ADManager
 	(
 	adNO decimal(4,0) NOT NULL IDENTITY (5001, 1),
-	adImage varbinary(max) NOT NULL,
+	adImage varchar(max) NOT NULL,
 	adLink varchar(200) NOT NULL,
 	adMessage varchar(200) NOT NULL,
 	adTimeStart DATE NOT NULL,
@@ -253,21 +253,21 @@ CREATE TABLE Member
 	memNO     decimal(5, 0) NOT NULL IDENTITY(40001,1),
 	memTel        VARCHAR(16),
 	memAccount    VARCHAR(32),
-	memPwd        VARCHAR(16),
+	memPwd        VARCHAR(32),
 	memName       VARCHAR(32),
 	memGender     VARCHAR(4),
 	memEmail      VARCHAR(64),
 	memRegister   DATETIME,
 	memStatus    VARCHAR(16),
 	memInfract    TINYINT,
-	memImage     VARBINARY(MAX),
+	memImage     VARCHAR(MAX),
 	CONSTRAINT pk_member PRIMARY KEY (memNO)
 )
 GO
-insert into member values('0912-345-687','Vir1','sa654321','虛擬會員1','男性','vir123456@cc.cc','2017-10-10 14:24:41','已註冊通過','0',000101);
-insert into member values('0912-345-687','Vir2','sa654321','虛擬會員2','女性','vir123556@cc.cc','2017-10-10 14:24:42','未通過驗證','0',010101);
-insert into member values('0912-345-687','Vir3','sa654321','虛擬會員3','女性','vir123656@cc.cc','2017-10-10 14:24:43','已註冊通過','0',100101);
-insert into member values('0912-345-687','Vir4','sa654321','虛擬會員4','男性','vir123756@cc.cc','2017-10-10 14:24:44','已註冊通過','0',110101);
+insert into member values('0912345686','Vir111','sa654321','虛擬會員1','男','vir123456@cc.cc','2017-10-10 14:24:41','一般會員驗證','0',null);
+insert into member values('0912345687','Vir222','sa654321','虛擬會員2','女','vir123556@cc.cc','2017-10-10 14:24:42','未驗證會員','0',null);
+insert into member values('0912345688','Vir333','sa654321','虛擬會員3','女','vir123656@cc.cc','2017-10-10 14:24:43','FB驗證','0',null);
+insert into member values('0912345689','Vir444','sa654321','虛擬會員4','男','vir123756@cc.cc','2017-10-10 14:24:44','Google驗證','0',null);
 GO
 
 

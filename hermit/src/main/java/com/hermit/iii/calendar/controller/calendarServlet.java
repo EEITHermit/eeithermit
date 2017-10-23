@@ -21,8 +21,7 @@ import com.hermit.iii.calendar.model.CalendarEventService;
 import com.hermit.iii.calendar.model.CalendarEventVO;
 import com.hermit.iii.house.model.HouseDAO;
 import com.hermit.iii.house.model.HouseVO;
-import com.hermit.iii.member.model.MemberDAO;
-import com.hermit.iii.member.model.MemberVO;
+import com.hermit.iii.member.model.*;
 
 
 @WebServlet("/calendarServlet")
@@ -55,7 +54,7 @@ public class calendarServlet extends HttpServlet {
 			out.print(JSONString);
 			return;
 		}else if("queryMember".equals(mission)){
-			MemberDAO mhDAO = new MemberDAO();
+			MemberJNDIDAO mhDAO = new MemberJNDIDAO();
 			String name = request.getParameter("member");
 			ArrayList<String> arrayR = new ArrayList<String>();
 			ArrayList<MemberVO> array = mhDAO.autoCompleteM(name);
