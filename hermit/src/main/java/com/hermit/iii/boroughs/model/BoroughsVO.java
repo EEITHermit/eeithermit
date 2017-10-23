@@ -1,9 +1,10 @@
 package com.hermit.iii.boroughs.model;
 
-public class boroughsVO {
+public class BoroughsVO {
 	private Integer boroughNO;
 	private String boroughName;
 	private Integer cityNO;
+	
 	public Integer getBoroughNO() {
 		return boroughNO;
 	}

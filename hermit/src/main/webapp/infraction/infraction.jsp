@@ -57,7 +57,7 @@
 <body>
 	<h2>黑名單申請單</h2>
 	<form>
-		會員資料:<input type="text" id="memNO" name="memNO"/><br/>
+		會員資料:<input type="text" id="memNO" name="memNO" value="${param.member}"/><br/>
 		<p style="float:left">申請原因:<p><textarea style="resize:none" id="reason" name="reason"></textarea><br/>
 		<!-- 會員帳號(假資料) -->
 		<input type="hidden" value="30001" id="empNO">
