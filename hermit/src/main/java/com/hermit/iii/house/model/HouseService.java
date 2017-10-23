@@ -1,60 +1,66 @@
 package com.hermit.iii.house.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HouseService {
-
-	private HouseDAO_interface dao;
+	private HouseDAO_interface dao ;
 	
 	public HouseService(){
-		dao=new HouseDAO_JDBC();
-	}
-	public HouseVO insert(String houseTitle,Integer cityNO,Integer boroughNO,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
-		HouseVO houseVO=new HouseVO();
-		houseVO.setHouseTitle(houseTitle);
-		houseVO.setCityNO(cityNO);
-		houseVO.setBoroughNO(boroughNO);
-		houseVO.setHighestFloor(highestFloor);
-		houseVO.setNowFloor(nowFloor);
-		houseVO.setHouseStatus(houseStatus);
-		houseVO.setHouseRent(houseRent);
-		houseVO.setHouseCharge(houseCharge);
-		houseVO.setWaterRate(waterRate);
-		houseVO.setPowerRate(powerRate);
-		houseVO.setHouseVideo(houseVideo);
-		houseVO.setTypeNO(typeNO);
-		houseVO.setFormNO(formNO);
-		houseVO.setHouseAddr(houseAddr);
-		houseVO.setHouseSize(houseSize);
-		dao.insert(houseVO);
-		return houseVO;
+		dao = new HouseDAO_JNDI();
 	}
 	
-	public HouseVO update(String houseTitle,Integer cityNO,Integer boroughNO,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
-		HouseVO houseVO =new HouseVO();
-		houseVO.setHouseTitle(houseTitle);
-		houseVO.setCityNO(cityNO);
-		houseVO.setBoroughNO(boroughNO);
-		houseVO.setHighestFloor(highestFloor);
-		houseVO.setNowFloor(nowFloor);
-		houseVO.setHouseStatus(houseStatus);
-		houseVO.setHouseRent(houseRent);
-		houseVO.setHouseCharge(houseCharge);
-		houseVO.setWaterRate(waterRate);
-		houseVO.setPowerRate(powerRate);
-		houseVO.setHouseVideo(houseVideo);
-		houseVO.setTypeNO(typeNO);
-		houseVO.setFormNO(formNO);
-		houseVO.setHouseAddr(houseAddr);
-		houseVO.setHouseSize(houseSize);
-		dao.update(houseVO);
-		return houseVO;
+	public HouseVO insertHouse(String houseTitle,Integer cityNO,Integer boroughNO,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
+		HouseVO vo = new HouseVO();
+		vo.setHouseTitle(houseTitle);
+		vo.setCityNO(cityNO);
+		vo.setBoroughNO(boroughNO);
+		vo.setHighestFloor(highestFloor);
+		vo.setNowFloor(nowFloor);
+		vo.setHouseStatus(houseStatus);
+		vo.setHouseRent(houseRent);
+		vo.setHouseCharge(houseCharge);
+		vo.setWaterRate(waterRate);
+		vo.setPowerRate(powerRate);
+		vo.setHouseVideo(houseVideo);
+		vo.setTypeNO(typeNO);
+		vo.setFormNO(formNO);
+		vo.setHouseAddr(houseAddr);
+		vo.setHouseSize(houseSize);
+		dao.insert(vo);
+		return vo;
 	}
 	
-	public HouseVO findByPrimaryKey(Integer houseNO){
+	public HouseVO updateHouse(Integer houseNO,String houseTitle,Integer cityNO,Integer boroughNO,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
+		HouseVO vo = new HouseVO();
+		vo.setHouseNO(houseNO);
+		vo.setHouseTitle(houseTitle);
+		vo.setCityNO(cityNO);
+		vo.setBoroughNO(boroughNO);
+		vo.setHighestFloor(highestFloor);
+		vo.setNowFloor(nowFloor);
+		vo.setHouseStatus(houseStatus);
+		vo.setHouseRent(houseRent);
+		vo.setHouseCharge(houseCharge);
+		vo.setWaterRate(waterRate);
+		vo.setPowerRate(powerRate);
+		vo.setHouseVideo(houseVideo);
+		vo.setTypeNO(typeNO);
+		vo.setFormNO(formNO);
+		vo.setHouseAddr(houseAddr);
+		vo.setHouseSize(houseSize);
+		dao.update(vo);
+		return vo;
+	}
+	
+	public void dateHouse(Integer houseNO){
+		dao.delete(houseNO);
+	}
+	
+	public HouseVO getOneHouse(Integer houseNO){
 		return dao.findByPrimaryKey(houseNO);
 	}
-	
-	
+	public List<HouseVO> getAllHouse(){
+		return dao.getAll();
+	}
+
 }

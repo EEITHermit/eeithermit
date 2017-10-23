@@ -9,7 +9,23 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HouseDAO_JDBC implements HouseDAO_interface{
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+public class HouseDAO_JNDI implements HouseDAO_interface {
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static final String INSERT_STMT =
 		      "INSERT INTO house (houseTitle,cityNO,boroughNO,highestFloor,nowFloor,houseStatus,houseRent,houseCharge,waterRate,powerRate,houseVideo,typeNO,formNO,houseAddr,houseSize) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT =
@@ -31,7 +47,7 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		PreparedStatement pstmt = null;
 
 		try{
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1,houseVO.getHouseTitle());
 			pstmt.setInt(2,houseVO.getCityNO());
@@ -76,7 +92,7 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try{
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1,houseVO.getHouseTitle());
 			pstmt.setInt(2,houseVO.getCityNO());
@@ -122,7 +138,7 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try{
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+			con = ds.getConnection();			
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setInt(1,houseNO);
 			pstmt.execute();
@@ -156,7 +172,7 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		HouseVO vo = new HouseVO();
 		ResultSet rs =null; 
 		try{
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setInt(1,houseNO);
 			rs = pstmt.executeQuery();
@@ -210,7 +226,7 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		ResultSet rs =null; 
 		List<HouseVO> list = new LinkedList<HouseVO>();
 		try{
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
@@ -308,113 +324,4 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		
 		return areaNo;
 	}
-	
-	
-	
-	
-	public static void main(String args[]){
-		HouseVO vo = new HouseVO();
-		HouseDAO_JDBC dao = new HouseDAO_JDBC();
-		List<HouseVO> list;
-		
-//Insert Test Start		
-//		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
-//		vo.setCityNO(1);
-//		vo.setBoroughNO(1);
-//		vo.setHighestFloor(13);
-//		vo.setNowFloor(5);
-//		vo.setHouseStatus("未出租");
-//		vo.setHouseRent(20000);
-//		vo.setHouseCharge(40000);     //押金
-//		vo.setWaterRate("依帳單繳費");
-//		vo.setPowerRate("依帳單繳費");
-//		vo.setHouseVideo("http://www.youtube.com");
-//		vo.setTypeNO(2010);
-//		vo.setFormNO(2010);
-//		vo.setHouseAddr("新北市板橋區大馬路3號");
-//		vo.setHouseSize(10.32);
-//		dao.insert(vo);
-//		System.out.println("Insert Success");
-//Insert Test End	
-		
-		
-//Update Test Start
-//		vo.setHouseTitle("不甜蜜小套房");
-//		vo.setCityNO(2);
-//		vo.setBoroughNO(2);
-//		vo.setHighestFloor(18);
-//		vo.setNowFloor(18);
-//		vo.setHouseStatus("出租中");
-//		vo.setHouseRent(18000);
-//		vo.setHouseCharge(36000);
-//		vo.setWaterRate("依帳單繳費");
-//		vo.setPowerRate("依帳單繳費");
-//		vo.setHouseVideo("http://www.youtube.com/notsweethouse");
-//		vo.setTypeNO(2020);
-//		vo.setFormNO(2020);
-//		vo.setHouseAddr("新北市板橋區大馬路2號");
-//		vo.setHouseSize(18.87);
-//		vo.setHouseNO(20002);
-//		dao.update(vo);
-//		System.out.println("Update Success");
-//Update Test End	
-		
-		
-//Delete Test Start
-//		dao.delete(20003);
-//		System.out.println("Delete Success");
-//Delete Test End
-		
-//Get One Test Start
-//		vo = dao.findByPrimaryKey(20001);	
-//		System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-//		System.out.println("getCityNO = \t\t" + vo.getCityNO());
-//		System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
-//		System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
-//		System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
-//		System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
-//		System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
-//		System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
-//		System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
-//		System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
-//		System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//		System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//		System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
-//		System.out.println("getFormNO = \t\t" + vo.getFormNO());
-//		System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
-//		System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
-//		System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
-//		System.out.println("Search Success");
-//Get One Test End	
-		
-//Get All Test Start
-//		list = dao.getAll();
-//		for(int i=0;i<list.size();i++){
-//			vo = list.get(i);
-//			System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
-//			System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-//			System.out.println("getCityNO = \t\t" + vo.getCityNO());
-//			System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
-//			System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
-//			System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
-//			System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
-//			System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
-//			System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
-//			System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
-//			System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
-//			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//			System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
-//			System.out.println("getFormNO = \t\t" + vo.getFormNO());
-//			System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
-//			System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
-//			System.out.println();
-//			System.out.println("------------------------------next---------------------------------------------");
-//			System.out.println();
-//		}
-//		System.out.println("Search All Success");
-//Get All Test End		
-		
-	}
-	
 }
