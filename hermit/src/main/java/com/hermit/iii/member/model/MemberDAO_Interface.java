@@ -9,7 +9,7 @@ public interface MemberDAO_Interface {
 
 	public void update(MemberVO memberVO);
 
-	public void delete(Integer mseqno);
+	public void delete(Integer memNO);
 
 	public MemberVO findByPrimaryKey(Integer memNO);
 
