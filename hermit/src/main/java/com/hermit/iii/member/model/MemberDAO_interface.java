@@ -1,0 +1,34 @@
+package com.hermit.iii.member.model;
+
+import java.io.*;
+import java.util.*;
+
+public interface MemberDAO_interface {
+
+	public void insert(MemberVO memberVO);
+
+	public void update(MemberVO memberVO);
+
+	public void delete(Integer memNO);
+
+	public MemberVO findByPrimaryKey(Integer memNO);
+
+	public Set<MemberVO> getAll();
+
+	/**** 自訂指令 ****/
+
+	public ArrayList<MemberVO> autoCompleteM(String name);
+
+	public void checkInfraction(Integer memNO);
+
+	public Integer infractPlus1(Integer memNO);
+
+	// SMS更新會員狀態
+	public void update_MemStatusByMemTel(MemberVO memberVO);
+
+	// Image查詢(讀取)
+	public String find_MemImageByMemNO(Integer memNO);
+
+	// AJAX 帳號檢查
+	public String count_MemAccount_AJAX(String memAccount);
+}

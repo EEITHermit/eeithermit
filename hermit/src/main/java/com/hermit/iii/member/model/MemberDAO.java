@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class MemberDAO implements MemberDAO_Interface {
+public class MemberDAO implements MemberDAO_interface {
 
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=Hermit";
@@ -176,7 +176,7 @@ public class MemberDAO implements MemberDAO_Interface {
 		return memberVO;
 
 	}
-
+/*
 	@Override
 	public List<MemberVO> getAll() {
 		List<MemberVO> list = new ArrayList<MemberVO>();
@@ -235,7 +235,7 @@ public class MemberDAO implements MemberDAO_Interface {
 
 		return list;
 	}
-	
+	*/
 	//member會員輸入的autoComplete(黑名單及行事曆使用)
 		public ArrayList<MemberVO> autoCompleteM(String name){
 			ArrayList<MemberVO> array = new ArrayList<MemberVO>();
@@ -387,5 +387,29 @@ public class MemberDAO implements MemberDAO_Interface {
 		// System.out.println(memberVO3.getMemImage());
 		// System.out.println("---------------------");
 
+	}
+
+	@Override
+	public Set<MemberVO> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update_MemStatusByMemTel(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String find_MemImageByMemNO(Integer memNO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String count_MemAccount_AJAX(String memAccount) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
