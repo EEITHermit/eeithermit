@@ -218,6 +218,7 @@ CREATE TABLE BusinTeam
 	constraint BusinTeam_businNo_pk primary key (businNO)
 	) 
 GO
+	insert into BusinTeam values('第一組',30001)
 
 CREATE TABLE TeamMemberList
 (
@@ -232,7 +233,7 @@ CREATE TABLE TeamMemberList
 	constraint TeamMemberList_MemberListNo_pk primary key (memberListNO)
 )
 GO
-
+	insert into TeamMemberList values(30001,30010,'2017-01-01',null,1)
 
 
 CREATE TABLE TeamArea
@@ -245,6 +246,7 @@ CREATE TABLE TeamArea
 	constraint TeamArea_city_fk foreign key (cityNO) references city (cityNO)
 )
 GO
+	insert into TeamArea values(30010,1,1)
 
 CREATE TABLE Member
 (

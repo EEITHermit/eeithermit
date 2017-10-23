@@ -11,11 +11,20 @@
 </script>
 </head>
 <body>
-	<c:forEach var="resVO" items="${resArray}">
-	<p>${resVO.reservationNo}</p><br/>
-	<p>${resVO.applyTime}</p><br/>
-	<p>${resVO.houseVO}</p><br/>
-	<p>${resVO.memberVO}</p><br/>
-	</c:forEach>
+	<table>
+		<tr>
+			<th>預約編號</th>
+			<th>預約人</th>
+			<th>期望時間</th>
+			<th>房屋地址</th>
+			<th>預約日期</th>
+		</tr>
+		<c:forEach var="resVO" items="${resArray}">
+			<tr>
+				<td>${resVO.reservationNO}</td>
+				<td>${resVO.memVO.}</td>
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>

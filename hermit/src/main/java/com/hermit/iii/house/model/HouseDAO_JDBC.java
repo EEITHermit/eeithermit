@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 			"SELECT houseNO,houseTitle,cityNO,boroughNO,highestFloor,nowFloor,houseStatus,houseRent,houseCharge,waterRate,powerRate,houseVideo,typeNO,formNO,houseAddr,houseSize FROM house where houseNO = ?";
 	private static final String GET_ALL_STMT =
 			"SELECT houseNO,houseTitle,cityNO,boroughNO,highestFloor,nowFloor,houseStatus,houseRent,houseCharge,waterRate,powerRate,houseVideo,typeNO,formNO,houseAddr,houseSize FROM house order by houseNO";
-
+	private static final String AUTO_COMPLETE =
+			"SELECT * FROM house WHERE houseAddr LIKE ?";
+	private static final String FIND_BOROUGHNO_BY_HOUSENO =
+			"select boroughNO from house where houseNO = ?";
 	
 	@Override
 	public void insert(HouseVO houseVO) {
@@ -257,23 +261,23 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		List<HouseVO> list;
 		
 //Insert Test Start		
-//		vo.setHouseTitle("甜蜜小套房");
-//		vo.setCityNO(1);
-//		vo.setBoroughNO(1);
-//		vo.setHighestFloor(15);
-//		vo.setNowFloor(10);
-//		vo.setHouseStatus("未出租");
-//		vo.setHouseRent(15000);
-//		vo.setHouseCharge(30000);
-//		vo.setWaterRate("依帳單繳費");
-//		vo.setPowerRate("依帳單繳費");
-//		vo.setHouseVideo("http://www.youtube.com");
-//		vo.setTypeNO(2010);
-//		vo.setFormNO(2010);
-//		vo.setHouseAddr("新北市板橋區大馬路1號");
-//		vo.setHouseSize(10.32);
-//		dao.insert(vo);
-//		System.out.println("Insert Success");
+		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
+		vo.setCityNO(1);
+		vo.setBoroughNO(1);
+		vo.setHighestFloor(13);
+		vo.setNowFloor(5);
+		vo.setHouseStatus("未出租");
+		vo.setHouseRent(20000);
+		vo.setHouseCharge(40000);     //押金
+		vo.setWaterRate("依帳單繳費");
+		vo.setPowerRate("依帳單繳費");
+		vo.setHouseVideo("http://www.youtube.com");
+		vo.setTypeNO(2010);
+		vo.setFormNO(2010);
+		vo.setHouseAddr("新北市板橋區大馬路3號");
+		vo.setHouseSize(10.32);
+		dao.insert(vo);
+		System.out.println("Insert Success");
 //Insert Test End	
 		
 		
@@ -355,4 +359,58 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 //Get All Test End		
 		
 	}
+	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=hermit";
+	@Override
+	public ArrayList<HouseVO> autoCompleteH(String address) {
+		HouseVO houseVO = new HouseVO();
+		ArrayList<HouseVO> array = new ArrayList<HouseVO>();
+		Connection conn = null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
+			PreparedStatement ps = conn.prepareStatement(AUTO_COMPLETE);
+			ps.setString(1, "%"+address+"%");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				houseVO.setHouseNO(rs.getInt("houseNO"));
+				houseVO.setHouseAddr(rs.getString("houseAddr"));
+				array.add(houseVO);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return array;
+	}
+
+	@Override
+	public Integer findAreaNoByHouseNo(Integer houseNo) {
+		Integer areaNo = null;
+		Connection conn = null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
+			PreparedStatement ps = conn.prepareStatement(FIND_BOROUGHNO_BY_HOUSENO);
+			ps.setInt(1, houseNo);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			areaNo = rs.getInt(1);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return areaNo;
+	}
+	
 }
