@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>註冊頁面</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 .center-control {
 	margin-left: auto;
@@ -71,18 +71,18 @@
 
 	<footer class="footer"> <small>&copy; IIIEDU.GARYHSU</small> </footer>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/TweenMax.min.js"></script>
 	<script>
 	var item, radius, itemLength, rY;
 
 	$(function() {
 		var G_CLIENT_ID = '538877171960-djc145ihldt91ec28hajlt5m66sis16g.apps.googleusercontent.com';
-		var G_REDIRECT_URL = 'http://localhost:8081/Hermit/identity.do?action=google_process_Action';
+		var G_REDIRECT_URL = 'http://localhost:8081/hermit/identity.do?action=google_process_Action';
 		var G_SCOPE = 'https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile';
 
 		var F_CLIENT_ID = '1719931494697481';
-		var F_REDIRECT_URL = 'http://localhost:8081/Hermit/identity.do?action=facebook_process_Action';
+		var F_REDIRECT_URL = 'http://localhost:8081/hermit/identity.do?action=facebook_process_Action';
 		var F_SCOPE = 'email';
 
 		$('#google').attr('href','https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE);

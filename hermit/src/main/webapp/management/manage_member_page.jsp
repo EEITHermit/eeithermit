@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理頁面</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -196,7 +196,7 @@
 		</div>
 	</div>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"

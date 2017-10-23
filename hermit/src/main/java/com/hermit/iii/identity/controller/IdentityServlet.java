@@ -14,11 +14,11 @@ public class IdentityServlet extends HttpServlet {
 	/**** Google ****/
 	private final String G_CLIENT_ID = "538877171960-djc145ihldt91ec28hajlt5m66sis16g.apps.googleusercontent.com";
 	private final String G_CLIENT_SECRET = "tXgMa9kOdHwrM02EgEeOa1Zs";
-	private final String G_REDIRECT_URL = "http://localhost:8081/Hermit/identity.do?action=google_process_Action";
+	private final String G_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=google_process_Action";
 	/**** Facebook ****/
 	private final String F_CLIENT_ID = "1719931494697481";
 	private final String F_CLIENT_SECRET = "e510e1f84173c944fbc3254a94739510";
-	private final String F_REDIRECT_URL = "http://localhost:8081/Hermit/identity.do?action=facebook_process_Action";
+	private final String F_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=facebook_process_Action";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

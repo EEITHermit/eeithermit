@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>註冊頁面</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/iEdit.min.css">
 <style>
@@ -193,7 +193,8 @@
 		<footer class="footer"> <small>&copy; IIIEDU.GARYHSU</small>
 		</footer>
 		<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
-		<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
 		<script>
 		var txres = null;
@@ -206,27 +207,27 @@
 		// 重置(button type="reset"回復原始值，在本程式需利用新頁面進階清空EL)
 		$('#buttonReset').click(function() {
 			location.replace('<%=request.getContextPath()%>/register/register_page.jsp');
-							});
+		});
 
-			// 圖檔操作
-			$("#fileImg").change(function(e) {
+		// 圖檔操作
+		$("#fileImg").change(function(e) {
 
-				var img = e.target.files[0];
+			var img = e.target.files[0];
 
-				if (!img.type.match('image.*')) {
-					alert("Whoops! That is not an image.");
-					return;
-				}
-				iEdit.open(img, true, function(res) {
-					$("#resultImg").attr("src", res);
-					txres = res;
-				});
+			if (!img.type.match('image.*')) {
+				alert("Whoops! That is not an image.");
+				return;
+			}
+			iEdit.open(img, true, function(res) {
+				$("#resultImg").attr("src", res);
+				txres = res;
 			});
+		});
 
-			$('#buttonConfirm').click(function() {
-				$('input[name="memImage"]').val(txres);
-				$('form[name="myForm"]').submit();
-			});
+		$('#buttonConfirm').click(function() {
+			$('input[name="memImage"]').val(txres);
+			$('form[name="myForm"]').submit();
+		});
 		</script>
 </body>
 </html>

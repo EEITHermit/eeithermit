@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Hermit租屋網隱私權聲明</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 .background-image {
 	background-image:
@@ -207,7 +207,8 @@ header h1 {
 	</div>
 	<footer class="footer"> <small>&copy; IIIEDU.GARYHSU</small> </footer>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script>
 		
 	</script>
