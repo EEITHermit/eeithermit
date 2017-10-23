@@ -1,6 +1,5 @@
 package com.hermit.iii.member.model;
 
-import java.io.*;
 import java.util.*;
 
 public interface MemberDAO_interface {
