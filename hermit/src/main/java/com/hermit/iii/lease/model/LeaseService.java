@@ -76,12 +76,12 @@ public class LeaseService {
 	}
 
 	// 刪除service
-	public void deleteMember(Integer leaseNO) {
+	public void deleteLease(Integer leaseNO) {
 		dao.delete(leaseNO);
 	}
 
 	// 查詢一筆service
-	public LeaseVO getOneMember(Integer leaseNO) {
+	public LeaseVO getOneLease(Integer leaseNO) {
 		return dao.findByPrimaryKey(leaseNO);
 	}
 
