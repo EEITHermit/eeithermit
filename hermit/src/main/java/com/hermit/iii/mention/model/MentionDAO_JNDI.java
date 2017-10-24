@@ -26,9 +26,8 @@ public class MentionDAO_JNDI implements MentionDAO_Interface{
 	@Override
 	public Integer getBoroughNOByEmpNO(Integer EmpNO){
 		Integer result = null;
-		try {
-			Connection conn = ds.getConnection();
-			PreparedStatement ps = conn.prepareStatement(getBoroughNOByEmpNO);
+		try (Connection conn = ds.getConnection();
+			PreparedStatement ps = conn.prepareStatement(getBoroughNOByEmpNO);){
 			ps.setInt(1, EmpNO);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
