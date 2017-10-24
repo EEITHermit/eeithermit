@@ -23,8 +23,9 @@ public class ADManagerService {
 		dao.insert(adVO);
 	}
 	
-	public void updateADManager(String adImage , String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, int adBrowse , int adModify){
+	public void updateADManager(int adNo, String adImage , String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, int adBrowse , int adModify){
 		ADManagerVO adVO = new ADManagerVO();
+		adVO.setAdNo(adNo);
 		adVO.setAdImage(adImage);
 		adVO.setAdLink(adLink);
 		adVO.setAdMessage(adMessage);
