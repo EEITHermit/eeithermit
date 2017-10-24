@@ -1,7 +1,7 @@
 package com.hermit.iii.mention.model;
 
 public class MentionService {
-	MentionDAO_Interface menDAO = null;
+	MentionDAO_Interface menDAO ;
 	public MentionService(){
 		menDAO = new MentionDAO_JNDI();
 	}

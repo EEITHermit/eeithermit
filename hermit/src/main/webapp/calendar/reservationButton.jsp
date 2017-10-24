@@ -72,7 +72,7 @@
 <div id="reservationDiv">
 	<form id="reservationForm" action="<%= request.getContextPath() %>/reservationServlet?mission=reservation" method="POST">
 		<!-- 會員帳號為假資料 -->
-		<input type="hidden" name="memberNo" value="40001"/>
+		<input type="hidden" name="memberNo" value="40004"/>
 		<!-- 房屋帳號為假資料 -->
 		<input type="hidden" name="houseNo" value="20001"/>
 		<h3>請選擇期望預約時間</h3>
