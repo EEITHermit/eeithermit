@@ -19,6 +19,8 @@ $(document).ready(function(){
 	  $('h2').css('color','red').css('background-color','pink');
   })
 </script>
+
+
 	<div class="wrapper">
 
 		<div id="focus">
@@ -35,18 +37,37 @@ $(document).ready(function(){
 						alt="x" /></a></li>
 				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e06.jpg"
 						alt="x" /></a></li>
-						
-						
+				<li><a class="ADManagerServlet" ><img src="http://farm9.staticflickr.com/8241/8589392310_7b6127e243_s.jpg" width="75" height="75"></a></li>
 			</ul>
+						
 		</div>
 	</div>
-	
 	<script>
-		$(function(){
-			$.getJSON("admanager",{"action":"getAllADManager"},function(data){
-				
-			})	
-		})
+
+// 	$(document).ready(function() {
+
+// 		$('.image-popup-vertical-fit').magnificPopup({
+// 			type: 'image',
+// 			closeOnContentClick: true,
+// 			mainClass: 'mfp-img-mobile',
+// 			image: {
+// 				verticalFit: true
+// 			}
+			
+// 		});
+// 		$(document).ready(function(){
+// 			var dataJson;
+			
+// 			var table = $("#myTable");
+// 			var tbody = $("#myTable>tbody");
+// 			function ajaxPost(){
+// 			$.post("ADManagerServlet",{"action":"getAllADManagerForJson"},function(data){
+// 				dataJson = $.parseJSON(data).list;
+// 				console.log(data);
+// 				console.log(dataJson);
+// 				tbody.empty();
+// 			})	
+// 		})
 		
 	</script>
 </body>
