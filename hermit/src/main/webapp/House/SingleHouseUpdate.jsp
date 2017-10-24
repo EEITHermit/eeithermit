@@ -5,14 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="css/datatables.min.css"/>
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/flashcanvas.js"></script>
-<script src="js/jSignature.min.js"></script>
-<script src="js/datatables.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../css/datatables.min.css"/>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/flashcanvas.js"></script>
+<script src="../js/jSignature.min.js"></script>
+<script src="../js/datatables.min.js"></script>
 </head>
 <body>
 	<form action="">
