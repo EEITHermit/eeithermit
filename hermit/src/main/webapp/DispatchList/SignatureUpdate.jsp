@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-	<form method="post" action="DispatchListServlet">
+	<form id="ListForm" method="post" action="DispatchListServlet">
 		<div class="form-group">
 			<label for="dempno">派工單號</label>
 			<input type="text" class="form-control" name="dlno" value=${dlVO.dlNo}>
@@ -62,13 +62,14 @@
 	$(function(){
 		var jSig = $("#signature");
 		var base64 = $("#base64");
+		var eleImg = $("#elesignImg");
     	jSig.jSignature({'height':'100%','width':'100%','decor-color': 'transparent'});
     	
-    	jSig.jSignature("setData",$("#elesignImg").attr("src"));
-
-    	
+ 	 
+ 
 		$("#submit").on("click",function(){
-			base64.val(jSig.jSignature("getData"));		
+			base64.val(jSig.jSignature("getData"));
+			
 		})
 		$("#clear").on("click",function(){
 			jSig.jSignature("clear");
