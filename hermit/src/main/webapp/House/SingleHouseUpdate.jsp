@@ -5,14 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/datatables.min.css"/>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
-<script src="../js/datatables.min.js"></script>
+<link rel="stylesheet" href="/hermit/css/bootstrap.min.css">
+<link rel="stylesheet" href="/hermit/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/hermit/css/datatables.min.css"/>
+<script src="/hermit/js/jquery-3.2.1.min.js"></script>
+<script src="/hermit/js/bootstrap.js"></script>
+<script src="/hermit/js/flashcanvas.js"></script>
+<script src="/hermit/js/jSignature.min.js"></script>
+<script src="/hermit/js/datatables.min.js"></script>
 </head>
 <body>
 	<form action="">
@@ -66,8 +66,7 @@
 		</div>
 		<div>
 			<label>房屋類型</label> 
-			<select name="">
-				<option value=""></option>
+			<select id="houseType">
 			</select>
 		</div>
 		
@@ -85,15 +84,20 @@
 			<input type="text" value="${vo.houseSize }" name="houseSize">
 		</div>
 		<input type="submit" value="修改">
-		<input id="formNO" type="text" value="${vo.formNO}">
+		
+		<input id="formNO" type="hidden" value="${vo.formNO}">
+		<input id="typeNO" type="hidden" value="${vo.typeNO}">
 	</form>
 
 	<script>
 	$(document).ready(function(){
 
 			var dataJson;
-			var select= $("#houseForm");
-			console.log($("#formNO"))
+			var selectForm= $("#houseForm");
+			var formNO = $("#formNO").val();
+			var selectType=$("#houseType");
+			var typeNO=$("#typeNO").val();
+			
 			$.post("/hermit/HouseFormServlet.do", {action : "getAllForm"}, function(data) {
 				dataJson = $.parseJSON(data).list;
 // 				console.log(data);
@@ -101,9 +105,27 @@
 				$.each(dataJson,function(index,VO){
 					var cell1= $("<option></option>").text(VO.hForm);
 					cell1.val(VO.formNO);
+// 					console.log(formNO);
+// 					console.log(VO.formNO);
+					if(formNO == VO.formNO){
+						cell1.prop("selected","true");
+					}
+					selectForm.append(cell1);
 					
-					select.append(cell1);
-					
+				})
+				
+			})
+			$.post("/hermit/HouseTypeServlet.do",{action:"getAllType"},function(data){
+				dataJson=$.parseJSON(data).list;
+// 				console.log(data);
+				$.each(dataJson,function(index,VO){
+					var cell2=$("<option></option>").text(VO.hType);
+					cell2.val(VO.typeNO);
+					console.log(VO.typeNO);
+					if(typeNO==VO.typeNO){
+						cell2.prop("selected","true");
+					}
+					selectType.append(cell2);
 				})
 				
 			})
