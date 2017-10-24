@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>首頁</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
+<script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
 </head>
 <body>
 	<div class="container">
