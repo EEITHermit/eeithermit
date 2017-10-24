@@ -67,7 +67,9 @@ public class HouseServlet extends HttpServlet {
 			System.out.println("Insert Success");
 		}
 		if("updateHouse".equals(action)){
-			houseNO = Integer.valueOf("houseNO");
+			svc=new HouseService();
+			
+			houseNO = Integer.valueOf(request.getParameter("houseNO"));
 			houseTitle = request.getParameter("houstTitle");
 			cityNO = Integer.valueOf(request.getParameter("cityNO"));
 			boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
@@ -87,13 +89,26 @@ public class HouseServlet extends HttpServlet {
 			System.out.println("Update Success");
 		}
 		if("deleteHouse".equals(action)){
-			houseNO = Integer.valueOf("houseNO");
+			houseNO = Integer.valueOf(request.getParameter("houseNO"));
 			svc.dateHouse(houseNO);
 			System.out.println("Delete success");
 		}
 		if("getOneHouse".equals(action)){
-			houseNO = Integer.valueOf("houseNO");
-			vo = svc.getOneHouse(houseNO);
+			svc=new HouseService();
+			vo=svc.getOneHouse(Integer.valueOf(request.getParameter("houseNO")));
+			request.setAttribute("vo",vo);
+			//
+			RequestDispatcher rd=request.getRequestDispatcher("");
+			//
+			rd.forward(request, response);
+			System.out.println("Search One Success");
+		}
+		if("getOneHouse_FK".equals(action)){
+			svc=new HouseService();
+			vo=svc.GET_ONE_HOUSE_FK(Integer.valueOf(request.getParameter("houseNO")));
+			request.setAttribute("vo",vo);
+			RequestDispatcher rd=request.getRequestDispatcher("/House/SingleHouseUpdate.jsp");
+			rd.forward(request, response);
 			System.out.println("Search One Success");
 		}
 		if("getAllHouse".equals(action)){
@@ -106,7 +121,7 @@ public class HouseServlet extends HttpServlet {
 			System.out.println("asd");
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			List<HouseVO> list = svc.getAllHouse();
+			List<HouseVO> list = svc.getAllHouse_FK();
 			List list2 = new LinkedList();
 			PrintWriter out = response.getWriter();
 			for(int i = 0; i<list.size();i++){
@@ -125,9 +140,13 @@ public class HouseServlet extends HttpServlet {
 				m1.put("powerRate", vo.getPowerRate());
 				m1.put("houseVideo", vo.getHouseVideo());
 				m1.put("typeNO", vo.getTypeNO());
+				m1.put("hType", vo.gethType());  
 				m1.put("formNO", vo.getFormNO());
+				m1.put("hForm", vo.gethForm());
 				m1.put("houseAddr", vo.getHouseAddr());
 				m1.put("houseSize", vo.getHouseSize());
+				m1.put("hType", vo.gethType());
+				m1.put("hForm", vo.gethForm());
 				list2.add(m1);
 			}
 			Map m2 = new LinkedHashMap();
