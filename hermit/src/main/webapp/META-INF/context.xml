@@ -7,5 +7,6 @@
       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
       url="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=hermit"
       maxIdle="10"
+      maxWaitMillis="-1"
   />
 </Context>

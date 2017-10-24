@@ -51,11 +51,10 @@ public class MentionFilter implements Filter {
 		if(boroughNO != null){
 		resArray = reservation.selectByArea(boroughNO);
 		}
-		//測試
-		System.out.println(resArray.size());
 		request.setAttribute("resArray", resArray);
+		request.setAttribute("resSize",resArray.size());
 		chain.doFilter(request, response);
-		return;		
+		return;	
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

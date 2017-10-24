@@ -8,13 +8,18 @@
 <title>員工首頁</title>
 <script src='<%= request.getContextPath() %>/js/jquery.min.js'></script>
 <script>
-	document.addEventListener("DOMContentLoader",work);
+	document.addEventListener("DOMContentLoaded",work);
 	
 	function work(){
 		var exceptTime = $($("#resTable>tbody>tr").find("td")[2]).text();
-		console.log(exceptTime);
+		
 	};
 </script>
+<style>
+	table{
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	<table id="resTable">
@@ -32,9 +37,11 @@
 			<tr>
 				<td>${resVO.reservationNo}</td>
 				<td>${resVO.memberVO.memName}</td>
-				<td>${resVO.exceptTime}</td>
+				<td><button type="button" id="check">查看</button></td>
+				<td style="display:none;">${resVO.exceptTime}</td>
 				<td>${resVO.houseVO.houseAddr}</td>
 				<td>${resVO.applyTime}</td>
+				<td><button type="button" id="takeBT">接案</button></td>
 			</tr>
 		</c:forEach>
 		</tbody>

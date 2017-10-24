@@ -9,6 +9,8 @@ import java.util.*;
 import javax.naming.*;
 import javax.sql.*;
 
+import com.hermit.iii.util.SecurityCipher;
+
 public class MemberJNDIDAO implements MemberDAO_interface {
 	DataSource ds = null;
 
@@ -54,7 +56,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 				pstmt = conn.prepareStatement(INSERT_WITHDATE_STMT);
 				pstmt.setString(1, memberVO.getMemTel());
 				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, memberVO.getMemPwd());
+				pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
 				pstmt.setString(4, memberVO.getMemName());
 				pstmt.setString(5, memberVO.getMemGender());
 				pstmt.setString(6, memberVO.getMemEmail());
@@ -66,7 +68,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 				pstmt = conn.prepareStatement(INSERT_STMT);
 				pstmt.setString(1, memberVO.getMemTel());
 				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, memberVO.getMemPwd());
+				pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
 				pstmt.setString(4, memberVO.getMemName());
 				pstmt.setString(5, memberVO.getMemGender());
 				pstmt.setString(6, memberVO.getMemEmail());
@@ -96,7 +98,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 
 			pstmt.setString(1, memberVO.getMemTel());
 			pstmt.setString(2, memberVO.getMemAccount());
-			pstmt.setString(3, memberVO.getMemPwd());
+			pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
 			pstmt.setString(4, memberVO.getMemName());
 			pstmt.setString(5, memberVO.getMemGender());
 			pstmt.setString(6, memberVO.getMemEmail());
