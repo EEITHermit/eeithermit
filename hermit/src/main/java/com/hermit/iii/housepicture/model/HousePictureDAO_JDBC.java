@@ -34,7 +34,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setBytes(1, housePictureVO.gethPicture());
+			pstmt.setString(1, housePictureVO.gethPicture());
 			pstmt.setInt(2, housePictureVO.getHouseNO());
 			pstmt.execute();
 		} catch (SQLException se) {
@@ -64,7 +64,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			pstmt.setBytes(1, housePictureVO.gethPicture());
+			pstmt.setString(1, housePictureVO.gethPicture());
 			pstmt.setInt(2, housePictureVO.getHouseNO());
 			pstmt.setInt(3, housePictureVO.getHousePictureNO());
 			pstmt.execute();
@@ -130,7 +130,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				housePictureVO.setHousePictureNO(rs.getInt("housePictureNO"));
-				housePictureVO.sethPicture(rs.getBytes("hPicture"));
+				housePictureVO.sethPicture(rs.getString("hPicture"));
 				housePictureVO.setHouseNO(rs.getInt("HouseNO"));
 			}
 		return housePictureVO;	
@@ -168,7 +168,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 			while(rs.next()){
 				housePictureVO = new HousePictureVO();
 				housePictureVO.setHousePictureNO(rs.getInt("housePictureNO"));
-				housePictureVO.sethPicture(rs.getBytes("hPicture"));
+				housePictureVO.sethPicture(rs.getString("hPicture"));
 				housePictureVO.setHouseNO(rs.getInt("HouseNO"));
 				list.add(housePictureVO);
 			}
@@ -231,7 +231,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 //			e.printStackTrace();
 //		}
 		
-		dao.delete(1);
+//		dao.delete(1);
 		
 //		try {
 //			FileOutputStream fos = new FileOutputStream("D://temp//out//2.jpg");
@@ -248,7 +248,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 //			e.printStackTrace();
 //		}
 		
-		List<HousePictureVO> list = dao.getAll();
+//		List<HousePictureVO> list = dao.getAll();
 		
 //		for(int i =0 ; i<list.size();i++){
 //			vo = list.get(i);
