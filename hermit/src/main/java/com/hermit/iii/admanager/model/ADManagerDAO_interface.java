@@ -7,6 +7,7 @@ public interface ADManagerDAO_interface {
 	public void delete(int adNo);
 	public ADManagerVO findByPrimaryKey(int adNo);
 	public List<ADManagerVO> getAll();
+	public String getAllForJson();
 	
 
 }
