@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 			"SELECT houseNO,houseTitle,cityNO,boroughNO,highestFloor,nowFloor,houseStatus,houseRent,houseCharge,waterRate,powerRate,houseVideo,typeNO,formNO,houseAddr,houseSize FROM house where houseNO = ?";
 	private static final String GET_ALL_STMT =
 			"SELECT houseNO,houseTitle,cityNO,boroughNO,highestFloor,nowFloor,houseStatus,houseRent,houseCharge,waterRate,powerRate,houseVideo,typeNO,formNO,houseAddr,houseSize FROM house order by houseNO";
-
+	private static final String AUTO_COMPLETE =
+			"SELECT * FROM house WHERE houseAddr LIKE ?";
+	private static final String FIND_BOROUGHNO_BY_HOUSENO =
+			"select boroughNO from house where houseNO = ?";
 	
 	@Override
 	public void insert(HouseVO houseVO) {
@@ -251,29 +255,86 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		}
 	}
 	
+	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=hermit";
+	@Override
+	public ArrayList<HouseVO> autoCompleteH(String address) {
+		HouseVO houseVO = new HouseVO();
+		ArrayList<HouseVO> array = new ArrayList<HouseVO>();
+		Connection conn = null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
+			PreparedStatement ps = conn.prepareStatement(AUTO_COMPLETE);
+			ps.setString(1, "%"+address+"%");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				houseVO.setHouseNO(rs.getInt("houseNO"));
+				houseVO.setHouseAddr(rs.getString("houseAddr"));
+				array.add(houseVO);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return array;
+	}
+
+	@Override
+	public Integer findAreaNoByHouseNo(Integer houseNo) {
+		Integer areaNo = null;
+		Connection conn = null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
+			PreparedStatement ps = conn.prepareStatement(FIND_BOROUGHNO_BY_HOUSENO);
+			ps.setInt(1, houseNo);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			areaNo = rs.getInt(1);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return areaNo;
+	}
+	
+	
+	
+	
 	public static void main(String args[]){
 		HouseVO vo = new HouseVO();
 		HouseDAO_JDBC dao = new HouseDAO_JDBC();
 		List<HouseVO> list;
 		
 //Insert Test Start		
-		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
-		vo.setCityNO(1);
-		vo.setBoroughNO(1);
-		vo.setHighestFloor(13);
-		vo.setNowFloor(5);
-		vo.setHouseStatus("未出租");
-		vo.setHouseRent(20000);
-		vo.setHouseCharge(40000);     //押金
-		vo.setWaterRate("依帳單繳費");
-		vo.setPowerRate("依帳單繳費");
-		vo.setHouseVideo("http://www.youtube.com");
-		vo.setTypeNO(2010);
-		vo.setFormNO(2010);
-		vo.setHouseAddr("新北市板橋區大馬路3號");
-		vo.setHouseSize(10.32);
-		dao.insert(vo);
-		System.out.println("Insert Success");
+//		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
+//		vo.setCityNO(1);
+//		vo.setBoroughNO(1);
+//		vo.setHighestFloor(13);
+//		vo.setNowFloor(5);
+//		vo.setHouseStatus("未出租");
+//		vo.setHouseRent(20000);
+//		vo.setHouseCharge(40000);     //押金
+//		vo.setWaterRate("依帳單繳費");
+//		vo.setPowerRate("依帳單繳費");
+//		vo.setHouseVideo("http://www.youtube.com");
+//		vo.setTypeNO(2010);
+//		vo.setFormNO(2010);
+//		vo.setHouseAddr("新北市板橋區大馬路3號");
+//		vo.setHouseSize(10.32);
+//		dao.insert(vo);
+//		System.out.println("Insert Success");
 //Insert Test End	
 		
 		
@@ -327,32 +388,33 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 //Get One Test End	
 		
 //Get All Test Start
-		list = dao.getAll();
-		for(int i=0;i<list.size();i++){
-			vo = list.get(i);
-			System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
-			System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-			System.out.println("getCityNO = \t\t" + vo.getCityNO());
-			System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
-			System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
-			System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
-			System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
-			System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
-			System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
-			System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
-			System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
-			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-			System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
-			System.out.println("getFormNO = \t\t" + vo.getFormNO());
-			System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
-			System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
-			System.out.println();
-			System.out.println("------------------------------next---------------------------------------------");
-			System.out.println();
-		}
-		System.out.println("Search All Success");
+//		list = dao.getAll();
+//		for(int i=0;i<list.size();i++){
+//			vo = list.get(i);
+//			System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
+//			System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
+//			System.out.println("getCityNO = \t\t" + vo.getCityNO());
+//			System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
+//			System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
+//			System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
+//			System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
+//			System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
+//			System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
+//			System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
+//			System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
+//			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+//			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+//			System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
+//			System.out.println("getFormNO = \t\t" + vo.getFormNO());
+//			System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
+//			System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
+//			System.out.println();
+//			System.out.println("------------------------------next---------------------------------------------");
+//			System.out.println();
+//		}
+//		System.out.println("Search All Success");
 //Get All Test End		
 		
 	}
+	
 }

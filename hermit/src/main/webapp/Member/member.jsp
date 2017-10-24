@@ -58,7 +58,7 @@
 							<li><a href="#">註冊</a></li>
 							
 							<!-- member=40001是假資料，等統整時要拿掉 -->
-							<li><a href="<%=request.getContextPath()%>/MemberServlet?member=40001">會員管理</a></li>
+							<li><a href="<%=request.getContextPath()%>/member.do?action=member_search&member=40001">會員管理</a></li>
 							
 							<li><a href="#">登出</a></li>
 						</ul></li>
@@ -70,7 +70,7 @@
 		<div class="col-md-4 mid"></div>
 		<div class="col-md-4 mid">
 			
-		<form method="POST" action="<%=request.getContextPath()%>/MemberServlet?action=update" id="form">
+		<form method="POST" action="<%=request.getContextPath()%>/member.do?action=update" id="form">
 			
 			編號<input type="text" value="${memNO}" disabled><br>
 			   <input type="hidden" readonly value="${memNO}" name="memNO">
