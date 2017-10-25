@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MentionDAO_JDBC implements MentionDAO_Interface{
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -20,14 +21,14 @@ public class MentionDAO_JDBC implements MentionDAO_Interface{
 	String getBoroughNOByEmpNO = "select boroughNO from TeamMemberList L "
 			+ "join TeamArea T on L.businNO = T.businNO where L.empNO = ?";
 	@Override
-	public Integer getBoroughNOByEmpNO(Integer EmpNO){
-		Integer result = null;
+	public ArrayList<Integer> getBoroughNOByEmpNO(Integer EmpNO){
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		try (Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 			PreparedStatement ps = conn.prepareStatement(getBoroughNOByEmpNO);){
 			ps.setInt(1, EmpNO);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
-				result = rs.getInt(1);
+			while(rs.next()){
+				result.add(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
