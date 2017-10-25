@@ -99,7 +99,8 @@ public class IdentityServlet extends HttpServlet {
 			System.out.println(connAccessToken.getResponseCode()); // 200
 
 			if (connAccessToken.getResponseCode() == HttpURLConnection.HTTP_OK) {
-				System.out.println("access_token HTTP_OK!!"); // access_token HTTP_OK!!
+				System.out.println("access_token HTTP_OK!!"); // access_token
+																// HTTP_OK!!
 				BufferedReader reader2 = new BufferedReader(
 						new InputStreamReader(connAccessToken.getInputStream(), "UTF-8"));
 
@@ -132,7 +133,7 @@ public class IdentityServlet extends HttpServlet {
 			int expires = 0;
 			String type = null;
 			String email = null;
-			
+
 			URL urlToken = new URL("https://graph.facebook.com/v2.10/oauth/access_token");
 			HttpURLConnection connToken = (HttpURLConnection) urlToken.openConnection();
 
@@ -176,7 +177,8 @@ public class IdentityServlet extends HttpServlet {
 			System.out.println(connAccessToken.getResponseCode()); // 200
 
 			if (connAccessToken.getResponseCode() == HttpURLConnection.HTTP_OK) {
-				System.out.println("access_token HTTP_OK!!"); // access_token HTTP_OK!!
+				System.out.println("access_token HTTP_OK!!"); // access_token
+																// HTTP_OK!!
 				BufferedReader reader2 = new BufferedReader(
 						new InputStreamReader(connAccessToken.getInputStream(), "UTF-8"));
 
