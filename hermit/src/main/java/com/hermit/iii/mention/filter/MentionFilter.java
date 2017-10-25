@@ -46,10 +46,12 @@ public class MentionFilter implements Filter {
 //		Integer empNO = Integer.valueOf((String)session.getAttribute("empNO"));
 		//測試用假資料 員工40001
 		Integer empNO = 30001;
-		Integer boroughNO = mention.getBoroughNOByEmpNO(empNO);
-		ArrayList<ReservationVO> resArray = null;
-		if(boroughNO != null){
-		resArray = reservation.selectByArea(boroughNO);
+		ArrayList<Integer> boroughNOs = mention.getBoroughNOByEmpNO(empNO);
+		ArrayList<ReservationVO> resArray = new ArrayList<ReservationVO>();
+		if(!boroughNOs.isEmpty()){
+			for(Integer boroughNO : boroughNOs){
+				resArray.addAll(reservation.selectByArea(boroughNO));
+			}
 		}
 		request.setAttribute("resArray", resArray);
 		request.setAttribute("resSize",resArray.size());
