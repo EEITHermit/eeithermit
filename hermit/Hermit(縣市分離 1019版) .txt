@@ -387,7 +387,7 @@ CREATE TABLE Lease(
 	leaseDate Date not null,
 	leasePic varbinary(max) null,
 	houseNote varchar(100) null,   --房屋備註:例如設備損壞、點交狀況
-    	Refund bit not null,          --押金已退金額    
+    Refund bit not null,          --押金已退金額    
 
 	CONSTRAINT Rate_house_fk FOREIGN KEY(houseNO) REFERENCES house(houseNO),
 	CONSTRAINT Rate_Member_fk FOREIGN KEY(memNO) REFERENCES Member(memNO),

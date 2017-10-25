@@ -8,5 +8,6 @@ public interface BoroughsDAO_interface {
      public void delete(Integer boroughNO);
      public BoroughsVO findByPrimaryKey(Integer boroughNO);
      public List<BoroughsVO> getAll();
+     public String getAllWhereCity(Integer cityNO);
      
 }

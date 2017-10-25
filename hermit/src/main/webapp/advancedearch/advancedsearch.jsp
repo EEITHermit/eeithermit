@@ -19,14 +19,7 @@
 				<label for="exampleFormControlSelect1">Example select</label>
 				<select class="form-control" id="exampleFormControlSelect1">
 					<option>請選擇</option>
-					<option value="1">台北市</option>
-					<option value="2">新北市</option>
-					<option value="3">基隆市</option>
-					<option value="4">桃園市</option>
-					<option value="5">新竹市</option>
-					<option value="6">新竹縣</option>
-					<option value="7">苗栗縣</option>
-					<option value="8">台中市</option>
+					
 				</select>
 			</div>
 			<div class="form-check form-check-inline">

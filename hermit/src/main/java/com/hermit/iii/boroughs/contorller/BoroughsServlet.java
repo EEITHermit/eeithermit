@@ -20,6 +20,7 @@ public class BoroughsServlet extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		BoroughsService bs = new BoroughsService();
 		Integer boroughNO;

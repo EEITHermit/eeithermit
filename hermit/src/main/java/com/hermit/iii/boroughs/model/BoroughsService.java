@@ -34,5 +34,8 @@ public class BoroughsService {
 	public List<BoroughsVO> getAll(){
 		return dao.getAll();
 	}
+	public String getAllWhereCity(Integer cityNO){
+		return dao.getAllWhereCity(cityNO);
+	}
 	
 }
