@@ -49,12 +49,12 @@
 	
 	$(function(){
 		
-		var G_CLIENT_ID = "255567519559-nvivb663dv9cvq945kn9no690o4sb7ta.apps.googleusercontent.com";
-		var G_REDIRECT_URL = "http://localhost:8081/hermit/Login/memotherlogin.do?action=google_login_Action";
+		var G_CLIENT_ID = "538877171960-djc145ihldt91ec28hajlt5m66sis16g.apps.googleusercontent.com";
+		var G_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=google_login_Action";
 		var G_SCOPE = 'https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile';
 		
-		var F_CLIENT_ID = "121337305228818";
-		var F_REDIRECT_URL = "http://localhost:8081/hermit/Login/memotherlogin.do?action=facebook_login_Action";
+		var F_CLIENT_ID = "1719931494697481";
+		var F_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=facebook_login_Action";
 		var F_SCOPE = 'email';
 
 		
