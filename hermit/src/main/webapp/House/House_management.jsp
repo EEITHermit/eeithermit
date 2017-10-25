@@ -15,8 +15,6 @@
 <script src="../js/datatables.min.js"></script>
 </head>
 <body>
-
-
 <table id="myTable">
 		<thead>
 			<tr>
@@ -39,7 +37,9 @@
 				<th>編輯</th>
 			</tr>
 		</thead>
-		<tbody></tbody>
+		<tbody>
+		
+		</tbody>
 		<tfoot>
 			<tr>
 				<th>房屋編號</th>
@@ -60,12 +60,59 @@
 				<th>坪數</th>
 				<th>編輯</th>
 			</tr>
+			
 		</tfoot>
 	</table>
+	
+	<table>
+	
+	<tbody>
+			<tr>
+				<th>房屋標題</th>
+				<th>縣市</th>
+				<th>地區</th>
+				<th>最高樓層</th>
+				<th>房屋樓層</th>
+				<th>房屋狀態</th>
+				<th>租金</th>
+				<th>押金</th>
+				<th>水費</th>
+				<th>電費</th>
+				<th>影片</th>
+				<th>類型</th>
+				<th>形態</th>
+				<th>地址</th>
+				<th>坪數</th>
+				<th>編輯</th>
+			</tr>
+	</tbody>
+	
+	
+	
+
+	
+	</table>
+	
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+		
 	<form action="/hermit/House.do" method="get" id="modify">
 	<input type="hidden" name="action" value="getOneHouse_FK">
 	<input type="hidden" id="houseNO" name="houseNO">
 	</form>
+	
+	
 <script>
 $(document).ready(function(){
 	var dataJson;
@@ -81,10 +128,10 @@ $(document).ready(function(){
 			$.each(dataJson,function(index,VO){
 				var cell1=$("<td></td>").text(VO.houseNO);
 				var cell2=$("<td></td>").text(VO.houseTitle)
-				var cell3=$("<td></td>").text(VO.cityNO)
-				var cell4=$("<td></td>").text(VO.boroughNO);
+				var cell3=$("<td></td>").text(VO.cityName)
+				var cell4=$("<td></td>").text(VO.boroughName);
 				var cell5=$("<td></td>").text(VO.highestFloor);
-				var cell6=$("<td></td>").text(VO.nowfloor);
+				var cell6=$("<td></td>").text(VO.nowFloor);
 				var cell7=$("<td></td>").text(VO.houseStatus);
 				var cell8=$("<td></td>").text(VO.houseRent);
 				var cell9=$("<td></td>").text(VO.houseCharge);
@@ -108,8 +155,7 @@ $(document).ready(function(){
 				$("#modify").submit();
 			})
 		})
-	
-	
+		
 })
 </script>
 
