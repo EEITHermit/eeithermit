@@ -180,7 +180,7 @@ public class CityDAO_JNDI implements CityDAO_interface {
 		ResultSet rs ;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_STMT);
+			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			List<CityVO> list = new LinkedList<CityVO>();
 			while(rs.next()){

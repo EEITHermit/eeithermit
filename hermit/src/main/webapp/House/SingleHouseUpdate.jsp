@@ -48,6 +48,7 @@
 			<option>未出租</option>
 			<option>已出租</option>
 			<option>修繕中</option>
+			
 			</select> 
 <%-- 			<input type="hidden" value="${vo.houseStatus}" name="houseStatus"> --%>
 		</div>
@@ -158,25 +159,49 @@
 					selectCity.append(cell1);
 				})
 			})
-			$.post("/hermit/BoroughsServlet.do",{action:"getAllborough"},function(data){
-				dataJson=$.parseJSON(data).list;
-// 				console.log(data);
-				$.each(dataJson,function(index,VO){
-					var cell1=$("<option></option>").text(VO.boroughName);
-					cell1.val(VO.boroughNO);
-					if(boroughNO==VO.boroughNO){
-						cell1.prop("selected","true");
-					}
-					selectBorough.append(cell1);
+			$("#cityName").change(function(){
+				
+				var cityNO = ($("#cityName").val());
+				$("#boroughName").html("");
+				$.post("/hermit/BoroughsServlet.do",{action:"getAllborough",cityNO:cityNO},function(data){
+					
+					dataJson=$.parseJSON(data).list;
+//	 				console.log(data);
+					$.each(dataJson,function(index,VO){
+						var cell1=$("<option></option>").text(VO.boroughName);
+						cell1.val(VO.boroughNO);
+						if(boroughNO==VO.boroughNO){
+							cell1.prop("selected","true");
+						}
+						selectBorough.append(cell1);
+					})
 				})
 			})
+			$.post("/hermit/BoroughsServlet.do",{action:"getAllborough",cityNO:cityNO},function(data){
+				var cityNO = ($("#cityName").val());
+					dataJson=$.parseJSON(data).list;
+//	 				console.log(data);
+					$.each(dataJson,function(index,VO){
+						var cell1=$("<option></option>").text(VO.boroughName);
+						cell1.val(VO.boroughNO);
+						if(boroughNO==VO.boroughNO){
+							cell1.prop("selected","true");
+						}
+						selectBorough.append(cell1);
+					})
+				})
+			
+			
+			
 			var houseStatus = "${vo.houseStatus}";
 			if(houseStatus == "已出租"){
-				SelectStatus.find("option").eq(2).prop("selected","true");
+				SelectStatus.find("option").eq(1).prop("selected","true");
 				console.log(SelectStatus.find("option").eq(2));
 			}else if(houseStatus == "未出租"){
-				SelectStatus.find("option").eq(1).prop("selected","true");
+				SelectStatus.find("option").eq(0).prop("selected","true");
 				console.log(SelectStatus.find("option").eq(1));
+			}else if(houseStatus=="修繕中"){
+				SelectStatus.find("option").eq(2).prop("selected","true");
 			}
 		})
 	</script>

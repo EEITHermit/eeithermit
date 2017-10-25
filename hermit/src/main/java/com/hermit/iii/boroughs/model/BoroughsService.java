@@ -34,5 +34,7 @@ public class BoroughsService {
 	public List<BoroughsVO> getAll(){
 		return dao.getAll();
 	}
-	
+	public List<BoroughsVO> getAll_cityNO(Integer cityNO){
+		return dao.getAll_cityNO(cityNO);
+	} 
 }

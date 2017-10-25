@@ -34,8 +34,8 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	private static final String AUTO_COMPLETE = "SELECT * FROM house WHERE houseAddr LIKE ?";
 	private static final String FIND_BOROUGHNO_BY_HOUSENO = "select boroughNO from house where houseNO = ?";
 	//子傑加
-	private static final String GET_ALL_JOIN_FK = "SELECT A.houseNO,A.houseTitle,A.cityNO,A.boroughNO,A.highestFloor,A.nowFloor,A.houseStatus,A.houseRent,A.houseCharge,A.waterRate,A.powerRate,A.houseVideo,A.TypeNO,B.hType,A.formNO,C.hForm,A.houseAddr,A.houseSize from House as A JOIN  HouseType as B on A.typeNO =B.typeNO JOIN HouseForm as C on A.formNO=C.formNO";
-	private static final String GET_ONE_HOUSE_FK = "SELECT A.houseNO,A.houseTitle,A.cityNO,A.boroughNO,A.highestFloor,A.nowFloor,A.houseStatus,A.houseRent,A.houseCharge,A.waterRate,A.powerRate,A.houseVideo,A.TypeNO,B.hType,A.formNO,C.hForm,A.houseAddr,A.houseSize from House as A JOIN  HouseType as B on A.typeNO =B.typeNO JOIN HouseForm as C on A.formNO=C.formNO where A.houseNO=?";
+	private static final String GET_ALL_JOIN_FK = " SELECT A.houseNO,A.houseTitle,A.cityNO,D.cityName ,A.boroughNO ,E.boroughName,A.highestFloor,A.nowFloor,A.houseStatus,A.houseRent,A.houseCharge,A.waterRate,A.powerRate,A.houseVideo,A.TypeNO,B.hType,A.formNO,C.hForm,A.houseAddr,A.houseSize from House as A JOIN  HouseType as B on A.typeNO =B.typeNO JOIN HouseForm as C on A.formNO=C.formNO JOIN city as D on A.cityNO=D.cityNO JOIN Boroughs as E on A.boroughNO=E.boroughNO";
+	private static final String GET_ONE_HOUSE_FK = "SELECT A.houseNO,A.houseTitle,A.cityNO,D.cityName ,A.boroughNO,E.boroughName,A.highestFloor,A.nowFloor,A.houseStatus,A.houseRent,A.houseCharge,A.waterRate,A.powerRate,A.houseVideo,A.TypeNO,B.hType,A.formNO,C.hForm,A.houseAddr,A.houseSize from House as A JOIN  HouseType as B on A.typeNO =B.typeNO JOIN HouseForm as C on A.formNO=C.formNO  JOIN city as D on A.cityNO=D.cityNO JOIN Boroughs as E on A.boroughNO=E.boroughNO where A.houseNO=?";
 	@Override
 	public void insert(HouseVO houseVO) {
 		Connection con = null;
@@ -105,7 +105,7 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 			pstmt.setDouble(15, houseVO.getHouseSize());
 			pstmt.setInt(16, houseVO.getHouseNO());
 			pstmt.execute();
-
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -321,7 +321,9 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 				vo = new HouseVO();
 				vo.setHouseTitle(rs.getString("houseTitle"));
 				vo.setCityNO(rs.getInt("cityNO"));
+				vo.setCityName(rs.getString("cityName"));
 				vo.setBoroughNO(rs.getInt("boroughNO"));
+				vo.setBoroughName(rs.getString("boroughName"));
 				vo.setHighestFloor(rs.getInt("highestFloor"));
 				vo.setNowFloor(rs.getInt("nowFloor"));
 				vo.setHouseStatus(rs.getString("houseStatus"));
@@ -374,7 +376,9 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 			while (rs.next()) {
 				vo.setHouseTitle(rs.getString("houseTitle"));
 				vo.setCityNO(rs.getInt("cityNO"));
+				vo.setCityName(rs.getString("cityName"));
 				vo.setBoroughNO(rs.getInt("boroughNO"));
+				vo.setBoroughName(rs.getString("boroughName"));
 				vo.setHighestFloor(rs.getInt("highestFloor"));
 				vo.setNowFloor(rs.getInt("nowFloor"));
 				vo.setHouseStatus(rs.getString("houseStatus"));

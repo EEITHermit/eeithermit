@@ -13,6 +13,9 @@
 <script src="../js/flashcanvas.js"></script>
 <script src="../js/jSignature.min.js"></script>
 <script src="../js/datatables.min.js"></script>
+<style>
+
+</style>
 </head>
 <body>
 <table id="myTable">
@@ -63,12 +66,12 @@
 			
 		</tfoot>
 	</table>
-	
-	<table>
-	
-	<tbody>
-			<tr>
-				<th>房屋標題</th>
+
+<form action="<%=request.getContextPath()%>/House.do" method="POST">
+<table class="insertTable">
+	<thead>
+	<tr>
+			<th>房屋標題</th>
 				<th>縣市</th>
 				<th>地區</th>
 				<th>最高樓層</th>
@@ -85,27 +88,74 @@
 				<th>坪數</th>
 				<th>編輯</th>
 			</tr>
+	</thead>
+	<tbody>
+		<tr>
+				<td>
+				<input type="text" style="width: 75px" value="${param.houseTitle}" name="houseTitle">
+				</td>
+				
+				<td>
+				<select name="cityNO" id="cityNO">
+				<option>請選擇</option>
+				</select>
+				</td>
+				
+				<td>
+				<select name="boroughNO" id="boroughNO">
+				
+				</select>				
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.hightestFloor}" name="highestFloor">
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor">
+				</td>
+				<td>
+				<select name="houseStatus" id="SelectStatus">
+				<option>未出租</option>
+				<option>已出租</option>
+				<option>修繕中</option>
+				</select> 
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent">
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge">
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate">
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate">
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.houseVideo}" name="houseVideo">
+				</td>
+				<td>
+				<select id="houseType" name="typeNO"></select>
+				</td>
+				<td>
+				<select id="houseForm" name="formNO"></select>
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr">
+				</td>
+				<td>
+				<input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize">
+				</td>
+				<td>
+				<button id="addHouse">新增</button>
+				</td>
+				
+		</tr>
+		<input type="hidden" name=action>
 	</tbody>
-	
-	
-	
-
-	
-	</table>
-	
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
+</table>
+</form>
+		
 		
 	<form action="/hermit/House.do" method="get" id="modify">
 	<input type="hidden" name="action" value="getOneHouse_FK">
@@ -120,10 +170,22 @@ $(document).ready(function(){
 	var table=$("#myTable");
 	var tbody=$("#myTable>tbody");
 	
+	var selectCity=$("#cityNO")
+	var cityNO=$("#cityNO").val();
+	
+	var selectBorough=$("#boroughNO");
+	var boroughNO=$("#boroughNO").val();
+	
+	var selectForm= $("#houseForm");
+	var formNO = $("#formNO").val();
+	
+	var selectType=$("#houseType");
+	var typeNO=$("#typeNO").val();
+	
 		$.post("/hermit/House.do",{action:"getAllHouseForJson"},function(data){
 			dataJson=$.parseJSON(data).list;
-			console.log(data);
-			console.log(dataJson);
+// 			console.log(data);
+// 			console.log(dataJson);
 			tbody.empty();
 			$.each(dataJson,function(index,VO){
 				var cell1=$("<td></td>").text(VO.houseNO);
@@ -155,6 +217,68 @@ $(document).ready(function(){
 				$("#modify").submit();
 			})
 		})
+		$.post("/hermit/CityServlet.do",{action:"getAllCity"},function(data){
+				dataJson=$.parseJSON(data).list;
+				console.log(data);
+				$.each(dataJson,function(index,VO){
+					var cell1=$("<option></option>").text(VO.cityName);
+					cell1.val(VO.cityNO);
+					console.log(VO.cityName);
+					selectCity.append(cell1);
+				})
+			})
+			$("#cityNO").change(function(){
+				
+				var cityNO = ($("#cityNO").val());
+				$("#boroughNO").html("");
+				$.post("/hermit/BoroughsServlet.do",{action:"getAllborough",cityNO:cityNO},function(data){
+					
+					dataJson=$.parseJSON(data).list;
+//	 				console.log(data);
+					selectBorough.append($("<option>請選擇</option>"));
+					$.each(dataJson,function(index,VO){
+						
+						var cell1=$("<option></option>").text(VO.boroughName);
+						cell1.val(VO.boroughNO);
+						selectBorough.append(cell1);
+					})
+				})
+			})
+			$.post("/hermit/HouseTypeServlet.do",{action:"getAllType"},function(data){
+				dataJson=$.parseJSON(data).list;
+// 				console.log(data);
+				$.each(dataJson,function(index,VO){
+					var cell2=$("<option></option>").text(VO.hType);
+					cell2.val(VO.typeNO);
+// 					console.log(VO.typeNO);
+					selectType.append(cell2);
+				})
+				
+			})
+			$.post("/hermit/HouseFormServlet.do", {action : "getAllForm"}, function(data) {
+				dataJson = $.parseJSON(data).list;
+// 				console.log(data);
+// 				console.log(dataJson);
+				$.each(dataJson,function(index,VO){
+					var cell1= $("<option></option>").text(VO.hForm);
+					cell1.val(VO.formNO);
+					selectForm.append(cell1);
+				})
+			})
+			var houseStatus = "${vo.houseStatus}";
+		if(houseStatus == "已出租"){
+			SelectStatus.find("option").eq(1).prop("selected","true");
+			console.log(SelectStatus.find("option").eq(2));
+		}else if(houseStatus == "未出租"){
+			SelectStatus.find("option").eq(0).prop("selected","true");
+			console.log(SelectStatus.find("option").eq(1));
+		}else if(houseStatus=="修繕中"){
+			SelectStatus.find("option").eq(2).prop("selected","true");
+		}
+			
+			$("#addHouse").click(function(){
+				$('input[name="action"]').val("insertHouse");
+			})
 		
 })
 </script>
