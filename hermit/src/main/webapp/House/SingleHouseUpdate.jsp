@@ -15,7 +15,7 @@
 <script src="/hermit/js/datatables.min.js"></script>
 </head>
 <body>
-	<form action="">
+	<form method="POST" action="/hermit/House.do?action=updateHouse">
 		<div>
 			<label>房屋編號</label> 
 			<input type="text" readonly value="${vo.houseNO}" name="houseNO">
@@ -25,12 +25,14 @@
 		    <input type="text" value="${vo.houseTitle}" name="houseTitle">
 		</div>
 		<div>
-			<label>縣市</label> 
-			<input type="text" value="${vo.cityNO}" name="cityNO">
+			<label>縣市</label>
+			<select id="cityName" name="cityNO"></select> 
+			<input type="hidden" value="${vo.cityNO}" id="cityNO" name="cityNO">
 		</div>
 		<div>
 			<label>地區</label> 
-			<input type="text" value="${vo.boroughNO}" name="boroughNO">
+			<select id="boroughName" name="boroughNO"></select>
+			<input type="hidden" value="${vo.boroughNO}" name="boroughNOe" id="boroughNO">
 		</div>
 		<div>
 			<label>最高樓層</label> 
@@ -41,8 +43,13 @@
 			<input type="text" value="${vo.nowFloor}" name="nowFloor">
 		</div>
 		<div>
-			<label>房屋狀態</label> 
-			<input type="text" value="${vo.houseStatus}" name="houseStatus">
+			<label>房屋狀態</label>
+			<select name="houseStatus" id="SelectStatus">
+			<option>未出租</option>
+			<option>已出租</option>
+			<option>修繕中</option>
+			</select> 
+<%-- 			<input type="hidden" value="${vo.houseStatus}" name="houseStatus"> --%>
 		</div>
 		<div>
 			<label>租金</label> 
@@ -66,13 +73,14 @@
 		</div>
 		<div>
 			<label>房屋類型</label> 
-			<select id="houseType">
-			</select>
+			<select id="houseType" name="typeNO"></select>
+			<input id="typeNO" type="hidden" value="${vo.typeNO}" name="typeNO">
 		</div>
 		
 		<div>
 		<lable>形態</lable>
-			<select id="houseForm"></select>
+			<select id="houseForm" name="formNO"></select>
+			<input id="formNO" type="hidden" value="${vo.formNO}" name="formNO">
 		</div>
 		
 		<div>
@@ -85,8 +93,8 @@
 		</div>
 		<input type="submit" value="修改">
 		
-		<input id="formNO" type="hidden" value="${vo.formNO}">
-		<input id="typeNO" type="hidden" value="${vo.typeNO}">
+		
+		
 	</form>
 
 	<script>
@@ -95,9 +103,18 @@
 			var dataJson;
 			var selectForm= $("#houseForm");
 			var formNO = $("#formNO").val();
+			
 			var selectType=$("#houseType");
 			var typeNO=$("#typeNO").val();
 			
+			var selectCity=$("#cityName")
+			var cityNO=$("#cityNO").val();
+			
+			var selectBorough=$("#boroughName");
+			var boroughNO=$("#boroughNO").val();
+			
+			var SelectStatus=$("#SelectStatus");
+// 			console.log(selectCity);
 			$.post("/hermit/HouseFormServlet.do", {action : "getAllForm"}, function(data) {
 				dataJson = $.parseJSON(data).list;
 // 				console.log(data);
@@ -121,7 +138,7 @@
 				$.each(dataJson,function(index,VO){
 					var cell2=$("<option></option>").text(VO.hType);
 					cell2.val(VO.typeNO);
-					console.log(VO.typeNO);
+// 					console.log(VO.typeNO);
 					if(typeNO==VO.typeNO){
 						cell2.prop("selected","true");
 					}
@@ -129,7 +146,38 @@
 				})
 				
 			})
-
+			$.post("/hermit/CityServlet.do",{action:"getAllCity"},function(data){
+				dataJson=$.parseJSON(data).list;
+// 				console.log(data);
+				$.each(dataJson,function(index,VO){
+					var cell1=$("<option></option>").text(VO.cityName);
+					cell1.val(VO.cityNO);
+					if(cityNO==VO.cityNO){
+						cell1.prop("selected","true");
+					}
+					selectCity.append(cell1);
+				})
+			})
+			$.post("/hermit/BoroughsServlet.do",{action:"getAllborough"},function(data){
+				dataJson=$.parseJSON(data).list;
+// 				console.log(data);
+				$.each(dataJson,function(index,VO){
+					var cell1=$("<option></option>").text(VO.boroughName);
+					cell1.val(VO.boroughNO);
+					if(boroughNO==VO.boroughNO){
+						cell1.prop("selected","true");
+					}
+					selectBorough.append(cell1);
+				})
+			})
+			var houseStatus = "${vo.houseStatus}";
+			if(houseStatus == "已出租"){
+				SelectStatus.find("option").eq(2).prop("selected","true");
+				console.log(SelectStatus.find("option").eq(2));
+			}else if(houseStatus == "未出租"){
+				SelectStatus.find("option").eq(1).prop("selected","true");
+				console.log(SelectStatus.find("option").eq(1));
+			}
 		})
 	</script>
 </body>
