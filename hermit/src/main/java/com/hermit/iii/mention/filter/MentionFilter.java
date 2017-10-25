@@ -19,7 +19,7 @@ import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.reservation.model.ReservationService;
 import com.hermit.iii.reservation.model.ReservationVO;
 
-@WebFilter(urlPatterns="/mention/mention.jsp")
+@WebFilter(urlPatterns="/mention/*")
 public class MentionFilter implements Filter {
 
     public MentionFilter() {
