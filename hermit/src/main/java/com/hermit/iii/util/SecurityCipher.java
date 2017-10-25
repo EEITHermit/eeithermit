@@ -22,6 +22,10 @@ public class SecurityCipher {
 		SecureRandom srnd = new SecureRandom(); // 嚴格亂數產生
 		srnd.nextBytes(iv);
 
+		if (message == null || message.trim().length() == 0) {
+			return null;
+		}
+
 		try {
 			Cipher cipher = Cipher.getInstance(transformationCBC);
 			SecretKeySpec secretKey = new SecretKeySpec(KEY.getBytes(), "AES");
@@ -54,6 +58,10 @@ public class SecurityCipher {
 	public static String encryptString(String message) {
 		String encryptedString = "";
 
+		if (message == null || message.trim().length() == 0) {
+			return null;
+		}
+
 		try {
 			Cipher cipher = Cipher.getInstance(transformationECB);
 			SecretKeySpec secretKey = new SecretKeySpec(KEY.getBytes(), "AES");
@@ -81,6 +89,10 @@ public class SecurityCipher {
 	public static String decryptStringWithIV(String message) {
 		String decryptedString = "";
 		byte[] iv = new byte[128 / 8]; // BlockCipher為16位元組要求(AES使用長度無關)，使產生每次不同(打亂)
+
+		if (message == null || message.trim().length() == 0) {
+			return null;
+		}
 
 		try {
 			Cipher cipher = Cipher.getInstance(transformationCBC);
@@ -113,6 +125,10 @@ public class SecurityCipher {
 
 	public static String decryptString(String message) {
 		String decryptedString = "";
+
+		if (message == null || message.trim().length() == 0) {
+			return null;
+		}
 
 		try {
 			Cipher cipher = Cipher.getInstance(transformationECB);
