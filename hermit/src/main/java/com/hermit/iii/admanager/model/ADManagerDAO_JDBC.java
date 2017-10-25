@@ -1,11 +1,19 @@
 package com.hermit.iii.admanager.model;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.json.simple.JSONValue;
+
+import com.hermit.iii.dispatchlist.model.DispatchListVO;
 
 public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 	private static final String INSERT =
@@ -72,15 +80,15 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 			
 				conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 				pstmt = conn.prepareStatement(UPDATE);
-				pstmt.setString(1, ADManagerVO.getAdImage()); //廣告圖片
-				pstmt.setString(2, ADManagerVO.getAdLink());
-				pstmt.setString(3, ADManagerVO.getAdMessage());
-				pstmt.setDate(4, ADManagerVO.getAdTimeStart());
-				pstmt.setDate(5, ADManagerVO.getAdTimeEnd());
-				pstmt.setBoolean(6, ADManagerVO.getAdStatus()); //廣告狀態
-				pstmt.setInt(7, ADManagerVO.getAdBrowse());  //廣告瀏覽次數
-				pstmt.setInt(8, ADManagerVO.getAdModify());  //最後修改人
-				pstmt.setInt(9, ADManagerVO.getAdNo());
+				pstmt.setInt(1, ADManagerVO.getAdNo());
+				pstmt.setString(2, ADManagerVO.getAdImage()); //廣告圖片
+				pstmt.setString(3, ADManagerVO.getAdLink());
+				pstmt.setString(4, ADManagerVO.getAdMessage());
+				pstmt.setDate(5, ADManagerVO.getAdTimeStart());
+				pstmt.setDate(6, ADManagerVO.getAdTimeEnd());
+				pstmt.setBoolean(7, ADManagerVO.getAdStatus()); //廣告狀態
+				pstmt.setInt(8, ADManagerVO.getAdBrowse());  //廣告瀏覽次數
+				pstmt.setInt(9, ADManagerVO.getAdModify());  //最後修改人
 				pstmt.executeUpdate();
 				
 			} catch(SQLException e){
@@ -206,6 +214,8 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 				pstmt = conn.prepareStatement(GET_ALL);
 				rs = pstmt.executeQuery();
 				
+				
+				
 				while (rs.next()) {					
 					adVO = new ADManagerVO();
 					adVO.setAdNo(rs.getInt("adNo"));
@@ -219,6 +229,8 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 					adVO.setAdModify(rs.getInt("adModify"));
 					list.add(adVO);
 				}
+				
+								
 			} catch (SQLException e) {
 				throw new RuntimeException("A database error occured. "
 						+ e.getMessage());
@@ -247,6 +259,66 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 			}
 			return list;
 		}
+		@Override
+		public String getAllForJson() {
+			List<Map> list = new ArrayList<Map>();
+			ADManagerVO adVO = null;
+			String jsonString = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+		try {
+
+			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+			pstmt = conn.prepareStatement(GET_ALL);
+			rs = pstmt.executeQuery();
+				
+			while (rs.next()) {
+				Map m1 = new LinkedHashMap();
+				m1.put("adNo", rs.getInt("adNo"));
+				m1.put("adLink", rs.getString("adLink"));
+				m1.put("adMessage",rs.getString("adMessage"));
+				m1.put("adTimeStart",rs.getDate("adTimeStart"));
+				m1.put("adTimeEnd",rs.getDate("adTimeEnd"));
+				m1.put("adStatus",rs.getInt("adStatus"));
+				m1.put("adBrowse",rs.getInt("adBrowse"));
+				m1.put("adModify",rs.getInt("adModify"));
+				list.add(m1);
+			}
+			Map m2 = new LinkedHashMap();
+			m2.put("list",list);
+			jsonString = JSONValue.toJSONString(m2);
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return jsonString;
+	}
+		
+
 		public static void main (String args[]){
 			ADManagerVO aVO = new ADManagerVO();
 			ADManagerDAO_JDBC aDAO = new ADManagerDAO_JDBC();
@@ -255,21 +327,25 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 			
 			
 //			FileInputStream fis;
-//			try {
-//				fis = new FileInputStream("D://WebSite//imgs//test5.png");
-//				aVO.setAdImage(fis);
-//				aVO.setAdLink("www.yahoo.com.yw");
+//			
+//				try {
+//					fis = new FileInputStream("D://WebSite//imgs//test5.png");
+//				aVO.setAdImage("date:image/png;base64,1234");
+//				aVO.setAdLink("www.yahoo.com.tw");
 //				aVO.setAdMessage("哈囉大家好");
-//				aVO.setAdTimeStart(java.sql.Date.valueOf("2017-10-15"));
-//				aVO.setAdTimeEnd(java.sql.Date.valueOf("2017-10-20"));
+//				aVO.setAdTimeStart(java.sql.Date.valueOf("2017-10-23"));
+//				aVO.setAdTimeEnd(java.sql.Date.valueOf("2017-10-25"));
 //				aVO.setAdStatus(true);
 //				aVO.setAdBrowse(1);
 //				aVO.setAdModify(30001);
 //				aDAO.insert(aVO);
+//				} catch (FileNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 //				System.out.println("insert success");
-//			} catch (FileNotFoundException e) {
-//				e.printStackTrace();
-//			}
+//		
+			}
 			
 	////Insert Test End
 	////Update Test Start
@@ -323,25 +399,28 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 	//Search All Test Start
 			
 //			System.out.println("-----------Search All Start------------");	
-			List<ADManagerVO> list = aDAO.getAll();
-			for(int i=0;i<list.size();i++){
-				aVO = list.get(i);
-				aVO = aDAO.findByPrimaryKey(5003);
-				System.out.println("adImage \t= " + aVO.getAdImage());
-				System.out.println("adLink \t= " + aVO.getAdLink());
-				System.out.println("adMessage \t= " + aVO.getAdMessage());
-				System.out.println("adTimeStart \t= " + aVO.getAdTimeStart());
-				System.out.println("adTimeEnd \t= " + aVO.getAdTimeEnd());
-				System.out.println("adStatus = " + aVO.getAdStatus());
-				System.out.println("adBrowse \t= " + aVO.getAdBrowse());
-				System.out.println("adModify \t= " + aVO.getAdModify());
-				System.out.println("adNo \t= " + aVO.getAdNo());
-				System.out.println("Search One success");
-			}
-			System.out.println("-----------Search All success------------");	
-			
-	//Search All Test End		
-		}
+//			List<ADManagerVO> list = aDAO.getAll();
+//			for(int i=0;i<list.size();i++){
+//				aVO = list.get(i);
+//				aVO = aDAO.findByPrimaryKey(5003);
+//				System.out.println("adImage \t= " + aVO.getAdImage());
+//				System.out.println("adLink \t= " + aVO.getAdLink());
+//				System.out.println("adMessage \t= " + aVO.getAdMessage());
+//				System.out.println("adTimeStart \t= " + aVO.getAdTimeStart());
+//				System.out.println("adTimeEnd \t= " + aVO.getAdTimeEnd());
+//				System.out.println("adStatus = " + aVO.getAdStatus());
+//				System.out.println("adBrowse \t= " + aVO.getAdBrowse());
+//				System.out.println("adModify \t= " + aVO.getAdModify());
+//				System.out.println("adNo \t= " + aVO.getAdNo());
+//				System.out.println("Search One success");
+//			}
+//			System.out.println("-----------Search All success------------");	
+//			
+//	Search All Test End		
+//		}
+
+
+		
 		
 }
 	

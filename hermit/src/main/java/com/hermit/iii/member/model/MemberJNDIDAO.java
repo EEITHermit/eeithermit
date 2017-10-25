@@ -186,7 +186,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 				memberVO.setMemNO(rs.getInt("memNO"));
 				memberVO.setMemTel(rs.getString("memTel"));
 				memberVO.setMemAccount(rs.getString("memAccount"));
-				memberVO.setMemPwd(rs.getString("memPwd"));
+				memberVO.setMemPwd(new SecurityCipher().decryptString(rs.getString("memPwd")));
 				memberVO.setMemName(rs.getString("memName"));
 				memberVO.setMemGender(rs.getString("memGender"));
 				memberVO.setMemEmail(rs.getString("memEmail"));

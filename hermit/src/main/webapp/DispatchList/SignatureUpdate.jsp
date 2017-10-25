@@ -5,18 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>修改</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/datatables.min.css"/>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
-<script src="../js/datatables.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
+<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
+<script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </head>
 <body>
 <div class="container">
-	<form method="post" action="DispatchListServlet">
+	<form id="ListForm" method="post" action="DispatchListServlet">
 		<div class="form-group">
 			<label for="dempno">派工單號</label>
 			<input type="text" class="form-control" name="dlno" value=${dlVO.dlNo}>
@@ -62,13 +62,14 @@
 	$(function(){
 		var jSig = $("#signature");
 		var base64 = $("#base64");
+		var eleImg = $("#elesignImg");
     	jSig.jSignature({'height':'100%','width':'100%','decor-color': 'transparent'});
     	
-    	jSig.jSignature("setData",$("#elesignImg").attr("src"));
-
-    	
+ 	 
+ 
 		$("#submit").on("click",function(){
-			base64.val(jSig.jSignature("getData"));		
+			base64.val(jSig.jSignature("getData"));
+			
 		})
 		$("#clear").on("click",function(){
 			jSig.jSignature("clear");
