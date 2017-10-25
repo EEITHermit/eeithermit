@@ -26,25 +26,7 @@
 </style>
 </head>
 <body>
-	<header> <nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#myNavbar" aria-expanded="ture">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Hermit</a>
-		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-home"></span>
-						Home</a></li>
-			</ul>
-		</div>
-	</div>
-	</nav></header>
+	<jsp:include page="/fragment/back_side_page.jsp" />
 	<div class="container">
 		<div class="row">
 			<form method="post" action="<%=request.getContextPath()%>/member.do"
@@ -196,7 +178,8 @@
 		</div>
 	</div>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
@@ -343,22 +326,24 @@
 
 			$.ajax({
 				url:'<%=request.getContextPath()%>/member.do?',
-				method:'post',
-				data:{'action':'register_check_account_Action','memAccount':account},
-				dataType:'text',
-				success:function(data) {
-					if(data == "帳號已存在") {
+				method : 'post',
+				data : {
+					'action' : 'register_check_account_Action',
+					'memAccount' : account
+				},
+				dataType : 'text',
+				success : function(data) {
+					if (data == "帳號已存在") {
 						msg.innerHTML = data;
-						$('#buttonAdd').prop('disabled',true);
-						$('#buttonUpdate').prop('disabled',true);
-					}
-					else {
+						$('#buttonAdd').prop('disabled', true);
+						$('#buttonUpdate').prop('disabled', true);
+					} else {
 						msg.innerHTML = "";
-						$('#buttonAdd').prop('disabled',false);
-						$('#buttonUpdate').prop('disabled',false);
+						$('#buttonAdd').prop('disabled', false);
+						$('#buttonUpdate').prop('disabled', false);
 					}
 				},
-				error:function() {
+				error : function() {
 					alert("您的瀏覽器不支援Ajax!!");
 				}
 			});

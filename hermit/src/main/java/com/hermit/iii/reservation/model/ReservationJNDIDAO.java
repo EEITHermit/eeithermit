@@ -75,7 +75,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 	}
 	//員工接案後確認是否已被接案，再更新狀態
 	String selectStatus = "select takedOver from reservation where reservationNO = ?";
-	String updateEmpNo = "update reservation set empNO = ?,takedOver = true where reservationNO = ?";
+	String updateEmpNo = "update reservation set empNO = ?,takedOver = 'true' where reservationNO = ?";
 	@Override
 	public Integer updateStatus(Integer reservationNo , Integer empNo) {
 		int result = 0;
@@ -99,7 +99,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 		return result;
 	}
 	//確認是否有預約過此房屋
-	String checkExist = "select * from reservation where houseNO= ? AND memNO = ?";
+	String checkExist = "select * from reservation where houseNO= ? AND memNO = ? AND takedOver = 'false'";
 	@Override
 	public boolean checkExist(Integer houseNo,Integer memberNo){
 		boolean result = true;

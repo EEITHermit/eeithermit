@@ -64,8 +64,10 @@ public class reservationServlet extends HttpServlet {
 				Integer areaNo = mgDAO.findAreaNoByHouseNo(Integer.valueOf(houseNo));
 				String times[] = request.getParameterValues("Time");
 				String expectTime = "";
-				for (String time : times) {
-					expectTime = expectTime + time + "; ";
+				if(times != null){
+					for (String time : times) {
+						expectTime = expectTime + time + "; ";
+					}
 				}
 				rlVO.getMemberVO().setMemNO(Integer.valueOf(memberNo));
 				rlVO.getHouseVO().setHouseNO(Integer.valueOf(houseNo));

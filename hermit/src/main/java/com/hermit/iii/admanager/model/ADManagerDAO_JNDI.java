@@ -34,7 +34,7 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 	private static final String INSERT = 
 			"INSERT INTO ADManager (adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = 
-			"UPDATE ADManager set adImage=?, adLink=?, adMessage=?, adTimeStart=?, adTimeEnd=?, adStatus=?, adBrowse=?, adModify=? WHERE adNo=?";
+			"UPDATE ADManager set adNo=?, adImage=?, adLink=?, adMessage=?, adTimeStart=?, adTimeEnd=?, adStatus=?, adBrowse=?, adModify=? WHERE adNo=?";
 	private static final String DELETE = 
 			"DELETE FROM ADManager WHERE adNo=?";
 	private static final String GET_ONE = 
@@ -92,14 +92,15 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(UPDATE);
 
-			pstmt.setString(1, ad.getAdImage());
-			pstmt.setString(2, ad.getAdLink());
-			pstmt.setString(3, ad.getAdMessage());
-			pstmt.setDate(4, ad.getAdTimeStart());
-			pstmt.setDate(5, ad.getAdTimeEnd());
-			pstmt.setBoolean(6, ad.getAdStatus());
-			pstmt.setInt(7, ad.getAdBrowse());
-			pstmt.setInt(8, ad.getAdModify());
+			pstmt.setInt(1, ad.getAdNo());
+			pstmt.setString(2, ad.getAdImage());
+			pstmt.setString(3, ad.getAdLink());
+			pstmt.setString(4, ad.getAdMessage());
+			pstmt.setDate(5, ad.getAdTimeStart());
+			pstmt.setDate(6, ad.getAdTimeEnd());
+			pstmt.setBoolean(7, ad.getAdStatus());
+			pstmt.setInt(8, ad.getAdBrowse());
+			pstmt.setInt(9, ad.getAdModify());
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {

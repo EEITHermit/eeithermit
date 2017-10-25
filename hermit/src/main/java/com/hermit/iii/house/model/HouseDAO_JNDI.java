@@ -303,15 +303,23 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	public Integer findAreaNoByHouseNo(Integer houseNo) {
 		Integer areaNo = null;
 		Connection conn = null;
+		PreparedStatement ps = null;
 		try {
 			conn = ds.getConnection();
-			PreparedStatement ps = conn.prepareStatement(FIND_BOROUGHNO_BY_HOUSENO);
+			ps = conn.prepareStatement(FIND_BOROUGHNO_BY_HOUSENO);
 			ps.setInt(1, houseNo);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			areaNo = rs.getInt(1);
 		} catch(SQLException e){
 			e.printStackTrace();
+		}finally{
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return areaNo;

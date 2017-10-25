@@ -258,7 +258,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				memberVO.setMemNO(rs.getInt("memNO"));
 				memberVO.setMemTel(rs.getString("memTel"));
 				memberVO.setMemAccount(rs.getString("memAccount"));
-				memberVO.setMemPwd(rs.getString("memPwd"));
+				memberVO.setMemPwd(new SecurityCipher().decryptString(rs.getString("memPwd")));
 				memberVO.setMemName(rs.getString("memName"));
 				memberVO.setMemGender(rs.getString("memGender"));
 				memberVO.setMemEmail(rs.getString("memEmail"));
@@ -755,22 +755,22 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		// System.out.println(memberVO3.getMemImage());
 		// System.out.println("---------------------");
 		//
-		// // 查詢全部
-		// Set<MemberVO> set = dao.getAll();
-		// for (MemberVO member : set) {
-		// System.out.print(member.getMemNO() + ",");
-		// System.out.print(member.getMemTel() + ",");
-		// System.out.print(member.getMemAccount() + ",");
-		// System.out.print(member.getMemPwd() + ",");
-		// System.out.print(member.getMemName() + ",");
-		// System.out.print(member.getMemGender() + ",");
-		// System.out.print(member.getMemEmail() + ",");
-		// System.out.print(member.getMemRegister() + ",");
-		// System.out.print(member.getMemStatus() + ",");
-		// System.out.print(member.getMemInfract() + ",");
-		// System.out.println(member.getMemImage());
-		// System.out.println();
-		// }
+		 // 查詢全部
+		 Set<MemberVO> set = dao.getAll();
+		 for (MemberVO member : set) {
+		 System.out.print(member.getMemNO() + ",");
+		 System.out.print(member.getMemTel() + ",");
+		 System.out.print(member.getMemAccount() + ",");
+		 System.out.print(member.getMemPwd() + ",");
+		 System.out.print(member.getMemName() + ",");
+		 System.out.print(member.getMemGender() + ",");
+		 System.out.print(member.getMemEmail() + ",");
+		 System.out.print(member.getMemRegister() + ",");
+		 System.out.print(member.getMemStatus() + ",");
+		 System.out.print(member.getMemInfract() + ",");
+		 System.out.println(member.getMemImage());
+		 System.out.println();
+		 }
 		//
 		// // 刪除初始資料一筆
 		// dao.delete(40002);
