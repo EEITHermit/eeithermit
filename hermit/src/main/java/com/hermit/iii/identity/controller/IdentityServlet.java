@@ -313,5 +313,105 @@ public class IdentityServlet extends HttpServlet {
 			}
 			response.sendRedirect("register/register_easy_page.jsp");
 		}
+
+		// 驗證Facebook登入
+		if ("facebook_login_Action".equals(action)) {
+			// 準備存放3rd party訊息的Map物件
+			Map<String, String> bearerMsgMap = new HashMap<String, String>();
+			// 將bearerMsgMap放入request物件內，識別字串為 "BearerMsgKey"
+			session.setAttribute("BearerMsgKey", bearerMsgMap);
+
+			String token = null;
+			int expires = 0;
+			String type = null;
+			String email = null;
+
+			URL urlObtainToken = new URL("https://graph.facebook.com/v2.10/oauth/access_token");
+			HttpURLConnection connectionObtainToken = (HttpURLConnection) urlObtainToken.openConnection();
+
+			connectionObtainToken.setRequestMethod("GET");
+			connectionObtainToken.setDoOutput(true);
+
+			OutputStreamWriter writer = new OutputStreamWriter(connectionObtainToken.getOutputStream());
+
+			writer.write("code=" + request.getParameter("code") + "&");
+			writer.write("client_id=" + F_CLIENT_ID + "&");
+			writer.write("client_secret=" + F_CLIENT_SECRET + "&");
+			writer.write("redirect_uri=" + F_REDIRECT_URL);
+			writer.close();
+			System.out.println(connectionObtainToken.getResponseCode());
+
+			// 認證成功
+			if (connectionObtainToken.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(connectionObtainToken.getInputStream(), "UTF-8"));
+				JSONTokener jsonTokener = new JSONTokener(br);
+				JSONObject jsonObject;
+
+				try {
+					jsonObject = (JSONObject) jsonTokener.nextValue();
+					token = jsonObject.getString("access_token");
+					expires = jsonObject.getInt("expires_in");
+					type = jsonObject.getString("token_type");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+				System.out.println(token); // (token)
+				System.out.println(expires); // 5183999
+				System.out.println(type); // bearer
+			} else {
+				response.sendRedirect("/hermit/MemberLogin/LoginError.jsp");
+				return;
+			}
+
+			URL urlUserInfo = new URL(
+					"https://graph.facebook.com/me?fields=id,name,picture.height(400),email&access_token=" + token);
+			HttpURLConnection connAccessToken = (HttpURLConnection) urlUserInfo.openConnection();
+
+			// 登入者驗證成功
+			if (connAccessToken.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				BufferedReader br2 = new BufferedReader(
+						new InputStreamReader(connAccessToken.getInputStream(), "UTF-8"));
+
+				JSONTokener jsonTokener = new JSONTokener(br2);
+				JSONObject jsonObject;
+
+				try {
+					jsonObject = (JSONObject) jsonTokener.nextValue();
+					System.out.println(jsonObject.toString());
+					// Email
+					email = jsonObject.getString("email");
+					bearerMsgMap.put("memEmail", email);
+					// 姓名
+					System.out.println(jsonObject.getString("name"));
+					bearerMsgMap.put("memName", jsonObject.getString("name"));
+					// id
+					System.out.println(jsonObject.getString("id"));
+					bearerMsgMap.put("memAccount", jsonObject.getString("id"));
+
+					bearerMsgMap.put("Identity", "facebook");
+
+					// 用MemberService去驗證取得的資料是否已註冊
+					MemLoginService ls = new MemLoginService();
+					MemberVO vo = ls.OtherCheck(jsonObject.getString("id"), jsonObject.getString("name"));
+
+					if (vo != null) {
+						response.sendRedirect("/hermit/MemberLogin/LoginSuccess.jsp");
+						return;
+					} else {
+						response.sendRedirect("/hermit/MemberLogin/LoginError.jsp");
+						return;
+					}
+				} catch (JSONException e) {
+					System.out.println("No Email");
+				}
+			} else {
+				response.sendRedirect("/hermit/MemberLogin/LoginError.jsp");
+				return;
+			}
+			response.sendRedirect("/hermit/MemberLogin/Login.jsp");
+		}
 	}
 }
