@@ -17,6 +17,24 @@ public class HouseVO {
 	private Integer formNO;
 	private String houseAddr;
 	private Double houseSize;
+	//子傑加入子表
+	private String hType;
+	private String hForm;
+	private String cityName;
+	private String boroughName;
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getBoroughName() {
+		return boroughName;
+	}
+	public void setBoroughName(String boroughName) {
+		this.boroughName = boroughName;
+	}
+	//
 	public Integer getHouseNO() {
 		return houseNO;
 	}
@@ -113,4 +131,17 @@ public class HouseVO {
 	public void setHouseSize(Double houseSize) {
 		this.houseSize = houseSize;
 	}
+	public String gethType() {
+		return hType;
+	}
+	public void sethType(String hType) {
+		this.hType = hType;
+	}
+	public String gethForm() {
+		return hForm;
+	}
+	public void sethForm(String hForm) {
+		this.hForm = hForm;
+	}
+	
 }

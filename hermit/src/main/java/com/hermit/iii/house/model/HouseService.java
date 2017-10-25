@@ -71,4 +71,12 @@ public class HouseService {
     public Integer findAreaNoByHouseNo(Integer houseNo){
     	return dao.findAreaNoByHouseNo(houseNo);
     }; 
+    //子傑加，House加入子表，查全部
+    public List<HouseVO> getAllHouse_FK(){
+    	return dao.GET_ALL_JOIN_FK();
+    }
+    //子傑加，House加入子表，查單一
+    public HouseVO GET_ONE_HOUSE_FK(Integer houseNO){
+    	return dao.GET_ONE_HOUSE_FK(houseNO);
+    }
 }
