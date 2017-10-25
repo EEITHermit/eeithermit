@@ -9,14 +9,14 @@ public class HousePictureService {
 		dao = new HousePictureDAO_JNDI();
 	}
 	
-	public void insertHousePicture(byte[] hPicture,Integer houseNO){
+	public void insertHousePicture(String hPicture,Integer houseNO){
 		HousePictureVO vo = new HousePictureVO();
 		vo.sethPicture(hPicture);
 		vo.setHouseNO(houseNO);
 		dao.insert(vo);
 	}
 	
-	public void updateHousePicture(Integer housePictureNO , byte[] hPicture , Integer houseNO){
+	public void updateHousePicture(Integer housePictureNO ,String hPicture , Integer houseNO){
 		HousePictureVO vo = new HousePictureVO();
 		vo.setHouseNO(houseNO);
 		vo.setHousePictureNO(housePictureNO);

@@ -48,7 +48,7 @@ public class HousePictureDAO_JNDI implements HousePictureDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setBytes(1, housePictureVO.gethPicture());
+			pstmt.setString(1, housePictureVO.gethPicture());
 			pstmt.setInt(2, housePictureVO.getHouseNO());
 			pstmt.execute();
 		} catch (SQLException se) {
@@ -78,7 +78,7 @@ public class HousePictureDAO_JNDI implements HousePictureDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			pstmt.setBytes(1, housePictureVO.gethPicture());
+			pstmt.setString(1, housePictureVO.gethPicture());
 			pstmt.setInt(2, housePictureVO.getHouseNO());
 			pstmt.setInt(3, housePictureVO.getHousePictureNO());
 			pstmt.execute();
@@ -144,7 +144,7 @@ public class HousePictureDAO_JNDI implements HousePictureDAO_interface{
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				housePictureVO.setHousePictureNO(rs.getInt("housePictureNO"));
-				housePictureVO.sethPicture(rs.getBytes("hPicture"));
+				housePictureVO.sethPicture(rs.getString("hPicture"));
 				housePictureVO.setHouseNO(rs.getInt("HouseNO"));
 			}
 		return housePictureVO;	
@@ -182,7 +182,7 @@ public class HousePictureDAO_JNDI implements HousePictureDAO_interface{
 			while(rs.next()){
 				housePictureVO = new HousePictureVO();
 				housePictureVO.setHousePictureNO(rs.getInt("housePictureNO"));
-				housePictureVO.sethPicture(rs.getBytes("hPicture"));
+				housePictureVO.sethPicture(rs.getString("hPicture"));
 				housePictureVO.setHouseNO(rs.getInt("HouseNO"));
 				list.add(housePictureVO);
 			}

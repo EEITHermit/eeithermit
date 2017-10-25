@@ -368,7 +368,7 @@ GO
 
 CREATE TABLE HousePicture(
 	housePictureNO int  primary key identity NOT NULL,
-	hPicture varbinary(max) NOT NULL,
+	hPicture varchar(max) NOT NULL,
 	houseNO decimal(5,0) NOT NULL,
 CONSTRAINT Picture_house_fk FOREIGN KEY(houseNO) REFERENCES house(houseNO)
 )

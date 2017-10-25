@@ -60,7 +60,7 @@ public class ADManagerServlet extends HttpServlet {
 
 		if ("updateADManager".equals(action)) {
 			ads = new ADManagerService();
-
+			adNo = Integer.valueOf(req.getParameter("adNo"));
 			adImage = String.valueOf(req.getParameter("adImage"));
 			adLink = String.valueOf(req.getParameter("adLink"));
 			adMessage = String.valueOf(req.getParameter("adMessage"));
@@ -69,9 +69,9 @@ public class ADManagerServlet extends HttpServlet {
 			adStatus = Boolean.valueOf(true);
 			adBrowse = Integer.valueOf(req.getParameter("adBrowse"));
 			adModify = Integer.valueOf(req.getParameter("adModify"));
-			ads.updateADManager(adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
+			ads.updateADManager(adNo,adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
 			System.out.println("Update OK");
-			RequestDispatcher rd = req.getRequestDispatcher("back-adindex.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("adInsert.jsp");
 			rd.forward(req, resp);
 		}
 
@@ -87,7 +87,7 @@ public class ADManagerServlet extends HttpServlet {
 			ads = new ADManagerService();
 			adVO = ads.getOneADManager(Integer.valueOf(req.getParameter("adNo")));
 			req.setAttribute("adVO", adVO);
-			RequestDispatcher rd = req.getRequestDispatcher("back-adindex.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("adInsert.jsp");
 			rd.forward(req, resp);
 		}
 		if ("getAllADManager".equals(action)) {
@@ -95,7 +95,7 @@ public class ADManagerServlet extends HttpServlet {
 			ads = new ADManagerService();
 			List<ADManagerVO> list = ads.getAllADManager();
 			System.out.println("Get All OK");
-			RequestDispatcher rd = req.getRequestDispatcher("back-adindex.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("adInsert.jsp");
 			rd.forward(req, resp);
 		}
 		if ("getAllADManagerForJson".equals(action)) {
@@ -109,6 +109,7 @@ public class ADManagerServlet extends HttpServlet {
 			out.close();
 			System.out.println("Get All For JSON");
 		}
+		
 	}
 
 }
