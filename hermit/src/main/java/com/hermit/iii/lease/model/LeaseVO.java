@@ -14,7 +14,7 @@ public class LeaseVO implements Serializable {
 	private Integer Deposit;
 	private Integer Relief;
 	private Date leaseDate;
-	private Blob leasePic;
+	private String leasePic;
 	private String houseNote;
 	private Byte Refund;
 
@@ -98,11 +98,11 @@ public class LeaseVO implements Serializable {
 		this.leaseDate = leaseDate;
 	}
 
-	public Blob getLeasePic() {
+	public String getLeasePic() {
 		return leasePic;
 	}
 
-	public void setLeasePic(Blob leasePic) {
+	public void setLeasePic(String leasePic) {
 		this.leasePic = leasePic;
 	}
 

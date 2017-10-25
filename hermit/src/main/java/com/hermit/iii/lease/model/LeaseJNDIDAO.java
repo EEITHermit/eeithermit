@@ -31,7 +31,7 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT leaseNO,houseNO,leaseBeginDate,leaseEndDate,memNO,empNO,Rent,Deposit,Relief,leaseDate,leasePic,houseNote,Refund FROM Lease ORDER BY leaseNO";
 
 	@Override
-	public void insert(LeaseVO leaseVO, InputStream is, long size) {
+	public void insert(LeaseVO leaseVO) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERT_STMT);) {
 
@@ -44,7 +44,7 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 			pstmt.setInt(7, leaseVO.getDeposit());
 			pstmt.setInt(8, leaseVO.getRelief());
 			pstmt.setDate(9, leaseVO.getLeaseDate());
-			pstmt.setBinaryStream(10, is, size);
+			pstmt.setString(10,leaseVO.getLeasePic());
 			pstmt.setString(11, leaseVO.getHouseNote());
 			pstmt.setByte(12, leaseVO.getRefund());
 
@@ -56,7 +56,7 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 	}
 
 	@Override
-	public void update(LeaseVO leaseVO, InputStream is, long size) {
+	public void update(LeaseVO leaseVO) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);) {
 
@@ -69,7 +69,7 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 			pstmt.setInt(7, leaseVO.getDeposit());
 			pstmt.setInt(8, leaseVO.getRelief());
 			pstmt.setDate(9, leaseVO.getLeaseDate());
-			pstmt.setBinaryStream(10, is, size);
+			pstmt.setString(10,leaseVO.getLeasePic());
 			pstmt.setString(11, leaseVO.getHouseNote());
 			pstmt.setByte(12, leaseVO.getRefund());
 			pstmt.setInt(13, leaseVO.getLeaseNO());
@@ -120,7 +120,7 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 				leaseVO.setDeposit(rs.getInt("Deposit"));
 				leaseVO.setRelief(rs.getInt("Relief"));
 				leaseVO.setLeaseDate(rs.getDate("leaseDate"));
-				leaseVO.setLeasePic(rs.getBlob("leasePic"));
+				leaseVO.setLeasePic(rs.getString("leasePic"));
 				leaseVO.setHouseNote(rs.getString("houseNote"));
 				leaseVO.setRefund(rs.getByte("Refund"));
 			}
@@ -155,7 +155,7 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 				leaseVO.setDeposit(rs.getInt("Deposit"));
 				leaseVO.setRelief(rs.getInt("Relief"));
 				leaseVO.setLeaseDate(rs.getDate("leaseDate"));
-				leaseVO.setLeasePic(rs.getBlob("leasePic"));
+				leaseVO.setLeasePic(rs.getString("leasePic"));
 				leaseVO.setHouseNote(rs.getString("houseNote"));
 				leaseVO.setRefund(rs.getByte("Refund"));
 				set.add(leaseVO); // Store the row in the list

@@ -5,9 +5,9 @@ import java.util.*;
 
 public interface LeaseDAO_interface {
 
-	public void insert(LeaseVO leaseVO, InputStream is, long size);
+	public void insert(LeaseVO leaseVO);
 
-	public void update(LeaseVO leaseVO, InputStream is, long size);
+	public void update(LeaseVO leaseVO);
 
 	public void delete(Integer leaseNO);
 
