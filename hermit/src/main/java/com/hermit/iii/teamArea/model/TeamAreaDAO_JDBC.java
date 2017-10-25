@@ -13,7 +13,7 @@ public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface{
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=hermit";
 	public TeamAreaDAO_JDBC(){
 		try {
-			Class.forName("driver");
+			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,7 @@ public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface{
 		TeamAreaVO taVO = new TeamAreaVO();
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 				PreparedStatement ps = conn.prepareStatement(select)){
-				ps.setInt(1, taVO.getBusinNO());
+				ps.setInt(1, businNO);
 				
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()){
@@ -84,5 +84,5 @@ public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface{
 		}
 		return result;
 	}
-
+	
 }

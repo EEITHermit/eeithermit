@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -24,14 +25,14 @@ public class MentionDAO_JNDI implements MentionDAO_Interface{
 	String getBoroughNOByEmpNO = "select boroughNO from TeamMemberList L "
 			+ "join TeamArea T on L.businNO = T.businNO where L.empNO = ?";
 	@Override
-	public Integer getBoroughNOByEmpNO(Integer EmpNO){
-		Integer result = null;
+	public ArrayList<Integer> getBoroughNOByEmpNO(Integer EmpNO){
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		try (Connection conn = ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(getBoroughNOByEmpNO);){
 			ps.setInt(1, EmpNO);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
-				result = rs.getInt(1);
+			while(rs.next()){
+				result.add(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

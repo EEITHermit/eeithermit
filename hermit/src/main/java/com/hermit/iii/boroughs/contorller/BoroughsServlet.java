@@ -1,7 +1,11 @@
 package com.hermit.iii.boroughs.contorller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONValue;
+
 import com.hermit.iii.boroughs.model.BoroughsService;
 import com.hermit.iii.boroughs.model.BoroughsVO;
 
-@WebServlet("/BoroughsServlet")
+@WebServlet("/BoroughsServlet.do")
 public class BoroughsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,8 +27,10 @@ public class BoroughsServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		String action = request.getParameter("action");
 		BoroughsService bs = new BoroughsService();
+		
 		Integer boroughNO;
 		String boroughName;
 		Integer cityNO;
@@ -55,7 +63,25 @@ public class BoroughsServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request,response);
-			
+		}
+		if("getAllBoroughByCity".equals(action)){
+			cityNO=Integer.valueOf(request.getParameter("cityNO"));
+			List<BoroughsVO> list=bs.getAll_cityNO(cityNO);
+			List list2=new LinkedList();
+			PrintWriter out=response.getWriter();
+			for(int i=0;i<list.size();i++){
+				Map m1=new LinkedHashMap();
+				BoroughsVO vo=list.get(i);
+				m1.put("boroughNO", vo.getBoroughNO());
+				m1.put("boroughName", vo.getBoroughName());
+				list2.add(m1);
+			}
+			Map m2=new LinkedHashMap();
+			m2.put("list", list2);
+			String str=JSONValue.toJSONString(m2);
+			out.println(str);
+			out.flush();
+			out.close();
 		}
 	}
 }

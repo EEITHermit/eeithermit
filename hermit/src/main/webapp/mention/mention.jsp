@@ -7,8 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>員工首頁</title>
 <link href='<%=request.getContextPath() %>/css/jquery-ui.min.css' rel='stylesheet' />
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="css/portfolio-item.css" rel="stylesheet">
 <script src='<%= request.getContextPath() %>/js/jquery.min.js'></script>
 <script src='<%=request.getContextPath() %>/js/jquery-ui.min.js'></script>
+
 <script>
 	document.addEventListener("DOMContentLoaded",work);
 	

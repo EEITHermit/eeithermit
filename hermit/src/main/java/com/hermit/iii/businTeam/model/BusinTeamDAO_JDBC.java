@@ -11,7 +11,7 @@ public class BusinTeamDAO_JDBC implements BusinTeamDAO_interface{
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=hermit";
 	public BusinTeamDAO_JDBC(){
 		try {
-			Class.forName("driver");
+			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -66,7 +66,7 @@ public class BusinTeamDAO_JDBC implements BusinTeamDAO_interface{
 		BusinTeamVO btVO = new BusinTeamVO();
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 				PreparedStatement ps = conn.prepareStatement(select)){
-				ps.setInt(1, btVO.getBusinNO());
+				ps.setInt(1, businNO);
 				
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()){
@@ -79,5 +79,4 @@ public class BusinTeamDAO_JDBC implements BusinTeamDAO_interface{
 			}
 		return btVO;
 	}
-	
 }

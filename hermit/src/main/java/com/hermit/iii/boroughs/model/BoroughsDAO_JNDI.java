@@ -39,9 +39,12 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 	private static final String GET_ONE_STMT =
 			"SELECT boroughNO,boroughName,cityNO FROM boroughs where boroughNO = ?";
 	private static final String GET_ALL_STMT =
+
 			"SELECT boroughNO,boroughName,cityNO FROM boroughs order by boroughNO";
 	private static final String FIND_BORO_WHERE_CITY = 
 			"SELECT boroughNO,boroughName,cityNO FROM boroughs order by boroughNO WHERE cityNO = ?";
+	private static final String GET_ALL_STMT_cityNO =
+			"SELECT boroughNO,boroughName,cityNO FROM boroughs where cityNO=? order by boroughNO";
 
 	
 	@Override
@@ -190,6 +193,7 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				vo = new BoroughsVO();
@@ -266,4 +270,46 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 		}
 	}
 
+	@Override
+	public List<BoroughsVO> getAll_cityNO(Integer cityNO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		BoroughsVO vo ;
+		ResultSet rs;
+		List<BoroughsVO> list = new LinkedList<BoroughsVO>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT_cityNO);
+			pstmt.setInt(1, cityNO);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				vo = new BoroughsVO();
+				vo.setBoroughNO(rs.getInt("boroughNO"));
+				vo.setBoroughName(rs.getString("boroughName"));
+				vo.setCityNO(rs.getInt("cityNO"));
+				list.add(vo);
+			}
+			return list;
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
 }
+	

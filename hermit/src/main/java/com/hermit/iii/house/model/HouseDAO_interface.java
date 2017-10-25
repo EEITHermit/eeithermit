@@ -14,4 +14,9 @@ public interface HouseDAO_interface {
      public ArrayList<HouseVO> autoCompleteH(String address);
      //漢勳加，搜尋所負責鄉鎮區用
      public Integer findAreaNoByHouseNo(Integer houseNo);
+     
+     //子傑加，House表格JOIN houseType與houseForm
+     public List<HouseVO> GET_ALL_JOIN_FK();
+     public HouseVO GET_ONE_HOUSE_FK(Integer houseNO);
+     
 }
