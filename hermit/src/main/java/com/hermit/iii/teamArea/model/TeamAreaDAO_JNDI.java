@@ -60,7 +60,7 @@ public class TeamAreaDAO_JNDI implements TeamAreaDAO_interface{
 		TeamAreaVO taVO = new TeamAreaVO();
 		try(Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(select)){
-				ps.setInt(1, taVO.getBusinNO());
+				ps.setInt(1, businNO);
 				
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()){

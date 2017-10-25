@@ -71,7 +71,7 @@ public class BusinTeamDAO_JNDI implements BusinTeamDAO_interface{
 		BusinTeamVO btVO = new BusinTeamVO();
 		try(Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(select)){
-				ps.setInt(1, btVO.getBusinNO());
+				ps.setInt(1, businNO);
 				
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()){
