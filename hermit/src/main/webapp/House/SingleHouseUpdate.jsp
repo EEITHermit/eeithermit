@@ -134,9 +134,10 @@
 				
 			})
 			$.post("/hermit/HouseTypeServlet.do",{action:"getAllType"},function(data){
-				dataJson=$.parseJSON(data).list;
 // 				console.log(data);
-				$.each(dataJson,function(index,VO){
+				var dataJson2 = $.parseJSON(data);
+//  				console.log(dataJson2);
+				$.each(dataJson2,function(index,VO){
 					var cell2=$("<option></option>").text(VO.hType);
 					cell2.val(VO.typeNO);
 // 					console.log(VO.typeNO);
@@ -166,7 +167,7 @@
 				$.post("/hermit/BoroughsServlet.do",{action:"getAllBoroughByCity",cityNO:cityNO},function(data){
 					
 					dataJson=$.parseJSON(data).list;
-//	 				console.log(data);
+// 	 				console.log(data);
 					$.each(dataJson,function(index,VO){
 						var cell1=$("<option></option>").text(VO.boroughName);
 						cell1.val(VO.boroughNO);
@@ -177,10 +178,10 @@
 					})
 				})
 			})
-			$.post("/hermit/BoroughsServlet.do",{action:"getAllborough",cityNO:cityNO},function(data){
+			$.post("/hermit/BoroughsServlet.do",{action:"getAllBoroughByCity",cityNO:cityNO},function(data){
 				var cityNO = ($("#cityName").val());
+	 				console.log(data);
 					dataJson=$.parseJSON(data).list;
-//	 				console.log(data);
 					$.each(dataJson,function(index,VO){
 						var cell1=$("<option></option>").text(VO.boroughName);
 						cell1.val(VO.boroughNO);
