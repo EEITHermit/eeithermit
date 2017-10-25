@@ -118,11 +118,13 @@
 </style>
 </head>
 <body>
+	<!-- 載入框架 -->
+	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- 員工編號=>假資料 -->
 	<input type="hidden" id="empNO" value="30001"/>
 	
 	
-	<h3>您有 ${resSize} 筆未處理預約  <button type="button" id="resButton">展開</button></h3>
+<%-- 	<h3>您有 ${resSize} 筆未處理預約  <button type="button" id="resButton">展開</button></h3> --%>
 	<table id="resTable">
 		<thead>
 		<tr>
@@ -187,9 +189,9 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-comments"></i>
               </div>
-              <div class="mr-5">26 New Messages!</div>
+              <div class="mr-5">您有 ${resSize} 筆未處理預約  </div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" id="resButton">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
