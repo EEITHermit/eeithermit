@@ -10,7 +10,8 @@
 		<br><br>
 		<h2>Hermit</h2>
 		<div>
-			<a href="back-adindex.jsp" class="btn btn-default" >廣告管理</a><p/>
+			<a href="adInsert
+			.jsp" class="btn btn-default" >廣告管理</a><p/>
 		</div>
 		
 

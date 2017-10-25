@@ -19,16 +19,15 @@
 </head>
 <body>
 <div style="margin-right:auto;">
-<h1>後台廣告管理系統</h1><br><br><br>
-	<div class="container">
-		<div class="imgs">
-			<form method="get" action="ADManagerServlet">
-<!-- 			<h6>廣告圖片</h6> -->
-<!-- 				<label class="custom-file"> -->
-<!-- 				<input id="file" type="file" class="custom-file-input"> -->
-<!-- 				<span class="custom-file-control"></span> -->
-<!-- 				<img id="result" src="" height="360" width="1000" > -->
-<!-- 				</label><p/><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+<h1>後台廣告管理系統</h1><br><br>
+	<div>
+		<div>
+			<h6>廣告圖片</h6><br>
+			
+			<form method="post" action="ADManagerServlet" >
+				<img id="result" src="" height="360" width="1000" ><br>
+				<input id="fileimage" name="adImage" type="file" value="result">
+				<p/><br><br>
 			<h6>圖片連結網址</h6>			
 				<input type="text" value="${adLink}" size="60" placeholder="請輸入範例格式:http://www.example.com.tw" name="adno" ><p/><br>
 			<h6>請輸入廣告訊息(限20字內)</h6>
@@ -53,10 +52,10 @@
 
 <script type="text/javascript"> 
 	$(function(){
-	 	$("#file").change(function(e){
+	 	$("#fileimage").change(function(e){
 	 		  var img = e.target.files[0];
 	 		  if(!img.type.match('image.*')){
-	 		    alert("請放入廣告圖片");
+	 		    alert("123");
 	 		    return;
 	 		  }
 	 		  iEdit.open(img, true, function(res){
@@ -64,7 +63,7 @@
 	 		  });
 	 		  //在檔案送出前，讓image的src送到input裡
 	 		  $("#form").submit(function(event){
-	 			  $("#memImage").val($("#result").attr("src"));
+	 			  $("#fileimage").val($("#result").attr("src"));
 	 		  }) 
 	 		});
 	})

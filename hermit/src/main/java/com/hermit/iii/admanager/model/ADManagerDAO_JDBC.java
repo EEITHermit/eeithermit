@@ -80,15 +80,15 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 			
 				conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 				pstmt = conn.prepareStatement(UPDATE);
-				pstmt.setString(1, ADManagerVO.getAdImage()); //廣告圖片
-				pstmt.setString(2, ADManagerVO.getAdLink());
-				pstmt.setString(3, ADManagerVO.getAdMessage());
-				pstmt.setDate(4, ADManagerVO.getAdTimeStart());
-				pstmt.setDate(5, ADManagerVO.getAdTimeEnd());
-				pstmt.setBoolean(6, ADManagerVO.getAdStatus()); //廣告狀態
-				pstmt.setInt(7, ADManagerVO.getAdBrowse());  //廣告瀏覽次數
-				pstmt.setInt(8, ADManagerVO.getAdModify());  //最後修改人
-				pstmt.setInt(9, ADManagerVO.getAdNo());
+				pstmt.setInt(1, ADManagerVO.getAdNo());
+				pstmt.setString(2, ADManagerVO.getAdImage()); //廣告圖片
+				pstmt.setString(3, ADManagerVO.getAdLink());
+				pstmt.setString(4, ADManagerVO.getAdMessage());
+				pstmt.setDate(5, ADManagerVO.getAdTimeStart());
+				pstmt.setDate(6, ADManagerVO.getAdTimeEnd());
+				pstmt.setBoolean(7, ADManagerVO.getAdStatus()); //廣告狀態
+				pstmt.setInt(8, ADManagerVO.getAdBrowse());  //廣告瀏覽次數
+				pstmt.setInt(9, ADManagerVO.getAdModify());  //最後修改人
 				pstmt.executeUpdate();
 				
 			} catch(SQLException e){
