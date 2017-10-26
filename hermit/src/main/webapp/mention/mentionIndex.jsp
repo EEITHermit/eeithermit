@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>員工首頁</title>
 <link href='<%=request.getContextPath()%>/css/jquery-ui.min.css'
 	rel='stylesheet' />
@@ -30,11 +30,11 @@
 			var resDiv = $("#resDiv");
 			if($(this).text() == "展開"){
 				$(this).text("收起");
-				resDiv.toggle("drop",true,1000,function(){});
+				resDiv.toggle("drop",true,1000);
 				
 			}else{
 				$(this).text("展開");
-				resDiv.toggle("drop",false,1000,function(){});
+				resDiv.toggle("drop",false,1000);
 				
 			}
 		});
