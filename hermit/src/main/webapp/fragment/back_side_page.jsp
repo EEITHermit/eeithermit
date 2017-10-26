@@ -16,7 +16,14 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/back_side.css">
 </head>
-
+<style>
+	body{
+		background-color: #AAFFEE;
+	}
+	.main{
+		background-color:#AAFFEE;
+	}
+</style>
 <body>
 	<div>
 	<aside>

@@ -124,9 +124,8 @@ table{
 </style>
 </head>
 <body>
-<div style="border:3px solid red;"></div>
 	<!-- 載入框架 -->
-<%-- 	<jsp:include page="/fragment/back_side_page.jsp" /> --%>
+	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- 員工編號=>假資料 -->
 	<input type="hidden" id="empNO" value="30001" />
 
