@@ -381,13 +381,13 @@ CREATE TABLE Lease(
 	leaseEndDate date NOT NULL,
 	memNO decimal(5, 0) NOT NULL,
 	empNO decimal(5,0) NOT NULL,
-	Rent int NULL,
-	Deposit int NULL,          --押金
-	Relief int NULL,           --減免租金
+	leaseRent int NULL,
+	leaseDeposit int NULL,          --押金
+	leaseRelief int NULL,           --減免租金
 	leaseDate Date not null,
 	leasePic varchar(max) null,
 	houseNote varchar(100) null,   --房屋備註:例如設備損壞、點交狀況
-    Refund bit not null,          --押金已退金額    
+    leaseRefund bit not null,          --押金已退金額    
 
 	CONSTRAINT Rate_house_fk FOREIGN KEY(houseNO) REFERENCES house(houseNO),
 	CONSTRAINT Rate_Member_fk FOREIGN KEY(memNO) REFERENCES Member(memNO),
