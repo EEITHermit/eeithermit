@@ -22,7 +22,7 @@
 		padding:0;
 	}
 	a:link, a:visited, a:hover ,a:active{
-		color : white;
+		color:white;
 	    text-decoration: none;
 	    padding: 14px 25px;
 	    text-align: center;
@@ -37,15 +37,18 @@
 		font-family:fantasy;
 	}
 	.main-gallery
-	{	
+	{
 	    width:100%;
 	    height:50vh;
-	    background:url("images/main.jpg");
-		background-position:center;
+	    background:url("../images/main.jpg");
+	    background-position:center;
 	    background-size:cover;
 	    margin-top:52px;
 	}
-
+	li{
+		display: inline-block;
+		text-decoration:none;
+	}
   #button { padding: .5em 1em; text-decoration: none; }
 </style>
 </head>
@@ -53,7 +56,7 @@
 	
 	<div class="w3-bar w3-black navbar-fixed-top">
 		<button class="w3-button w3-dark-grey w3-xlarge w3-left" onclick="openLeftMenu()">&#9776;</button>
-		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button w3-xlarge w3-left"><span id="hermitHome">Hermit</span></a>
+		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-left"><span id="hermitHome">Hermit</span></a>
 		
 		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
 		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
@@ -65,25 +68,21 @@
 		  <a href="#" class="w3-bar-item w3-button">我的收藏</a>
 		</div>	   
 	</div>
-	<section class="main-gallery">
-			<div class="container text-center" >
-				<div class="row" style="margin-top:8%;padding:3% 2% 2% 2%;border-radius: 20px">
-				<span style="font-size:5em;font-family: Microsoft JhengHei">Hermit租屋顧問網</span>
-					  <div class="input-group">
-						  <input class="form-control input-lg" type="text">
-						  <span class="input-group-btn">
-						    <button class="btn btn-default btn-lg" type="button">搜尋</button>
-						  </span>
-					  </div>
-					  <div>
-						  <div id="effect" class="form-control" style="background-color: white;height:20vh;">
-						  </div>
-						  <span id="button" class="w3-right" style="font-size:10px;background-color: white;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">進階搜尋<span class="glyphicon glyphicon-chevron-down"></span></span>
-					  </div>
-				</div>
-			</div>
-	</section>
-	<div class="w3-black" style="height:3vh;border-bottom-left-radius:15px;border-bottom-right-radius:3px;"></div>
+	
+	<footer class="w3-bottom w3-black container-fluid" >
+
+		<div class="row nav">
+		  <div class="col-md-4"></div>
+		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></div>
+		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></div>
+		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></div>
+		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></div>
+		  <div class="col-md-4"></div>
+		</div>
+	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
+	</div>
+		 
+	</footer>
 	<script>
 	$( function() {
 		var spanArrow = $(".glyphicon-chevron-down"); 

@@ -53,15 +53,24 @@
 		})
 	};
 </script>
+
 </head>
 <body>
-	<h2>黑名單申請單</h2>
-	<form>
-		會員資料:<input type="text" id="memNO" name="memNO" value="${param.member}"/><br/>
-		<p style="float:left">申請原因:<p><textarea style="resize:none" id="reason" name="reason"></textarea><br/>
+	
+	<!-- 載入框架 -->
+	<jsp:include page="/fragment/back_side_page.jsp" />
+	
+	<div class="container">
+	<div class="row">
+	<h1>黑名單申請單</h1>
+	<form class="form-group" style="font-size:20px;">
+		會員資料:<input  class="form-control" type="text" id="memNO" name="memNO" value="${param.member}"/><br/>
+		<p style="float:left">申請原因:<p><textarea class="form-control" style="resize:none" id="reason" name="reason"></textarea><br/>
 		<!-- 會員帳號(假資料) -->
-		<input type="hidden" value="30001" id="empNO">
-		<button type="button" id="bt">提交</button>
+		<input   type="hidden" value="30001" id="empNO">
+		<button class="btn btn-primary" type="button" id="bt">提交</button>
 	</form>
+	</div>
+	</div>
 </body>
 </html>
