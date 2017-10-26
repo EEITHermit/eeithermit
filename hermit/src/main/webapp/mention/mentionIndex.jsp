@@ -9,8 +9,6 @@
 <link href='<%=request.getContextPath() %>/css/jquery-ui.min.css' rel='stylesheet' />
 <!-- Bootstrap core CSS -->
 <link href="<%= request.getContextPath() %>/css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="<%= request.getContextPath() %>/css/portfolio-item.css" rel="stylesheet">
 <script src='<%= request.getContextPath() %>/js/jquery.min.js'></script>
 <script src='<%=request.getContextPath() %>/js/jquery-ui.min.js'></script>
 <!-- Bootstrap core JavaScript-->
@@ -32,10 +30,10 @@
 			
 			if($(this).text() == "展開"){
 				$(this).text("收起");
-				$("#resTable").toggle(true,500);
+				$("#resTable").toggle(true,1000);
 			}else{
 				$(this).text("展開");
-				$("#resTable").toggle(false,500);
+				$("#resTable").toggle(false,1000);
 			}
 		});
 		//設定期望時間內容
@@ -120,7 +118,7 @@
 <body>
 <div style="border:3px solid red;"></div>
 	<!-- 載入框架 -->
-<%-- 	<jsp:include page="/fragment/back_side_page.jsp" /> --%>
+	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- 員工編號=>假資料 -->
 	<input type="hidden" id="empNO" value="30001"/>
 	
@@ -176,10 +174,7 @@
 		</table>
 	</div>
 	<!-- bootstrap -->
-	<div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      
+    <div class="container">
       <h1>HermitのHome</h1>
       <hr>
       <!-- Icon Cards-->
@@ -250,7 +245,5 @@
         </div>
       </div>
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
 </body>
 </html>
