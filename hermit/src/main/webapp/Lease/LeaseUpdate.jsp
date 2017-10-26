@@ -14,7 +14,8 @@
 
 </head>
 <body>
-	<form action="/hermit/LeaseServlet.do?action=update">
+
+	<form action="/hermit/LeaseServlet.do?action=update" id="form" method="post">
 	<div>
 	<lable>合約編號</lable>
 	<input type="text" readonly value="${vo.leaseNO}" name="leaseNO">
@@ -47,17 +48,17 @@
 	
 	<div>
 	<label>租金</label>
-	<input type="text" value="${vo.Rent}" name="Rent">
+	<input type="text" value="${vo.leaseRent}" name="leaseRent">
 	</div>
 	
 	<div>
 	<lable>押金</lable>
-	<input type="text" value="${vo.Deposit}" name="Deposit">
+	<input type="text" value="${vo.leaseDeposit}" name="leaseDeposit">
 	</div>
 	
 	<div>
 	<lable>折扣</lable>
-	<input type="text" value="${vo.Relief}" name="Relief">	
+	<input type="text" value="${vo.leaseRelief}" name="leaseRelief">	
 	</div>
 	
 	<div>
@@ -67,8 +68,9 @@
 	
 	<div>
 	<lable>合約照片</lable>
-	<input type="file" style="width:75px" value="${vo.leasePic}" name="leasePic" id="file">
-	<img id="result" style="width:75px">
+	<input type="file" style="width:75px" value="${vo.leasePic}" id="file">
+	<input type="hidden" id="leasePic" name="leasePic">
+	<img id="result" style="width:75px" src="${vo.leasePic}" />
 	</div>
 	
 	<div>
@@ -78,9 +80,9 @@
 	
 	<div>
 	<label>押金是否返還</label>
-	<select value="${vo.Refund}" name="Refund" id="SelectRefund">
-	<option >是</option>
-	<option>否</option>
+	<select name="leaseRefund" id="SelectRefund">
+	<option value="1">是</option>
+	<option value="0">否</option>
 	</select>
 	</div>
 	
@@ -97,8 +99,36 @@
 <script>
 $(document).ready(function(){
 	
-	var Refund="${vo.Refund}";
-	console.log(Refund);
+	var SelectRefund=$("#SelectRefund");
+// 		console.log(SelectRefund);
+	$.post("/hermit/LeaseServlet.do", {action : "getAllLeaseForJson"}, function(data) {
+		dataJson = $.parseJSON(data);
+// 			console.log(data);
+			console.log(dataJson);
+		$.each(dataJson,function(index,VO){
+			var cell1= $("<option></option>").text(VO.leaseRefund);
+			cell1.text("是");
+				console.log(cell1);
+//				console.log(VO.leaseRefund);
+			if(SelectRefund == VO.leaseRefund){
+				cell1.prop("selected","true");
+			}
+			SelectRefund.append(cell1);
+			
+		})
+		
+	})
+	
+	$.post("/hermit/LeaseServlet.do",{action:"getAllLeaseForJson"},function(data){
+		var dataJson=$.parseJSON(data);
+		$.each(dataJson,function(index,VO){
+			var cell1=$("")
+			
+		})
+	})
+	
+	
+
 	
 	//圖片↓↓↓
 	$("#file").change(function(e){
@@ -110,9 +140,12 @@ $(document).ready(function(){
 		  iEdit.open(img, true, function(res){
 		    $("#result").attr("src", res);
 		  });
+		  
 	});
 	//圖片↑↑↑
-
+	$("#form").submit(function(event){
+			  $("#leasePic").val($("#result").attr("src"));
+		  })
 
 
 

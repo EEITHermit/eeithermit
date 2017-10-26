@@ -46,13 +46,13 @@ public class LeaseServlet extends HttpServlet {
 		Date leaseEndDate = null;
 		Integer memNO = null;
 		Integer empNO = null;
-		Integer Rent = null;
-		Integer Deposit = null;
-		Integer Relief = null;
+		Integer leaseRent = null;
+		Integer leaseDeposit = null;
+		Integer leaseRelief = null;
 		Date leaseDate = null;
 		String leasePic = null;
 		String houseNote = null;
-		Byte Refund = null;
+		Byte leaseRefund = null;
 
 		if ("getAllLeaseForJson".equals(action)) {
 
@@ -67,13 +67,13 @@ public class LeaseServlet extends HttpServlet {
 				m1.put("leaseEndDate", vo2.getLeaseEndDate());
 				m1.put("memNO", vo2.getMemNO());
 				m1.put("empNO", vo2.getEmpNO());
-				m1.put("Rent", vo2.getRent());
-				m1.put("Deposit", vo2.getDeposit());
-				m1.put("Relief", vo2.getRelief());
+				m1.put("leaseRent", vo2.getLeaseRent());
+				m1.put("leaseDeposit", vo2.getLeaseDeposit());
+				m1.put("leaseRelief", vo2.getLeaseRelief());
 				m1.put("leaseDate", vo2.getLeaseDate());
 				m1.put("leasePic", vo2.getLeasePic());
 				m1.put("houseNote", vo2.getHouseNote());
-				m1.put("Refund", vo2.getRefund());
+				m1.put("leaseRefund", vo2.getLeaseRefund());
 				list2.add(m1);
 				System.out.println("for");
 			}
@@ -89,15 +89,17 @@ public class LeaseServlet extends HttpServlet {
 			leaseEndDate = java.sql.Date.valueOf(request.getParameter("leaseEndDate"));
 			memNO = Integer.valueOf(request.getParameter("memNO"));
 			empNO = Integer.valueOf(request.getParameter("empNO"));
-			Rent = Integer.valueOf(request.getParameter("Rent"));
-			Deposit = Integer.valueOf(request.getParameter("Deposit"));
-			Relief = Integer.valueOf(request.getParameter("Relief"));
+			leaseRent = Integer.valueOf(request.getParameter("leaseRent"));
+			leaseDeposit = Integer.valueOf(request.getParameter("leaseDeposit"));
+			System.out.println(leaseDeposit);
+			leaseRelief = Integer.valueOf(request.getParameter("leaseRelief"));
 			leaseDate = java.sql.Date.valueOf(request.getParameter("leaseDate"));
 			leasePic = request.getParameter("leasePic");
+			System.out.println(leasePic);
 			houseNote = request.getParameter("houseNote");
-			Refund = Byte.valueOf(request.getParameter("Refund"));
-			svc.addLease(houseNO, leaseBeginDate, leaseEndDate, memNO, empNO, Rent, Deposit, Relief, leaseDate,
-					leasePic, houseNote, Refund);
+			leaseRefund = Byte.valueOf(request.getParameter("leaseRefund"));
+			svc.addLease(houseNO, leaseBeginDate, leaseEndDate, memNO, empNO,leaseRent, leaseDeposit, leaseRelief, leaseDate,
+					leasePic, houseNote, leaseRefund);
 			response.sendRedirect("/hermit/Lease/Lease.jsp");
 			System.out.println("Add Lease success");
 		}
@@ -110,6 +112,27 @@ public class LeaseServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Lease/LeaseUpdate.jsp");
 			rd.forward(request, response);
 			System.out.println("Search One Success");
+		}
+		
+		if("update".equals(action)){
+			System.out.println("aaa");
+			leaseNO=Integer.valueOf(request.getParameter("leaseNO"));
+			houseNO = Integer.valueOf(request.getParameter("houseNO"));
+			leaseBeginDate = java.sql.Date.valueOf(request.getParameter("leaseBeginDate"));
+			leaseEndDate = java.sql.Date.valueOf(request.getParameter("leaseEndDate"));
+			memNO = Integer.valueOf(request.getParameter("memNO"));
+			empNO = Integer.valueOf(request.getParameter("empNO"));
+			leaseRent = Integer.valueOf(request.getParameter("leaseRent"));
+			leaseDeposit = Integer.valueOf(request.getParameter("leaseDeposit"));
+			System.out.println(leaseDeposit);
+			leaseRelief = Integer.valueOf(request.getParameter("leaseRelief"));
+			leaseDate = java.sql.Date.valueOf(request.getParameter("leaseDate"));
+			leasePic = request.getParameter("leasePic");
+			System.out.println(leasePic);
+			houseNote = request.getParameter("houseNote");
+			leaseRefund = Byte.valueOf(request.getParameter("leaseRefund"));
+			svc.updateLease(leaseNO, houseNO, leaseBeginDate, leaseEndDate, memNO, empNO, leaseRent, leaseDeposit, leaseRelief, leaseDate, leasePic, houseNote, leaseRefund);
+			response.sendRedirect("/hermit/Lease/Lease.jsp");
 		}
 	}
 

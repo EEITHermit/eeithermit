@@ -58,7 +58,7 @@
 <input type="hidden" id="leaseNO" name="leaseNO">
 </form>
 
-<form action="<%=request.getContextPath()%>/LeaseServlet.do" method="POST">
+<form action="<%=request.getContextPath()%>/LeaseServlet.do" method="POST" id="form">
 	<table id="addLease">
 		<thead>
 			<tr>
@@ -82,16 +82,17 @@
 					<td><input type="date" style="width:100px" value="${param.leaseEndDate}" name="leaseEndDate"></td>
 					<td><input type="text" style="width:75px" value="${param.memNO}" name="memNO"></td>
 					<td><input type="text" style="width:75px" value="${param.empNO}" name="empNO"></td>
-					<td><input type="text" style="width:75px" value="${param.Rent}" name="Rent"></td>
-					<td><input type="text" style="width:75px" value="${param.Deposit}" name="Deposit"></td>
-					<td><input type="text" style="width:75px" value="${param.Relief}" name="Relief"></td>
+					<td><input type="text" style="width:75px" value="${param.leaseRent}" name="leaseRent"></td>
+					<td><input type="text" style="width:75px" value="${param.leaseDeposit}" name="leaseDeposit"></td>
+					<td><input type="text" style="width:75px" value="${param.leaseRelief}" name="leaseRelief"></td>
 					<td><input type="date" style="width:100px" value="${param.leaseDate}" name="leaseDate"></td>
 					<td><input type="text" style="width:75px" value="${param.houseNote}" name="houseNote"></td>
-					<td><select name="Refund" id="selectRefund"><option value=1>是</option><option value=0>否</option></select></td>
+					<td><select name="leaseRefund" id="selectleaseRefund"><option value=1>是</option><option value=0>否</option></select></td>
 					<td><button id="addBtn">新增</button></td>
 					<th>合約圖片</th>
-					<td><input type="file" style="width:75px" value="${param.leasePic}" name="leasePic" id="file"></td>
-					<td><img id="result" style="width:75px"></td>
+					<td><input type="file" style="width:75px" value="${param.leasePic}" id="file"></td>
+					<td><input type="hidden" id="leasePic" name="leasePic"></td>
+					<td><img id="result" width="75" src="" name="leasePic"></td>
 				</tr>
 					<input type="hidden" name=action>
 			</tbody>		
@@ -122,12 +123,12 @@ $(document).ready(function(){
 			var cell4=$("<td></td>").text(VO.leaseEndDate);
 			var cell5=$("<td></td>").text(VO.memNO);
 			var cell6=$("<td></td>").text(VO.empNO);
-			var cell7=$("<td></td>").text(VO.Rent);
-			var cell8=$("<td></td>").text(VO.Deposit);
-			var cell9=$("<td></td>").text(VO.Relief);
+			var cell7=$("<td></td>").text(VO.leaseRent);
+			var cell8=$("<td></td>").text(VO.leaseDeposit);
+			var cell9=$("<td></td>").text(VO.leaseRelief);
 			var cell10=$("<td></td>").text(VO.leaseDate);
 			var cell11=$("<td></td>").text(VO.houseNote);
-			var cell12=$("<td></td>").text(VO.Refund);
+			var cell12=$("<td></td>").text(VO.leaseRefund);
 			    cell12.attr("class","Refund");
 			var cell13=$("<td></td>").html('<button class="btn btn-primary">修改</button>');
 			var row=$("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5
@@ -158,6 +159,7 @@ $(document).ready(function(){
 		$('input[name="action"]').val("insertLease");
 	})
 	
+	
 	$("#file").change(function(e){
 		  var img = e.target.files[0];
 		  if(!img.type.match('image.*')){
@@ -167,6 +169,10 @@ $(document).ready(function(){
 		  iEdit.open(img, true, function(res){
 		    $("#result").attr("src", res);
 		  });
+		  $("#form").submit(function(event){
+			  $("#leasePic").val($("#result").attr("src"));
+		  })
+		  console.log($("#result").attr("src"));
 	});
 })
 </script>

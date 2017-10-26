@@ -114,6 +114,7 @@
 			var selectBorough=$("#boroughName");
 			var boroughNO=$("#boroughNO").val();
 			
+			//從查全部取得房屋狀態
 			var SelectStatus=$("#SelectStatus");
 // 			console.log(selectCity);
 			$.post("/hermit/HouseFormServlet.do", {action : "getAllForm"}, function(data) {
