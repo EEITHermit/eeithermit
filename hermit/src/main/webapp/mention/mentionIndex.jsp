@@ -11,7 +11,6 @@
 <!-- Bootstrap core CSS -->
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
 	rel="stylesheet">
-
 <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
 <script src='<%=request.getContextPath()%>/js/jquery-ui.min.js'></script>
 <!-- Bootstrap core JavaScript-->

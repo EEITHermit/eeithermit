@@ -21,7 +21,8 @@
 		<div>
 			<label for="adImage">廣告圖片</label><br>
 			<img id="result" src="${adImage}" height="200" width="500" ><br>
-			<input id="file"  type="file" value="${adImage}">
+			<input  id="file"  type="file" value="${adImage}">
+			<input type="hidden" name="adImage" id="adImage">
 			<p/><br>
 		</div>
 		<div>
@@ -44,14 +45,13 @@
 		</div>	
 		<div>
 			<label for="adStatus">狀態 </label>
-			<input type="radio" name="true" value="0" checked>上架
-  			<input type="radio" name="true" value="1">下架<br>
+			<input name="adStatus" type="radio" name="true" value="0" checked>上架
 		</div>
 		<div>
 			<label for="adModify">修改人</label>
 			<input type='text' name='admodify' size="60" placeholder="請輸入員工代號  ex:00000"><P/><br>
 		</div>
-	
+			<input type="hidden" name="action" value="InsertADManager">	
 			<button type="submit" class="btn btn-default" id="submit">確認</button>
 			<button type="reset" class="btn btn-default">清除</button>
 	</div>
@@ -70,7 +70,9 @@ $("#file").change(function(e){
 	  }
 	  iEdit.open(img, true, function(res){
 	    $("#result").attr("src", res);
-	  }); $("#form").submit(function(event){
+	    $("#adImage").val($("#result").attr("src"));
+	  }); 
+	  $("#form").submit(function(event){
 		  $("#adImage").val($("#result").attr("src"));
 	  }) 
 	});
