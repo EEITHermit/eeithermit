@@ -27,8 +27,8 @@
 						class="label">Facebook</span></a></li>
 				<li><a href="#" class="icon fa-dribbble"><span
 						class="label">Dribbble</span></a></li>
-				<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-				<li><a href="#" class="icon fa-envelope-o"><span
+				<li><a href="#" class="fa fa-user-circle-o"><span class="label">Github</span></a></li>
+				<li><a href="#" class="icon fa-bell-o"><span
 						class="label">Email</span></a></li>
 			</ul>
 			</nav> </header>
