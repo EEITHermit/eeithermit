@@ -8,7 +8,7 @@
 <title>員工首頁</title>
 <link href='<%=request.getContextPath() %>/css/jquery-ui.min.css' rel='stylesheet' />
 <!-- Bootstrap core CSS -->
-<link href="<%= request.getContextPath() %>/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src='<%= request.getContextPath() %>/js/jquery.min.js'></script>
 <script src='<%=request.getContextPath() %>/js/jquery-ui.min.js'></script>
 <!-- Bootstrap core JavaScript-->
