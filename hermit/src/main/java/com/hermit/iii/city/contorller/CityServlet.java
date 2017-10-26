@@ -36,7 +36,6 @@ public class CityServlet extends HttpServlet {
 			List<CityVO> list=svc.getAllCity();
 			List list2=new LinkedList();
 			PrintWriter out=response.getWriter();
-			
 			for(int i=0;i<list.size();i++){
 				Map m1=new LinkedHashMap();
 				vo=list.get(i);
@@ -50,10 +49,6 @@ public class CityServlet extends HttpServlet {
 			out.println(str);
 			out.flush();
 			out.close();
-			
-		}
-		
-		if("getCityForJSON".equals(action)){
 			
 		}
 	}

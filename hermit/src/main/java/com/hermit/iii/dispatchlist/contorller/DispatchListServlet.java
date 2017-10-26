@@ -98,6 +98,7 @@ public class DispatchListServlet extends HttpServlet {
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
+			
 			dls = new DispatchListService();
 			String stringjson = dls.getAllForJson();
 			out.println(stringjson);

@@ -265,16 +265,6 @@ $(document).ready(function(){
 					selectForm.append(cell1);
 				})
 			})
-			var houseStatus = "${vo.houseStatus}";
-		if(houseStatus == "已出租"){
-			SelectStatus.find("option").eq(1).prop("selected","true");
-			console.log(SelectStatus.find("option").eq(2));
-		}else if(houseStatus == "未出租"){
-			SelectStatus.find("option").eq(0).prop("selected","true");
-			console.log(SelectStatus.find("option").eq(1));
-		}else if(houseStatus=="修繕中"){
-			SelectStatus.find("option").eq(2).prop("selected","true");
-		}
 			
 			$("#addHouse").click(function(){
 				$('input[name="action"]').val("insertHouse");

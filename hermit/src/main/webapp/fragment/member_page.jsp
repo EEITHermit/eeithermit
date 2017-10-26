@@ -70,7 +70,6 @@
 	</div>
 	
 	<footer class="w3-bottom w3-black container-fluid" >
-
 		<div class="row nav">
 		  <div class="col-md-4"></div>
 		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></div>
@@ -80,8 +79,7 @@
 		  <div class="col-md-4"></div>
 		</div>
 	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-	</div>
-		 
+		</div>
 	</footer>
 	<script>
 	$( function() {
