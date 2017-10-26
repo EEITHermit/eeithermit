@@ -176,7 +176,7 @@ CREATE TABLE Emp
 	(
 	empNO decimal(5,0) NOT NULL IDENTITY (30001, 1),
 	empAccount varchar(12) NOT NULL,
-	empPwd varchar(12) NOT NULL,
+	empPwd varchar(64) NOT NULL,
 	empPhone varchar(12) NOT NULL,
 	empName varchar(20) NOT NULL,
 	postNO decimal(3,0) NOT NULL,
