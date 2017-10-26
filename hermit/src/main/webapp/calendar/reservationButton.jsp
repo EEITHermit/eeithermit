@@ -72,57 +72,57 @@
 <div id="reservationDiv">
 	<form id="reservationForm" action="<%= request.getContextPath() %>/reservationServlet?mission=reservation" method="POST">
 		<!-- 會員帳號為假資料 -->
-		<input type="hidden" name="memberNo" value="40001"/>
+		<input type="hidden" name="memberNo" value="40003"/>
 		<!-- 房屋帳號為假資料 -->
-		<input type="hidden" name="houseNo" value="20001"/>
+		<input type="hidden" name="houseNo" value="20002"/>
 		<h3>請選擇期望預約時間</h3>
 		<div id="MonDiv">
-			<input type="checkbox" name="week" value="星期一" id="Mon"/><label for="Mon">星期一</label> 
+			<input type="checkbox" name="week" value="一" id="Mon"/><label for="Mon">星期一</label> 
 			<div id="MonTime">
-				<input type="checkbox" name="Time" value="星期一上午" id="MonMon"/><label for="MonMon">上午</label><br/>
-				<input type="checkbox" name="Time" value="星期一下午" id="MonAf"/><label for="MonAf">下午</label>
+				<input type="checkbox" name="Time" value="一上" id="MonMon"/><label for="MonMon">上午</label><br/>
+				<input type="checkbox" name="Time" value="一下" id="MonAf"/><label for="MonAf">下午</label>
 			</div>
 		</div>
 		<div id="TuesDiv">
-			<input type="checkbox" name="week" value="星期二"id="Tues"/><label for="Tues">星期二</label> 
+			<input type="checkbox" name="week" value="二"id="Tues"/><label for="Tues">星期二</label> 
 			<div id="TuesTime">
-				<input type="checkbox" name="Time" value="星期二上午" id="TuesMon"/><label for="TuesMon">上午</label><br/>
-				<input type="checkbox" name="Time" value="星期二下午" id="TuesAf"/><label for="TuesAf">下午</label>
+				<input type="checkbox" name="Time" value="二上" id="TuesMon"/><label for="TuesMon">上午</label><br/>
+				<input type="checkbox" name="Time" value="二下" id="TuesAf"/><label for="TuesAf">下午</label>
 			</div>
 		</div>
 		<div id="WednDiv">
-			<input type="checkbox" name="week" value="星期三"id="Wedn"/><label for="Wedn">星期三 </label>
+			<input type="checkbox" name="week" value="三"id="Wedn"/><label for="Wedn">星期三 </label>
 			<div id="WednTime">
-				<input type="checkbox" name="Time" value="星期三上午" id="WednMon"/><label for="WednMon">上午</label><br/>
-				<input type="checkbox" name="Time" value="星期三下午" id="WednAf"/><label for="WednAf">下午</label>
+				<input type="checkbox" name="Time" value="三上" id="WednMon"/><label for="WednMon">上午</label><br/>
+				<input type="checkbox" name="Time" value="三下" id="WednAf"/><label for="WednAf">下午</label>
 			</div>
 		</div>
 		<div id="ThurDiv">
-			<input type="checkbox" name="week" value="星期四"id="Thur"/><label for="Thur">星期四 </label>
+			<input type="checkbox" name="week" value="四"id="Thur"/><label for="Thur">星期四 </label>
 			<div id="ThurTime">
-				<input type="checkbox" name="Time" value="星期四上午" id="ThurMon"/><label for="ThurMon">上午</label><br/>
-				<input type="checkbox" name="Time" value="星期四下午" id="ThurAf"/><label for="ThurAf">下午</label>
+				<input type="checkbox" name="Time" value="四上" id="ThurMon"/><label for="ThurMon">上午</label><br/>
+				<input type="checkbox" name="Time" value="四下" id="ThurAf"/><label for="ThurAf">下午</label>
 			</div>
 		</div>
 		<div id="FriDiv">
-			<input type="checkbox" name="week" value="星期五" id="Fri"/><label for="Fri">星期五 </label>
+			<input type="checkbox" name="week" value="五" id="Fri"/><label for="Fri">星期五 </label>
 			<div id="FriTime">
-				<input type="checkbox" name="Time" value="星期五上午" id="FriMon"/><label for="FriMon">上午</label><br/>
-				<input type="checkbox" name="Time" value="星期五下午" id="FriAf"/><label for="FriAf">下午</label>
+				<input type="checkbox" name="Time" value="五上" id="FriMon"/><label for="FriMon">上午</label><br/>
+				<input type="checkbox" name="Time" value="五下" id="FriAf"/><label for="FriAf">下午</label>
 			</div>
 		</div>
 		<div id="SatDiv">
-			<input type="checkbox" name="week" value="星期六" id="Sat"/><label for="Sat">星期六 </label>
+			<input type="checkbox" name="week" value="六" id="Sat"/><label for="Sat">星期六 </label>
 			<div id="SatTime">
-				<input type="checkbox" name="Time" value="星期六上午" id="SatMon"/><label for="SatMon">上午</label><br/>
-				<input type="checkbox" name="Time" value="星期六下午" id="SatAf"/><label for="SatAf">下午</label>
+				<input type="checkbox" name="Time" value="六上" id="SatMon"/><label for="SatMon">上午</label><br/>
+				<input type="checkbox" name="Time" value="六下" id="SatAf"/><label for="SatAf">下午</label>
 			</div>
 		</div>
 		<div id="SunDiv">
-			<input type="checkbox" name="week" value="星期日" id="Sun"/><label for="Sun">星期日 </label>
+			<input type="checkbox" name="week" value="日" id="Sun"/><label for="Sun">星期日 </label>
 			<div id="SunTime">
-				<input type="checkbox" name="Time" value="星期日上午" id="SunMon"/><label for="SunMon">上午</label><br/>
-				<input type="checkbox" name="Time" value="星期日下午" id="SunAf"/><label for="SunAf">下午</label>
+				<input type="checkbox" name="Time" value="日上" id="SunMon"/><label for="SunMon">上午</label><br/>
+				<input type="checkbox" name="Time" value="日下" id="SunAf"/><label for="SunAf">下午</label>
 			</div>
 		</div>
 		<div style="clear:both;margin-top:50px">

@@ -25,7 +25,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 	}
 	// 會員確認預約後的新增
 	String insert = "insert into reservation("
-			+ "memNO,houseNO,areaNO,exceptTime,applyTime,takedOver) values(?,?,?,?,?,?)";
+			+ "memNO,houseNO,boroughNO,exceptTime,applyTime,takedOver) values(?,?,?,?,?,?)";
 	@Override
 	public Integer insert(ReservationVO rlVO) {
 		int result = 0;
@@ -33,7 +33,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 			PreparedStatement ps = conn.prepareStatement(insert);){
 			ps.setInt(1, rlVO.getMemberVO().getMemNO());
 			ps.setInt(2, rlVO.getHouseVO().getHouseNO());
-			ps.setInt(3, rlVO.getAreaNO());
+			ps.setInt(3, rlVO.getBoroughNO());
 			ps.setString(4,rlVO.getExceptTime());
 			ps.setTimestamp(5, rlVO.getApplyTime());
 			ps.setBoolean(6, false);
@@ -44,7 +44,9 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 		return result;
 	}
 	//推播功能用
-	String select = "select * from reservation where (areaNO = ?) AND (takedOver = false)";
+	String select = "select * from reservation r join house h on h.houseNO = r.houseNO "
+			+ "join member m on m.memNO = r.memNO "
+			+ "where (r.boroughNO = ?) AND (takedOver = 'false')";
 	@Override
 	public ArrayList<ReservationVO> selectByArea(Integer areaNo) {
 		ArrayList<ReservationVO> array = new ArrayList<ReservationVO>();
@@ -56,9 +58,13 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 				ReservationVO rlVO = new ReservationVO();
 				rlVO.setReservationNo(rs.getInt("reservationNO"));
 				rlVO.getMemberVO().setMemNO(rs.getInt("memNO"));
+				rlVO.getMemberVO().setMemName(rs.getString("memName"));
+				rlVO.getMemberVO().setMemGender(rs.getString("memGender"));
+				rlVO.getMemberVO().setMemTel(rs.getString("memTel"));
 				rlVO.getHouseVO().setHouseNO(rs.getInt("houseNO"));
+				rlVO.getHouseVO().setHouseAddr(rs.getString("houseAddr"));
 				rlVO.setExceptTime(rs.getString("exceptTime"));
-				rlVO.setAreaNO(rs.getInt("areaNO"));
+				rlVO.setBoroughNO(rs.getInt("boroughNO"));
 				rlVO.setApplyTime(rs.getTimestamp("applyTime"));
 				array.add(rlVO);
 			}
@@ -69,7 +75,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 	}
 	//員工接案後確認是否已被接案，再更新狀態
 	String selectStatus = "select takedOver from reservation where reservationNO = ?";
-	String updateEmpNo = "update reservation set empNO = ?,takedOver = true where reservationNO = ?";
+	String updateEmpNo = "update reservation set empNO = ?,takedOver = 'true' where reservationNO = ?";
 	@Override
 	public Integer updateStatus(Integer reservationNo , Integer empNo) {
 		int result = 0;
@@ -93,7 +99,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 		return result;
 	}
 	//確認是否有預約過此房屋
-	String checkExist = "select * from reservation where houseNO= ? AND memNO = ?";
+	String checkExist = "select * from reservation where houseNO= ? AND memNO = ? AND takedOver = 'false'";
 	@Override
 	public boolean checkExist(Integer houseNo,Integer memberNo){
 		boolean result = true;

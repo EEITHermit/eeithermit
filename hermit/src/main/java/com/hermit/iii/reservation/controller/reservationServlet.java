@@ -62,18 +62,16 @@ public class reservationServlet extends HttpServlet {
 				ReservationVO rlVO = new ReservationVO();
 				Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 				Integer areaNo = mgDAO.findAreaNoByHouseNo(Integer.valueOf(houseNo));
-				String weeks[] = request.getParameterValues("week");
 				String times[] = request.getParameterValues("Time");
 				String expectTime = "";
-				for(String week :weeks){
-					expectTime = expectTime + week +"; ";
-				}
-				for (String time : times) {
-					expectTime = expectTime + time + "; ";
+				if(times != null){
+					for (String time : times) {
+						expectTime = expectTime + time + "; ";
+					}
 				}
 				rlVO.getMemberVO().setMemNO(Integer.valueOf(memberNo));
 				rlVO.getHouseVO().setHouseNO(Integer.valueOf(houseNo));
-				rlVO.setAreaNO(areaNo);
+				rlVO.setBoroughNO(areaNo);
 				rlVO.setApplyTime(currentTime);
 				rlVO.setExceptTime(expectTime);
 				result = rlDAO.insert(rlVO);

@@ -84,6 +84,15 @@ public class DispatchListServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("SignatureUpdate.jsp");
 			rd.forward(request,response);
 		}
+
+		if("getAllDispatchList".equals(action)){
+			dls = new DispatchListService();
+			List<DispatchListVO> list = dls.getAllDispatchList();
+			request.setAttribute("list",list);
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			rd.forward(request,response);
+			
+		}
 		
 		if("getAllDispatchListForJson".equals(action)){
 			response.setHeader("content-type", "text/html;charset=UTF-8");

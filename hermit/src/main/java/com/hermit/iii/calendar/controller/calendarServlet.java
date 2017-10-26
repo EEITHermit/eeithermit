@@ -15,14 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import com.hermit.iii.calendar.model.CalendarEventService;
 import com.hermit.iii.calendar.model.CalendarEventVO;
-import com.hermit.iii.house.model.HouseDAO;
+import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
-import com.hermit.iii.member.model.MemberDAO;
-import com.hermit.iii.member.model.MemberVO;
+import com.hermit.iii.member.model.*;
 
 
 @WebServlet("/calendarServlet")
@@ -55,7 +53,7 @@ public class calendarServlet extends HttpServlet {
 			out.print(JSONString);
 			return;
 		}else if("queryMember".equals(mission)){
-			MemberDAO mhDAO = new MemberDAO();
+			MemberJNDIDAO mhDAO = new MemberJNDIDAO();
 			String name = request.getParameter("member");
 			ArrayList<String> arrayR = new ArrayList<String>();
 			ArrayList<MemberVO> array = mhDAO.autoCompleteM(name);
@@ -66,7 +64,7 @@ public class calendarServlet extends HttpServlet {
 			out.print(new JSONArray(arrayR));  //中文自必須先行編碼
 			return;
 		}else if("queryHouse".equals(mission)){
-			HouseDAO mhDAO = new HouseDAO();
+			HouseService mhDAO = new HouseService();
 			String address = request.getParameter("house");
 			ArrayList<String> arrayR = new ArrayList<String>();
 			ArrayList<HouseVO> array = mhDAO.autoCompleteH(address);
