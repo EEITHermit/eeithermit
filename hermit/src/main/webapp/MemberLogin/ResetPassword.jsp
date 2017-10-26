@@ -19,13 +19,13 @@
 				</tr>
 
 				<tr>
-					<td align="center">新密碼:</td>
+					<td align="center"><font style="color: red;">*</font>請輸入新密碼:</td>
 					<td><input type="password" name="newPassword" /><small><font
 							color="red" size="-1">${errors.newPassword}</font></small></td>
 				</tr>
 
 				<tr>
-					<td align="center">確認新密碼:</td>
+					<td align="center"><font style="color: red;">*</font>請確認新密碼:</td>
 					<td><input type="password" name="newPassword2" /><small><font
 							color="red" size="-1">${errors.newPassword2}</font></small></td>
 				</tr>
