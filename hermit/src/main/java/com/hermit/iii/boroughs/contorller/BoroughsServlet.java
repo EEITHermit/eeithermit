@@ -26,9 +26,8 @@ public class BoroughsServlet extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+		response.setContentType("text/html; charset=UTF-8");
 		String action = request.getParameter("action");
 		BoroughsService bs = new BoroughsService();
 		
@@ -65,16 +64,11 @@ public class BoroughsServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request,response);
 		}
-		if("getAllborough".equals(action)){
-			
+		if("getAllBoroughByCity".equals(action)){
 			cityNO=Integer.valueOf(request.getParameter("cityNO"));
-			
 			List<BoroughsVO> list=bs.getAll_cityNO(cityNO);
 			List list2=new LinkedList();
 			PrintWriter out=response.getWriter();
-			
-			
-			
 			for(int i=0;i<list.size();i++){
 				Map m1=new LinkedHashMap();
 				BoroughsVO vo=list.get(i);

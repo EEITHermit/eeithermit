@@ -185,7 +185,7 @@ $(document).ready(function(){
 		$.post("/hermit/House.do",{action:"getAllHouseForJson"},function(data){
 			dataJson=$.parseJSON(data).list;
 // 			console.log(data);
-// 			console.log(dataJson);
+			console.log(dataJson);
 			tbody.empty();
 			$.each(dataJson,function(index,VO){
 				var cell1=$("<td></td>").text(VO.houseNO);
@@ -219,7 +219,7 @@ $(document).ready(function(){
 		})
 		$.post("/hermit/CityServlet.do",{action:"getAllCity"},function(data){
 				dataJson=$.parseJSON(data).list;
-				console.log(data);
+// 				console.log(data);
 				$.each(dataJson,function(index,VO){
 					var cell1=$("<option></option>").text(VO.cityName);
 					cell1.val(VO.cityNO);
@@ -231,7 +231,7 @@ $(document).ready(function(){
 				
 				var cityNO = ($("#cityNO").val());
 				$("#boroughNO").html("");
-				$.post("/hermit/BoroughsServlet.do",{action:"getAllborough",cityNO:cityNO},function(data){
+				$.post("/hermit/BoroughsServlet.do",{action:"getAllBoroughByCity",cityNO:cityNO},function(data){
 					
 					dataJson=$.parseJSON(data).list;
 //	 				console.log(data);
