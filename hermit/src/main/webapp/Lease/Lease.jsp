@@ -11,10 +11,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/iEdit.min.css">
 
-<script src="../js/bootstrap.js"></script>
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
-<script src="../js/datatables.min.js"></script>
+
 
 
 </head>
@@ -32,12 +29,12 @@
 			<th>押金</th>
 			<th>折扣</th>
 			<th>簽約日期</th>
-			<th>合約圖片</th>
 			<th>備註</th>
 			<th>押金返還</th>
 		</tr>
 	</thead>
 	<tbody>
+	
 	</tbody>
 	<tfoot>
 		<tr>
@@ -51,14 +48,14 @@
 			<th>押金</th>
 			<th>折扣</th>
 			<th>簽約日期</th>
-			<th>合約圖片</th>
 			<th>備註</th>
 			<th>押金返還</th>
 		</tr>
 	</tfoot>
 </table>
-<form action="/hermit/Lease.do" method="get">
+<form action="/hermit/LeaseServlet.do" method="get" id="modify">
 <input type="hidden" name="action" value=getOneLease>
+<input type="hidden" id="leaseNO" name="leaseNO">
 </form>
 
 <form action="<%=request.getContextPath()%>/LeaseServlet.do" method="POST">
@@ -74,14 +71,13 @@
 				<th>押金</th>
 				<th>折扣</th>
 				<th>簽約日期</th>
-				<th>合約圖片</th>
 				<th>備註</th>
 				<th>押金返還</th>
 			</tr>
 		</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="width:75px" value="${param.houseNO}" name="houseTitle"></td>
+					<td><input type="text" style="width:75px" value="${param.houseNO}" name="houseNO"></td>
 					<td><input type="date" style="width:100px" value="${param.leaseBeginDate}" name="leaseBeginDate"></td>
 					<td><input type="date" style="width:100px" value="${param.leaseEndDate}" name="leaseEndDate"></td>
 					<td><input type="text" style="width:75px" value="${param.memNO}" name="memNO"></td>
@@ -90,18 +86,22 @@
 					<td><input type="text" style="width:75px" value="${param.Deposit}" name="Deposit"></td>
 					<td><input type="text" style="width:75px" value="${param.Relief}" name="Relief"></td>
 					<td><input type="date" style="width:100px" value="${param.leaseDate}" name="leaseDate"></td>
-					
 					<td><input type="text" style="width:75px" value="${param.houseNote}" name="houseNote"></td>
 					<td><select name="Refund" id="selectRefund"><option value=1>是</option><option value=0>否</option></select></td>
 					<td><button id="addBtn">新增</button></td>
+					<th>合約圖片</th>
 					<td><input type="file" style="width:75px" value="${param.leasePic}" name="leasePic" id="file"></td>
-					<td><img id="result"></td>
+					<td><img id="result" style="width:75px"></td>
 				</tr>
 					<input type="hidden" name=action>
 			</tbody>		
 	</table>
 </form>
 <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/flashcanvas.js"></script>
+<script src="../js/jSignature.min.js"></script>
+<script src="../js/datatables.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>		
 <script>
 $(document).ready(function(){
@@ -126,22 +126,31 @@ $(document).ready(function(){
 			var cell8=$("<td></td>").text(VO.Deposit);
 			var cell9=$("<td></td>").text(VO.Relief);
 			var cell10=$("<td></td>").text(VO.leaseDate);
-			var cell11=$("<td></td>").text(VO.leasePic);
-			var cell12=$("<td></td>").text(VO.houseNote);
-			var cell13=$("<td></td>").text(VO.Refund);
-			var cell14=$("<td></td>").html('<button class="btn btn-primary">修改</button>');
+			var cell11=$("<td></td>").text(VO.houseNote);
+			var cell12=$("<td></td>").text(VO.Refund);
+			    cell12.attr("class","Refund");
+			var cell13=$("<td></td>").html('<button class="btn btn-primary">修改</button>');
 			var row=$("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5
 				,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,
-				cell14]);
+				]);
 			tbody.append(row);
 		})
 		$(".btn-primary").on("click",function(){
 			var tr=$(this).parents("tr");
-			var houseNO=$(this).parents("tr").children("td:eq(0)").text();
+			var leaseNO=$(this).parents("tr").children("td:eq(0)").text();
 			$("#leaseNO").val(leaseNO);
 			$("#modify").submit();
 		})
-		
+		var Refund=$(".Refund");
+		$.each(Refund,function(index,Ref){
+		console.log($(Ref).text());
+		console.log(index);//告訴你到第幾個迴圈了
+		if($(Ref).text()=="0"){
+			$(Ref).text("否");
+		}else if($(Ref).text()=="1"){
+			$(Ref).text("是");
+		}
+		})
 	})
 	//查全部合約 ===結束===
 		
