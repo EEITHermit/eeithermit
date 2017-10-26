@@ -32,4 +32,7 @@ public class CityService {
 	public List<CityVO> getAllCity(){
 		return dao.getAll();
 	}
+	public String getAllForJSON(){
+		return dao.getAllForJson();
+	}
 }
