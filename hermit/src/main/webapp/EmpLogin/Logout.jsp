@@ -13,6 +13,6 @@
 </head>
 <body>
 您已經登出<p/>
-<a href="http://localhost:8081/hermit/EmpLogin/Login.jsp">登入</a>
+<a href="http://localhost:8081/hermit/back_index_page.jsp">登入</a>
 </body>
 </html>

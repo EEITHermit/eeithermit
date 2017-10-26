@@ -185,10 +185,10 @@ CREATE TABLE Emp
 	constraint Emp_empno_pk primary key (empNO)
 	)
 GO
-insert into emp values('MKLiu','sa123456','0912-345-678','劉明凱','310',0);
-insert into emp values('Vir1','sa123456','0912-345-678','虛擬人物1','320',0);
-insert into emp values('Vir2','sa123456','0912-345-678','虛擬人物2','330',0);
-insert into emp values('Vir3','sa123456','0912-345-678','虛擬人物3','340',0);
+insert into emp values('MKLiu','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','劉明凱','310',0);
+insert into emp values('Vir1','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','虛擬人物1','320',0);
+insert into emp values('Vir2','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','虛擬人物2','330',0);
+insert into emp values('Vir3','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','虛擬人物3','340',0);
 GO
 
 
