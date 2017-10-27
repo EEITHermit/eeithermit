@@ -19,7 +19,6 @@
 				<label for="exampleFormControlSelect1">Example select</label>
 				<select class="form-control" id="exampleFormControlSelect1">
 					<option>請選擇</option>
-					
 				</select>
 			</div>
 			<div class="form-check form-check-inline">

@@ -17,6 +17,7 @@ public class HouseVO {
 	private Integer formNO;
 	private String houseAddr;
 	private Double houseSize;
+
 	//子傑加入子表
 	private String hType;
 	private String hForm;
@@ -34,7 +35,7 @@ public class HouseVO {
 	public void setBoroughName(String boroughName) {
 		this.boroughName = boroughName;
 	}
-	//
+	//github.com/EEITHermit/eeithermit.git
 	public Integer getHouseNO() {
 		return houseNO;
 	}

@@ -8,17 +8,21 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../css/datatables.min.css"/>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
-<script src="../js/datatables.min.js"></script>
+<!-- 房屋表格用↓ -->
+<link rel="stylesheet" 
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- 房屋表格用↑ class="table"	 -->
+
 <style>
 
 </style>
 </head>
 <body>
-<table id="myTable">
+	<!-- 載入框架 -->
+	<jsp:include page="/fragment/back_side_page.jsp" />
+	<!-- bootstrap -->
+	<div class="container">
+<table id="myTable" class="table">
 		<thead>
 			<tr>
 				<th>房屋編號</th>
@@ -68,7 +72,7 @@
 	</table>
 
 <form action="<%=request.getContextPath()%>/House.do" method="POST">
-<table class="insertTable">
+<table class="insertTable" class="table">
 	<thead>
 	<tr>
 			<th>房屋標題</th>
@@ -162,7 +166,12 @@
 	<input type="hidden" id="houseNO" name="houseNO">
 	</form>
 	
-	
+</div>	
+<!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
+<script src="../js/bootstrap.js"></script>
+<script src="../js/flashcanvas.js"></script>
+<script src="../js/jSignature.min.js"></script>
+<script src="../js/datatables.min.js"></script>
 <script>
 $(document).ready(function(){
 	var dataJson;
@@ -185,7 +194,7 @@ $(document).ready(function(){
 		$.post("/hermit/House.do",{action:"getAllHouseForJson"},function(data){
 			dataJson=$.parseJSON(data).list;
 // 			console.log(data);
-			console.log(dataJson);
+// 			console.log(dataJson);
 			tbody.empty();
 			$.each(dataJson,function(index,VO){
 				var cell1=$("<td></td>").text(VO.houseNO);
@@ -216,6 +225,24 @@ $(document).ready(function(){
 				$("#houseNO").val(houseNO);
 				$("#modify").submit();
 			})
+			
+			$('#myTable').DataTable( {
+		        "language": {
+		            "lengthMenu": "每頁顯示 _MENU_ 筆",
+		            "zeroRecords": "Nothing found - sorry",
+		            "info": "現在正顯示   _PAGE_  共有 _PAGES_ 頁",
+		            "infoEmpty": "No records available",
+		            "infoFiltered": "(filtered from _MAX_ total records)",
+		            "search": "查詢:",
+		            "paginate": {
+		        		"first":      "首頁",
+		        		"last":       "末頁",
+		        		"next":       "下頁",
+		        		"previous":   "前頁"
+		        	}
+		        }
+			});
+			
 		})
 		$.post("/hermit/CityServlet.do",{action:"getAllCity"},function(data){
 				dataJson=$.parseJSON(data).list;
@@ -223,7 +250,7 @@ $(document).ready(function(){
 				$.each(dataJson,function(index,VO){
 					var cell1=$("<option></option>").text(VO.cityName);
 					cell1.val(VO.cityNO);
-					console.log(VO.cityName);
+// 					console.log(VO.cityName);
 					selectCity.append(cell1);
 				})
 			})

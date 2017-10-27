@@ -18,20 +18,20 @@
 </head>
 <style>
 	body{
-/* 		background-color: #AAFFEE; */
+ 		background-color: #AAFFEE; 
 	}
 	.main{
-/* 		background-color:#AAFFEE; */
+ 		background-color:#AAFFEE; 
 	}
 </style>
-<body class="bg-danger">
+<body>
 	<div>
 	<aside>
 	<div class="navBtn">+</div>
 	<nav> <a href="<%=request.getContextPath()%>/mention/mentionIndex.jsp">首頁</a>
-	<a href="">房屋產品維護</a> 
+	<a href="/hermit/House/House_management.jsp">房屋產品維護</a> 
 	<a href="">房屋租賃維護</a> 
-	<a href="">合約租賃管理</a> 
+	<a href="/hermit/Lease/Lease.jsp">合約租賃管理</a> 
 	<a href="<%=request.getContextPath()%>/calendar/calendar.jsp">預約行程管理</a> 
 	<a href="">廣告輪播管理</a> 
 	<a href="">派工回報系統</a> 
