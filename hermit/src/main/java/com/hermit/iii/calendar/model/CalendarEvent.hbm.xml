@@ -14,6 +14,6 @@
 		   <property name="houseNO" column="houseNO"/>
 		   <property name="eventStartTime" column="eventStartTime"/>
 		   <property name="eventEndTime" column="eventEndTime"/>
-		   <property name="PS" column="PS"/>
+		   <property name="ps" column="ps"/>
 	</class>
 </hibernate-mapping>
