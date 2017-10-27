@@ -18,13 +18,13 @@
 </head>
 <style>
 	body{
-/* 		background-color: #AAFFEE; */
+ 		background-color: #AAFFEE; 
 	}
 	.main{
-/* 		background-color:#AAFFEE; */
+ 		background-color:#AAFFEE; 
 	}
 </style>
-<body class="bg-danger">
+<body>
 	<div>
 	<aside>
 	<div class="navBtn">+</div>

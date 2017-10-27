@@ -75,7 +75,7 @@ public class LeaseServlet extends HttpServlet {
 				m1.put("houseNote", vo2.getHouseNote());
 				m1.put("leaseRefund", vo2.getLeaseRefund());
 				list2.add(m1);
-				System.out.println("for");
+				
 			}
 			String jsonString = new JSONArray(list2).toString();
 			out.println(jsonString);
