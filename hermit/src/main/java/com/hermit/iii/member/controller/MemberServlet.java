@@ -399,18 +399,12 @@ public class MemberServlet extends HttpServlet {
 			MemberService memSvc = new MemberService();
 
 			Integer memNO = Integer.valueOf(request.getParameter("memNO"));
-			// String memTel=request.getParameter("memTel");
 			String memAccount = request.getParameter("memAccount");
-			// String memPwd=request.getParameter("memPwd");
-			// String memName = request.getParameter("memName");
 			String memGender = request.getParameter("memGender");
-			// String memEmail = request.getParameter("memEmail");
 			String memStatus = request.getParameter("memStatus");
-
 			Integer memInfract = Integer.valueOf(request.getParameter("memInfract"));
-
 			String memImage = request.getParameter("memImage");
-			System.out.println(memImage);
+//			System.out.println(memImage);
 			memberVO = memSvc.update(memNO, memTel, memAccount, memPwd, memName, memGender, memEmail, memStatus,
 					memInfract, memImage);
 

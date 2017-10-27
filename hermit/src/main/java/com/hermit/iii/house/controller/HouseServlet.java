@@ -30,6 +30,7 @@ public class HouseServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		
 		String action =request.getParameter("action");
 		HouseService svc = new HouseService(); 
 		HouseVO vo ;
@@ -50,7 +51,9 @@ public class HouseServlet extends HttpServlet {
 		String houseAddr = null;
 		Double houseSize = null;
 		
+		
 		if("insertHouse".equals(action)){
+			
 			houseTitle = request.getParameter("houseTitle");
 			cityNO = Integer.valueOf(request.getParameter("cityNO"));
 			boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
