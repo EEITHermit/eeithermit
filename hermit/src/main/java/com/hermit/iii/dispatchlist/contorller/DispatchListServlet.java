@@ -72,7 +72,6 @@ public class DispatchListServlet extends HttpServlet {
 		if("deleteDispatchList".equals(action)){
 			dls = new DispatchListService();
 			dls.deleteDispatchList(Integer.valueOf(request.getParameter("dlno")));
-			response.sendRedirect("SignatureGetAll.jsp");
 		}
 		
 		if("getOneDispatchList".equals(action)){
