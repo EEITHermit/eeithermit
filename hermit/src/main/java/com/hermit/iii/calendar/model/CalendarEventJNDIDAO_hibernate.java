@@ -37,11 +37,18 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 	@Override
 	public ArrayList<CalendarEventVO_hibernate> selectByEmpAndTime(Integer empID, Timestamp start, Timestamp end) {
 		ArrayList<CalendarEventVO_hibernate> array = new ArrayList<CalendarEventVO_hibernate>();
-		Query query = session.createQuery(selectByEandT_h);
-		query.setParameter(1, start);
-		query.setParameter(2, end);
-		List list = query.list();
-		array.addAll(list);
+		try{
+			session.getTransaction().begin();
+			Query query = session.createQuery(selectByEandT_h);
+			query.setParameter(0, start);
+			query.setParameter(1, end);
+			List list = query.list();
+			array.addAll(list);
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
 		return array;
 	}
 	//查詢時間是否衝突，測試完畢
@@ -50,7 +57,7 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 					+ "AND((?>=eventStartTime AND ?<eventEndTime)"
 					+ "or(?>eventStartTime AND ?<=eventEndTime)"
 					+ "or(?<=eventStartTime AND ?>=eventEndTime))";
-	String checkE_h = "from CalendarEvnetVO where (empNO = ?) AND (eventNO != ?)"
+	String checkE_h = "from CalendarEventVO_hibernate where (empNO = ?) AND (eventNO != ?)"
 					+ "AND(eventStartTime between ? and ?) "
 					+ "AND((?>=eventStartTime AND ?<eventEndTime)"
 					+ "or(?>eventStartTime AND ?<=eventEndTime)"
@@ -61,22 +68,28 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 		String day = start.toString().substring(0,10);
 		Date date1 = Date.valueOf(day);
 		Date date2 = new Date(Timestamp.valueOf(day+" 00:00:00").getTime()+60*60*24*1000);
-		Query query = session.createQuery(checkE_h);
-		query.setParameter(1, empID);
-		query.setParameter(2, eventNo);
-		query.setParameter(3, date1);
-		query.setParameter(4, date2);
-		query.setParameter(5, start);
-		query.setParameter(6, start);
-		query.setParameter(7, end);
-		query.setParameter(8, end);
-		query.setParameter(9, start);
-		query.setParameter(10,end);
-		Iterator iterator = query.iterate();
-		if(iterator.hasNext()){
-			result = true;
-		}else{
-			result = false;
+		try {
+			session.getTransaction().begin();
+			Query query = session.createQuery(checkE_h);
+			query.setParameter(0, empID);
+			query.setParameter(1, eventNo);
+			query.setParameter(2, date1);
+			query.setParameter(3, date2);
+			query.setParameter(4, start);
+			query.setParameter(5, start);
+			query.setParameter(6, end);
+			query.setParameter(7, end);
+			query.setParameter(8, start);
+			query.setParameter(9, end);
+			Iterator iterator = query.iterate();
+			if (iterator.hasNext()) {
+				result = true;
+			} else {
+				result = false;
+			}
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
 		}
 		return result;
 	}
@@ -113,8 +126,15 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 			+ "where eventNO = ?";
 	@Override
 	public Integer update(CalendarEventVO_hibernate resVO) {
-		Integer result = 1;
-		session.saveOrUpdate(resVO);
+		Integer result = 0;
+		try{
+			session.getTransaction().begin();
+			session.saveOrUpdate(resVO);
+			session.getTransaction().commit();
+			result = 1;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
 		return result;
 	}
 	//新增資料，測試OK
@@ -122,8 +142,15 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 			+ "eventEndTime,ps) values(?,?,?,?,?,?)";
 	@Override
 	public Integer insert(CalendarEventVO_hibernate resVO) {
-		Integer result = 1;
-		session.saveOrUpdate(resVO);
+		Integer result = 0;
+		try{
+			session.getTransaction().begin();
+			session.saveOrUpdate(resVO);
+			session.getTransaction().commit();
+			result=1;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
 		return result;
 	}
 	//刪除資料
@@ -163,16 +190,5 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 //			}
 			return array;
 		}
-	public static void main(String[] args){
-		CalendarEventJNDIDAO_hibernate ch = new CalendarEventJNDIDAO_hibernate();
-		CalendarEventVO_hibernate cVO = new CalendarEventVO_hibernate();
-		cVO.setEmpNO(30001);
-		cVO.setMemNO(40001);
-		cVO.setHouseNO(20001);
-		Timestamp startTime = Timestamp.valueOf("2017-10-20 10:00:00");
-		cVO.setEventStartTime(startTime);
-		Timestamp endTime = Timestamp.valueOf("2017-10-20 13:00:00");
-		cVO.setPs("OK!");
-		System.out.println(ch.insert(cVO));
-	}
-}
+	
+}	
