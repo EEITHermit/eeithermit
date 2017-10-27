@@ -25,12 +25,7 @@
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
 	<style>
 a:link, a:visited, a:hover, a:active {
-	color: white;
-	text-decoration: none;
-	padding: 14px 25px;
 	text-align: left;
-	text-decoration: none;
-	display: inline-block;
 }
 </style>
 	<div id="content">
