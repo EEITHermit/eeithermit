@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hermit.iii.lease.model.LeaseVO_hibernate" table="Lease">
+
+		<id name="leaseNO" column="leaseNO">
+			<generator class="identity" />
+		</id>
+
+		<property name="houseNO" column="houseNO" />
+		<property name="leaseBeginDate" column="leaseBeginDate" />
+		<property name="leaseEndDate" column="leaseEndDate" />
+		<property name="memNO" column="memNO" />
+		<property name="empNO" column="empNO" />
+		<property name="leaseRent" column="leaseRent" />
+		<property name="leaseDeposit" column="leaseDeposit" />
+		<property name="leaseRelief" column="leaseRelief" />
+		<property name="leaseDate" column="leaseDate" />
+		<property name="leasePic" column="leasePic" />
+		<property name="houseNote" column="houseNote" />
+		<property name="leaseRefund" column="leaseRefund" />
+
+	</class>
+</hibernate-mapping>

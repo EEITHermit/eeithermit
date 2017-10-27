@@ -15,13 +15,12 @@
 </head>
 <body>
 <div class="container">
-<form method="get" action="../ADManagerServlet" >
-	<div class="form-group">
-<!-- 		選擇傳至server端的廣告圖片 -->
-		<div>
+<form method="post" action="../ADManagerServlet" enctype="multipart/form-data" >
+<div class="form-group">
+<div>
 			<label for="adImage">廣告圖片</label><br>
-			<img id="result" src="${adImage}" height="200" width="500" ><br>
-			<input  id="file"  type="file" value="${adImage}">
+			<img id="result" src="${adImage}" height="300" width="350" ><br>
+			<input id="file" name="adImage" type="file" value="${adImage}">
 			<input type="hidden" name="adImage" id="adImage">
 			<p/><br>
 		</div>
@@ -36,25 +35,22 @@
 		</div>
 		<div>
 			<label for="adTimeStart">廣告上架時間</label>
-			<input type="date" name="AdTimeStart" value="${adTimeStart}" id="date1" size="60" placeholder="2014-09-18"><p/><br>
+			<input type="date" name="adTimeStart" value="${adTimeStart}" id="date1" size="60" placeholder="2014-09-18"><p/><br>
+			<label for="adTimeEnd">廣告下架時間</label>
+			<input type="date" name="adTimeEnd" value="${adTimeEnd}" id="date1" size="60" placeholder="2015-09-18"><p/><br>
 		</div>
-		<div>
-			<h6>廣告下架時間</h6>
-			<label for="adTimeEnd">廣告下架時間 </label>
-			<input type="date" name="AdTimeEnd" value="${adTimeEnd}" id="date2" size="60" placeholder="2015-09-18"><p/><br>
-		</div>	
 		<div>
 			<label for="adStatus">狀態 </label>
-			<input name="adStatus" type="radio" name="true" value="0" checked>上架
-		</div>
+			<input type="radio" name="adStatus" value="0" checked>上架
+  		</div>
 		<div>
 			<label for="adModify">修改人</label>
-			<input type='text' name='admodify' size="60" placeholder="請輸入員工代號  ex:00000"><P/><br>
+			<input type='text' name='adModify' size="60" placeholder="請輸入員工代號  ex:00000"><P/><br>
 		</div>
 			<input type="hidden" name="action" value="InsertADManager">	
-			<button type="submit" class="btn btn-default" id="submit">確認</button>
-			<button type="reset" class="btn btn-default">清除</button>
-	</div>
+			<button type="submit" class="btn btn-default" id="submit" onclick="javascrtpt:window.location.href='back-adIndex.jsp'">確認</button>
+			<button type="reset" class="btn btn-default">清除</button>	
+</div>
 </form>
 </div>
 <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
@@ -70,12 +66,17 @@ $("#file").change(function(e){
 	  }
 	  iEdit.open(img, true, function(res){
 	    $("#result").attr("src", res);
+ 		  $("#adImage").val($("#result").attr("src"));
+	  });
 	    $("#adImage").val($("#result").attr("src"));
 	  }); 
 	  $("#form").submit(function(event){
 		  $("#adImage").val($("#result").attr("src"));
-	  }) 
-	});
+// 		  alert($("#file").val());
+	  });
+// 	function testSubmit(){
+// 		 alert($("#file").val());
+// 	}
 </script>
 </body>
 </html>

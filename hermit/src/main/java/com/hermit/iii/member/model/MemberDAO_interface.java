@@ -39,5 +39,4 @@ public interface MemberDAO_interface {
 
 	// 忘記密碼查詢
 	public MemberVO findByEmail(String memEmail);
-	
 }

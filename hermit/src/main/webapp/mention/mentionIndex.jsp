@@ -9,7 +9,6 @@
 <link href='<%=request.getContextPath()%>/css/jquery-ui.min.css'
 	rel='stylesheet' />
 <!-- Bootstrap core CSS -->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
 <script src='<%=request.getContextPath()%>/js/jquery-ui.min.js'></script>
@@ -142,12 +141,12 @@ table{
 				<div class="card text-white bg-primary o-hidden h-100" id="resCard">
 					<div class="card-body">
 						<div class="card-body-icon">
-                <i class="fa fa-fw fa-comments"></i>
-              </div>
+                		<i class="fa fa-fw fa-comments"></i>
+              		</div>
 						<div class="mr-5" style="font-size:18px">
 							您有<span style="font-size: 36px; color: red"> ${resSize} </span>筆未處理預約
 						</div>
-					</div>
+					</div >	
 					<a id="resButton">展開</a>
 				</div>
 			</div>
