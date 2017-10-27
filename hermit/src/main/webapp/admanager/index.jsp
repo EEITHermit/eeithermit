@@ -29,19 +29,19 @@ $(document).ready(function(){
 		<div id="focus">
 			<ul>
 				<li>
-<!-- 				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="ad-backindex.jsp" -->
-<!-- 						alt="x" /></a></li> -->
-<!-- 				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e02.jpg" -->
-<!-- 						alt="x" /></a></li> -->
-<!-- 				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e03.jpg" -->
-<!-- 						alt="x" /></a></li> -->
-<!-- 				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e04.jpg" -->
-<!-- 						alt="x" /></a></li> -->
-<!-- 				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e05.jpg" -->
-<!-- 						alt="x" /></a></li> -->
-<!-- 				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e06.jpg" -->
-<!-- 						alt="x" /></a></li> -->
-<!-- 				<li><a class="ADManagerServlet" ><img src="http://farm9.staticflickr.com/8241/8589392310_7b6127e243_s.jpg" width="75" height="75"></a></li> -->
+				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="ad-backindex.jsp"
+						alt="x" /></a></li>
+				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e02.jpg"
+						alt="x" /></a></li>
+				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e03.jpg"
+						alt="x" /></a></li>
+				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e04.jpg"
+						alt="x" /></a></li>
+				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e05.jpg"
+						alt="x" /></a></li>
+				<li><a href="https://tw.yahoo.com/" target="_blank"><img src="images/e06.jpg"
+						alt="x" /></a></li>
+				<li><a class="ADManagerServlet" ><img src="http://farm9.staticflickr.com/8241/8589392310_7b6127e243_s.jpg" width="75" height="75"></a></li>
 					
 				</li>	
 			</ul>
@@ -49,43 +49,43 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<div>
-	<form action="ADManagerServlet" >
-		<input id="file" type="file" >
-		<img id="result">
-	</form>
+<!-- 	<form action="ADManagerServlet" > -->
+<!-- 		<input id="file" type="file" > -->
+<!-- 		<img id="result"> -->
+<!-- 	</form> -->
 	</div>
 	<script>
 
-	$("#file").change(function(e){
+// 	$("#file").change(function(e){
 		  
-		  var img = e.target.files[0];
+// 		  var img = e.target.files[0];
 
-		  if(!img.type.match('image.*')){
-		    alert("Whoops! That is not an image.");
-		    return;
-		  }
-		  iEdit.open(img, true, function(res){
-		    $("#result").attr("src", res);
-		  });
+// 		  if(!img.type.match('image.*')){
+// 		    alert("Whoops! That is not an image.");
+// 		    return;
+// 		  }
+// 		  iEdit.open(img, true, function(res){
+// 		    $("#result").attr("src", res);
+// 		  });
 		  
-		});
+// 		});
 	
-	$(function(){
-	 	$("#file").change(function(e){
-	 		  var img = e.target.files[0];
-	 		  if(!img.type.match('image.*')){
-	 		    alert("請放入廣告圖片");
-	 		    return;
-	 		  }
-	 		  iEdit.open(img, true, function(res){
-	 		    $("#result").attr("src", res);
-	 		  });
-	 		  //在檔案送出前，讓image的src送到input裡
-	 		  $("#form").submit(function(event){
-	 			  $("#memImage").val($("#result").attr("src"));
-	 		  }) 
-	 		});
-	})
+// 	$(function(){
+// 	 	$("#file").change(function(e){
+// 	 		  var img = e.target.files[0];
+// 	 		  if(!img.type.match('image.*')){
+// 	 		    alert("請放入廣告圖片");
+// 	 		    return;
+// 	 		  }
+// 	 		  iEdit.open(img, true, function(res){
+// 	 		    $("#result").attr("src", res);
+// 	 		  });
+// 	 		  //在檔案送出前，讓image的src送到input裡
+// 	 		  $("#form").submit(function(event){
+// 	 			  $("#memImage").val($("#result").attr("src"));
+// 	 		  }) 
+// 	 		});
+// 	})
 	</script>
 </body>
 </html>
