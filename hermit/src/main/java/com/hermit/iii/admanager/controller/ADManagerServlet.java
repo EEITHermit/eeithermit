@@ -43,8 +43,9 @@ public class ADManagerServlet extends HttpServlet {
 		Boolean adStatus = null;
 		Integer adBrowse = null;
 		Integer adModify = null;
-
-		if ("InsertADManager".equals(action)) {
+		
+//		新增圖片資料
+		if ("InsertADManager".equals(action)) {	
 			ads = new ADManagerService();
 			adImage = String.valueOf(req.getParameter("adImage"));
 			adLink = String.valueOf(req.getParameter("adLink"));
@@ -55,43 +56,46 @@ public class ADManagerServlet extends HttpServlet {
 			adBrowse = Integer.valueOf(0);
 			adModify = Integer.valueOf(req.getParameter("adModify"));
 			ads.insertADManager(adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
+			resp.sendRedirect("admanager/back-adindex.jsp");
 			System.out.println("Insert OK");
 			
 		}
-
+//		修改圖片資料
 		if ("updateADManager".equals(action)) {
-			ads = new ADManagerService();
+			ads = new ADManagerService();			
 			adNo = Integer.valueOf(req.getParameter("adNo"));
-			adImage = req.getParameter("adImage");
+			adImage = String.valueOf(req.getParameter("adImage"));
 			adLink = String.valueOf(req.getParameter("adLink"));
 			adMessage = String.valueOf(req.getParameter("adMessage"));
-			adTimeStart = java.sql.Date.valueOf("adTimeStart");
-			adTimeEnd = java.sql.Date.valueOf("adTimeEnd");
-			adStatus = Boolean.valueOf(true);
-			adBrowse = Integer.valueOf(req.getParameter("adBrowse"));
+			adTimeStart = java.sql.Date.valueOf(req.getParameter("adTimeStart").toString());
+			adTimeEnd = java.sql.Date.valueOf(req.getParameter("adTimeEnd").toString());
+			adStatus = Boolean.valueOf(req.getParameter("adStatus"));
+			adBrowse = Integer.valueOf(0);
 			adModify = Integer.valueOf(req.getParameter("adModify"));
 			ads.updateADManager(adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
+			resp.sendRedirect("admanager/back-adindex.jsp");
 			System.out.println("Update OK");
-			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-			rd.forward(req, resp);
+//			RequestDispatcher rd = req.getRequestDispatcher("/admanager/back-adindex.jsp");
+//			rd.forward(req, resp);
 		}
-
+//		刪除圖片(adNo)
 		if ("deleteADManager".equals(action)) {
 			ads = new ADManagerService();
 			ads.deleteADManager(Integer.valueOf(req.getParameter("adNo")));
-			resp.sendRedirect("back-adindex.jsp");
+			
 			// System.out.println("delete OK");
 		}
-
+//		取一
 		if ("getOneADManager".equals(action)) {
 			System.out.println("Get one OK");
 			ADManagerVO adVO = new ADManagerVO();
 			ads = new ADManagerService();
 			adVO = ads.getOneADManager(Integer.valueOf(req.getParameter("adNo")));
 			req.setAttribute("adVO", adVO);
-			RequestDispatcher rd = req.getRequestDispatcher("back-adindex.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/admanager/adUpdate.jsp");
 			rd.forward(req, resp);
 		}
+//		查詢全部
 		if ("getAllADManager".equals(action)) {
 			ads = new ADManagerService();
 			List<ADManagerVO> list = ads.getAllADManager();
@@ -100,6 +104,7 @@ public class ADManagerServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 			rd.forward(req, resp);
 		}
+//		抓JSON格式
 		if ("getAllADManagerForJson".equals(action)) {
 			resp.setHeader("content-type", "text/html;charset=UTF-8");
 			resp.setCharacterEncoding("UTF-8");
