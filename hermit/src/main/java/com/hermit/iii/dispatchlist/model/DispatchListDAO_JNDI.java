@@ -24,6 +24,7 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {
+			//跟TOMCAT連線
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
