@@ -2,6 +2,7 @@ package com.hermit.iii.qanda.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.qanda.model.QandAService;
 import com.hermit.iii.qanda.model.QandAVO;
 
@@ -35,16 +37,35 @@ public class QAndAFilter implements Filter {
 		}else{
 			return;
 		}
-		//取得登入後session裡的memberNO
-//		HttpSession session = req.getSession();
-//		Integer memberNO = (Integer) session.getAttribute("member");
-		//memNO假資料
-		Integer memNO = 40001;
-		QandAService qaService = new QandAService();
-		QandAVO qaVO = qaService.getOneQandA(memNO);
-		array = qaService.getAllByMemberNO(memNO);
-		request.setAttribute("array",array);
-		chain.doFilter(request, response);
+		String servletPath = (req.getServletPath().split("/")[2]).trim().substring(0,5);
+		if("QAndA".equals(servletPath)){
+			//取得登入後session裡的memberNO
+//			HttpSession session = req.getSession();
+//			Integer memberNO = (Integer) session.getAttribute("member");
+			//memNO假資料
+			Integer memNO = 40001;
+			QandAService qaService = new QandAService();
+			QandAVO qaVO = qaService.getOneQandA(memNO);
+			array = qaService.getAllByMemberNO(memNO);
+			request.setAttribute("array",array);
+			chain.doFilter(request, response);
+		}else if("AAndQ".equals(servletPath)){
+			//取得登入後session裡的empNO
+//			HttpSession session = req.getSession();
+//			Integer empNO = (Integer) session.getAttribute("emp");
+			//empNO假資料
+			Integer empNO = 30001;
+			//取得boroughNO
+			MentionService mention = new MentionService();
+			QandAService qaService = new QandAService();
+			ArrayList<Integer> boroughNO = mention.getBoroughNOByEmpNO(empNO);
+			array = new ArrayList<QandAVO>();
+			for(Integer boroNO :boroughNO){
+				array.addAll(qaService.getAllByBoroughNO(boroNO));
+			}
+			request.setAttribute("array",array);
+			chain.doFilter(request, response);
+		}
 	}
 	public void init(FilterConfig fConfig) throws ServletException {
 	}

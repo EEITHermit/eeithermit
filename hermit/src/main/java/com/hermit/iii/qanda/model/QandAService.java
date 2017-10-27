@@ -70,4 +70,8 @@ public class QandAService {
 	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
 		return dao.getAllByMemberNO(memNO);
 	}
+	// 員工查詢Q&A
+	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO){
+		return dao.getAllByBoroughNO(boroughNO);
+	}
 }

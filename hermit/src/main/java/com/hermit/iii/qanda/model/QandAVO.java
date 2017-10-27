@@ -8,6 +8,7 @@ import com.hermit.iii.house.model.HouseVO;
 public class QandAVO implements Serializable {
 	private Integer qaNO;
 	private Integer memNO;
+	private String memName;
 	private Integer empNO;
 	private HouseVO houseVO = new HouseVO();
 	private Date qTime;
@@ -69,6 +70,14 @@ public class QandAVO implements Serializable {
 	public void setaDetail(String aDetail) {
 		this.aDetail = aDetail;
 	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+	
+	
 	
 	
 }

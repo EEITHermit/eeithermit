@@ -21,6 +21,10 @@ public class QandAJDBCDAO implements QandADAO_interface {
 	private static final String GET_ALL_STMT = "SELECT qaNO,memNO,empNO,houseNO,qTime,aTime,qaType,qDetail,aDetail FROM QandA ORDER BY qaNO";
 	//用memberNO查詢Q&A
 	private static final String GET_ALL_BY_MEMBER_NO = "SELECT * FROM QandA Q JOIN house H ON Q.houseNO = H.houseNO where memNO = ?  ORDER BY qTime DESC";
+	//用emp查詢boroughNO 來查詢Q&A
+		private static final String GET_ALL_BY_BOROUGH_NO = "SELECT * FROM QandA Q "
+				+ " JOIN house H ON Q.houseNO = H.houseNO "
+				+ "JOIN Member M ON Q.memNO = M.memNO where boroughNO = ? AND empNO IS NULL";
 	@Override
 	public void insert(QandAVO qandaVO) {
 		Connection con = null;
@@ -269,6 +273,60 @@ public class QandAJDBCDAO implements QandADAO_interface {
 				QandAVO qandaVO = new QandAVO();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
+				qandaVO.setEmpNO(rs.getInt("empNO"));
+				qandaVO.getHouseVO().setHouseNO(rs.getInt("houseNO"));
+				qandaVO.getHouseVO().setHouseTitle(rs.getString("houseTitle"));
+				qandaVO.setqTime(rs.getDate("qTime"));
+				qandaVO.setaTime(rs.getDate("aTime"));
+				qandaVO.setQaType(rs.getByte("qaType"));
+				qandaVO.setqDetail(rs.getString("qDetail"));
+				qandaVO.setaDetail(rs.getString("aDetail"));
+				array.add(qandaVO); // Store the row in the list
+			}
+
+		} catch (ClassNotFoundException e) { // Handle any driver errors
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) { // Handle any SQL errors
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally { // Clean up JDBC resources
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return array;
+	}
+
+	@Override
+	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_BY_BOROUGH_NO);
+			pstmt.setInt(1, boroughNO);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// 確定有資料才開始new QandAVO物件
+				// qandaVO = Domain objects
+				QandAVO qandaVO = new QandAVO();
+				qandaVO.setQaNO(rs.getInt("qaNO"));
+				qandaVO.setMemNO(rs.getInt("memNO"));
+				qandaVO.setMemName(rs.getString("memName"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
 				qandaVO.getHouseVO().setHouseNO(rs.getInt("houseNO"));
 				qandaVO.getHouseVO().setHouseTitle(rs.getString("houseTitle"));

@@ -15,4 +15,6 @@ public interface QandADAO_interface {
 	public Set<QandAVO> getAll();
 	//漢勳加
 	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO);
+	//漢勳加
+	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO);
 }
