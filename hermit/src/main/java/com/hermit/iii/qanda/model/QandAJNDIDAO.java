@@ -28,7 +28,9 @@ public class QandAJNDIDAO implements QandADAO_interface {
 	private static final String GET_ONE_STMT = "SELECT qaNO,memNO,empNO,houseNO,qTime,aTime,qaType,qDetail,aDetail FROM QandA WHERE qaNO = ?";
 	// (含PK流水號)全選，避免用＊(免PK流水號當條件全打包，PK流水號當排序使得每次結果顯示方式統一)
 	private static final String GET_ALL_STMT = "SELECT qaNO,memNO,empNO,houseNO,qTime,aTime,qaType,qDetail,aDetail FROM QandA ORDER BY qaNO";
-
+	//用memberNO查詢Q&A
+	private static final String GET_ALL_BY_MEMBER_NO = "SELECT * FROM QandA Q "
+			+ " JOIN house H ON Q.houseNO = H.houseNO where memNO = ? ORDER BY qTime DESC";
 	@Override
 	public void insert(QandAVO qandaVO) {
 
@@ -36,7 +38,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 
 			pstmt.setInt(1, qandaVO.getMemNO());
 			pstmt.setInt(2, qandaVO.getEmpNO());
-			pstmt.setInt(3, qandaVO.getHouseNO());
+			pstmt.setInt(3, qandaVO.getHouseVO().getHouseNO());
 			pstmt.setDate(4, qandaVO.getqTime());
 			pstmt.setDate(5, qandaVO.getaTime());
 			pstmt.setByte(6, qandaVO.getQaType());
@@ -57,7 +59,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 
 			pstmt.setInt(1, qandaVO.getMemNO());
 			pstmt.setInt(2, qandaVO.getEmpNO());
-			pstmt.setInt(3, qandaVO.getHouseNO());
+			pstmt.setInt(3, qandaVO.getHouseVO().getHouseNO());
 			pstmt.setDate(4, qandaVO.getqTime());
 			pstmt.setDate(5, qandaVO.getaTime());
 			pstmt.setByte(6, qandaVO.getQaType());
@@ -105,7 +107,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
-				qandaVO.setHouseNO(rs.getInt("houseNO"));
+				qandaVO.getHouseVO().setHouseNO(rs.getInt("houseNO"));
 				qandaVO.setqTime(rs.getDate("qTime"));
 				qandaVO.setaTime(rs.getDate("aTime"));
 				qandaVO.setQaType(rs.getByte("qaType"));
@@ -136,7 +138,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
-				qandaVO.setHouseNO(rs.getInt("houseNO"));
+				qandaVO.getHouseVO().setHouseNO(rs.getInt("houseNO"));
 				qandaVO.setqTime(rs.getDate("qTime"));
 				qandaVO.setaTime(rs.getDate("aTime"));
 				qandaVO.setQaType(rs.getByte("qaType"));
@@ -149,5 +151,35 @@ public class QandAJNDIDAO implements QandADAO_interface {
 			e.printStackTrace();
 		}
 		return set;
+	}
+	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
+		
+		ResultSet rs = null;
+		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ALL_BY_MEMBER_NO);){
+			pstmt.setInt(1, memNO);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// 確定有資料才開始new QandAVO物件
+				// qandaVO = Domain objects
+				QandAVO qandaVO = new QandAVO();
+				qandaVO.setQaNO(rs.getInt("qaNO"));
+				qandaVO.setMemNO(rs.getInt("memNO"));
+				qandaVO.setEmpNO(rs.getInt("empNO"));
+				qandaVO.getHouseVO().setHouseNO(rs.getInt("houseNO"));
+				qandaVO.getHouseVO().setHouseTitle(rs.getString("houseTitle"));
+				qandaVO.setqTime(rs.getDate("qTime"));
+				qandaVO.setaTime(rs.getDate("aTime"));
+				qandaVO.setQaType(rs.getByte("qaType"));
+				qandaVO.setqDetail(rs.getString("qDetail"));
+				qandaVO.setaDetail(rs.getString("aDetail"));
+				array.add(qandaVO); // Store the row in the list
+			}
+
+		} catch (SQLException se) { // Handle any SQL errors
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} 
+		return array;
 	}
 }
