@@ -10,13 +10,13 @@ public class LeaseVO implements Serializable {
 	private Date leaseEndDate;
 	private Integer memNO;
 	private Integer empNO;
-	private Integer Rent;
-	private Integer Deposit;
-	private Integer Relief;
+	private Integer leaseRent;
+	private Integer leaseDeposit;
+	private Integer leaseRelief;
 	private Date leaseDate;
-	private Blob leasePic;
+	private String leasePic;
 	private String houseNote;
-	private Byte Refund;
+	private Byte leaseRefund;
 
 	public Integer getLeaseNO() {
 		return leaseNO;
@@ -66,28 +66,28 @@ public class LeaseVO implements Serializable {
 		this.empNO = empNO;
 	}
 
-	public Integer getRent() {
-		return Rent;
+	public Integer getLeaseRent() {
+		return leaseRent;
 	}
 
-	public void setRent(Integer rent) {
-		Rent = rent;
+	public void setLeaseRent(Integer leaseRent) {
+		this.leaseRent = leaseRent;
 	}
 
-	public Integer getDeposit() {
-		return Deposit;
+	public Integer getLeaseDeposit() {
+		return leaseDeposit;
 	}
 
-	public void setDeposit(Integer deposit) {
-		Deposit = deposit;
+	public void setLeaseDeposit(Integer leaseDeposit) {
+		this.leaseDeposit = leaseDeposit;
 	}
 
-	public Integer getRelief() {
-		return Relief;
+	public Integer getLeaseRelief() {
+		return leaseRelief;
 	}
 
-	public void setRelief(Integer relief) {
-		Relief = relief;
+	public void setLeaseRelief(Integer leaseRelief) {
+		this.leaseRelief = leaseRelief;
 	}
 
 	public Date getLeaseDate() {
@@ -98,11 +98,11 @@ public class LeaseVO implements Serializable {
 		this.leaseDate = leaseDate;
 	}
 
-	public Blob getLeasePic() {
+	public String getLeasePic() {
 		return leasePic;
 	}
 
-	public void setLeasePic(Blob leasePic) {
+	public void setLeasePic(String leasePic) {
 		this.leasePic = leasePic;
 	}
 
@@ -114,11 +114,11 @@ public class LeaseVO implements Serializable {
 		this.houseNote = houseNote;
 	}
 
-	public Byte getRefund() {
-		return Refund;
+	public Byte getLeaseRefund() {
+		return leaseRefund;
 	}
 
-	public void setRefund(Byte refund) {
-		Refund = refund;
+	public void setLeaseRefund(Byte leaseRefund) {
+		this.leaseRefund = leaseRefund;
 	}
 }

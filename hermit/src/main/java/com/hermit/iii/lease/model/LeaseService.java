@@ -14,8 +14,8 @@ public class LeaseService {
 
 	// 新增service
 	public LeaseVO addLease(Integer houseNO, java.sql.Date leaseBeginDate, java.sql.Date leaseEndDate, Integer memNO,
-			Integer empNO, Integer Rent, Integer Deposit, Integer Relief, java.sql.Date leaseDate, InputStream is,
-			String houseNote, Byte Refund) {
+			Integer empNO, Integer leaseRent, Integer leaseDeposit, Integer leaseRelief, java.sql.Date leaseDate, String leasePic,
+			String houseNote, Byte leaseRefund) {
 
 		LeaseVO leaseVO = new LeaseVO();
 
@@ -24,29 +24,25 @@ public class LeaseService {
 		leaseVO.setLeaseEndDate(leaseEndDate);
 		leaseVO.setMemNO(memNO);
 		leaseVO.setEmpNO(empNO);
-		leaseVO.setRent(Rent);
-		leaseVO.setDeposit(Deposit);
-		leaseVO.setRelief(Relief);
+		leaseVO.setLeaseRent(leaseRent);
+		leaseVO.setLeaseDeposit(leaseDeposit);
+		leaseVO.setLeaseRelief(leaseRelief);
 		leaseVO.setLeaseDate(leaseDate);
+		leaseVO.setLeasePic(leasePic);
 		leaseVO.setHouseNote(houseNote);
-		leaseVO.setRefund(Refund);
+		leaseVO.setLeaseRefund(leaseRefund);
 
-		int size;
-		try {
-			size = is.available();
-		} catch (IOException e) {
-			size = 0;
-		}
 
-		dao.insert(leaseVO, is, size);
+
+		dao.insert(leaseVO);
 
 		return leaseVO;
 	}
 
 	// 修改service
 	public LeaseVO updateLease(Integer leaseNO, Integer houseNO, java.sql.Date leaseBeginDate,
-			java.sql.Date leaseEndDate, Integer memNO, Integer empNO, Integer Rent, Integer Deposit, Integer Relief,
-			java.sql.Date leaseDate, InputStream is, String houseNote, Byte Refund) {
+			java.sql.Date leaseEndDate, Integer memNO, Integer empNO, Integer leaseRent, Integer leaseDeposit, Integer leaseRelief,
+			java.sql.Date leaseDate, String leasePic, String houseNote, Byte leaseRefund) {
 
 		LeaseVO leaseVO = new LeaseVO();
 
@@ -56,21 +52,17 @@ public class LeaseService {
 		leaseVO.setLeaseEndDate(leaseEndDate);
 		leaseVO.setMemNO(memNO);
 		leaseVO.setEmpNO(empNO);
-		leaseVO.setRent(Rent);
-		leaseVO.setDeposit(Deposit);
-		leaseVO.setRelief(Relief);
+		leaseVO.setLeaseRent(leaseRent);
+		leaseVO.setLeaseDeposit(leaseDeposit);
+		leaseVO.setLeaseRelief(leaseRelief);
 		leaseVO.setLeaseDate(leaseDate);
+		leaseVO.setLeasePic(leasePic);
 		leaseVO.setHouseNote(houseNote);
-		leaseVO.setRefund(Refund);
+		leaseVO.setLeaseRefund(leaseRefund);
 
-		int size;
-		try {
-			size = is.available();
-		} catch (IOException e) {
-			size = 0;
-		}
+		
 
-		dao.update(leaseVO, is, size);
+		dao.update(leaseVO);
 
 		return leaseVO;
 	}

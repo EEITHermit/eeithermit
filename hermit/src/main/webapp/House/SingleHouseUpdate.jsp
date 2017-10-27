@@ -114,6 +114,7 @@
 			var selectBorough=$("#boroughName");
 			var boroughNO=$("#boroughNO").val();
 			
+			//從查全部取得房屋狀態
 			var SelectStatus=$("#SelectStatus");
 // 			console.log(selectCity);
 			$.post("/hermit/HouseFormServlet.do", {action : "getAllForm"}, function(data) {
@@ -165,7 +166,6 @@
 				var cityNO = ($("#cityName").val());
 				$("#boroughName").html("");
 				$.post("/hermit/BoroughsServlet.do",{action:"getAllBoroughByCity",cityNO:cityNO},function(data){
-					
 					dataJson=$.parseJSON(data).list;
 // 	 				console.log(data);
 					$.each(dataJson,function(index,VO){
@@ -178,6 +178,8 @@
 					})
 				})
 			})
+			
+			//從查全部的JSP過來，取值用
 			$.post("/hermit/BoroughsServlet.do",{action:"getAllBoroughByCity",cityNO:cityNO},function(data){
 				var cityNO = ($("#cityName").val());
 	 				console.log(data);
@@ -191,8 +193,6 @@
 						selectBorough.append(cell1);
 					})
 				})
-			
-			
 			
 			var houseStatus = "${vo.houseStatus}";
 			if(houseStatus == "已出租"){

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>查詢全部</title>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
@@ -57,10 +58,10 @@
 		function ajaxPost(){
 				$.post("DispatchListServlet",{"action":"getAllDispatchListForJson"},function(data){
 					dataJson = $.parseJSON(data).list;
-					console.log(data);
-					console.log(dataJson);
 					tbody.empty();
 					$.each(dataJson,function(index,VO){
+						console.log("第" +index + "筆資料=");
+						console.log(VO);
 						var cell1 = $("<td></td>").text(VO.dlNO);
 						var cell2 = $("<td></td>").text(VO.dempNO);
 						var cell3 = $("<td></td>").text(VO.aempNO);

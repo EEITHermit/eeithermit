@@ -2,6 +2,7 @@ package com.hermit.iii.housepicture.model;
 
 public class HousePictureVO {
 	private Integer housePictureNO;
+
 	private String hPicture;
 	private Integer houseNO;
 	public Integer getHousePictureNO() {
