@@ -233,7 +233,7 @@
 											</div>
 										</div>									
 									</div>
-									<span id="advencedSearch" class="w3-right" style="line-height:20px;width:70px;font-size:10px;background-color: rgba(255,255,255,0.7);color:black;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">進階搜尋<span class="glyphicon glyphicon-chevron-down"></span></span>
+									<span id="advencedSearch" class="w3-right" style="line-height:25px;width:80px;font-size:10px;background-color: rgba(255,255,255,0.7);color:black;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">進階搜尋<span class="glyphicon glyphicon-chevron-down"></span></span>
 								</div>
 							<div class="col-md-5 col-sm-4">
 							</div>
