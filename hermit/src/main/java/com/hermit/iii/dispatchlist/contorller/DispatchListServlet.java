@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import com.hermit.iii.dispatchlist.model.DispatchListDAO_JNDI;
 import com.hermit.iii.dispatchlist.model.DispatchListService;
 import com.hermit.iii.dispatchlist.model.DispatchListVO;
 

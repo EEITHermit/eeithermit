@@ -70,8 +70,8 @@
 		<div class="w3-sidebar w3-bar-block w3-animate-left navbar-fixed-top w3-dark-gray" style="color:white;display:none;font-size:20px;font-family:Microsoft JhengHei;" id="leftMenu">
 		  <button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large"><span>Close &times</span></button>
 		  <a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button"><span>首頁</span></a>
-		  <a href="#" class="w3-bar-item w3-button"><span>會員中心</span></a>
-		  <a href="#" class="w3-bar-item w3-button"><span>我的收藏</span></a>
+		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp" class="w3-bar-item w3-button"><span>會員中心</span></a>
+		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp" class="w3-bar-item w3-button"><span>我的收藏</span></a>
 		</div>	   
 	</div>
 	<div id="top" class="masthead" role="main">
@@ -86,7 +86,7 @@
 								<input class="form-control input-lg" name="houstTitle" id="houstTitle" placeholder="請輸入您想尋找的關鍵字...">
 								<span class="input-group-addon" style="margin:0;padding:0;background-color: rgba(0,0,0,0)"><button id="submit" type="button" class="btn btn-success btn-lg">搜尋</button></span>
 							</div>
-								 <div style="height:35vh; width:100%;overflow:hidden">
+								 <div style="height:38vh; width:100%;overflow:hidden">
 									<div id="effect" class="form-control" style="background-color:rgba(255,255,255,0.3);height:80%;overflow:auto">
 											<div class=" col-md-2" style="">
 												<select id="city" name="cityNO" class="form-control form-control-sm" style="border: 1px,solid,gray;">

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
@@ -36,9 +37,12 @@ public class AdvancedSearch extends HttpServlet {
 		String houseRent = request.getParameter("houseRent");
 		String equid = request.getParameter("equid");
 		JSONObject equidObj = new JSONObject(equid);
-		LinkedHashMap<String, Object> equidMap = new Gson().fromJson(equid, new TypeToken<LinkedHashMap<String, Object>>() {}.getType());
-		System.out.println(equidMap.get("TV"));
-		
+//		LinkedHashMap<String, Object> equidMap = new Gson().fromJson(equid, new TypeToken<LinkedHashMap<String, Object>>() {}.getType());
+		JSONArray nameAry = equidObj.names();
+		JSONArray valAry = equidObj.toJSONArray(nameAry);
+		for(int i =0;i<valAry.length();i++){
+			System.out.println(nameAry.getString(i) + " , " + valAry.getBoolean(i));
+		}
 	}
-
+	
 }
