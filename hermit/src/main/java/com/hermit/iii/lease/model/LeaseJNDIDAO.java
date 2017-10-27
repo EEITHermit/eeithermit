@@ -1,6 +1,5 @@
 package com.hermit.iii.lease.model;
 
-import java.io.*;
 import java.sql.*;
 import java.util.*;
 
