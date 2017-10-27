@@ -101,7 +101,7 @@
 
 				<div class="span8">
 					<h1 class="page-title">
-						<i class="glyphicon glyphicon-home"></i> <span
+						<i class="glyphicon glyphicon-edit"></i> <span
 							style="font-family: Microsoft JhengHei">修改會員資料</span>
 					</h1>
 
@@ -114,14 +114,13 @@
 						</div>
 						<!-- /widget-header -->
 
-						<div class="widget-content">
 
-							<table class="table table-striped table-bordered">
-								<tbody>
-								</tbody>
-							</table>
+						<!-- 這邊是放你的資料 -->
+						<div class="widget-content">
 						</div>
 						<!-- /widget-content -->
+						
+						
 					</div>
 					<!-- /widget -->
 				</div>
