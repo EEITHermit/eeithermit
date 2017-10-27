@@ -111,7 +111,7 @@ public class LeaseServlet extends HttpServlet {
 			request.setAttribute("vo", vo);
 			RequestDispatcher rd = request.getRequestDispatcher("/Lease/LeaseUpdate.jsp");
 			rd.forward(request, response);
-			System.out.println("Search One Success");
+//			System.out.println("Search One Success");
 		}
 		
 		if("update".equals(action)){
