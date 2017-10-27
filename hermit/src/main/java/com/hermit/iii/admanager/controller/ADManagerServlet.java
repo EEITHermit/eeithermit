@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hermit.iii.admanager.model.ADManagerService;
 import com.hermit.iii.admanager.model.ADManagerVO;
-import com.hermit.iii.dispatchlist.model.DispatchListService;
+
 
 @WebServlet("/ADManagerServlet")
 public class ADManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-//	public ADManagerServlet() {
-//		super();
-//	}
+	// public ADManagerServlet() {
+	// super();
+	// }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -34,7 +34,8 @@ public class ADManagerServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		ADManagerService ads = null;
 		Integer adNo = null;
-		String adImage = null;
+		String adImage = req.getParameter("adImage");
+		System.out.println("adImage:" + adImage);
 		String adLink = null;
 		String adMessage = null;
 		Date adTimeStart = null;
@@ -48,10 +49,10 @@ public class ADManagerServlet extends HttpServlet {
 			adImage = String.valueOf(req.getParameter("adImage"));
 			adLink = String.valueOf(req.getParameter("adLink"));
 			adMessage = String.valueOf(req.getParameter("adMessage"));
-			adTimeStart = java.sql.Date.valueOf(req.getParameter("adTimeStart"));
-			adTimeEnd = java.sql.Date.valueOf(req.getParameter("adTimeEnd"));
-			adStatus = Boolean.valueOf(true);
-			adBrowse = Integer.valueOf(req.getParameter("adBrowse"));
+			adTimeStart = java.sql.Date.valueOf(req.getParameter("adTimeStart").toString());
+			adTimeEnd = java.sql.Date.valueOf(req.getParameter("adTimeEnd").toString());
+			adStatus = Boolean.valueOf(req.getParameter("adStatus"));
+			adBrowse = Integer.valueOf(0);
 			adModify = Integer.valueOf(req.getParameter("adModify"));
 
 			ads.insertADManager(adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
@@ -61,24 +62,25 @@ public class ADManagerServlet extends HttpServlet {
 		if ("updateADManager".equals(action)) {
 			ads = new ADManagerService();
 			adNo = Integer.valueOf(req.getParameter("adNo"));
-			adImage = String.valueOf(req.getParameter("adImage"));
+			adImage = req.getParameter("adImage");
 			adLink = String.valueOf(req.getParameter("adLink"));
 			adMessage = String.valueOf(req.getParameter("adMessage"));
-			adTimeStart = java.sql.Date.valueOf(req.getParameter("adTimeStart"));
-			adTimeEnd = java.sql.Date.valueOf(req.getParameter("adTimeEnd"));
+			adTimeStart = java.sql.Date.valueOf("adTimeStart");
+			adTimeEnd = java.sql.Date.valueOf("adTimeEnd");
 			adStatus = Boolean.valueOf(true);
 			adBrowse = Integer.valueOf(req.getParameter("adBrowse"));
 			adModify = Integer.valueOf(req.getParameter("adModify"));
-			ads.updateADManager(adNo,adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
+			ads.updateADManager(adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
 			System.out.println("Update OK");
-			RequestDispatcher rd = req.getRequestDispatcher("adInsert.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 			rd.forward(req, resp);
 		}
 
 		if ("deleteADManager".equals(action)) {
 			ads = new ADManagerService();
 			ads.deleteADManager(Integer.valueOf(req.getParameter("adNo")));
-			System.out.println("delete OK");
+			resp.sendRedirect("back-adindex.jsp");
+			// System.out.println("delete OK");
 		}
 
 		if ("getOneADManager".equals(action)) {
@@ -87,15 +89,15 @@ public class ADManagerServlet extends HttpServlet {
 			ads = new ADManagerService();
 			adVO = ads.getOneADManager(Integer.valueOf(req.getParameter("adNo")));
 			req.setAttribute("adVO", adVO);
-			RequestDispatcher rd = req.getRequestDispatcher("adInsert.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("back-adindex.jsp");
 			rd.forward(req, resp);
 		}
 		if ("getAllADManager".equals(action)) {
-			ADManagerVO adVO = new ADManagerVO();
 			ads = new ADManagerService();
 			List<ADManagerVO> list = ads.getAllADManager();
-			System.out.println("Get All OK");
-			RequestDispatcher rd = req.getRequestDispatcher("adInsert.jsp");
+			req.setAttribute("list", list);
+			// System.out.println("Get All OK");
+			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 			rd.forward(req, resp);
 		}
 		if ("getAllADManagerForJson".equals(action)) {
@@ -109,7 +111,7 @@ public class ADManagerServlet extends HttpServlet {
 			out.close();
 			System.out.println("Get All For JSON");
 		}
-		
+
 	}
 
 }

@@ -4,16 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>後台</title>
+<title>圖片新增成功</title>
 </head>
 <body>
-		<br><br>
-		<h2>Hermit</h2>
-		<div>
-			<a href="adInsert
-			.jsp" class="btn btn-default" >新增廣告</a><p/>
-		</div>
-		
+	<div>新增成功</div>
+	<a href="back-index.jsp" class="btn btn-default" >廣告管理</a><p/>
+
 
 </body>
 </html>
