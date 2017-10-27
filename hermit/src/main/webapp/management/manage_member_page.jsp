@@ -287,6 +287,13 @@
 			// 新增
 			$('#buttonAdd').click(function() {
 				$('input[name="action"]').val('management_insert_Action');
+				
+				/* 避免修改與新增誤按，影響後續的判斷 */
+				// PK設值，但這設值是為了回傳，還是hidden無顯示
+				$('#memNO').val(null);
+				// 為了顯示PK埋標籤<span></span>，使用者維持無法修改
+				$('#memNO+span').text('');
+				
 				$('.modal-body b').text('請確認是否新增');
 			});
 

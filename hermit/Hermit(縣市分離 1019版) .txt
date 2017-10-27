@@ -176,7 +176,7 @@ CREATE TABLE Emp
 	(
 	empNO decimal(5,0) NOT NULL IDENTITY (30001, 1),
 	empAccount varchar(12) NOT NULL,
-	empPwd varchar(12) NOT NULL,
+	empPwd varchar(64) NOT NULL,
 	empPhone varchar(12) NOT NULL,
 	empName varchar(20) NOT NULL,
 	postNO decimal(3,0) NOT NULL,
@@ -185,10 +185,10 @@ CREATE TABLE Emp
 	constraint Emp_empno_pk primary key (empNO)
 	)
 GO
-insert into emp values('MKLiu','sa123456','0912-345-678','劉明凱','310',0);
-insert into emp values('Vir1','sa123456','0912-345-678','虛擬人物1','320',0);
-insert into emp values('Vir2','sa123456','0912-345-678','虛擬人物2','330',0);
-insert into emp values('Vir3','sa123456','0912-345-678','虛擬人物3','340',0);
+insert into emp values('MKLiu','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','劉明凱','310',0);
+insert into emp values('Vir1','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','虛擬人物1','320',0);
+insert into emp values('Vir2','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','虛擬人物2','330',0);
+insert into emp values('Vir3','cP4Yt0V+bTAhpw7wZwNP+Q==','0912-345-678','虛擬人物3','340',0);
 GO
 
 
@@ -381,13 +381,13 @@ CREATE TABLE Lease(
 	leaseEndDate date NOT NULL,
 	memNO decimal(5, 0) NOT NULL,
 	empNO decimal(5,0) NOT NULL,
-	Rent int NULL,
-	Deposit int NULL,          --押金
-	Relief int NULL,           --減免租金
+	leaseRent int NULL,
+	leaseDeposit int NULL,          --押金
+	leaseRelief int NULL,           --減免租金
 	leaseDate Date not null,
 	leasePic varchar(max) null,
 	houseNote varchar(100) null,   --房屋備註:例如設備損壞、點交狀況
-    Refund bit not null,          --押金已退金額    
+    leaseRefund bit not null,          --押金已退金額    
 
 	CONSTRAINT Rate_house_fk FOREIGN KEY(houseNO) REFERENCES house(houseNO),
 	CONSTRAINT Rate_Member_fk FOREIGN KEY(memNO) REFERENCES Member(memNO),

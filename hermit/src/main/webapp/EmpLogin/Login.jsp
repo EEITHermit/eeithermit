@@ -77,7 +77,7 @@ $(document).ready(function(){
 				</tr>
 			</table>
 			<div id="rememberBtn" class="remember-box">
-				<span>記住密碼</span><input type="checkbox" id="remember" ${cookie.flag.value}>
+				<span>Remember me</span><input type="checkbox" id="remember" ${cookie.flag.value}>
 			</div>
 		</form>
 	</center>
