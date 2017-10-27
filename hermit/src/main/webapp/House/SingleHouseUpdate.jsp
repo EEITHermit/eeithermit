@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="/hermit/css/bootstrap.min.css">
 <link rel="stylesheet" href="/hermit/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/hermit/css/datatables.min.css"/>
+<!-- 房屋表格用↓ -->
+<link rel="stylesheet" 
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- 房屋表格用↑ class="table"	 -->
 <script src="/hermit/js/jquery-3.2.1.min.js"></script>
 <script src="/hermit/js/bootstrap.js"></script>
 <script src="/hermit/js/flashcanvas.js"></script>
@@ -15,34 +19,40 @@
 <script src="/hermit/js/datatables.min.js"></script>
 </head>
 <body>
+	<!-- 載入框架 -->
+	<jsp:include page="/fragment/back_side_page.jsp" />
+	<!-- bootstrap -->
+	<div class="container">
+	<div class="col-md-7 col-md-offset-1">
+	<div class="col-md-4">
 	<form method="POST" action="/hermit/House.do?action=updateHouse">
-		<div>
+		<div class="form-group">
 			<label>房屋編號</label> 
 			<input type="text" readonly value="${vo.houseNO}" name="houseNO">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>房屋標題</label>
 		    <input type="text" value="${vo.houseTitle}" name="houseTitle">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>縣市</label>
 			<select id="cityName" name="cityNO"></select> 
 			<input type="hidden" value="${vo.cityNO}" id="cityNO" name="cityNO">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>地區</label> 
 			<select id="boroughName" name="boroughNO"></select>
 			<input type="hidden" value="${vo.boroughNO}" name="boroughNOe" id="boroughNO">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>最高樓層</label> 
 			<input type="text" value="${vo.highestFloor}" name="highestFloor">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>現在樓層</label> 
 			<input type="text" value="${vo.nowFloor}" name="nowFloor">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>房屋狀態</label>
 			<select name="houseStatus" id="SelectStatus">
 			<option>未出租</option>
@@ -52,43 +62,43 @@
 			</select> 
 <%-- 			<input type="hidden" value="${vo.houseStatus}" name="houseStatus"> --%>
 		</div>
-		<div>
+		<div class="form-group">
 			<label>租金</label> 
 			<input type="text" value="${vo.houseRent}" name="houseRent">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>押金</label> 
 			<input type="text" value="${vo.houseCharge}" name="housecharge">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>水費</label> 
 			<input type="text" value="${vo.waterRate}" name="waterRate">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>電費</label> 
 			<input type="text" value="${vo.powerRate}" name="powerRate">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>影片</label>
 			 <input type="text" value="${vo.houseVideo}" name="houseVideo">
 		</div>
-		<div>
+		<div class="form-group">
 			<label>房屋類型</label> 
 			<select id="houseType" name="typeNO"></select>
 			<input id="typeNO" type="hidden" value="${vo.typeNO}" name="typeNO">
 		</div>
 		
-		<div>
+		<div class="form-group">
 		<lable>形態</lable>
 			<select id="houseForm" name="formNO"></select>
 			<input id="formNO" type="hidden" value="${vo.formNO}" name="formNO">
 		</div>
 		
-		<div>
+		<div class="form-group">
 			<label>地址</label> <input type="text" value="${vo.houseAddr}"
 				name="houseAddr">
 		</div>
-		<div>
+		<div class="form-group">
 			<lable>坪數</lable>
 			<input type="text" value="${vo.houseSize }" name="houseSize">
 		</div>
@@ -97,7 +107,9 @@
 		
 		
 	</form>
-
+	</div>
+	</div>
+	</div>
 	<script>
 	$(document).ready(function(){
 
@@ -105,8 +117,7 @@
 			var selectForm= $("#houseForm");
 			var formNO = $("#formNO").val();
 			
-			var selectType=$("#houseType");
-			var typeNO=$("#typeNO").val();
+			
 			
 			var selectCity=$("#cityName")
 			var cityNO=$("#cityNO").val();
@@ -134,10 +145,12 @@
 				})
 				
 			})
+			var selectType=$("#houseType");
+			var typeNO=$("#typeNO").val();
 			$.post("/hermit/HouseTypeServlet.do",{action:"getAllType"},function(data){
 // 				console.log(data);
-				var dataJson2 = $.parseJSON(data);
-//  				console.log(dataJson2);
+				var dataJson2 = $.parseJSON(data).list;
+ 				console.log(dataJson2);
 				$.each(dataJson2,function(index,VO){
 					var cell2=$("<option></option>").text(VO.hType);
 					cell2.val(VO.typeNO);
@@ -182,7 +195,7 @@
 			//從查全部的JSP過來，取值用
 			$.post("/hermit/BoroughsServlet.do",{action:"getAllBoroughByCity",cityNO:cityNO},function(data){
 				var cityNO = ($("#cityName").val());
-	 				console.log(data);
+// 	 				console.log(data);
 					dataJson=$.parseJSON(data).list;
 					$.each(dataJson,function(index,VO){
 						var cell1=$("<option></option>").text(VO.boroughName);
