@@ -101,7 +101,7 @@
 
 				<div class="span8">
 					<h1 class="page-title">
-						<i class="glyphicon glyphicon-home"></i> <span
+						<i class="glyphicon glyphicon-heart"></i> <span
 							style="font-family: Microsoft JhengHei">收藏</span>
 					</h1>
 

@@ -101,7 +101,7 @@
 
 				<div class="span8">
 					<h1 class="page-title">
-						<i class="glyphicon glyphicon-home"></i> <span
+						<i class="glyphicon glyphicon-calendar"></i> <span
 							style="font-family: Microsoft JhengHei">預約</span>
 					</h1>
 

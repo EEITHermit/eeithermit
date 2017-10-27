@@ -101,7 +101,7 @@
 
 				<div class="span8">
 					<h1 class="page-title">
-						<i class="glyphicon glyphicon-home"></i> <span
+						<i class="glyphicon glyphicon-edit"></i> <span
 							style="font-family: Microsoft JhengHei">修改會員資料</span>
 					</h1>
 

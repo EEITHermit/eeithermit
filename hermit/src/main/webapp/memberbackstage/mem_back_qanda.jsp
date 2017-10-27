@@ -101,7 +101,7 @@
 
 				<div class="span8">
 					<h1 class="page-title">
-						<i class="glyphicon glyphicon-home"></i> <span
+						<i class="glyphicon glyphicon-comment"></i> <span
 							style="font-family: Microsoft JhengHei">問與答</span>
 					</h1>
 
