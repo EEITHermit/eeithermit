@@ -24,15 +24,10 @@
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
 	<style>
-	a:link, a:visited, a:hover ,a:active{
-		color:white;
-	    text-decoration: none;
-	    padding: 14px 25px;
-	    text-align: left;
-	    text-decoration: none;
-	    display: inline-block;
-	}
-	</style>
+a:link, a:visited, a:hover, a:active {
+	text-align: left;
+}
+</style>
 	<div id="content">
 
 		<div class="container">
@@ -44,7 +39,8 @@
 					<div class="account-container">
 
 						<div class="account-avatar">
-							<img src="<%=request.getContextPath()%>/css/images/god.ico" alt="" class="thumbnail" />
+							<img src="<%=request.getContextPath()%>/css/images/god.ico"
+								alt="" class="thumbnail" />
 						</div>
 						<!-- /account-avatar -->
 
@@ -114,14 +110,13 @@
 						</div>
 						<!-- /widget-header -->
 
-						<div class="widget-content">
 
-							<table class="table table-striped table-bordered">
-								<tbody>
-								</tbody>
-							</table>
+						<!-- 這邊是放你的資料 -->
+						<div class="widget-content">
 						</div>
 						<!-- /widget-content -->
+	
+						
 					</div>
 					<!-- /widget -->
 				</div>

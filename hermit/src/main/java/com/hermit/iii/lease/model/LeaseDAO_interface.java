@@ -1,6 +1,5 @@
 package com.hermit.iii.lease.model;
 
-import java.io.InputStream;
 import java.util.*;
 
 public interface LeaseDAO_interface {

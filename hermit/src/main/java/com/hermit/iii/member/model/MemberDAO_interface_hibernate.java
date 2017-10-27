@@ -2,17 +2,17 @@ package com.hermit.iii.member.model;
 
 import java.util.*;
 
-public interface MemberDAO_interface {
+public interface MemberDAO_interface_hibernate {
 
-	public void insert(MemberVO memberVO);
+	public void insert(MemberVO_hibernate memberVO_hibernate);
 
-	public void update(MemberVO memberVO);
+	public void update(MemberVO_hibernate memberVO_hibernate);
 
 	public void delete(Integer memNO);
 
-	public MemberVO findByPrimaryKey(Integer memNO);
+	public MemberVO_hibernate findByPrimaryKey(Integer memNO);
 
-	public Set<MemberVO> getAll();
+	public Set<MemberVO_hibernate> getAll();
 
 	/**** 自訂指令 ****/
 
