@@ -98,34 +98,22 @@
 <script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
 <script>
 $(document).ready(function(){
-	
+	var SelectVal=${vo.leaseRefund};
 	var SelectRefund=$("#SelectRefund");
-// 		console.log(SelectRefund);
-	$.post("/hermit/LeaseServlet.do", {action : "getAllLeaseForJson"}, function(data) {
-		dataJson = $.parseJSON(data);
-// 			console.log(data);
-			console.log(dataJson);
-		$.each(dataJson,function(index,VO){
-			var cell1= $("<option></option>").text(VO.leaseRefund);
-			cell1.text("是");
-				console.log(cell1);
-//				console.log(VO.leaseRefund);
-			if(SelectRefund == VO.leaseRefund){
-				cell1.prop("selected","true");
-			}
-			SelectRefund.append(cell1);
-			
-		})
-		
-	})
+// 	console.log(SelectVal);
 	
-	$.post("/hermit/LeaseServlet.do",{action:"getAllLeaseForJson"},function(data){
-		var dataJson=$.parseJSON(data);
-		$.each(dataJson,function(index,VO){
-			var cell1=$("")
-			
-		})
-	})
+	//取全部，判斷狀態用
+	if(SelectVal==0){
+		SelectRefund.children("option").eq(1).prop("selected","true");
+	}else if(SelectVal==1){
+		SelectRefund.children("option").eq(0).prop("selected","true");
+	}
+	//
+	
+	
+		
+	
+	
 	
 	
 
