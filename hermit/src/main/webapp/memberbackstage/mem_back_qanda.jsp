@@ -114,14 +114,12 @@
 						</div>
 						<!-- /widget-header -->
 
-						<div class="widget-content">
 
-							<table class="table table-striped table-bordered">
-								<tbody>
-								</tbody>
-							</table>
+						<!-- 這邊是放你的資料 -->
+						<div class="widget-content">
 						</div>
 						<!-- /widget-content -->
+						
 					</div>
 					<!-- /widget -->
 				</div>
