@@ -34,7 +34,13 @@ public class SMSServlet extends HttpServlet {
 
 			smscode = (String) session.getAttribute("SMScode");
 			Map<String, String> BearerMsg = (Map<String, String>) session.getAttribute("BearerMsgKey");
-			String identity = BearerMsg.get("Identity");
+
+			String identity = null;
+			try {
+				identity = BearerMsg.get("Identity");
+			} catch (NullPointerException e) {
+				identity = "無驗證";
+			}
 
 			try {
 				/**** 1.接收請求參數 - 輸入格式的錯誤處理 ****/
