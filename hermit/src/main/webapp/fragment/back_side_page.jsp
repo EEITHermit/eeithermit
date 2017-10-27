@@ -16,15 +16,29 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/back_side.css">
 </head>
-<body>
+<style>
+	body{
+/* 		background-color: #AAFFEE; */
+	}
+	.main{
+/* 		background-color:#AAFFEE; */
+	}
+</style>
+<body class="bg-danger">
+	<div>
 	<aside>
 	<div class="navBtn">+</div>
-	<nav> <a href="<%=request.getContextPath()%>/back_index_page.jsp">首頁</a>
-	<a href="">房屋產品維護</a> <a href="">房屋租賃維護</a> <a href="">合約租賃管理</a> <a
-		href="">預約行程管理</a> <a href="">廣告輪播管理</a> <a href="">派工回報系統</a> <a
-		href="">會員留言管理</a> <a
-		href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
-	<a href="">員工資料管理</a> <a href="">黑名單</a> </nav> </aside>
+	<nav> <a href="<%=request.getContextPath()%>/mention/mentionIndex.jsp">首頁</a>
+	<a href="">房屋產品維護</a> 
+	<a href="">房屋租賃維護</a> 
+	<a href="">合約租賃管理</a> 
+	<a href="<%=request.getContextPath()%>/calendar/calendar.jsp">預約行程管理</a> 
+	<a href="">廣告輪播管理</a> 
+	<a href="">派工回報系統</a> 
+	<a href="">會員留言管理</a> 
+	<a href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
+	<a href="">員工資料管理</a> 
+	<a href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a> </nav> </aside>
 
 	<div class="main">
 		<!-- do it !!!! -->
@@ -59,5 +73,6 @@
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/back_side.js"></script>
+	</div>
 </body>
 </html>

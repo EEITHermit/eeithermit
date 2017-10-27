@@ -11,13 +11,60 @@
 <link href='<%=request.getContextPath() %>/css/jquery-ui.structure.min.css' rel='stylesheet' />
 <link href='<%=request.getContextPath() %>/css/jquery-ui.theme.min.css' rel='stylesheet' />
 <link href='<%=request.getContextPath() %>/css/jquery-ui-timepicker-addon.min.css' rel='stylesheet'/>
-<script src='<%=request.getContextPath() %>/js/jquery.min.js'></script>
-<script src='<%=request.getContextPath() %>/js/jquery-ui.min.js'></script>
-<script src='<%=request.getContextPath() %>/js/moment.min.js'></script>
-<script src='<%=request.getContextPath() %>/js/fullcalendar.min.js'></script>
-<script src='<%=request.getContextPath() %>/js/scheduler.min.js'></script>
-<script src='<%=request.getContextPath() %>/js/jquery-ui-timepicker-addon.js'></script>
-<script src='<%=request.getContextPath() %>/js/jquery-ui-sliderAccess.js'></script>
+<%-- <script src='<%=request.getContextPath() %>/js/jquery-3.2.1.min.js'></script> --%>
+
+
+
+</head>
+
+<body>
+	<!-- 載入框架 -->
+	<jsp:include page="/fragment/back_side_page.jsp" />
+	<!-- 程式所需js檔 -->
+	<script src='<%=request.getContextPath() %>/js/jquery-ui.min.js'></script>
+	<script src='<%=request.getContextPath() %>/js/moment.min.js'></script>
+	<script src='<%=request.getContextPath() %>/js/fullcalendar.min.js'></script>
+	<script src='<%=request.getContextPath() %>/js/scheduler.min.js'></script>
+	<script src='<%=request.getContextPath() %>/js/jquery-ui-timepicker-addon.js'></script>
+	<script src='<%=request.getContextPath() %>/js/jquery-ui-sliderAccess.js'></script>
+	<!-- 以下div為事件點擊彈出視窗 -->
+	<div id="dialog-form" title="預約編輯">
+		<form id="eventForm">
+			<fieldset>
+				<input id="eventId" name="eventId"type="hidden"/>
+				預約會員：<input id="member"type="text"value="" disabled/><br/>
+					   <input id="member"type="hidden" name="member"value="" readonly/>
+				開始時間：<input id="startTime"type="text" name="start"value=""readonly/><br/>
+				結束時間：<input id="endTime"type="text" name="end"value=""readonly/><br/>
+				預約房屋：<input id="house"type="text" value="" disabled/><br/>
+					   <input id="house"type="hidden" name="house"value="" readonly/>
+				<p style="float:left">備註內容：</p><textarea id="ps" name="ps"style="resize:none"> </textarea><br/>
+			</fieldset>
+		</form>
+	</div>
+	<!-- 以下div為insert事件彈出視窗 -->
+	<div id="dialog-insert" title="新增預約">
+		<form id="insertForm">
+			
+				<!-- empNo為假資料 -->
+				<input id="empNo" type="hidden" name="empNo"value="30001"/>
+				預約會員：<input id="memberIn"type="text" name="member" value=""/><br/>
+				開始時間：<input id="startTimeIn"type="text" name="startTime"value="" readonly/><br/>
+				結束時間：<input id="endTimeIn"type="text" name="endTime" value="" readonly/><br/>
+				預約房屋：<input id="houseIn"type="text" name="house" value=""/><br/>
+				<p style="float:left">備註內容：</p><textarea id="psIn" name="ps" style="resize:none"> </textarea><br/>
+			
+		</form>
+	</div>
+	<!-- 以下div選擇calendar日期 -->
+	<div style="margin-left:450px">
+	<input type="button" id="datepicker" value="選擇日期"/>
+	</div>
+	<!-- calendar顯示div處 -->
+	<div id='calendar' class="container" style="font-size:20px"></div>
+	<!-- 存放拖拉暫存事件ID -->
+	<div><form><input type="hidden" id="tempID" value=""></form></div>
+	
 <script>
 	$(document).ready(createCalendar);
 	<%-- var empNO = <%=session.getAttribute("empNo")%> --%> //取得當前登入會員id
@@ -301,48 +348,5 @@
 	
 	
 </script>
-
-</head>
-
-<body>
-	<!-- 以下div為事件點擊彈出視窗 -->
-	<div id="dialog-form" title="預約編輯">
-		<form id="eventForm">
-			<fieldset>
-				<input id="eventId" name="eventId"type="hidden"/>
-				預約會員：<input id="member"type="text"value="" disabled/><br/>
-					   <input id="member"type="hidden" name="member"value="" readonly/>
-				開始時間：<input id="startTime"type="text" name="start"value=""readonly/><br/>
-				結束時間：<input id="endTime"type="text" name="end"value=""readonly/><br/>
-				預約房屋：<input id="house"type="text" value="" disabled/><br/>
-					   <input id="house"type="hidden" name="house"value="" readonly/>
-				<p style="float:left">備註內容：</p><textarea id="ps" name="ps"style="resize:none"> </textarea><br/>
-			</fieldset>
-		</form>
-	</div>
-	<!-- 以下div為insert事件彈出視窗 -->
-	<div id="dialog-insert" title="新增預約">
-		<form id="insertForm">
-			
-				<!-- empNo為假資料 -->
-				<input id="empNo" type="hidden" name="empNo"value="30001"/>
-				預約會員：<input id="memberIn"type="text" name="member" value=""/><br/>
-				開始時間：<input id="startTimeIn"type="text" name="startTime"value="" readonly/><br/>
-				結束時間：<input id="endTimeIn"type="text" name="endTime" value="" readonly/><br/>
-				預約房屋：<input id="houseIn"type="text" name="house" value=""/><br/>
-				<p style="float:left">備註內容：</p><textarea id="psIn" name="ps" style="resize:none"> </textarea><br/>
-			
-		</form>
-	</div>
-	<!-- 以下div選擇calendar日期 -->
-	<div style="margin-left:450px">
-	<input type="button" id="datepicker" value="選擇日期"/>
-	</div>
-	<!-- calendar顯示div處 -->
-	<div id='calendar'></div>
-	<!-- 存放拖拉暫存事件ID -->
-	<div><form><input type="hidden" id="tempID" value=""></form></div>
-	
-	
 </body>
 </html>

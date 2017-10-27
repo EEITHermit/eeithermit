@@ -54,9 +54,9 @@ public class ADManagerServlet extends HttpServlet {
 			adStatus = Boolean.valueOf(req.getParameter("adStatus"));
 			adBrowse = Integer.valueOf(0);
 			adModify = Integer.valueOf(req.getParameter("adModify"));
-
 			ads.insertADManager(adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
 			System.out.println("Insert OK");
+			
 		}
 
 		if ("updateADManager".equals(action)) {
