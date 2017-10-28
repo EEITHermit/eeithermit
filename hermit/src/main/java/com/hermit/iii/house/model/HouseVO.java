@@ -1,10 +1,13 @@
 package com.hermit.iii.house.model;
 
-public class HouseVO {
+import java.io.Serializable;
+
+public class HouseVO  implements Serializable{
 	private Integer houseNO;
 	private String houseTitle;
 	private Integer cityNO;
 	private Integer boroughNO;
+	private String previewPic;
 	private Integer highestFloor;
 	private Integer nowFloor;
 	private String houseStatus;
@@ -18,24 +21,6 @@ public class HouseVO {
 	private String houseAddr;
 	private Double houseSize;
 
-	//子傑加入子表
-	private String hType;
-	private String hForm;
-	private String cityName;
-	private String boroughName;
-	public String getCityName() {
-		return cityName;
-	}
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-	public String getBoroughName() {
-		return boroughName;
-	}
-	public void setBoroughName(String boroughName) {
-		this.boroughName = boroughName;
-	}
-	//github.com/EEITHermit/eeithermit.git
 	public Integer getHouseNO() {
 		return houseNO;
 	}
@@ -132,17 +117,10 @@ public class HouseVO {
 	public void setHouseSize(Double houseSize) {
 		this.houseSize = houseSize;
 	}
-	public String gethType() {
-		return hType;
+	public String getPreviewPic() {
+		return previewPic;
 	}
-	public void sethType(String hType) {
-		this.hType = hType;
+	public void setPreviewPic(String previewPic) {
+		this.previewPic = previewPic;
 	}
-	public String gethForm() {
-		return hForm;
-	}
-	public void sethForm(String hForm) {
-		this.hForm = hForm;
-	}
-	
 }

@@ -4,10 +4,10 @@ import java.util.*;
 
 public class MemberService {
 
-	private MemberDAO_interface dao ;
+	private MemberDAO_interface_hibernate dao ;
 
 	public MemberService() {
-		dao = new MemberJNDIDAO();
+		dao = new MemberDAO_hibernate();
 	}
 
 	public MemberVO insert(String memTel, String memAccount, String memPwd, String memName, String memGender,

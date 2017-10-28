@@ -31,8 +31,8 @@ public class CalendarEventJNDIDAO implements CalendarEventDAO_interface{
 			+ "join house H ON C.houseNO = H.houseNO "
 			+ "where E.empNO=? and (C.eventStartTime between ? and ?)";
 	@Override
-	public ArrayList<CalendarEventVO> selectByEmpAndTime(Integer empID, Timestamp start, Timestamp end) {
-		ArrayList<CalendarEventVO> array = new ArrayList<CalendarEventVO>();
+	public ArrayList<CalendarEventVO_original> selectByEmpAndTime(Integer empID, Timestamp start, Timestamp end) {
+		ArrayList<CalendarEventVO_original> array = new ArrayList<CalendarEventVO_original>();
 		try (Connection conn = ds.getConnection();
 			 PreparedStatement ps = conn.prepareStatement(selectByEandT);){
 			ps.setInt(1, empID);
@@ -40,7 +40,7 @@ public class CalendarEventJNDIDAO implements CalendarEventDAO_interface{
 			ps.setTimestamp(3, end);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
-				CalendarEventVO resVO = new CalendarEventVO();
+				CalendarEventVO_original resVO = new CalendarEventVO_original();
 				resVO.setEventNO(rs.getInt("eventNO"));
 				resVO.getEmpVO().setEmpNO(rs.getInt("empNO"));
 				resVO.getMemberVO().setMemNO(rs.getInt("memNO"));
@@ -125,7 +125,7 @@ public class CalendarEventJNDIDAO implements CalendarEventDAO_interface{
 			+ "eventStartTime= ?, eventEndTime=?,ps=? "
 			+ "where eventNO = ?";
 	@Override
-	public Integer update(CalendarEventVO resVO) {
+	public Integer update(CalendarEventVO_original resVO) {
 		Integer result = null;
 		try(Connection conn = ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(update);){
@@ -148,7 +148,7 @@ public class CalendarEventJNDIDAO implements CalendarEventDAO_interface{
 	String insert = "insert into CalendarEvent(empNO,memNO,houseNO,eventStartTime,"
 			+ "eventEndTime,ps) values(?,?,?,?,?,?)";
 	@Override
-	public Integer insert(CalendarEventVO resVO) {
+	public Integer insert(CalendarEventVO_original resVO) {
 		Integer result = null;
 		try(Connection conn = ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(insert);){
@@ -189,14 +189,14 @@ public class CalendarEventJNDIDAO implements CalendarEventDAO_interface{
 				+ "join house H ON C.houseNO = H.houseNO "
 				+ "where M.memNO=? and (C.eventStartTime between getDate() and (getDate()+365))"; //+1為加一天
 		@Override
-		public ArrayList<CalendarEventVO> selectByMember(Integer memberNo){
-			ArrayList<CalendarEventVO> array = new ArrayList<CalendarEventVO>();
+		public ArrayList<CalendarEventVO_original> selectByMember(Integer memberNo){
+			ArrayList<CalendarEventVO_original> array = new ArrayList<CalendarEventVO_original>();
 			try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(selectByMember);){
 				ps.setInt(1, memberNo);
 				ResultSet rs = ps.executeQuery();
 				while(rs.next()){
-					CalendarEventVO resVO = new CalendarEventVO();
+					CalendarEventVO_original resVO = new CalendarEventVO_original();
 					resVO.setEventNO(rs.getInt("eventNO"));
 					resVO.getEmpVO().setEmpName(rs.getString("empName"));
 					resVO.getEmpVO().setEmpPhone(rs.getString("empPhone"));

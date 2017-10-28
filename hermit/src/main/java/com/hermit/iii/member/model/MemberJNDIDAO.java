@@ -24,9 +24,8 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 	}
 
 	// memNO在資料庫為自動流水號免新增，順序同資料庫表格(與VO/Bean)設定
-	// (memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract,memImage)
-	private static final String INSERT_STMT = "INSERT INTO Member VALUES (?, ?, ?, ?, ?, ?, getdate(), ?, ?, ?)";
-	private static final String INSERT_WITHDATE_STMT = "INSERT INTO Member VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	// (memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister改預設,memStatus,memInfract,memImage)
+	private static final String INSERT_STMT = "INSERT INTO Member (memTel,memAccount,memPwd,memName,memGender,memEmail,memStatus,memInfract,memImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	// 同上順序，全改通吃法(PK流水號當條件)
 	private static final String UPDATE_STMT = "UPDATE Member SET memTel=?, memAccount=?, memPwd=?, memName=?, memGender=?, memEmail=?, memStatus=?, memInfract=?, memImage=? WHERE memNO = ?";
 	private static final String DELETE_STMT = "DELETE FROM Member WHERE memNO = ?";
@@ -52,30 +51,16 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 
 		try (Connection conn = ds.getConnection();) {
 
-			if (memberVO.getMemRegister() != null) {
-				pstmt = conn.prepareStatement(INSERT_WITHDATE_STMT);
-				pstmt.setString(1, memberVO.getMemTel());
-				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
-				pstmt.setString(4, memberVO.getMemName());
-				pstmt.setString(5, memberVO.getMemGender());
-				pstmt.setString(6, memberVO.getMemEmail());
-				pstmt.setDate(7, memberVO.getMemRegister());
-				pstmt.setString(8, memberVO.getMemStatus());
-				pstmt.setInt(9, memberVO.getMemInfract());
-				pstmt.setString(10, memberVO.getMemImage());
-			} else {
-				pstmt = conn.prepareStatement(INSERT_STMT);
-				pstmt.setString(1, memberVO.getMemTel());
-				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
-				pstmt.setString(4, memberVO.getMemName());
-				pstmt.setString(5, memberVO.getMemGender());
-				pstmt.setString(6, memberVO.getMemEmail());
-				pstmt.setString(7, memberVO.getMemStatus());
-				pstmt.setInt(8, memberVO.getMemInfract());
-				pstmt.setString(9, memberVO.getMemImage());
-			}
+			pstmt = conn.prepareStatement(INSERT_STMT);
+			pstmt.setString(1, memberVO.getMemTel());
+			pstmt.setString(2, memberVO.getMemAccount());
+			pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
+			pstmt.setString(4, memberVO.getMemName());
+			pstmt.setString(5, memberVO.getMemGender());
+			pstmt.setString(6, memberVO.getMemEmail());
+			pstmt.setString(7, memberVO.getMemStatus());
+			pstmt.setInt(8, memberVO.getMemInfract());
+			pstmt.setString(9, memberVO.getMemImage());
 
 			pstmt.executeUpdate();
 
@@ -186,7 +171,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 				memberVO.setMemNO(rs.getInt("memNO"));
 				memberVO.setMemTel(rs.getString("memTel"));
 				memberVO.setMemAccount(rs.getString("memAccount"));
-				memberVO.setMemPwd(new SecurityCipher().decryptString(rs.getString("memPwd")));
+				memberVO.setMemPwd(rs.getString("memPwd"));
 				memberVO.setMemName(rs.getString("memName"));
 				memberVO.setMemGender(rs.getString("memGender"));
 				memberVO.setMemEmail(rs.getString("memEmail"));

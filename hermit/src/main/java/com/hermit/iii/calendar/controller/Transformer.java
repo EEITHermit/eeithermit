@@ -1,11 +1,11 @@
 package com.hermit.iii.calendar.controller;
 
-import com.hermit.iii.calendar.model.CalendarEventVO;
+import com.hermit.iii.calendar.model.CalendarEventVO_original;
 
 public class Transformer {
 	//更改event物件變為Calender物件
-	public CalendarEventVO eventToReservation(eventShow event){
-		CalendarEventVO resVO = new CalendarEventVO();
+	public CalendarEventVO_original eventToReservation(eventShow event){
+		CalendarEventVO_original resVO = new CalendarEventVO_original();
 		resVO.setEventNO(event.getId());
 		resVO.setEventStartTime(event.getStart());
 		resVO.setEventEndTime(event.getEnd());
@@ -19,7 +19,7 @@ public class Transformer {
 		return resVO;
 	}
 	//更改reservation物件變為event物件
-	public eventShow reservationToEvent(CalendarEventVO resVO){
+	public eventShow reservationToEvent(CalendarEventVO_original resVO){
 		eventShow event = new eventShow();
 		event.setId(resVO.getEventNO());
 		event.setStart(resVO.getEventStartTime());

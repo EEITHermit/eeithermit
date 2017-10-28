@@ -24,6 +24,7 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {
+			//跟TOMCAT連線
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
@@ -46,9 +47,8 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 	
 
 			
-			
 	@Override
-	public void insert(DispatchListVO DispatchListVO) {
+	public void insert(DispatchListVO_orignal DispatchListVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -56,9 +56,9 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setInt(1,DispatchListVO.getDempNo());
-			pstmt.setInt(2,DispatchListVO.getAempNo());
-			pstmt.setInt(3,DispatchListVO.getQaNo());
+			pstmt.setInt(1,DispatchListVO.getDempNO());
+			pstmt.setInt(2,DispatchListVO.getAempNO());
+			pstmt.setInt(3,DispatchListVO.getQaNO());
 			pstmt.setDate(4,DispatchListVO.getDlStime());
 			pstmt.execute();
 
@@ -84,20 +84,20 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 	}
 
 	@Override
-	public void update(DispatchListVO DispatchListVO) {
+	public void update(DispatchListVO_orignal DispatchListVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setInt(1,DispatchListVO.getDempNo());
-			pstmt.setInt(2,DispatchListVO.getAempNo());
-			pstmt.setInt(3,DispatchListVO.getQaNo());
+			pstmt.setInt(1,DispatchListVO.getDempNO());
+			pstmt.setInt(2,DispatchListVO.getAempNO());
+			pstmt.setInt(3,DispatchListVO.getQaNO());
 			pstmt.setDate(4,DispatchListVO.getDlStime());
 			pstmt.setDate(5,DispatchListVO.getDlEtime());
 			pstmt.setString(6,DispatchListVO.getElesign());
 			pstmt.setString(7,DispatchListVO.getDlNote());
-			pstmt.setInt(8,DispatchListVO.getDlNo());
+			pstmt.setInt(8,DispatchListVO.getDlNO());
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -153,10 +153,10 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 	}
 
 	@Override
-	public DispatchListVO findByPrimaryKey(Integer dlno) {
+	public DispatchListVO_orignal findByPrimaryKey(Integer dlno) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		DispatchListVO dlVO = null;
+		DispatchListVO_orignal dlVO = null;
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
@@ -165,11 +165,11 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dlVO = new DispatchListVO();
-				dlVO.setDlNo(rs.getInt("dlNO"));
-				dlVO.setDempNo(rs.getInt("dempNO"));
-				dlVO.setAempNo(rs.getInt("aempNO"));
-				dlVO.setQaNo(rs.getInt("qaNO"));
+				dlVO = new DispatchListVO_orignal();
+				dlVO.setDlNO(rs.getInt("dlNO"));
+				dlVO.setDempNO(rs.getInt("dempNO"));
+				dlVO.setAempNO(rs.getInt("aempNO"));
+				dlVO.setQaNO(rs.getInt("qaNO"));
 				dlVO.setDlStime(rs.getDate("dlStime"));
 				dlVO.setDlEtime(rs.getDate("dlEtime"));
 				dlVO.setElesign(rs.getString("elesign"));
@@ -205,66 +205,10 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 	}
 
 	@Override
-	public List<DispatchListVO> getAll() {
-		List<DispatchListVO> list = new ArrayList<DispatchListVO>();
-		DispatchListVO dlVO = null;
-	
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-	
-		try {
-	
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-	
-			while (rs.next()) {
-				dlVO = new DispatchListVO();
-				dlVO.setDlNo(rs.getInt("dlNO"));
-				dlVO.setDempNo(rs.getInt("dempNO"));
-				dlVO.setAempNo(rs.getInt("aempNO"));
-				dlVO.setQaNo(rs.getInt("qaNO"));
-				dlVO.setDlStime(rs.getDate("dlStime"));
-				dlVO.setDlEtime(rs.getDate("dlEtime"));
-				dlVO.setElesign(rs.getString("elesign"));
-				dlVO.setDlNote(rs.getString("dlNote"));
-				list.add(dlVO);
-			}
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
-	}
-	
-	@Override
-	public String getAllForJson() {
-		List<Map> list = new ArrayList<Map>();
-		DispatchListVO dlVO = null;
-		String jsonString = null;
+	public List<DispatchListVO_orignal> getAll() {
+		List<DispatchListVO_orignal> list = new ArrayList<DispatchListVO_orignal>();
+		DispatchListVO_orignal dlVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -276,20 +220,17 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 			rs = pstmt.executeQuery();
 				
 			while (rs.next()) {
-				Map m1 = new LinkedHashMap();
-				m1.put("dlNO", rs.getInt("dlNO"));
-				m1.put("dempNO", rs.getInt("dempNO"));
-				m1.put("aempNO",rs.getInt("aempNO"));
-				m1.put("qaNO",rs.getInt("qaNO"));
-				m1.put("dlStime",rs.getDate("dlStime").toString());
-				m1.put("dlEtime",rs.getDate("dlEtime").toString());
-				m1.put("elesign",rs.getString("elesign"));
-				m1.put("dlNote",rs.getString("dlNote"));
-				list.add(m1);
+				dlVO = new DispatchListVO_orignal();
+				dlVO.setDlNO(rs.getInt("dlNO"));
+				dlVO.setDempNO(rs.getInt("dempNO"));
+				dlVO.setAempNO(rs.getInt("aempNO"));
+				dlVO.setQaNO(rs.getInt("qaNO"));
+				dlVO.setDlStime(rs.getDate("dlStime"));
+				dlVO.setDlEtime(rs.getDate("dlEtime"));
+				dlVO.setElesign(rs.getString("elesign"));
+				dlVO.setDlNote(rs.getString("dlNote"));
+				list.add(dlVO);
 			}
-			Map m2 = new LinkedHashMap();
-			m2.put("list",list);
-			jsonString = JSONValue.toJSONString(m2);
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -316,7 +257,65 @@ public class DispatchListDAO_JNDI implements DispatchListDAO_interface {
 				}
 			}
 		}
-		return jsonString;
+		return list;
 	}
+		@Override
+		public String getAllForJson() {
+			List<Map> list = new ArrayList<Map>();
+			DispatchListVO_orignal dlVO = null;
+			String jsonString = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_ALL_STMT);
+				rs = pstmt.executeQuery();
+					
+				while (rs.next()) {
+					Map m1 = new LinkedHashMap();
+					m1.put("dlNO", rs.getInt("dlNO"));
+					m1.put("dempNO", rs.getInt("dempNO"));
+					m1.put("aempNO",rs.getInt("aempNO"));
+					m1.put("qaNO",rs.getInt("qaNO"));
+					m1.put("dlStime","["+rs.getDate("dlStime")+"]");
+					m1.put("dlEtime","["+rs.getDate("dlEtime")+"]");
+					m1.put("elesign","["+rs.getDate("elesign")+"]");
+					m1.put("dlNote",rs.getString("dlNote"));
+					list.add(m1);
+				}
+				Map m2 = new LinkedHashMap();
+				m2.put("list",list);
+				jsonString = JSONValue.toJSONString(m2);
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return jsonString;
+		}
 }
 

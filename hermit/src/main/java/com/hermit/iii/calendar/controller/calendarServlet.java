@@ -17,9 +17,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.hermit.iii.calendar.model.CalendarEventService;
-import com.hermit.iii.calendar.model.CalendarEventVO;
+import com.hermit.iii.calendar.model.CalendarEventVO_original;
 import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.house.model.HouseVO_orignal;
 import com.hermit.iii.member.model.*;
 
 
@@ -44,8 +45,8 @@ public class calendarServlet extends HttpServlet {
 			Timestamp start = Timestamp.valueOf(startTime);
 			Timestamp end = Timestamp.valueOf(endTime);
 			ArrayList<eventShow> events = new ArrayList<eventShow>();
-			ArrayList<CalendarEventVO> array = rs.selectByEmpAndTime(Integer.valueOf(empNo), start, end);
-			for(CalendarEventVO resVO:array){
+			ArrayList<CalendarEventVO_original> array = rs.selectByEmpAndTime(Integer.valueOf(empNo), start, end);
+			for(CalendarEventVO_original resVO:array){
 				eventShow event = transformer.reservationToEvent(resVO);
 				events.add(event);
 			}
@@ -67,8 +68,8 @@ public class calendarServlet extends HttpServlet {
 			HouseService mhDAO = new HouseService();
 			String address = request.getParameter("house");
 			ArrayList<String> arrayR = new ArrayList<String>();
-			ArrayList<HouseVO> array = mhDAO.autoCompleteH(address);
-			for(HouseVO houseVO : array){
+			ArrayList<HouseVO_orignal> array = mhDAO.autoCompleteH(address);
+			for(HouseVO_orignal houseVO : array){
 				String result = houseVO.getHouseNO()+"\t"+houseVO.getHouseAddr();
 				arrayR.add(result);
 			}
@@ -100,7 +101,7 @@ public class calendarServlet extends HttpServlet {
 				event.setEnd(Timestamp.valueOf(object.getString("end")));
 				event.setTitle(object.getString("title"));
 				//轉換event to reservation 並呼叫update
-				CalendarEventVO resVO = transformer.eventToReservation(event);
+				CalendarEventVO_original resVO = transformer.eventToReservation(event);
 				//確認時間內無事件，無事件後可繼續更新
 				if(rs.checkExist(event.getEmpNo(),event.getStart(),event.getEnd(),id)){
 					out.print("此時段已有行程");
@@ -141,7 +142,7 @@ public class calendarServlet extends HttpServlet {
 			event.setEnd(Timestamp.valueOf(end));
 			event.setTitle(member+"\n"+house+"\n"+ps);
 			//轉換event to reservation 並呼叫update
-			CalendarEventVO resVO = transformer.eventToReservation(event);
+			CalendarEventVO_original resVO = transformer.eventToReservation(event);
 			//確認時間內無事件，無事件後可繼續更新
 			if(!(rs.checkExist(event.getEmpNo(),event.getStart(),event.getEnd(),0))){
 				result = rs.insert(resVO);
