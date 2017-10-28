@@ -404,7 +404,7 @@ public class MemberServlet extends HttpServlet {
 			String memStatus = request.getParameter("memStatus");
 			Integer memInfract = Integer.valueOf(request.getParameter("memInfract"));
 			String memImage = request.getParameter("memImage");
-//			System.out.println(memImage);
+			// System.out.println(memImage);
 			memberVO = memSvc.update(memNO, memTel, memAccount, memPwd, memName, memGender, memEmail, memStatus,
 					memInfract, memImage);
 
@@ -593,7 +593,7 @@ public class MemberServlet extends HttpServlet {
 					jm.put("memNO", member.getMemNO());
 					jm.put("memTel", member.getMemTel());
 					jm.put("memAccount", member.getMemAccount());
-					jm.put("memPwd", member.getMemPwd());
+					jm.put("memPwd", new SecurityCipher().decryptString(member.getMemPwd()));
 					jm.put("memName", member.getMemName());
 					jm.put("memGender", member.getMemGender());
 					jm.put("memEmail", member.getMemEmail());

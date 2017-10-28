@@ -3,10 +3,10 @@ package com.hermit.iii.favorite.model;
 import java.util.*;
 
 public class FavoriteService {
-	private FavoriteDAO_interface dao;
+	private FavoriteDAO_interface_hibernate dao;
 
 	public FavoriteService() {
-		dao = new FavoriteJDBCDAO();
+		dao = new FavoriteDAO_hibernate();
 	}
 
 	// 新增service
