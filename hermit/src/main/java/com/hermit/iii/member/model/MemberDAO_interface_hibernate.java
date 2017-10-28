@@ -16,14 +16,14 @@ public interface MemberDAO_interface_hibernate {
 
 	/**** 自訂指令 ****/
 
-	public ArrayList<MemberVO> autoCompleteM(String name);
+	public ArrayList<MemberVO_hibernate> autoCompleteM(String name);
 
 	public void checkInfraction(Integer memNO);
 
 	public Integer infractPlus1(Integer memNO);
 
 	// SMS更新會員狀態
-	public void update_MemStatusByMemTel(MemberVO memberVO);
+	public void update_MemStatusByMemTel(MemberVO_hibernate memberVO_hibernate);
 
 	// Image查詢(讀取)
 	public String find_MemImageByMemNO(Integer memNO);
@@ -32,11 +32,11 @@ public interface MemberDAO_interface_hibernate {
 	public String count_MemAccount_AJAX(String memAccount);
 
 	// 驗證帳號是否存在
-	public MemberVO findByAccount(String memAccount);
+	public MemberVO_hibernate findByAccount(String memAccount);
 
 	// 忘記帳號查詢
-	public MemberVO findByTel(String memTel);
+	public MemberVO_hibernate findByTel(String memTel);
 
 	// 忘記密碼查詢
-	public MemberVO findByEmail(String memEmail);
+	public MemberVO_hibernate findByEmail(String memEmail);
 }
