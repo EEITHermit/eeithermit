@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import com.hermit.iii.businTeam.model.BusinTeamVO;
 
-public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface{
+public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface_original{
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=hermit";
 	public TeamAreaDAO_JDBC(){
@@ -21,7 +21,7 @@ public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface{
 	
 	String insert = "insert into TeamArea values(?,?,?)";
 	@Override
-	public Integer insert(TeamAreaVO taVO) {
+	public Integer insert(TeamAreaVO_original taVO) {
 		Integer result = 0;
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 			PreparedStatement ps = conn.prepareStatement(insert)){
@@ -51,8 +51,8 @@ public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface{
 
 	String select = "select * from TeamArea where businNO = ?";
 	@Override
-	public TeamAreaVO select(Integer businNO) {
-		TeamAreaVO taVO = new TeamAreaVO();
+	public TeamAreaVO_original select(Integer businNO) {
+		TeamAreaVO_original taVO = new TeamAreaVO_original();
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 				PreparedStatement ps = conn.prepareStatement(select)){
 				ps.setInt(1, businNO);
@@ -71,7 +71,7 @@ public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface{
 
 	String update = "update TeamArea set cityNO = ? , boroughNO = ? where businNO = ?";
 	@Override
-	public Integer update(TeamAreaVO taVO) {
+	public Integer update(TeamAreaVO_original taVO) {
 		Integer result = 0;
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 			PreparedStatement ps = conn.prepareStatement(update)){
