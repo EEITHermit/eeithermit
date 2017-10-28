@@ -12,9 +12,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	String passwd = "P@ssw0rd";
 
 	// memNO在資料庫為自動流水號免新增，順序同資料庫表格(與VO/Bean)設定
-	// (memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister,memStatus,memInfract,memImage)
-	private static final String INSERT_STMT = "INSERT INTO Member VALUES (?, ?, ?, ?, ?, ?, getdate(), ?, ?, ?)";
-	private static final String INSERT_WITHDATE_STMT = "INSERT INTO Member VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	// (memTel,memAccount,memPwd,memName,memGender,memEmail,memRegister改預設,memStatus,memInfract,memImage)
+	private static final String INSERT_STMT = "INSERT INTO Member (memTel,memAccount,memPwd,memName,memGender,memEmail,memStatus,memInfract,memImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	// 同上順序，全改通吃法(PK流水號當條件)
 	private static final String UPDATE_STMT = "UPDATE Member SET memTel=?, memAccount=?, memPwd=?, memName=?, memGender=?, memEmail=?, memStatus=?, memInfract=?, memImage=? WHERE memNO = ?";
 	private static final String DELETE_STMT = "DELETE FROM Member WHERE memNO = ?";
@@ -43,30 +42,16 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 
-			if (memberVO.getMemRegister() != null) {
-				pstmt = con.prepareStatement(INSERT_WITHDATE_STMT);
-				pstmt.setString(1, memberVO.getMemTel());
-				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, new SecurityCipher().encryptString((memberVO.getMemPwd())));
-				pstmt.setString(4, memberVO.getMemName());
-				pstmt.setString(5, memberVO.getMemGender());
-				pstmt.setString(6, memberVO.getMemEmail());
-				pstmt.setDate(7, memberVO.getMemRegister());
-				pstmt.setString(8, memberVO.getMemStatus());
-				pstmt.setInt(9, memberVO.getMemInfract());
-				pstmt.setString(10, memberVO.getMemImage());
-			} else {
-				pstmt = con.prepareStatement(INSERT_STMT);
-				pstmt.setString(1, memberVO.getMemTel());
-				pstmt.setString(2, memberVO.getMemAccount());
-				pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
-				pstmt.setString(4, memberVO.getMemName());
-				pstmt.setString(5, memberVO.getMemGender());
-				pstmt.setString(6, memberVO.getMemEmail());
-				pstmt.setString(7, memberVO.getMemStatus());
-				pstmt.setInt(8, memberVO.getMemInfract());
-				pstmt.setString(9, memberVO.getMemImage());
-			}
+			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt.setString(1, memberVO.getMemTel());
+			pstmt.setString(2, memberVO.getMemAccount());
+			pstmt.setString(3, new SecurityCipher().encryptString(memberVO.getMemPwd()));
+			pstmt.setString(4, memberVO.getMemName());
+			pstmt.setString(5, memberVO.getMemGender());
+			pstmt.setString(6, memberVO.getMemEmail());
+			pstmt.setString(7, memberVO.getMemStatus());
+			pstmt.setInt(8, memberVO.getMemInfract());
+			pstmt.setString(9, memberVO.getMemImage());
 
 			pstmt.executeUpdate();
 
@@ -258,7 +243,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				memberVO.setMemNO(rs.getInt("memNO"));
 				memberVO.setMemTel(rs.getString("memTel"));
 				memberVO.setMemAccount(rs.getString("memAccount"));
-				memberVO.setMemPwd(new SecurityCipher().decryptString(rs.getString("memPwd")));
+				memberVO.setMemPwd(rs.getString("memPwd"));
 				memberVO.setMemName(rs.getString("memName"));
 				memberVO.setMemGender(rs.getString("memGender"));
 				memberVO.setMemEmail(rs.getString("memEmail"));
@@ -726,54 +711,54 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		memberVO1.setMemImage(null);
 		dao.insert(memberVO1);
 
-		// // 修改初始資料第一筆 (register由資料庫系統給)
-		// MemberVO memberVO2 = new MemberVO();
-		// memberVO2.setMemNO(40001);
-		// memberVO2.setMemTel("0905123456");
-		// memberVO2.setMemAccount("account123");
-		// memberVO2.setMemPwd("123Pwd@@");
-		// memberVO2.setMemName("小花Lin");
-		// memberVO2.setMemGender("女");
-		// memberVO2.setMemEmail("mail123@gmail.com");
-		// memberVO2.setMemStatus("一般會員驗證");
-		// memberVO2.setMemInfract(2);
-		// // memberVO2.setMimage(null); // not use
-		// dao.update(memberVO2, null, 0);
-		//
-		// // 查詢初始資料第一筆
-		// MemberVO memberVO3 = dao.findByPrimaryKey(40005);
-		// System.out.print(memberVO3.getMemNO() + ",");
-		// System.out.print(memberVO3.getMemTel() + ",");
-		// System.out.print(memberVO3.getMemAccount() + ",");
-		// System.out.print(memberVO3.getMemPwd() + ",");
-		// System.out.print(memberVO3.getMemName() + ",");
-		// System.out.print(memberVO3.getMemGender() + ",");
-		// System.out.print(memberVO3.getMemEmail() + ",");
-		// System.out.print(memberVO3.getMemRegister() + ",");
-		// System.out.print(memberVO3.getMemStatus() + ",");
-		// System.out.print(memberVO3.getMemInfract() + ",");
+		// 修改初始資料第一筆 (register由資料庫系統給)
+		MemberVO memberVO2 = new MemberVO();
+		memberVO2.setMemNO(40001);
+		memberVO2.setMemTel("0905123456");
+		memberVO2.setMemAccount("account123");
+		memberVO2.setMemPwd("123Pwd@@");
+		memberVO2.setMemName("小花Lin");
+		memberVO2.setMemGender("女");
+		memberVO2.setMemEmail("mail123@gmail.com");
+		memberVO2.setMemStatus("一般會員驗證");
+		memberVO2.setMemInfract(2);
+		// memberVO2.setMimage(null); // not use
+		dao.update(memberVO2);
+
+		// 查詢初始資料第一筆
+		MemberVO memberVO3 = dao.findByPrimaryKey(40005);
+		System.out.print(memberVO3.getMemNO() + ",");
+		System.out.print(memberVO3.getMemTel() + ",");
+		System.out.print(memberVO3.getMemAccount() + ",");
+		System.out.print(memberVO3.getMemPwd() + ",");
+		System.out.print(memberVO3.getMemName() + ",");
+		System.out.print(memberVO3.getMemGender() + ",");
+		System.out.print(memberVO3.getMemEmail() + ",");
+		System.out.print(memberVO3.getMemRegister() + ",");
+		System.out.print(memberVO3.getMemStatus() + ",");
+		System.out.println(memberVO3.getMemInfract() + ",");
 		// System.out.println(memberVO3.getMemImage());
-		// System.out.println("---------------------");
-		//
-		 // 查詢全部
-		 Set<MemberVO> set = dao.getAll();
-		 for (MemberVO member : set) {
-		 System.out.print(member.getMemNO() + ",");
-		 System.out.print(member.getMemTel() + ",");
-		 System.out.print(member.getMemAccount() + ",");
-		 System.out.print(member.getMemPwd() + ",");
-		 System.out.print(member.getMemName() + ",");
-		 System.out.print(member.getMemGender() + ",");
-		 System.out.print(member.getMemEmail() + ",");
-		 System.out.print(member.getMemRegister() + ",");
-		 System.out.print(member.getMemStatus() + ",");
-		 System.out.print(member.getMemInfract() + ",");
-		 System.out.println(member.getMemImage());
-		 System.out.println();
-		 }
-		//
-		// // 刪除初始資料一筆
-		// dao.delete(40002);
+		System.out.println("---------------------");
+
+		// 查詢全部
+		Set<MemberVO> set = dao.getAll();
+		for (MemberVO member : set) {
+			System.out.print(member.getMemNO() + ",");
+			System.out.print(member.getMemTel() + ",");
+			System.out.print(member.getMemAccount() + ",");
+			System.out.print(new SecurityCipher().decryptString(member.getMemPwd()) + ",");
+			System.out.print(member.getMemName() + ",");
+			System.out.print(member.getMemGender() + ",");
+			System.out.print(member.getMemEmail() + ",");
+			System.out.print(member.getMemRegister() + ",");
+			System.out.print(member.getMemStatus() + ",");
+			System.out.print(member.getMemInfract() + ",");
+			// System.out.println(member.getMemImage());
+			System.out.println();
+		}
+
+		// 刪除初始資料一筆
+		dao.delete(40002);
 
 		// select by account
 		// MemberVO memVO4 = dao.findByAccount("eeit9704");
@@ -791,19 +776,19 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		// System.out.println("--------------------");
 
 		// select by tel
-//		MemberVO memVO5 = dao.findByTel("0928265804");
-//		System.out.print(memVO5.getMemNO() + ",");
-//		System.out.print(memVO5.getMemTel() + ",");
-//		System.out.print(memVO5.getMemAccount() + ",");
-//		System.out.print(memVO5.getMemPwd() + ",");
-//		System.out.print(memVO5.getMemName() + ",");
-//		System.out.print(memVO5.getMemGender() + ",");
-//		System.out.print(memVO5.getMemEmail() + ",");
-//		System.out.print(memVO5.getMemRegister() + ",");
-//		System.out.print(memVO5.getMemStatus() + ",");
-//		System.out.print(memVO5.getMemInfract() + ",");
-//		System.out.println(memVO5.getMemImage());
-//		System.out.println("--------------------");
+		// MemberVO memVO5 = dao.findByTel("0928265804");
+		// System.out.print(memVO5.getMemNO() + ",");
+		// System.out.print(memVO5.getMemTel() + ",");
+		// System.out.print(memVO5.getMemAccount() + ",");
+		// System.out.print(memVO5.getMemPwd() + ",");
+		// System.out.print(memVO5.getMemName() + ",");
+		// System.out.print(memVO5.getMemGender() + ",");
+		// System.out.print(memVO5.getMemEmail() + ",");
+		// System.out.print(memVO5.getMemRegister() + ",");
+		// System.out.print(memVO5.getMemStatus() + ",");
+		// System.out.print(memVO5.getMemInfract() + ",");
+		// System.out.println(memVO5.getMemImage());
+		// System.out.println("--------------------");
 
 		// select by email
 		// MemberVO memVO6 = dao.findByEmail("eeit9704@gmail.com");

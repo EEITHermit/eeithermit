@@ -12,7 +12,7 @@ import java.util.Map;
 
 import org.json.simple.JSONValue;
 
-public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
+public class BoroughsDAO_JDBC implements BoroughsDAO_interface_original {
 
 	private static final String INSERT_STMT =
 		      "INSERT INTO boroughs (boroughName,cityNO) VALUES (?, ?)";
@@ -30,7 +30,7 @@ public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
 			"SELECT boroughNO,boroughName,cityNO FROM boroughs where cityNO=? order by boroughNO";
 	
 	@Override
-	public void insert(BoroughsVO BoroughsVO) {
+	public void insert(BoroughsVO_original BoroughsVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -63,7 +63,7 @@ public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
 	}
 
 	@Override
-	public void update(BoroughsVO BoroughsVO) {
+	public void update(BoroughsVO_original BoroughsVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -127,10 +127,10 @@ public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
 	}
 
 	@Override
-	public BoroughsVO findByPrimaryKey(Integer boroughNO) {
+	public BoroughsVO_original findByPrimaryKey(Integer boroughNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo = new BoroughsVO();
+		BoroughsVO_original vo = new BoroughsVO_original();
 		ResultSet rs; 
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
@@ -166,18 +166,18 @@ public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
 	}
 
 	@Override
-	public List<BoroughsVO> getAll() {
+	public List<BoroughsVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
-		List<BoroughsVO> list = new LinkedList<BoroughsVO>();
+		List<BoroughsVO_original> list = new LinkedList<BoroughsVO_original>();
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new BoroughsVO();
+				vo = new BoroughsVO_original();
 				vo.setBoroughNO(rs.getInt("boroughNO"));
 				vo.setBoroughName(rs.getString("boroughName"));
 				vo.setCityNO(rs.getInt("cityNO"));
@@ -209,7 +209,7 @@ public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
 	public String getAllWhereCity(Integer cityNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
 		List list = new LinkedList();
 		try {
@@ -250,19 +250,19 @@ public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
 			}
 		}
 	}
-	public List<BoroughsVO> getAll_cityNO(Integer cityNO) {
+	public List<BoroughsVO_original> getAll_cityNO(Integer cityNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
-		List<BoroughsVO> list = new LinkedList<BoroughsVO>();
+		List<BoroughsVO_original> list = new LinkedList<BoroughsVO_original>();
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_STMT_cityNO);
 			pstmt.setInt(1, cityNO);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new BoroughsVO();
+				vo = new BoroughsVO_original();
 				vo.setBoroughNO(rs.getInt("boroughNO"));
 				vo.setBoroughName(rs.getString("boroughName"));
 				vo.setCityNO(rs.getInt("cityNO"));
@@ -291,7 +291,7 @@ public class BoroughsDAO_JDBC implements BoroughsDAO_interface {
 		}
 	}
 	public static void main(String[] args){
-		BoroughsVO vo = new BoroughsVO();
+		BoroughsVO_original vo = new BoroughsVO_original();
 		BoroughsDAO_JDBC dao = new BoroughsDAO_JDBC();
 
 		// insert test

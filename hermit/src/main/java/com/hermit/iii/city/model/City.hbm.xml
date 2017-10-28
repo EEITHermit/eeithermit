@@ -4,16 +4,13 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.hermit.iii.favorite.model.FavoriteVO"
-		table="Favorite">
+	<class name="com.hermit.iii.city.model.CityVO" table="city">
 
-		<id name="favNO" column="favNO">
+		<id name="cityNO" column="cityNO">
 			<generator class="identity" />
 		</id>
 
-		<property name="memNO" column="memNO" />
-		<property name="houseNO" column="houseNO" />
-		<property name="favDate" column="favDate" />
+		<property name="cityName" column="cityName" />
 
 	</class>
 </hibernate-mapping>
