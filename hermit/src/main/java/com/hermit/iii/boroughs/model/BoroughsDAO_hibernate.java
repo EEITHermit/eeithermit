@@ -46,7 +46,7 @@ public class BoroughsDAO_hibernate implements BoroughsDAO_interface {
 			session.delete(boroughsVO);
 			session.getTransaction().commit();
 		}catch(RuntimeException ex){
-			session.getTransaction().commit();
+			session.getTransaction().rollback();
 			throw ex;
 		}
 
@@ -78,6 +78,7 @@ public class BoroughsDAO_hibernate implements BoroughsDAO_interface {
 			session.getTransaction().commit();
 		}catch(RuntimeException ex){
 			session.getTransaction().rollback();
+			ex.printStackTrace();
 		}
 		return list;
 	}
@@ -112,7 +113,7 @@ public class BoroughsDAO_hibernate implements BoroughsDAO_interface {
 //		dao.update(vo);
 		
 		//刪除
-//		dao.delete(42);
+//		dao.delete(44);
 		
 		//查詢
 //		BoroughsVO vo=dao.findByPrimaryKey(1);

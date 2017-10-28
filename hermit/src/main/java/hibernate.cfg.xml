@@ -46,6 +46,8 @@
 		<mapping resource="com/hermit/iii/housetype/model/HouseType.hbm.xml" />
 		<mapping resource="com/hermit/iii/calendar/model/CalendarEvent.hbm.xml"/>
 		<mapping resource="com/hermit/iii/boroughs/model/Boroughs.hbm.xml"/>
+		<mapping resource="com/hermit/iii/housepicture/model/HousePicture.hbm.xml"/>
+		
 
 
 	</session-factory>
