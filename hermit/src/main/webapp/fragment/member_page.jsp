@@ -9,7 +9,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/w3.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.min.css"/>
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+<link href="http://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
@@ -22,7 +25,7 @@
 		padding:0;
 	}
 	a:link, a:visited, a:hover ,a:active{
-		color:white;
+		color : white;
 	    text-decoration: none;
 	    padding: 14px 25px;
 	    text-align: center;
@@ -34,40 +37,51 @@
 	}
 	.w3-sidebar span{
 		color:white;
-		font-family:fantasy;
+		font-family: 'cwTeXYen', sans-serif;
 	}
 	.main-gallery
-	{
+	{	
 	    width:100%;
 	    height:50vh;
-	    background:url("../images/main.jpg");
-	    background-position:center;
+	    background:url("images/main.jpg");
+		background-position:center;
 	    background-size:cover;
 	    margin-top:52px;
 	}
-	li{
-		display: inline-block;
-		text-decoration:none;
+	.w3-jumbo span{
+		font-family:"Tangerine",serif;
+	}
+	.glfont {
+    font-family: 'Pacifico', cursive;
+	}
+	.glcwTeXYen{
+		font-family: 'cwTeXYen', sans-serif;
 	}
   #button { padding: .5em 1em; text-decoration: none; }
 </style>
 </head>
 <body>
 	
-	<div class="w3-bar w3-black navbar-fixed-top">
+	<div class="w3-bar w3-black navbar-fixed-top glcwTeXYen">
 		<button class="w3-button w3-dark-grey w3-xlarge w3-left" onclick="openLeftMenu()">&#9776;</button>
-		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-left"><span id="hermitHome">Hermit</span></a>
-		
+		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button w3-xlarge w3-left glfont"><span id="hermitHome">Hermit</span></a>
 		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
 		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
 		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right"><span id="hermitHome">登入</span></a>
 		<div class="w3-sidebar w3-bar-block w3-animate-left navbar-fixed-top w3-dark-gray" style="color:white;display:none;font-size:20px;font-family:Microsoft JhengHei;" id="leftMenu">
-		  <button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large"><span>Close &times</span></button>
-		  <a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button">首頁</a>
-		  <a href="#" class="w3-bar-item w3-button">會員中心</a>
-		  <a href="#" class="w3-bar-item w3-button">我的收藏</a>
+		<button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large"><span>Close &times</span></button>
+		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button"><span>首頁</span></a>
+		<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp" class="w3-bar-item w3-button"><span>會員中心</span></a>
+		<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp" class="w3-bar-item w3-button"><span>我的收藏</span></a>
 		</div>	   
 	</div>
+	
+	
+	
+	
+	
+	
+	
 	
 	<footer class="w3-bottom w3-black container-fluid" >
 		<div class="row nav">

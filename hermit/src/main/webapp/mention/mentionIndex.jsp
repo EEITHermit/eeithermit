@@ -10,7 +10,6 @@
 	rel='stylesheet' />
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
 <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
 <script src='<%=request.getContextPath()%>/js/jquery-ui.min.js'></script>
 <!-- Bootstrap core JavaScript-->
@@ -29,12 +28,12 @@
 			var resDiv = $("#resDiv");
 			if($(this).text() == "展開"){
 				$(this).text("收起");
+
 				resDiv.toggle("drop",true,1000);
-				
 			}else{
 				$(this).text("展開");
+
 				resDiv.toggle("drop",false,1000);
-				
 			}
 		});
 		//設定期望時間內容
@@ -130,6 +129,7 @@ table{
 
 
 	<!-- bootstrap -->
+
 	<div class="container">
 		<!-- Breadcrumbs-->
 
@@ -140,13 +140,14 @@ table{
 			<div class="col-xl-3 col-sm-6 mb-3">
 				<div class="card text-white bg-primary o-hidden h-100" id="resCard">
 					<div class="card-body">
+						<div class="card-body-icon">
+                		<i class="fa fa-fw fa-comments"></i>
+              		</div>
 						<div class="mr-5" style="font-size:18px">
 							您有<span style="font-size: 36px; color: red"> ${resSize} </span>筆未處理預約
 						</div>
-					</div >
-					
+					</div >	
 					<a id="resButton">展開</a>
-					
 				</div>
 			</div>
 

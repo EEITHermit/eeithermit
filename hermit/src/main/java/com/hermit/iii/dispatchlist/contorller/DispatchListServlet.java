@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import com.hermit.iii.dispatchlist.model.DispatchListDAO_JNDI;
 import com.hermit.iii.dispatchlist.model.DispatchListService;
 import com.hermit.iii.dispatchlist.model.DispatchListVO;
 
@@ -72,7 +71,6 @@ public class DispatchListServlet extends HttpServlet {
 		if("deleteDispatchList".equals(action)){
 			dls = new DispatchListService();
 			dls.deleteDispatchList(Integer.valueOf(request.getParameter("dlno")));
-			response.sendRedirect("SignatureGetAll.jsp");
 		}
 		
 		if("getOneDispatchList".equals(action)){

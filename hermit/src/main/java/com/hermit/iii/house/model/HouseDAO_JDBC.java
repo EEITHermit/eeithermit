@@ -6,8 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import org.json.simple.JSONValue;
 
 public class HouseDAO_JDBC implements HouseDAO_interface{
 	private static final String INSERT_STMT =
@@ -424,7 +428,55 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		
 	
 	}
-	
+	@Override
+	public String advencedSearch(String searchStr) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+			pstmt = con.prepareStatement(searchStr);
+			rs = pstmt.executeQuery();
+			List<Map> searchList = new LinkedList<Map>();
+			while (rs.next()) {
+				Map m1 = new LinkedHashMap();
+				m1.put("houseNO", rs.getString("houseNO"));
+				m1.put("houseTitle", rs.getString("houseTitle"));
+				m1.put("cityName", rs.getString("cityName"));
+				m1.put("boroughtName", rs.getString("boroughtName"));
+				m1.put("highestFloor", rs.getString("highestFloor"));
+				m1.put("nowFloor", rs.getString("nowFloor"));
+				m1.put("houseRent", rs.getString("houseRent"));
+				m1.put("hType", rs.getString("hType"));
+				m1.put("hForm", rs.getString("hForm"));
+				m1.put("houseAddr", rs.getString("houseAddr"));
+				m1.put("houseSize", rs.getString("houseSize"));
+				searchList.add(m1);
+			}
+			Map m2 = new LinkedHashMap();
+			m2.put("searchList", searchList);
+			String jsonStr = JSONValue.toJSONString(m2);
+			return jsonStr;
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 	public static void main(String args[]){
 		HouseVO vo = new HouseVO();
 		HouseDAO_JDBC dao = new HouseDAO_JDBC();

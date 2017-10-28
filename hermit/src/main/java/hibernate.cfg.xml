@@ -37,11 +37,14 @@
         <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
 
 		<!--Java物件與資料庫表格的映射檔 -->
+		<mapping resource="com/hermit/iii/favorite/model/Favorite.hbm.xml" />
+		<mapping resource="com/hermit/iii/lease/model/Lease.hbm.xml" />
 		<mapping resource="com/hermit/iii/member/model/Member.hbm.xml" />
 		<mapping resource="com/hermit/iii/admanager/model/ADManager.hbm.xml" />
 		<mapping resource="com/hermit/iii/houseform/model/HouseForm.hbm.xml" />
 		<mapping resource="com/hermit/iii/housetype/model/HouseType.hbm.xml" />
-		
+		<mapping resource="com/hermit/iii/calendar/model/CalendarEvent.hbm.xml"/>
+
 
 	</session-factory>
 	
