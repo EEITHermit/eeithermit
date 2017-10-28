@@ -6,7 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Q&A</title>
+<link href='<%= request.getContextPath() %>/css/jqueryText/jquery-te-1.4.0.css' rel='stylesheet' />
 <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
+<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 <style>
 	#queryTable{
  		display:none; 
@@ -19,14 +21,18 @@
 	document.addEventListener("DOMContentLoaded",work);
 	
 	function work(){
+		//跳出查詢畫面
 		$("#queryBT").click(function(){
 			$("#queryTable").toggle(true);
 			$("#commentForm").toggle(false);
 		});
+		//跳出投訴頁面
 		$("#commentBT").click(function(){
 			$("#queryTable").toggle(false);
 			$("#commentForm").toggle(true);
 		});
+		//產生jqueyText
+		$('.commentArea').jqte();
 	};
 	
 	function check(){
@@ -76,8 +82,9 @@
 				<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
 			</c:forEach>
 		</select>
-		申訴內容：<textarea name="qDetail" style="resize:none;"></textarea>
+		申訴內容：<textarea id="commentArea" class="commentArea" name="qDetail" style="resize:none;"></textarea>
 		<input type="button" value="提交" onclick="check()"/>
 	</form>
+	
 </body>
 </html>
