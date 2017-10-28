@@ -193,7 +193,6 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 		memberVO1.setMemName("小明Lin");
 		memberVO1.setMemGender("男");
 		memberVO1.setMemEmail("mail123@gmail.com");
-		// memberVO1.setMemRegister(java.sql.Date.valueOf("2017-10-10"));
 		memberVO1.setMemStatus("未驗證會員");
 		memberVO1.setMemInfract(0);
 		memberVO1.setMemImage(null);
@@ -208,7 +207,6 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 		 memberVO2.setMemName("小花Lin");
 		 memberVO2.setMemGender("女");
 		 memberVO2.setMemEmail("mail123@gmail.com");
-		 memberVO2.setMemRegister(java.sql.Date.valueOf("2017-10-10"));
 		 memberVO2.setMemStatus("一般會員驗證");
 		 memberVO2.setMemInfract(2);
 		 // memberVO2.setMimage(null); // not use
