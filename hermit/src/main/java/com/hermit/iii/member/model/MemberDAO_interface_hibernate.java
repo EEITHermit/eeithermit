@@ -4,15 +4,15 @@ import java.util.*;
 
 public interface MemberDAO_interface_hibernate {
 
-	public void insert(MemberVO_hibernate memberVO_hibernate);
+	public void insert(MemberVO memberVO);
 
-	public void update(MemberVO_hibernate memberVO_hibernate);
+	public void update(MemberVO memberVO);
 
 	public void delete(Integer memNO);
 
-	public MemberVO_hibernate findByPrimaryKey(Integer memNO);
+	public MemberVO findByPrimaryKey(Integer memNO);
 
-	public Set<MemberVO_hibernate> getAll();
+	public Set<MemberVO> getAll();
 
 	/**** 自訂指令 ****/
 

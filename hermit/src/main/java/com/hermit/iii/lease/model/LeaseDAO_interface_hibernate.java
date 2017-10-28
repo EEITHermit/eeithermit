@@ -4,13 +4,13 @@ import java.util.*;
 
 public interface LeaseDAO_interface_hibernate {
 
-	public void insert(LeaseVO_hibernate leaseVO_hibernate);
+	public void insert(LeaseVO leaseVO);
 
-	public void update(LeaseVO_hibernate leaseVO_hibernate);
+	public void update(LeaseVO leaseVO);
 
 	public void delete(Integer leaseNO);
 
-	public LeaseVO_hibernate findByPrimaryKey(Integer leaseNO);
+	public LeaseVO findByPrimaryKey(Integer leaseNO);
 
-	public Set<LeaseVO_hibernate> getAll();
+	public Set<LeaseVO> getAll();
 }
