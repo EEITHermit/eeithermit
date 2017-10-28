@@ -7,20 +7,23 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONString;
 import org.json.simple.JSONValue;
 
 import com.hermit.iii.util.HibernateUtil;
 
-public class CityDAO_hibernate implements CityDAO_interface_hibernate {
+public class CityDAO_hibernate implements CityDAO_interface {
 
-	private static final String GET_ALL_STMT="from CityVO_hibernate";
+	private static final String GET_ALL_STMT="from CityVO";
 	
 	@Override
-	public void insert(CityVO_hibernate cityVO_hibernate) {
+	public void insert(CityVO cityVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(cityVO_hibernate);
+			session.saveOrUpdate(cityVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -29,11 +32,11 @@ public class CityDAO_hibernate implements CityDAO_interface_hibernate {
 	}
 
 	@Override
-	public void update(CityVO_hibernate cityVO_hibernate) {
+	public void update(CityVO cityVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(cityVO_hibernate);
+			session.saveOrUpdate(cityVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -46,8 +49,8 @@ public class CityDAO_hibernate implements CityDAO_interface_hibernate {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			CityVO_hibernate cityVO_hibernate = session.get(CityVO_hibernate.class, cityNO);
-			session.delete(cityVO_hibernate);
+			CityVO cityVO = session.get(CityVO.class, cityNO);
+			session.delete(cityVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -56,22 +59,22 @@ public class CityDAO_hibernate implements CityDAO_interface_hibernate {
 	}
 
 	@Override
-	public CityVO_hibernate findByPrimaryKey(Integer cityNO) {
-		CityVO_hibernate cityVO_hibernate = null;
+	public CityVO findByPrimaryKey(Integer cityNO) {
+		CityVO cityVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			cityVO_hibernate = session.get(CityVO_hibernate.class, cityNO);
+			cityVO = session.get(CityVO.class, cityNO);
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return cityVO_hibernate;
+		return cityVO;
 	}
 
 	@Override
-	public List<CityVO_hibernate> getAll() {
-		List<CityVO_hibernate> list = null;
+	public List<CityVO> getAll() {
+		List<CityVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -93,7 +96,13 @@ public class CityDAO_hibernate implements CityDAO_interface_hibernate {
 		try{
 			session.beginTransaction();
 			Query query=session.createQuery(GET_ALL_STMT);
-			list.add(query);
+			List<CityVO> listQ=query.list();
+			for(CityVO cityVO:listQ){
+				Map m1=new LinkedHashMap();
+				m1.put("cityNO", cityVO.getCityNO());
+				m1.put("cityName", cityVO.getCityName());
+				list.add(m1);
+			}
 			session.getTransaction().commit();
 			Map m2=new LinkedHashMap();
 			m2.put("list", list);
@@ -136,7 +145,8 @@ public class CityDAO_hibernate implements CityDAO_interface_hibernate {
 //			System.out.print(cityVO_hibernate.getCityNO()+",");
 //			System.out.println(cityVO_hibernate.getCityName());
 //		}
-	
-		
+		//GetAllForJson
+		String Json=dao_hibernate.getAllForJson();
+		System.out.println(Json);
 	}
 }

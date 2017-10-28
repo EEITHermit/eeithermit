@@ -1,6 +1,6 @@
 package com.hermit.iii.city.model;
 
-public class CityVO {
+public class CityVO_original {
 	private Integer cityNO;
 	private String cityName;
 	

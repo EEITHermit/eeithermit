@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 import org.json.simple.JSONValue;
 
-public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
+public class BoroughsDAO_JNDI implements BoroughsDAO_interface_original {
 
 
 	private static DataSource ds = null;
@@ -48,7 +48,7 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 
 	
 	@Override
-	public void insert(BoroughsVO boroughsVO) {
+	public void insert(BoroughsVO_original boroughsVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -81,7 +81,7 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 	}
 
 	@Override
-	public void update(BoroughsVO boroughsVO) {
+	public void update(BoroughsVO_original boroughsVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -145,10 +145,10 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 	}
 
 	@Override
-	public BoroughsVO findByPrimaryKey(Integer boroughNO) {
+	public BoroughsVO_original findByPrimaryKey(Integer boroughNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo = new BoroughsVO();
+		BoroughsVO_original vo = new BoroughsVO_original();
 		ResultSet rs; 
 		try {
 			con = ds.getConnection();
@@ -184,19 +184,19 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 	}
 
 	@Override
-	public List<BoroughsVO> getAll() {
+	public List<BoroughsVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
-		List<BoroughsVO> list = new LinkedList<BoroughsVO>();
+		List<BoroughsVO_original> list = new LinkedList<BoroughsVO_original>();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new BoroughsVO();
+				vo = new BoroughsVO_original();
 				vo.setBoroughNO(rs.getInt("boroughNO"));
 				vo.setBoroughName(rs.getString("boroughName"));
 				vo.setCityNO(rs.getInt("cityNO"));
@@ -228,7 +228,7 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 	public String getAllWhereCity(Integer cityNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
 		List list = new LinkedList();
 		try {
@@ -271,19 +271,19 @@ public class BoroughsDAO_JNDI implements BoroughsDAO_interface {
 	}
 
 	@Override
-	public List<BoroughsVO> getAll_cityNO(Integer cityNO) {
+	public List<BoroughsVO_original> getAll_cityNO(Integer cityNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
-		List<BoroughsVO> list = new LinkedList<BoroughsVO>();
+		List<BoroughsVO_original> list = new LinkedList<BoroughsVO_original>();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT_cityNO);
 			pstmt.setInt(1, cityNO);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new BoroughsVO();
+				vo = new BoroughsVO_original();
 				vo.setBoroughNO(rs.getInt("boroughNO"));
 				vo.setBoroughName(rs.getString("boroughName"));
 				vo.setCityNO(rs.getInt("cityNO"));

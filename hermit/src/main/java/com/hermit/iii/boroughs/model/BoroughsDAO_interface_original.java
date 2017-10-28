@@ -2,14 +2,14 @@ package com.hermit.iii.boroughs.model;
 
 import java.util.List;
 
-public interface BoroughsDAO_interface {
-	 public void insert(BoroughsVO boroughsVO);
-     public void update(BoroughsVO boroughsVO);
+public interface BoroughsDAO_interface_original {
+	 public void insert(BoroughsVO_original boroughsVO);
+     public void update(BoroughsVO_original boroughsVO);
      public void delete(Integer boroughNO);
-     public BoroughsVO findByPrimaryKey(Integer boroughNO);
-     public List<BoroughsVO> getAll();
+     public BoroughsVO_original findByPrimaryKey(Integer boroughNO);
+     public List<BoroughsVO_original> getAll();
      public String getAllWhereCity(Integer cityNO);
      //子傑加
-     public List<BoroughsVO> getAll_cityNO(Integer cityNO);
+     public List<BoroughsVO_original> getAll_cityNO(Integer cityNO);
      
 }

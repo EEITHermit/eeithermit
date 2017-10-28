@@ -1,6 +1,6 @@
 package com.hermit.iii.boroughs.model;
 
-public class BoroughsVO_original {
+public class BoroughsVO {
 	private Integer boroughNO;
 	private String boroughName;
 	private Integer cityNO;

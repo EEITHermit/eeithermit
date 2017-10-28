@@ -4,13 +4,14 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.hermit.iii.city.model.CityVO" table="city">
+	<class name="com.hermit.iii.boroughs.model.BoroughsVO" table="Boroughs">
 
-		<id name="cityNO" column="cityNO">
+		<id name="boroughNO" column="boroughNO">
 			<generator class="identity" />
 		</id>
 
-		<property name="cityName" column="cityName" />
+		<property name="boroughName" column="boroughName" />
+		<property name="cityNO" column="cityNO" />
 
 	</class>
 </hibernate-mapping>

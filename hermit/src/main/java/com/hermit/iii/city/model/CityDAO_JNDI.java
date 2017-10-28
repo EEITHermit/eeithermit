@@ -17,9 +17,9 @@ import javax.sql.DataSource;
 
 import org.json.simple.JSONValue;
 
-import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.boroughs.model.BoroughsVO_original;
 
-public class CityDAO_JNDI implements CityDAO_interface {
+public class CityDAO_JNDI implements CityDAO_interface_original {
 	private static DataSource ds = null;
 	static {
 		try {
@@ -45,7 +45,7 @@ public class CityDAO_JNDI implements CityDAO_interface {
 	
 	
 	@Override
-	public void insert(CityVO cityVO) {
+	public void insert(CityVO_original cityVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -77,7 +77,7 @@ public class CityDAO_JNDI implements CityDAO_interface {
 	}
 
 	@Override
-	public void update(CityVO cityVO) {
+	public void update(CityVO_original cityVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -142,10 +142,10 @@ public class CityDAO_JNDI implements CityDAO_interface {
 	}
 
 	@Override
-	public CityVO findByPrimaryKey(Integer cityNO) {
+	public CityVO_original findByPrimaryKey(Integer cityNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CityVO cityVO = new CityVO();
+		CityVO_original cityVO = new CityVO_original();
 		ResultSet rs ;
 		try {
 			con = ds.getConnection();
@@ -179,18 +179,18 @@ public class CityDAO_JNDI implements CityDAO_interface {
 	}
 
 	@Override
-	public List<CityVO> getAll() {
+	public List<CityVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CityVO cityVO ;
+		CityVO_original cityVO ;
 		ResultSet rs ;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-			List<CityVO> list = new LinkedList<CityVO>();
+			List<CityVO_original> list = new LinkedList<CityVO_original>();
 			while(rs.next()){
-				cityVO = new CityVO();
+				cityVO = new CityVO_original();
 				cityVO.setCityNO(rs.getInt("cityNO"));
 				cityVO.setCityName(rs.getString("cityName"));
 				list.add(cityVO);
@@ -220,7 +220,7 @@ public class CityDAO_JNDI implements CityDAO_interface {
 	public String getAllForJson() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
 		List list = new LinkedList();
 		try {
@@ -229,13 +229,16 @@ public class CityDAO_JNDI implements CityDAO_interface {
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				Map m1 = new LinkedHashMap();
+				
 				m1.put("cityNO", rs.getInt("cityNO"));
 				m1.put("cityName", rs.getInt("cityName"));
+				
 				list.add(m1);
 			}
 			Map m2 = new LinkedHashMap();
 			m2.put("list", list);
-		String boroughJSON = JSONValue.toJSONString(m2);	
+		
+			String boroughJSON = JSONValue.toJSONString(m2);	
 			return boroughJSON;
 			
 		} catch (SQLException se) {
