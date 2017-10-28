@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 
 import com.hermit.iii.calendar.model.CalendarEventService;
-import com.hermit.iii.calendar.model.CalendarEventVO;
+import com.hermit.iii.calendar.model.CalendarEventVO_original;
 import com.hermit.iii.house.model.HouseDAO;
 import com.hermit.iii.reservation.model.ReservationService;
-import com.hermit.iii.reservation.model.ReservationVO;
+import com.hermit.iii.reservation.model.ReservationVO_original;
 
 
 @WebServlet("/reservationServlet")
@@ -36,7 +36,7 @@ public class reservationServlet extends HttpServlet {
 		String mission = request.getParameter("mission");
 		if(mission.equals("queryReservation")){
 			CalendarEventService resDAO = new CalendarEventService();
-			ArrayList<CalendarEventVO> array;
+			ArrayList<CalendarEventVO_original> array;
 			Integer memberNo = Integer.valueOf(request.getParameter("memberNo"));
 			array = resDAO.selectByMember(memberNo);
 			out.print(new JSONArray(array).toString());
@@ -59,7 +59,7 @@ public class reservationServlet extends HttpServlet {
 			if (!(rlDAO.checkExist(houseNo, memberNo))) {
 				int result = 0;
 				HouseDAO mgDAO = new HouseDAO();
-				ReservationVO rlVO = new ReservationVO();
+				ReservationVO_original rlVO = new ReservationVO_original();
 				Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 				Integer areaNo = mgDAO.findAreaNoByHouseNo(Integer.valueOf(houseNo));
 				String times[] = request.getParameterValues("Time");

@@ -18,10 +18,10 @@
 </head>
 <style>
 	body{
- 		background-color: #AAFFEE; 
+ 		background-color: #ADADAD; 
 	}
 	.main{
- 		background-color:#AAFFEE; 
+ 		background-color:#ADADAD; 
 	}
 </style>
 <body>

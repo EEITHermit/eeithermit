@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hermit.iii.qanda.model.QandAVO" table="QandA">
+		<id name="qaNO" column="qaNO">
+			<generator class="identity"></generator>
+		</id>
+		<property name="memNO" column="memNO"></property>
+		<property name="empNO" column="empNO"></property>
+		<property name="houseNO" column="houseNO"></property>
+		<property name="qTime" column="qTime"></property>
+		<property name="aTime" column="aTime"></property>
+		<property name="qaType" column="qaType"></property>
+		<property name="qDetail" column="qDetail"></property>
+		<property name="aDetail" column="aDetail"></property>
+	</class>
+</hibernate-mapping>

@@ -3,21 +3,21 @@ package com.hermit.iii.housepicture.model;
 import java.util.List;
 
 public class HousePictureService {
-	private HousePictureDAO_interface dao;
+	private HousePictureDAO_interface_original dao;
 	
 	public HousePictureService(){
 		dao = new HousePictureDAO_JNDI();
 	}
 	
 	public void insertHousePicture(String hPicture,Integer houseNO){
-		HousePictureVO vo = new HousePictureVO();
+		HousePictureVO_original vo = new HousePictureVO_original();
 		vo.sethPicture(hPicture);
 		vo.setHouseNO(houseNO);
 		dao.insert(vo);
 	}
 	
 	public void updateHousePicture(Integer housePictureNO ,String hPicture , Integer houseNO){
-		HousePictureVO vo = new HousePictureVO();
+		HousePictureVO_original vo = new HousePictureVO_original();
 		vo.setHouseNO(houseNO);
 		vo.setHousePictureNO(housePictureNO);
 		vo.sethPicture(hPicture);
@@ -28,11 +28,11 @@ public class HousePictureService {
 		dao.delete(housePictureNO);
 	}
 	
-	public HousePictureVO getOneHousePicture(Integer housePictureNO){
+	public HousePictureVO_original getOneHousePicture(Integer housePictureNO){
 		return dao.findByPrimaryKey(housePictureNO);
 	}
 	
-	public List<HousePictureVO> getAllHousePicture(){
+	public List<HousePictureVO_original> getAllHousePicture(){
 		return dao.getAll();
 	}
 }

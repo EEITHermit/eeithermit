@@ -258,7 +258,7 @@ CREATE TABLE Member
 	memName       VARCHAR(32),
 	memGender     VARCHAR(4),
 	memEmail      VARCHAR(64),
-	memRegister   DATETIME,
+	memRegister   DATETIME DEFAULT GETDATE(),
 	memStatus    VARCHAR(16),
 	memInfract    TINYINT,
 	memImage     VARCHAR(MAX),

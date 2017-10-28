@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.hermit.iii.favorite.model.FavoriteVO_hibernate"
+	<class name="com.hermit.iii.favorite.model.FavoriteVO"
 		table="Favorite">
 
 		<id name="favNO" column="favNO">

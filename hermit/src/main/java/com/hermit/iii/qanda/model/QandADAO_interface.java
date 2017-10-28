@@ -4,17 +4,17 @@ import java.util.*;
 
 public interface QandADAO_interface {
 
-	public void insert(QandAVO qandaVO);
+	public void insert(QandAVO_original qandaVO);
 
-	public void update(QandAVO qandaVO);
+	public void update(QandAVO_original qandaVO);
 
 	public void delete(Integer qaNO);
 
-	public QandAVO findByPrimaryKey(Integer qaNO);
+	public QandAVO_original findByPrimaryKey(Integer qaNO);
 
-	public Set<QandAVO> getAll();
+	public Set<QandAVO_original> getAll();
 	//漢勳加
-	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO);
+	public ArrayList<QandAVO_original> getAllByMemberNO(Integer memNO);
 	//漢勳加
-	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO);
+	public ArrayList<QandAVO_original> getAllByBoroughNO(Integer boroughNO);
 }
