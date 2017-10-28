@@ -20,6 +20,7 @@ import com.hermit.iii.calendar.model.CalendarEventService;
 import com.hermit.iii.calendar.model.CalendarEventVO_original;
 import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.house.model.HouseVO_orignal;
 import com.hermit.iii.member.model.*;
 
 
@@ -67,8 +68,8 @@ public class calendarServlet extends HttpServlet {
 			HouseService mhDAO = new HouseService();
 			String address = request.getParameter("house");
 			ArrayList<String> arrayR = new ArrayList<String>();
-			ArrayList<HouseVO> array = mhDAO.autoCompleteH(address);
-			for(HouseVO houseVO : array){
+			ArrayList<HouseVO_orignal> array = mhDAO.autoCompleteH(address);
+			for(HouseVO_orignal houseVO : array){
 				String result = houseVO.getHouseNO()+"\t"+houseVO.getHouseAddr();
 				arrayR.add(result);
 			}
