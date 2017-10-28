@@ -29,11 +29,11 @@ public class AdvancedSearch extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String searchStr =  
-				"SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize "
-				+ "FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO JOIN HousePicture p ON h.houseNO = p.houseNO "
+				"SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize "
+				+ "FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO "
 				+ "WHERE h.houseStatus = '未出租'";
 		
-		
+		String houseTitle = request.getParameter("houseTitle");
 		Integer cityNO = Integer.valueOf(request.getParameter("cityNO"));
 		Integer boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
 		Integer typeNO = Integer.valueOf(request.getParameter("typeNO"));
@@ -42,7 +42,9 @@ public class AdvancedSearch extends HttpServlet {
 		Integer houseRent = Integer.valueOf(request.getParameter("houseRent"));
 		String equid = request.getParameter("equid");
 
-		
+		if((houseTitle.length()!= 0 ) && (houseTitle != null)){
+			searchStr = searchStr + " and (h.houseTitle like '%" + houseTitle +"%')";
+		}
 		if((!cityNO.equals(-1)) && (cityNO != null)){
 			searchStr = searchStr + " and (h.cityNO = " + cityNO.toString() +")";
 		}
@@ -110,6 +112,7 @@ public class AdvancedSearch extends HttpServlet {
 				}
 			}
 		}
+		System.out.println(searchStr);
 		HouseService hsv = new HouseService();
 		System.out.println(hsv.advencedSearch(searchStr));
 	}

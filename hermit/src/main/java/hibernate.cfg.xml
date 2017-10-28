@@ -38,6 +38,8 @@
 
 		<!--Java物件與資料庫表格的映射檔 -->
 		<mapping resource="com/hermit/iii/favorite/model/Favorite.hbm.xml" />
+		<mapping resource="com/hermit/iii/dispatchlist/model/DispatchList_hbm.xml" />
+		<mapping resource="com/hermit/iii/house/model/House_hbm.xml" />
 		<mapping resource="com/hermit/iii/lease/model/Lease.hbm.xml" />
 		<mapping resource="com/hermit/iii/member/model/Member.hbm.xml" />
 

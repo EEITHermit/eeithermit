@@ -57,6 +57,7 @@
 		var tbody = $("#myTable>tbody");
 		function ajaxPost(){
 				$.post("DispatchListServlet",{"action":"getAllDispatchListForJson"},function(data){
+					console.log(data);
 					dataJson = $.parseJSON(data).list;
 					tbody.empty();
 					$.each(dataJson,function(index,VO){

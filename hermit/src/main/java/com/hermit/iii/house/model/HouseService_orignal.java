@@ -3,10 +3,10 @@ package com.hermit.iii.house.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HouseService {
+public class HouseService_orignal {
 	private HouseDAO_interface dao ;
 	
-	public HouseService(){
+	public HouseService_orignal(){
 		dao = new HouseDAO_JNDI();
 	}
 	

@@ -2,7 +2,7 @@ package com.hermit.iii.dispatchlist.model;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class DispatchListVO implements Serializable{
+public class DispatchListVO_orignal  implements Serializable{
 
 	private Integer dlNO;
 	private Integer dempNO;
