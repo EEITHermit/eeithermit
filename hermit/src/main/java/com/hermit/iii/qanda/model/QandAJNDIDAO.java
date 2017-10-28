@@ -36,7 +36,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 			+ " JOIN house H ON Q.houseNO = H.houseNO "
 			+ "JOIN Member M ON Q.memNO = M.memNO where boroughNO = ? AND empNO IS NULL";
 	@Override
-	public void insert(QandAVO qandaVO) {
+	public void insert(QandAVO_original qandaVO) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERT_STMT);) {
 
@@ -74,7 +74,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public void update(QandAVO qandaVO) {
+	public void update(QandAVO_original qandaVO) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);) {
 
@@ -111,9 +111,9 @@ public class QandAJNDIDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public QandAVO findByPrimaryKey(Integer qaNO) {
+	public QandAVO_original findByPrimaryKey(Integer qaNO) {
 		ResultSet rs = null;
-		QandAVO qandaVO = null;
+		QandAVO_original qandaVO = null;
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ONE_STMT);) {
 
@@ -124,7 +124,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 			if (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				qandaVO = new QandAVO();
+				qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
@@ -143,10 +143,10 @@ public class QandAJNDIDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public Set<QandAVO> getAll() {
+	public Set<QandAVO_original> getAll() {
 		ResultSet rs = null;
-		QandAVO qandaVO = null;
-		Set<QandAVO> set = new LinkedHashSet<QandAVO>();
+		QandAVO_original qandaVO = null;
+		Set<QandAVO_original> set = new LinkedHashSet<QandAVO_original>();
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ALL_STMT);) {
 
@@ -155,7 +155,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				qandaVO = new QandAVO();
+				qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
@@ -173,10 +173,10 @@ public class QandAJNDIDAO implements QandADAO_interface {
 		}
 		return set;
 	}
-	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
+	public ArrayList<QandAVO_original> getAllByMemberNO(Integer memNO){
 		
 		ResultSet rs = null;
-		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		ArrayList<QandAVO_original> array = new ArrayList<QandAVO_original>();
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ALL_BY_MEMBER_NO);){
 			pstmt.setInt(1, memNO);
 			rs = pstmt.executeQuery();
@@ -184,7 +184,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				QandAVO qandaVO = new QandAVO();
+				QandAVO_original qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
@@ -205,9 +205,9 @@ public class QandAJNDIDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO) {
+	public ArrayList<QandAVO_original> getAllByBoroughNO(Integer boroughNO) {
 		ResultSet rs = null;
-		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		ArrayList<QandAVO_original> array = new ArrayList<QandAVO_original>();
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ALL_BY_BOROUGH_NO);){
 			pstmt.setInt(1, boroughNO);
 			rs = pstmt.executeQuery();
@@ -215,7 +215,7 @@ public class QandAJNDIDAO implements QandADAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				QandAVO qandaVO = new QandAVO();
+				QandAVO_original qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setMemName(rs.getString("memName"));

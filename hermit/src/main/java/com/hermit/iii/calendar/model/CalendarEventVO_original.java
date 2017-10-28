@@ -6,12 +6,12 @@ import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.member.model.MemberVO;
 
-public class CalendarEventVO_hibernate implements Serializable {
+public class CalendarEventVO_original implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer eventNO;
-	private Integer empNO;
-	private Integer memNO;
-	private Integer houseNO;
+	private EmpVO empVO = new EmpVO();
+	private MemberVO memberVO = new MemberVO();
+	private HouseVO houseVO = new HouseVO();
 	private Timestamp eventStartTime;
 	private Timestamp eventEndTime;
 	private String ps;
@@ -21,23 +21,23 @@ public class CalendarEventVO_hibernate implements Serializable {
 	public void setEventNO(Integer eventNO) {
 		this.eventNO = eventNO;
 	}
-	public Integer getEmpNO() {
-		return empNO;
+	public EmpVO getEmpVO() {
+		return empVO;
 	}
-	public void setEmpNO(Integer empNO) {
-		this.empNO = empNO;
+	public void setEmpVO(EmpVO empVO) {
+		this.empVO = empVO;
 	}
-	public Integer getMemNO() {
-		return memNO;
+	public MemberVO getMemberVO() {
+		return memberVO;
 	}
-	public void setMemNO(Integer memNO) {
-		this.memNO = memNO;
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
-	public Integer getHouseNO() {
-		return houseNO;
+	public HouseVO getHouseVO() {
+		return houseVO;
 	}
-	public void setHouseNO(Integer houseNO) {
-		this.houseNO = houseNO;
+	public void setHouseVO(HouseVO houseVO) {
+		this.houseVO = houseVO;
 	}
 	public Timestamp getEventStartTime() {
 		return eventStartTime;
@@ -57,4 +57,7 @@ public class CalendarEventVO_hibernate implements Serializable {
 	public void setPs(String ps) {
 		this.ps = ps;
 	}
+	
+	
+	
 }
