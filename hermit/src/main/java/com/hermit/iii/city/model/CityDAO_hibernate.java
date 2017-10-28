@@ -84,7 +84,7 @@ public class CityDAO_hibernate implements CityDAO_interface_hibernate {
 		}
 		return list;
 	}
-
+	
 	@Override
 	public String getAllForJson() {
 		List list=new LinkedList();
@@ -136,8 +136,7 @@ public class CityDAO_hibernate implements CityDAO_interface_hibernate {
 //			System.out.print(cityVO_hibernate.getCityNO()+",");
 //			System.out.println(cityVO_hibernate.getCityName());
 //		}
-		//查詢ForJson
-		
+	
 		
 	}
 }
