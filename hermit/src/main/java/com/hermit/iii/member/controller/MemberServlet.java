@@ -554,9 +554,7 @@ public class MemberServlet extends HttpServlet {
 				request.setAttribute("memNO", memberVO.getMemNO());
 				request.setAttribute("memTel", memberVO.getMemTel());
 				request.setAttribute("memAccount", memberVO.getMemAccount());
-				
-				request.setAttribute("memPwd", memberVO.getMemPwd());
-				
+				request.setAttribute("memPwd", new SecurityCipher().decryptString(memberVO.getMemPwd()));
 				request.setAttribute("memName", memberVO.getMemName());
 				request.setAttribute("memGender", memberVO.getMemGender());
 				request.setAttribute("memEmail", memberVO.getMemEmail());
