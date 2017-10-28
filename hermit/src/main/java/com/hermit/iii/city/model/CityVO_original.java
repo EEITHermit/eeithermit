@@ -1,6 +1,6 @@
 package com.hermit.iii.city.model;
 
-public class CityVO_hibernate {
+public class CityVO {
 	private Integer cityNO;
 	private String cityName;
 	
