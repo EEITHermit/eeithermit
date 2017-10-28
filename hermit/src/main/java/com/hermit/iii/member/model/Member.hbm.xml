@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.hermit.iii.member.model.MemberVO_hibernate" table="Member">
+	<class name="com.hermit.iii.member.model.MemberVO" table="Member">
 
 		<id name="memNO" column="memNO">
 			<generator class="identity" />

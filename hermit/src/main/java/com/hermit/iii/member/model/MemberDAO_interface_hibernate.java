@@ -4,26 +4,26 @@ import java.util.*;
 
 public interface MemberDAO_interface_hibernate {
 
-	public void insert(MemberVO_hibernate memberVO_hibernate);
+	public void insert(MemberVO memberVO);
 
-	public void update(MemberVO_hibernate memberVO_hibernate);
+	public void update(MemberVO memberVO);
 
 	public void delete(Integer memNO);
 
-	public MemberVO_hibernate findByPrimaryKey(Integer memNO);
+	public MemberVO findByPrimaryKey(Integer memNO);
 
-	public Set<MemberVO_hibernate> getAll();
+	public Set<MemberVO> getAll();
 
 	/**** 自訂指令 ****/
 
-	public ArrayList<MemberVO_hibernate> autoCompleteM(String name);
+	public ArrayList<MemberVO> autoCompleteM(String name);
 
 	public void checkInfraction(Integer memNO);
 
 	public Integer infractPlus1(Integer memNO);
 
 	// SMS更新會員狀態
-	public void update_MemStatusByMemTel(MemberVO_hibernate memberVO_hibernate);
+	public void update_MemStatusByMemTel(MemberVO memberVO);
 
 	// Image查詢(讀取)
 	public String find_MemImageByMemNO(Integer memNO);
@@ -32,11 +32,11 @@ public interface MemberDAO_interface_hibernate {
 	public String count_MemAccount_AJAX(String memAccount);
 
 	// 驗證帳號是否存在
-	public MemberVO_hibernate findByAccount(String memAccount);
+	public MemberVO findByAccount(String memAccount);
 
 	// 忘記帳號查詢
-	public MemberVO_hibernate findByTel(String memTel);
+	public MemberVO findByTel(String memTel);
 
 	// 忘記密碼查詢
-	public MemberVO_hibernate findByEmail(String memEmail);
+	public MemberVO findByEmail(String memEmail);
 }

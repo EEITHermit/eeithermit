@@ -726,35 +726,35 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		memberVO1.setMemImage(null);
 		dao.insert(memberVO1);
 
-		// // 修改初始資料第一筆 (register由資料庫系統給)
-		// MemberVO memberVO2 = new MemberVO();
-		// memberVO2.setMemNO(40001);
-		// memberVO2.setMemTel("0905123456");
-		// memberVO2.setMemAccount("account123");
-		// memberVO2.setMemPwd("123Pwd@@");
-		// memberVO2.setMemName("小花Lin");
-		// memberVO2.setMemGender("女");
-		// memberVO2.setMemEmail("mail123@gmail.com");
-		// memberVO2.setMemStatus("一般會員驗證");
-		// memberVO2.setMemInfract(2);
-		// // memberVO2.setMimage(null); // not use
-		// dao.update(memberVO2, null, 0);
-		//
-		// // 查詢初始資料第一筆
-		// MemberVO memberVO3 = dao.findByPrimaryKey(40005);
-		// System.out.print(memberVO3.getMemNO() + ",");
-		// System.out.print(memberVO3.getMemTel() + ",");
-		// System.out.print(memberVO3.getMemAccount() + ",");
-		// System.out.print(memberVO3.getMemPwd() + ",");
-		// System.out.print(memberVO3.getMemName() + ",");
-		// System.out.print(memberVO3.getMemGender() + ",");
-		// System.out.print(memberVO3.getMemEmail() + ",");
-		// System.out.print(memberVO3.getMemRegister() + ",");
-		// System.out.print(memberVO3.getMemStatus() + ",");
-		// System.out.print(memberVO3.getMemInfract() + ",");
-		// System.out.println(memberVO3.getMemImage());
-		// System.out.println("---------------------");
-		//
+		 // 修改初始資料第一筆 (register由資料庫系統給)
+		 MemberVO memberVO2 = new MemberVO();
+		 memberVO2.setMemNO(40001);
+		 memberVO2.setMemTel("0905123456");
+		 memberVO2.setMemAccount("account123");
+		 memberVO2.setMemPwd("123Pwd@@");
+		 memberVO2.setMemName("小花Lin");
+		 memberVO2.setMemGender("女");
+		 memberVO2.setMemEmail("mail123@gmail.com");
+		 memberVO2.setMemStatus("一般會員驗證");
+		 memberVO2.setMemInfract(2);
+		 // memberVO2.setMimage(null); // not use
+		 dao.update(memberVO2);
+		
+		 // 查詢初始資料第一筆
+		 MemberVO memberVO3 = dao.findByPrimaryKey(40005);
+		 System.out.print(memberVO3.getMemNO() + ",");
+		 System.out.print(memberVO3.getMemTel() + ",");
+		 System.out.print(memberVO3.getMemAccount() + ",");
+		 System.out.print(memberVO3.getMemPwd() + ",");
+		 System.out.print(memberVO3.getMemName() + ",");
+		 System.out.print(memberVO3.getMemGender() + ",");
+		 System.out.print(memberVO3.getMemEmail() + ",");
+		 System.out.print(memberVO3.getMemRegister() + ",");
+		 System.out.print(memberVO3.getMemStatus() + ",");
+		 System.out.print(memberVO3.getMemInfract() + ",");
+		 System.out.println(memberVO3.getMemImage());
+		 System.out.println("---------------------");
+		
 		 // 查詢全部
 		 Set<MemberVO> set = dao.getAll();
 		 for (MemberVO member : set) {
@@ -771,9 +771,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		 System.out.println(member.getMemImage());
 		 System.out.println();
 		 }
-		//
-		// // 刪除初始資料一筆
-		// dao.delete(40002);
+		
+		 // 刪除初始資料一筆
+		 dao.delete(40002);
 
 		// select by account
 		// MemberVO memVO4 = dao.findByAccount("eeit9704");

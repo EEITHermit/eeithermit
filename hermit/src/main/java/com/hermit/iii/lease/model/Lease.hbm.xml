@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.hermit.iii.lease.model.LeaseVO_hibernate" table="Lease">
+	<class name="com.hermit.iii.lease.model.LeaseVO" table="Lease">
 
 		<id name="leaseNO" column="leaseNO">
 			<generator class="identity" />
