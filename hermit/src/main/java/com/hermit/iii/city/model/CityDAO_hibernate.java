@@ -65,6 +65,7 @@ public class CityDAO_hibernate implements CityDAO_interface {
 		try {
 			session.beginTransaction();
 			cityVO = session.get(CityVO.class, cityNO);
+			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;

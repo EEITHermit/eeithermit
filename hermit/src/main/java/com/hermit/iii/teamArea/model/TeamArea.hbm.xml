@@ -6,11 +6,19 @@
 <hibernate-mapping>
 	<class name="com.hermit.iii.teamArea.model.TeamAreaVO" table="TeamArea">
 
-		<id name="businNO" column="businNO">
-			<generator class="identity" />
-		</id>
+<!-- 		<id name="businNO" column="businNO"> -->
+<!-- 			<generator class="identity" /> -->
+<!-- 		</id> -->
+	<composite-id>
+            <key-property name="businNO" 
+                          column="businNO"/>
+            <key-property name="cityNO" 
+                          column="cityNO"/>
+    </composite-id>
 
-		<property name="cityNO" column="cityNO" />
+
+
+<!-- 		<property name="cityNO" column="cityNO" /> -->
 		<property name="boroughNO" column="boroughNO" />
 
 	</class>
