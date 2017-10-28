@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="com.hermit.iii.admanager.model.ADManagerVO_hibernate" table="ADManager">
+		
+		<id name="adNO" column="adNO">
+			<generator class="identity" />
+		</id>
+		
+	<property name="adImage" column="adImage" />
+	<property name="adLink" column="adLink" />
+	<property name="adMessage" column="adMessage" />
+	<property name="adTimeStart" column="adTimeStart" />
+	<property name="adTimeEnd" column="adTimeEnd" />
+	<property name="adStatus" column="adStatus" />
+	<property name="adBrowse" column="adBrowse" />
+	<property name="adModify" column="adModify" />
+	
+	</class>
+</hibernate-mapping>

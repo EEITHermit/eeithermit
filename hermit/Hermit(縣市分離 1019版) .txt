@@ -328,8 +328,11 @@ GO
 
 CREATE TABLE Favorite
 (
+	favNO	decimal(5, 0) NOT NULL IDENTITY(40001,1),
 	memNO     decimal(5, 0) NOT NULL,
 	houseNO     decimal(5,0) NOT NULL,
+	favDate   DATETIME,
+	CONSTRAINT pk_favorite PRIMARY KEY (favNO),
 	CONSTRAINT fk_Favorite_to_member FOREIGN KEY(memNO) REFERENCES Member(memNO),
 	CONSTRAINT fk_Favorite_to_house FOREIGN KEY(houseNO) REFERENCES house(houseNO)
 )

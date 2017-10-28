@@ -1,5 +1,6 @@
 package com.hermit.iii.qanda.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class QandAService {
@@ -18,7 +19,7 @@ public class QandAService {
 
 		qandaVO.setMemNO(memNO);
 		qandaVO.setEmpNO(empNO);
-		qandaVO.setHouseNO(houseNO);
+		qandaVO.getHouseVO().setHouseNO(houseNO);
 		qandaVO.setqTime(qTime);
 		qandaVO.setaTime(aTime);
 		qandaVO.setQaType(qaType);
@@ -39,7 +40,7 @@ public class QandAService {
 		qandaVO.setQaNO(qaNO);
 		qandaVO.setMemNO(memNO);
 		qandaVO.setEmpNO(empNO);
-		qandaVO.setHouseNO(houseNO);
+		qandaVO.getHouseVO().setHouseNO(houseNO);
 		qandaVO.setqTime(qTime);
 		qandaVO.setaTime(aTime);
 		qandaVO.setQaType(qaType);
@@ -64,5 +65,13 @@ public class QandAService {
 	// 查詢全部service
 	public Set<QandAVO> getAll() {
 		return dao.getAll();
+	}
+	// 會員查詢Q&A
+	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
+		return dao.getAllByMemberNO(memNO);
+	}
+	// 員工查詢Q&A
+	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO){
+		return dao.getAllByBoroughNO(boroughNO);
 	}
 }

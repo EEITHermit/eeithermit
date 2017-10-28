@@ -18,5 +18,6 @@ public interface HouseDAO_interface {
      //子傑加，House表格JOIN houseType與houseForm
      public List<HouseVO> GET_ALL_JOIN_FK();
      public HouseVO GET_ONE_HOUSE_FK(Integer houseNO);
+     public String advencedSearch(String searchStr);
      
 }

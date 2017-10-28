@@ -79,4 +79,7 @@ public class HouseService {
     public HouseVO GET_ONE_HOUSE_FK(Integer houseNO){
     	return dao.GET_ONE_HOUSE_FK(houseNO);
     }
+    public String advencedSearch(String searchStr){
+    	return dao.advencedSearch(searchStr);
+    }
 }
