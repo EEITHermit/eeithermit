@@ -16,7 +16,7 @@
 		<property name="memName" column="memName" />
 		<property name="memGender" column="memGender" />
 		<property name="memEmail" column="memEmail" />
-		<property name="memRegister" column="memRegister" />
+		<property name="memRegister" column="memRegister" insert="false" />
 		<property name="memStatus" column="memStatus" />
 		<property name="memInfract" column="memInfract" />
 		<property name="memImage" column="memImage" />
