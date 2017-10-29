@@ -2,10 +2,13 @@ package com.hermit.iii.teammemberlist.model;
 
 import java.sql.Date;
 
+import com.hermit.iii.businTeam.model.BusinTeamVO;
+import com.hermit.iii.emp.model.EmpVO;
+
 public class TeamMemberListVO {
 	private Integer memberListNO;
-	private Integer empNO;
-	private Integer businNO;
+	private EmpVO empVO;
+	private BusinTeamVO businTeamVO;
 	private Date tmlStartTime;
 	private Date tmlEndTime;
 	private Byte tmlStatus;
@@ -18,20 +21,20 @@ public class TeamMemberListVO {
 		this.memberListNO = memberListNO;
 	}
 
-	public Integer getEmpNO() {
-		return empNO;
+	public EmpVO getEmpVO() {
+		return empVO;
 	}
 
-	public void setEmpNO(Integer empNO) {
-		this.empNO = empNO;
+	public void setEmpVO(EmpVO empVO) {
+		this.empVO = empVO;
 	}
 
-	public Integer getBusinNO() {
-		return businNO;
+	public BusinTeamVO getBusinTeamVO() {
+		return businTeamVO;
 	}
 
-	public void setBusinNO(Integer businNO) {
-		this.businNO = businNO;
+	public void setBusinTeamVO(BusinTeamVO businTeamVO) {
+		this.businTeamVO = businTeamVO;
 	}
 
 	public Date getTmlStartTime() {

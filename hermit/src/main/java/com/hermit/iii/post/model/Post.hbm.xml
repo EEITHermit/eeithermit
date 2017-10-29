@@ -10,6 +10,13 @@
 		</id>
 
 		<property name="postName" column="postName" />
+		<set name="emps" table="Emp" lazy="false" cascade="all" inverse="true"
+			order-by="empNO asc">
+			<key>
+				<column name="postNO" />
+			</key>
+			<one-to-many class="com.hermit.iii.emp.model.EmpVO" />
+		</set>
 
 	</class>
 </hibernate-mapping>

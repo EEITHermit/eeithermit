@@ -12,5 +12,13 @@
 		<property name="businName" column="businName" />
 		<property name="manager" column="manager" />
 
+		<set name="teammemberlists" table="TeamMemberList" lazy="false"
+			cascade="all" inverse="true" order-by="memberListNO asc">
+			<key>
+				<column name="businNO" />
+			</key>
+			<one-to-many class="com.hermit.iii.teammemberlist.model.TeamMemberListVO" />
+		</set>
+
 	</class>
 </hibernate-mapping>

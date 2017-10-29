@@ -101,7 +101,7 @@ public class BusinTeamDAO_hibernate implements BusinTeamDAO_interface_hibernate 
 		dao.update(businTeamVO2);
 
 		// delete
-		dao.delete(30020);
+		// dao.delete(30020);
 
 		// select one
 		BusinTeamVO businTeamVO3 = dao.findByPrimaryKey(30010);
