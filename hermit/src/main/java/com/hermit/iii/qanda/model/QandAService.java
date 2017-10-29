@@ -5,19 +5,19 @@ import java.util.Set;
 
 public class QandAService {
 
-	private QandADAO_interface dao;
+	private QandADAO_interface_hibernate dao;
 
 	public QandAService() {
-		dao = new QandAJNDIDAO();
+		dao = new QandAJNDIDAO_hibernate();
 	}
 
 	// 新增service
-	public QandAVO_original addQandA(Integer memNO, Integer empNO, Integer houseNO, java.sql.Date qTime, java.sql.Date aTime,
+	public QandAVO addQandA(Integer memNO, Integer empNO, Integer houseNO, java.sql.Date qTime, java.sql.Date aTime,
 			Byte qaType, String qDetail, String aDetail) {
 
-		QandAVO_original qandaVO = new QandAVO_original();
+		QandAVO qandaVO = new QandAVO();
 
-		qandaVO.setMemNO(memNO);
+		qandaVO.getMemberVO().setMemNO(memNO);
 		qandaVO.setEmpNO(empNO);
 		qandaVO.getHouseVO().setHouseNO(houseNO);
 		qandaVO.setqTime(qTime);
@@ -32,13 +32,13 @@ public class QandAService {
 	}
 
 	// 修改service
-	public QandAVO_original updateQandA(Integer qaNO, Integer memNO, Integer empNO, Integer houseNO, java.sql.Date qTime,
+	public QandAVO updateQandA(Integer qaNO, Integer memNO, Integer empNO, Integer houseNO, java.sql.Date qTime,
 			java.sql.Date aTime, Byte qaType, String qDetail, String aDetail) {
 
-		QandAVO_original qandaVO = new QandAVO_original();
+		QandAVO qandaVO = new QandAVO();
 
 		qandaVO.setQaNO(qaNO);
-		qandaVO.setMemNO(memNO);
+		qandaVO.getMemberVO().setMemNO(memNO);;
 		qandaVO.setEmpNO(empNO);
 		qandaVO.getHouseVO().setHouseNO(houseNO);
 		qandaVO.setqTime(qTime);
@@ -58,20 +58,20 @@ public class QandAService {
 	}
 
 	// 查詢一筆service
-	public QandAVO_original getOneQandA(Integer qaNO) {
+	public QandAVO getOneQandA(Integer qaNO) {
 		return dao.findByPrimaryKey(qaNO);
 	}
 
 	// 查詢全部service
-	public Set<QandAVO_original> getAll() {
+	public Set<QandAVO> getAll() {
 		return dao.getAll();
 	}
 	// 會員查詢Q&A
-	public ArrayList<QandAVO_original> getAllByMemberNO(Integer memNO){
+	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
 		return dao.getAllByMemberNO(memNO);
 	}
 	// 員工查詢Q&A
-	public ArrayList<QandAVO_original> getAllByBoroughNO(Integer boroughNO){
+	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO){
 		return dao.getAllByBoroughNO(boroughNO);
 	}
 }

@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -18,30 +19,30 @@ import javax.sql.DataSource;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.json.JSONObject;
 
+import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interface_hibernate{
-	Session session;
+	
 	public CalendarEventJNDIDAO_hibernate(){
-		session = HibernateUtil.getSessionFactory().getCurrentSession(); 
+		
 	}
 	//查詢員工時段內的預約，測試完畢
-	String selectByEandT="select * from CalendarEvent C "
-			+ "join Emp E ON C.empNO = E.empNO "
-			+ "join member M ON C.memNO = M.memNO "
-			+ "join house H ON C.houseNO = H.houseNO "
-			+ "where E.empNO=? and (C.eventStartTime between ? and ?)";
 	String selectByEandT_h = "from CalendarEventVO "
-			+ "where (eventStartTime between ? and ?)";
+			+ "where empNO=? AND (eventStartTime between ? and ?)";
 	@Override
 	public ArrayList<CalendarEventVO> selectByEmpAndTime(Integer empID, Timestamp start, Timestamp end) {
 		ArrayList<CalendarEventVO> array = new ArrayList<CalendarEventVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(selectByEandT_h);
-			query.setParameter(0, start);
-			query.setParameter(1, end);
+			query.setParameter(0, empID);
+			query.setParameter(1, start);
+			query.setParameter(2, end);
 			List list = query.list();
 			array.addAll(list);
 			session.getTransaction().commit();
@@ -52,11 +53,6 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 		return array;
 	}
 	//查詢時間是否衝突，測試完畢
-	String checkE = "select * from CalendarEvent where (empNO = ?) AND (eventNO != ?)"
-					+ "AND(eventStartTime between ? and ?) "
-					+ "AND((?>=eventStartTime AND ?<eventEndTime)"
-					+ "or(?>eventStartTime AND ?<=eventEndTime)"
-					+ "or(?<=eventStartTime AND ?>=eventEndTime))";
 	String checkE_h = "from CalendarEventVO where (empNO = ?) AND (eventNO != ?)"
 					+ "AND(eventStartTime between ? and ?) "
 					+ "AND((?>=eventStartTime AND ?<eventEndTime)"
@@ -68,6 +64,7 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 		String day = start.toString().substring(0,10);
 		Date date1 = Date.valueOf(day);
 		Date date2 = new Date(Timestamp.valueOf(day+" 00:00:00").getTime()+60*60*24*1000);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
 		try {
 			session.getTransaction().begin();
 			Query query = session.createQuery(checkE_h);
@@ -120,13 +117,10 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 //		return max;
 //	}
 	//更新資料，測試完畢
-	String update = "update CalendarEvent set "
-			+ "empNO = ? , memNO = ? , houseNO = ? ,"
-			+ "eventStartTime= ?, eventEndTime=?,ps=? "
-			+ "where eventNO = ?";
 	@Override
 	public Integer update(CalendarEventVO resVO) {
 		Integer result = 0;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
 		try{
 			session.getTransaction().begin();
 			session.saveOrUpdate(resVO);
@@ -138,11 +132,10 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 		return result;
 	}
 	//新增資料，測試OK
-	String insert = "insert into CalendarEvent(empNO,memNO,houseNO,eventStartTime,"
-			+ "eventEndTime,ps) values(?,?,?,?,?,?)";
 	@Override
 	public Integer insert(CalendarEventVO resVO) {
 		Integer result = 0;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
 		try{
 			session.getTransaction().begin();
 			session.saveOrUpdate(resVO);
@@ -157,38 +150,36 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 	String delete = "delete from CalendarEvent where eventNO = ?";
 	@Override
 	public Integer delete(int ID) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
 		Integer result = 1;
+		try{
+		session.getTransaction().begin();	
 		CalendarEventVO ch = session.get(CalendarEventVO.class, ID);
 		session.delete(ch);
+		session.getTransaction().commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
 		return result;
 	}
 	//查詢員工時段內的預約，測試完畢
-		String selectByMember="select * from CalendarEvent C "
-				+ "join Emp E ON C.empNO = E.empNO "
-				+ "join member M ON C.memNO = M.memNO "
-				+ "join house H ON C.houseNO = H.houseNO "
-				+ "where M.memNO=? and (C.eventStartTime between getDate() and (getDate()+365))"; //+1為加一天
+		String selectByMember_h = "from CalendarEventVO where memNO = ? and (eventStartTime between getDate() and (getDate()+365))";
 		@Override
 		public ArrayList<CalendarEventVO> selectByMember(Integer memberNo){
 			ArrayList<CalendarEventVO> array = new ArrayList<CalendarEventVO>();
-//			try (Connection conn = ds.getConnection();
-//				PreparedStatement ps = conn.prepareStatement(selectByMember);){
-//				ps.setInt(1, memberNo);
-//				ResultSet rs = ps.executeQuery();
-//				while(rs.next()){
-//					CalendarEventVO resVO = new CalendarEventVO();
-//					resVO.setEventNO(rs.getInt("eventNO"));
-//					resVO.getEmpVO().setEmpName(rs.getString("empName"));
-//					resVO.getEmpVO().setEmpPhone(rs.getString("empPhone"));
-//					resVO.getHouseVO().setHouseTitle(rs.getString("houseTitle"));
-//					resVO.getHouseVO().setHouseAddr(rs.getString("houseAddr"));
-//					resVO.setEventStartTime(rs.getTimestamp("eventStartTime"));
-//					array.add(resVO);
-//				}
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
+			try{
+				session.getTransaction().begin();
+				Query query = session.createQuery(selectByMember_h);
+				query.setParameter(0, memberNo);
+				List list = query.list();
+				array.addAll(list);
+				session.getTransaction().commit();
+			} catch (Exception e1) {
+				session.getTransaction().rollback();
+				e1.printStackTrace();
+			}
 			return array;
 		}
-	
 }	

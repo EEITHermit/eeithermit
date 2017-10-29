@@ -3,6 +3,8 @@ package com.hermit.iii.reservation.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.emp.model.EmpVO_original;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.member.model.MemberVO;
@@ -11,10 +13,10 @@ public class ReservationVO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private Integer reservationNO;
-	private Integer memNO;
-	private Integer houseNO;
-	private Integer empNO;
-	private Integer boroughNO;
+	private MemberVO memberVO = new MemberVO();
+	private HouseVO houseVO = new HouseVO();
+	private EmpVO empVO;
+	private BoroughsVO boroughsVO = new BoroughsVO();
 	private Boolean takedOver;
 	private String exceptTime;
 	private Timestamp applyTime;
@@ -24,29 +26,29 @@ public class ReservationVO implements Serializable{
 	public void setReservationNO(Integer reservationNO) {
 		this.reservationNO = reservationNO;
 	}
-	public Integer getMemNO() {
-		return memNO;
+	public MemberVO getMemberVO() {
+		return memberVO;
 	}
-	public void setMemNO(Integer memNO) {
-		this.memNO = memNO;
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
-	public Integer getHouseNO() {
-		return houseNO;
+	public HouseVO getHouseVO() {
+		return houseVO;
 	}
-	public void setHouseNO(Integer houseNO) {
-		this.houseNO = houseNO;
+	public void setHouseVO(HouseVO houseVO) {
+		this.houseVO = houseVO;
 	}
-	public Integer getEmpNO() {
-		return empNO;
+	public EmpVO getEmpVO() {
+		return empVO;
 	}
-	public void setEmpNO(Integer empNO) {
-		this.empNO = empNO;
+	public void setEmpVO(EmpVO empVO) {
+		this.empVO = empVO;
 	}
-	public Integer getBoroughNO() {
-		return boroughNO;
+	public BoroughsVO getBoroughsVO() {
+		return boroughsVO;
 	}
-	public void setBoroughNO(Integer boroughNO) {
-		this.boroughNO = boroughNO;
+	public void setBoroughsVO(BoroughsVO boroughsVO) {
+		this.boroughsVO = boroughsVO;
 	}
 	public Boolean getTakedOver() {
 		return takedOver;
@@ -66,6 +68,5 @@ public class ReservationVO implements Serializable{
 	public void setApplyTime(Timestamp applyTime) {
 		this.applyTime = applyTime;
 	}
-	
 	
 }

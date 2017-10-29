@@ -46,7 +46,7 @@
 				<tr>
 					<td>${qaVO.qaNO}</td>
 					<td>${qaVO.qTime}</td>
-					<td>${qaVO.memName}</td>
+					<td>${qaVO.memberVO.memName}</td>
 					<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 					<td>${qaVO.qDetail}</td>
 					<td><button type="button">回覆</button></tr>

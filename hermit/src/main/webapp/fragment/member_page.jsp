@@ -58,6 +58,15 @@
 		font-family: 'cwTeXYen', sans-serif;
 	}
   #button { padding: .5em 1em; text-decoration: none; }
+  #footer {
+  	margin-top:30px;
+  	margin-bottom:0px;
+	width:100%;
+	height:100px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	}
 </style>
 </head>
 <body>
@@ -76,25 +85,6 @@
 		</div>	   
 	</div>
 	
-	
-	
-	
-	
-	
-	
-	
-	<footer class="w3-bottom w3-black container-fluid" >
-		<div class="row nav">
-		  <div class="col-md-4"></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></div>
-		  <div class="col-md-4"></div>
-		</div>
-	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-		</div>
-	</footer>
 	<script>
 	$( function() {
 		var spanArrow = $(".glyphicon-chevron-down"); 

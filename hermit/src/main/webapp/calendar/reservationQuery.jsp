@@ -17,7 +17,7 @@
 			var array;
 			body.text("");
 			//以會員id搜尋預約
-			$.get("<%= request.getContextPath() %>/reservationServlet?mission=queryReservation",{memberNo:"40004"},function(data){
+			$.get("<%= request.getContextPath() %>/reservationServlet?mission=queryReservation",{memberNo:"40001"},function(data){
 				array = JSON.parse(data);
 				for(var res of array){
 					var tr = $("<tr></tr>");

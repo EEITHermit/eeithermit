@@ -19,6 +19,12 @@
 			</key>
 			<one-to-many class="com.hermit.iii.teammemberlist.model.TeamMemberListVO" />
 		</set>
-
+		<set name="teamAreaVOs" table="TeamArea" lazy="false"
+			cascade="all" inverse="true" order-by="businNO asc">
+			<key>
+				<column name="businNO" />
+			</key>
+			<one-to-many class="com.hermit.iii.teamArea.model.TeamAreaVO" />
+		</set>
 	</class>
 </hibernate-mapping>

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class MentionService {
 	MentionDAO_Interface menDAO ;
 	public MentionService(){
-		menDAO = new MentionDAO_JNDI();
+		menDAO = new MentionDAO_JNDI_hibernate();
 	}
 	
 	public ArrayList<Integer> getBoroughNOByEmpNO(Integer empNO){

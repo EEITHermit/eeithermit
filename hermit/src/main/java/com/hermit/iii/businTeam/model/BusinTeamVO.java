@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.hermit.iii.teamArea.model.TeamAreaVO;
 import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
 
 public class BusinTeamVO implements Serializable {
@@ -12,7 +13,7 @@ public class BusinTeamVO implements Serializable {
 	private String businName;
 	private Integer manager;
 	private Set<TeamMemberListVO> teammemberlists = new HashSet<TeamMemberListVO>();
-
+	private Set<TeamAreaVO> teamAreaVOs = new HashSet<TeamAreaVO>();
 	public Integer getBusinNO() {
 		return businNO;
 	}
@@ -45,4 +46,12 @@ public class BusinTeamVO implements Serializable {
 		this.teammemberlists = teammemberlists;
 	}
 
+	public Set<TeamAreaVO> getTeamAreaVOs() {
+		return teamAreaVOs;
+	}
+
+	public void setTeamAreaVOs(Set<TeamAreaVO> teamAreaVOs) {
+		this.teamAreaVOs = teamAreaVOs;
+	}
+	
 }
