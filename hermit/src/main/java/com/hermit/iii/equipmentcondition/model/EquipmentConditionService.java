@@ -4,10 +4,10 @@ import java.util.*;
 
 public class EquipmentConditionService {
 
-	private EquipmentConditionDAO_interface dao;
+	private EquipmentConditionDAO_interface_hibernate dao;
 
 	public EquipmentConditionService() {
-		dao = new EquipmentConditionJNDIDAO();
+		dao = new EquipmentConditionDAO_hibernate();
 	}
 
 	// 新增service
@@ -83,7 +83,7 @@ public class EquipmentConditionService {
 	}
 
 	// 查詢全部service
-	public Set<EquipmentConditionVO> getAll() {
+	public List<EquipmentConditionVO> getAll() {
 		return dao.getAll();
 	}
 }

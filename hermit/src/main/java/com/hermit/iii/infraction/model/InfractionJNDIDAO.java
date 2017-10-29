@@ -29,7 +29,7 @@ public class InfractionJNDIDAO implements InfractionDAO_interface {
 
 	// 新增，已測試
 	@Override
-	public Integer insert(InfractionVO inVO) {
+	public Integer insert(InfractionVO_original inVO) {
 		Integer result = 0;
 		try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(insert);) {
 			ps.setInt(1, inVO.getMemNO());
@@ -43,7 +43,7 @@ public class InfractionJNDIDAO implements InfractionDAO_interface {
 	}
 
 	@Override
-	public void update(InfractionVO infractionVO) {
+	public void update(InfractionVO_original infractionVO) {
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);) {
 
 			pstmt.setInt(1, infractionVO.getMemNO());
@@ -74,9 +74,9 @@ public class InfractionJNDIDAO implements InfractionDAO_interface {
 	}
 
 	@Override
-	public InfractionVO findByPrimaryKey(Integer inNO) {
+	public InfractionVO_original findByPrimaryKey(Integer inNO) {
 		ResultSet rs = null;
-		InfractionVO infractionVO = null;
+		InfractionVO_original infractionVO = null;
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ONE_STMT);) {
 
@@ -87,7 +87,7 @@ public class InfractionJNDIDAO implements InfractionDAO_interface {
 			if (rs.next()) {
 				// 確定有資料才開始new InfractionVO物件
 				// infractionVO = Domain objects
-				infractionVO = new InfractionVO();
+				infractionVO = new InfractionVO_original();
 				infractionVO.setInNO(rs.getInt("inNO"));
 				infractionVO.setMemNO(rs.getInt("memNO"));
 				infractionVO.setReason(rs.getString("reason"));
@@ -110,10 +110,10 @@ public class InfractionJNDIDAO implements InfractionDAO_interface {
 	}
 
 	@Override
-	public Set<InfractionVO> getAll() {
+	public Set<InfractionVO_original> getAll() {
 		ResultSet rs = null;
-		InfractionVO infractionVO = null;
-		Set<InfractionVO> set = new LinkedHashSet<InfractionVO>();
+		InfractionVO_original infractionVO = null;
+		Set<InfractionVO_original> set = new LinkedHashSet<InfractionVO_original>();
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ALL_STMT);) {
 
@@ -122,7 +122,7 @@ public class InfractionJNDIDAO implements InfractionDAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new InfractionVO物件
 				// infractionVO = Domain objects
-				infractionVO = new InfractionVO();
+				infractionVO = new InfractionVO_original();
 				infractionVO.setInNO(rs.getInt("inNO"));
 				infractionVO.setMemNO(rs.getInt("memNO"));
 				infractionVO.setReason(rs.getString("reason"));

@@ -21,7 +21,7 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT inNO,memNO,reason,inDate,empNO FROM Infraction ORDER BY inNO";
 
 	@Override
-	public Integer insert(InfractionVO infractionVO) {
+	public Integer insert(InfractionVO_original infractionVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		Integer result = 0;
@@ -61,7 +61,7 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 	}
 
 	@Override
-	public void update(InfractionVO infractionVO) {
+	public void update(InfractionVO_original infractionVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -137,11 +137,11 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 	}
 
 	@Override
-	public InfractionVO findByPrimaryKey(Integer inNO) {
+	public InfractionVO_original findByPrimaryKey(Integer inNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		InfractionVO infractionVO = null;
+		InfractionVO_original infractionVO = null;
 
 		try {
 			Class.forName(driver);
@@ -155,7 +155,7 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 			if (rs.next()) {
 				// 確定有資料才開始new InfractionVO物件
 				// infractionVO = Domain objects
-				infractionVO = new InfractionVO();
+				infractionVO = new InfractionVO_original();
 				infractionVO.setInNO(rs.getInt("inNO"));
 				infractionVO.setMemNO(rs.getInt("memNO"));
 				infractionVO.setReason(rs.getString("reason"));
@@ -194,12 +194,12 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 	}
 
 	@Override
-	public Set<InfractionVO> getAll() {
+	public Set<InfractionVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		InfractionVO infractionVO = null;
-		Set<InfractionVO> set = new LinkedHashSet<InfractionVO>();
+		InfractionVO_original infractionVO = null;
+		Set<InfractionVO_original> set = new LinkedHashSet<InfractionVO_original>();
 
 		try {
 			Class.forName(driver);
@@ -211,7 +211,7 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new InfractionVO物件
 				// infractionVO = Domain objects
-				infractionVO = new InfractionVO();
+				infractionVO = new InfractionVO_original();
 				infractionVO.setInNO(rs.getInt("inNO"));
 				infractionVO.setMemNO(rs.getInt("memNO"));
 				infractionVO.setReason(rs.getString("reason"));
@@ -254,7 +254,7 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 		InfractionJDBCDAO dao = new InfractionJDBCDAO();
 
 		// 新增
-		InfractionVO infractionVO1 = new InfractionVO();
+		InfractionVO_original infractionVO1 = new InfractionVO_original();
 		infractionVO1.setMemNO(40001);
 		infractionVO1.setReason("reason123");
 		infractionVO1.setInDate(java.sql.Date.valueOf("2017-10-08"));
@@ -262,7 +262,7 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 		dao.insert(infractionVO1);
 
 		// 修改初始資料第一筆
-		InfractionVO infractionVO2 = new InfractionVO();
+		InfractionVO_original infractionVO2 = new InfractionVO_original();
 		infractionVO2.setInNO(40001);
 		infractionVO2.setMemNO(40001);
 		infractionVO2.setReason("reason456");
@@ -271,7 +271,7 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 		dao.update(infractionVO2);
 
 		// 查詢初始資料第一筆
-		InfractionVO infractionVO3 = dao.findByPrimaryKey(40001);
+		InfractionVO_original infractionVO3 = dao.findByPrimaryKey(40001);
 		System.out.print(infractionVO3.getInNO() + ",");
 		System.out.print(infractionVO3.getMemNO() + ",");
 		System.out.print(infractionVO3.getReason() + ",");
@@ -280,8 +280,8 @@ public class InfractionJDBCDAO implements InfractionDAO_interface {
 		System.out.println("---------------------");
 
 		// 查詢全部
-		Set<InfractionVO> set = dao.getAll();
-		for (InfractionVO Infraction : set) {
+		Set<InfractionVO_original> set = dao.getAll();
+		for (InfractionVO_original Infraction : set) {
 			System.out.print(Infraction.getInNO() + ",");
 			System.out.print(Infraction.getMemNO() + ",");
 			System.out.print(Infraction.getReason() + ",");

@@ -3,7 +3,7 @@ package com.hermit.iii.member.model;
 import java.io.Serializable;
 import java.sql.*;
 
-public class MemberVO_hibernate implements Serializable {
+public class MemberVO_original implements Serializable {
 	private Integer memNO;
 	private String memTel;
 	private String memAccount;

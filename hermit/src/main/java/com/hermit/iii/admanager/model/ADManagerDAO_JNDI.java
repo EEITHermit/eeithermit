@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 import org.json.simple.JSONValue;
 
-import com.hermit.iii.dispatchlist.model.DispatchListVO;
+import com.hermit.iii.dispatchlist.model.DispatchListVO_orignal;
 
 public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 
@@ -262,7 +262,7 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 	@Override
 	public String getAllForJson() {
 		List<Map> list = new ArrayList<Map>();
-		DispatchListVO dlVO = null;
+		DispatchListVO_orignal dlVO = null;
 		String jsonString = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;

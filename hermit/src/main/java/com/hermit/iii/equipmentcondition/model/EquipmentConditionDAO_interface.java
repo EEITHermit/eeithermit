@@ -4,13 +4,13 @@ import java.util.*;
 
 public interface EquipmentConditionDAO_interface {
 
-	public void insert(EquipmentConditionVO equipmentConditionVO);
-
-	public void update(EquipmentConditionVO equipmentConditionVO);
+	public void insert(EquipmentConditionVO_orignal eqiupmentConditionVO_orignal);
+					   
+	public void update(EquipmentConditionVO_orignal eqiupmentConditionVO_orignal);
 
 	public void delete(Integer houseNO);
 
-	public EquipmentConditionVO findByPrimaryKey(Integer houseNO);
+	public EquipmentConditionVO_orignal findByPrimaryKey(Integer houseNO);
 
-	public Set<EquipmentConditionVO> getAll();
+	public Set<EquipmentConditionVO_orignal> getAll();
 }

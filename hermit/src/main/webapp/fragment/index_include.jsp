@@ -70,8 +70,8 @@
 		<div class="w3-sidebar w3-bar-block w3-animate-left navbar-fixed-top w3-dark-gray" style="color:white;display:none;font-size:20px;font-family:Microsoft JhengHei;" id="leftMenu">
 		  <button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large"><span>Close &times</span></button>
 		  <a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button"><span>首頁</span></a>
-		  <a href="#" class="w3-bar-item w3-button"><span>會員中心</span></a>
-		  <a href="#" class="w3-bar-item w3-button"><span>我的收藏</span></a>
+		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp" class="w3-bar-item w3-button"><span>會員中心</span></a>
+		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp" class="w3-bar-item w3-button"><span>我的收藏</span></a>
 		</div>	   
 	</div>
 	<div id="top" class="masthead" role="main">
@@ -84,9 +84,9 @@
 						<div class="form-group"  style="overflow:inherit">
 							<div class="input-group">
 								<input class="form-control input-lg" name="houstTitle" id="houstTitle" placeholder="請輸入您想尋找的關鍵字...">
-								<span class="input-group-addon" style="margin:0;padding:0;background-color: rgba(0,0,0,0)"><button type="submit" class="btn btn-success btn-lg">搜尋</button></span>
+								<span class="input-group-addon" style="margin:0;padding:0;background-color: rgba(0,0,0,0)"><button id="submit" type="button" class="btn btn-success btn-lg">搜尋</button></span>
 							</div>
-								 <div style="height:35vh; width:100%;overflow:hidden">
+								 <div style="height:38vh; width:100%;overflow:hidden">
 									<div id="effect" class="form-control" style="background-color:rgba(255,255,255,0.3);height:80%;overflow:auto">
 											<div class=" col-md-2" style="">
 												<select id="city" name="cityNO" class="form-control form-control-sm" style="border: 1px,solid,gray;">
@@ -104,44 +104,46 @@
 												<select id="houseForm" class="form-control form-control-sm" style="border: 1px,solid,gray;">
 												</select>
 											</div>
-										<div class="col-md-11  w3-margin text-left" style="padding-bottom:20px;background-color: rgba(255,255,255,0.6);overflow:auto">
-											<div>
-												<div class="w3-left" style="width:12%;margin-right:0">
-													<label class="radio-inline" >
+											<div class=" col-md-2">
+												<select id="houseSize" class="form-control form-control-sm" style="border: 1px,solid,gray;">
+													<option value="-1">&gt; 房屋大小  &lt;</option>
+													<option value="0">10坪以下</option>
+													<option value="1">10-15坪</option>
+													<option value="2">15-20坪</option>
+													<option value="3">20-30坪</option>
+													<option value="4">30坪以上</option>
+												</select>
+											</div>
+										<div class="col-md-11  w3-margin text-left" style="background-color: rgba(255,255,255,0.6);height:auto;overflow:auto">
+											<div style="height:30px">
+												<div class="w3-left" style="width:87%;">
+													<label class="radio-inline" style="margin-right:6%" >
 														<span class="glcwTeXYen" style="font-size:1.3em">租金 &gt;</span>
 													</label>
-												</div>
-												<div class="w3-right" style="width:87%;">
 													<label class="radio-inline">
-												      <input type="radio" name="optradio">5000以下
+												      <input type="radio" id="rent1" name="houseRent">5000以下
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="optradio">5000-10000元
+												      <input type="radio" id="rent2" name="houseRent">5000-10000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="optradio">10000-20000元
+												      <input type="radio" name="houseRent">10000-20000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="optradio">20000-30000元
+												      <input type="radio" name="houseRent">20000-30000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="optradio">30000元以上
-												    </label>
-												    <label class="radio-inline">
-												      <input style="display:inline;" type="radio" name="optradio">
-												      <input style="display:inline;width:4em;" type="text" name="rentBegin" maxlength="6">
-												      <span>-</span>
-												      <input style="display:inline;width:4em;" type="text" name="rentEnd"  maxlength="6">
+												      <input type="radio" name="houseRent">30000元以上
 												    </label>
 												</div>
 											</div>
-											<div style="height:60%">
-												<div style="width:6vw;;">
-													<label class="radio-inline">
+											<div style="height:150px">
+												<div class="col-md-12">
+													<label class="radio-inline w3-left" style="display:block;padding-left:4px">
 															<span class="glcwTeXYen" style="font-size:1.3em">其他設備 :</span>
 													</label>
 												</div>
-												<div style="width:86%;">
+												<div id="equid" style="width:86%;">
 													<div class="col-md-2">
 														<label class="radio-inline">
 													      <input type="checkbox" name="TV">電視
@@ -231,7 +233,7 @@
 											</div>
 										</div>									
 									</div>
-									<span id="button" class="w3-right" style="font-size:10px;background-color: rgba(255,255,255,0.7);color:black;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">進階搜尋<span class="glyphicon glyphicon-chevron-down"></span></span>
+									<span id="advencedSearch" class="w3-right" style="line-height:25px;width:80px;font-size:10px;background-color: rgba(255,255,255,0.7);color:black;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">進階搜尋<span class="glyphicon glyphicon-chevron-down"></span></span>
 								</div>
 							<div class="col-md-5 col-sm-4">
 							</div>
@@ -257,7 +259,7 @@
 	<script>
 		$( function() {
 			var spanArrow = $(".glyphicon-chevron-down"); 
-			var btn = $( "#button" );
+			var advencedSearch = $( "#advencedSearch" );
 			var effect = $( "#effect" );
 			var leftMenu = $("#leftMenu");
 			var path = "<%= request.getContextPath()%>";
@@ -265,7 +267,8 @@
 			var borough = $("#borough");
 			var houseForm= $("#houseForm");
 			var houseType= $("#houseType");
-			
+			var houseSize = $("#houseSize");
+			var houseTitle = $("#houstTitle");
 			function runEffect(){
 				effect.toggle( "blind",  500 );
 				if(spanArrow.attr('class') == "glyphicon glyphicon-chevron-up"){
@@ -275,13 +278,13 @@
 				}
 			};
 			
-			btn.on( "click", function() {
+			advencedSearch.on( "click", function() {
 			      runEffect();
 			});
 		    effect.hide(); 
 		    $.post(path+"/HouseFormServlet.do",{"action":"getAllForm"},function(data){
 				var formData = $.parseJSON(data).list;
-				houseForm.append($("<option></option>").text("房屋型態").val(-1));
+				houseForm.append($("<option></option>").text("> 房屋型態 <").val(-1));
 				$.each(formData,function(index,value){
 					var opt = $("<option></option>").text(value.hForm);
 					opt.val(value.formNO);
@@ -290,7 +293,7 @@
 		    })
 		    $.post(path+"/HouseTypeServlet.do",{"action":"getAllType"},function(data){
 				var typeData = $.parseJSON(data).list;
-				houseType.append($("<option></option>").text("房屋類型").val(-1));
+				houseType.append($("<option></option>").text("> 房屋類型 <").val(-1));
 				$.each(typeData,function(index,value){
 					var opt = $("<option></option>").text(value.hType);
 					opt.val(value.typeNO);
@@ -315,6 +318,7 @@
 				$.post(path+"/BoroughsServlet.do",{"action":"getAllBoroughByCity","cityNO":city.val()},function(data){
 					var boroughData = $.parseJSON(data).list;
 					borough.empty();
+					borough.append($("<option></option>").text("> 鄉鎮區 <").val(-1));
 					$.each(boroughData,function(index,value){
 						var opt = $("<option></option>").text(value.boroughName);
 						opt.val(value.boroughNO)
@@ -327,6 +331,43 @@
 			})
 // 			初始化下拉選單
 			getCity();	
+			var radioButtons = $("input:radio[name='houseRent']");
+			var chkboxButtions = $("input:checkbox");
+			$("#submit").on("click",function(){
+				var jsonStr = JSON.stringify({
+						TV:$("#equid label input[name='TV']").prop('checked'),
+						aircondition:$("#equid label input[name='aircondition']").prop('checked'),
+						refrigerator:$("#equid label input[name='refrigerator']").prop('checked'),
+						waterHeater:$("#equid label input[name='waterHeater']").prop('checked'),
+						gas:$("#equid label input[name='gas']").prop('checked'),
+						theFourthStation:$("#equid label input[name='theFourthStation']").prop('checked'),
+						net:$("#equid label input[name='net']").prop('checked'),
+						washing:$("#equid label input[name='washing']").prop('checked'),
+						bed:$("#equid label input[name='bed']").prop('checked'),
+						wardrobe:$("#equid label input[name='wardrobe']").prop('checked'),
+						sofa:$("#equid label input[name='sofa']").prop('checked'),
+						parking:$("#equid label input[name='parking']").prop('checked'),
+						elevator:$("#equid label input[name='elevator']").prop('checked'),
+						balcony:$("#equid label input[name='balcony']").prop('checked'),
+						permitCook:$("#equid label input[name='permitCook']").prop('checked'),
+						pet:$("#equid label input[name='pet']").prop('checked'),
+						closeMRT:$("#equid label input[name='closeMRT']").prop('checked'),	
+				});
+				var searchStr = {
+						houseTitle:houseTitle.val(),
+						cityNO:city.val(),
+						boroughNO:borough.val(),
+						typeNO:houseType.val(),
+						formNO:houseForm.val(),
+						houseSize:houseSize.val(),
+						houseRent:radioButtons.index(radioButtons.filter(':checked')),
+						equid:jsonStr
+				}
+			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
+					console.log(data);
+				})
+			})
+			
 		});
 			function openLeftMenu() {
 			    document.getElementById("leftMenu").style.display = "block";

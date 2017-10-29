@@ -1,6 +1,6 @@
 package com.hermit.iii.lease.model;
 
-import java.io.*;
+import java.io.Serializable;
 import java.sql.*;
 
 public class LeaseVO implements Serializable {

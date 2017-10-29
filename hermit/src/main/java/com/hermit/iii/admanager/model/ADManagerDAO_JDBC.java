@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.json.simple.JSONValue;
 
-import com.hermit.iii.dispatchlist.model.DispatchListVO;
+import com.hermit.iii.dispatchlist.model.DispatchListVO_orignal;
 
 public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 	private static final String INSERT =

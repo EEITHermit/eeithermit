@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HouseService {
-	private HouseDAO_interface dao ;
+	private HouseDAO_interface_hibernate dao ;
 	
 	public HouseService(){
-		dao = new HouseDAO_JNDI();
+		dao = new HouseDAO_hibernate();
 	}
 	
-	public HouseVO insertHouse(String houseTitle,Integer cityNO,Integer boroughNO,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
+	public HouseVO insertHouse(String houseTitle,Integer cityNO,Integer boroughNO,String previewPic,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
 		HouseVO vo = new HouseVO();
 		vo.setHouseTitle(houseTitle);
 		vo.setCityNO(cityNO);
 		vo.setBoroughNO(boroughNO);
+		vo.setPreviewPic(previewPic);
 		vo.setHighestFloor(highestFloor);
 		vo.setNowFloor(nowFloor);
 		vo.setHouseStatus(houseStatus);
@@ -31,12 +32,13 @@ public class HouseService {
 		return vo;
 	}
 	
-	public HouseVO updateHouse(Integer houseNO,String houseTitle,Integer cityNO,Integer boroughNO,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
+	public HouseVO updateHouse(Integer houseNO,String houseTitle,Integer cityNO,Integer boroughNO,String previewPic,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
 		HouseVO vo = new HouseVO();
 		vo.setHouseNO(houseNO);
 		vo.setHouseTitle(houseTitle);
 		vo.setCityNO(cityNO);
 		vo.setBoroughNO(boroughNO);
+		vo.setPreviewPic(previewPic);
 		vo.setHighestFloor(highestFloor);
 		vo.setNowFloor(nowFloor);
 		vo.setHouseStatus(houseStatus);
@@ -78,5 +80,8 @@ public class HouseService {
     //子傑加，House加入子表，查單一
     public HouseVO GET_ONE_HOUSE_FK(Integer houseNO){
     	return dao.GET_ONE_HOUSE_FK(houseNO);
+    }
+    public String advencedSearch(String searchStr){
+    	return dao.advencedSearch(searchStr);
     }
 }

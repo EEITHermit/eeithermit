@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONValue;
 import com.hermit.iii.city.model.CityService;
-import com.hermit.iii.city.model.CityVO;
+import com.hermit.iii.city.model.CityVO_original;
 import java.io.IOException;
 
 
@@ -29,11 +29,11 @@ public class CityServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String action = request.getParameter("action");
 		CityService svc=new CityService();
-		CityVO vo;
+		CityVO_original vo;
 		
 		
 		if("getAllCity".equals(action)){
-			List<CityVO> list=svc.getAllCity();
+			List<CityVO_original> list=svc.getAllCity();
 			List list2=new LinkedList();
 			PrintWriter out=response.getWriter();
 			for(int i=0;i<list.size();i++){

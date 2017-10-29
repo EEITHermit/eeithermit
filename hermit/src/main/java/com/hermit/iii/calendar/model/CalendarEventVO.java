@@ -9,9 +9,9 @@ import com.hermit.iii.member.model.MemberVO;
 public class CalendarEventVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer eventNO;
-	private EmpVO empVO = new EmpVO();
-	private MemberVO memberVO = new MemberVO();
-	private HouseVO houseVO = new HouseVO();
+	private Integer empNO;
+	private Integer memNO;
+	private Integer houseNO;
 	private Timestamp eventStartTime;
 	private Timestamp eventEndTime;
 	private String ps;
@@ -21,23 +21,23 @@ public class CalendarEventVO implements Serializable {
 	public void setEventNO(Integer eventNO) {
 		this.eventNO = eventNO;
 	}
-	public EmpVO getEmpVO() {
-		return empVO;
+	public Integer getEmpNO() {
+		return empNO;
 	}
-	public void setEmpVO(EmpVO empVO) {
-		this.empVO = empVO;
+	public void setEmpNO(Integer empNO) {
+		this.empNO = empNO;
 	}
-	public MemberVO getMemberVO() {
-		return memberVO;
+	public Integer getMemNO() {
+		return memNO;
 	}
-	public void setMemberVO(MemberVO memberVO) {
-		this.memberVO = memberVO;
+	public void setMemNO(Integer memNO) {
+		this.memNO = memNO;
 	}
-	public HouseVO getHouseVO() {
-		return houseVO;
+	public Integer getHouseNO() {
+		return houseNO;
 	}
-	public void setHouseVO(HouseVO houseVO) {
-		this.houseVO = houseVO;
+	public void setHouseNO(Integer houseNO) {
+		this.houseNO = houseNO;
 	}
 	public Timestamp getEventStartTime() {
 		return eventStartTime;
@@ -57,7 +57,4 @@ public class CalendarEventVO implements Serializable {
 	public void setPs(String ps) {
 		this.ps = ps;
 	}
-	
-	
-	
 }

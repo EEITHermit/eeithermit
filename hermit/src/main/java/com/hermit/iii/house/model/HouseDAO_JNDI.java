@@ -6,13 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import org.json.simple.JSONValue;
 
 public class HouseDAO_JNDI implements HouseDAO_interface {
 
@@ -37,28 +41,28 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	private static final String GET_ALL_JOIN_FK = " SELECT A.houseNO,A.houseTitle,A.cityNO,D.cityName ,A.boroughNO ,E.boroughName,A.highestFloor,A.nowFloor,A.houseStatus,A.houseRent,A.houseCharge,A.waterRate,A.powerRate,A.houseVideo,A.TypeNO,B.hType,A.formNO,C.hForm,A.houseAddr,A.houseSize from House as A JOIN  HouseType as B on A.typeNO =B.typeNO JOIN HouseForm as C on A.formNO=C.formNO JOIN city as D on A.cityNO=D.cityNO JOIN Boroughs as E on A.boroughNO=E.boroughNO";
 	private static final String GET_ONE_HOUSE_FK = "SELECT A.houseNO,A.houseTitle,A.cityNO,D.cityName ,A.boroughNO,E.boroughName,A.highestFloor,A.nowFloor,A.houseStatus,A.houseRent,A.houseCharge,A.waterRate,A.powerRate,A.houseVideo,A.TypeNO,B.hType,A.formNO,C.hForm,A.houseAddr,A.houseSize from House as A JOIN  HouseType as B on A.typeNO =B.typeNO JOIN HouseForm as C on A.formNO=C.formNO  JOIN city as D on A.cityNO=D.cityNO JOIN Boroughs as E on A.boroughNO=E.boroughNO where A.houseNO=?";
 	@Override
-	public void insert(HouseVO houseVO) {
+	public void insert(HouseVO_orignal HouseVO_orignal) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, houseVO.getHouseTitle());
-			pstmt.setInt(2, houseVO.getCityNO());
-			pstmt.setInt(3, houseVO.getBoroughNO());
-			pstmt.setInt(4, houseVO.getHighestFloor());
-			pstmt.setInt(5, houseVO.getNowFloor());
-			pstmt.setString(6, houseVO.getHouseStatus());
-			pstmt.setInt(7, houseVO.getHouseRent());
-			pstmt.setInt(8, houseVO.getHouseCharge());
-			pstmt.setString(9, houseVO.getWaterRate());
-			pstmt.setString(10, houseVO.getPowerRate());
-			pstmt.setString(11, houseVO.getHouseVideo());
-			pstmt.setInt(12, houseVO.getTypeNO());
-			pstmt.setInt(13, houseVO.getFormNO());
-			pstmt.setString(14, houseVO.getHouseAddr());
-			pstmt.setDouble(15, houseVO.getHouseSize());
+			pstmt.setString(1, HouseVO_orignal.getHouseTitle());
+			pstmt.setInt(2, HouseVO_orignal.getCityNO());
+			pstmt.setInt(3, HouseVO_orignal.getBoroughNO());
+			pstmt.setInt(4, HouseVO_orignal.getHighestFloor());
+			pstmt.setInt(5, HouseVO_orignal.getNowFloor());
+			pstmt.setString(6, HouseVO_orignal.getHouseStatus());
+			pstmt.setInt(7, HouseVO_orignal.getHouseRent());
+			pstmt.setInt(8, HouseVO_orignal.getHouseCharge());
+			pstmt.setString(9, HouseVO_orignal.getWaterRate());
+			pstmt.setString(10, HouseVO_orignal.getPowerRate());
+			pstmt.setString(11, HouseVO_orignal.getHouseVideo());
+			pstmt.setInt(12, HouseVO_orignal.getTypeNO());
+			pstmt.setInt(13, HouseVO_orignal.getFormNO());
+			pstmt.setString(14, HouseVO_orignal.getHouseAddr());
+			pstmt.setDouble(15, HouseVO_orignal.getHouseSize());
 			pstmt.execute();
 
 		} catch (SQLException se) {
@@ -82,28 +86,28 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	}
 
 	@Override
-	public void update(HouseVO houseVO) {
+	public void update(HouseVO_orignal HouseVO_orignal) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			pstmt.setString(1, houseVO.getHouseTitle());
-			pstmt.setInt(2, houseVO.getCityNO());
-			pstmt.setInt(3, houseVO.getBoroughNO());
-			pstmt.setInt(4, houseVO.getHighestFloor());
-			pstmt.setInt(5, houseVO.getNowFloor());
-			pstmt.setString(6, houseVO.getHouseStatus());
-			pstmt.setInt(7, houseVO.getHouseRent());
-			pstmt.setInt(8, houseVO.getHouseCharge());
-			pstmt.setString(9, houseVO.getWaterRate());
-			pstmt.setString(10, houseVO.getPowerRate());
-			pstmt.setString(11, houseVO.getHouseVideo());
-			pstmt.setInt(12, houseVO.getTypeNO());
-			pstmt.setInt(13, houseVO.getFormNO());
-			pstmt.setString(14, houseVO.getHouseAddr());
-			pstmt.setDouble(15, houseVO.getHouseSize());
-			pstmt.setInt(16, houseVO.getHouseNO());
+			pstmt.setString(1, HouseVO_orignal.getHouseTitle());
+			pstmt.setInt(2, HouseVO_orignal.getCityNO());
+			pstmt.setInt(3, HouseVO_orignal.getBoroughNO());
+			pstmt.setInt(4, HouseVO_orignal.getHighestFloor());
+			pstmt.setInt(5, HouseVO_orignal.getNowFloor());
+			pstmt.setString(6, HouseVO_orignal.getHouseStatus());
+			pstmt.setInt(7, HouseVO_orignal.getHouseRent());
+			pstmt.setInt(8, HouseVO_orignal.getHouseCharge());
+			pstmt.setString(9, HouseVO_orignal.getWaterRate());
+			pstmt.setString(10, HouseVO_orignal.getPowerRate());
+			pstmt.setString(11, HouseVO_orignal.getHouseVideo());
+			pstmt.setInt(12, HouseVO_orignal.getTypeNO());
+			pstmt.setInt(13, HouseVO_orignal.getFormNO());
+			pstmt.setString(14, HouseVO_orignal.getHouseAddr());
+			pstmt.setDouble(15, HouseVO_orignal.getHouseSize());
+			pstmt.setInt(16, HouseVO_orignal.getHouseNO());
 			pstmt.execute();
 			
 		} catch (SQLException se) {
@@ -158,10 +162,10 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	}
 
 	@Override
-	public HouseVO findByPrimaryKey(Integer houseNO) {
+	public HouseVO_orignal findByPrimaryKey(Integer houseNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo = new HouseVO();
+		HouseVO_orignal vo = new HouseVO_orignal();
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
@@ -209,18 +213,18 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	}
 
 	@Override
-	public List<HouseVO> getAll() {
+	public List<HouseVO_orignal> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo;
+		HouseVO_orignal vo;
 		ResultSet rs = null;
-		List<HouseVO> list = new LinkedList<HouseVO>();
+		List<HouseVO_orignal> list = new LinkedList<HouseVO_orignal>();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				vo = new HouseVO();
+				vo = new HouseVO_orignal();
 				vo.setHouseTitle(rs.getString("houseTitle"));
 				vo.setCityNO(rs.getInt("cityNO"));
 				vo.setBoroughNO(rs.getInt("boroughNO"));
@@ -261,9 +265,9 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	}
 
 	@Override
-	public ArrayList<HouseVO> autoCompleteH(String address) {
-		HouseVO houseVO = new HouseVO();
-		ArrayList<HouseVO> array = new ArrayList<HouseVO>();
+	public ArrayList<HouseVO_orignal> autoCompleteH(String address) {
+		HouseVO_orignal HouseVO_orignal = new HouseVO_orignal();
+		ArrayList<HouseVO_orignal> array = new ArrayList<HouseVO_orignal>();
 		Connection conn = null;
 		try {
 			conn = ds.getConnection();
@@ -271,9 +275,9 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 			ps.setString(1, "%" + address + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				houseVO.setHouseNO(rs.getInt("houseNO"));
-				houseVO.setHouseAddr(rs.getString("houseAddr"));
-				array.add(houseVO);
+				HouseVO_orignal.setHouseNO(rs.getInt("houseNO"));
+				HouseVO_orignal.setHouseAddr(rs.getString("houseAddr"));
+				array.add(HouseVO_orignal);
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -315,18 +319,18 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	}
 
 	@Override
-	public List<HouseVO> GET_ALL_JOIN_FK() {
+	public List<HouseVO_orignal> GET_ALL_JOIN_FK() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo;
+		HouseVO_orignal vo;
 		ResultSet rs = null;
-		List<HouseVO> list = new LinkedList<HouseVO>();
+		List<HouseVO_orignal> list = new LinkedList<HouseVO_orignal>();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_JOIN_FK);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				vo = new HouseVO();
+				vo = new HouseVO_orignal();
 				vo.setHouseTitle(rs.getString("houseTitle"));
 				vo.setCityNO(rs.getInt("cityNO"));
 				vo.setCityName(rs.getString("cityName"));
@@ -371,10 +375,10 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 	}
 
 	@Override
-	public HouseVO GET_ONE_HOUSE_FK(Integer houseNO) {
+	public HouseVO_orignal GET_ONE_HOUSE_FK(Integer houseNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo = new HouseVO();
+		HouseVO_orignal vo = new HouseVO_orignal();
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
@@ -404,6 +408,56 @@ public class HouseDAO_JNDI implements HouseDAO_interface {
 				vo.setHouseNO(rs.getInt("houseNO"));
 			}
 			return vo;
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public String advencedSearch(String searchStr) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(searchStr);
+			rs = pstmt.executeQuery();
+			List<Map> searchList = new LinkedList<Map>();
+			while (rs.next()) {
+				Map m1 = new LinkedHashMap();
+				m1.put("houseNO", rs.getString("houseNO"));
+				m1.put("houseTitle", rs.getString("houseTitle"));
+				m1.put("cityName", rs.getString("cityName"));
+				m1.put("boroughName", rs.getString("boroughName"));
+				m1.put("highestFloor", rs.getString("highestFloor"));
+				m1.put("nowFloor", rs.getString("nowFloor"));
+				m1.put("houseRent", rs.getString("houseRent"));
+				m1.put("hType", rs.getString("hType"));
+				m1.put("hForm", rs.getString("hForm"));
+				m1.put("houseAddr", rs.getString("houseAddr"));
+				m1.put("houseSize", rs.getString("houseSize"));
+				searchList.add(m1);
+			}
+			Map m2 = new LinkedHashMap();
+			m2.put("searchList", searchList);
+			String jsonStr = JSONValue.toJSONString(m2);
+			return jsonStr;
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {

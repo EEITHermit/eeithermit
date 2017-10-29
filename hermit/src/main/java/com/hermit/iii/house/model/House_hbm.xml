@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hermit.iii.house.model.HouseVO" table="House">
+		<id name="houseNO" column="houseNO">
+			<generator class="identity" />
+		</id>
+		<property name="houseTitle" column="houseTitle" />
+		<property name="cityNO" column="cityNO" />
+		<property name="boroughNO" column="boroughNO" />
+		<property name="previewPic" column="previewPic" />
+		<property name="highestFloor" column="highestFloor" />
+		<property name="nowFloor" column="nowFloor" />
+		<property name="houseStatus" column="houseStatus" />
+		<property name="houseRent" column="houseRent" />
+		<property name="houseCharge" column="houseCharge" />
+		<property name="waterRate" column="waterRate" />
+		<property name="powerRate" column="powerRate" />
+		<property name="houseVideo" column="houseVideo" />
+		<property name="typeNO" column="typeNO" />
+		<property name="formNO" column="formNO" />
+		<property name="houseAddr" column="houseAddr" />
+		<property name="houseSize" column="houseSize" />
+	</class>
+</hibernate-mapping>

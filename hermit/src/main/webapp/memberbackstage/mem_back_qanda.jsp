@@ -20,14 +20,26 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
+<link href='<%= request.getContextPath() %>/css/jqueryText/jquery-te-1.4.0.css' rel='stylesheet' />
+
+<style>
+	#queryTable{
+ 		display:none; 
+	}
+	#commentForm{
+  		display:none;  
+	}
+</style>
+
 </head>
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
 	<style>
-	a:link, a:visited, a:hover ,a:active{
-	    text-align: left;
-	}
-	</style>
+		a:link, a:visited, a:hover, a:active {
+			text-align: left;
+		}
+
+</style>
 	<div id="content">
 
 		<div class="container">
@@ -39,7 +51,8 @@
 					<div class="account-container">
 
 						<div class="account-avatar">
-							<img src="<%=request.getContextPath()%>/css/images/god.ico" alt="" class="thumbnail" />
+							<img src="<%=request.getContextPath()%>/css/images/god.ico"
+								alt="" class="thumbnail" />
 						</div>
 						<!-- /account-avatar -->
 
@@ -112,9 +125,59 @@
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
+							<!-- 模式選擇按鈕 -->
+							<button id="queryBT">查詢留言</button>
+							<button id="commentBT">客服申請</button>
+							<!-- 查詢留言區域 -->
+							<table id="queryTable">
+								<thead>
+									<tr>
+										<th>留言時間</th>
+										<th>留言類型</th>
+										<th>房屋連結</th>
+										<th>留言內容</th>
+										<th>回覆時間</th>
+										<th>回覆內容</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="qaVO" items="${array}">
+										<tr>
+											<td>${qaVO.qTime}</td>
+											<c:if test="${qaVO.qaType == 0}">
+												<td>客服</td>
+											</c:if>
+											<c:if test="${qaVO.qaType == 1}">
+												<td>詢問</td>
+											</c:if>
+											<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+											<td>${qaVO.qDetail}</td>
+											<td>${qaVO.aTime}</td>
+											<td>${qaVO.aDetail}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<!-- 客服申請區域 -->
+							<form id="commentForm"
+								action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
+								method="POST">
+								請選擇房屋：<select name="houseNO">
+									<option>請選擇</option>
+									<!-- 假資料  待hibernate做完補上-->
+									<option value="20001">大馬路</option>
+									<!-- filter會傳來houseArray 為此會員所租賃的房屋 -->
+									<c:forEach var="houseVO" items="${houseArray}">
+										<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
+									</c:forEach>
+								</select> 申訴內容：
+								<textarea id="commentArea" class="commentArea" name="qDetail"
+									style="resize: none;"></textarea>
+								<input type="button" value="提交" onclick="check()" />
+							</form>
 						</div>
 						<!-- /widget-content -->
-						
+
 					</div>
 					<!-- /widget -->
 				</div>
@@ -146,5 +209,30 @@
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
+	<script>
+	document.addEventListener("DOMContentLoaded",work);
+	
+	function work(){
+		//跳出查詢畫面
+		$("#queryBT").click(function(){
+			$("#queryTable").toggle("fold",true,1000);
+			$("#commentForm").toggle("fold",false,1000);
+		});
+		//跳出投訴頁面
+		$("#commentBT").click(function(){
+			$("#queryTable").toggle("fold",false,1000);
+			$("#commentForm").toggle("fold",true,1000);
+		});
+		//產生jqueyText
+		$('.commentArea').jqte();
+	};
+	
+	function check(){
+		if(confirm("是否確認送出投訴")){
+			(document.getElementById("commentForm")).submit();
+		}
+	};
+</script>
 </body>
 </html>

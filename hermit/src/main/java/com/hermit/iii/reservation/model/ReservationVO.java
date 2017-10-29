@@ -10,42 +10,49 @@ import com.hermit.iii.member.model.MemberVO;
 public class ReservationVO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private Integer reservationNo;
-	private MemberVO memberVO = new MemberVO();
-	private HouseVO houseVO = new HouseVO();
-	private EmpVO empVO = new EmpVO();
+	private Integer reservationNO;
+	private Integer memNO;
+	private Integer houseNO;
+	private Integer empNO;
 	private Integer boroughNO;
+	private Boolean takedOver;
 	private String exceptTime;
 	private Timestamp applyTime;
-	public Integer getReservationNo() {
-		return reservationNo;
+	public Integer getReservationNO() {
+		return reservationNO;
 	}
-	public void setReservationNo(Integer reservationNo) {
-		this.reservationNo = reservationNo;
+	public void setReservationNO(Integer reservationNO) {
+		this.reservationNO = reservationNO;
 	}
-	public MemberVO getMemberVO() {
-		return memberVO;
+	public Integer getMemNO() {
+		return memNO;
 	}
-	public void setMemberVO(MemberVO memberVO) {
-		this.memberVO = memberVO;
+	public void setMemNO(Integer memNO) {
+		this.memNO = memNO;
 	}
-	public HouseVO getHouseVO() {
-		return houseVO;
+	public Integer getHouseNO() {
+		return houseNO;
 	}
-	public void setHouseVO(HouseVO houseVO) {
-		this.houseVO = houseVO;
+	public void setHouseNO(Integer houseNO) {
+		this.houseNO = houseNO;
 	}
-	public EmpVO getEmpVO() {
-		return empVO;
+	public Integer getEmpNO() {
+		return empNO;
 	}
-	public void setEmpVO(EmpVO empVO) {
-		this.empVO = empVO;
+	public void setEmpNO(Integer empNO) {
+		this.empNO = empNO;
 	}
 	public Integer getBoroughNO() {
 		return boroughNO;
 	}
 	public void setBoroughNO(Integer boroughNO) {
 		this.boroughNO = boroughNO;
+	}
+	public Boolean getTakedOver() {
+		return takedOver;
+	}
+	public void setTakedOver(Boolean takedOver) {
+		this.takedOver = takedOver;
 	}
 	public String getExceptTime() {
 		return exceptTime;
@@ -59,6 +66,6 @@ public class ReservationVO implements Serializable{
 	public void setApplyTime(Timestamp applyTime) {
 		this.applyTime = applyTime;
 	}
-		
+	
 	
 }

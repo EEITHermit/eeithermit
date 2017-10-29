@@ -18,6 +18,7 @@ import org.json.simple.JSONValue;
 
 import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.house.model.HouseVO_orignal;
 
 @WebServlet("/House.do")
 public class HouseServlet extends HttpServlet {
@@ -29,8 +30,7 @@ public class HouseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
-		
+
 		String action =request.getParameter("action");
 		HouseService svc = new HouseService(); 
 		HouseVO vo ;
@@ -38,6 +38,7 @@ public class HouseServlet extends HttpServlet {
 		String houseTitle = null;
 		Integer cityNO = null;
 		Integer boroughNO = null;
+		String previewPic=null;
 		Integer highestFloor = null;
 		Integer nowFloor = null;
 		String houseStatus = null;
@@ -57,6 +58,7 @@ public class HouseServlet extends HttpServlet {
 			houseTitle = request.getParameter("houseTitle");
 			cityNO = Integer.valueOf(request.getParameter("cityNO"));
 			boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
+			previewPic = request.getParameter("previewPic");
 			highestFloor = Integer.valueOf(request.getParameter("highestFloor"));
 			nowFloor = Integer.valueOf(request.getParameter("nowFloor"));
 			houseStatus = request.getParameter("houseStatus");
@@ -69,7 +71,7 @@ public class HouseServlet extends HttpServlet {
 			formNO = Integer.valueOf(request.getParameter("formNO"));
 			houseAddr = request.getParameter("houseAddr");
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
-			svc.insertHouse(houseTitle, cityNO, boroughNO, highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
+			svc.insertHouse(houseTitle, cityNO, boroughNO, previewPic,highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
 			response.sendRedirect("/hermit/House/House_management.jsp");
 			
 			System.out.println("Insert Success");
@@ -82,6 +84,7 @@ public class HouseServlet extends HttpServlet {
 			houseTitle = request.getParameter("houseTitle");
 			cityNO = Integer.valueOf(request.getParameter("cityNO"));
 			boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
+			previewPic = request.getParameter("previewPic");
 			highestFloor = Integer.valueOf(request.getParameter("highestFloor"));
 			nowFloor = Integer.valueOf(request.getParameter("nowFloor"));
 			houseStatus = request.getParameter("houseStatus");
@@ -94,7 +97,7 @@ public class HouseServlet extends HttpServlet {
 			formNO = Integer.valueOf(request.getParameter("formNO"));
 			houseAddr = request.getParameter("houseAddr");
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
-			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO, highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
+			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO,previewPic, highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
 //			RequestDispatcher rd=request.getRequestDispatcher("/House/House_management.jsp");
 //			rd.forward(request, response);
 			response.sendRedirect("/hermit/House/House_management.jsp");
@@ -130,49 +133,48 @@ public class HouseServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("SignatureUpdate.jsp");
 			rd.forward(request,response);
 		}
-		if("getAllHouseForJson".equals(action)){
-			System.out.println("asd");
-			response.setHeader("content-type", "text/html;charset=UTF-8");
-			response.setCharacterEncoding("UTF-8");
-			List<HouseVO> list = svc.getAllHouse_FK();
-			List list2 = new LinkedList();
-			PrintWriter out = response.getWriter();
-			for(int i = 0; i<list.size();i++){
-				Map m1 = new LinkedHashMap();
-				vo = list.get(i);
-				m1.put("houseNO",vo.getHouseNO());
-				m1.put("houseTitle", vo.getHouseTitle());
-				m1.put("cityNO", vo.getCityNO());
-				m1.put("cityName", vo.getCityName());
-				m1.put("boroughNO", vo.getBoroughNO());
-				m1.put("boroughName", vo.getBoroughName());
-				m1.put("highestFloor", vo.getHighestFloor());
-				m1.put("nowFloor", vo.getNowFloor());
-				m1.put("houseStatus", vo.getHouseStatus());
-				m1.put("houseRent", vo.getHouseRent());
-				m1.put("houseCharge", vo.getHouseCharge());
-				m1.put("waterRate", vo.getWaterRate());
-				m1.put("powerRate", vo.getPowerRate());
-				m1.put("houseVideo", vo.getHouseVideo());
-				m1.put("typeNO", vo.getTypeNO());
-				m1.put("hType", vo.gethType());  
-				m1.put("formNO", vo.getFormNO());
-				m1.put("hForm", vo.gethForm());
-				m1.put("houseAddr", vo.getHouseAddr());
-				m1.put("houseSize", vo.getHouseSize());
-				m1.put("hType", vo.gethType());
-				m1.put("hForm", vo.gethForm());
-				list2.add(m1);
-			}
-			Map m2 = new LinkedHashMap();
-			m2.put("list",list2);
-			String strJson = JSONValue.toJSONString(m2);
-			out.println(strJson);
-			out.flush();
-			out.close();
-			System.out.println("Get All For JSON success");
-		}
-		
+//		if("getAllHouseForJson".equals(action)){
+//			response.setHeader("content-type", "text/html;charset=UTF-8");
+//			response.setCharacterEncoding("UTF-8");
+//			List<HouseVO> list = svc.getAllHouse_FK();
+//			List list2 = new LinkedList();
+//			PrintWriter out = response.getWriter();
+//			for(int i = 0; i<list.size();i++){
+//				Map m1 = new LinkedHashMap();
+//				vo = list.get(i);
+//				m1.put("houseNO",vo.getHouseNO());
+//				m1.put("houseTitle", vo.getHouseTitle());
+//				m1.put("cityNO", vo.getCityNO());
+//				m1.put("cityName", vo.getCityName());
+//				m1.put("boroughNO", vo.getBoroughNO());
+//				m1.put("boroughName", vo.getBoroughName());
+//				m1.put("highestFloor", vo.getHighestFloor());
+//				m1.put("nowFloor", vo.getNowFloor());
+//				m1.put("houseStatus", vo.getHouseStatus());
+//				m1.put("houseRent", vo.getHouseRent());
+//				m1.put("houseCharge", vo.getHouseCharge());
+//				m1.put("waterRate", vo.getWaterRate());
+//				m1.put("powerRate", vo.getPowerRate());
+//				m1.put("houseVideo", vo.getHouseVideo());
+//				m1.put("typeNO", vo.getTypeNO());
+//				m1.put("hType", vo.gethType());  
+//				m1.put("formNO", vo.getFormNO());
+//				m1.put("hForm", vo.gethForm());
+//				m1.put("houseAddr", vo.getHouseAddr());
+//				m1.put("houseSize", vo.getHouseSize());
+//				m1.put("hType", vo.gethType());
+//				m1.put("hForm", vo.gethForm());
+//				list2.add(m1);
+//			}
+//			Map m2 = new LinkedHashMap();
+//			m2.put("list",list2);
+//			String strJson = JSONValue.toJSONString(m2);
+//			out.println(strJson);
+//			out.flush();
+//			out.close();
+//			System.out.println("Get All For JSON success");
+//		}
+//		
 	}
 
 }
