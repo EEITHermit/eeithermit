@@ -11,19 +11,13 @@
 		<property name="houseTitle" column="houseTitle" />
 
 <!-- 		<property name="cityNO" column="cityNO" /> -->
-		<many-to-one name="CityVO" class="com.hermit.iii.city.model.CityVO" lazy="false">
+		<many-to-one name="cityVO" class="com.hermit.iii.city.model.CityVO" lazy="false">
 		<column name="cityNO"></column>
-		</many-to-one>
-		<many-to-one name="CityVO" class="com.hermit.iii.city.model.CityVO" lazy="false">
-		<column name="cityName"></column>
 		</many-to-one>
 
 <!-- 		<property name="boroughNO" column="boroughNO" /> -->
-		<many-to-one name="BoroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
+		<many-to-one name="boroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
 		<column name="boroughNO"></column>
-		</many-to-one>
-		<many-to-one name="BoroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
-		<column name="boroughName"></column>
 		</many-to-one>
 		
 		<property name="previewPic" column="previewPic"/>
@@ -35,8 +29,16 @@
 		<property name="waterRate" column="waterRate" />
 		<property name="powerRate" column="powerRate" />
 		<property name="houseVideo" column="houseVideo" />
-		<property name="typeNO" column="typeNO" />
-		<property name="formNO" column="formNO" />
+<!-- 		<property name="typeNO" column="typeNO" /> -->
+		<many-to-one name="houseTypeVO" class="com.hermit.iii.housetype.model.HouseTypeVO">
+		<column name="typeNO"></column>
+		</many-to-one>
+		
+<!-- 		<property name="formNO" column="formNO" /> -->
+		<many-to-one name="hosueFormVO" class="com.hermit.iii.houseform.model.HouseFormVO">
+		<column name="formNO"></column>
+		</many-to-one>
+		
 		<property name="houseAddr" column="houseAddr" />
 		<property name="houseSize" column="houseSize" />
 	</class>

@@ -71,7 +71,7 @@ public class HouseServlet extends HttpServlet {
 			formNO = Integer.valueOf(request.getParameter("formNO"));
 			houseAddr = request.getParameter("houseAddr");
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
-			svc.insertHouse(houseTitle, cityNO, boroughNO, previewPic,highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
+//			svc.insertHouse(houseTitle, cityNO, boroughNO, previewPic,highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
 			response.sendRedirect("/hermit/House/House_management.jsp");
 			
 			System.out.println("Insert Success");
@@ -97,7 +97,7 @@ public class HouseServlet extends HttpServlet {
 			formNO = Integer.valueOf(request.getParameter("formNO"));
 			houseAddr = request.getParameter("houseAddr");
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
-			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO,previewPic, highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
+//			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO,previewPic, highestFloor, nowFloor, houseStatus, houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
 //			RequestDispatcher rd=request.getRequestDispatcher("/House/House_management.jsp");
 //			rd.forward(request, response);
 			response.sendRedirect("/hermit/House/House_management.jsp");
