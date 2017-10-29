@@ -40,6 +40,7 @@ public class reservationServlet extends HttpServlet {
 			ArrayList<CalendarEventVO> array;
 			Integer memberNo = Integer.valueOf(request.getParameter("memberNo"));
 			array = resDAO.selectByMember(memberNo);
+			//測試
 			for(CalendarEventVO vo :array){
 				System.out.println(new JSONObject(vo.getEmpVO()));
 			}
