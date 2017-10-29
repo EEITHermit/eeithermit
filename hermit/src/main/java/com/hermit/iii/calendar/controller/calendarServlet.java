@@ -68,8 +68,8 @@ public class calendarServlet extends HttpServlet {
 			HouseService mhDAO = new HouseService();
 			String address = request.getParameter("house");
 			ArrayList<String> arrayR = new ArrayList<String>();
-			ArrayList<HouseVO_orignal> array = mhDAO.autoCompleteH(address);
-			for(HouseVO_orignal houseVO : array){
+			ArrayList<HouseVO> array = mhDAO.autoCompleteH(address);
+			for(HouseVO houseVO : array){
 				String result = houseVO.getHouseNO()+"\t"+houseVO.getHouseAddr();
 				arrayR.add(result);
 			}
