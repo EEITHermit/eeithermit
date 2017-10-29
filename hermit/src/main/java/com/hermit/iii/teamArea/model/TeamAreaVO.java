@@ -4,35 +4,45 @@ import java.io.Serializable;
 //import org.apache.commons.lang.builder.EqualsBuilder;
 //import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
+
 public class TeamAreaVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer businNO;
+	private TeamMemberListVO teamMemberListVO = new TeamMemberListVO();
 	private Integer cityNO;
-	private Integer boroughNO;
+	private BoroughsVO boroughsVO =new BoroughsVO();
 	
 	public TeamAreaVO(){
 		
 	}
-	public Integer getBusinNO() {
-		return businNO;
+
+	public TeamMemberListVO getTeamMemberListVO() {
+		return teamMemberListVO;
 	}
-	public void setBusinNO(Integer businNO) {
-		this.businNO = businNO;
+
+	public void setTeamMemberListVO(TeamMemberListVO teamMemberListVO) {
+		this.teamMemberListVO = teamMemberListVO;
 	}
+
 	public Integer getCityNO() {
 		return cityNO;
 	}
+
 	public void setCityNO(Integer cityNO) {
 		this.cityNO = cityNO;
 	}
-	public Integer getBoroughNO() {
-		return boroughNO;
+
+	public BoroughsVO getBoroughsVO() {
+		return boroughsVO;
 	}
-	public void setBoroughNO(Integer boroughNO) {
-		this.boroughNO = boroughNO;
+
+	public void setBoroughsVO(BoroughsVO boroughsVO) {
+		this.boroughsVO = boroughsVO;
 	}
+	
 	//重新定義equal()、hasCode()
 //	public boolean equals(Object obj){
 //		if(obj==this){
