@@ -5,25 +5,17 @@
 
 <hibernate-mapping>
 	<class name="com.hermit.iii.teamArea.model.TeamAreaVO" table="TeamArea">
-
-<!-- 		<id name="businNO" column="businNO"> -->
-<!-- 			<generator class="assigned" /> -->
-<!-- 		</id> -->
-		
-	<composite-id>
-            <key-many-to-one name="TeamMemberListVO" class="com.hermit.iii.teammemberlist.model.TeamMemberListVO" lazy="false">
-                          <column name="businNO"/>
-            </key-many-to-one>
-            
-            <key-many-to-one  name="BoroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
-                          <column name="boroughNO"/>
-            </key-many-to-one>
-    </composite-id>
-
-
-
+			<composite-id>
+			<key-many-to-one name="teamMemberListVO"
+				class="com.hermit.iii.teammemberlist.model.TeamMemberListVO" lazy="false">
+				<column name="businNO" />
+			</key-many-to-one>
+			<key-many-to-one name="boroughsVO"
+				class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
+				<column name="boroughNO" />
+			</key-many-to-one>
+			</composite-id>
 		<property name="cityNO" column="cityNO" />
-<!-- 		<property name="boroughNO" column="boroughNO" /> -->
 
 	</class>
 </hibernate-mapping>

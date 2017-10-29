@@ -7,17 +7,12 @@ import java.io.Serializable;
 import com.hermit.iii.boroughs.model.BoroughsVO;
 import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
 
-public class TeamAreaVO implements Serializable{
+public class TeamAreaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private TeamMemberListVO teamMemberListVO = new TeamMemberListVO();
+	private TeamMemberListVO teamMemberListVO;
 	private Integer cityNO;
-	private BoroughsVO boroughsVO =new BoroughsVO();
-	
-	public TeamAreaVO(){
-		
-	}
+	private BoroughsVO BoroughVO;
 
 	public TeamMemberListVO getTeamMemberListVO() {
 		return teamMemberListVO;
@@ -34,34 +29,32 @@ public class TeamAreaVO implements Serializable{
 	public void setCityNO(Integer cityNO) {
 		this.cityNO = cityNO;
 	}
-
-	public BoroughsVO getBoroughsVO() {
-		return boroughsVO;
+	public BoroughsVO getBoroughVO() {
+		return BoroughVO;
+	}
+	public void setBoroughVO(BoroughsVO boroughVO) {
+		BoroughVO = boroughVO;
 	}
 
-	public void setBoroughsVO(BoroughsVO boroughsVO) {
-		this.boroughsVO = boroughsVO;
-	}
-	
-	//重新定義equal()、hasCode()
-//	public boolean equals(Object obj){
-//		if(obj==this){
-//			return true;	
-//		}
-//		if(!(obj instanceof TeamAreaVO)){
-//			return false;
-//		}
-//		TeamAreaVO vo=(TeamAreaVO)obj;
-//		return new EqualsBuilder()
-//				.append(this.businNO,vo.getBusinNO())
-//				.append(this.cityNO,vo.getCityNO())
-//				.isequals();
-//	}
-//	public int hashCode(){
-//		return new HashCodeBuilder()
-//				.append(this.businNO)
-//				.append(this.cityNO)
-//				.toHashCode();
-//	}		
-//	
+	// 重新定義equal()、hasCode()
+	// public boolean equals(Object obj){
+	// if(obj==this){
+	// return true;
+	// }
+	// if(!(obj instanceof TeamAreaVO)){
+	// return false;
+	// }
+	// TeamAreaVO vo=(TeamAreaVO)obj;
+	// return new EqualsBuilder()
+	// .append(this.businNO,vo.getBusinNO())
+	// .append(this.cityNO,vo.getCityNO())
+	// .isequals();
+	// }
+	// public int hashCode(){
+	// return new HashCodeBuilder()
+	// .append(this.businNO)
+	// .append(this.cityNO)
+	// .toHashCode();
+	// }
+	//
 }
