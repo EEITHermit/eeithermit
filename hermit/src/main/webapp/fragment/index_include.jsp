@@ -58,6 +58,15 @@
 		font-family: 'cwTeXYen', sans-serif;
 	}
   #button { padding: .5em 1em; text-decoration: none; }
+	#footer {
+		margin-top:30px;
+		margin-bottom:0px;
+		width:100%;
+		height:100px;
+		position:absolute;
+		bottom:0;
+		left:0;
+	}
 </style>
 </head>
 <body>
@@ -74,20 +83,20 @@
 		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp" class="w3-bar-item w3-button"><span>我的收藏</span></a>
 		</div>	   
 	</div>
-	<div id="top" class="masthead" role="main">
-		<div class="container" style="overflow:inherit">
+	<div id="top" class="masthead" role="main" style="height:auto;padding-top:80px;padding-bottom:0">
+		<div class="container" style="overflow:hidden">
 			<span class="w3-jumbo glfont" >Hermit<span>
 			</div>
-			<div class="row">
+			<div class="row" style="height:auto">
 				<div class="col-md-6 col-sm-12 col-md-offset-3 subscribe">
 					<form class="form-horizontal" role="form" action="<%= request.getContextPath()%>/index.jsp" id="subscribeForm" method="POST">
-						<div class="form-group"  style="overflow:inherit">
+						<div class="form-group"  style="overflow:hidden">
 							<div class="input-group">
 								<input class="form-control input-lg" name="houstTitle" id="houstTitle" placeholder="請輸入您想尋找的關鍵字...">
 								<span class="input-group-addon" style="margin:0;padding:0;background-color: rgba(0,0,0,0)"><button id="submit" type="button" class="btn btn-success btn-lg">搜尋</button></span>
 							</div>
 								 <div style="height:38vh; width:100%;overflow:hidden">
-									<div id="effect" class="form-control" style="background-color:rgba(255,255,255,0.3);height:80%;overflow:auto">
+									<div id="effect" class="form-control" style="background-color:rgba(255,255,255,0.3);height:75%;overflow:hidden">
 											<div class=" col-md-2" style="">
 												<select id="city" name="cityNO" class="form-control form-control-sm" style="border: 1px,solid,gray;">
 												</select>
@@ -243,19 +252,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="w3-black" style="height:3vh;border-bottom-left-radius:15px;border-bottom-right-radius:3px;"></div>
-	<footer class="w3-bottom w3-black container-fluid" >
-		<div class="row nav">
-		  <div class="col-md-4"></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></div>
-		  <div class="col-md-1"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></div>
-		  <div class="col-md-4"></div>
-		</div>
-	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-		</div>
-	</footer>
+	<div class="w3-black w3-margin-bottom" style="height:3vh;border-bottom-left-radius:15px;border-bottom-right-radius:3px;"></div>
+	
 	<script>
 		$( function() {
 			var spanArrow = $(".glyphicon-chevron-down"); 
@@ -364,7 +362,7 @@
 						equid:jsonStr
 				}
 			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
-					console.log(data);
+					location.replace("<%= request.getContextPath()%>/advancedSearch/GetHouseJson.jsp");
 				})
 			})
 			

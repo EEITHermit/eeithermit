@@ -1,16 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>赫米特租屋管理</title>
+<meta charset="UTF-8">
+<title>House Test</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/flashcanvas.js"></script>
+<script src="../js/jSignature.min.js"></script>
 <jsp:include page="/fragment/index_include.jsp" />
+<style>
+
+</style>
 </head>
 <body id="body">
-
-	<footer class="w3-bottom w3-black container-fluid text-center" >
+	
+	
+	<footer class="w3-black container-fluid text-center w3-margin-top" >
 		<div>
 			<ul class="nav nav-pills " style="display: flex;font-size:13px;justify-content: center;">
 			  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
@@ -22,5 +31,11 @@
 	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
 		</div>
 	</footer>	
+	<script>
+		$(function(){
+			console.log(<%= session.getAttribute("target")%>)
+		})
+	</script>
 </body>
+
 </html>
