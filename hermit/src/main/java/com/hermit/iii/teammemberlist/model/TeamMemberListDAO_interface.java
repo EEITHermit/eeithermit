@@ -4,13 +4,13 @@ import java.util.*;
 
 public interface TeamMemberListDAO_interface {
 
-	public void insert(TeamMemberListVO teamMemberListVO);
+	public void insert(TeamMemberListVO_original teamMemberListVO);
 
-	public void update(TeamMemberListVO teamMemberListVO);
+	public void update(TeamMemberListVO_original teamMemberListVO);
 
 	public void delete(Integer memberListNO);
 
-	public TeamMemberListVO findByPrimaryKey(Integer memberListNO);
+	public TeamMemberListVO_original findByPrimaryKey(Integer memberListNO);
 
-	public Set<TeamMemberListVO> getAll();
+	public Set<TeamMemberListVO_original> getAll();
 }

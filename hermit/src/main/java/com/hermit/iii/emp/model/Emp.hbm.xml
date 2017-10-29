@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hermit.iii.emp.model.EmpVO" table="Emp">
+		<id name="empNO" column="empNO">
+			<generator class="identity" />
+		</id>
+
+		<property name="empAccount" column="empAccount" />
+		<property name="empPwd" column="empPwd" />
+		<property name="empPhone" column="empPhone" />
+		<property name="empName" column="empName" />
+		<property name="empStatus" column="empStatus" />
+
+		<many-to-one name="postVO" class="com.hermit.iii.post.model.PostVO"
+			lazy="false">
+			<column name="postNO" />
+		</many-to-one>
+
+		<set name="teammemberlists" table="TeamMemberList" lazy="false"
+			cascade="all" inverse="true" order-by="memberListNo asc">
+			<key>
+				<column name="empNO" />
+			</key>
+			<one-to-many class="com.hermit.iii.teammemberlist.model.TeamMemberListVO" />
+		</set>
+
+	</class>
+</hibernate-mapping>

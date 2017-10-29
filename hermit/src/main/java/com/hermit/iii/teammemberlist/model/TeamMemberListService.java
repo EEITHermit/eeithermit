@@ -11,10 +11,10 @@ public class TeamMemberListService {
 	}
 
 	// 新增service
-	public TeamMemberListVO addTeamMemberList(Integer empNO, Integer businNO, java.sql.Date tmlStartTime,
+	public TeamMemberListVO_original addTeamMemberList(Integer empNO, Integer businNO, java.sql.Date tmlStartTime,
 			java.sql.Date tmlEndTime, Byte tmlStatus) {
 
-		TeamMemberListVO teamMemberListVO = new TeamMemberListVO();
+		TeamMemberListVO_original teamMemberListVO = new TeamMemberListVO_original();
 
 		teamMemberListVO.setEmpNO(empNO);
 		teamMemberListVO.setBusinNO(businNO);
@@ -28,10 +28,10 @@ public class TeamMemberListService {
 	}
 
 	// 修改service
-	public TeamMemberListVO updateTeamMemberList(Integer memberListNO, Integer empNO, Integer businNO,
+	public TeamMemberListVO_original updateTeamMemberList(Integer memberListNO, Integer empNO, Integer businNO,
 			java.sql.Date tmlStartTime, java.sql.Date tmlEndTime, Byte tmlStatus) {
 
-		TeamMemberListVO teamMemberListVO = new TeamMemberListVO();
+		TeamMemberListVO_original teamMemberListVO = new TeamMemberListVO_original();
 
 		teamMemberListVO.setMemberListNO(memberListNO);
 		teamMemberListVO.setEmpNO(empNO);
@@ -51,12 +51,12 @@ public class TeamMemberListService {
 	}
 
 	// 查詢一筆service
-	public TeamMemberListVO getOneTeamMemberList(Integer memberListNO) {
+	public TeamMemberListVO_original getOneTeamMemberList(Integer memberListNO) {
 		return dao.findByPrimaryKey(memberListNO);
 	}
 
 	// 查詢全部service
-	public Set<TeamMemberListVO> getAll() {
+	public Set<TeamMemberListVO_original> getAll() {
 		return dao.getAll();
 	}
 }

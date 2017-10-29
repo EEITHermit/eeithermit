@@ -91,11 +91,11 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 		TeamAreaDAO_hibernate dao=new TeamAreaDAO_hibernate();
 		
 		//insert
-		TeamAreaVO vo=new TeamAreaVO();
-		vo.setBusinNO(30020);
-		vo.setCityNO(1);
-		vo.setBoroughNO(2);
-		dao.insert(vo);
+//		TeamAreaVO vo=new TeamAreaVO();
+//		vo.setBusinNO(30020);
+//		vo.setCityNO(1);
+//		vo.setBoroughNO(2);
+//		dao.insert(vo);
 		
 		//update
 //		TeamAreaVO vo=new TeamAreaVO();

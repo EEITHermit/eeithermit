@@ -31,7 +31,7 @@ public class BusinTeamDAO_JDBC implements BusinTeamDAO_interface{
 	}
 	String insert = "insert into BusinTeam values(?,?)";
 	@Override
-	public Integer insert(BusinTeamVO btVO) {
+	public Integer insert(BusinTeamVO_original btVO) {
 		Integer result = 0;
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 			PreparedStatement ps = conn.prepareStatement(insert)){
@@ -46,7 +46,7 @@ public class BusinTeamDAO_JDBC implements BusinTeamDAO_interface{
 	
 	String update = "update BusinTeam set businName = ? , manager = ? where businNO = ?";
 	@Override
-	public Integer update(BusinTeamVO btVO) {
+	public Integer update(BusinTeamVO_original btVO) {
 		Integer result = 0;
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 			PreparedStatement ps = conn.prepareStatement(update)){
@@ -62,8 +62,8 @@ public class BusinTeamDAO_JDBC implements BusinTeamDAO_interface{
 
 	String select = "select * from BusinTeam where businNO = ?";
 	@Override
-	public BusinTeamVO select(Integer businNO) {
-		BusinTeamVO btVO = new BusinTeamVO();
+	public BusinTeamVO_original select(Integer businNO) {
+		BusinTeamVO_original btVO = new BusinTeamVO_original();
 		try(Connection conn = DriverManager.getConnection(url,"sa","P@ssw0rd");
 				PreparedStatement ps = conn.prepareStatement(select)){
 				ps.setInt(1, businNO);

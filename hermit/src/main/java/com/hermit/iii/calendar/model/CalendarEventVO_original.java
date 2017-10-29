@@ -2,14 +2,14 @@ package com.hermit.iii.calendar.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.emp.model.EmpVO_original;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.member.model.MemberVO;
 
 public class CalendarEventVO_original implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer eventNO;
-	private EmpVO empVO = new EmpVO();
+	private EmpVO_original empVO = new EmpVO_original();
 	private MemberVO memberVO = new MemberVO();
 	private HouseVO houseVO = new HouseVO();
 	private Timestamp eventStartTime;
@@ -21,10 +21,10 @@ public class CalendarEventVO_original implements Serializable {
 	public void setEventNO(Integer eventNO) {
 		this.eventNO = eventNO;
 	}
-	public EmpVO getEmpVO() {
+	public EmpVO_original getEmpVO() {
 		return empVO;
 	}
-	public void setEmpVO(EmpVO empVO) {
+	public void setEmpVO(EmpVO_original empVO) {
 		this.empVO = empVO;
 	}
 	public MemberVO getMemberVO() {

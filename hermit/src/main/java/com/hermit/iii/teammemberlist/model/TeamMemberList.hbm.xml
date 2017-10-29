@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hermit.iii.teammemberlist.model.TeamMemberListVO" table="TeamMemberList">
+		<id name="memberListNO" column="memberListNO">
+			<generator class="identity" />
+		</id>
+				
+		<many-to-one name="empVO" class="com.hermit.iii.emp.model.EmpVO" lazy="false">
+			<column name="empNO"/>
+		</many-to-one>
+		<many-to-one name="businTeamVO" class="com.hermit.iii.businTeam.model.BusinTeamVO" lazy="false">
+			<column name="businNO"/>
+		</many-to-one>
+		
+		<property name="tmlStartTime" column="tmlStartTime" />
+		<property name="tmlEndTime" column="tmlEndTime" />
+		<property name="tmlStatus" column="tmlStatus" />
+
+	</class>
+</hibernate-mapping>
