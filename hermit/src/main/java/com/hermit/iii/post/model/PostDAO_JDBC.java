@@ -23,7 +23,7 @@ public class PostDAO_JDBC implements PostDAO_interface {
 			  "SELECT postNO,postName FROM Post order by postNO";
 	
 	@Override
-	public void insert(PostVO postVO) {
+	public void insert(PostVO_original postVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -54,7 +54,7 @@ public class PostDAO_JDBC implements PostDAO_interface {
 	}
 
 	@Override
-	public void update(PostVO postVO) {
+	public void update(PostVO_original postVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -117,10 +117,10 @@ public class PostDAO_JDBC implements PostDAO_interface {
 	}
 
 	@Override
-	public PostVO findByPrimaryKey(Integer postNO) {
+	public PostVO_original findByPrimaryKey(Integer postNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		PostVO vo = new PostVO();
+		PostVO_original vo = new PostVO_original();
 		ResultSet rs ;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
@@ -155,19 +155,19 @@ public class PostDAO_JDBC implements PostDAO_interface {
 	}
 
 	@Override
-	public List<PostVO> getAll() {
+	public List<PostVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		PostVO vo;
+		PostVO_original vo;
 		ResultSet rs ;
-		List<PostVO> list = new LinkedList<PostVO>();
+		List<PostVO_original> list = new LinkedList<PostVO_original>();
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				vo = new PostVO();
+				vo = new PostVO_original();
 				vo.setPostName(rs.getString("postName"));
 				vo.setPostNO(rs.getInt("postNO"));
 				list.add(vo);
@@ -196,7 +196,7 @@ public class PostDAO_JDBC implements PostDAO_interface {
 	
 	
 	public static void main(String args[]){
-		PostVO vo = new PostVO();
+		PostVO_original vo = new PostVO_original();
 		PostDAO_JDBC dao = new PostDAO_JDBC();
 		
 //		vo.setPostName("管理員");

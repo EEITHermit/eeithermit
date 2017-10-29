@@ -3,7 +3,7 @@ package com.hermit.iii.reservation.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.emp.model.EmpVO_original;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.member.model.MemberVO;
 
@@ -13,7 +13,7 @@ public class ReservationVO_original implements Serializable{
 	private Integer reservationNo;
 	private MemberVO memberVO = new MemberVO();
 	private HouseVO houseVO = new HouseVO();
-	private EmpVO empVO = new EmpVO();
+	private EmpVO_original empVO = new EmpVO_original();
 	private Integer boroughNO;
 	private String exceptTime;
 	private Timestamp applyTime;
@@ -35,10 +35,10 @@ public class ReservationVO_original implements Serializable{
 	public void setHouseVO(HouseVO houseVO) {
 		this.houseVO = houseVO;
 	}
-	public EmpVO getEmpVO() {
+	public EmpVO_original getEmpVO() {
 		return empVO;
 	}
-	public void setEmpVO(EmpVO empVO) {
+	public void setEmpVO(EmpVO_original empVO) {
 		this.empVO = empVO;
 	}
 	public Integer getBoroughNO() {

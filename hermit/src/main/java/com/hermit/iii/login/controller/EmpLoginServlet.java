@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.emp.model.EmpVO_original;
 import com.hermit.iii.login.model.EmpLoginService;
 
 @WebServlet("/Login/emplogin.do")
@@ -45,7 +45,7 @@ public class EmpLoginServlet extends HttpServlet {
 		EmpLoginService ls = new EmpLoginService();
 		// 呼叫 ls物件的 check()，要記得傳入accont與pwd兩個參數
 		// 同時將傳回值放入EmpVO型別的變數vo之內。
-		EmpVO vo = ls.check(account, pwd);
+		EmpVO_original vo = ls.check(account, pwd);
 		if (vo != null) {
 			session.setAttribute("LoginOK", vo);
 		} else {

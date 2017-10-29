@@ -23,7 +23,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 	private static final String DELETE = "DELETE FROM Emp where empNO=?";
 
 	@Override
-	public void insert(EmpVO empVO) {
+	public void insert(EmpVO_original empVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -68,7 +68,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public void update(EmpVO empVO) {
+	public void update(EmpVO_original empVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -153,8 +153,8 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public EmpVO findByAccount(String empAccount) {
-		EmpVO empVO = null;
+	public EmpVO_original findByAccount(String empAccount) {
+		EmpVO_original empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -171,7 +171,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 
 			while (rs.next()) {
 
-				empVO = new EmpVO();
+				empVO = new EmpVO_original();
 				empVO.setEmpNO(rs.getInt("empNO"));
 				empVO.setEmpAccount(rs.getString("empAccount"));
 				empVO.setEmpPwd(rs.getString("empPwd"));
@@ -215,8 +215,8 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public EmpVO findByPrimaryKey(Integer empNO) {
-		EmpVO empVO = null;
+	public EmpVO_original findByPrimaryKey(Integer empNO) {
+		EmpVO_original empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -232,7 +232,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 
 			while (rs.next()) {
 
-				empVO = new EmpVO();
+				empVO = new EmpVO_original();
 				empVO.setEmpNO(rs.getInt("empNO"));
 				empVO.setEmpAccount(rs.getString("empAccount"));
 				empVO.setEmpPwd(rs.getString("empPwd"));
@@ -276,10 +276,10 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public List<EmpVO> getAll() {
+	public List<EmpVO_original> getAll() {
 
-		List<EmpVO> list = new ArrayList<EmpVO>();
-		EmpVO empVO = null;
+		List<EmpVO_original> list = new ArrayList<EmpVO_original>();
+		EmpVO_original empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -293,7 +293,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 
 			while (rs.next()) {
 
-				empVO = new EmpVO();
+				empVO = new EmpVO_original();
 				empVO.setEmpNO(rs.getInt("empNO"));
 				empVO.setEmpAccount(rs.getString("empAccount"));
 				empVO.setEmpPwd(rs.getString("empPwd"));
@@ -341,7 +341,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		EmpJDBCDAO dao = new EmpJDBCDAO();
 
 		// insert
-		EmpVO empVO1 = new EmpVO();
+		EmpVO_original empVO1 = new EmpVO_original();
 		empVO1.setEmpAccount("eeit9704");
 		empVO1.setEmpPwd("sa123456");
 		empVO1.setEmpPhone("0928265804");
@@ -365,7 +365,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		// dao.delete(30003);
 
 		// select by account
-		EmpVO empVO3 = dao.findByAccount("Vir3");
+		EmpVO_original empVO3 = dao.findByAccount("Vir3");
 		System.out.print(empVO3.getEmpNO() + ",");
 		System.out.print(empVO3.getEmpAccount() + ",");
 		System.out.print(empVO3.getEmpPwd() + ",");
@@ -376,7 +376,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		System.out.println("----------------------");
 
 		// select one
-		EmpVO empVO4 = dao.findByPrimaryKey(30001);
+		EmpVO_original empVO4 = dao.findByPrimaryKey(30001);
 		System.out.print(empVO4.getEmpNO() + ",");
 		System.out.print(empVO4.getEmpAccount() + ",");
 		System.out.print(empVO4.getEmpPwd() + ",");
@@ -387,8 +387,8 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		System.out.println("----------------------");
 
 		// select all
-		List<EmpVO> list = dao.getAll();
-		for (EmpVO aEmp : list) {
+		List<EmpVO_original> list = dao.getAll();
+		for (EmpVO_original aEmp : list) {
 			System.out.print(aEmp.getEmpNO() + ",");
 			System.out.print(aEmp.getEmpAccount() + ",");
 			System.out.print(aEmp.getEmpPwd() + ",");
