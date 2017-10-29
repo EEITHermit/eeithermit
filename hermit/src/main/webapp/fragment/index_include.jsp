@@ -26,7 +26,6 @@
 	}
 	a:link, a:visited, a:hover ,a:active{
 		color : white;
-	    text-decoration: none;
 	    padding: 14px 25px;
 	    text-align: center;
 	    text-decoration: none;
@@ -96,7 +95,7 @@
 								<span class="input-group-addon" style="margin:0;padding:0;background-color: rgba(0,0,0,0)"><button id="submit" type="button" class="btn btn-success btn-lg">搜尋</button></span>
 							</div>
 								 <div style="height:38vh; width:100%;overflow:hidden">
-									<div id="effect" class="form-control" style="background-color:rgba(255,255,255,0.3);height:75%;overflow:hidden">
+									<div id="effect" class="form-control" style="background-color:rgba(255,255,255,0.3);height:75%;overflow:auto">
 											<div class=" col-md-2" style="">
 												<select id="city" name="cityNO" class="form-control form-control-sm" style="border: 1px,solid,gray;">
 												</select>
