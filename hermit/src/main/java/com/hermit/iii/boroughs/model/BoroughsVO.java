@@ -1,6 +1,9 @@
 package com.hermit.iii.boroughs.model;
 
+import java.io.Serializable;
+
 public class BoroughsVO {
+	
 	private Integer boroughNO;
 	private String boroughName;
 	private Integer cityNO;

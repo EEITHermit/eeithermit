@@ -1,8 +1,10 @@
 package com.hermit.iii.teammemberlist.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class TeamMemberListVO {
+public class TeamMemberListVO{
+	
 	private Integer memberListNO;
 	private Integer empNO;
 	private Integer businNO;
