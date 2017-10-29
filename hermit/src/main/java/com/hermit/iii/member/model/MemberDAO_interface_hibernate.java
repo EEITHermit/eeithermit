@@ -36,7 +36,4 @@ public interface MemberDAO_interface_hibernate {
 
 	// 忘記帳號查詢
 	public MemberVO findByTel(String memTel);
-
-	// 忘記密碼查詢
-	public MemberVO findByEmail(String memEmail);
 }

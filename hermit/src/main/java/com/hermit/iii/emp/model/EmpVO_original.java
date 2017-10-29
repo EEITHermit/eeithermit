@@ -1,21 +1,14 @@
 package com.hermit.iii.emp.model;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import com.hermit.iii.post.model.PostVO;
-import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
-
-public class EmpVO implements Serializable {
+public class EmpVO_original implements java.io.Serializable {
 
 	private Integer empNO;
 	private String empAccount;
 	private String empPwd;
 	private String empPhone;
 	private String empName;
-	private PostVO postVO;
+	private Integer postNO;
 	private Boolean empStatus;
-	private Set<TeamMemberListVO> teammemberlists = new HashSet<TeamMemberListVO>();
 
 	public Integer getEmpNO() {
 		return empNO;
@@ -57,12 +50,12 @@ public class EmpVO implements Serializable {
 		this.empName = empName;
 	}
 
-	public PostVO getPostVO() {
-		return postVO;
+	public Integer getPostNO() {
+		return postNO;
 	}
 
-	public void setPostVO(PostVO postVO) {
-		this.postVO = postVO;
+	public void setPostNO(Integer postNO) {
+		this.postNO = postNO;
 	}
 
 	public Boolean getEmpStatus() {
@@ -71,14 +64,6 @@ public class EmpVO implements Serializable {
 
 	public void setEmpStatus(Boolean empStatus) {
 		this.empStatus = empStatus;
-	}
-
-	public Set<TeamMemberListVO> getTeammemberlists() {
-		return teammemberlists;
-	}
-
-	public void setTeammemberlists(Set<TeamMemberListVO> teammemberlists) {
-		this.teammemberlists = teammemberlists;
 	}
 
 }

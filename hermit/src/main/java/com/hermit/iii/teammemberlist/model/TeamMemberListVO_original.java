@@ -1,14 +1,12 @@
 package com.hermit.iii.teammemberlist.model;
 
 import java.io.Serializable;
-import java.sql.Date;
-import com.hermit.iii.businTeam.model.BusinTeamVO;
-import com.hermit.iii.emp.model.EmpVO;
+import java.sql.*;
 
-public class TeamMemberListVO {
+public class TeamMemberListVO_original implements Serializable {
 	private Integer memberListNO;
-	private EmpVO empVO;
-	private BusinTeamVO businTeamVO;
+	private Integer empNO;
+	private Integer businNO;
 	private Date tmlStartTime;
 	private Date tmlEndTime;
 	private Byte tmlStatus;
@@ -21,20 +19,20 @@ public class TeamMemberListVO {
 		this.memberListNO = memberListNO;
 	}
 
-	public EmpVO getEmpVO() {
-		return empVO;
+	public Integer getEmpNO() {
+		return empNO;
 	}
 
-	public void setEmpVO(EmpVO empVO) {
-		this.empVO = empVO;
+	public void setEmpNO(Integer empNO) {
+		this.empNO = empNO;
 	}
 
-	public BusinTeamVO getBusinTeamVO() {
-		return businTeamVO;
+	public Integer getBusinNO() {
+		return businNO;
 	}
 
-	public void setBusinTeamVO(BusinTeamVO businTeamVO) {
-		this.businTeamVO = businTeamVO;
+	public void setBusinNO(Integer businNO) {
+		this.businNO = businNO;
 	}
 
 	public Date getTmlStartTime() {
@@ -60,5 +58,4 @@ public class TeamMemberListVO {
 	public void setTmlStatus(Byte tmlStatus) {
 		this.tmlStatus = tmlStatus;
 	}
-
 }

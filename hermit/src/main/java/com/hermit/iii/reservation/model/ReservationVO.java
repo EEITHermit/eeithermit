@@ -3,7 +3,7 @@ package com.hermit.iii.reservation.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.emp.model.EmpVO_original;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.member.model.MemberVO;
 

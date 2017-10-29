@@ -1,33 +1,29 @@
 package com.hermit.iii.teamArea.model;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONString;
-import org.json.simple.JSONValue;
 
+import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.businTeam.model.BusinTeamVO;
+import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 
-	private static final String GET_ALL_STMT="from TeamArea";
+	private static final String GET_ALL_STMT="from TeamAreaVO";
 	
 	@Override
 	public void insert(TeamAreaVO taVO) {
 		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			session.saveOrUpdate(taVO);
+			session.save(taVO);
 			session.getTransaction().commit();
 		}catch(RuntimeException ex){
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();;
 		}
 	}
 
@@ -91,11 +87,20 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 		TeamAreaDAO_hibernate dao=new TeamAreaDAO_hibernate();
 		
 		//insert
-		TeamAreaVO vo=new TeamAreaVO();
-		vo.setBusinNO(30020);
-		vo.setCityNO(1);
-		vo.setBoroughNO(2);
-		dao.insert(vo);
+//		TeamAreaVO vo=new TeamAreaVO();
+//		BusinTeamVO t =new BusinTeamVO();
+//		t.setBusinNO(30010);
+//		vo.setBusinTeamVO(t);
+//		vo.setCityNO(2);
+//		BoroughsVO b = new BoroughsVO();
+//		b.setBoroughNO(2);
+//		vo.setBoroughsVO(b);
+//		dao.insert(vo);
+		
+//		List<TeamAreaVO> list = dao.getAll();
+//		for(TeamAreaVO v : list){
+//			System.out.println(v.getBoroughsVO().getBoroughName());
+//		}
 		
 		//update
 //		TeamAreaVO vo=new TeamAreaVO();
