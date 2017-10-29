@@ -100,7 +100,7 @@ public class PostDAO_hibernate implements PostDAO_interface_hibernate {
 		dao.update(postVO2);
 
 		// delete
-		dao.delete(350);
+		// dao.delete(350);
 
 		// select one
 		PostVO postVO3 = dao.findByPrimaryKey(330);

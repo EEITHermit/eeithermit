@@ -9,9 +9,24 @@
 			<generator class="identity" />
 		</id>
 		<property name="houseTitle" column="houseTitle" />
-		<property name="cityNO" column="cityNO" />
-		<property name="boroughNO" column="boroughNO" />
-		<property name="previewPic" column="previewPic" />
+
+<!-- 		<property name="cityNO" column="cityNO" /> -->
+		<many-to-one name="CityVO" class="com.hermit.iii.city.model.CityVO" lazy="false">
+		<column name="cityNO"></column>
+		</many-to-one>
+		<many-to-one name="CityVO" class="com.hermit.iii.city.model.CityVO" lazy="false">
+		<column name="cityName"></column>
+		</many-to-one>
+
+<!-- 		<property name="boroughNO" column="boroughNO" /> -->
+		<many-to-one name="BoroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
+		<column name="boroughNO"></column>
+		</many-to-one>
+		<many-to-one name="BoroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
+		<column name="boroughName"></column>
+		</many-to-one>
+		
+		<property name="previewPic" column="previewPic"/>
 		<property name="highestFloor" column="highestFloor" />
 		<property name="nowFloor" column="nowFloor" />
 		<property name="houseStatus" column="houseStatus" />

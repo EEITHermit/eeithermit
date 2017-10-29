@@ -6,12 +6,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.businTeam.model.BusinTeamVO;
 import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 
-	private static final String GET_ALL_STMT="from TeamArea";
+	private static final String GET_ALL_STMT="from TeamAreaVO";
 	
 	@Override
 	public void insert(TeamAreaVO taVO) {
@@ -22,22 +23,22 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 			session.getTransaction().commit();
 		}catch(RuntimeException ex){
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();;
 		}
 	}
-
+	//團隊不刪除
 	@Override
 	public void delete(Integer businNO) {
-		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			session.beginTransaction();
-			TeamAreaVO vo=session.get(TeamAreaVO.class, businNO);
-			session.delete(vo);
-			session.getTransaction().commit();
-		}catch(RuntimeException ex){
-			session.getTransaction().rollback();
-			throw ex;
-		}
+//		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+//		try{
+//			session.beginTransaction();
+//			TeamAreaVO vo=session.get(TeamAreaVO.class, businNO);
+//			session.delete(vo);
+//			session.getTransaction().commit();
+//		}catch(RuntimeException ex){
+//			session.getTransaction().rollback();
+//			throw ex;
+//		}
 	}
 
 	@Override
@@ -87,22 +88,21 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 		TeamAreaVO vo=new TeamAreaVO();
 		
 		//insert
-		TeamMemberListVO vo1=new TeamMemberListVO();
-		vo1.setBusinNO(30010);
-		vo.setTeamMemberListVO(vo1);
-		vo.setCityNO(2);
-		BoroughsVO vo2=new BoroughsVO();
-		vo2.setBoroughNO(1);
-		vo.setBoroughVO(vo2);
+//		BusinTeamVO t =new BusinTeamVO();
+//		t.setBusinNO(30010);
+//		vo.setBusinTeamVO(t);
 		
-		dao.insert(vo);
+//		vo.setCityNO(2);
 		
-		
-//		TeamAreaVO vo=new TeamAreaVO();
-//		vo.setBusinNO(30020);
-//		vo.setCityNO(1);
-//		vo.setBoroughNO(2);
+//		BoroughsVO b = new BoroughsVO();
+//		b.setBoroughNO(2);
+//		vo.setBoroughsVO(b);
 //		dao.insert(vo);
+		
+//		List<TeamAreaVO> list = dao.getAll();
+//		for(TeamAreaVO v : list){
+//			System.out.println(v.getBoroughsVO().getBoroughName());
+//		}
 		
 		//update
 //		TeamAreaVO vo=new TeamAreaVO();
@@ -110,9 +110,8 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 //		vo.setCityNO(1);
 //		vo.setBoroughNO(2);
 //		dao.update(vo);
-
+		
+		//查詢
+		
 	}
-
-	
-
 }

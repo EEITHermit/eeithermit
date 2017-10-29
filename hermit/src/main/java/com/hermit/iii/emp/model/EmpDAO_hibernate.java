@@ -132,29 +132,29 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 		// dao.delete(30003);
 
 		// select one
-		// EmpVO empVO3 = dao.findByPrimaryKey(30001);
-		// System.out.print(empVO3.getEmpNO() + ",");
-		// System.out.print(empVO3.getEmpAccount() + ",");
-		// System.out.print(empVO3.getEmpPwd() + ",");
-		// System.out.print(empVO3.getEmpPhone() + ",");
-		// System.out.print(empVO3.getEmpName() + ",");
-		// System.out.print(empVO3.getPostNO() + ",");
-		// System.out.println(empVO3.getEmpStatus());
-		// System.out.println("----------------------");
+		EmpVO empVO3 = dao.findByPrimaryKey(30001);
+		System.out.print(empVO3.getEmpNO() + ",");
+		System.out.print(empVO3.getEmpAccount() + ",");
+		System.out.print(empVO3.getEmpPwd() + ",");
+		System.out.print(empVO3.getEmpPhone() + ",");
+		System.out.print(empVO3.getEmpName() + ",");
+		System.out.print(empVO3.getPostVO().getPostNO() + ",");
+		System.out.println(empVO3.getEmpStatus());
+		System.out.println("----------------------");
 
 		// select all
-		// Set<EmpVO> set = dao.getAll();
-		// for (EmpVO empVO : set) {
-		// System.out.print(empVO.getEmpNO() + ",");
-		// System.out.print(empVO.getEmpAccount() + ",");
-		// System.out.print(empVO.getEmpPwd() + ",");
-		// System.out.print(empVO.getEmpPhone() + ",");
-		// System.out.print(empVO.getEmpName() + ",");
-		// System.out.print(empVO.getPostNO() + ",");
-		// System.out.print(empVO.getEmpStatus());
-		// System.out.println("");
-		// }
-		// System.out.println("----------------------");
+		Set<EmpVO> set = dao.getAll();
+		for (EmpVO empVO : set) {
+			System.out.print(empVO.getEmpNO() + ",");
+			System.out.print(empVO.getEmpAccount() + ",");
+			System.out.print(empVO.getEmpPwd() + ",");
+			System.out.print(empVO.getEmpPhone() + ",");
+			System.out.print(empVO.getEmpName() + ",");
+			System.out.print(empVO.getPostVO().getPostNO() + ",");
+			System.out.print(empVO.getEmpStatus());
+			System.out.println("");
+		}
+		System.out.println("----------------------");
 
 		// select account
 		EmpVO empVO4 = dao.findByAccount("Vir3");
@@ -163,7 +163,8 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 		System.out.print(empVO4.getEmpPwd() + ",");
 		System.out.print(empVO4.getEmpPhone() + ",");
 		System.out.print(empVO4.getEmpName() + ",");
-		System.out.print(empVO4.getPostNO() + ",");
+		// 改寫成以下三行寫法
+		System.out.print(empVO4.getPostVO().getPostNO() + ",");
 		System.out.println(empVO4.getEmpStatus());
 		System.out.println("----------------------");
 
