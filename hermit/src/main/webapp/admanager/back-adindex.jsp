@@ -79,7 +79,7 @@
 	</table>
 	<form id="modify" method="get" action="../ADManagerServlet">	
 		<input type="hidden" name="action" value="getOneADManager">
-		<input type="hidden" id="adNo" name="adNo" >
+		<input type="hidden" id="adNO" name="adNO" >
 	</form>
 </div>
 <script> 
@@ -96,7 +96,7 @@
 //  				console.log(dataJson);
 				tbody.empty();
 				$.each(dataJson,function(index,VO){
-					var cell1 = $("<td></td>").text(VO.adNo);
+					var cell1 = $("<td></td>").text(VO.adNO);
 					var img1 = $("<img>").attr("src",VO.adImage);//1
 					var cell2 = $("<td></td>").append(img1)//2
 					var cell3 = $("<td></td>").text(VO.adLink);
@@ -113,9 +113,9 @@
 // 				刪除
 				$(".btn-danger").on("click",function(){
 					var tr = $(this).parents("tr");
-					var adNo = $(this).parents("tr").children("td:eq(0)").text();
+					var adNO = $(this).parents("tr").children("td:eq(0)").text();
 					if (confirm("您確定要刪除?") == true) {
-						$.get("../ADManagerServlet",{"action":"deleteADManager","adNo":adNo},function(){
+						$.get("../ADManagerServlet",{"action":"deleteADManager","adNO":adNO},function(){
 							window.location.reload();
 						})  
 						
@@ -126,8 +126,8 @@
 // 				修改
 				$(".btn-primary").on("click",function(){
 					var tr = $(this).parents("tr");
-					var adNo = $(this).parents("tr").children("td:eq(0)").text();
-					$("#adNo").val(adNo);
+					var adNO = $(this).parents("tr").children("td:eq(0)").text();
+					$("#adNO").val(adNO);
 					$("#modify").submit();
 				})
 				

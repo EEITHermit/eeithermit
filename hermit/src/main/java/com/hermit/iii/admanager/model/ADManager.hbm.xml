@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 	
 <hibernate-mapping>
-	<class name="com.hermit.iii.admanager.model.ADManagerVO_hibernate" table="ADManager">
+	<class name="com.hermit.iii.admanager.model.ADManagerVO" table="ADManager">
 		
 		<id name="adNO" column="adNO">
 			<generator class="identity" />

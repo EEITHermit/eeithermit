@@ -1,10 +1,9 @@
 package com.hermit.iii.admanager.model;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-public class ADManagerVO_hibernate implements Serializable {
-	private Integer adNo; //廣告編號
+public class ADManagerVO_original {
+	private Integer adNO; //廣告編號
 	private String adImage; //廣告圖片
 	private String adLink; //廣告超連結
 	private String adMessage; //廣告訊息
@@ -13,11 +12,11 @@ public class ADManagerVO_hibernate implements Serializable {
 	private boolean adStatus; //廣告狀態(已上架,已下架)
 	private Integer adBrowse; //廣告瀏覽次數
 	private Integer adModify; //廣告最後修改人
-	public Integer getAdNo() {
-		return adNo;
+	public Integer getAdNO() {
+		return adNO;
 	}
-	public void setAdNo(Integer adNo) {
-		this.adNo = adNo;
+	public void setAdNO(Integer adNO) {
+		this.adNO = adNO;
 	}
 	public String getAdImage() {
 		return adImage;

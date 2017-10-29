@@ -18,8 +18,8 @@
 <form method="post" action="ADManagerServlet" enctype="multipart/form-data" >
 <div class="form-group">
 <div>
-			<label for="adNo">廣告編號</label><br>
-			<input id="text" name="adNo" type="text" value=${adVO.adNo}>
+			<label for="adNO">廣告編號</label><br>
+			<input id="text" name="adNO" type="text" value=${adVO.adNO}>
 			<p/><br>
 		</div>
 		<div>

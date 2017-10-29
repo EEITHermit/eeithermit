@@ -1,8 +1,6 @@
 package com.hermit.iii.houseform.model;
 
-import java.io.Serializable;
-
-public class HouseFormVO_hibernate implements Serializable {
+public class HouseFormVO_original {
 	private Integer formNO;
 	private String hForm;
 	public Integer getFormNO() {

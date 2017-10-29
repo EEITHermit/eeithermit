@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.json.simple.JSONValue;
 
+import com.hermit.iii.equipmentcondition.model.EquipmentConditionVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
@@ -22,7 +23,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(houseVO);
+			session.save(houseVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -36,7 +37,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(houseVO);
+			session.update(houseVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -150,7 +151,6 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			session.beginTransaction();
 //			List list = session.createNativeQuery(searchStr).list();
 			Query query=session.createSQLQuery(searchStr); 
-			System.out.println(query);
 			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			List<Map<String,Object>> list=query.list(); 
 			Map m2 = new LinkedHashMap();
@@ -163,9 +163,25 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		}
 		return jsonStr;
 	}
+	
+	public void insertHouseAndEquip(HouseVO houseVO,EquipmentConditionVO equipVO){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.save(houseVO);
+			equipVO.setHouseNO(houseVO.getHouseNO());
+			session.save(equipVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		
+	}
 	public static void main (String args[]){
 		HouseDAO_hibernate dao = new HouseDAO_hibernate();
 		HouseVO vo = new HouseVO();
+		EquipmentConditionVO evo = new EquipmentConditionVO();
 		List<HouseVO> list = null;
 //		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
 //		vo.setCityNO(1);
@@ -182,9 +198,31 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //		vo.setFormNO(2010);
 //		vo.setHouseAddr("新北市板橋區大馬路3號");
 //		vo.setHouseSize(10.32);
-//		dao.insert(vo);
+//		
+//		evo.setTV((byte) 1);
+//		evo.setAircondition((byte) 1);
+//		evo.setRefrigerator((byte) 1);
+//		evo.setWaterHeater((byte) 1);
+//		evo.setGas((byte) 1);
+//		evo.setTheFourthStation((byte) 1);
+//		evo.setNet((byte) 1);
+//		evo.setWashing((byte) 1);
+//		evo.setBed((byte) 1);
+//		evo.setWardrobe((byte) 1);
+//		evo.setSofa((byte) 1);
+//		evo.setParking((byte) 1);
+//		evo.setElevator((byte) 1);
+//		evo.setBalcony((byte) 1);
+//		evo.setPermitCook((byte) 1);
+//		evo.setPet((byte) 1);
+//		evo.setCloseMRT((byte) 1);
+//		
+//		dao.insertHouseAndEquip(vo,evo);
 //		System.out.println("success");
-//		dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)");
+		
+		
+		
+		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
 		
 
 		//Update Test Start
