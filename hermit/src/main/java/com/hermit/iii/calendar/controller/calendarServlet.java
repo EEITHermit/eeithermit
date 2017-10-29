@@ -20,7 +20,6 @@ import com.hermit.iii.calendar.model.CalendarEventService;
 import com.hermit.iii.calendar.model.CalendarEventVO;
 import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
-import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.member.model.*;
 
 
@@ -54,7 +53,7 @@ public class calendarServlet extends HttpServlet {
 			out.print(JSONString);
 			return;
 		}else if("queryMember".equals(mission)){
-			MemberJNDIDAO mhDAO = new MemberJNDIDAO();
+			MemberService mhDAO = new MemberService();
 			String name = request.getParameter("member");
 			ArrayList<String> arrayR = new ArrayList<String>();
 			ArrayList<MemberVO> array = mhDAO.autoCompleteM(name);

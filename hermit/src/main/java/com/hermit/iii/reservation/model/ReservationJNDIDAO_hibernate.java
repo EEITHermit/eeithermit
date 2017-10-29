@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hibernate{
@@ -79,7 +80,9 @@ public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hi
 			}
 			if(exist == false){
 				ReservationVO res = session.get(ReservationVO.class, reservationNo);
-				res.getEmpVO().setEmpNO(empNo);
+				EmpVO empVO = new EmpVO();
+				empVO.setEmpNO(empNo);
+				res.setEmpVO(empVO);
 				res.setTakedOver(true);
 				session.saveOrUpdate(res);
 				result = 1;
@@ -118,14 +121,19 @@ public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hi
 	public static void main(String[] args){
 		ReservationJNDIDAO_hibernate res = new ReservationJNDIDAO_hibernate();
 		ReservationVO re = new ReservationVO();
-		re.setApplyTime(Timestamp.valueOf("2017-10-10 00:00:00"));
-		re.getBoroughsVO().setBoroughNO(1);
-		re.setTakedOver(false);
-		re.setExceptTime("OK");
-		re.getEmpVO().setEmpNO(30001);
-		re.getMemberVO().setMemNO(40001);
-		re.getHouseVO().setHouseNO(20001);
-		res.insert(re);
+//		re.setApplyTime(Timestamp.valueOf("2017-10-10 00:00:00"));
+//		re.getBoroughsVO().setBoroughNO(1);
+//		re.setTakedOver(false);
+//		re.setExceptTime("OK");
+//		re.getEmpVO().setEmpNO(30001);
+//		re.getMemberVO().setMemNO(40001);
+//		re.getHouseVO().setHouseNO(20001);
+//		res.insert(re);
+//		for(ReservationVO r:res.selectByArea(1)){
+//			System.out.println(r.getApplyTime());
+//			System.out.println(r.getMemberVO().getMemName());
+//		}
+//		res.updateStatus(80000001, 30001);
 	}
 	
 }

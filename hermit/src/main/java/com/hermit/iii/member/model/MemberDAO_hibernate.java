@@ -87,23 +87,68 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 	}
 
 	/**** 自訂指令 ****/
-
+	//OK
+	// member會員輸入的autoComplete(黑名單及行事曆使用)
+	private static String AUTO_COMPLETE= "from MemberVO where memName like ?";
 	@Override
 	public ArrayList<MemberVO> autoCompleteM(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		ArrayList<MemberVO> array = new ArrayList<MemberVO>();
+		try{
+			session.getTransaction().begin();
+			Query query  = session.createQuery(AUTO_COMPLETE);
+			query.setParameter(0, "%"+name+"%");
+			List<MemberVO> list = query.list();
+			array.addAll(list);
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
+		return array;
 	}
-
+	//OK
+	//黑名單檢查，若次數超過三次，則更改會員狀態為"黑名單會員"(黑名單用)
+	private static String CHECK_INFRACTION = "from MemberVO where memNO = ? AND memInfract>=3";
 	@Override
 	public void checkInfraction(Integer memNO) {
-		// TODO Auto-generated method stub
-
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.getTransaction().begin();
+			Query query = session.createQuery(CHECK_INFRACTION);
+			query.setParameter(0, memNO);
+			List<MemberVO> list = query.list();
+			for(MemberVO vo : list){
+				vo.setMemStatus("黑名單會員");
+				session.saveOrUpdate(vo);
+			}
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
 	}
-
+	//OK
+	//員工申請黑名單時，黑名單次數+1(黑名單用)
+	private static String INFRACTPLUS1 = "from MemberVO where memNO = ? AND memStatus != '黑名單會員'";
 	@Override
 	public Integer infractPlus1(Integer memNO) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer result = 0;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.getTransaction().begin();
+			Query query = session.createQuery(INFRACTPLUS1);
+			query.setParameter(0, memNO);
+			List<MemberVO> list = query.list();
+			for(MemberVO vo : list){
+				vo.setMemInfract(vo.getMemInfract()+1);
+				session.saveOrUpdate(vo);
+			}
+			result = 1;
+			session.getTransaction().commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return result;
 	}
 
 	// SMS更新會員狀態

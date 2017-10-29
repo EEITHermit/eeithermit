@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.sql.*;
 
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.member.model.MemberVO;
 
 public class QandAVO implements Serializable {
 	private Integer qaNO;
-	private Integer memNO;
+	private MemberVO memberVO = new MemberVO();
 	private Integer empNO;
-	private Integer houseNO;
+	private HouseVO houseVO = new HouseVO();
 	private Date qTime;
 	private Date aTime;
 	private Byte qaType;
@@ -21,11 +22,11 @@ public class QandAVO implements Serializable {
 	public void setQaNO(Integer qaNO) {
 		this.qaNO = qaNO;
 	}
-	public Integer getMemNO() {
-		return memNO;
+	public MemberVO getMemberVO() {
+		return memberVO;
 	}
-	public void setMemNO(Integer memNO) {
-		this.memNO = memNO;
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
 	public Integer getEmpNO() {
 		return empNO;
@@ -33,11 +34,11 @@ public class QandAVO implements Serializable {
 	public void setEmpNO(Integer empNO) {
 		this.empNO = empNO;
 	}
-	public Integer getHouseNO() {
-		return houseNO;
+	public HouseVO getHouseVO() {
+		return houseVO;
 	}
-	public void setHouseNO(Integer houseNO) {
-		this.houseNO = houseNO;
+	public void setHouseVO(HouseVO houseVO) {
+		this.houseVO = houseVO;
 	}
 	public Date getqTime() {
 		return qTime;
@@ -69,5 +70,6 @@ public class QandAVO implements Serializable {
 	public void setaDetail(String aDetail) {
 		this.aDetail = aDetail;
 	}
+	
 	
 }

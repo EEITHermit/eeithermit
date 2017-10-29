@@ -40,9 +40,9 @@ public class reservationServlet extends HttpServlet {
 			ArrayList<CalendarEventVO> array;
 			Integer memberNo = Integer.valueOf(request.getParameter("memberNo"));
 			array = resDAO.selectByMember(memberNo);
-			//測試
-			for(CalendarEventVO vo :array){
-				System.out.println(new JSONObject(vo.getEmpVO()));
+			for(CalendarEventVO c : array){
+				c.getEmpVO().setPostVO(null);
+				c.getEmpVO().setTeammemberlists(null);
 			}
 			out.print(new JSONArray(array).toString());
 			return;
@@ -66,8 +66,7 @@ public class reservationServlet extends HttpServlet {
 				HouseDAO mgDAO = new HouseDAO();
 				ReservationVO rlVO = new ReservationVO();
 				Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-//				Integer areaNo = mgDAO.findAreaNoByHouseNo(Integer.valueOf(houseNo));
-				Integer areaNo = 1;
+				Integer areaNo = mgDAO.findAreaNoByHouseNo(Integer.valueOf(houseNo));
 				String times[] = request.getParameterValues("Time");
 				String expectTime = "";
 				if(times != null){

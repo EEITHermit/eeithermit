@@ -8,20 +8,21 @@
 		<id name="reservationNO" column="reservationNO">
 			<generator class="identity" />
 		</id>
-		<many-to-one name="memberVO" class="com.hermit.iii.member.model.MemberVO">
+		<many-to-one name="memberVO" class="com.hermit.iii.member.model.MemberVO" lazy="false">
 			<column name="memNO"></column>
 		</many-to-one>
-		<many-to-one name="houseVO" class="com.hermit.iii.house.model.HouseVO">
+		<many-to-one name="houseVO" class="com.hermit.iii.house.model.HouseVO" lazy="false">
 			<column name="houseNO"></column>
 		</many-to-one>
-		<many-to-one name="boroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO">
+		<many-to-one name="boroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
 			<column name="boroughNO"></column>
+		</many-to-one>
+		<many-to-one name="empVO" class="com.hermit.iii.emp.model.EmpVO" lazy="false">
+			<column name="empNO"></column>	
 		</many-to-one>
 		<property name="exceptTime" column="exceptTime"></property>
 		<property name="takedOver" column="takedOver"></property>
-		<many-to-one name="empVO" class="com.hermit.iii.emp.model.EmpVO">
-			<column name="empNO"></column>
-		</many-to-one>
+		
 		<property name="applyTime" column="applyTime"></property>
 	</class> 
 </hibernate-mapping>

@@ -17,7 +17,8 @@ import com.hermit.iii.util.HibernateUtil;
 public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 
 	private static final String GET_ALL_STMT =	"from HouseVO order by houseNO";
-	
+	private static final String AUTO_COMPLETE = "FROM HouseVO Where houseAddr like ?";
+	private static final String FIND_BOROUGHNO_BY_HOUSENO = "from houseVO where houseNO = ?";
 	@Override
 	public void insert(HouseVO houseVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -88,32 +89,44 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		}
 	}
 
-//未寫
+//測試完成
 	@Override
 	public ArrayList<HouseVO> autoCompleteH(String address) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		ArrayList<HouseVO> array = new ArrayList<HouseVO>();
 		try {
 			session.beginTransaction();
+			Query query = session.createQuery(AUTO_COMPLETE);
+			query.setParameter(0, "%"+address+"%");
+			List<HouseVO> list = query.list();
+			array.addAll(list);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return null;
+		return array;
 	}
 	
 	//未寫
 	@Override
 	public Integer findAreaNoByHouseNo(Integer houseNo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer boroughNO = null;
 		try {
 			session.beginTransaction();
+			Query query = session.createQuery(FIND_BOROUGHNO_BY_HOUSENO);
+			query.setParameter(0,houseNo);
+			List<HouseVO> list = query.list();
+			for(HouseVO h : list){
+				boroughNO = h.getBoroughNO();
+			}
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return null;
+		return boroughNO;
 	}
 
 //未寫
