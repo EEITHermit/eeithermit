@@ -38,7 +38,7 @@ public class HouseTypeDAO_JNDI implements HouseTypeDAO_interface {
 			"SELECT typeNO,hType FROM houseType order by typeNO";
 	
 	@Override
-	public void insert(HouseTypeVO houseTypeVO) {
+	public void insert(HouseTypeVO_original houseTypeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -69,7 +69,7 @@ public class HouseTypeDAO_JNDI implements HouseTypeDAO_interface {
 	}
 
 	@Override
-	public void update(HouseTypeVO houseTypeVO) {
+	public void update(HouseTypeVO_original houseTypeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -132,11 +132,11 @@ public class HouseTypeDAO_JNDI implements HouseTypeDAO_interface {
 	}
 
 	@Override
-	public HouseTypeVO findByPrimaryKey(Integer typeNO) {
+	public HouseTypeVO_original findByPrimaryKey(Integer typeNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
-		HouseTypeVO vo = new HouseTypeVO();
+		HouseTypeVO_original vo = new HouseTypeVO_original();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
@@ -169,18 +169,18 @@ public class HouseTypeDAO_JNDI implements HouseTypeDAO_interface {
 	}
 
 	@Override
-	public List<HouseTypeVO> getAll() {
+	public List<HouseTypeVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		List<HouseTypeVO> list = new LinkedList<HouseTypeVO>();
+		List<HouseTypeVO_original> list = new LinkedList<HouseTypeVO_original>();
 		ResultSet rs;
-		HouseTypeVO vo;
+		HouseTypeVO_original vo;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new HouseTypeVO();
+				vo = new HouseTypeVO_original();
 				vo.setTypeNO(rs.getInt("typeNO"));
 				vo.sethType(rs.getString("hType"));
 				list.add(vo);

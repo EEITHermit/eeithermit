@@ -3,10 +3,10 @@ package com.hermit.iii.housetype.model;
 import java.util.List;
 
 public class HouseTypeService {
-	private HouseTypeDAO_interface dao;
+	private HouseTypeDAO_interface_hibernate dao;
 	
 	public HouseTypeService(){
-		dao = new HouseTypeDAO_JNDI();
+		dao = new HouseTypeDAO_hibernate();
 	}
 	
 	public void insertHouseForm(String hType){
@@ -15,22 +15,22 @@ public class HouseTypeService {
 		dao.insert(vo);
 	}
 	
-	public void updateHouseForm(Integer typeNO,String hType){
+	public void updateHouseType(Integer typeNO,String hType){
 		HouseTypeVO vo = new HouseTypeVO();
 		vo.setTypeNO(typeNO);
 		vo.sethType(hType);
 		dao.update(vo);
 	}
 	
-	public void deleteHouseForm(Integer typeNO){
+	public void deleteHouseType(Integer typeNO){
 		dao.delete(typeNO);
 	}
 	
-	public HouseTypeVO getOneHouseForm(Integer typeNO){
+	public HouseTypeVO getOneHouseType(Integer typeNO){
 		return dao.findByPrimaryKey(typeNO);
 	}
 	
-	public List<HouseTypeVO> getAllHouseForm(){
+	public List<HouseTypeVO> getAllHouseType(){
 		return dao.getAll();
 	}
 }

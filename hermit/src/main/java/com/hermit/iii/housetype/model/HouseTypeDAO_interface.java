@@ -4,9 +4,9 @@ import java.util.List;
 
 
 public interface HouseTypeDAO_interface {
-	 public void insert(HouseTypeVO houseTypeVO);
-     public void update(HouseTypeVO houseTypeVO);
+	 public void insert(HouseTypeVO_original houseTypeVO);
+     public void update(HouseTypeVO_original houseTypeVO);
      public void delete(Integer typeNO);
-     public HouseTypeVO findByPrimaryKey(Integer typeNO);
-     public List<HouseTypeVO> getAll();
+     public HouseTypeVO_original findByPrimaryKey(Integer typeNO);
+     public List<HouseTypeVO_original> getAll();
 }

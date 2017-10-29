@@ -1,13 +1,12 @@
 package com.hermit.iii.houseform.model;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class HouseFormService {
-	private HouseFormDAO_interface dao;
+	private HouseFormDAO_interface_hibernate dao;
 	
 	public HouseFormService(){
-		dao = new HouseFormDAO_JNDI();
+		dao = new HouseFormDAO_hibernate();
 	}
 	
 	public void insertHouseForm(String hForm){
