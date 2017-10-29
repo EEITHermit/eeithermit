@@ -2,17 +2,20 @@ package com.hermit.iii.teamArea.model;
 
 import java.io.Serializable;
 
+import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
+
 public class TeamAreaVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private Integer businNO;
+	private TeamMemberListVO teamMemberListVO;
 	private Integer cityNO;
-	private Integer boroughNO;
-	public Integer getBusinNO() {
-		return businNO;
+	private BoroughsVO BoroughVO;
+	public TeamMemberListVO getTeamMemberListVO() {
+		return teamMemberListVO;
 	}
-	public void setBusinNO(Integer businNO) {
-		this.businNO = businNO;
+	public void setTeamMemberListVO(TeamMemberListVO teamMemberListVO) {
+		this.teamMemberListVO = teamMemberListVO;
 	}
 	public Integer getCityNO() {
 		return cityNO;
@@ -20,11 +23,11 @@ public class TeamAreaVO implements Serializable{
 	public void setCityNO(Integer cityNO) {
 		this.cityNO = cityNO;
 	}
-	public Integer getBoroughNO() {
-		return boroughNO;
+	public BoroughsVO getBoroughVO() {
+		return BoroughVO;
 	}
-	public void setBoroughNO(Integer boroughNO) {
-		this.boroughNO = boroughNO;
+	public void setBoroughVO(BoroughsVO boroughVO) {
+		BoroughVO = boroughVO;
 	}
 	
 }
