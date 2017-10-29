@@ -17,6 +17,7 @@ import org.json.simple.JSONValue;
 
 import com.hermit.iii.housetype.model.HouseTypeService;
 import com.hermit.iii.housetype.model.HouseTypeVO;
+import com.hermit.iii.housetype.model.HouseTypeVO_original;
 
 /**
  * Servlet implementation class HouseTypeServlet
@@ -30,9 +31,6 @@ public class HouseTypeServlet extends HttpServlet {
 		doPost(request,response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action=request.getParameter("action");
@@ -46,7 +44,7 @@ public class HouseTypeServlet extends HttpServlet {
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			
-			List<HouseTypeVO> list = svc.getAllHouseForm();
+			List<HouseTypeVO> list = svc.getAllHouseType();
 			List list2=new LinkedList();
 			PrintWriter out=response.getWriter();
 			

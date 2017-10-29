@@ -37,7 +37,7 @@ public class HouseFormDAO_JNDI implements HouseFormDAO_interface {
 	
 	
 	@Override
-	public void insert(HouseFormVO houseFormVO) {
+	public void insert(HouseFormVO_original houseFormVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -69,7 +69,7 @@ public class HouseFormDAO_JNDI implements HouseFormDAO_interface {
 	}
 
 	@Override
-	public void update(HouseFormVO houseFormVO){
+	public void update(HouseFormVO_original houseFormVO){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -132,10 +132,10 @@ public class HouseFormDAO_JNDI implements HouseFormDAO_interface {
 	}
 
 	@Override
-	public HouseFormVO findByPrimaryKey(Integer formNO) {
+	public HouseFormVO_original findByPrimaryKey(Integer formNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseFormVO houseFormVO = new HouseFormVO();
+		HouseFormVO_original houseFormVO = new HouseFormVO_original();
 		ResultSet rs ;
 		try {
 			con = ds.getConnection();
@@ -169,18 +169,18 @@ public class HouseFormDAO_JNDI implements HouseFormDAO_interface {
 	}
 
 	@Override
-	public List<HouseFormVO> getAll() {
+	public List<HouseFormVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseFormVO houseFormVO ;
-		List<HouseFormVO> list = new LinkedList<HouseFormVO>();
+		HouseFormVO_original houseFormVO ;
+		List<HouseFormVO_original> list = new LinkedList<HouseFormVO_original>();
 		ResultSet rs ;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				houseFormVO = new HouseFormVO();
+				houseFormVO = new HouseFormVO_original();
 				houseFormVO.setFormNO(rs.getInt("formNO"));
 				houseFormVO.sethForm(rs.getString("hForm"));
 				list.add(houseFormVO);

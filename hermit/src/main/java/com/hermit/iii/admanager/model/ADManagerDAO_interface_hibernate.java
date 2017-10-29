@@ -3,15 +3,15 @@ import java.util.List;
 
 public interface ADManagerDAO_interface_hibernate {	
 	
-	public void insert(ADManagerVO_hibernate ad);
+	public void insert(ADManagerVO ad);
 	
-	public void update(ADManagerVO_hibernate ad);
+	public void update(ADManagerVO ad);
 	
-	public void delete(int adNo);
+	public void delete(int adNO);
 	
-	public ADManagerVO_hibernate findByPrimaryKey(int adNo);
+	public ADManagerVO findByPrimaryKey(int adNO);
 	
-	public List<ADManagerVO_hibernate> getAll();
+	public List<ADManagerVO> getAll();
 	
 	public String getAllForJson();
 	

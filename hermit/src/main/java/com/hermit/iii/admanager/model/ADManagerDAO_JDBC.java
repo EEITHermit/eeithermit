@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.json.simple.JSONValue;
 
-import com.hermit.iii.dispatchlist.model.DispatchListVO;
+
 
 public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 	private static final String INSERT =
@@ -29,7 +29,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 
 		
 		@Override
-		public void insert(ADManagerVO ADManagerVO) {
+		public void insert(ADManagerVO_original ADManagerVO) {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			
@@ -71,7 +71,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 
 
 		@Override
-		public void update(ADManagerVO ADManagerVO) {
+		public void update(ADManagerVO_original ADManagerVO) {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			
@@ -147,7 +147,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 
 
 		@Override
-		public ADManagerVO findByPrimaryKey(int adNo) {
+		public ADManagerVO_original findByPrimaryKey(Integer adNO) {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ADManagerVO adVO = null;
@@ -155,12 +155,12 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 			try {
 				conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 				pstmt = conn.prepareStatement(GET_ONE);
-				pstmt.setInt(1, adNo);
+				pstmt.setInt(1, adNO);
 				rs = pstmt.executeQuery();
 
 				while (rs.next()) {
 					adVO = new ADManagerVO();
-					adVO.setAdNo(rs.getInt("adNo"));
+					adVO.setadNO(rs.getInt("adNo"));
 					adVO.setAdImage(rs.getString("adImage"));
 					adVO.setAdLink(rs.getString("adLink"));
 					adVO.setAdMessage(rs.getString("adMessage"));
@@ -170,7 +170,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 					adVO.setAdBrowse(rs.getInt("adBrowse"));
 					adVO.setAdModify(rs.getInt("adModify"));
 				}
-				return adVO;
+				
 			} catch (SQLException e) {
 				throw new RuntimeException("A database error occured. "
 						+ e.getMessage());
@@ -200,7 +200,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 		}
 
 		@Override
-		public List<ADManagerVO> getAll() {
+		public List<ADManagerVO_original> getAll() {
 			List<ADManagerVO> list = new ArrayList<ADManagerVO>();
 			ADManagerVO adVO = null;
 
@@ -218,7 +218,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 				
 				while (rs.next()) {					
 					adVO = new ADManagerVO();
-					adVO.setAdNo(rs.getInt("adNo"));
+					adVO.setadNO(rs.getInt("adNo"));
 					adVO.setAdImage(rs.getString("adImage"));
 					adVO.setAdLink(rs.getString("adLink"));
 					adVO.setAdMessage(rs.getString("adMessage"));
@@ -257,7 +257,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 					}
 				}
 			}
-			return list;
+//			return list;
 		}
 		@Override
 		public String getAllForJson() {
@@ -320,8 +320,8 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 		
 
 		public static void main (String args[]){
-			ADManagerVO aVO = new ADManagerVO();
-			ADManagerDAO_JDBC aDAO = new ADManagerDAO_JDBC();
+			ADManagerVO adVO = new ADManagerVO();
+			ADManagerDAO_JDBC adDAO = new ADManagerDAO_JDBC();
 			
 			//Insert Test Start
 			

@@ -25,7 +25,6 @@ public class ADManagerService {
 	
 	public void updateADManager(int adNo, String adImage , String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, int adBrowse , int adModify){
 		ADManagerVO adVO = new ADManagerVO();
-		adVO.setAdNo(adNo);
 		adVO.setAdImage(adImage);
 		adVO.setAdLink(adLink);
 		adVO.setAdMessage(adMessage);
@@ -37,12 +36,12 @@ public class ADManagerService {
 		dao.update(adVO);
 	}
 	
-	public void deleteADManager(int adNo){
-		dao.delete(adNo);
+	public void deleteADManager(int adNO){
+		dao.delete(adNO);
 	}
 	
-	public ADManagerVO getOneADManager(int adNo){
-		return dao.findByPrimaryKey(adNo);
+	public ADManagerVO getOneADManager(int adNO){
+		return dao.findByPrimaryKey(adNO);
 		
 	}
 	

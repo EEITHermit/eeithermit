@@ -38,12 +38,26 @@
 
 		<!--Java物件與資料庫表格的映射檔 -->
 		<mapping resource="com/hermit/iii/favorite/model/Favorite.hbm.xml" />
+		<mapping resource="com/hermit/iii/dispatchlist/model/DispatchList_hbm.xml" />
+		<mapping resource="com/hermit/iii/equipmentcondition/model/EquipmentCondition_hbm.xml" />
+		<mapping resource="com/hermit/iii/house/model/House_hbm.xml" />
 		<mapping resource="com/hermit/iii/lease/model/Lease.hbm.xml" />
 		<mapping resource="com/hermit/iii/member/model/Member.hbm.xml" />
-		<mapping resource="com/hermit/iii/admanager/model/ADManager.hbm.xml" />
+
+		<mapping resource="com/hermit/iii/city/model/City.hbm.xml" />
+<!-- 		<mapping resource="com/hermit/iii/admanager/model/ADManager.hbm.xml" /> -->
 		<mapping resource="com/hermit/iii/houseform/model/HouseForm.hbm.xml" />
 		<mapping resource="com/hermit/iii/housetype/model/HouseType.hbm.xml" />
 		<mapping resource="com/hermit/iii/calendar/model/CalendarEvent.hbm.xml"/>
+
+		<mapping resource="com/hermit/iii/reservation/model/reservation.hbm.xml"/>
+		<mapping resource="com/hermit/iii/qanda/model/QandA.hbm.xml"/>
+
+		<mapping resource="com/hermit/iii/boroughs/model/Boroughs.hbm.xml"/>
+		<mapping resource="com/hermit/iii/housepicture/model/HousePicture.hbm.xml"/>
+		<mapping resource="com/hermit/iii/teamArea/model/TeamArea.hbm.xml"/>
+		<mapping resource="com/hermit/iii/infraction/model/infraction.hbm.xml"/>
+		
 
 
 	</session-factory>

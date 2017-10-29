@@ -1,9 +1,8 @@
 package com.hermit.iii.admanager.model;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-public class ADManagerVO_hibernate implements Serializable {
+public class ADManagerVO_original {
 	private Integer adNo; //廣告編號
 	private String adImage; //廣告圖片
 	private String adLink; //廣告超連結

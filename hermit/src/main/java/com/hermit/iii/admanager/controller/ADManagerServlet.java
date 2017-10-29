@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hermit.iii.admanager.model.ADManagerService;
-import com.hermit.iii.admanager.model.ADManagerVO;
+import com.hermit.iii.admanager.model.ADManagerVO_original;
 
 
 @WebServlet("/ADManagerServlet")
@@ -88,7 +88,7 @@ public class ADManagerServlet extends HttpServlet {
 //		取一
 		if ("getOneADManager".equals(action)) {
 			System.out.println("Get one OK");
-			ADManagerVO adVO = new ADManagerVO();
+			ADManagerVO_original adVO = new ADManagerVO_original();
 			ads = new ADManagerService();
 			adVO = ads.getOneADManager(Integer.valueOf(req.getParameter("adNo")));
 			req.setAttribute("adVO", adVO);
@@ -98,7 +98,7 @@ public class ADManagerServlet extends HttpServlet {
 //		查詢全部
 		if ("getAllADManager".equals(action)) {
 			ads = new ADManagerService();
-			List<ADManagerVO> list = ads.getAllADManager();
+			List<ADManagerVO_original> list = ads.getAllADManager();
 			req.setAttribute("list", list);
 			// System.out.println("Get All OK");
 			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
