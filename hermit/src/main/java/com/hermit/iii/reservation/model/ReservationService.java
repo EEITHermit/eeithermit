@@ -3,11 +3,11 @@ package com.hermit.iii.reservation.model;
 import java.util.ArrayList;
 
 public class ReservationService {
-	ReservationDAO_interface rlDAO = new ReservationJNDIDAO();
-	public Integer insert(ReservationVO_original rlVO){
+	ReservationDAO_interface_hibernate rlDAO = new ReservationJNDIDAO_hibernate();
+	public Integer insert(ReservationVO rlVO){
 		return rlDAO.insert(rlVO);
 	}
-	public ArrayList<ReservationVO_original> selectByArea(Integer areaNo){
+	public ArrayList<ReservationVO> selectByArea(Integer areaNo){
 		return rlDAO.selectByArea(areaNo);
 	}
 	public Integer updateStatus(Integer reservationNo,Integer empNo){

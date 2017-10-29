@@ -74,7 +74,7 @@
 		<!-- 會員帳號為假資料 -->
 		<input type="hidden" name="memberNo" value="40003"/>
 		<!-- 房屋帳號為假資料 -->
-		<input type="hidden" name="houseNo" value="20002"/>
+		<input type="hidden" name="houseNo" value="20001"/>
 		<h3>請選擇期望預約時間</h3>
 		<div id="MonDiv">
 			<input type="checkbox" name="week" value="一" id="Mon"/><label for="Mon">星期一</label> 

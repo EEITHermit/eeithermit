@@ -21,16 +21,15 @@ import org.hibernate.Session;
 import com.hermit.iii.util.HibernateUtil;
 
 public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hibernate{
-	Session session;
+	 
 	public ReservationJNDIDAO_hibernate(){
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
 	}
 	// 會員確認預約後的新增
-	String insert = "insert into reservation("
-			+ "memNO,houseNO,boroughNO,exceptTime,applyTime,takedOver) values(?,?,?,?,?,?)";
 	@Override
 	public Integer insert(ReservationVO rlVO) {
 		int result = 0;
+		Session	session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 		session.getTransaction().begin();
 		session.saveOrUpdate(rlVO);
@@ -44,15 +43,12 @@ public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hi
 		return result;
 	}
 	//推播功能用
-	String select = "select * from reservation r join house h on h.houseNO = r.houseNO "
-			+ "join member m on m.memNO = r.memNO "
-			+ "where (r.boroughNO = ?) AND (takedOver = 'false')";
-	//測
 	String select_h = "from ReservationVO "
 			+ "where (boroughNO = ?) AND (takedOver = 'false')";
 	@Override
 	public ArrayList<ReservationVO> selectByArea(Integer areaNo) {
 		ArrayList<ReservationVO> array = new ArrayList<ReservationVO>();
+		Session	session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(select_h);
@@ -67,12 +63,11 @@ public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hi
 		return array;
 	}
 	//員工接案後確認是否已被接案，再更新狀態
-	String selectStatus = "select takedOver from reservation where reservationNO = ?";
 	String selectStatus_h = "from ReservationVO where reservationNO = ?";
-	String updateEmpNo = "update reservation set empNO = ?,takedOver = 'true' where reservationNO = ?";
 	@Override
 	public Integer updateStatus(Integer reservationNo , Integer empNo) {
 		int result = 0;
+		Session	session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(selectStatus_h);
@@ -84,7 +79,7 @@ public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hi
 			}
 			if(exist == false){
 				ReservationVO res = session.get(ReservationVO.class, reservationNo);
-				res.setEmpNO(empNo);
+				res.getEmpVO().setEmpNO(empNo);
 				res.setTakedOver(true);
 				session.saveOrUpdate(res);
 				result = 1;
@@ -100,11 +95,11 @@ public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hi
 		return result;
 	}
 	//確認是否有預約過此房屋
-	String checkExist = "select * from reservation where houseNO= ? AND memNO = ? AND takedOver = 'false'";
 	String checkExist_h = "from ReservationVO where houseNO = ? AND memNO = ? AND takedOver = 'false'";
 	@Override
 	public boolean checkExist(Integer houseNo,Integer memberNo){
 		boolean result = true;
+		Session	session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(checkExist_h);
@@ -118,6 +113,19 @@ public class ReservationJNDIDAO_hibernate implements ReservationDAO_interface_hi
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public static void main(String[] args){
+		ReservationJNDIDAO_hibernate res = new ReservationJNDIDAO_hibernate();
+		ReservationVO re = new ReservationVO();
+		re.setApplyTime(Timestamp.valueOf("2017-10-10 00:00:00"));
+		re.getBoroughsVO().setBoroughNO(1);
+		re.setTakedOver(false);
+		re.setExceptTime("OK");
+		re.getEmpVO().setEmpNO(30001);
+		re.getMemberVO().setMemNO(40001);
+		re.getHouseVO().setHouseNO(20001);
+		res.insert(re);
 	}
 	
 }

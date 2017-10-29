@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.hermit.iii.calendar.model.CalendarEventService;
-import com.hermit.iii.calendar.model.CalendarEventVO_original;
+import com.hermit.iii.calendar.model.CalendarEventVO;
 import com.hermit.iii.house.model.HouseDAO;
 import com.hermit.iii.reservation.model.ReservationService;
-import com.hermit.iii.reservation.model.ReservationVO_original;
+import com.hermit.iii.reservation.model.ReservationVO;
 
 
 @WebServlet("/reservationServlet")
@@ -36,9 +37,12 @@ public class reservationServlet extends HttpServlet {
 		String mission = request.getParameter("mission");
 		if(mission.equals("queryReservation")){
 			CalendarEventService resDAO = new CalendarEventService();
-			ArrayList<CalendarEventVO_original> array;
+			ArrayList<CalendarEventVO> array;
 			Integer memberNo = Integer.valueOf(request.getParameter("memberNo"));
 			array = resDAO.selectByMember(memberNo);
+			for(CalendarEventVO vo :array){
+				System.out.println(new JSONObject(vo.getEmpVO()));
+			}
 			out.print(new JSONArray(array).toString());
 			return;
 		};
@@ -59,9 +63,10 @@ public class reservationServlet extends HttpServlet {
 			if (!(rlDAO.checkExist(houseNo, memberNo))) {
 				int result = 0;
 				HouseDAO mgDAO = new HouseDAO();
-				ReservationVO_original rlVO = new ReservationVO_original();
+				ReservationVO rlVO = new ReservationVO();
 				Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-				Integer areaNo = mgDAO.findAreaNoByHouseNo(Integer.valueOf(houseNo));
+//				Integer areaNo = mgDAO.findAreaNoByHouseNo(Integer.valueOf(houseNo));
+				Integer areaNo = 1;
 				String times[] = request.getParameterValues("Time");
 				String expectTime = "";
 				if(times != null){
@@ -71,7 +76,8 @@ public class reservationServlet extends HttpServlet {
 				}
 				rlVO.getMemberVO().setMemNO(Integer.valueOf(memberNo));
 				rlVO.getHouseVO().setHouseNO(Integer.valueOf(houseNo));
-				rlVO.setBoroughNO(areaNo);
+				rlVO.getBoroughsVO().setBoroughNO(areaNo);
+				rlVO.setTakedOver(false);
 				rlVO.setApplyTime(currentTime);
 				rlVO.setExceptTime(expectTime);
 				result = rlDAO.insert(rlVO);
