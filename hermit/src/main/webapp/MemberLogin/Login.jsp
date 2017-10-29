@@ -21,7 +21,7 @@
 			if($("#remember").prop("checked")){
 				box = "on";
 			}
-			$.post('/Hermit/Login/memlogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
+			$.post('/hermit/Login/memlogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
 				
 				if(data == "ok"){
 					window.location = "/hermit/MemberLogin/LoginSuccess.jsp";

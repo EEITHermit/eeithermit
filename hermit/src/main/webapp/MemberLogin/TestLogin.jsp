@@ -29,7 +29,7 @@
 			if($("#remember").prop("checked")){
 				box = "on";
 			}
-			$.post('/Hermit/Login/memlogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
+			$.post('/hermit/Login/memlogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
 				
 				if(data == "ok"){
 					window.location = "/hermit/MemberLogin/LoginSuccess.jsp";
@@ -75,7 +75,7 @@
 	<header role="banner">
 	<div id="cd-logo">
 		<a href="#0"><img
-			src="<%=request.getContextPath()%>/img/cd-logo.svg" alt="Logo"></a>
+			src="<%=request.getContextPath()%>/images/cd-logo.svg" alt="Logo"></a>
 	</div>
 
 	<nav class="main-nav">
