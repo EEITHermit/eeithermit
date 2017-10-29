@@ -177,13 +177,13 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
 				leaseVO.setMemNO(rs.getInt("memNO"));
 				leaseVO.setEmpNO(rs.getInt("empNO"));
-				leaseVO.setLeaseRent(rs.getInt("Rent"));
-				leaseVO.setLeaseDeposit(rs.getInt("Deposit"));
-				leaseVO.setLeaseRelief(rs.getInt("Relief"));
+				leaseVO.setLeaseRent(rs.getInt("leaseRent"));
+				leaseVO.setLeaseDeposit(rs.getInt("leaseDeposit"));
+				leaseVO.setLeaseRelief(rs.getInt("leaseRelief"));
 				leaseVO.setLeaseDate(rs.getDate("leaseDate"));
 				leaseVO.setLeasePic(rs.getString("leasePic"));
 				leaseVO.setHouseNote(rs.getString("houseNote"));
-				leaseVO.setLeaseRefund(rs.getByte("Refund"));
+				leaseVO.setLeaseRefund(rs.getByte("leaseRefund"));
 			}
 
 		} catch (ClassNotFoundException e) { // Handle any driver errors
@@ -234,13 +234,13 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
 				leaseVO.setMemNO(rs.getInt("memNO"));
 				leaseVO.setEmpNO(rs.getInt("empNO"));
-				leaseVO.setLeaseRent(rs.getInt("Rent"));
-				leaseVO.setLeaseDeposit(rs.getInt("Deposit"));
-				leaseVO.setLeaseRelief(rs.getInt("Relief"));
+				leaseVO.setLeaseRent(rs.getInt("leaseRent"));
+				leaseVO.setLeaseDeposit(rs.getInt("leaseDeposit"));
+				leaseVO.setLeaseRelief(rs.getInt("leaseRelief"));
 				leaseVO.setLeaseDate(rs.getDate("leaseDate"));
 				leaseVO.setLeasePic(rs.getString("leasePic"));
 				leaseVO.setHouseNote(rs.getString("houseNote"));
-				leaseVO.setLeaseRefund(rs.getByte("Refund"));
+				leaseVO.setLeaseRefund(rs.getByte("leaseRefund"));
 				set.add(leaseVO); // Store the row in the list
 			}
 
@@ -281,66 +281,66 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 		leaseVO1.setLeaseDeposit(1000);
 		leaseVO1.setLeaseRelief(1000);
 		leaseVO1.setLeaseDate(java.sql.Date.valueOf("2017-04-01"));
-		leaseVO1.setLeasePic("0x23456"); // not use
+		leaseVO1.setLeasePic(null); // not use
 		leaseVO1.setHouseNote("備註123");
 		leaseVO1.setLeaseRefund((byte) 0);
 		dao.insert(leaseVO1);
 
 		// 修改初始資料第一筆
-//		LeaseVO leaseVO2 = new LeaseVO();
-//		leaseVO2.setLeaseNO(200001);
-//		leaseVO2.setHouseNO(20001);
-//		leaseVO2.setLeaseBeginDate(java.sql.Date.valueOf("2014-10-10"));
-//		leaseVO2.setLeaseEndDate(java.sql.Date.valueOf("2016-01-01"));
-//		leaseVO2.setMemNO(40001);
-//		leaseVO2.setEmpNO(30001);
-//		leaseVO2.setRent(1000);
-//		leaseVO2.setDeposit(1000);
-//		leaseVO2.setRelief(1000);
-//		leaseVO2.setLeaseDate(java.sql.Date.valueOf("2018-04-01"));
-//		// leaseVO2.setLeasePic(null); // not use
-//		leaseVO2.setHouseNote("備註123");
-//		leaseVO2.setRefund((byte) 10);
-//		dao.update(leaseVO2);
-//
-//		// 查詢初始資料第一筆
-//		LeaseVO leaseVO3 = dao.findByPrimaryKey(200001);
-//		System.out.print(leaseVO3.getLeaseNO() + ",");
-//		System.out.print(leaseVO3.getHouseNO() + ",");
-//		System.out.print(leaseVO3.getLeaseBeginDate() + ",");
-//		System.out.print(leaseVO3.getLeaseEndDate() + ",");
-//		System.out.print(leaseVO3.getMemNO() + ",");
-//		System.out.print(leaseVO3.getEmpNO() + ",");
-//		System.out.print(leaseVO3.getRent() + ",");
-//		System.out.print(leaseVO3.getDeposit() + ",");
-//		System.out.print(leaseVO3.getRelief() + ",");
-//		System.out.print(leaseVO3.getLeaseDate() + ",");
-//		System.out.print(leaseVO3.getLeasePic() + ",");
-//		System.out.print(leaseVO3.getHouseNote() + ",");
-//		System.out.println(leaseVO3.getRefund());
-//		System.out.println("---------------------");
-//
-//		// 查詢全部
-//		Set<LeaseVO> set = dao.getAll();
-//		for (LeaseVO leaseVO : set) {
-//			System.out.print(leaseVO.getLeaseNO() + ",");
-//			System.out.print(leaseVO.getHouseNO() + ",");
-//			System.out.print(leaseVO.getLeaseBeginDate() + ",");
-//			System.out.print(leaseVO.getLeaseEndDate() + ",");
-//			System.out.print(leaseVO.getMemNO() + ",");
-//			System.out.print(leaseVO.getEmpNO() + ",");
-//			System.out.print(leaseVO.getRent() + ",");
-//			System.out.print(leaseVO.getDeposit() + ",");
-//			System.out.print(leaseVO.getRelief() + ",");
-//			System.out.print(leaseVO.getLeaseDate() + ",");
-//			System.out.print(leaseVO.getLeasePic() + ",");
-//			System.out.print(leaseVO.getHouseNote() + ",");
-//			System.out.println(leaseVO.getRefund());
-//			System.out.println();
-//		}
-//		// 刪除初始資料一筆
-//		dao.delete(200001);
-//
-//		System.out.println("Done");
+		LeaseVO leaseVO2 = new LeaseVO();
+		leaseVO2.setLeaseNO(200001);
+		leaseVO2.setHouseNO(20001);
+		leaseVO2.setLeaseBeginDate(java.sql.Date.valueOf("2014-10-10"));
+		leaseVO2.setLeaseEndDate(java.sql.Date.valueOf("2016-01-01"));
+		leaseVO2.setMemNO(40001);
+		leaseVO2.setEmpNO(30001);
+		leaseVO2.setLeaseRent(1000);
+		leaseVO2.setLeaseDeposit(1000);
+		leaseVO2.setLeaseRelief(1000);
+		leaseVO2.setLeaseDate(java.sql.Date.valueOf("2018-04-01"));
+		// leaseVO2.setLeasePic(null); // not use
+		leaseVO2.setHouseNote("備註123");
+		leaseVO2.setLeaseRefund((byte) 10);
+		dao.update(leaseVO2);
+
+		// 查詢初始資料第一筆
+		LeaseVO leaseVO3 = dao.findByPrimaryKey(200001);
+		System.out.print(leaseVO3.getLeaseNO() + ",");
+		System.out.print(leaseVO3.getHouseNO() + ",");
+		System.out.print(leaseVO3.getLeaseBeginDate() + ",");
+		System.out.print(leaseVO3.getLeaseEndDate() + ",");
+		System.out.print(leaseVO3.getMemNO() + ",");
+		System.out.print(leaseVO3.getEmpNO() + ",");
+		System.out.print(leaseVO3.getLeaseRent() + ",");
+		System.out.print(leaseVO3.getLeaseDeposit() + ",");
+		System.out.print(leaseVO3.getLeaseRelief() + ",");
+		System.out.print(leaseVO3.getLeaseDate() + ",");
+		System.out.print(leaseVO3.getLeasePic() + ",");
+		System.out.print(leaseVO3.getHouseNote() + ",");
+		System.out.println(leaseVO3.getLeaseRefund());
+		System.out.println("---------------------");
+
+		// 查詢全部
+		Set<LeaseVO> set = dao.getAll();
+		for (LeaseVO leaseVO : set) {
+			System.out.print(leaseVO.getLeaseNO() + ",");
+			System.out.print(leaseVO.getHouseNO() + ",");
+			System.out.print(leaseVO.getLeaseBeginDate() + ",");
+			System.out.print(leaseVO.getLeaseEndDate() + ",");
+			System.out.print(leaseVO.getMemNO() + ",");
+			System.out.print(leaseVO.getEmpNO() + ",");
+			System.out.print(leaseVO.getLeaseRent() + ",");
+			System.out.print(leaseVO.getLeaseDeposit() + ",");
+			System.out.print(leaseVO.getLeaseRelief() + ",");
+			System.out.print(leaseVO.getLeaseDate() + ",");
+			System.out.print(leaseVO.getLeasePic() + ",");
+			System.out.print(leaseVO.getHouseNote() + ",");
+			System.out.println(leaseVO.getLeaseRefund());
+			System.out.println();
+		}
+		// 刪除初始資料一筆
+		dao.delete(200001);
+
+		System.out.println("Done");
 	}
 }

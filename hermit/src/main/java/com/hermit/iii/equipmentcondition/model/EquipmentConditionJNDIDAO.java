@@ -30,28 +30,28 @@ public class EquipmentConditionJNDIDAO implements EquipmentConditionDAO_interfac
 	private static final String GET_ALL_STMT = "SELECT houseNO,TV,aircondition,refrigerator,waterHeater,gas,theFourthStation,net,washing,bed,wardrobe,sofa,parking,elevator,balcony,permitCook,pet,closeMRT FROM equipmentCondition ORDER BY houseNO";
 
 	@Override
-	public void insert(EquipmentConditionVO equipmentConditionVO) {
+	public void insert(EquipmentConditionVO_orignal EquipmentConditionVO_orignal) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERT_STMT);) {
 
-			pstmt.setInt(1, equipmentConditionVO.getHouseNO());
-			pstmt.setByte(2, equipmentConditionVO.getTV());
-			pstmt.setByte(3, equipmentConditionVO.getAircondition());
-			pstmt.setByte(4, equipmentConditionVO.getRefrigerator());
-			pstmt.setByte(5, equipmentConditionVO.getWaterHeater());
-			pstmt.setByte(6, equipmentConditionVO.getGas());
-			pstmt.setByte(7, equipmentConditionVO.getTheFourthStation());
-			pstmt.setByte(8, equipmentConditionVO.getNet());
-			pstmt.setByte(9, equipmentConditionVO.getWashing());
-			pstmt.setByte(10, equipmentConditionVO.getBed());
-			pstmt.setByte(11, equipmentConditionVO.getWardrobe());
-			pstmt.setByte(12, equipmentConditionVO.getSofa());
-			pstmt.setByte(13, equipmentConditionVO.getParking());
-			pstmt.setByte(14, equipmentConditionVO.getElevator());
-			pstmt.setByte(15, equipmentConditionVO.getBalcony());
-			pstmt.setByte(16, equipmentConditionVO.getPermitCook());
-			pstmt.setByte(17, equipmentConditionVO.getPet());
-			pstmt.setByte(18, equipmentConditionVO.getCloseMRT());
+			pstmt.setInt(1, EquipmentConditionVO_orignal.getHouseNO());
+			pstmt.setByte(2, EquipmentConditionVO_orignal.getTV());
+			pstmt.setByte(3, EquipmentConditionVO_orignal.getAircondition());
+			pstmt.setByte(4, EquipmentConditionVO_orignal.getRefrigerator());
+			pstmt.setByte(5, EquipmentConditionVO_orignal.getWaterHeater());
+			pstmt.setByte(6, EquipmentConditionVO_orignal.getGas());
+			pstmt.setByte(7, EquipmentConditionVO_orignal.getTheFourthStation());
+			pstmt.setByte(8, EquipmentConditionVO_orignal.getNet());
+			pstmt.setByte(9, EquipmentConditionVO_orignal.getWashing());
+			pstmt.setByte(10, EquipmentConditionVO_orignal.getBed());
+			pstmt.setByte(11, EquipmentConditionVO_orignal.getWardrobe());
+			pstmt.setByte(12, EquipmentConditionVO_orignal.getSofa());
+			pstmt.setByte(13, EquipmentConditionVO_orignal.getParking());
+			pstmt.setByte(14, EquipmentConditionVO_orignal.getElevator());
+			pstmt.setByte(15, EquipmentConditionVO_orignal.getBalcony());
+			pstmt.setByte(16, EquipmentConditionVO_orignal.getPermitCook());
+			pstmt.setByte(17, EquipmentConditionVO_orignal.getPet());
+			pstmt.setByte(18, EquipmentConditionVO_orignal.getCloseMRT());
 
 			pstmt.executeUpdate();
 
@@ -61,28 +61,28 @@ public class EquipmentConditionJNDIDAO implements EquipmentConditionDAO_interfac
 	}
 
 	@Override
-	public void update(EquipmentConditionVO equipmentConditionVO) {
+	public void update(EquipmentConditionVO_orignal EquipmentConditionVO_orignal) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);) {
 
-			pstmt.setByte(1, equipmentConditionVO.getTV());
-			pstmt.setByte(2, equipmentConditionVO.getAircondition());
-			pstmt.setByte(3, equipmentConditionVO.getRefrigerator());
-			pstmt.setByte(4, equipmentConditionVO.getWaterHeater());
-			pstmt.setByte(5, equipmentConditionVO.getGas());
-			pstmt.setByte(6, equipmentConditionVO.getTheFourthStation());
-			pstmt.setByte(7, equipmentConditionVO.getNet());
-			pstmt.setByte(8, equipmentConditionVO.getWashing());
-			pstmt.setByte(9, equipmentConditionVO.getBed());
-			pstmt.setByte(10, equipmentConditionVO.getWardrobe());
-			pstmt.setByte(11, equipmentConditionVO.getSofa());
-			pstmt.setByte(12, equipmentConditionVO.getParking());
-			pstmt.setByte(13, equipmentConditionVO.getElevator());
-			pstmt.setByte(14, equipmentConditionVO.getBalcony());
-			pstmt.setByte(15, equipmentConditionVO.getPermitCook());
-			pstmt.setByte(16, equipmentConditionVO.getPet());
-			pstmt.setByte(17, equipmentConditionVO.getCloseMRT());
-			pstmt.setInt(18, equipmentConditionVO.getHouseNO());
+			pstmt.setByte(1, EquipmentConditionVO_orignal.getTV());
+			pstmt.setByte(2, EquipmentConditionVO_orignal.getAircondition());
+			pstmt.setByte(3, EquipmentConditionVO_orignal.getRefrigerator());
+			pstmt.setByte(4, EquipmentConditionVO_orignal.getWaterHeater());
+			pstmt.setByte(5, EquipmentConditionVO_orignal.getGas());
+			pstmt.setByte(6, EquipmentConditionVO_orignal.getTheFourthStation());
+			pstmt.setByte(7, EquipmentConditionVO_orignal.getNet());
+			pstmt.setByte(8, EquipmentConditionVO_orignal.getWashing());
+			pstmt.setByte(9, EquipmentConditionVO_orignal.getBed());
+			pstmt.setByte(10, EquipmentConditionVO_orignal.getWardrobe());
+			pstmt.setByte(11, EquipmentConditionVO_orignal.getSofa());
+			pstmt.setByte(12, EquipmentConditionVO_orignal.getParking());
+			pstmt.setByte(13, EquipmentConditionVO_orignal.getElevator());
+			pstmt.setByte(14, EquipmentConditionVO_orignal.getBalcony());
+			pstmt.setByte(15, EquipmentConditionVO_orignal.getPermitCook());
+			pstmt.setByte(16, EquipmentConditionVO_orignal.getPet());
+			pstmt.setByte(17, EquipmentConditionVO_orignal.getCloseMRT());
+			pstmt.setInt(18, EquipmentConditionVO_orignal.getHouseNO());
 
 			pstmt.executeUpdate();
 
@@ -106,9 +106,9 @@ public class EquipmentConditionJNDIDAO implements EquipmentConditionDAO_interfac
 	}
 
 	@Override
-	public EquipmentConditionVO findByPrimaryKey(Integer houseNO) {
+	public EquipmentConditionVO_orignal findByPrimaryKey(Integer houseNO) {
 		ResultSet rs = null;
-		EquipmentConditionVO equipmentConditionVO = null;
+		EquipmentConditionVO_orignal EquipmentConditionVO_orignal = null;
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ONE_STMT);) {
 
@@ -116,68 +116,68 @@ public class EquipmentConditionJNDIDAO implements EquipmentConditionDAO_interfac
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				// 確定有資料才開始new EquipmentConditionVO物件
-				// equipmentConditionVO = Domain objects
-				equipmentConditionVO = new EquipmentConditionVO();
-				equipmentConditionVO.setHouseNO(rs.getInt("houseNO"));
-				equipmentConditionVO.setTV(rs.getByte("TV"));
-				equipmentConditionVO.setAircondition(rs.getByte("aircondition"));
-				equipmentConditionVO.setRefrigerator(rs.getByte("refrigerator"));
-				equipmentConditionVO.setWaterHeater(rs.getByte("waterHeater"));
-				equipmentConditionVO.setGas(rs.getByte("gas"));
-				equipmentConditionVO.setTheFourthStation(rs.getByte("theFourthStation"));
-				equipmentConditionVO.setNet(rs.getByte("net"));
-				equipmentConditionVO.setWashing(rs.getByte("washing"));
-				equipmentConditionVO.setBed(rs.getByte("bed"));
-				equipmentConditionVO.setWardrobe(rs.getByte("wardrobe"));
-				equipmentConditionVO.setSofa(rs.getByte("sofa"));
-				equipmentConditionVO.setParking(rs.getByte("parking"));
-				equipmentConditionVO.setElevator(rs.getByte("elevator"));
-				equipmentConditionVO.setBalcony(rs.getByte("balcony"));
-				equipmentConditionVO.setPermitCook(rs.getByte("permitCook"));
-				equipmentConditionVO.setPet(rs.getByte("pet"));
-				equipmentConditionVO.setCloseMRT(rs.getByte("closeMRT"));
+				// 確定有資料才開始new EquipmentConditionVO_orignal物件
+				// EquipmentConditionVO_orignal = Domain objects
+				EquipmentConditionVO_orignal = new EquipmentConditionVO_orignal();
+				EquipmentConditionVO_orignal.setHouseNO(rs.getInt("houseNO"));
+				EquipmentConditionVO_orignal.setTV(rs.getByte("TV"));
+				EquipmentConditionVO_orignal.setAircondition(rs.getByte("aircondition"));
+				EquipmentConditionVO_orignal.setRefrigerator(rs.getByte("refrigerator"));
+				EquipmentConditionVO_orignal.setWaterHeater(rs.getByte("waterHeater"));
+				EquipmentConditionVO_orignal.setGas(rs.getByte("gas"));
+				EquipmentConditionVO_orignal.setTheFourthStation(rs.getByte("theFourthStation"));
+				EquipmentConditionVO_orignal.setNet(rs.getByte("net"));
+				EquipmentConditionVO_orignal.setWashing(rs.getByte("washing"));
+				EquipmentConditionVO_orignal.setBed(rs.getByte("bed"));
+				EquipmentConditionVO_orignal.setWardrobe(rs.getByte("wardrobe"));
+				EquipmentConditionVO_orignal.setSofa(rs.getByte("sofa"));
+				EquipmentConditionVO_orignal.setParking(rs.getByte("parking"));
+				EquipmentConditionVO_orignal.setElevator(rs.getByte("elevator"));
+				EquipmentConditionVO_orignal.setBalcony(rs.getByte("balcony"));
+				EquipmentConditionVO_orignal.setPermitCook(rs.getByte("permitCook"));
+				EquipmentConditionVO_orignal.setPet(rs.getByte("pet"));
+				EquipmentConditionVO_orignal.setCloseMRT(rs.getByte("closeMRT"));
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return equipmentConditionVO;
+		return EquipmentConditionVO_orignal;
 	}
 
 	@Override
-	public Set<EquipmentConditionVO> getAll() {
+	public Set<EquipmentConditionVO_orignal> getAll() {
 		ResultSet rs = null;
-		EquipmentConditionVO equipmentConditionVO = null;
-		Set<EquipmentConditionVO> set = new LinkedHashSet<EquipmentConditionVO>();
+		EquipmentConditionVO_orignal EquipmentConditionVO_orignal = null;
+		Set<EquipmentConditionVO_orignal> set = new LinkedHashSet<EquipmentConditionVO_orignal>();
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ALL_STMT);) {
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// 確定有資料才開始new EquipmentConditionVO物件
-				// equipmentConditionVO = Domain objects
-				equipmentConditionVO = new EquipmentConditionVO();
-				equipmentConditionVO.setHouseNO(rs.getInt("houseNO"));
-				equipmentConditionVO.setTV(rs.getByte("TV"));
-				equipmentConditionVO.setAircondition(rs.getByte("aircondition"));
-				equipmentConditionVO.setRefrigerator(rs.getByte("refrigerator"));
-				equipmentConditionVO.setWaterHeater(rs.getByte("waterHeater"));
-				equipmentConditionVO.setGas(rs.getByte("gas"));
-				equipmentConditionVO.setTheFourthStation(rs.getByte("theFourthStation"));
-				equipmentConditionVO.setNet(rs.getByte("net"));
-				equipmentConditionVO.setWashing(rs.getByte("washing"));
-				equipmentConditionVO.setBed(rs.getByte("bed"));
-				equipmentConditionVO.setWardrobe(rs.getByte("wardrobe"));
-				equipmentConditionVO.setSofa(rs.getByte("sofa"));
-				equipmentConditionVO.setParking(rs.getByte("parking"));
-				equipmentConditionVO.setElevator(rs.getByte("elevator"));
-				equipmentConditionVO.setBalcony(rs.getByte("balcony"));
-				equipmentConditionVO.setPermitCook(rs.getByte("permitCook"));
-				equipmentConditionVO.setPet(rs.getByte("pet"));
-				equipmentConditionVO.setCloseMRT(rs.getByte("closeMRT"));
-				set.add(equipmentConditionVO); // Store the row in the list
+				// 確定有資料才開始new EquipmentConditionVO_orignal物件
+				// EquipmentConditionVO_orignal = Domain objects
+				EquipmentConditionVO_orignal = new EquipmentConditionVO_orignal();
+				EquipmentConditionVO_orignal.setHouseNO(rs.getInt("houseNO"));
+				EquipmentConditionVO_orignal.setTV(rs.getByte("TV"));
+				EquipmentConditionVO_orignal.setAircondition(rs.getByte("aircondition"));
+				EquipmentConditionVO_orignal.setRefrigerator(rs.getByte("refrigerator"));
+				EquipmentConditionVO_orignal.setWaterHeater(rs.getByte("waterHeater"));
+				EquipmentConditionVO_orignal.setGas(rs.getByte("gas"));
+				EquipmentConditionVO_orignal.setTheFourthStation(rs.getByte("theFourthStation"));
+				EquipmentConditionVO_orignal.setNet(rs.getByte("net"));
+				EquipmentConditionVO_orignal.setWashing(rs.getByte("washing"));
+				EquipmentConditionVO_orignal.setBed(rs.getByte("bed"));
+				EquipmentConditionVO_orignal.setWardrobe(rs.getByte("wardrobe"));
+				EquipmentConditionVO_orignal.setSofa(rs.getByte("sofa"));
+				EquipmentConditionVO_orignal.setParking(rs.getByte("parking"));
+				EquipmentConditionVO_orignal.setElevator(rs.getByte("elevator"));
+				EquipmentConditionVO_orignal.setBalcony(rs.getByte("balcony"));
+				EquipmentConditionVO_orignal.setPermitCook(rs.getByte("permitCook"));
+				EquipmentConditionVO_orignal.setPet(rs.getByte("pet"));
+				EquipmentConditionVO_orignal.setCloseMRT(rs.getByte("closeMRT"));
+				set.add(EquipmentConditionVO_orignal); // Store the row in the list
 			}
 
 		} catch (SQLException e) {

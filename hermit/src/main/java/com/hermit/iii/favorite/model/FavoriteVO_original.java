@@ -1,9 +1,8 @@
 package com.hermit.iii.favorite.model;
 
-import java.io.Serializable;
 import java.sql.*;
 
-public class FavoriteVO_hibernate implements Serializable {
+public class FavoriteVO_original implements java.io.Serializable {
 	private Integer favNO;
 	private Integer memNO;
 	private Integer houseNO;

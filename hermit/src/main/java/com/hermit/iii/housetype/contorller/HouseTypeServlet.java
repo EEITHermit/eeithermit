@@ -43,7 +43,6 @@ public class HouseTypeServlet extends HttpServlet {
 		if("getAllType".equals(action)){
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			
 			List<HouseTypeVO> list = svc.getAllHouseType();
 			List list2=new LinkedList();
 			PrintWriter out=response.getWriter();

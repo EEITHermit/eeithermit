@@ -54,7 +54,7 @@
 					<span class="label label-success">恭喜您!!已完成註冊手續</span>
 				</h1>
 				<div id="countdown"></div>
-				<a href="register_page.jsp">8秒後將自動跳轉，或是點此連結直接前往首頁</a>
+				<a href="<%=request.getContextPath()%>/index.jsp">8秒後將自動跳轉，或是點此連結直接前往首頁</a>
 			</div>
 		</div>
 	</div>
@@ -70,7 +70,7 @@
 			fontColor : '#FFFFFF',
 			autostart : false,
 			onComplete : function() {
-				location.href = "register_page.jsp";
+				location.href = "<%=request.getContextPath()%>/index.jsp";
 			}
 		}).start()
 	</script>

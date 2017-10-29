@@ -26,7 +26,7 @@ public class QandAJDBCDAO implements QandADAO_interface {
 				+ " JOIN house H ON Q.houseNO = H.houseNO "
 				+ "JOIN Member M ON Q.memNO = M.memNO where boroughNO = ? AND empNO IS NULL";
 	@Override
-	public void insert(QandAVO qandaVO) {
+	public void insert(QandAVO_original qandaVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -69,7 +69,7 @@ public class QandAJDBCDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public void update(QandAVO qandaVO) {
+	public void update(QandAVO_original qandaVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -149,11 +149,11 @@ public class QandAJDBCDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public QandAVO findByPrimaryKey(Integer qaNO) {
+	public QandAVO_original findByPrimaryKey(Integer qaNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		QandAVO qandaVO = null;
+		QandAVO_original qandaVO = null;
 
 		try {
 			Class.forName(driver);
@@ -167,7 +167,7 @@ public class QandAJDBCDAO implements QandADAO_interface {
 			if (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				qandaVO = new QandAVO();
+				qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
@@ -203,12 +203,12 @@ public class QandAJDBCDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public Set<QandAVO> getAll() {
+	public Set<QandAVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		QandAVO qandaVO = null;
-		Set<QandAVO> set = new LinkedHashSet<QandAVO>();
+		QandAVO_original qandaVO = null;
+		Set<QandAVO_original> set = new LinkedHashSet<QandAVO_original>();
 
 		try {
 			Class.forName(driver);
@@ -220,7 +220,7 @@ public class QandAJDBCDAO implements QandADAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				qandaVO = new QandAVO();
+				qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
@@ -255,11 +255,11 @@ public class QandAJDBCDAO implements QandADAO_interface {
 		}
 		return set;
 	}
-	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
+	public ArrayList<QandAVO_original> getAllByMemberNO(Integer memNO){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		ArrayList<QandAVO_original> array = new ArrayList<QandAVO_original>();
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
@@ -270,7 +270,7 @@ public class QandAJDBCDAO implements QandADAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				QandAVO qandaVO = new QandAVO();
+				QandAVO_original qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setEmpNO(rs.getInt("empNO"));
@@ -308,11 +308,11 @@ public class QandAJDBCDAO implements QandADAO_interface {
 	}
 
 	@Override
-	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO) {
+	public ArrayList<QandAVO_original> getAllByBoroughNO(Integer boroughNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		ArrayList<QandAVO_original> array = new ArrayList<QandAVO_original>();
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
@@ -323,7 +323,7 @@ public class QandAJDBCDAO implements QandADAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new QandAVO物件
 				// qandaVO = Domain objects
-				QandAVO qandaVO = new QandAVO();
+				QandAVO_original qandaVO = new QandAVO_original();
 				qandaVO.setQaNO(rs.getInt("qaNO"));
 				qandaVO.setMemNO(rs.getInt("memNO"));
 				qandaVO.setMemName(rs.getString("memName"));

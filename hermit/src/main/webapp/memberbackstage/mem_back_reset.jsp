@@ -20,6 +20,7 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
 </head>
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
@@ -112,6 +113,61 @@
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
+						<div class="row">
+		<div class="col-md-4 mid"></div>
+		<div class="col-md-4 mid">
+			
+		<form method="POST" action="<%=request.getContextPath()%>/member.do?action=update" id="form">
+			
+			編號<input type="text" value="${memNO}" disabled><br>
+			   <input type="hidden" readonly value="${memNO}" name="memNO">
+			
+			電話 <input type="text" value="${memTel}" disabled>
+			   <input type="hidden" value="${memTel}" name="memTel">
+			<font size="-1" color="#FF0000">${MsgMap.memTel}</font>
+			<br>
+			
+			帳號<input type="text" value="${memAccount}" disabled>
+			<input type="hidden"  value="${memAccount}" name="memAccount"><br>
+			
+			密碼<input type="password" value="${memPwd}" name="memPwd">
+			<font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
+			<br>
+			
+			姓名<input type="text" value="${memName}" name="memName">
+            <font size="-1" color="#FF0000">${MsgMap.memName}</font>
+			<br>
+			
+			性別<input type="text" value="${memGender}" disabled>
+			   <input type="hidden" readonly value="${memGender}" name="memGender" ><br>
+			   
+			信箱<input type="text" value="${memEmail}" name="memEmail">
+			<font size="-1" color="#FF0000">${MsgMap.memEmail}</font>
+			<br>
+			註冊時間<input type="text" value="${memRegister}" disabled>
+			<input type="hidden" readonly value="${memRegister}" name="memRegister"><br>
+			
+			會員狀態<input type="text" value="${memStatus}" disabled>
+			<input type="hidden" readonly value="${memStatus}" name="memStatus"><br>
+			
+			違規次數<input type="text" value="${memInfract}" disabled>
+			<input type="hidden" readonly value="${memInfract}" name="memInfract"><br>
+			
+			<div>
+			圖片<input type="file" id="file" > 
+			<input type="hidden" id="memImage" name="memImage" value="${memImage}"  >
+			
+			<img id="result" src="${memImage}" name="memImage" id="memImage" height="200" width="200">
+			</div>
+			<input type="submit" value="修改">
+			
+			</form>
+		
+		
+	
+		</div>
+		<div class="col-md-4 mid"></div>
+	</div>
 						</div>
 						<!-- /widget-content -->
 						
@@ -147,5 +203,24 @@
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
+	<script type="text/javascript">
+	$("#file").change(function(e){
+		  
+		  var img = e.target.files[0];
+
+		  if(!img.type.match('image.*')){
+		    alert("Whoops! That is not an image.");
+		    return;
+		  }
+		  iEdit.open(img, true, function(res){
+		    $("#result").attr("src", res);
+		  });
+		  //在檔案送出前，讓image的src送到input裡
+		  $("#form").submit(function(event){
+			  $("#memImage").val($("#result").attr("src"));
+		  }) 
+		});
+	</script>
 </body>
 </html>

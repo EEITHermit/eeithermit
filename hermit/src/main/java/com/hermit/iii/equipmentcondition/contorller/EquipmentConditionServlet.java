@@ -42,10 +42,10 @@ public class EquipmentConditionServlet extends HttpServlet {
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			EquipmentConditionService eqSvc = new EquipmentConditionService();
-			Set<EquipmentConditionVO> set = eqSvc.getAll();
+			List<EquipmentConditionVO> list = eqSvc.getAll();
 			List jsonList = new LinkedList();
 			PrintWriter out = response.getWriter();
-			for (EquipmentConditionVO eq : set) {
+			for (EquipmentConditionVO eq : list) {
 				Map m1 = new LinkedHashMap();
 				m1.put("TV", eq.getTV());	//電視
 				m1.put("aircondition", eq.getAircondition()); //冷氣

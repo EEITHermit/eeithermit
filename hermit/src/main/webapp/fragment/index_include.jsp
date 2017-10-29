@@ -268,6 +268,7 @@
 			var houseForm= $("#houseForm");
 			var houseType= $("#houseType");
 			var houseSize = $("#houseSize");
+			var houseTitle = $("#houstTitle");
 			function runEffect(){
 				effect.toggle( "blind",  500 );
 				if(spanArrow.attr('class') == "glyphicon glyphicon-chevron-up"){
@@ -353,6 +354,7 @@
 						closeMRT:$("#equid label input[name='closeMRT']").prop('checked'),	
 				});
 				var searchStr = {
+						houseTitle:houseTitle.val(),
 						cityNO:city.val(),
 						boroughNO:borough.val(),
 						typeNO:houseType.val(),

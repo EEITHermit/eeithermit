@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hermit.iii.equipmentcondition.model.EquipmentConditionVO" table="equipmentCondition">
+		<id name="houseNO" column="houseNO">
+			<generator class="assigned" />
+		</id>
+		<property name="TV" column="TV" />
+		<property name="aircondition" column="aircondition" />
+		<property name="refrigerator" column="refrigerator" />
+		<property name="waterHeater" column="waterHeater" />
+		<property name="gas" column="gas" />
+		<property name="theFourthStation" column="theFourthStation" />
+		<property name="net" column="net" />
+		<property name="washing" column="washing" />
+		<property name="bed" column="bed" />
+		<property name="wardrobe" column="wardrobe" />
+		<property name="sofa" column="sofa" />
+		<property name="parking" column="parking" />
+		<property name="elevator" column="elevator" />
+		<property name="balcony" column="balcony" />
+		<property name="permitCook" column="permitCook" />
+		<property name="pet" column="pet" />
+		<property name="closeMRT" column="closeMRT" />
+	</class>
+</hibernate-mapping>

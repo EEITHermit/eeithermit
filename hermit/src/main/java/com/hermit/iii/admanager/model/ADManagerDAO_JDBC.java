@@ -14,17 +14,16 @@ import java.util.Map;
 import org.json.simple.JSONValue;
 
 
-
 public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
-	private static final String INSERT =
+	private static final String INSERT_STMT =
 		"INSERT INTO ADManager (adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = 
 		"UPDATE ADManager set adImage=?, adLink=?, adMessage=?, adTimeStart=?, adTimeEnd=?, adStatus=?, adBrowse=?, adModify=? WHERE adNo=?";
 	private static final String DELETE = 
 		"DELETE FROM ADManager WHERE adNo=?";
-	private static final String GET_ONE = 
+	private static final String GET_ONE_STMT = 
 		"SELECT adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify FROM ADManager WHERE adNo=?";
-	private static final String GET_ALL = 
+	private static final String GET_ALL_STMT = 
 		"SELECT adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify FROM ADManager ORDER BY adNo";
 
 		
@@ -37,7 +36,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 				
 			
 				conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
-				pstmt = conn.prepareStatement(INSERT);
+				pstmt = conn.prepareStatement(INSERT_STMT);
 				pstmt.setString(1, ADManagerVO.getAdImage()); //廣告圖片
 				pstmt.setString(2, ADManagerVO.getAdLink());
 				pstmt.setString(3, ADManagerVO.getAdMessage());
@@ -80,7 +79,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 			
 				conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 				pstmt = conn.prepareStatement(UPDATE);
-				pstmt.setInt(1, ADManagerVO.getAdNo());
+				pstmt.setInt(1, ADManagerVO.getAdNO());
 				pstmt.setString(2, ADManagerVO.getAdImage()); //廣告圖片
 				pstmt.setString(3, ADManagerVO.getAdLink());
 				pstmt.setString(4, ADManagerVO.getAdMessage());
@@ -148,19 +147,19 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 
 		@Override
 		public ADManagerVO_original findByPrimaryKey(Integer adNO) {
-			Connection conn = null;
+			Connection con = null;
 			PreparedStatement pstmt = null;
-			ADManagerVO adVO = null;
+			ADManagerVO_original adVO = null;
 			ResultSet rs = null;
 			try {
-				conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
-				pstmt = conn.prepareStatement(GET_ONE);
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
+				pstmt = con.prepareStatement(GET_ONE_STMT);
 				pstmt.setInt(1, adNO);
 				rs = pstmt.executeQuery();
 
 				while (rs.next()) {
-					adVO = new ADManagerVO();
-					adVO.setadNO(rs.getInt("adNo"));
+					adVO = new ADManagerVO_original();
+					adVO.setAdNO(rs.getInt("adNO"));
 					adVO.setAdImage(rs.getString("adImage"));
 					adVO.setAdLink(rs.getString("adLink"));
 					adVO.setAdMessage(rs.getString("adMessage"));
@@ -189,20 +188,21 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 						e.printStackTrace(System.err);
 					}
 				}
-				if (conn != null) {
+				if (con != null) {
 					try {
-						conn.close();
+						con.close();
 					} catch (Exception e) {
 						e.printStackTrace(System.err);
 					}
 				}
 			}
+			return adVO;
 		}
 
 		@Override
 		public List<ADManagerVO_original> getAll() {
-			List<ADManagerVO> list = new ArrayList<ADManagerVO>();
-			ADManagerVO adVO = null;
+			List<ADManagerVO_original> list = new ArrayList<ADManagerVO_original>();
+			ADManagerVO_original adVO = null;
 
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -211,14 +211,14 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 			
 			try {
 				conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
-				pstmt = conn.prepareStatement(GET_ALL);
+				pstmt = conn.prepareStatement(GET_ALL_STMT);
 				rs = pstmt.executeQuery();
 				
 				
 				
 				while (rs.next()) {					
-					adVO = new ADManagerVO();
-					adVO.setadNO(rs.getInt("adNo"));
+					adVO = new ADManagerVO_original();
+					adVO.setAdNO(rs.getInt("adNO"));
 					adVO.setAdImage(rs.getString("adImage"));
 					adVO.setAdLink(rs.getString("adLink"));
 					adVO.setAdMessage(rs.getString("adMessage"));
@@ -257,7 +257,8 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 					}
 				}
 			}
-//			return list;
+			return list;
+//			return adVO;
 		}
 		@Override
 		public String getAllForJson() {
@@ -271,7 +272,7 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 		try {
 
 			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
-			pstmt = conn.prepareStatement(GET_ALL);
+			pstmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 				
 			while (rs.next()) {
@@ -320,31 +321,31 @@ public class ADManagerDAO_JDBC implements ADManagerDAO_interface{
 		
 
 		public static void main (String args[]){
-			ADManagerVO adVO = new ADManagerVO();
+			ADManagerVO_original adVO = new ADManagerVO_original();
 			ADManagerDAO_JDBC adDAO = new ADManagerDAO_JDBC();
 			
 			//Insert Test Start
 			
 			
-//			FileInputStream fis;
-//			
-//				try {
-//					fis = new FileInputStream("D://WebSite//imgs//test5.png");
-//				aVO.setAdImage("date:image/png;base64,1234");
-//				aVO.setAdLink("www.yahoo.com.tw");
-//				aVO.setAdMessage("哈囉大家好");
-//				aVO.setAdTimeStart(java.sql.Date.valueOf("2017-10-23"));
-//				aVO.setAdTimeEnd(java.sql.Date.valueOf("2017-10-25"));
-//				aVO.setAdStatus(true);
-//				aVO.setAdBrowse(1);
-//				aVO.setAdModify(30001);
-//				aDAO.insert(aVO);
-//				} catch (FileNotFoundException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				System.out.println("insert success");
-//		
+			FileInputStream fis;
+			
+				try {
+					fis = new FileInputStream("D://WebSite//imgs//test5.png");
+				adVO.setAdImage("date:image/png;base64,1234");
+				adVO.setAdLink("www.yahoo.com.tw");
+				adVO.setAdMessage("哈囉大家好");
+				adVO.setAdTimeStart(java.sql.Date.valueOf("2017-10-23"));
+				adVO.setAdTimeEnd(java.sql.Date.valueOf("2017-10-25"));
+				adVO.setAdStatus(true);
+				adVO.setAdBrowse(1);
+				adVO.setAdModify(30001);
+				adDAO.insert(adVO);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("insert success");
+		
 			}
 			
 	////Insert Test End

@@ -1,15 +1,13 @@
 package com.hermit.iii.lease.model;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Set;
+import java.util.*;
 
 public class LeaseService {
 
-	private LeaseDAO_interface dao;
+	private LeaseDAO_interface_hibernate dao;
 
 	public LeaseService() {
-		dao = new LeaseJNDIDAO();
+		dao = new LeaseDAO_hibernate();
 	}
 
 	// 新增service

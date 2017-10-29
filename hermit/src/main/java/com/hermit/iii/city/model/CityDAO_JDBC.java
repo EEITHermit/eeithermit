@@ -12,9 +12,9 @@ import java.util.Map;
 
 import org.json.simple.JSONValue;
 
-import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.boroughs.model.BoroughsVO_original;
 
-public class CityDAO_JDBC implements CityDAO_interface {
+public class CityDAO_JDBC implements CityDAO_interface_original {
 
 	private static final String INSERT_STMT =
 		      "INSERT INTO City (cityName) VALUES (?)";
@@ -34,7 +34,7 @@ public class CityDAO_JDBC implements CityDAO_interface {
 	
 
 	@Override
-	public void insert(CityVO cityVO) {
+	public void insert(CityVO_original cityVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -66,7 +66,7 @@ public class CityDAO_JDBC implements CityDAO_interface {
 	}
 
 	@Override
-	public void update(CityVO cityVO) {
+	public void update(CityVO_original cityVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -131,10 +131,10 @@ public class CityDAO_JDBC implements CityDAO_interface {
 	}
 
 	@Override
-	public CityVO findByPrimaryKey(Integer cityNO) {
+	public CityVO_original findByPrimaryKey(Integer cityNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CityVO cityVO = new CityVO();
+		CityVO_original cityVO = new CityVO_original();
 		ResultSet rs ;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
@@ -168,18 +168,18 @@ public class CityDAO_JDBC implements CityDAO_interface {
 	}
 
 	@Override
-	public List<CityVO> getAll() {
+	public List<CityVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CityVO cityVO ;
+		CityVO_original cityVO ;
 		ResultSet rs ;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-			List<CityVO> list = new LinkedList<CityVO>();
+			List<CityVO_original> list = new LinkedList<CityVO_original>();
 			while(rs.next()){
-				cityVO = new CityVO();
+				cityVO = new CityVO_original();
 				cityVO.setCityNO(rs.getInt("cityNO"));
 				cityVO.setCityName(rs.getString("cityName"));
 				list.add(cityVO);
@@ -209,7 +209,7 @@ public class CityDAO_JDBC implements CityDAO_interface {
 	public String getAllForJson() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		BoroughsVO vo ;
+		BoroughsVO_original vo ;
 		ResultSet rs;
 		List list = new LinkedList();
 		try {
@@ -250,7 +250,7 @@ public class CityDAO_JDBC implements CityDAO_interface {
 	
 	
 	public static void main (String[] args){
-		CityVO vo = new CityVO();
+		CityVO_original vo = new CityVO_original();
 		CityDAO_JDBC dao = new CityDAO_JDBC();
 		
 //		vo.setCityName("瑪莎多拉");

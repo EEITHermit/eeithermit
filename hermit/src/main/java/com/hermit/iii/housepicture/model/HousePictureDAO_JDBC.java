@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
+public class HousePictureDAO_JDBC implements HousePictureDAO_interface_original{
 	
 	private static final String INSERT_STMT =
 			"INSERT INTO HousePicture (hPicture,houseNO) VALUES (?,?)";
@@ -28,7 +28,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 	
 	
 	@Override
-	public void insert(HousePictureVO housePictureVO) {
+	public void insert(HousePictureVO_original housePictureVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -58,7 +58,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 		}
 	}
 	@Override
-	public void update(HousePictureVO housePictureVO) {
+	public void update(HousePictureVO_original housePictureVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -118,10 +118,10 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 		}
 	}
 	@Override
-	public HousePictureVO findByPrimaryKey(Integer housePictureNO) {
+	public HousePictureVO_original findByPrimaryKey(Integer housePictureNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HousePictureVO housePictureVO = new HousePictureVO();
+		HousePictureVO_original housePictureVO = new HousePictureVO_original();
 		ResultSet rs ;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
@@ -155,18 +155,18 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 		}
 	}
 	@Override
-	public List<HousePictureVO> getAll() {
+	public List<HousePictureVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HousePictureVO housePictureVO;
+		HousePictureVO_original housePictureVO;
 		ResultSet rs ;
-		List<HousePictureVO> list = new LinkedList<HousePictureVO>();
+		List<HousePictureVO_original> list = new LinkedList<HousePictureVO_original>();
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				housePictureVO = new HousePictureVO();
+				housePictureVO = new HousePictureVO_original();
 				housePictureVO.setHousePictureNO(rs.getInt("housePictureNO"));
 				housePictureVO.sethPicture(rs.getString("hPicture"));
 				housePictureVO.setHouseNO(rs.getInt("HouseNO"));
@@ -194,7 +194,7 @@ public class HousePictureDAO_JDBC implements HousePictureDAO_interface{
 		}
 	}
 	public static void main(String args[]){
-		HousePictureVO vo = new HousePictureVO();
+		HousePictureVO_original vo = new HousePictureVO_original();
 		HousePictureDAO_JDBC dao = new HousePictureDAO_JDBC();
 		
 //		File f = new File("D://temp//1.jpg");

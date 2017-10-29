@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.qanda.model.QandAService;
-import com.hermit.iii.qanda.model.QandAVO;
+import com.hermit.iii.qanda.model.QandAVO_original;
 
 @WebFilter(value="/QAndA/*")
 public class QAndAFilter implements Filter {
@@ -30,7 +30,7 @@ public class QAndAFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = null;
 		HttpServletResponse resp = null;
-		ArrayList<QandAVO> array ;
+		ArrayList<QandAVO_original> array ;
 		if(request instanceof HttpServletRequest && response instanceof HttpServletResponse){
 			req = (HttpServletRequest) request;
 			resp = (HttpServletResponse) response;
@@ -45,7 +45,7 @@ public class QAndAFilter implements Filter {
 			//memNO假資料
 			Integer memNO = 40001;
 			QandAService qaService = new QandAService();
-			QandAVO qaVO = qaService.getOneQandA(memNO);
+			QandAVO_original qaVO = qaService.getOneQandA(memNO);
 			array = qaService.getAllByMemberNO(memNO);
 			request.setAttribute("array",array);
 			chain.doFilter(request, response);
@@ -59,7 +59,7 @@ public class QAndAFilter implements Filter {
 			MentionService mention = new MentionService();
 			QandAService qaService = new QandAService();
 			ArrayList<Integer> boroughNO = mention.getBoroughNOByEmpNO(empNO);
-			array = new ArrayList<QandAVO>();
+			array = new ArrayList<QandAVO_original>();
 			for(Integer boroNO :boroughNO){
 				array.addAll(qaService.getAllByBoroughNO(boroNO));
 			}

@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hermit.iii.admanager.model.ADManagerService;
-import com.hermit.iii.admanager.model.ADManagerVO_original;
+import com.hermit.iii.admanager.model.ADManagerVO;
+
 
 
 @WebServlet("/ADManagerServlet")
@@ -33,7 +34,7 @@ public class ADManagerServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		ADManagerService ads = null;
-		Integer adNo = null;
+		Integer adNO = null;
 		String adImage = req.getParameter("adImage");
 		System.out.println("adImage:" + adImage);
 		String adLink = null;
@@ -63,7 +64,7 @@ public class ADManagerServlet extends HttpServlet {
 //		修改圖片資料
 		if ("updateADManager".equals(action)) {
 			ads = new ADManagerService();			
-			adNo = Integer.valueOf(req.getParameter("adNo"));
+			adNO = Integer.valueOf(req.getParameter("adNO"));
 			adImage = String.valueOf(req.getParameter("adImage"));
 			adLink = String.valueOf(req.getParameter("adLink"));
 			adMessage = String.valueOf(req.getParameter("adMessage"));
@@ -72,7 +73,7 @@ public class ADManagerServlet extends HttpServlet {
 			adStatus = Boolean.valueOf(req.getParameter("adStatus"));
 			adBrowse = Integer.valueOf(0);
 			adModify = Integer.valueOf(req.getParameter("adModify"));
-			ads.updateADManager(adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
+			ads.updateADManager(adNO, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
 			resp.sendRedirect("admanager/back-adindex.jsp");
 			System.out.println("Update OK");
 //			RequestDispatcher rd = req.getRequestDispatcher("/admanager/back-adindex.jsp");
@@ -81,16 +82,16 @@ public class ADManagerServlet extends HttpServlet {
 //		刪除圖片(adNo)
 		if ("deleteADManager".equals(action)) {
 			ads = new ADManagerService();
-			ads.deleteADManager(Integer.valueOf(req.getParameter("adNo")));
+			ads.deleteADManager(Integer.valueOf(req.getParameter("adNO")));
 			
 			// System.out.println("delete OK");
 		}
 //		取一
 		if ("getOneADManager".equals(action)) {
 			System.out.println("Get one OK");
-			ADManagerVO_original adVO = new ADManagerVO_original();
+			ADManagerVO adVO = new ADManagerVO();
 			ads = new ADManagerService();
-			adVO = ads.getOneADManager(Integer.valueOf(req.getParameter("adNo")));
+			adVO = ads.getOneADManager(Integer.valueOf(req.getParameter("adNO")));
 			req.setAttribute("adVO", adVO);
 			RequestDispatcher rd = req.getRequestDispatcher("/admanager/adUpdate.jsp");
 			rd.forward(req, resp);
@@ -98,7 +99,7 @@ public class ADManagerServlet extends HttpServlet {
 //		查詢全部
 		if ("getAllADManager".equals(action)) {
 			ads = new ADManagerService();
-			List<ADManagerVO_original> list = ads.getAllADManager();
+			List<ADManagerVO> list = ads.getAllADManager();
 			req.setAttribute("list", list);
 			// System.out.println("Get All OK");
 			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");

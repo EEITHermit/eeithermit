@@ -32,11 +32,11 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 			+ "join member M ON C.memNO = M.memNO "
 			+ "join house H ON C.houseNO = H.houseNO "
 			+ "where E.empNO=? and (C.eventStartTime between ? and ?)";
-	String selectByEandT_h = "from CalendarEventVO_hibernate "
+	String selectByEandT_h = "from CalendarEventVO "
 			+ "where (eventStartTime between ? and ?)";
 	@Override
-	public ArrayList<CalendarEventVO_hibernate> selectByEmpAndTime(Integer empID, Timestamp start, Timestamp end) {
-		ArrayList<CalendarEventVO_hibernate> array = new ArrayList<CalendarEventVO_hibernate>();
+	public ArrayList<CalendarEventVO> selectByEmpAndTime(Integer empID, Timestamp start, Timestamp end) {
+		ArrayList<CalendarEventVO> array = new ArrayList<CalendarEventVO>();
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(selectByEandT_h);
@@ -57,7 +57,7 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 					+ "AND((?>=eventStartTime AND ?<eventEndTime)"
 					+ "or(?>eventStartTime AND ?<=eventEndTime)"
 					+ "or(?<=eventStartTime AND ?>=eventEndTime))";
-	String checkE_h = "from CalendarEventVO_hibernate where (empNO = ?) AND (eventNO != ?)"
+	String checkE_h = "from CalendarEventVO where (empNO = ?) AND (eventNO != ?)"
 					+ "AND(eventStartTime between ? and ?) "
 					+ "AND((?>=eventStartTime AND ?<eventEndTime)"
 					+ "or(?>eventStartTime AND ?<=eventEndTime)"
@@ -125,7 +125,7 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 			+ "eventStartTime= ?, eventEndTime=?,ps=? "
 			+ "where eventNO = ?";
 	@Override
-	public Integer update(CalendarEventVO_hibernate resVO) {
+	public Integer update(CalendarEventVO resVO) {
 		Integer result = 0;
 		try{
 			session.getTransaction().begin();
@@ -141,7 +141,7 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 	String insert = "insert into CalendarEvent(empNO,memNO,houseNO,eventStartTime,"
 			+ "eventEndTime,ps) values(?,?,?,?,?,?)";
 	@Override
-	public Integer insert(CalendarEventVO_hibernate resVO) {
+	public Integer insert(CalendarEventVO resVO) {
 		Integer result = 0;
 		try{
 			session.getTransaction().begin();
@@ -158,7 +158,7 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 	@Override
 	public Integer delete(int ID) {
 		Integer result = 1;
-		CalendarEventVO_hibernate ch = session.get(CalendarEventVO_hibernate.class, ID);
+		CalendarEventVO ch = session.get(CalendarEventVO.class, ID);
 		session.delete(ch);
 		return result;
 	}
@@ -169,8 +169,8 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 				+ "join house H ON C.houseNO = H.houseNO "
 				+ "where M.memNO=? and (C.eventStartTime between getDate() and (getDate()+365))"; //+1為加一天
 		@Override
-		public ArrayList<CalendarEventVO_hibernate> selectByMember(Integer memberNo){
-			ArrayList<CalendarEventVO_hibernate> array = new ArrayList<CalendarEventVO_hibernate>();
+		public ArrayList<CalendarEventVO> selectByMember(Integer memberNo){
+			ArrayList<CalendarEventVO> array = new ArrayList<CalendarEventVO>();
 //			try (Connection conn = ds.getConnection();
 //				PreparedStatement ps = conn.prepareStatement(selectByMember);){
 //				ps.setInt(1, memberNo);

@@ -4,13 +4,13 @@ import java.sql.Date;
 import java.util.List;
 
 public class ADManagerService {
-	private ADManagerDAO_interface dao;
+	private ADManagerDAO_interface_hibernate dao;
 	
 	public ADManagerService(){
-		dao = new ADManagerDAO_JNDI();
+		dao = new ADManagerDAO_hebernate();
 	}
 	
-	public void insertADManager(String adImage, String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, int adBrowse , int adModify){
+	public void insertADManager(String adImage, String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, Integer adBrowse , Integer adModify){
 		ADManagerVO adVO = new ADManagerVO();
 		adVO.setAdImage(adImage);
 		adVO.setAdLink(adLink);
@@ -23,7 +23,7 @@ public class ADManagerService {
 		dao.insert(adVO);
 	}
 	
-	public void updateADManager(int adNo, String adImage , String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, int adBrowse , int adModify){
+	public void updateADManager(Integer adNO, String adImage , String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, Integer adBrowse , Integer adModify){
 		ADManagerVO adVO = new ADManagerVO();
 		adVO.setAdImage(adImage);
 		adVO.setAdLink(adLink);

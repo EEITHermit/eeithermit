@@ -1,9 +1,9 @@
 package com.hermit.iii.lease.model;
 
-import java.io.Serializable;
+import java.io.*;
 import java.sql.*;
 
-public class LeaseVO_hibernate implements Serializable {
+public class LeaseVO_original implements Serializable {
 	private Integer leaseNO;
 	private Integer houseNO;
 	private Date leaseBeginDate;

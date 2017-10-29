@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hermit.iii.qanda.model.QandAService;
-import com.hermit.iii.qanda.model.QandAVO;
+import com.hermit.iii.qanda.model.QandAVO_original;
 
 /**
  * Servlet implementation class QAndAServlet
@@ -55,7 +55,7 @@ public class QAndAServlet extends HttpServlet {
 			String aDetail = request.getParameter("aDetail");
 			Date qTime = new Date(System.currentTimeMillis());
 			QandAService qa = new QandAService();
-			QandAVO qaVO = qa.getOneQandA(qaNO);
+			QandAVO_original qaVO = qa.getOneQandA(qaNO);
 			qa.updateQandA(qaNO, qaVO.getMemNO(), empNO, qaVO.getHouseVO().getHouseNO()
 					,qaVO.getqTime(), qTime, qaVO.getQaType(), qaVO.getqDetail(), aDetail);
 			response.sendRedirect("/hermit/QAndA/AAndQ.jsp");

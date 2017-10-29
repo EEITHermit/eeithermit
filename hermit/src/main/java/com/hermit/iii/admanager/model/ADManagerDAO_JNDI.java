@@ -31,29 +31,29 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 		}
 	}
 
-	private static final String INSERT = "INSERT INTO ADManager (adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO ADManager (adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE ADManager set  adImage=?, adLink=?, adMessage=?, adTimeStart=?, adTimeEnd=?, adStatus=?, adBrowse=?, adModify=? WHERE adNo=?";
 	private static final String DELETE = "DELETE FROM ADManager WHERE adNo=?";
-	private static final String GET_ONE = "SELECT adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify FROM ADManager WHERE adNo=?";
-	private static final String GET_ALL = "SELECT adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify FROM ADManager ORDER BY adNo";
+	private static final String GET_ONE_STMT = "SELECT adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify FROM ADManager WHERE adNo=?";
+	private static final String GET_ALL_STMT = "SELECT adNo, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify FROM ADManager ORDER BY adNo";
 
 	@Override
-	public void insert(ADManagerVO ad) {
+	public void insert(ADManagerVO_original adManagerVO) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 
 			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(INSERT);
-			pstmt.setString(1, ad.getAdImage());
-			pstmt.setString(2, ad.getAdLink());
-			pstmt.setString(3, ad.getAdMessage());
-			pstmt.setDate(4, ad.getAdTimeStart());
-			pstmt.setDate(5, ad.getAdTimeEnd());
-			pstmt.setBoolean(6, ad.getAdStatus());
-			pstmt.setInt(7, ad.getAdBrowse());
-			pstmt.setInt(8, ad.getAdModify());
+			pstmt = conn.prepareStatement(INSERT_STMT);
+			pstmt.setString(1, adManagerVO.getAdImage());
+			pstmt.setString(2, adManagerVO.getAdLink());
+			pstmt.setString(3, adManagerVO.getAdMessage());
+			pstmt.setDate(4, adManagerVO.getAdTimeStart());
+			pstmt.setDate(5, adManagerVO.getAdTimeEnd());
+			pstmt.setBoolean(6, adManagerVO.getAdStatus());
+			pstmt.setInt(7, adManagerVO.getAdBrowse());
+			pstmt.setInt(8, adManagerVO.getAdModify());
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -78,25 +78,23 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 	}
 
 	@Override
-	public void update(ADManagerVO ad) {
+	public void update(ADManagerVO_original adManagerVO) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 
 			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(UPDATE);
-
-			
-			pstmt.setString(1, ad.getAdImage());
-			pstmt.setString(2, ad.getAdLink());
-			pstmt.setString(3, ad.getAdMessage());
-			pstmt.setDate(4,ad.getAdTimeStart());
-			pstmt.setDate(5, ad.getAdTimeEnd());
-			pstmt.setBoolean(6, ad.getAdStatus());
-			pstmt.setInt(7, ad.getAdBrowse());
-			pstmt.setInt(8, ad.getAdModify());
-			pstmt.setInt(9, ad.getAdNo());
+			pstmt = conn.prepareStatement(UPDATE);			
+			pstmt.setString(1, adManagerVO.getAdImage());
+			pstmt.setString(2, adManagerVO.getAdLink());
+			pstmt.setString(3, adManagerVO.getAdMessage());
+			pstmt.setDate(4,adManagerVO.getAdTimeStart());
+			pstmt.setDate(5, adManagerVO.getAdTimeEnd());
+			pstmt.setBoolean(6, adManagerVO.getAdStatus());
+			pstmt.setInt(7, adManagerVO.getAdBrowse());
+			pstmt.setInt(8, adManagerVO.getAdModify());
+			pstmt.setInt(9, adManagerVO.getAdNO());
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -151,20 +149,20 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 	}
 
 	@Override
-	public ADManagerVO findByPrimaryKey(int adNo) {
+	public ADManagerVO_original findByPrimaryKey(Integer adNO) {
 
-		ADManagerVO adVO = new ADManagerVO();
-		Connection conn = null;
+		ADManagerVO_original adVO = new ADManagerVO_original();
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(GET_ONE);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, adNo);
+			pstmt.setInt(1, adNO);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				adVO.setAdNo(rs.getInt("adNo"));
+				adVO.setAdNO(rs.getInt("adNO"));
 				adVO.setAdImage(rs.getString("adImage"));
 				adVO.setAdLink(rs.getString("adLink"));
 				adVO.setAdMessage(rs.getString("adMessage"));
@@ -191,9 +189,9 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 					e.printStackTrace(System.err);
 				}
 			}
-			if (conn != null) {
+			if (con != null) {
 				try {
-					conn.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
@@ -203,9 +201,9 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 	}
 
 	@Override
-	public List<ADManagerVO> getAll() {
-		List<ADManagerVO> list = new ArrayList<ADManagerVO>();
-		ADManagerVO adVO = null;
+	public List<ADManagerVO_original> getAll() {
+		List<ADManagerVO_original> list = new ArrayList<ADManagerVO_original>();
+		ADManagerVO_original adVO = null;
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -214,12 +212,12 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 		try {
 
 			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(GET_ALL);
+			pstmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				adVO = new ADManagerVO();
-				adVO.setAdNo(rs.getInt("adNo"));
+			while (rs.next()) {					
+				adVO = new ADManagerVO_original();
+				adVO.setAdNO(rs.getInt("adNO"));
 				adVO.setAdImage(rs.getString("adImage"));
 				adVO.setAdLink(rs.getString("adLink"));
 				adVO.setAdMessage(rs.getString("adMessage"));
@@ -262,7 +260,7 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 	@Override
 	public String getAllForJson() {
 		List<Map> list = new ArrayList<Map>();
-		DispatchListVO_orignal dlVO = null;
+		ADManagerVO_original adVO = null;
 		String jsonString = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -270,7 +268,7 @@ public class ADManagerDAO_JNDI implements ADManagerDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL);
+			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

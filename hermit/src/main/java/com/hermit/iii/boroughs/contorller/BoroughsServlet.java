@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONValue;
 
 import com.hermit.iii.boroughs.model.BoroughsService;
-import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.boroughs.model.BoroughsVO_original;
 
 @WebServlet("/BoroughsServlet.do")
 public class BoroughsServlet extends HttpServlet {
@@ -52,26 +52,26 @@ public class BoroughsServlet extends HttpServlet {
 			bs.deleteBoroughs(Integer.valueOf(request.getParameter("boroughNO")));
 		}
 		if("getOneBorough".equals(action)){
-			BoroughsVO vo = new BoroughsVO();
+			BoroughsVO_original vo = new BoroughsVO_original();
 			vo = bs.getOne(Integer.valueOf(request.getParameter("boroughNO")));
 			request.setAttribute("boroughVO", vo);
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request,response);
 		}
 		if("getAllBorough".equals(action)){
-			List<BoroughsVO> list = bs.getAll();
+			List<BoroughsVO_original> list = bs.getAll();
 			request.setAttribute("list", list);
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request,response);
 		}
 		if("getAllBoroughByCity".equals(action)){
 			cityNO=Integer.valueOf(request.getParameter("cityNO"));
-			List<BoroughsVO> list=bs.getAll_cityNO(cityNO);
+			List<BoroughsVO_original> list=bs.getAll_cityNO(cityNO);
 			List list2=new LinkedList();
 			PrintWriter out=response.getWriter();
 			for(int i=0;i<list.size();i++){
 				Map m1=new LinkedHashMap();
-				BoroughsVO vo=list.get(i);
+				BoroughsVO_original vo=list.get(i);
 				m1.put("boroughNO", vo.getBoroughNO());
 				m1.put("boroughName", vo.getBoroughName());
 				list2.add(m1);

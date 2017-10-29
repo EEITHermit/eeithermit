@@ -33,28 +33,28 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 	private static final String GET_ONE_HOUSE_FK = "SELECT A.houseNO,A.houseTitle,A.cityNO,D.cityName ,A.boroughNO,E.boroughName,A.highestFloor,A.nowFloor,A.houseStatus,A.houseRent,A.houseCharge,A.waterRate,A.powerRate,A.houseVideo,A.TypeNO,B.hType,A.formNO,C.hForm,A.houseAddr,A.houseSize from House as A JOIN  HouseType as B on A.typeNO =B.typeNO JOIN HouseForm as C on A.formNO=C.formNO  JOIN city as D on A.cityNO=D.cityNO JOIN Boroughs as E on A.boroughNO=E.boroughNO where A.houseNO=?";
 	
 	@Override
-	public void insert(HouseVO houseVO) {
+	public void insert(HouseVO_orignal HouseVO_orignal) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try{
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1,houseVO.getHouseTitle());
-			pstmt.setInt(2,houseVO.getCityNO());
-			pstmt.setInt(3,houseVO.getBoroughNO());
-			pstmt.setInt(4,houseVO.getHighestFloor());
-			pstmt.setInt(5,houseVO.getNowFloor());
-			pstmt.setString(6,houseVO.getHouseStatus());
-			pstmt.setInt(7,houseVO.getHouseRent());
-			pstmt.setInt(8,houseVO.getHouseCharge());
-			pstmt.setString(9,houseVO.getWaterRate());
-			pstmt.setString(10,houseVO.getPowerRate());
-			pstmt.setString(11,houseVO.getHouseVideo());
-			pstmt.setInt(12,houseVO.getTypeNO());
-			pstmt.setInt(13,houseVO.getFormNO());
-			pstmt.setString(14,houseVO.getHouseAddr());
-			pstmt.setDouble(15,houseVO.getHouseSize());
+			pstmt.setString(1,HouseVO_orignal.getHouseTitle());
+			pstmt.setInt(2,HouseVO_orignal.getCityNO());
+			pstmt.setInt(3,HouseVO_orignal.getBoroughNO());
+			pstmt.setInt(4,HouseVO_orignal.getHighestFloor());
+			pstmt.setInt(5,HouseVO_orignal.getNowFloor());
+			pstmt.setString(6,HouseVO_orignal.getHouseStatus());
+			pstmt.setInt(7,HouseVO_orignal.getHouseRent());
+			pstmt.setInt(8,HouseVO_orignal.getHouseCharge());
+			pstmt.setString(9,HouseVO_orignal.getWaterRate());
+			pstmt.setString(10,HouseVO_orignal.getPowerRate());
+			pstmt.setString(11,HouseVO_orignal.getHouseVideo());
+			pstmt.setInt(12,HouseVO_orignal.getTypeNO());
+			pstmt.setInt(13,HouseVO_orignal.getFormNO());
+			pstmt.setString(14,HouseVO_orignal.getHouseAddr());
+			pstmt.setDouble(15,HouseVO_orignal.getHouseSize());
 			pstmt.execute();
 
 		}catch(SQLException se){
@@ -79,28 +79,28 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 	}
 
 	@Override
-	public void update(HouseVO houseVO) {
+	public void update(HouseVO_orignal HouseVO_orignal) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try{
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			pstmt.setString(1,houseVO.getHouseTitle());
-			pstmt.setInt(2,houseVO.getCityNO());
-			pstmt.setInt(3,houseVO.getBoroughNO());
-			pstmt.setInt(4,houseVO.getHighestFloor());
-			pstmt.setInt(5,houseVO.getNowFloor());
-			pstmt.setString(6,houseVO.getHouseStatus());
-			pstmt.setInt(7,houseVO.getHouseRent());
-			pstmt.setInt(8,houseVO.getHouseCharge());
-			pstmt.setString(9,houseVO.getWaterRate());
-			pstmt.setString(10,houseVO.getPowerRate());
-			pstmt.setString(11,houseVO.getHouseVideo());
-			pstmt.setInt(12,houseVO.getTypeNO());
-			pstmt.setInt(13,houseVO.getFormNO());
-			pstmt.setString(14,houseVO.getHouseAddr());
-			pstmt.setDouble(15,houseVO.getHouseSize());
-			pstmt.setInt(16,houseVO.getHouseNO());
+			pstmt.setString(1,HouseVO_orignal.getHouseTitle());
+			pstmt.setInt(2,HouseVO_orignal.getCityNO());
+			pstmt.setInt(3,HouseVO_orignal.getBoroughNO());
+			pstmt.setInt(4,HouseVO_orignal.getHighestFloor());
+			pstmt.setInt(5,HouseVO_orignal.getNowFloor());
+			pstmt.setString(6,HouseVO_orignal.getHouseStatus());
+			pstmt.setInt(7,HouseVO_orignal.getHouseRent());
+			pstmt.setInt(8,HouseVO_orignal.getHouseCharge());
+			pstmt.setString(9,HouseVO_orignal.getWaterRate());
+			pstmt.setString(10,HouseVO_orignal.getPowerRate());
+			pstmt.setString(11,HouseVO_orignal.getHouseVideo());
+			pstmt.setInt(12,HouseVO_orignal.getTypeNO());
+			pstmt.setInt(13,HouseVO_orignal.getFormNO());
+			pstmt.setString(14,HouseVO_orignal.getHouseAddr());
+			pstmt.setDouble(15,HouseVO_orignal.getHouseSize());
+			pstmt.setInt(16,HouseVO_orignal.getHouseNO());
 			pstmt.execute();
 
 		}catch(SQLException se){
@@ -157,10 +157,10 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 	}
 
 	@Override
-	public HouseVO findByPrimaryKey(Integer houseNO) {
+	public HouseVO_orignal findByPrimaryKey(Integer houseNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo = new HouseVO();
+		HouseVO_orignal vo = new HouseVO_orignal();
 		ResultSet rs =null; 
 		try{
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
@@ -210,18 +210,18 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 	}
 
 	@Override
-	public List<HouseVO> getAll() {
+	public List<HouseVO_orignal> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo;
+		HouseVO_orignal vo;
 		ResultSet rs =null; 
-		List<HouseVO> list = new LinkedList<HouseVO>();
+		List<HouseVO_orignal> list = new LinkedList<HouseVO_orignal>();
 		try{
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new HouseVO();
+				vo = new HouseVO_orignal();
 				vo.setHouseTitle(rs.getString("houseTitle"));
 				vo.setCityNO(rs.getInt("cityNO"));
 				vo.setBoroughNO(rs.getInt("boroughNO"));
@@ -265,9 +265,9 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=hermit";
 	@Override
-	public ArrayList<HouseVO> autoCompleteH(String address) {
-		HouseVO houseVO = new HouseVO();
-		ArrayList<HouseVO> array = new ArrayList<HouseVO>();
+	public ArrayList<HouseVO_orignal> autoCompleteH(String address) {
+		HouseVO_orignal HouseVO_orignal = new HouseVO_orignal();
+		ArrayList<HouseVO_orignal> array = new ArrayList<HouseVO_orignal>();
 		Connection conn = null;
 		try {
 			Class.forName(driver);
@@ -276,9 +276,9 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 			ps.setString(1, "%"+address+"%");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
-				houseVO.setHouseNO(rs.getInt("houseNO"));
-				houseVO.setHouseAddr(rs.getString("houseAddr"));
-				array.add(houseVO);
+				HouseVO_orignal.setHouseNO(rs.getInt("houseNO"));
+				HouseVO_orignal.setHouseAddr(rs.getString("houseAddr"));
+				array.add(HouseVO_orignal);
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -318,18 +318,18 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 	
 
 	@Override
-	public List<HouseVO> GET_ALL_JOIN_FK() {
+	public List<HouseVO_orignal> GET_ALL_JOIN_FK() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo;
+		HouseVO_orignal vo;
 		ResultSet rs =null; 
-		List<HouseVO> list = new LinkedList<HouseVO>();
+		List<HouseVO_orignal> list = new LinkedList<HouseVO_orignal>();
 		try{
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_JOIN_FK);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new HouseVO();
+				vo = new HouseVO_orignal();
 				vo.setHouseTitle(rs.getString("houseTitle"));
 				vo.setCityNO(rs.getInt("cityNO"));
 				vo.setBoroughNO(rs.getInt("boroughNO"));
@@ -373,10 +373,10 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 	}
 	
 	@Override
-	public HouseVO GET_ONE_HOUSE_FK(Integer houseNO) {
+	public HouseVO_orignal GET_ONE_HOUSE_FK(Integer houseNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		HouseVO vo = new HouseVO();
+		HouseVO_orignal vo = new HouseVO_orignal();
 		ResultSet rs =null; 
 		try{
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
@@ -478,9 +478,9 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 
 	}
 	public static void main(String args[]){
-		HouseVO vo = new HouseVO();
+		HouseVO_orignal vo = new HouseVO_orignal();
 		HouseDAO_JDBC dao = new HouseDAO_JDBC();
-		List<HouseVO> list;
+		List<HouseVO_orignal> list;
 		
 //Insert Test Start		
 //		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
@@ -611,27 +611,27 @@ public class HouseDAO_JDBC implements HouseDAO_interface{
 		//GET ALL_FK TEST END
 	
 		//GET ONE_FK TEST BEGIN
-		vo = dao.GET_ONE_HOUSE_FK(20001);	
-		System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-		System.out.println("getCityNO = \t\t" + vo.getCityNO());
-		System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
-		System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
-		System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
-		System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
-		System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
-		System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
-		System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
-		System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
-		System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-		System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-		System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
-		System.out.println("gethType = \t\t" + vo.gethType());
-		System.out.println("getFormNO = \t\t" + vo.getFormNO());
-		System.out.println("gethForm = \t\t" +vo.gethForm());
-		System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
-		System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
-		System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
-		System.out.println("Search Success");
+//		vo = dao.GET_ONE_HOUSE_FK(20001);	
+//		System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
+//		System.out.println("getCityNO = \t\t" + vo.getCityNO());
+//		System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
+//		System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
+//		System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
+//		System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
+//		System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
+//		System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
+//		System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
+//		System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
+//		System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+//		System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+//		System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
+//		System.out.println("gethType = \t\t" + vo.gethType());
+//		System.out.println("getFormNO = \t\t" + vo.getFormNO());
+//		System.out.println("gethForm = \t\t" +vo.gethForm());
+//		System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
+//		System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
+//		System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
+//		System.out.println("Search Success");
 		//GET ONE_FK TEST END
 	
 	

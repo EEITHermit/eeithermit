@@ -27,7 +27,7 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 	String insert = "insert into reservation("
 			+ "memNO,houseNO,boroughNO,exceptTime,applyTime,takedOver) values(?,?,?,?,?,?)";
 	@Override
-	public Integer insert(ReservationVO rlVO) {
+	public Integer insert(ReservationVO_original rlVO) {
 		int result = 0;
 		try(Connection conn = ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(insert);){
@@ -48,14 +48,14 @@ public class ReservationJNDIDAO implements ReservationDAO_interface{
 			+ "join member m on m.memNO = r.memNO "
 			+ "where (r.boroughNO = ?) AND (takedOver = 'false')";
 	@Override
-	public ArrayList<ReservationVO> selectByArea(Integer areaNo) {
-		ArrayList<ReservationVO> array = new ArrayList<ReservationVO>();
+	public ArrayList<ReservationVO_original> selectByArea(Integer areaNo) {
+		ArrayList<ReservationVO_original> array = new ArrayList<ReservationVO_original>();
 		try(Connection conn = ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(select);){
 			ps.setInt(1, areaNo);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
-				ReservationVO rlVO = new ReservationVO();
+				ReservationVO_original rlVO = new ReservationVO_original();
 				rlVO.setReservationNo(rs.getInt("reservationNO"));
 				rlVO.getMemberVO().setMemNO(rs.getInt("memNO"));
 				rlVO.getMemberVO().setMemName(rs.getString("memName"));

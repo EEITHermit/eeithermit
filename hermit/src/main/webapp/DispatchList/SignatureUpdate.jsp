@@ -20,19 +20,19 @@
 	<form id="ListForm" method="post" action="DispatchListServlet">
 		<div class="form-group">
 			<label for="dempno">派工單號</label>
-			<input type="text" class="form-control" name="dlno" value=${dlVO.dlNo}>
+			<input type="text" class="form-control" name="dlno" value=${dlVO.dlNO}>
 		</div>
 		<div class="form-group">
 			<label for="dempno">指派人</label>
-			<input type="text" class="form-control" name="dempno" value=${dlVO.dempNo}>
+			<input type="text" class="form-control" name="dempno" value=${dlVO.dempNO}>
 		</div>
 		<div class="form-group">
 		 	<label for="aempno">負責人</label>
-		 	<input type="text" class="form-control" name="aempno" value=${dlVO.aempNo}>
+		 	<input type="text" class="form-control" name="aempno" value=${dlVO.aempNO}>
 		</div>
 		<div class="form-group">
 		 	<label for="qano">問答單號</label>
-		 	<input type="text" class="form-control" name="qano" value=${dlVO.qaNo}>
+		 	<input type="text" class="form-control" name="qano" value=${dlVO.qaNO}>
 		</div>
 		<div class="form-group">
 		 	<label for="stime">派工時間</label>

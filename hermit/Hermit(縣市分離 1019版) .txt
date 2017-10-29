@@ -136,6 +136,7 @@ CREATE TABLE House(
 	houseTitle varchar(50) NOT NULL,
 	cityNO decimal(3,0)  NOT NULL,
 	boroughNO decimal(4,0)  NOT NULL,
+	previewPic varchar(MAX) NULL,
 	highestFloor decimal(2,0) NOT NULL,
 	nowFloor decimal(2,0) NOT NULL,
 	houseStatus varchar(10) NOT NULL,
@@ -156,7 +157,7 @@ CREATE TABLE House(
 
 go
 
-insert into house values('精美小套房',1,1,15,5,'已出租',15000,1000,'包水','按帳單計費','123',2010,2010,'大馬路1號',17.23);
+insert into house values('精美小套房',1,1,null,15,5,'未出租',15000,1000,'包水','按帳單計費','123',2010,2010,'大馬路1號',17.23);
 GO
 
 CREATE TABLE Post
@@ -257,7 +258,7 @@ CREATE TABLE Member
 	memName       VARCHAR(32),
 	memGender     VARCHAR(4),
 	memEmail      VARCHAR(64),
-	memRegister   DATETIME,
+	memRegister   DATETIME DEFAULT GETDATE(),
 	memStatus    VARCHAR(16),
 	memInfract    TINYINT,
 	memImage     VARCHAR(MAX),

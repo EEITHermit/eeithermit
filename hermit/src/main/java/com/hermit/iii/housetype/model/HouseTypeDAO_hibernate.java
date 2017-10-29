@@ -10,7 +10,7 @@ import com.hermit.iii.util.HibernateUtil;
 
 public class HouseTypeDAO_hibernate implements HouseTypeDAO_interface_hibernate {
 
-	private static final String GET_ALL_STMT = "from HouseTypeVO_hibernate order by typeNO";
+	private static final String GET_ALL_STMT = "from HouseTypeVO order by typeNO";
 
 	@Override
 	public void insert(HouseTypeVO houseTypeVO) {
