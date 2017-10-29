@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.hermit.iii.businTeam.model.BusinTeamVO;
+import com.hermit.iii.businTeam.model.BusinTeamVO_original;
 
 public class TeamAreaDAO_JDBC implements TeamAreaDAO_interface_original{
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";

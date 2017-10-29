@@ -27,7 +27,7 @@ public class EmpDAO implements EmpDAO_interface {
 	private static final String DELETE = "DELETE FROM Emp where empNO=?";
 
 	@Override
-	public void insert(EmpVO empVO) {
+	public void insert(EmpVO_original empVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -69,7 +69,7 @@ public class EmpDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public void update(EmpVO empVO) {
+	public void update(EmpVO_original empVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -147,9 +147,9 @@ public class EmpDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public EmpVO findByAccount(String empAccount) {
+	public EmpVO_original findByAccount(String empAccount) {
 
-		EmpVO empVO = null;
+		EmpVO_original empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -165,7 +165,7 @@ public class EmpDAO implements EmpDAO_interface {
 
 			while (rs.next()) {
 
-				empVO = new EmpVO();
+				empVO = new EmpVO_original();
 				empVO.setEmpNO(rs.getInt("empNO"));
 				empVO.setEmpAccount(rs.getString("empAccount"));
 				empVO.setEmpPwd(rs.getString("empPwd"));
@@ -206,9 +206,9 @@ public class EmpDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public EmpVO findByPrimaryKey(Integer empNO) {
+	public EmpVO_original findByPrimaryKey(Integer empNO) {
 
-		EmpVO empVO = null;
+		EmpVO_original empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -222,7 +222,7 @@ public class EmpDAO implements EmpDAO_interface {
 
 			while (rs.next()) {
 
-				empVO = new EmpVO();
+				empVO = new EmpVO_original();
 				empVO.setEmpNO(rs.getInt("empNO"));
 				empVO.setEmpAccount(rs.getString("empAccount"));
 				empVO.setEmpPwd(rs.getString("empPwd"));
@@ -262,10 +262,10 @@ public class EmpDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public List<EmpVO> getAll() {
+	public List<EmpVO_original> getAll() {
 
-		List<EmpVO> list = new ArrayList<EmpVO>();
-		EmpVO empVO = null;
+		List<EmpVO_original> list = new ArrayList<EmpVO_original>();
+		EmpVO_original empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -277,7 +277,7 @@ public class EmpDAO implements EmpDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 
-				empVO = new EmpVO();
+				empVO = new EmpVO_original();
 				empVO.setEmpNO(rs.getInt("empNO"));
 				empVO.setEmpAccount(rs.getString("empAccount"));
 				empVO.setEmpPwd(rs.getString("empPwd"));

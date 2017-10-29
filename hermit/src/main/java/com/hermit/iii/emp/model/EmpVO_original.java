@@ -1,8 +1,6 @@
 package com.hermit.iii.emp.model;
 
-import java.io.Serializable;
-
-public class EmpVO implements Serializable {
+public class EmpVO_original implements java.io.Serializable {
 
 	private Integer empNO;
 	private String empAccount;

@@ -11,7 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.hermit.iii.businTeam.model.BusinTeamVO;
+import com.hermit.iii.businTeam.model.BusinTeamVO_original;
 
 public class TeamAreaDAO_JNDI implements TeamAreaDAO_interface_original{
 	DataSource ds = null;
