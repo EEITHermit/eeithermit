@@ -33,7 +33,7 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 	
 	
 	@Override
-	public void insert(DispatchListVO DispatchListVO) {
+	public void insert(DispatchListVO_orignal DispatchListVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -41,9 +41,9 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setInt(1,DispatchListVO.getDempNo());
-			pstmt.setInt(2,DispatchListVO.getAempNo());
-			pstmt.setInt(3,DispatchListVO.getQaNo());
+			pstmt.setInt(1,DispatchListVO.getDempNO());
+			pstmt.setInt(2,DispatchListVO.getAempNO());
+			pstmt.setInt(3,DispatchListVO.getQaNO());
 			pstmt.setDate(4,DispatchListVO.getDlStime());
 			pstmt.execute();
 
@@ -69,20 +69,20 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 	}
 
 	@Override
-	public void update(DispatchListVO DispatchListVO) {
+	public void update(DispatchListVO_orignal DispatchListVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setInt(1,DispatchListVO.getDempNo());
-			pstmt.setInt(2,DispatchListVO.getAempNo());
-			pstmt.setInt(3,DispatchListVO.getQaNo());
+			pstmt.setInt(1,DispatchListVO.getDempNO());
+			pstmt.setInt(2,DispatchListVO.getAempNO());
+			pstmt.setInt(3,DispatchListVO.getQaNO());
 			pstmt.setDate(4,DispatchListVO.getDlStime());
 			pstmt.setDate(5,DispatchListVO.getDlEtime());
 			pstmt.setString(6,DispatchListVO.getElesign());
 			pstmt.setString(7,DispatchListVO.getDlNote());
-			pstmt.setInt(8,DispatchListVO.getDlNo());
+			pstmt.setInt(8,DispatchListVO.getDlNO());
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -138,10 +138,10 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 	}
 
 	@Override
-	public DispatchListVO findByPrimaryKey(Integer dlno) {
+	public DispatchListVO_orignal findByPrimaryKey(Integer dlno) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		DispatchListVO dlVO = null;
+		DispatchListVO_orignal dlVO = null;
 		ResultSet rs = null;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
@@ -150,11 +150,11 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dlVO = new DispatchListVO();
-				dlVO.setDlNo(rs.getInt("dlNO"));
-				dlVO.setDempNo(rs.getInt("dempNO"));
-				dlVO.setAempNo(rs.getInt("aempNO"));
-				dlVO.setQaNo(rs.getInt("qaNO"));
+				dlVO = new DispatchListVO_orignal();
+				dlVO.setDlNO(rs.getInt("dlNO"));
+				dlVO.setDempNO(rs.getInt("dempNO"));
+				dlVO.setAempNO(rs.getInt("aempNO"));
+				dlVO.setQaNO(rs.getInt("qaNO"));
 				dlVO.setDlStime(rs.getDate("dlStime"));
 				dlVO.setDlEtime(rs.getDate("dlEtime"));
 				dlVO.setElesign(rs.getString("elesign"));
@@ -190,9 +190,9 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 	}
 
 	@Override
-	public List<DispatchListVO> getAll() {
-		List<DispatchListVO> list = new ArrayList<DispatchListVO>();
-		DispatchListVO dlVO = null;
+	public List<DispatchListVO_orignal> getAll() {
+		List<DispatchListVO_orignal> list = new ArrayList<DispatchListVO_orignal>();
+		DispatchListVO_orignal dlVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -205,11 +205,11 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 			rs = pstmt.executeQuery();
 				
 			while (rs.next()) {
-				dlVO = new DispatchListVO();
-				dlVO.setDlNo(rs.getInt("dlNO"));
-				dlVO.setDempNo(rs.getInt("dempNO"));
-				dlVO.setAempNo(rs.getInt("aempNO"));
-				dlVO.setQaNo(rs.getInt("qaNO"));
+				dlVO = new DispatchListVO_orignal();
+				dlVO.setDlNO(rs.getInt("dlNO"));
+				dlVO.setDempNO(rs.getInt("dempNO"));
+				dlVO.setAempNO(rs.getInt("aempNO"));
+				dlVO.setQaNO(rs.getInt("qaNO"));
 				dlVO.setDlStime(rs.getDate("dlStime"));
 				dlVO.setDlEtime(rs.getDate("dlEtime"));
 				dlVO.setElesign(rs.getString("elesign"));
@@ -247,7 +247,7 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 		@Override
 		public String getAllForJson() {
 			List<Map> list = new ArrayList<Map>();
-			DispatchListVO dlVO = null;
+			DispatchListVO_orignal dlVO = null;
 			String jsonString = null;
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -304,15 +304,15 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 		}
 	
 	public static void main (String args[]){
-		DispatchListVO dVO = new DispatchListVO();
+		DispatchListVO_orignal dVO = new DispatchListVO_orignal();
 		DispatchListDAO_JDBC dDAO = new DispatchListDAO_JDBC();
 		
 //Insert Test Start
 		
 //		System.out.println("insert start");
-//		dVO.setDempNo(30001);
-//		dVO.setAempNo(30002);
-//		dVO.setQaNo(60000001);
+//		dVO.setDempNO(30001);
+//		dVO.setAempNO(30002);
+//		dVO.setQaNO(60000001);
 //		dVO.setDlStime(java.sql.Date.valueOf("2017-10-10"));
 //		dDAO.insert(dVO);
 //		System.out.println("insert success");
@@ -321,12 +321,12 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 ////Update Test Start
 
 //		System.out.println("update start");
-//		dVO.setDlNo(70000002);
-//		dVO.setDempNo(30001);
-//		dVO.setAempNo(30002);
-//		dVO.setQaNo(60000001);
-//		dVO.setDlStime(java.sql.Date.valueOf("2017-10-10"));
-//		dVO.setDlEtime(java.sql.Date.valueOf("2017-10-11"));
+//		dVO.setDlNO(70000002);
+//		dVO.setDempNO(30001);
+//		dVO.setAempNO(30002);
+//		dVO.setQaNO(60000001);
+//		dVO.setDlStime(java.sql.Date.valueOf("2017-10-15"));
+//		dVO.setDlEtime(java.sql.Date.valueOf("2017-10-18"));
 //		dVO.setElesign("date:image/png;base64,1234");
 //		dVO.setDlNote("測試修復完畢+-*/");
 //		dDAO.update(dVO);
@@ -336,7 +336,7 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 //Delete Test Start
 		
 //		System.out.println("delete start");
-//		dDAO.delete(70000004);
+//		dDAO.delete(70000003);
 //		System.out.println("delete success");
 		
 //Delete Test End		
@@ -344,10 +344,10 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 		
 //		System.out.println("Search One Start");
 //		dVO = dDAO.findByPrimaryKey(70000001);
-//		System.out.println("dlNO \t= " + dVO.getDlNo());
-//		System.out.println("dempNO \t= " + dVO.getDempNo());
-//		System.out.println("aempNO \t= " + dVO.getAempNo());
-//		System.out.println("qaNO \t= " + dVO.getQaNo());
+//		System.out.println("dlNO \t= " + dVO.getDlNO());
+//		System.out.println("dempNO \t= " + dVO.getDempNO());
+//		System.out.println("aempNO \t= " + dVO.getAempNO());
+//		System.out.println("qaNO \t= " + dVO.getQaNO());
 //		System.out.println("dlStime = " + dVO.getDlStime());
 //		System.out.println("dlEtime = " + dVO.getDlEtime());
 //		System.out.println("elesign = " + dVO.getElesign());
@@ -358,20 +358,20 @@ public class DispatchListDAO_JDBC implements DispatchListDAO_interface {
 
 //Search All Test Start
 		
-//		System.out.println("-----------Search All Start------------");	
-//		List<DispatchListVO> list = dDAO.getAll();
-//		for(int i=0;i<list.size();i++){
-//			dVO = list.get(i);
-//			System.out.println("dlNO \t= " + dVO.getDlNo());
-//			System.out.println("dempNO \t= " + dVO.getDempNo());
-//			System.out.println("aempNO \t= " + dVO.getAempNo());
-//			System.out.println("qaNO \t= " + dVO.getQaNo());
-//			System.out.println("dlStime = " + dVO.getDlStime());
-//			System.out.println("dlEtime = " + dVO.getDlEtime());
-//			System.out.println("elesign = " + dVO.getElesign());
-//			System.out.println("dlNote \t= " + dVO.getDlNote());
-//		}
-//		System.out.println("-----------Search All success------------");	
+		System.out.println("-----------Search All Start------------");	
+		List<DispatchListVO_orignal> list = dDAO.getAll();
+		for(int i=0;i<list.size();i++){
+			dVO = list.get(i);
+			System.out.println("dlNO \t= " + dVO.getDlNO());
+			System.out.println("dempNO \t= " + dVO.getDempNO());
+			System.out.println("aempNO \t= " + dVO.getAempNO());
+			System.out.println("qaNO \t= " + dVO.getQaNO());
+			System.out.println("dlStime = " + dVO.getDlStime());
+			System.out.println("dlEtime = " + dVO.getDlEtime());
+			System.out.println("elesign = " + dVO.getElesign());
+			System.out.println("dlNote \t= " + dVO.getDlNote());
+		}
+		System.out.println("-----------Search All success------------");	
 		
 //Search All Test End		
 	}

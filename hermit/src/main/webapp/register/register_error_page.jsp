@@ -54,7 +54,7 @@
 					<span class="label label-danger">抱歉&nbsp;!!&nbsp;&nbsp;存取錯誤</span>
 				</h1>
 				<div id="countdown"></div>
-				<a href="register_notice_page.jsp">8秒後將自動跳轉，或是點此連結直接重新登入</a>
+				<a href="<%=request.getContextPath()%>/register/register_select_page.jsp">8秒後將自動跳轉，或是點此連結直接重新登入</a>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
 			fontColor : '#FFFFFF',
 			autostart : false,
 			onComplete : function() {
-				location.href = "register_notice_page.jsp";
+				location.href = "<%=request.getContextPath()%>/register/register_select_page.jsp";
 			}
 		}).start()
 	</script>

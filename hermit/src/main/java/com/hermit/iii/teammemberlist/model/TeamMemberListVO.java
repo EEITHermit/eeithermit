@@ -1,9 +1,8 @@
 package com.hermit.iii.teammemberlist.model;
 
-import java.io.Serializable;
-import java.sql.*;
+import java.sql.Date;
 
-public class TeamMemberListVO implements Serializable {
+public class TeamMemberListVO {
 	private Integer memberListNO;
 	private Integer empNO;
 	private Integer businNO;
@@ -58,4 +57,5 @@ public class TeamMemberListVO implements Serializable {
 	public void setTmlStatus(Byte tmlStatus) {
 		this.tmlStatus = tmlStatus;
 	}
+
 }

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hermit.iii.dispatchlist.model.DispatchListService;
 import com.hermit.iii.dispatchlist.model.DispatchListVO;
+import com.hermit.iii.dispatchlist.model.DispatchListVO_orignal;
 
 @WebServlet("/DispatchList/DispatchListServlet")
 public class DispatchListServlet extends HttpServlet {
@@ -99,6 +100,7 @@ public class DispatchListServlet extends HttpServlet {
 			
 			dls = new DispatchListService();
 			String stringjson = dls.getAllForJson();
+			System.out.println(stringjson);
 			out.println(stringjson);
 			out.flush();
 			out.close();

@@ -11,13 +11,13 @@ public class PostService {
 	}
 	
 	public void insertPost(String postName){
-		PostVO postVO = new PostVO();
+		PostVO_original postVO = new PostVO_original();
 		postVO.setPostName(postName);
 		dao.insert(postVO);
 	}
 	
 	public void updatePost(Integer postNO , String postName){
-		PostVO postVO = new PostVO();
+		PostVO_original postVO = new PostVO_original();
 		postVO.setPostNO(postNO);
 		postVO.setPostName(postName);
 		dao.update(postVO);
@@ -27,11 +27,11 @@ public class PostService {
 		dao.delete(postNO);
 	}
 	
-	public PostVO getOnePost(Integer postNO){
+	public PostVO_original getOnePost(Integer postNO){
 		return dao.findByPrimaryKey(postNO);
 	}
 	
-	public List<PostVO> getALL(){
+	public List<PostVO_original> getALL(){
 		return dao.getAll();
 	}
 }

@@ -36,7 +36,9 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			
+			TeamAreaVO vo=session.get(TeamAreaVO.class, businNO);
+			session.delete(vo);
+			session.getTransaction().commit();
 		}catch(RuntimeException ex){
 			session.getTransaction().rollback();
 			throw ex;
@@ -44,18 +46,66 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 	}
 
 	@Override
-	public TeamAreaVO select(Integer businNO) {
-		// TODO Auto-generated method stub
+	public TeamAreaVO findByPrimaryKey(Integer businNO) {
+		TeamAreaVO vo=null;
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			vo=session.get(TeamAreaVO.class, businNO);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		}
 		return null;
 	}
 
 	@Override
 	public void update(TeamAreaVO taVO) {
-		// TODO Auto-generated method stub
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(taVO);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
+	@Override
+	public List<TeamAreaVO> getAll() {
+		List<TeamAreaVO>list=null;
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query=session.createQuery(GET_ALL_STMT);
+			list=query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		TeamAreaDAO_hibernate dao=new TeamAreaDAO_hibernate();
+		
+		//insert
+//		TeamAreaVO vo=new TeamAreaVO();
+//		vo.setBusinNO(30020);
+//		vo.setCityNO(1);
+//		vo.setBoroughNO(2);
+//		dao.insert(vo);
+		
+		//update
+//		TeamAreaVO vo=new TeamAreaVO();
+//		vo.setBusinNO(30010);
+//		vo.setCityNO(1);
+//		vo.setBoroughNO(2);
+//		dao.update(vo);
 
 	}
+
+	
 
 }

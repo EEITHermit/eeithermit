@@ -30,7 +30,7 @@ public class TeamMemberListJNDIDAO implements TeamMemberListDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT memberListNO,empNO,businNO,tmlStartTime,tmlEndTime,tmlStatus FROM TeamMemberList ORDER BY memberListNO";
 
 	@Override
-	public void insert(TeamMemberListVO teamMemberListVO) {
+	public void insert(TeamMemberListVO_original teamMemberListVO) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERT_STMT);) {
 
@@ -48,7 +48,7 @@ public class TeamMemberListJNDIDAO implements TeamMemberListDAO_interface {
 	}
 
 	@Override
-	public void update(TeamMemberListVO teamMemberListVO) {
+	public void update(TeamMemberListVO_original teamMemberListVO) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);) {
 
@@ -81,9 +81,9 @@ public class TeamMemberListJNDIDAO implements TeamMemberListDAO_interface {
 	}
 
 	@Override
-	public TeamMemberListVO findByPrimaryKey(Integer memberListNO) {
+	public TeamMemberListVO_original findByPrimaryKey(Integer memberListNO) {
 		ResultSet rs = null;
-		TeamMemberListVO teamMemberListVO = null;
+		TeamMemberListVO_original teamMemberListVO = null;
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ONE_STMT);) {
 
@@ -94,7 +94,7 @@ public class TeamMemberListJNDIDAO implements TeamMemberListDAO_interface {
 			if (rs.next()) {
 				// 確定有資料才開始new TeamMemberListVO物件
 				// teamMemberListVO = Domain objects
-				teamMemberListVO = new TeamMemberListVO();
+				teamMemberListVO = new TeamMemberListVO_original();
 				teamMemberListVO.setMemberListNO(rs.getInt("memberListNO"));
 				teamMemberListVO.setEmpNO(rs.getInt("empNO"));
 				teamMemberListVO.setBusinNO(rs.getInt("businNO"));
@@ -110,10 +110,10 @@ public class TeamMemberListJNDIDAO implements TeamMemberListDAO_interface {
 	}
 
 	@Override
-	public Set<TeamMemberListVO> getAll() {
+	public Set<TeamMemberListVO_original> getAll() {
 		ResultSet rs = null;
-		TeamMemberListVO teamMemberListVO = null;
-		Set<TeamMemberListVO> set = new LinkedHashSet<TeamMemberListVO>();
+		TeamMemberListVO_original teamMemberListVO = null;
+		Set<TeamMemberListVO_original> set = new LinkedHashSet<TeamMemberListVO_original>();
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(GET_ALL_STMT);) {
 
@@ -122,7 +122,7 @@ public class TeamMemberListJNDIDAO implements TeamMemberListDAO_interface {
 			while (rs.next()) {
 				// 確定有資料才開始new TeamMemberListVO物件
 				// teamMemberListVO = Domain objects
-				teamMemberListVO = new TeamMemberListVO();
+				teamMemberListVO = new TeamMemberListVO_original();
 				teamMemberListVO.setMemberListNO(rs.getInt("memberListNO"));
 				teamMemberListVO.setEmpNO(rs.getInt("empNO"));
 				teamMemberListVO.setBusinNO(rs.getInt("businNO"));

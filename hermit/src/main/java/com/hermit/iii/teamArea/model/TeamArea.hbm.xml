@@ -16,5 +16,6 @@
 			</key-many-to-one>
 			</composite-id>
 		<property name="cityNO" column="cityNO" />
+
 	</class>
 </hibernate-mapping>

@@ -20,6 +20,7 @@ import com.hermit.iii.calendar.model.CalendarEventService;
 import com.hermit.iii.calendar.model.CalendarEventVO_original;
 import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.member.model.*;
 
 
