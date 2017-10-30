@@ -1,7 +1,9 @@
 package com.hermit.iii.member.model;
 
 import java.io.Serializable;
-import java.sql.*;
+import java.util.*;
+
+import com.hermit.iii.favorite.model.*;
 
 public class MemberVO implements Serializable {
 	private Integer memNO;
@@ -11,10 +13,12 @@ public class MemberVO implements Serializable {
 	private String memName;
 	private String memGender;
 	private String memEmail;
-	private Date memRegister;
+	private java.sql.Date memRegister;
 	private String memStatus;
 	private Integer memInfract;
 	private String memImage;
+
+	private Set<FavoriteVO> favs =new LinkedHashSet<FavoriteVO>();
 
 	public Integer getMemNO() {
 		return memNO;
@@ -72,11 +76,11 @@ public class MemberVO implements Serializable {
 		this.memEmail = memEmail;
 	}
 
-	public Date getMemRegister() {
+	public java.sql.Date getMemRegister() {
 		return memRegister;
 	}
 
-	public void setMemRegister(Date memRegister) {
+	public void setMemRegister(java.sql.Date memRegister) {
 		this.memRegister = memRegister;
 	}
 
@@ -102,5 +106,13 @@ public class MemberVO implements Serializable {
 
 	public void setMemImage(String memImage) {
 		this.memImage = memImage;
+	}
+
+	public Set<FavoriteVO> getFavs() {
+		return favs;
+	}
+
+	public void setFavs(Set<FavoriteVO> favs) {
+		this.favs = favs;
 	}
 }
