@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.json.simple.JSONValue;
 
-
+import com.hermit.iii.boroughs.model.BoroughsVO;
 import com.hermit.iii.city.model.CityVO;
 import com.hermit.iii.equipmentcondition.model.EquipmentConditionVO;
+import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
+import com.hermit.iii.housetype.model.HouseTypeVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
@@ -378,7 +382,34 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //				System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
 //				System.out.println("Search Success");
 				//GET ONE_FK TEST END
-			
-			
+//			HouseVO houseVO = new HouseVO();
+//			vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
+//			CityVO cityVO = new CityVO();
+//			cityVO.setCityNO(2);
+//			vo.setCityVO(cityVO);
+//			BoroughsVO boroughVO = new BoroughsVO();
+//			boroughVO.setBoroughNO(2);
+//			vo.setBoroughsVO(boroughVO);
+//			vo.setHighestFloor(13);
+//			vo.setNowFloor(5);
+//			vo.setHouseStatus("未出租");
+//			vo.setHouseRent(20000);
+//			vo.setHouseCharge(40000);     //押金
+//			vo.setWaterRate("依帳單繳費");
+//			vo.setPowerRate("依帳單繳費");
+//			vo.setHouseVideo("http://www.youtube.com");
+//			HouseTypeVO typeVO = new HouseTypeVO();
+//			typeVO.setTypeNO(2010);
+//			vo.setHouseTypeVO(typeVO);
+//			HouseFormVO formVO = new HouseFormVO();
+//			formVO.setFormNO(2010);
+//			vo.setHouseFormVO(formVO);
+//			vo.setHouseAddr("新北市板橋區大馬路3號");
+//			vo.setHouseSize(10.32);
+//			HousePictureVO hp = new HousePictureVO();
+//			hp.sethPicture("af456aw5e6fa4w");
+//			Set<HousePicture> set = vo.getHousePicture();
+//			set.add(hp);
+//			dao.insert(houseVO);
 	}
 }

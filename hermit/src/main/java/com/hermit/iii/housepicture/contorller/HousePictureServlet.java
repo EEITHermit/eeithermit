@@ -27,13 +27,15 @@ public class HousePictureServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String action = request.getParameter("action");
-		ConvertToBase64 ctb = new ConvertToBase64(); 
+		ConvertToBase64 ctb = new ConvertToBase64();
+		int count = 0;
 		if("insertHousePicture".equals(action)){
 			Collection<Part> parts = request.getParts();
 			for(Part item : request.getParts()){
 				String strBase64 = ctb.encode(item);
 				if(strBase64 != null){
-					System.out.println(strBase64);
+					count+=1;
+					System.out.println(count);
 				}
 			}
 		}

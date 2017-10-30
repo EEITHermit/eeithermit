@@ -7,8 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Q&A</title>
 <link href='<%= request.getContextPath() %>/css/jqueryText/jquery-te-1.4.0.css' rel='stylesheet' />
+<link href='<%= request.getContextPath() %>/css/bootstrap.min.css' rel='stylesheet' />
 <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
 <script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
+<script src='<%=request.getContextPath()%>/js/bootstrap.min.js'></script>
 <style>
 	#queryTable{
  		display:none; 
@@ -33,6 +35,8 @@
 		});
 		//產生jqueyText
 		$('.commentArea').jqte();
+		//產生dataTable
+		$("#queryTable").DataTable();
 	};
 	
 	function check(){
