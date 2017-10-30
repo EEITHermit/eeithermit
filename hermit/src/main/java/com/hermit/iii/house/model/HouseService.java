@@ -3,6 +3,11 @@ package com.hermit.iii.house.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.city.model.CityVO;
+import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housetype.model.HouseTypeVO;
+
 public class HouseService {
 	private HouseDAO_interface_hibernate dao ;
 	
@@ -13,8 +18,13 @@ public class HouseService {
 	public HouseVO insertHouse(String houseTitle,Integer cityNO,Integer boroughNO,String previewPic,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
 		HouseVO vo = new HouseVO();
 		vo.setHouseTitle(houseTitle);
-		vo.setCityNO(cityNO);
-		vo.setBoroughNO(boroughNO);
+		
+		CityVO cityVO=new CityVO();
+		cityVO.setCityNO(cityNO);
+		vo.setCityVO(cityVO);
+		BoroughsVO boroughsVO=new BoroughsVO();
+		boroughsVO.setBoroughNO(boroughNO);
+		vo.setBoroughsVO(boroughsVO);
 		vo.setPreviewPic(previewPic);
 		vo.setHighestFloor(highestFloor);
 		vo.setNowFloor(nowFloor);
@@ -24,8 +34,12 @@ public class HouseService {
 		vo.setWaterRate(waterRate);
 		vo.setPowerRate(powerRate);
 		vo.setHouseVideo(houseVideo);
-		vo.setTypeNO(typeNO);
-		vo.setFormNO(formNO);
+		HouseTypeVO houseTypeVO=new HouseTypeVO();
+		houseTypeVO.setTypeNO(typeNO);
+		vo.setHouseTypeVO(houseTypeVO);
+		HouseFormVO houseFormVO=new HouseFormVO();
+		houseFormVO.setFormNO(formNO);
+		vo.setHouseFormVO(houseFormVO);
 		vo.setHouseAddr(houseAddr);
 		vo.setHouseSize(houseSize);
 		dao.insert(vo);
@@ -36,8 +50,12 @@ public class HouseService {
 		HouseVO vo = new HouseVO();
 		vo.setHouseNO(houseNO);
 		vo.setHouseTitle(houseTitle);
-		vo.setCityNO(cityNO);
-		vo.setBoroughNO(boroughNO);
+		CityVO cityVO=new CityVO();
+		cityVO.setCityNO(cityNO);
+		vo.setCityVO(cityVO);
+		BoroughsVO boroughsVO=new BoroughsVO();
+		boroughsVO.setBoroughNO(boroughNO);
+		vo.setBoroughsVO(boroughsVO);
 		vo.setPreviewPic(previewPic);
 		vo.setHighestFloor(highestFloor);
 		vo.setNowFloor(nowFloor);
@@ -47,8 +65,12 @@ public class HouseService {
 		vo.setWaterRate(waterRate);
 		vo.setPowerRate(powerRate);
 		vo.setHouseVideo(houseVideo);
-		vo.setTypeNO(typeNO);
-		vo.setFormNO(formNO);
+		HouseTypeVO houseTypeVO=new HouseTypeVO();
+		houseTypeVO.setTypeNO(typeNO);
+		vo.setHouseTypeVO(houseTypeVO);
+		HouseFormVO houseFormVO=new HouseFormVO();
+		houseFormVO.setFormNO(formNO);
+		vo.setHouseFormVO(houseFormVO);
 		vo.setHouseAddr(houseAddr);
 		vo.setHouseSize(houseSize);
 		dao.update(vo);

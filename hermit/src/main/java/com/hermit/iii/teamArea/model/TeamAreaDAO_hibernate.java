@@ -26,19 +26,19 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 			ex.printStackTrace();;
 		}
 	}
-
+	//團隊不刪除
 	@Override
 	public void delete(Integer businNO) {
-		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			session.beginTransaction();
-			TeamAreaVO vo=session.get(TeamAreaVO.class, businNO);
-			session.delete(vo);
-			session.getTransaction().commit();
-		}catch(RuntimeException ex){
-			session.getTransaction().rollback();
-			throw ex;
-		}
+//		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+//		try{
+//			session.beginTransaction();
+//			TeamAreaVO vo=session.get(TeamAreaVO.class, businNO);
+//			session.delete(vo);
+//			session.getTransaction().commit();
+//		}catch(RuntimeException ex){
+//			session.getTransaction().rollback();
+//			throw ex;
+//		}
 	}
 
 	@Override
@@ -85,13 +85,15 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 	}
 	public static void main(String[] args) {
 		TeamAreaDAO_hibernate dao=new TeamAreaDAO_hibernate();
+		TeamAreaVO vo=new TeamAreaVO();
 		
 		//insert
-//		TeamAreaVO vo=new TeamAreaVO();
 //		BusinTeamVO t =new BusinTeamVO();
 //		t.setBusinNO(30010);
 //		vo.setBusinTeamVO(t);
+		
 //		vo.setCityNO(2);
+		
 //		BoroughsVO b = new BoroughsVO();
 //		b.setBoroughNO(2);
 //		vo.setBoroughsVO(b);
@@ -108,9 +110,8 @@ public class TeamAreaDAO_hibernate implements TeamAreaDAO_interface {
 //		vo.setCityNO(1);
 //		vo.setBoroughNO(2);
 //		dao.update(vo);
-
+		
+		//查詢
+		
 	}
-
-	
-
 }
