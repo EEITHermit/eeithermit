@@ -10,8 +10,6 @@ import com.hermit.iii.housetype.model.HouseTypeVO;
 public class HouseVO  implements Serializable{
 	private Integer houseNO;
 	private String houseTitle;
-//	private Integer cityNO;
-//	private Integer boroughNO;
 	private String previewPic;
 	private Integer highestFloor;
 	private Integer nowFloor;
@@ -21,11 +19,9 @@ public class HouseVO  implements Serializable{
 	private String waterRate;
 	private String powerRate;
 	private String houseVideo;
-//	private Integer typeNO;
-//	private Integer formNO;
 	private String houseAddr;
 	private Double houseSize;
-	
+	//子傑加
 	private CityVO cityVO;
 	private BoroughsVO boroughsVO;
 	private HouseTypeVO houseTypeVO;

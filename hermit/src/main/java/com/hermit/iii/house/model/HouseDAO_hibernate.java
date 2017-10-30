@@ -359,6 +359,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //				System.out.println("getCityName = \t\t" + vo.getCityVO().getCityName());
 //				System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughNO());
 //				System.out.println("getBoroughName = \t\t" + vo.getBoroughsVO().getBoroughName());
+//				System.out.println("getpreviewPic = \t\t" + vo.getPreviewPic());
 //				System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
 //				System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
 //				System.out.println("getHouseStatus = \t" + vo.getHouseStatus());

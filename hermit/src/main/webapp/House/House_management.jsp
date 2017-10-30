@@ -12,7 +12,7 @@
 <link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 房屋表格用↑ class="table"	 -->
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
 <style>
 
 </style>
@@ -71,7 +71,7 @@
 		</tfoot>
 	</table>
 
-<form action="<%=request.getContextPath()%>/House.do" method="POST">
+<form action="<%=request.getContextPath()%>/House.do" method="POST" id="form">
 <table class="insertTable" class="table">
 	<thead>
 	<tr>
@@ -90,6 +90,7 @@
 				<th>形態</th>
 				<th>地址</th>
 				<th>坪數</th>
+				<th>圖片</th>
 				<th>編輯</th>
 			</tr>
 	</thead>
@@ -151,6 +152,11 @@
 				<input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize">
 				</td>
 				<td>
+				<input type="file" id="file">
+				<input type="hidden" id="previewPic" name="previewPic"/>
+				<img id="result" border="0" style="border:none;max-height:200px;max-width:200px;">
+				</td>
+				<td>
 				<button id="addHouse">新增</button>
 				</td>
 				
@@ -172,6 +178,7 @@
 <script src="../js/flashcanvas.js"></script>
 <script src="../js/jSignature.min.js"></script>
 <script src="../js/datatables.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
 <script>
 $(document).ready(function(){
 	var dataJson;
@@ -250,7 +257,7 @@ $(document).ready(function(){
 				$.each(dataJson,function(index,VO){
 					var cell1=$("<option></option>").text(VO.cityName);
 					cell1.val(VO.cityNO);
-// 					console.log(VO.cityName);
+					console.log(VO.cityName);
 					selectCity.append(cell1);
 				})
 			})
@@ -292,7 +299,23 @@ $(document).ready(function(){
 					selectForm.append(cell1);
 				})
 			})
-			
+			$("#file").change(function(e){
+		  
+		  var img = e.target.files[0];
+
+		  if(!img.type.match('image.*')){
+		    alert("Whoops! That is not an image.");
+		    return;
+		  }
+		  iEdit.open(img, true, function(res){
+		    $("#result").attr("src", res);
+		  });
+		  //在檔案送出前，讓image的src送到input裡
+		  $("#form").submit(function(event){
+			  $("#previewPic").val($("#result").attr("src"));
+		  }) 
+		});
+		
 			$("#addHouse").click(function(){
 				$('input[name="action"]').val("insertHouse");
 			})
