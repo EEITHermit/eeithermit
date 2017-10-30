@@ -30,7 +30,7 @@
 	
 	<div class="form-group">
 	<lable>房屋編號</lable>
-	<input type="text" value="${vo.houseNO}" name="houseNO"  class="form-control">
+	<input type="text" value="${vo.houseVO.houseNO}" name="houseNO"  class="form-control">
 	</div>
 	
 	<div class="form-group">

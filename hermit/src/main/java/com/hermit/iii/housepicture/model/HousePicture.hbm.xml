@@ -9,9 +9,8 @@
 		<id name="housePictureNO" column="housePictureNO">
 			<generator class="identity" />
 		</id>
-
+		
 		<property name="hPicture" column="hPicture" />
 		<property name="houseNO" column="houseNO" />
-
 	</class>
 </hibernate-mapping>

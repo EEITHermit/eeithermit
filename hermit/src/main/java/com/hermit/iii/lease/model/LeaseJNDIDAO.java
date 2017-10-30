@@ -7,6 +7,7 @@ import javax.naming.*;
 import javax.sql.*;
 
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
 
 public class LeaseJNDIDAO implements LeaseDAO_interface {
 	DataSource ds = null;
@@ -171,4 +172,6 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 		}
 		return set;
 	}
+
+
 }

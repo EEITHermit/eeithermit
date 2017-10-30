@@ -39,6 +39,12 @@
 		<column name="formNO"></column>
 		</many-to-one>
 		
+		<set name="housePictureVO" table="HousePicture" lazy="false" cascade="all" inverse="true" order-by="housePictureNO asc">
+		<key><column name="houseNO"></column></key>
+<!-- 		這邊只能放House的PK↑ -->
+		<one-to-many class="com.hermit.iii.housepicture.model.HousePictureVO"/>
+		</set>
+		
 		<property name="houseAddr" column="houseAddr" />
 		<property name="houseSize" column="houseSize" />
 		
