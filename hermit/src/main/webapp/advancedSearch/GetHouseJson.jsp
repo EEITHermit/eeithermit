@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="../css/appstore.css">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
 <!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
-<script src="../js/appstore.js"></script>
+<script src="<%=request.getContextPath()%>/js/appstore.js"></script>
+<script src="<%=request.getContextPath()%>/js/lazyload.js"></script>
 
 <style>
 	a:link, a:visited, a:hover ,a:active{
@@ -19,7 +20,7 @@
 	    text-decoration: none;
 	    display: inline-block;
 	}
-	h3 a {
+	h4 a {
 		font-family: Microsoft JhengHei;
 	}
 </style>
@@ -46,25 +47,7 @@
 		$(function(){
 			
 			var houseItems = <%= session.getAttribute("houseItems") %>
-			var appstore = {
-				    "items": [
-				        {
-				            "title"         :"甜蜜小套房",
-				            "description"   :"租金：90,000/月",
-				            "link"          :"https://tw.yahoo.com/",
-				            "previewPic"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
-				            "tag"           :"台北市",
-				            "date"          :"2017-10-30"
-				        },{
-				            "title"         :"甜蜜小套房",
-				            "description"   :"租金：90,000/月",
-				            "link"          :"https://tw.yahoo.com/",
-				            "previewPic"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
-				            "tag"           :"台北市",
-				            "date"          :"2017-10-30"
-				        }]
-				}
-		    $.appstore({json:appstore});
+		    $.appstore({json:houseItems});
 		})
 	</script>
 </body>
