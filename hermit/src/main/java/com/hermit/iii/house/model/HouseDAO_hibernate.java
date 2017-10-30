@@ -1,6 +1,7 @@
 package com.hermit.iii.house.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,7 +177,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			List<Map<String,Object>> list=query.list(); 
 			Map m2 = new LinkedHashMap();
-			m2.put("list", list);
+			m2.put("items", list);
 			jsonStr = JSONValue.toJSONString(m2);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -199,6 +200,35 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			throw ex;
 		}
 		
+	}
+	public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
+		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.save(houseVO);
+			for(HousePictureVO housePictureVO:set){
+			housePictureVO.setHouseNO(houseVO.getHouseNO());
+			session.save(housePictureVO);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			ex.printStackTrace();
+		}
+	}
+	@Override
+	public HouseVO getPic(Integer houseNO) {
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		HouseVO houseVO=null;
+		try{
+			session.beginTransaction();
+			houseVO = (HouseVO) session.get(HouseVO.class, houseNO);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return houseVO;
 	}
 	public static void main (String args[]){
 		HouseDAO_hibernate dao = new HouseDAO_hibernate();
@@ -242,9 +272,38 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //		dao.insertHouseAndEquip(vo,evo);
 //		System.out.println("success");
 		
+		CityVO cityVO=new CityVO();
+		BoroughsVO boroughsVO=new BoroughsVO(); 
+		HouseTypeVO typeVO=new HouseTypeVO();
+		HouseFormVO formVO=new HouseFormVO();
+		HousePictureVO picVO=new HousePictureVO();
 		
+		vo.setHouseTitle("測試圖片");
+		cityVO.setCityNO(1);
+		vo.setCityVO(cityVO);
+		boroughsVO.setBoroughNO(3);
+		vo.setBoroughsVO(boroughsVO);
+		vo.setHighestFloor(20);
+		vo.setNowFloor(5);
+		vo.setHouseStatus("出租中");
+		vo.setHouseRent(18000);
+		vo.setHouseCharge(36000);
+		vo.setWaterRate("依帳單繳費");
+		vo.setPowerRate("依帳單繳費");
+		vo.setHouseVideo("http://www.youtube.com/notsweethouse");
+		typeVO.setTypeNO(2020);
+		vo.setHouseTypeVO(typeVO);
+		formVO.setFormNO(2020);
+		vo.setHouseFormVO(formVO);
+		vo.setHouseAddr("新北市板橋區大馬路2號");
+		vo.setHouseSize(18.87);
+		Set<HousePictureVO>set= new HashSet<HousePictureVO>();
+		picVO.sethPicture("0x654321");
+		set.add(picVO);
+		dao.insertHouseAndHousePicture(vo, set);
+		System.out.println("hi");
 		
-		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
+//		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
 		
 
 		//Update Test Start
@@ -382,34 +441,19 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //				System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
 //				System.out.println("Search Success");
 				//GET ONE_FK TEST END
-//			HouseVO houseVO = new HouseVO();
-//			vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
-//			CityVO cityVO = new CityVO();
-//			cityVO.setCityNO(2);
-//			vo.setCityVO(cityVO);
-//			BoroughsVO boroughVO = new BoroughsVO();
-//			boroughVO.setBoroughNO(2);
-//			vo.setBoroughsVO(boroughVO);
-//			vo.setHighestFloor(13);
-//			vo.setNowFloor(5);
-//			vo.setHouseStatus("未出租");
-//			vo.setHouseRent(20000);
-//			vo.setHouseCharge(40000);     //押金
-//			vo.setWaterRate("依帳單繳費");
-//			vo.setPowerRate("依帳單繳費");
-//			vo.setHouseVideo("http://www.youtube.com");
-//			HouseTypeVO typeVO = new HouseTypeVO();
-//			typeVO.setTypeNO(2010);
-//			vo.setHouseTypeVO(typeVO);
-//			HouseFormVO formVO = new HouseFormVO();
-//			formVO.setFormNO(2010);
-//			vo.setHouseFormVO(formVO);
-//			vo.setHouseAddr("新北市板橋區大馬路3號");
-//			vo.setHouseSize(10.32);
-//			HousePictureVO hp = new HousePictureVO();
-//			hp.sethPicture("af456aw5e6fa4w");
-//			Set<HousePicture> set = vo.getHousePicture();
-//			set.add(hp);
-//			dao.insert(houseVO);
+
+				
+				//GetPic test
+				
+//				vo=dao.getPic(20001);
+//				
+//				vo.getHousePictureVO();
+// 			
+//				Set<HousePictureVO>set=vo.getHousePictureVO();
+//				for(HousePictureVO hvo:set){
+//					System.out.print(hvo.gethPicture());
+//				}
 	}
+
+	
 }

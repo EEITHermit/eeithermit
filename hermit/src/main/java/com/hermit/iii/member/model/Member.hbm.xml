@@ -21,5 +21,11 @@
 		<property name="memInfract" column="memInfract" />
 		<property name="memImage" column="memImage" />
 
+		<set name="favs" table="Favorite" lazy="false" order-by="favNO asc">
+			<key>
+				<column name="memNO"></column>
+			</key>
+			<one-to-many class="com.hermit.iii.favorite.model.FavoriteVO" />
+		</set>
 	</class>
 </hibernate-mapping>

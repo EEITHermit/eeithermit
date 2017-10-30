@@ -3,10 +3,15 @@ package com.hermit.iii.favorite.model;
 import java.io.Serializable;
 import java.sql.*;
 
+import com.hermit.iii.house.model.*;
+import com.hermit.iii.member.model.*;
+
 public class FavoriteVO implements Serializable {
 	private Integer favNO;
-	private Integer memNO;
-	private Integer houseNO;
+	// JDBC與JNDI無法使用
+	private MemberVO memberVO;
+	// JDBC與JNDI無法使用
+	private HouseVO houseVO;
 	private Date favDate;
 
 	public Integer getFavNO() {
@@ -17,20 +22,20 @@ public class FavoriteVO implements Serializable {
 		this.favNO = favNO;
 	}
 
-	public Integer getMemNO() {
-		return memNO;
+	public MemberVO getMemberVO() {
+		return memberVO;
 	}
 
-	public void setMemNO(Integer memNO) {
-		this.memNO = memNO;
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
 
-	public Integer getHouseNO() {
-		return houseNO;
+	public HouseVO getHouseVO() {
+		return houseVO;
 	}
 
-	public void setHouseNO(Integer houseNO) {
-		this.houseNO = houseNO;
+	public void setHouseVO(HouseVO houseVO) {
+		this.houseVO = houseVO;
 	}
 
 	public Date getFavDate() {

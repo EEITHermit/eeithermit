@@ -1,10 +1,13 @@
 package com.hermit.iii.house.model;
 
 import java.io.Serializable;
+import java.util.*;
 
 import com.hermit.iii.boroughs.model.BoroughsVO;
 import com.hermit.iii.city.model.CityVO;
+import com.hermit.iii.favorite.model.FavoriteVO;
 import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
 import com.hermit.iii.housetype.model.HouseTypeVO;
 
 public class HouseVO  implements Serializable{
@@ -26,7 +29,18 @@ public class HouseVO  implements Serializable{
 	private BoroughsVO boroughsVO;
 	private HouseTypeVO houseTypeVO;
 	private HouseFormVO houseFormVO;
+
+	private Set<FavoriteVO> favs =new LinkedHashSet<FavoriteVO>();
+
+	private Set<HousePictureVO>housePictureVO=new HashSet<HousePictureVO>();
 	
+	
+	public Set<HousePictureVO> getHousePictureVO() {
+		return housePictureVO;
+	}
+	public void setHousePictureVO(Set<HousePictureVO> housePictureVO) {
+		this.housePictureVO = housePictureVO;
+	}
 	public Integer getHouseNO() {
 		return houseNO;
 	}
@@ -129,5 +143,11 @@ public class HouseVO  implements Serializable{
 	}
 	public void setPreviewPic(String previewPic) {
 		this.previewPic = previewPic;
+	}
+	public Set<FavoriteVO> getFavs() {
+		return favs;
+	}
+	public void setFavs(Set<FavoriteVO> favs) {
+		this.favs = favs;
 	}
 }
