@@ -35,23 +35,23 @@ public class MemLoginServlet extends HttpServlet {
 		String input = request.getParameter("code");
 
 		if (account == null || account.trim().length() == 0) {
-			errMsg += "1.帳號必須輸入;";
+			errMsg += "1.*帳號必須輸入;";
 		} else {
 			request.setAttribute("setacc", account);
 		}
 
 		if (pwd == null || pwd.trim().length() == 0) {
-			errMsg += "2.密碼必須輸入;";
+			errMsg += "2.*密碼必須輸入;";
 		} else {
 			request.setAttribute("setpwd", pwd);
 		}
 
 		if (input.length() == 0) {
-			errMsg += "3.驗證碼必須輸入;";
+			errMsg += "3.*驗證碼必須輸入;";
 
 		} else {
 			if (!rand.equals(input)) {
-				errMsg += "4.驗證碼錯誤;";
+				errMsg += "4.*驗證碼錯誤;";
 			}
 		}
 
@@ -68,7 +68,7 @@ public class MemLoginServlet extends HttpServlet {
 		if (vo != null) {
 			session.setAttribute("LoginOK", vo);
 		} else {
-			errMsg += "5.該帳號不存在或密碼錯誤;";
+			errMsg += "5.*該帳號不存在或密碼錯誤;";
 		}
 
 		if (errMsg.length() == 0) {

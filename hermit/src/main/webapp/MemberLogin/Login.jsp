@@ -18,6 +18,11 @@
 	$(document).ready(function(){
 		$("#submitBtn").click(function(){
 			var box;
+			$("#putacc").text("");
+			$("#putpwd").text("");
+			$("#putver").text("");
+			$("#loginErr").text("");
+			
 			if($("#remember").prop("checked")){
 				box = "on";
 			}

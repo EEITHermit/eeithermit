@@ -26,6 +26,11 @@
 	$(document).ready(function(){
 		$("#submitBtn").click(function(){
 			var box;
+			// 清除錯誤訊息
+			$("#putacc").text("");
+			$("#putpwd").text("");
+			$("#putver").text("");
+			$("#loginErr").text("");
 			if($("#remember").prop("checked")){
 				box = "on";
 			}
@@ -72,6 +77,7 @@
 </script>
 </head>
 <body>
+
 	<header role="banner">
 	<div id="cd-logo">
 		<a href="#0"><img
@@ -86,6 +92,12 @@
 	</ul>
 	</nav> </header>
 
+	<%
+		if (request.getSession().getAttribute("LoginOK") != null) {
+			out.print("<script>window.location='LoginSuccess.jsp'</script>");
+		}
+	%>
+	
 	<div class="cd-user-modal">
 		<!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container">
@@ -102,36 +114,40 @@
 					<p class="fieldset">
 						<label class="image-replace cd-username" for="signup-username">Username</label>
 						<input class="full-width has-padding has-border" name="account"
-							id="signup-username" type="text" placeholder="Username">
-						<span class="cd-error-message">${ErrorMsgKey.AccountEmptyError}</span>
+							id="account" type="text" placeholder="Username"
+							value="${cookie.account.value}"> <small><font
+							color="red" size="-1" id="putacc"></font></small>
 					</p>
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">Password</label>
 						<input class="full-width has-padding has-border" name="pwd"
-							id="signin-password" type="password" placeholder="Password">
-						<span class="cd-error-message">${ErrorMsgKey.PwdEmptyError}</span>
+							id="pwd" type="password" placeholder="Password"
+							value="${cookie.pwd.value}"> <small><font
+							color="red" size="-1" id="putpwd"></font></small>
 					</p>
 
 					<p class="fieldset">
-						<span class="cd-error-message">${ErrorMsgKey.LoginError}&nbsp;</span>
+						<small><font color="red" size="-1" id="loginErr"></font></small>
 					</p>
 
 					<p class="fieldset">
-						<label class="" for="signin-password">請輸入驗證碼:</label> <input
-							type="text" name="code" maxlength="6" size="10"> <img
-							id="image" align="middle" border="0" onclick="refresh()"
+						<label class="" for="">請輸入驗證碼:</label> <input type="text"
+							id="code" maxlength="6" size="10"><img id="image"
+							align="middle" border="0" onclick="refresh()"
 							src="<%=request.getContextPath()%>/MemberLogin/Image.jsp"
-							title="點擊更換圖片">
+							title="點擊更換圖片"><br /> <small><font color="red"
+							size="-1" id="putver"></font></small>
 					</p>
 
 					<p id="rememberBtn" class="remember-box">
-						<input type="checkbox" id="remember"> <label
-							for="remember">Remember me</label>
+						<input type="checkbox" id="remember" ${cookie.flag.value}>
+						<label for="remember">Remember me</label>
 					</p>
 
 					<p class="fieldset">
-						<input class="full-width" type="submit" value="Login" id="submitBtn">
+						<input class="full-width" type="submit" value="Login"
+							id="submitBtn">
 						<!-- <button class="full-width" type="button" id="submitBtn" value="Login">Login</button> -->
 					</p>
 				</form>
