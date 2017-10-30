@@ -106,9 +106,15 @@
 		$(function(){
 			
 			var houseItems = <%= session.getAttribute("houseItems") %>
+			
 			if(houseItems== null){
 				location.replace("<%= request.getContextPath()%>/index.jsp");
 			};
+			console.log(houseItems.items)
+			console.log(houseItems.items.length)
+			if(houseItems.items.length == 0){
+				alert("找不到房屋物件")
+			}
 		    $.appstore({json:houseItems});
 		})
 	</script>
