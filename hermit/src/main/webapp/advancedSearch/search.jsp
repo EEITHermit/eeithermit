@@ -22,69 +22,10 @@
 	}
 	h4 a {
 		font-family: Microsoft JhengHei;
-	}
-	.breadBox {
-    	width: 100%;
-    	display: block;
-    	box-sizing: border-box;
-	}
-	.breadBox .breadNav {
-	    width: 1200px;
-	    margin: auto;
-	    padding: 0;
-	}
-	.breadBox .breadNav .breadList,.conditionShow{
-	    float: left;
-	    margin: 0;
-	    padding: 0;
-	}
-	.breadBox .breadNav a {
-	    font-size: 13px;
-	    line-height: 55px;
-	}
-	.fa {
-	    display: inline-block;
-	    font: normal normal normal 14px/1 FontAwesome;
-	    font-size: inherit;
-	    text-rendering: auto;
-	    -webkit-font-smoothing: antialiased;
-	    -moz-osx-font-smoothing: grayscale;
-	}
-	.conditionShow {
-	    margin-left: 15px;
-	    width: 867px;
-	}
-	.breadBox .breadNav span {
-	    font-size: 12px;
-	    color: #A3A3A3;
-	}
-	.conditionShow span {
-	    display: block;
-	    float: left;
-	    margin-top: 15px;
-	    margin-right: 10px;
-	    border: 1px solid #D4D4D4;
-	    padding: 0px 10px;
-	    padding-right: 0px;
-	    color: #666666;
-	}
-
-	
-	
 </style>
 </head>
 <body id="body">
-<!-- 	 <section class="breadBox"> -->
-<!--         <div class="breadNav clearfix"> -->
-<!--             <div class="breadList" id="breadList"> -->
-<%--                 <a href="<%= request.getContextPath()%>/index.jsp" style="color:black;padding:0;">Hermit</a> --%>
-<!--                 <i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>&nbsp;&nbsp; -->
-<!--             </div> -->
-<!--             <div class="conditionShow clearfix"> -->
-<!-- 				<span>中正區&nbsp;&nbsp;</span>             -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </section> -->
+
 	<div class="container" style="margin:40px auto">
 		<div id="appstore-container"></div>
 	</div>

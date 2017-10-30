@@ -67,6 +67,53 @@
 		bottom:0;
 		left:0;
 	}
+	}
+	.breadBox {
+    	width: 100%;
+    	display: block;
+    	box-sizing: border-box;
+	}
+	.breadBox .breadNav {
+	    width: 1200px;
+	    margin: auto;
+	    padding: 0;
+	}
+	.breadBox .breadNav .breadList,.conditionShow{
+	    float: left;
+	    margin: 0;
+	    padding: 0;
+	}
+	.breadBox .breadNav a {
+	    font-size: 13px;
+	    line-height: 55px;
+	}
+	.fa {
+	    display: inline-block;
+	    font: normal normal normal 14px/1 FontAwesome;
+	    font-size: inherit;
+	    text-rendering: auto;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	}
+	.conditionShow {
+	    margin-left: 15px;
+	    width: 867px;
+	}
+	.breadBox .breadNav span {
+	    font-size: 12px;
+	    color: #A3A3A3;
+	}
+	.conditionShow span {
+	    display: block;
+	    float: left;
+	    margin-top: 15px;
+	    margin-right: 10px;
+	    border: 1px solid #D4D4D4;
+	    padding: 0px 10px;
+	    padding-right: 0px;
+	    color: #666666;
+	}
+	
 </style>
 </head>
 <body>
@@ -265,7 +312,30 @@
 		</div>
 	</div>
 	<div class="w3-black w3-margin-bottom" style="height:3vh;border-bottom-left-radius:15px;border-bottom-right-radius:3px;"></div>
-	
+	<section class="breadBox">
+        <div class="breadNav clearfix">
+            <div class="breadList" id="breadList">
+                <a href="<%= request.getContextPath()%>/index.jsp" style="color:black;padding:0;">Hermit</a>
+                <i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>&nbsp;&nbsp;
+            </div>
+            <div class="conditionShow clearfix">
+				<span>台北市&nbsp;&nbsp;</span>
+				<span>中正區&nbsp;&nbsp;</span>
+				<span>電梯大樓&nbsp;&nbsp;</span>
+				<span>獨立套房&nbsp;&nbsp;</span>
+				<span>10坪以下&nbsp;&nbsp;</span>
+				<span>有電視&nbsp;&nbsp;</span>
+				<span>有床&nbsp;&nbsp;</span>
+				<span>洗衣機&nbsp;&nbsp;</span>
+				<span>熱水器&nbsp;&nbsp;</span>
+				<span>網路&nbsp;&nbsp;</span>
+				<span>停車位&nbsp;&nbsp;</span>
+				<span>冷氣&nbsp;&nbsp;</span>
+				<span>冰箱&nbsp;&nbsp;</span>
+				<span>有瓦斯&nbsp;&nbsp;</span>
+            </div>
+        </div>
+    </section>
 	<script>
 		function openLeftMenu() {
 		    document.getElementById("leftMenu").style.display = "block";
@@ -298,7 +368,8 @@
 			var BoroughInit = 0;
 			var radioButtons = $("input:radio[name='houseRent']");
 			var chkboxButtions = $("#equid input:checkbox");
-			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp";
+			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp" | "<%= request.getRequestURI() %>" == "/hermit/";
+			
 			function runEffect(){
 				effect.toggle( "blind",  500 );
 				if(spanArrow.attr('class') == "glyphicon glyphicon-chevron-down"){
