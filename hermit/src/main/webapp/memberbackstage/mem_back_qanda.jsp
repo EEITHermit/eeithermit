@@ -20,25 +20,27 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
-<link href='<%= request.getContextPath() %>/css/jqueryText/jquery-te-1.4.0.css' rel='stylesheet' />
+<link
+	href='<%=request.getContextPath()%>/css/jqueryText/jquery-te-1.4.0.css'
+	rel='stylesheet' />
 
 <style>
-	#queryTable{
- 		display:none; 
-	}
-	#commentForm{
-  		display:none;  
-	}
+#queryTable {
+	display: none;
+}
+
+#commentForm {
+	display: none;
+}
 </style>
 
 </head>
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
 	<style>
-		a:link, a:visited, a:hover, a:active {
-			text-align: left;
-		}
-
+a:link, a:visited, a:hover, a:active {
+	text-align: left;
+}
 </style>
 	<div id="content">
 
@@ -164,8 +166,6 @@
 								method="POST">
 								請選擇房屋：<select name="houseNO">
 									<option>請選擇</option>
-									<!-- 假資料  待hibernate做完補上-->
-									<option value="20001">大馬路</option>
 									<!-- filter會傳來houseArray 為此會員所租賃的房屋 -->
 									<c:forEach var="houseVO" items="${houseArray}">
 										<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
@@ -199,18 +199,25 @@
 		<!-- /container -->
 	</div>
 	<!-- /footer -->
-<footer class="navbar-fixed-bottom w3-black container-fluid text-center" >
+	<footer
+		class="navbar-fixed-bottom w3-black container-fluid text-center">
 	<div>
-		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+		<ul class="nav nav-pills w3-centered "
+			style="display: flex; font-size: 13px; justify-content: center;">
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
-    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
+	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊
+			Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
 	</div>
-</footer>
+	</footer>
 
 
 
@@ -218,32 +225,32 @@
 ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
-	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script>
-	document.addEventListener("DOMContentLoaded",work);
-	
-	function work(){
-		//跳出查詢畫面
-		$("#queryBT").click(function(){
-			$("#queryTable").toggle("fold",true,1000);
-			$("#commentForm").toggle("fold",false,1000);
-		});
-		//跳出投訴頁面
-		$("#commentBT").click(function(){
-			$("#queryTable").toggle("fold",false,1000);
-			$("#commentForm").toggle("fold",true,1000);
-		});
-		//產生jqueyText
-		$('.commentArea').jqte();
-	};
-	
-	function check(){
-		if(confirm("是否確認送出投訴")){
-			(document.getElementById("commentForm")).submit();
-		}
-	};
-</script>
+		document.addEventListener("DOMContentLoaded", work);
+
+		function work() {
+			//跳出查詢畫面
+			$("#queryBT").click(function() {
+				$("#queryTable").toggle(true, 1000);
+				$("#commentForm").toggle(false, 1000);
+			});
+			//跳出投訴頁面
+			$("#commentBT").click(function() {
+				$("#queryTable").toggle(false, 1000);
+				$("#commentForm").toggle(true, 1000);
+			});
+			//產生jqueyText
+			$('.commentArea').jqte();
+		};
+
+		function check() {
+			if (confirm("是否確認送出投訴")) {
+				(document.getElementById("commentForm")).submit();
+			}
+		};
+	</script>
 </body>
 </html>
