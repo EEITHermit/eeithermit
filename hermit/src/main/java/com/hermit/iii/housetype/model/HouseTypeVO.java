@@ -1,6 +1,8 @@
 package com.hermit.iii.housetype.model;
 
-public class HouseTypeVO {
+import java.io.Serializable;
+
+public class HouseTypeVO implements Serializable {
 	private Integer typeNO;
 	private String hType;
 	public Integer getTypeNO() {

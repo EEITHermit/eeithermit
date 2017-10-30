@@ -1,9 +1,13 @@
 package com.hermit.iii.teammemberlist.model;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.hermit.iii.businTeam.model.BusinTeamVO;
 import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.teamArea.model.TeamAreaVO;
 
 public class TeamMemberListVO {
 	private Integer memberListNO;
@@ -61,4 +65,5 @@ public class TeamMemberListVO {
 		this.tmlStatus = tmlStatus;
 	}
 
+	
 }

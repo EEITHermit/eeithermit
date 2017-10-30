@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hermit.iii.infraction.model.InfractionService;
-import com.hermit.iii.infraction.model.InfractionVO_original;
+import com.hermit.iii.infraction.model.InfractionVO;
 import com.hermit.iii.member.model.*;
 @WebServlet(value="/infractionServlet")
 public class infractionServlet extends HttpServlet {
@@ -27,8 +27,8 @@ public class infractionServlet extends HttpServlet {
 			String mission = request.getParameter("mission");
 			if("insert".equals(mission)){
 				InfractionService inDAO = new InfractionService();
-				InfractionVO_original inVO = new InfractionVO_original();
-				MemberJNDIDAO memDAO = new MemberJNDIDAO();
+				InfractionVO inVO = new InfractionVO();
+				MemberService memDAO = new MemberService();
 				int memNO = Integer.valueOf(request.getParameter("memNO").split("\t")[0]);
 				inVO.setEmpNO(Integer.valueOf(request.getParameter("empNO")));
 				inVO.setMemNO(memNO);

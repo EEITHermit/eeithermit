@@ -69,15 +69,102 @@
 		var F_CLIENT_ID = "1719931494697481";
 		var F_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=facebook_login_Action";
 		var F_SCOPE = 'email';
+		
+		
+		$("#google").click(function(){
+			window.location='https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE;
+		})
+		
+		$("#facebook").click(function(){
+			window.location='https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE;
+		})
 
 		
-		$('#google').attr('href','https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE);
-		$('#facebook').attr('href','https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE);
+		/* $('#google').attr('href','https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE);
+		$('#facebook').attr('href','https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE); */
 	})
 </script>
+<style type="text/css">
+body {
+	padding: 2em;
+}
+/* Shared */
+.loginBtn {
+	box-sizing: border-box;
+	position: relative;
+	width: 13em; /* - apply for fixed size */
+	margin: 0.2em;
+	padding: 0 15px 0 46px;
+	border: none;
+	text-align: center;
+	line-height: 34px;
+	white-space: nowrap;
+	border-radius: 0.2em;
+	font-size: 16px;
+	color: #FFF;
+}
+
+.loginBtn:before {
+	content: "";
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 34px;
+	height: 100%;
+}
+
+.loginBtn:focus {
+	outline: none;
+}
+
+.loginBtn:active {
+	box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Facebook */
+.loginBtn--facebook {
+	background-color: #4C69BA;
+	background-image: linear-gradient(#4C69BA, #3B55A0);
+	/*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+	text-shadow: 0 -1px 0 #354C8C;
+}
+
+.loginBtn--facebook:before {
+	border-right: #364e92 1px solid;
+	background:
+		url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png')
+		6px 6px no-repeat;
+}
+
+.loginBtn--facebook:hover, .loginBtn--facebook:focus {
+	background-color: #5B7BD5;
+	background-image: linear-gradient(#5B7BD5, #4864B1);
+}
+
+/* Google */
+.loginBtn--google {
+	/*font-family: "Roboto", Roboto, arial, sans-serif;*/
+	background: #DD4B39;
+}
+
+.loginBtn--google:before {
+	border-right: #BB3F30 1px solid;
+	background:
+		url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png')
+		6px 6px no-repeat;
+}
+
+.loginBtn--google:hover, .loginBtn--google:focus {
+	background: #E74B37;
+}
+
+.divstyle {
+	margin: 0px auto;
+}
+</style>
 </head>
 <body>
-
 	<header role="banner">
 	<div id="cd-logo">
 		<a href="#0"><img
@@ -97,14 +184,13 @@
 			out.print("<script>window.location='LoginSuccess.jsp'</script>");
 		}
 	%>
-	
+
 	<div class="cd-user-modal">
 		<!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container">
 			<!-- this is the container wrapper -->
 			<ul class="cd-switcher">
 				<li><a href="#0">Sign in</a></li>
-				<li><a href="#0">New account</a></li>
 			</ul>
 
 			<div id="cd-login">
@@ -131,13 +217,17 @@
 						<small><font color="red" size="-1" id="loginErr"></font></small>
 					</p>
 
+					<div>
+						<img id="image" align="center" style="margin-left: 30px"
+							border="0" onclick="refresh()"
+							src="<%=request.getContextPath()%>/MemberLogin/Image.jsp"
+							title="點擊更換圖片"><br />
+					</div>
+
 					<p class="fieldset">
 						<label class="" for="">請輸入驗證碼:</label> <input type="text"
-							id="code" maxlength="6" size="10"><img id="image"
-							align="middle" border="0" onclick="refresh()"
-							src="<%=request.getContextPath()%>/MemberLogin/Image.jsp"
-							title="點擊更換圖片"><br /> <small><font color="red"
-							size="-1" id="putver"></font></small>
+							id="code" maxlength="6" size="10"><small><font
+							color="red" size="-1" id="putver"></font></small>
 					</p>
 
 					<p id="rememberBtn" class="remember-box">
@@ -155,49 +245,17 @@
 				<p class="cd-form-bottom-message">
 					<a href="#0">Forgot your password?</a>
 				</p>
+
+				<p class="fieldset">
+					<button class="loginBtn loginBtn--facebook" type="button"
+						id="facebook" style="margin-left: 88px">Login with
+						Facebook</button>
+
+					<button class="loginBtn loginBtn--google" type="button" id="google">Login
+						with Google</button>
+				</p>
 				<!-- <a href="#0" class="cd-close-form">Close</a> -->
 			</div>
-			<!-- cd-login -->
-
-			<div id="cd-signup">
-				<!-- sign up form -->
-				<form class="cd-form">
-					<p class="fieldset">
-						<label class="image-replace cd-username" for="signup-username">Username</label>
-						<input class="full-width has-padding has-border"
-							id="signup-username" type="text" placeholder="Username">
-						<span class="cd-error-message">Error message here!</span>
-					</p>
-
-					<p class="fieldset">
-						<label class="image-replace cd-email" for="signup-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="signup-email"
-							type="email" placeholder="E-mail"> <span
-							class="cd-error-message">Error message here!</span>
-					</p>
-
-					<p class="fieldset">
-						<label class="image-replace cd-password" for="signup-password">Password</label>
-						<input class="full-width has-padding has-border"
-							id="signup-password" type="text" placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a> <span
-							class="cd-error-message">Error message here!</span>
-					</p>
-
-					<p class="fieldset">
-						<input type="checkbox" id="accept-terms"> <label
-							for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-					</p>
-
-					<p class="fieldset">
-						<input class="full-width has-padding" type="submit"
-							value="Create account">
-					</p>
-				</form>
-
-				<!-- <a href="#0" class="cd-close-form">Close</a> -->
-			</div>
-			<!-- cd-signup -->
 
 			<div id="cd-reset-password">
 				<!-- reset password form -->

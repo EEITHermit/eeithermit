@@ -9,9 +9,18 @@
 			<generator class="identity" />
 		</id>
 		<property name="houseTitle" column="houseTitle" />
-		<property name="cityNO" column="cityNO" />
-		<property name="boroughNO" column="boroughNO" />
-		<property name="previewPic" column="previewPic" />
+
+<!-- 		<property name="cityNO" column="cityNO" /> -->
+		<many-to-one name="cityVO" class="com.hermit.iii.city.model.CityVO" lazy="false">
+		<column name="cityNO"></column>
+		</many-to-one>
+
+<!-- 		<property name="boroughNO" column="boroughNO" /> -->
+		<many-to-one name="boroughsVO" class="com.hermit.iii.boroughs.model.BoroughsVO" lazy="false">
+		<column name="boroughNO"></column>
+		</many-to-one>
+		
+		<property name="previewPic" column="previewPic"/>
 		<property name="highestFloor" column="highestFloor" />
 		<property name="nowFloor" column="nowFloor" />
 		<property name="houseStatus" column="houseStatus" />
@@ -20,8 +29,16 @@
 		<property name="waterRate" column="waterRate" />
 		<property name="powerRate" column="powerRate" />
 		<property name="houseVideo" column="houseVideo" />
-		<property name="typeNO" column="typeNO" />
-		<property name="formNO" column="formNO" />
+<!-- 		<property name="typeNO" column="typeNO" /> -->
+		<many-to-one name="houseTypeVO" class="com.hermit.iii.housetype.model.HouseTypeVO" lazy="false">
+		<column name="typeNO"></column>
+		</many-to-one>
+		
+<!-- 		<property name="formNO" column="formNO" /> -->
+		<many-to-one name="houseFormVO" class="com.hermit.iii.houseform.model.HouseFormVO" lazy="false">
+		<column name="formNO"></column>
+		</many-to-one>
+		
 		<property name="houseAddr" column="houseAddr" />
 		<property name="houseSize" column="houseSize" />
 	</class>

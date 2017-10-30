@@ -7,9 +7,13 @@
 		<id name="qaNO" column="qaNO">
 			<generator class="identity"></generator>
 		</id>
-		<property name="memNO" column="memNO"></property>
+		<many-to-one name="memberVO" class="com.hermit.iii.member.model.MemberVO" lazy="false">
+			<column name="memNO"></column>
+		</many-to-one>
 		<property name="empNO" column="empNO"></property>
-		<property name="houseNO" column="houseNO"></property>
+		<many-to-one name="houseVO" class="com.hermit.iii.house.model.HouseVO" lazy="false">
+			<column name="houseNO"></column>
+		</many-to-one>
 		<property name="qTime" column="qTime"></property>
 		<property name="aTime" column="aTime"></property>
 		<property name="qaType" column="qaType"></property>

@@ -217,7 +217,7 @@ table{
 					<tbody>
 						<c:forEach var="resVO" items="${resArray}">
 							<tr>
-								<td>${resVO.reservationNo}</td>
+								<td>${resVO.reservationNO}</td>
 								<td>${resVO.memberVO.memName}</td>
 								<td><button type="button" id="check">查看</button></td>
 								<td style="display: none;">${resVO.exceptTime}</td>

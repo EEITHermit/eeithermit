@@ -5,7 +5,7 @@
 	
 <hibernate-mapping>
 
-	<class name="com.hermit.iii.housetype.model.HouseTypeVO_hibernate">
+	<class name="com.hermit.iii.housetype.model.HouseTypeVO" table="housetype">
 	
 		<id name="typeNO" column="typeNO">
 			<generator class="identity" />

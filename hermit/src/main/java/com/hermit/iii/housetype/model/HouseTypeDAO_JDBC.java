@@ -22,7 +22,7 @@ public class HouseTypeDAO_JDBC implements HouseTypeDAO_interface {
 			"SELECT typeNO,hType FROM houseType order by typeNO";
 	
 	@Override
-	public void insert(HouseTypeVO houseTypeVO) {
+	public void insert(HouseTypeVO_original houseTypeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -53,7 +53,7 @@ public class HouseTypeDAO_JDBC implements HouseTypeDAO_interface {
 	}
 
 	@Override
-	public void update(HouseTypeVO houseTypeVO) {
+	public void update(HouseTypeVO_original houseTypeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -116,11 +116,11 @@ public class HouseTypeDAO_JDBC implements HouseTypeDAO_interface {
 	}
 
 	@Override
-	public HouseTypeVO findByPrimaryKey(Integer typeNO) {
+	public HouseTypeVO_original findByPrimaryKey(Integer typeNO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
-		HouseTypeVO vo = new HouseTypeVO();
+		HouseTypeVO_original vo = new HouseTypeVO_original();
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ONE_STMT);
@@ -153,18 +153,18 @@ public class HouseTypeDAO_JDBC implements HouseTypeDAO_interface {
 	}
 
 	@Override
-	public List<HouseTypeVO> getAll() {
+	public List<HouseTypeVO_original> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		List<HouseTypeVO> list = new LinkedList<HouseTypeVO>();
+		List<HouseTypeVO_original> list = new LinkedList<HouseTypeVO_original>();
 		ResultSet rs;
-		HouseTypeVO vo;
+		HouseTypeVO_original vo;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=Hermit", "sa", "P@ssw0rd");
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				vo = new HouseTypeVO();
+				vo = new HouseTypeVO_original();
 				vo.setTypeNO(rs.getInt("typeNO"));
 				vo.sethType(rs.getString("hType"));
 				list.add(vo);
@@ -192,23 +192,23 @@ public class HouseTypeDAO_JDBC implements HouseTypeDAO_interface {
 	}
 	
 	public static void main(String args[]){
-		HouseTypeVO vo = new HouseTypeVO();
+		HouseTypeVO_original vo = new HouseTypeVO_original();
 		HouseTypeDAO_JDBC dao = new HouseTypeDAO_JDBC();
 		
-		List<HouseTypeVO> list;
+		List<HouseTypeVO_original> list;
 		
 		
 		//test insert 
-//		vo.sethType("華廈");
+//		vo.sethType("柴房");
 //		dao.insert(vo);
 		//test update
 		
-//		vo.setTypeNO(2050);
-//		vo.sethType("柴房");
+//		vo.setTypeNO(2060);
+//		vo.sethType("茅坑");
 //		dao.update(vo);
 		
 		
-//		dao.delete(2050);
+//		dao.delete(2060);
 		
 //		vo = dao.findByPrimaryKey(2010);
 //		System.out.println(vo.gethType());

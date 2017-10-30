@@ -13,11 +13,6 @@ import org.hibernate.Session;
 import com.hermit.iii.util.HibernateUtil;
 
 public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
-	Session session;
-	public QandAJNDIDAO_hibernate() {
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-	}
-
 	// qaNO在資料庫為自動流水號免新增，順序同資料庫表格(與VO/Bean)設定
 	// (memNO,empNO,houseNO,qTime,aTime,qaType,qDetail,aDetail)
 	private static final String INSERT_STMT = "INSERT INTO QandA VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -37,7 +32,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 			+ "JOIN Member M ON Q.memNO = M.memNO where boroughNO = ? AND empNO IS NULL";
 	@Override
 	public void insert(QandAVO qandaVO) {
-
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.getTransaction().begin();
 			session.saveOrUpdate(qandaVO);
@@ -50,7 +45,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 
 	@Override
 	public void update(QandAVO qandaVO) {
-		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			session.saveOrUpdate(qandaVO);
@@ -63,7 +58,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 
 	@Override
 	public void delete(Integer qaNO) {
-
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			QandAVO qaVO = session.get(QandAVO.class, qaNO);
@@ -79,6 +74,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 	@Override
 	public QandAVO findByPrimaryKey(Integer qaNO) {
 		QandAVO qandaVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			qandaVO = session.get(QandAVO.class, qaNO);
@@ -93,7 +89,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 	@Override
 	public Set<QandAVO> getAll() {
 		Set<QandAVO> set = new LinkedHashSet<QandAVO>();
-
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.getTransaction().begin();
 			Query query = session.createQuery(GET_ALL_STMT_H);
@@ -109,6 +105,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 	private static String GET_ALL_BY_MEMBER_NO_H = "from QandAVO where memNO = ? ORDER BY qTime DESC";
 	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
 		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(GET_ALL_BY_MEMBER_NO_H);
@@ -122,11 +119,12 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 		} 
 		return array;
 	}
-	//錯誤 等關聯建好再繼續測試
-	private static String GET_ALL_BY_BOROUGH_NO_H = "FROM QandAVO where boroughNO = ? AND empNO IS NULL";
+	//OK
+	private static String GET_ALL_BY_BOROUGH_NO_H = "FROM QandAVO where houseVO.boroughNO = ? AND empNO IS NULL";
 	@Override
 	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO) {
 		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(GET_ALL_BY_BOROUGH_NO_H);

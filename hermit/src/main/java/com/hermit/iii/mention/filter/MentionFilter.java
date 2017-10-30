@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.reservation.model.ReservationService;
-import com.hermit.iii.reservation.model.ReservationVO_original;
+import com.hermit.iii.reservation.model.ReservationVO;
 
 @WebFilter(urlPatterns="/mention/*")
 public class MentionFilter implements Filter {
@@ -44,10 +44,10 @@ public class MentionFilter implements Filter {
 		//暫定從session內取得員工編號
 //		HttpSession session = req.getSession();	
 //		Integer empNO = Integer.valueOf((String)session.getAttribute("empNO"));
-		//測試用假資料 員工40001
+		//測試用假資料 員工30001
 		Integer empNO = 30001;
 		ArrayList<Integer> boroughNOs = mention.getBoroughNOByEmpNO(empNO);
-		ArrayList<ReservationVO_original> resArray = new ArrayList<ReservationVO_original>();
+		ArrayList<ReservationVO> resArray = new ArrayList<ReservationVO>();
 		if(!boroughNOs.isEmpty()){
 			for(Integer boroughNO : boroughNOs){
 				resArray.addAll(reservation.selectByArea(boroughNO));
