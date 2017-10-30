@@ -44,102 +44,25 @@
 	
 	<script>
 		$(function(){
+			
+			var houseItems = <%= session.getAttribute("houseItems") %>
 			var appstore = {
 				    "items": [
 				        {
 				            "title"         :"甜蜜小套房",
 				            "description"   :"租金：90,000/月",
 				            "link"          :"https://tw.yahoo.com/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
+				            "previewPic"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
 				            "tag"           :"台北市",
 				            "date"          :"2017-10-30"
-				        },
-				        {
-				            "title"         :"台北101站旁",
-				            "description"   :"租金：70,000/月",
-				            "link"          :"https://www.google.com.tw/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/26/150900952586001208_765x517x1493405.jpg",
-				            "tag"           :"新北市",
-				            "date"          :"2017-10-29"
-				        },
-				        {
-				            "title"         :"光復南路捷運世貿站",
-				            "description"   :"租金：40,000/月",
-				            "link"          :"https://www.facebook.com/?ref=logo",
-				            "thumbnail"     :"https://cp2.591.com.tw/house/active/2011/02/20/129817165322338508_765x517x447372.jpg",
-				            "tag"           :"友克鑫市",
-				            "date"          :"2017-10-21"
-				        }, {
+				        },{
 				            "title"         :"甜蜜小套房",
 				            "description"   :"租金：90,000/月",
 				            "link"          :"https://tw.yahoo.com/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
+				            "previewPic"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
 				            "tag"           :"台北市",
 				            "date"          :"2017-10-30"
-				        },
-				        {
-				            "title"         :"台北101站旁",
-				            "description"   :"租金：70,000/月",
-				            "link"          :"https://www.google.com.tw/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/26/150900952586001208_765x517x1493405.jpg",
-				            "tag"           :"新北市",
-				            "date"          :"2017-10-29"
-				        },
-				        {
-				            "title"         :"光復南路捷運世貿站",
-				            "description"   :"租金：40,000/月",
-				            "link"          :"https://www.facebook.com/?ref=logo",
-				            "thumbnail"     :"https://cp2.591.com.tw/house/active/2011/02/20/129817165322338508_765x517x447372.jpg",
-				            "tag"           :"友克鑫市",
-				            "date"          :"2017-10-21"
-				        }, {
-				            "title"         :"甜蜜小套房",
-				            "description"   :"租金：90,000/月",
-				            "link"          :"https://tw.yahoo.com/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
-				            "tag"           :"台北市",
-				            "date"          :"2017-10-30"
-				        },
-				        {
-				            "title"         :"台北101站旁",
-				            "description"   :"租金：70,000/月",
-				            "link"          :"https://www.google.com.tw/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/26/150900952586001208_765x517x1493405.jpg",
-				            "tag"           :"新北市",
-				            "date"          :"2017-10-29"
-				        },
-				        {
-				            "title"         :"光復南路捷運世貿站",
-				            "description"   :"租金：40,000/月",
-				            "link"          :"https://www.facebook.com/?ref=logo",
-				            "thumbnail"     :"https://cp2.591.com.tw/house/active/2011/02/20/129817165322338508_765x517x447372.jpg",
-				            "tag"           :"友克鑫市",
-				            "date"          :"2017-10-21"
-				        }, {
-				            "title"         :"甜蜜小套房",
-				            "description"   :"租金：90,000/月",
-				            "link"          :"https://tw.yahoo.com/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/25/150894090255548700_765x517x733302.jpg",
-				            "tag"           :"台北市",
-				            "date"          :"2017-10-30"
-				        },
-				        {
-				            "title"         :"台北101站旁",
-				            "description"   :"租金：70,000/月",
-				            "link"          :"https://www.google.com.tw/",
-				            "thumbnail"     :"https://hp1.591.com.tw/house/active/2017/10/26/150900952586001208_765x517x1493405.jpg",
-				            "tag"           :"新北市",
-				            "date"          :"2017-10-29"
-				        },
-				        {
-				            "title"         :"光復南路捷運世貿站",
-				            "description"   :"租金：40,000/月",
-				            "link"          :"https://www.facebook.com/?ref=logo",
-				            "thumbnail"     :"https://cp2.591.com.tw/house/active/2011/02/20/129817165322338508_765x517x447372.jpg",
-				            "tag"           :"友克鑫市",
-				            "date"          :"2017-10-21"
-				        }
-				    ]
+				        }]
 				}
 		    $.appstore({json:appstore});
 		})

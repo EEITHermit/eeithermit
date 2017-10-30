@@ -116,7 +116,7 @@ public class AdvancedSearch extends HttpServlet {
 		}
 		HouseService hsv = new HouseService();
 		HttpSession session = request.getSession();
-		session.setAttribute("target",hsv.advencedSearch(searchStr));
+		session.setAttribute("houseItems",hsv.advencedSearch(searchStr));
 	}
 	
 }
