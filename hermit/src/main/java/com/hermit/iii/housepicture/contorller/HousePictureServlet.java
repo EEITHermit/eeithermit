@@ -25,7 +25,7 @@ public class HousePictureServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		int count = 0;
 		String action = request.getParameter("action");
 		ConvertToBase64 ctb = new ConvertToBase64(); 
 		if("insertHousePicture".equals(action)){
