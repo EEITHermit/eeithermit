@@ -17,6 +17,7 @@
 <script src="/hermit/js/flashcanvas.js"></script>
 <script src="/hermit/js/jSignature.min.js"></script>
 <script src="/hermit/js/datatables.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
 </head>
 <body>
 	<!-- 載入框架 -->
@@ -25,7 +26,7 @@
 	<div class="container">
 	<div class="col-md-7 col-md-offset-1">
 	<div class="col-md-4">
-	<form method="POST" action="/hermit/House.do?action=updateHouse">
+	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form">
 		<div class="form-group">
 			<label>房屋編號</label> 
 			<input type="text" readonly value="${vo.houseNO}" name="houseNO">
@@ -37,12 +38,12 @@
 		<div class="form-group">
 			<label>縣市</label>
 			<select id="cityName" name="cityNO"></select> 
-			<input type="hidden" value="${vo.cityNO}" id="cityNO" name="cityNO">
+			<input type="hidden" value="${vo.cityVO.cityNO}" id="cityNO" name="cityNO">
 		</div>
 		<div class="form-group">
 			<label>地區</label> 
 			<select id="boroughName" name="boroughNO"></select>
-			<input type="hidden" value="${vo.boroughNO}" name="boroughNOe" id="boroughNO">
+			<input type="hidden" value="${vo.boroughsVO.boroughNO}" name="boroughNOe" id="boroughNO">
 		</div>
 		<div class="form-group">
 			<label>最高樓層</label> 
@@ -85,13 +86,13 @@
 		<div class="form-group">
 			<label>房屋類型</label> 
 			<select id="houseType" name="typeNO"></select>
-			<input id="typeNO" type="hidden" value="${vo.typeNO}" name="typeNO">
+			<input id="typeNO" type="hidden" value="${vo.houseTypeVO.typeNO}" name="typeNO">
 		</div>
 		
 		<div class="form-group">
 		<lable>形態</lable>
 			<select id="houseForm" name="formNO"></select>
-			<input id="formNO" type="hidden" value="${vo.formNO}" name="formNO">
+			<input id="formNO" type="hidden" value="${vo.houseFormVO.formNO}" name="formNO">
 		</div>
 		
 		<div class="form-group">
@@ -102,6 +103,11 @@
 			<lable>坪數</lable>
 			<input type="text" value="${vo.houseSize }" name="houseSize">
 		</div>
+		<div>
+				<input type="file" id="file">
+				<input type="hidden" id="previewPic" name="previewPic" />
+				<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
+		</div>
 		<input type="submit" value="修改">
 		
 		
@@ -110,6 +116,7 @@
 	</div>
 	</div>
 	</div>
+	<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
 	<script>
 	$(document).ready(function(){
 
@@ -217,6 +224,22 @@
 			}else if(houseStatus=="修繕中"){
 				SelectStatus.find("option").eq(2).prop("selected","true");
 			}
+			$("#file").change(function(e){
+				  
+				  var img = e.target.files[0];
+
+				  if(!img.type.match('image.*')){
+				    alert("Whoops! That is not an image.");
+				    return;
+				  }
+				  iEdit.open(img, true, function(res){
+				    $("#result").attr("src", res);
+				  });
+				  //在檔案送出前，讓image的src送到input裡
+				  $("#form").submit(function(event){
+					  $("#previewPic").val($("#result").attr("src"));
+				  }) 
+				});
 		})
 	</script>
 </body>

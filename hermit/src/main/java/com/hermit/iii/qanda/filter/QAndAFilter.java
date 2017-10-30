@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.lease.model.LeaseService;
 import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.qanda.model.QandAService;
 import com.hermit.iii.qanda.model.QandAVO;
 
-@WebFilter(value="/QAndA/*")
+//@WebFilter(value="/QAndA/*")
 public class QAndAFilter implements Filter {
 
    
@@ -37,8 +39,8 @@ public class QAndAFilter implements Filter {
 		}else{
 			return;
 		}
-		String servletPath = (req.getServletPath().split("/")[2]).trim().substring(0,5);
-		if("QAndA".equals(servletPath)){
+		String servletPath = (req.getServletPath().split("/")[2]).trim();
+		if("QAndA.jsp".equals(servletPath) || "mem_back_qanda.jsp".equals(servletPath)){
 			//取得登入後session裡的memberNO
 //			HttpSession session = req.getSession();
 //			Integer memberNO = (Integer) session.getAttribute("member");
@@ -47,9 +49,14 @@ public class QAndAFilter implements Filter {
 			QandAService qaService = new QandAService();
 			QandAVO qaVO = qaService.getOneQandA(memNO);
 			array = qaService.getAllByMemberNO(memNO);
+			//取得會員所擁有房屋資訊
+			ArrayList<HouseVO> houseArray = new ArrayList<HouseVO>();
+			LeaseService leaseService = new LeaseService();
+			houseArray = leaseService.findHouseBymemNO(memNO);
 			request.setAttribute("array",array);
+			request.setAttribute("houseArray", houseArray);
 			chain.doFilter(request, response);
-		}else if("AAndQ".equals(servletPath)){
+		}else if("AAndQ.jsp".equals(servletPath)){
 			//取得登入後session裡的empNO
 //			HttpSession session = req.getSession();
 //			Integer empNO = (Integer) session.getAttribute("emp");

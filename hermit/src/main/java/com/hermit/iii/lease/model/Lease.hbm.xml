@@ -9,8 +9,9 @@
 		<id name="leaseNO" column="leaseNO">
 			<generator class="identity" />
 		</id>
-
-		<property name="houseNO" column="houseNO" />
+		<many-to-one name="houseVO" class="com.hermit.iii.house.model.HouseVO" lazy="false">
+			<column name="houseNO"></column>
+		</many-to-one>
 		<property name="leaseBeginDate" column="leaseBeginDate" />
 		<property name="leaseEndDate" column="leaseEndDate" />
 		<property name="memNO" column="memNO" />

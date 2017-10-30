@@ -3,20 +3,20 @@ package com.hermit.iii.city.model;
 import java.util.List;
 
 public class CityService {
-	private CityDAO_interface_original dao;
+	private CityDAO_interface dao;
 	
 	public CityService(){
-		dao = new CityDAO_JNDI();
+		dao = new CityDAO_hibernate();
 	}
 	
 	public void insertCity(String cityName){
-		CityVO_original cityVO = new CityVO_original();
+		CityVO cityVO = new CityVO();
 		cityVO.setCityName(cityName);
 		dao.insert(cityVO);
 	}
 	
 	public void updateCity(Integer cityNO,String cityName){
-		CityVO_original cityVO = new CityVO_original();
+		CityVO cityVO = new CityVO();
 		cityVO.setCityNO(cityNO);
 		cityVO.setCityName(cityName);
 		dao.update(cityVO);
@@ -26,10 +26,10 @@ public class CityService {
 		dao.delete(cityNO);
 	}
 	
-	public CityVO_original getONECity(Integer cityNO){
+	public CityVO getONECity(Integer cityNO){
 		return dao.findByPrimaryKey(cityNO); 
 	}
-	public List<CityVO_original> getAllCity(){
+	public List<CityVO> getAllCity(){
 		return dao.getAll();
 	}
 	public String getAllForJSON(){

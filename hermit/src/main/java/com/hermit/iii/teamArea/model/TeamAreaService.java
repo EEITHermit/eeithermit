@@ -1,17 +1,17 @@
 package com.hermit.iii.teamArea.model;
 
 public class TeamAreaService {
-	TeamAreaDAO_interface_original ta = new TeamAreaDAO_JNDI();
-	public Integer insert(TeamAreaVO_original taVO){
-		return ta.insert(taVO);
+	TeamAreaDAO_interface ta = new TeamAreaDAO_hibernate();
+	public void insert(TeamAreaVO taVO){
+		ta.insert(taVO);
 	};
-	public Integer delete(Integer businNO){
-		return ta.delete(businNO);
+	public void delete(Integer businNO){
+		ta.delete(businNO);
 	};
-	public TeamAreaVO_original select(Integer businNO){
-		return ta.select(businNO);
+	public TeamAreaVO select(Integer businNO){
+		return ta.findByPrimaryKey(businNO);
 	};
-	public Integer update(TeamAreaVO_original taVO){
-		return ta.update(taVO);
+	public void update(TeamAreaVO taVO){
+		ta.update(taVO);
 	};
 }
