@@ -19,6 +19,7 @@
 <script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
 <script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+
 <style>
 	*{
 		margin:0;
@@ -91,30 +92,34 @@
 					<form class="form-horizontal" role="form" action="<%= request.getContextPath()%>/index.jsp" id="subscribeForm" method="POST">
 						<div class="form-group"  style="overflow:hidden">
 							<div class="input-group">
-								<input class="form-control input-lg" name="houstTitle" id="houstTitle" placeholder="請輸入您想尋找的關鍵字...">
+								<input class="form-control input-lg" name="houstTitle" id="houstTitle" placeholder="請輸入您想尋找的關鍵字..." value=${sessionScope.houseTitle}>
 								<span class="input-group-addon" style="margin:0;padding:0;background-color: rgba(0,0,0,0)"><button id="submit" type="button" class="btn btn-success btn-lg">搜尋</button></span>
 							</div>
 								 <div style="height:38vh; width:100%;overflow:hidden">
 									<div id="effect" class="form-control" style="background-color:rgba(255,255,255,0.3);height:75%;overflow:auto">
 											<div class=" col-md-2" style="">
 												<select id="city" name="cityNO" class="form-control form-control-sm" style="border: 1px,solid,gray;">
+													<option value="-1">&gt;&nbsp;縣市&nbsp;&lt;</option>
 												</select>
 											</div>
 											<div class=" col-md-2">
 												<select id="borough" class="form-control form-control-sm" style="border: 1px,solid,gray;">
+												<option value="-1">&gt;&nbsp;鄉鎮區&nbsp;&lt;</option>
 												</select>
 											</div>
 											<div class=" col-md-2">
 												<select id="houseType" class="form-control form-control-sm" style="border: 1px,solid,gray;">
+												<option value="-1">&gt;&nbsp;房屋類型&nbsp;&lt;</option>
 												</select>
 											</div>
 											<div class=" col-md-2">
 												<select id="houseForm" class="form-control form-control-sm" style="border: 1px,solid,gray;">
+												<option value="-1">&gt;&nbsp;房屋型態&nbsp;&lt;</option>
 												</select>
 											</div>
 											<div class=" col-md-2">
 												<select id="houseSize" class="form-control form-control-sm" style="border: 1px,solid,gray;">
-													<option value="-1">&gt; 房屋大小  &lt;</option>
+													<option value="-1">&gt;&nbsp;房屋大小&nbsp; &lt;</option>
 													<option value="0">10坪以下</option>
 													<option value="1">10-15坪</option>
 													<option value="2">15-20坪</option>
@@ -124,15 +129,18 @@
 											</div>
 										<div class="col-md-11  w3-margin text-left" style="background-color: rgba(255,255,255,0.6);height:auto;overflow:auto">
 											<div style="height:30px">
-												<div class="w3-left" style="width:87%;">
+												<div class="w3-left" style="width:92%;">
 													<label class="radio-inline" style="margin-right:6%" >
 														<span class="glcwTeXYen" style="font-size:1.3em">租金 &gt;</span>
 													</label>
 													<label class="radio-inline">
-												      <input type="radio" id="rent1" name="houseRent">5000以下
+												      <input type="radio" name="houseRent">不限
+												    </label>
+													<label class="radio-inline">
+												      <input type="radio" name="houseRent">5000以下
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" id="rent2" name="houseRent">5000-10000元
+												      <input type="radio" name="houseRent">5000-10000元
 												    </label>
 												    <label class="radio-inline">
 												      <input type="radio" name="houseRent">10000-20000元
@@ -237,11 +245,16 @@
 													      <input type="checkbox" name="closeMRT">近捷運
 													    </label>
 												    </div>
+												    <div class="col-md-2">
+													    <label class="radio-inline">
+													      <button type="button" id="clearCheckBox" class="btn btn-primary">清除全部</button>
+													    </label>
+												    </div>
 												</div>
 											</div>
 										</div>									
 									</div>
-									<span id="advencedSearch" class="w3-right" style="line-height:25px;width:80px;font-size:10px;background-color: rgba(255,255,255,0.7);color:black;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">進階搜尋<span class="glyphicon glyphicon-chevron-down"></span></span>
+									<span id="advencedSearch" class="w3-right" style="line-height:25px;width:80px;font-size:10px;background-color: rgba(255,255,255,0.7);color:black;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">進階搜尋<span class="glyphicon glyphicon-chevron-up"></span></span>
 								</div>
 							<div class="col-md-5 col-sm-4">
 							</div>
@@ -254,8 +267,24 @@
 	<div class="w3-black w3-margin-bottom" style="height:3vh;border-bottom-left-radius:15px;border-bottom-right-radius:3px;"></div>
 	
 	<script>
+		function openLeftMenu() {
+		    document.getElementById("leftMenu").style.display = "block";
+		    
+		}
+		function closeLeftMenu() {
+		    document.getElementById("leftMenu").style.display = "none";
+		}
 		$( function() {
-			var spanArrow = $(".glyphicon-chevron-down"); 
+			var sessionHouseTitle = "<%= session.getAttribute("houseTitle") %>";
+			var sessionCityNO = <%= session.getAttribute("cityNO") %> ;
+			var sessionBoroughNO = <%= session.getAttribute("boroughNO") %>;
+			var sessionTypeNO = <%= session.getAttribute("typeNO") %>;
+			var sessionFormNO = <%= session.getAttribute("formNO") %>;
+			var sessionHouseSize = <%= session.getAttribute("houseSize") %>;
+			var sessionHouseRent = <%= session.getAttribute("houseRent") %>;
+			var sessionEquid = <%= session.getAttribute("equid") %>
+
+			var spanArrow = $(".glyphicon-chevron-up"); 
 			var advencedSearch = $( "#advencedSearch" );
 			var effect = $( "#effect" );
 			var leftMenu = $("#leftMenu");
@@ -266,36 +295,53 @@
 			var houseType= $("#houseType");
 			var houseSize = $("#houseSize");
 			var houseTitle = $("#houstTitle");
+			var BoroughInit = 0;
+			var radioButtons = $("input:radio[name='houseRent']");
+			var chkboxButtions = $("#equid input:checkbox");
+			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp";
 			function runEffect(){
 				effect.toggle( "blind",  500 );
-				if(spanArrow.attr('class') == "glyphicon glyphicon-chevron-up"){
-					spanArrow.attr("class","glyphicon glyphicon-chevron-down");
-				}else{
-					spanArrow.attr("class","glyphicon glyphicon-chevron-up")
+				if(spanArrow.attr('class') == "glyphicon glyphicon-chevron-down"){
+					spanArrow.attr("class","glyphicon glyphicon-chevron-up");
+				}else if(spanArrow.attr('class') == "glyphicon glyphicon-chevron-up"){
+					spanArrow.attr("class","glyphicon glyphicon-chevron-down")
 				}
 			};
 			
 			advencedSearch.on( "click", function() {
 			      runEffect();
 			});
-		    effect.hide(); 
+			
+			if(indexCheck){
+				effect.hide();
+				houseTitle.val("");
+				spanArrow.attr("class","glyphicon glyphicon-chevron-down")
+			}
 		    $.post(path+"/HouseFormServlet.do",{"action":"getAllForm"},function(data){
 				var formData = $.parseJSON(data).list;
+				houseForm.empty();
 				houseForm.append($("<option></option>").text("> 房屋型態 <").val(-1));
-				$.each(formData,function(index,value){
-					var opt = $("<option></option>").text(value.hForm);
-					opt.val(value.formNO);
-					houseForm.append(opt);
-				})
+					$.each(formData,function(index,value){
+						var opt = $("<option></option>").text(value.hForm);
+						opt.val(value.formNO);
+						houseForm.append(opt);
+					})
+				if(sessionFormNO != null){
+					houseForm.val(sessionFormNO);			
+				}
 		    })
 		    $.post(path+"/HouseTypeServlet.do",{"action":"getAllType"},function(data){
 				var typeData = $.parseJSON(data).list;
+				houseType.empty();
 				houseType.append($("<option></option>").text("> 房屋類型 <").val(-1));
 				$.each(typeData,function(index,value){
 					var opt = $("<option></option>").text(value.hType);
 					opt.val(value.typeNO);
 					houseType.append(opt);					
 				})
+				if(sessionTypeNO != null && (!indexCheck)){
+					houseType.val(sessionTypeNO);			
+				}
 		    })
 		    $.post(path+"")
 		    
@@ -303,11 +349,15 @@
 			function getCity(){  
 				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
 					var cityData = $.parseJSON(data).list;
+					city.empty();
 					$.each(cityData,function(index,value){
 					var opt = $("<option></option>").text(value.cityName);
 					opt.val(value.cityNO)
 					city.append(opt); 
 					})
+					if(sessionCityNO != null && (!indexCheck)){
+						city.val(sessionCityNO);
+					}
 					getBorough();
 				});
 			}
@@ -321,15 +371,50 @@
 						opt.val(value.boroughNO)
 						borough.append(opt); 
 					})
+					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
+						borough.val(sessionBoroughNO);
+					}
 				});
 			}
-			city.on("change",function(){
-				getBorough();
-			})
+			if(sessionHouseSize != null && (!indexCheck)){
+				houseSize.val(sessionHouseSize);
+			}
+			if(sessionHouseRent != null && sessionHouseRent != -1 && (!indexCheck)){
+				$.each(radioButtons,function(index,button){
+					if(index == sessionHouseRent){
+						button.checked = true;
+					}
+				})
+			}
+			if(!indexCheck){
+				$.each(sessionEquid,function(key,value){
+					if(value){
+						$.each(chkboxButtions,function(index,box){
+							if(key == box.name){
+								box.checked = true;
+							}
+						})
+					}
+				})
+			}
 // 			初始化下拉選單
+			$("#clearCheckBox").on("click",function(){
+				$.each(chkboxButtions,function(index,box){
+					box.checked = false;
+				})
+			})
+			city.on("change",function(){
+				BoroughInit = 1;
+				getBorough();
+				borough.val(-1);
+			})
 			getCity();	
-			var radioButtons = $("input:radio[name='houseRent']");
-			var chkboxButtions = $("input:checkbox");
+
+
+
+
+//			送出查詢條件			
+		
 			$("#submit").on("click",function(){
 				var jsonStr = JSON.stringify({
 						TV:$("#equid label input[name='TV']").prop('checked'),
@@ -361,18 +446,12 @@
 						equid:jsonStr
 				}
 			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
-					location.replace("<%= request.getContextPath()%>/advancedSearch/GetHouseJson.jsp");
+					location.replace("<%= request.getContextPath()%>/advancedSearch/search.jsp");
 				})
 			})
 			
 		});
-			function openLeftMenu() {
-			    document.getElementById("leftMenu").style.display = "block";
-			    
-			}
-			function closeLeftMenu() {
-			    document.getElementById("leftMenu").style.display = "none";
-			}
+			
 	</script>
 </body>
 </html>

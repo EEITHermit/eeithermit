@@ -177,7 +177,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			List<Map<String,Object>> list=query.list(); 
 			Map m2 = new LinkedHashMap();
-			m2.put("list", list);
+			m2.put("items", list);
 			jsonStr = JSONValue.toJSONString(m2);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
