@@ -75,8 +75,6 @@
 	<form id="commentForm" action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0" method="POST">
 		請選擇房屋：<select name="houseNO">
 			<option>請選擇</option>
-			<!-- 假資料  待hibernate做完補上-->
-			<option value="20001">大馬路</option>
 			<!-- filter會傳來houseArray 為此會員所租賃的房屋 -->
 			<c:forEach var="houseVO" items="${houseArray}">
 				<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>

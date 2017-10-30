@@ -3,9 +3,11 @@ package com.hermit.iii.lease.model;
 import java.io.Serializable;
 import java.sql.*;
 
+import com.hermit.iii.house.model.HouseVO;
+
 public class LeaseVO implements Serializable {
 	private Integer leaseNO;
-	private Integer houseNO;
+	private HouseVO houseVO;
 	private Date leaseBeginDate;
 	private Date leaseEndDate;
 	private Integer memNO;
@@ -26,12 +28,13 @@ public class LeaseVO implements Serializable {
 		this.leaseNO = leaseNO;
 	}
 
-	public Integer getHouseNO() {
-		return houseNO;
+	
+	public HouseVO getHouseVO() {
+		return houseVO;
 	}
 
-	public void setHouseNO(Integer houseNO) {
-		this.houseNO = houseNO;
+	public void setHouseVO(HouseVO houseVO) {
+		this.houseVO = houseVO;
 	}
 
 	public Date getLeaseBeginDate() {

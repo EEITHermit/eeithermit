@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.lease.model.LeaseService;
 import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.qanda.model.QandAService;
 import com.hermit.iii.qanda.model.QandAVO;
@@ -47,7 +49,12 @@ public class QAndAFilter implements Filter {
 			QandAService qaService = new QandAService();
 			QandAVO qaVO = qaService.getOneQandA(memNO);
 			array = qaService.getAllByMemberNO(memNO);
+			//取得會員所擁有房屋資訊
+			ArrayList<HouseVO> houseArray = new ArrayList<HouseVO>();
+			LeaseService leaseService = new LeaseService();
+			houseArray = leaseService.findHouseBymemNO(memNO);
 			request.setAttribute("array",array);
+			request.setAttribute("houseArray", houseArray);
 			chain.doFilter(request, response);
 		}else if("AAndQ".equals(servletPath)){
 			//取得登入後session裡的empNO
