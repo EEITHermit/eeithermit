@@ -344,10 +344,19 @@ CREATE TABLE Favorite
 	CONSTRAINT fk_Favorite_to_house FOREIGN KEY(houseNO) REFERENCES house(houseNO)
 )
 GO
-
-
-
-
+insert into Favorite values(40001,20001,'2017-10-12 14:24:41');
+insert into Favorite values(40001,20002,'2017-10-13 14:24:41');
+insert into Favorite values(40001,20003,'2017-10-10 14:24:41');
+insert into Favorite values(40001,20004,'2017-10-11 14:24:41');
+insert into Favorite values(40002,20002,'2017-10-17 14:24:41');
+insert into Favorite values(40002,20003,'2017-10-12 14:24:41');
+insert into Favorite values(40002,20004,'2017-10-14 14:24:41');
+insert into Favorite values(40003,20002,'2017-10-17 14:24:41');
+insert into Favorite values(40003,20003,'2017-10-18 14:24:41');
+insert into Favorite values(40003,20001,'2017-10-16 14:24:41');
+insert into Favorite values(40003,20004,'2017-10-15 14:24:41');
+insert into Favorite values(40004,20003,'2017-10-11 14:24:41');
+GO
 
 create table equipmentCondition(
 	houseNO decimal(5,0) PRIMARY KEY,
