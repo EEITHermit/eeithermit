@@ -2,10 +2,12 @@ package com.hermit.iii.house.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.hermit.iii.boroughs.model.BoroughsVO;
 import com.hermit.iii.city.model.CityVO;
 import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
 import com.hermit.iii.housetype.model.HouseTypeVO;
 
 public class HouseService {
@@ -105,5 +107,11 @@ public class HouseService {
     }
     public String advencedSearch(String searchStr){
     	return dao.advencedSearch(searchStr);
+    }
+    public HouseVO getPic(Integer houseNO){
+    	return dao.getPic(houseNO);
+    }
+    public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
+    	dao.insertHouseAndHousePicture(houseVO, set);
     }
 }

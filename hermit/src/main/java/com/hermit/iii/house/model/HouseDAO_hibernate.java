@@ -1,18 +1,23 @@
 package com.hermit.iii.house.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.json.simple.JSONValue;
 
-
+import com.hermit.iii.boroughs.model.BoroughsVO;
 import com.hermit.iii.city.model.CityVO;
 import com.hermit.iii.equipmentcondition.model.EquipmentConditionVO;
+import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
+import com.hermit.iii.housetype.model.HouseTypeVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
@@ -196,6 +201,35 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		}
 		
 	}
+	public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
+		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.save(houseVO);
+			for(HousePictureVO housePictureVO:set){
+			housePictureVO.setHouseNO(houseVO.getHouseNO());
+			session.save(housePictureVO);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			ex.printStackTrace();
+		}
+	}
+	@Override
+	public HouseVO getPic(Integer houseNO) {
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		HouseVO houseVO=null;
+		try{
+			session.beginTransaction();
+			houseVO = (HouseVO) session.get(HouseVO.class, houseNO);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return houseVO;
+	}
 	public static void main (String args[]){
 		HouseDAO_hibernate dao = new HouseDAO_hibernate();
 		HouseVO vo = new HouseVO();
@@ -238,9 +272,38 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //		dao.insertHouseAndEquip(vo,evo);
 //		System.out.println("success");
 		
+		CityVO cityVO=new CityVO();
+		BoroughsVO boroughsVO=new BoroughsVO(); 
+		HouseTypeVO typeVO=new HouseTypeVO();
+		HouseFormVO formVO=new HouseFormVO();
+		HousePictureVO picVO=new HousePictureVO();
 		
+		vo.setHouseTitle("測試圖片");
+		cityVO.setCityNO(1);
+		vo.setCityVO(cityVO);
+		boroughsVO.setBoroughNO(3);
+		vo.setBoroughsVO(boroughsVO);
+		vo.setHighestFloor(20);
+		vo.setNowFloor(5);
+		vo.setHouseStatus("出租中");
+		vo.setHouseRent(18000);
+		vo.setHouseCharge(36000);
+		vo.setWaterRate("依帳單繳費");
+		vo.setPowerRate("依帳單繳費");
+		vo.setHouseVideo("http://www.youtube.com/notsweethouse");
+		typeVO.setTypeNO(2020);
+		vo.setHouseTypeVO(typeVO);
+		formVO.setFormNO(2020);
+		vo.setHouseFormVO(formVO);
+		vo.setHouseAddr("新北市板橋區大馬路2號");
+		vo.setHouseSize(18.87);
+		Set<HousePictureVO>set= new HashSet<HousePictureVO>();
+		picVO.sethPicture("0x654321");
+		set.add(picVO);
+		dao.insertHouseAndHousePicture(vo, set);
+		System.out.println("hi");
 		
-		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
+//		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
 		
 
 		//Update Test Start
@@ -378,7 +441,18 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //				System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
 //				System.out.println("Search Success");
 				//GET ONE_FK TEST END
-			
-			
+				
+				//GetPic test
+				
+//				vo=dao.getPic(20001);
+//				
+//				vo.getHousePictureVO();
+// 			
+//				Set<HousePictureVO>set=vo.getHousePictureVO();
+//				for(HousePictureVO hvo:set){
+//					System.out.print(hvo.gethPicture());
+//				}
 	}
+
+	
 }

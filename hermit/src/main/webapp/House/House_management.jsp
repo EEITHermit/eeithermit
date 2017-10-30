@@ -71,7 +71,7 @@
 		</tfoot>
 	</table>
 
-<form action="<%=request.getContextPath()%>/House.do" method="POST" id="form">
+<form action="<%=request.getContextPath()%>/House.do" method="POST" id="form" enctype="multipart/form-data">
 <table class="insertTable" class="table">
 	<thead>
 	<tr>
@@ -163,6 +163,15 @@
 		</tr>
 		<input type="hidden" name=action>
 	</tbody>
+</table>
+<table>
+	<thead>
+		<tr>
+			<rd>
+			<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >
+			</rd>
+		</tr>
+	</thead>
 </table>
 </form>
 		
@@ -257,7 +266,7 @@ $(document).ready(function(){
 				$.each(dataJson,function(index,VO){
 					var cell1=$("<option></option>").text(VO.cityName);
 					cell1.val(VO.cityNO);
-					console.log(VO.cityName);
+// 					console.log(VO.cityName);
 					selectCity.append(cell1);
 				})
 			})
