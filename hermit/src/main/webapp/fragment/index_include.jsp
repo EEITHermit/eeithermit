@@ -19,6 +19,7 @@
 <script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
 <script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+
 <style>
 	*{
 		margin:0;

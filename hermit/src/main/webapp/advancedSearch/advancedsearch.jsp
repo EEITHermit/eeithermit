@@ -45,12 +45,7 @@
 		
 		$("#getCheck").on("click",function(){
 			var checkBox = $(".form-check-inline input");
-			console.log(checkBox);
 			$.each(checkBox,function(index,value){
-				console.log("index = " + index);
-				console.log("value = " + value.value);
-				console.log("name = " + value.name);
-				console.log("checked = " + value.checked);
 			})
 		})
 	})

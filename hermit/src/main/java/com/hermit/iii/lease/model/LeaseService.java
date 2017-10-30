@@ -2,6 +2,8 @@ package com.hermit.iii.lease.model;
 
 import java.util.*;
 
+import com.hermit.iii.house.model.HouseVO;
+
 public class LeaseService {
 
 	private LeaseDAO_interface_hibernate dao;
@@ -16,8 +18,10 @@ public class LeaseService {
 			String houseNote, Byte leaseRefund) {
 
 		LeaseVO leaseVO = new LeaseVO();
-
-		leaseVO.setHouseNO(houseNO);
+		
+		HouseVO houseVO = new HouseVO();
+		houseVO.setHouseNO(houseNO);
+		leaseVO.setHouseVO(houseVO);
 		leaseVO.setLeaseBeginDate(leaseBeginDate);
 		leaseVO.setLeaseEndDate(leaseEndDate);
 		leaseVO.setMemNO(memNO);
@@ -45,7 +49,9 @@ public class LeaseService {
 		LeaseVO leaseVO = new LeaseVO();
 
 		leaseVO.setLeaseNO(leaseNO);
-		leaseVO.setHouseNO(houseNO);
+		HouseVO houseVO = new HouseVO();
+		houseVO.setHouseNO(houseNO);
+		leaseVO.setHouseVO(houseVO);
 		leaseVO.setLeaseBeginDate(leaseBeginDate);
 		leaseVO.setLeaseEndDate(leaseEndDate);
 		leaseVO.setMemNO(memNO);
@@ -78,5 +84,9 @@ public class LeaseService {
 	// 查詢全部service
 	public Set<LeaseVO> getAll() {
 		return dao.getAll();
+	}
+	//查詢房屋物件by memberNO
+	public ArrayList<HouseVO> findHouseBymemNO(Integer memNO){
+		return dao.findHouseBymemNO(memNO);
 	}
 }

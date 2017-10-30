@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.hibernate.*;
 
+import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.util.*;
 
 public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
@@ -81,13 +82,35 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 		}
 		return new LinkedHashSet<LeaseVO>(list);
 	}
+	//Q&A用 用會員編號找所屬房子
+	private static String FIND_BY_MEMBERNO = "from LeaseVO where memNO = ?";
+	@Override
+	public ArrayList<HouseVO> findHouseBymemNO(Integer memNO) {
+		ArrayList<HouseVO> array = new ArrayList<HouseVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.getTransaction().begin();
+			Query query = session.createQuery(FIND_BY_MEMBERNO);
+			query.setParameter(0, memNO);
+			List<LeaseVO> list= query.list();
+			for(LeaseVO leaseVO :list){
+				array.add(leaseVO.getHouseVO());
+			}
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
+		return array;
+	}
 
 	public static void main(String[] args) {
 		LeaseDAO_hibernate dao = new LeaseDAO_hibernate();
 
 		// 新增
 		LeaseVO leaseVO1 = new LeaseVO();
-		leaseVO1.setHouseNO(20001);
+		HouseVO houseVO1 = new HouseVO();
+		houseVO1.setHouseNO(20001);
+		leaseVO1.setHouseVO(houseVO1);
 		leaseVO1.setLeaseBeginDate(java.sql.Date.valueOf("2015-10-10"));
 		leaseVO1.setLeaseEndDate(java.sql.Date.valueOf("2017-01-01"));
 		leaseVO1.setMemNO(40001);
@@ -104,7 +127,9 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 		// 修改初始資料第一筆
 		LeaseVO leaseVO2 = new LeaseVO();
 		leaseVO2.setLeaseNO(200001);
-		leaseVO2.setHouseNO(20001);
+		HouseVO houseVO = new HouseVO();
+		houseVO.setHouseNO(20001);
+		leaseVO2.setHouseVO(houseVO);
 		leaseVO2.setLeaseBeginDate(java.sql.Date.valueOf("2014-10-10"));
 		leaseVO2.setLeaseEndDate(java.sql.Date.valueOf("2016-01-01"));
 		leaseVO2.setMemNO(40001);
@@ -121,7 +146,7 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 		// 查詢初始資料第一筆
 		LeaseVO LeaseVO3 = dao.findByPrimaryKey(200001);
 		System.out.print(LeaseVO3.getLeaseNO() + ",");
-		System.out.print(LeaseVO3.getHouseNO() + ",");
+		System.out.print(LeaseVO3.getHouseVO().getHouseNO() + ",");
 		System.out.print(LeaseVO3.getLeaseBeginDate() + ",");
 		System.out.print(LeaseVO3.getLeaseEndDate() + ",");
 		System.out.print(LeaseVO3.getMemNO() + ",");
@@ -139,7 +164,7 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 		Set<LeaseVO> set = dao.getAll();
 		for (LeaseVO leaseVO : set) {
 			System.out.print(leaseVO.getLeaseNO() + ",");
-			System.out.print(leaseVO.getHouseNO() + ",");
+			System.out.print(leaseVO.getHouseVO().getHouseNO() + ",");
 			System.out.print(leaseVO.getLeaseBeginDate() + ",");
 			System.out.print(leaseVO.getLeaseEndDate() + ",");
 			System.out.print(leaseVO.getMemNO() + ",");
@@ -158,5 +183,11 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 		dao.delete(200001);
 
 		System.out.println("Done");
+		 //找尋房屋物件BY memberNO
+		ArrayList<HouseVO> array = dao.findHouseBymemNO(40001);
+		for(HouseVO h :array){
+			System.out.println(h.getCityNO());
+		}
 	}
+
 }
