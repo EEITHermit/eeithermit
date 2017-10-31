@@ -20,11 +20,10 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
-</head>
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
 
-	<style>
+<style>
 a:link, a:visited, a:hover, a:active {
 	text-align: left;
 }
@@ -53,6 +52,21 @@ a:link, a:visited, a:hover, a:active {
 	margin: 3px;
 	padding: 0.4em;
 	font-size: 1.4em;
+}
+
+.favtitle {
+	font-size: 1.4em;
+}
+
+.favstatus, .favrent, .favsize {
+	font-size: 0.7em;
+	margin-left: 3%;
+}
+
+.favaddr {
+	font-size: 1em;
+	font-style: italic;
+	margin-left: 10%;
 }
 </style>
 	<div id="content">
@@ -141,15 +155,13 @@ a:link, a:visited, a:hover, a:active {
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
 							<ol id="selectable">
-								<li class="ui-widget-content"><img width="40px"
-									src="<%=request.getContextPath()%>/images/yellowstar.png">Item1
-									<button type="button" class="close">&times;</button></li>
-								<li class="ui-widget-content"><img width="40px"
-									src="<%=request.getContextPath()%>/images/yellowstar.png">Item2
-									<button type="button" class="close">&times;</button></li>
-								<li class="ui-widget-content"><img width="40px"
-									src="<%=request.getContextPath()%>/images/yellowstar.png">Item3
-									<button type="button" class="close">&times;</button></li>
+								<!-- 								<li class="ui-widget-content"><img width="40px" -->
+								<%-- 									src="<%=request.getContextPath()%>/images/yellowstar.png"><span --%>
+								<!-- 									class="favtitle">大陽台-鬧中取靜-近捷運站</span><span class="favstatus">未出租</span> -->
+								<!-- 									<button type="button" class="close">&times;</button> -->
+								<!-- 									<p class="favaddr">敦化北路100號</p> -->
+								<!-- 									<hr />圖<span class="favrent">租金：houseRent</span><span -->
+								<!-- 									class="favsize">坪數：houseSize</span></li> -->
 							</ol>
 						</div>
 						<!-- /widget-content -->
@@ -203,6 +215,7 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<script>
 		$(function() {
 			
@@ -210,24 +223,53 @@ a:link, a:visited, a:hover, a:active {
 
 		});
 		
-		function loadFavorite() {			
+		function loadFavorite() {		
 			$.ajax({
 				url:'<%=request.getContextPath()%>/FavoriteServlet?',
 				method : 'post',
 				data : {
-					'action' : 'favorite_getAll_Action',
+					'action' : 'favorite_getAJAX_Action',
 				},
 				dataType : 'JSON',
 				success : function(data) {
 					var fragment = $(document.createDocumentFragment());
 					$.each(data,function(k, v) {
-						var cell1 = $('<p></p>').html('<img width="40px" src="<%=request.getContextPath()%>/images/yellowstar.png">'+v.houseTitle+'<button type="button" class="close">&times;</button>');
-
-						var row = $('<li class="ui-widget-content"></li>').append(cell1);
+						var cell = $('<p></p>').html('<img width="40px" src="<%=request.getContextPath()%>/images/yellowstar.png">'
+														+ v.houseTitle
+														+ '<span class="favstatus">'
+														+ v.houseStatus
+														+ '</span><button type="button" class="close">&times;</button><p class="favaddr">'
+														+ v.houseAddr
+														+ '</p><hr /><img height="50" width="50" src="'+v.previewPic+'"><span class="favrent">租金：'
+														+ v.houseRent
+														+ '</span><span class="favsize">坪數：'
+														+ v.houseSize
+														+ '</span><input type="hidden" name="favNO" value="'+v.favNO+'">');
+						var row = $('<li class="ui-widget-content"></li>').append(cell);
 						fragment.append(row);
 					});
 					$("#selectable").html(fragment);
 					$("#selectable").selectable();
+					//close
+					$('.close').click(function() {
+						var fav = $(this).parents('li').find('input').val();
+						$.ajax({
+							url:'<%=request.getContextPath()%>/FavoriteServlet?',
+							method : 'post',
+							data : {
+								'action' : 'favorite_delete_Action',
+								'favNO' : fav
+							},
+							dataType : 'text',
+							success : function(data) {
+								console.log('移除成功');
+							},
+							error : function() {
+								alert("您的瀏覽器不支援Ajax!!");
+							}
+						})
+						$(this).parents('li').remove();
+					});
 				},
 				error : function() {
 					alert("您的瀏覽器不支援Ajax!!");
