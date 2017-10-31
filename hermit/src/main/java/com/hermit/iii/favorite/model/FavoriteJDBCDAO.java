@@ -30,8 +30,8 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, favoriteVO.getMemNO());
-			pstmt.setInt(2, favoriteVO.getHouseNO());
+//			pstmt.setInt(1, favoriteVO.getMemNO());
+//			pstmt.setInt(2, favoriteVO.getHouseNO());
 
 			pstmt.executeUpdate();
 
@@ -67,8 +67,8 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setInt(1, favoriteVO.getMemNO());
-			pstmt.setInt(2, favoriteVO.getHouseNO());
+//			pstmt.setInt(1, favoriteVO.getMemNO());
+//			pstmt.setInt(2, favoriteVO.getHouseNO());
 			pstmt.setDate(3, favoriteVO.getFavDate());
 			pstmt.setInt(4, favoriteVO.getFavNO());
 			
@@ -153,8 +153,8 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 				// favoriteVO = Domain objects
 				favoriteVO = new FavoriteVO();
 				favoriteVO.setFavNO(rs.getInt("favNO"));
-				favoriteVO.setMemNO(rs.getInt("memNO"));
-				favoriteVO.setHouseNO(rs.getInt("houseNO"));
+//				favoriteVO.setMemNO(rs.getInt("memNO"));
+//				favoriteVO.setHouseNO(rs.getInt("houseNO"));
 				favoriteVO.setFavDate(rs.getDate("favDate"));
 			}
 
@@ -208,8 +208,8 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 				// favoriteVO = Domain objects
 				favoriteVO = new FavoriteVO();
 				favoriteVO.setFavNO(rs.getInt("favNO"));
-				favoriteVO.setMemNO(rs.getInt("memNO"));
-				favoriteVO.setHouseNO(rs.getInt("houseNO"));
+//				favoriteVO.setMemNO(rs.getInt("memNO"));
+//				favoriteVO.setHouseNO(rs.getInt("houseNO"));
 				favoriteVO.setFavDate(rs.getDate("favDate"));
 				set.add(favoriteVO); // Store the row in the list
 			}
@@ -249,30 +249,30 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 
 		// 新增
 		FavoriteVO favoriteVO1 = new FavoriteVO();
-		favoriteVO1.setMemNO(40001);
-		favoriteVO1.setHouseNO(20001);
+//		favoriteVO1.setMemNO(40001);
+//		favoriteVO1.setHouseNO(20001);
 		favoriteVO1.setFavDate(java.sql.Date.valueOf("2017-10-08"));
 		dao.insert(favoriteVO1);
 
 		// 修改初始資料第一筆
 		FavoriteVO favoriteVO2 = new FavoriteVO();
 		favoriteVO2.setFavNO(40001);
-		favoriteVO2.setMemNO(40001);
-		favoriteVO2.setHouseNO(20001);
+//		favoriteVO2.setMemNO(40001);
+//		favoriteVO2.setHouseNO(20001);
 		favoriteVO2.setFavDate(java.sql.Date.valueOf("2015-02-02"));
 		dao.update(favoriteVO2);
 
 		// 查詢初始資料第一筆
 		FavoriteVO favoriteVO3 = dao.findByPrimaryKey(40001);
-		System.out.print(favoriteVO3.getMemNO() + ",");
-		System.out.println(favoriteVO3.getHouseNO());
+//		System.out.print(favoriteVO3.getMemNO() + ",");
+//		System.out.println(favoriteVO3.getHouseNO());
 		System.out.println("---------------------");
 
 		// 查詢全部
 		Set<FavoriteVO> set = dao.getAll();
 		for (FavoriteVO favorite : set) {
-			System.out.print(favorite.getMemNO() + ",");
-			System.out.println(favorite.getHouseNO());
+//			System.out.print(favorite.getMemNO() + ",");
+//			System.out.println(favorite.getHouseNO());
 		}
 
 		// 刪除初始資料一筆

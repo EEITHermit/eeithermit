@@ -4,16 +4,25 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.hermit.iii.favorite.model.FavoriteVO"
-		table="Favorite">
+	<class name="com.hermit.iii.favorite.model.FavoriteVO" table="Favorite">
 
 		<id name="favNO" column="favNO">
 			<generator class="identity" />
 		</id>
 
-		<property name="memNO" column="memNO" />
-		<property name="houseNO" column="houseNO" />
-		<property name="favDate" column="favDate" />
+		<!-- <property name="memNO" column="memNO" /> -->
+		<many-to-one name="memberVO" class="com.hermit.iii.member.model.MemberVO"
+			lazy="false">
+			<column name="memNO"></column>
+		</many-to-one>
+
+		<!-- <property name="houseNO" column="houseNO" /> -->
+		<many-to-one name="houseVO" class="com.hermit.iii.house.model.HouseVO"
+			lazy="false">
+			<column name="houseNO"></column>
+		</many-to-one>
+
+		<property name="favDate" column="favDate" insert="false" update="false" />
 
 	</class>
 </hibernate-mapping>

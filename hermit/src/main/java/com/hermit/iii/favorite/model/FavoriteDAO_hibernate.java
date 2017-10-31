@@ -4,6 +4,8 @@ import java.util.*;
 
 import org.hibernate.*;
 
+import com.hermit.iii.house.model.*;
+import com.hermit.iii.member.model.*;
 import com.hermit.iii.util.*;
 
 public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
@@ -84,33 +86,41 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 
 	public static void main(String[] args) {
 		FavoriteDAO_hibernate dao = new FavoriteDAO_hibernate();
-
+		
+		MemberDAO_hibernate daoMem = new MemberDAO_hibernate();
+		HouseDAO_hibernate daoHus = new HouseDAO_hibernate();
 		// 新增
 		FavoriteVO favoriteVO1 = new FavoriteVO();
-		favoriteVO1.setMemNO(40001);
-		favoriteVO1.setHouseNO(20001);
-		favoriteVO1.setFavDate(java.sql.Date.valueOf("2017-10-08"));
+		// 符合實際限制先有MemberVO才有Favorite操作
+		MemberVO memberVO1 = daoMem.findByPrimaryKey(40002);
+		favoriteVO1.setMemberVO(memberVO1);
+		// 符合實際限制先有HouseVO才有Favorite操作
+		HouseVO houseVO1 = daoHus.findByPrimaryKey(20001);
+		favoriteVO1.setHouseVO(houseVO1);
 		dao.insert(favoriteVO1);
 
 		// 修改初始資料第一筆
 		FavoriteVO favoriteVO2 = new FavoriteVO();
 		favoriteVO2.setFavNO(40001);
-		favoriteVO2.setMemNO(40001);
-		favoriteVO2.setHouseNO(20001);
-		favoriteVO2.setFavDate(java.sql.Date.valueOf("2015-02-02"));
+		// 符合實際限制先有MemberVO才有Favorite操作
+		MemberVO memberVO2 = daoMem.findByPrimaryKey(40002);
+		favoriteVO2.setMemberVO(memberVO2);
+		// 符合實際限制先有HouseVO才有Favorite操作
+		HouseVO houseVO2 = daoHus.findByPrimaryKey(20002);
+		favoriteVO2.setHouseVO(houseVO2);
 		dao.update(favoriteVO2);
 
 		// 查詢初始資料第一筆
 		FavoriteVO favoriteVO3 = dao.findByPrimaryKey(40001);
-		System.out.print(favoriteVO3.getMemNO() + ",");
-		System.out.println(favoriteVO3.getHouseNO());
+		System.out.print(favoriteVO3.getMemberVO().getMemNO() + ",");
+		System.out.println(favoriteVO3.getHouseVO().getHouseNO());
 		System.out.println("---------------------");
 
 		// 查詢全部
 		Set<FavoriteVO> set = dao.getAll();
 		for (FavoriteVO favoriteVO : set) {
-			System.out.print(favoriteVO.getMemNO() + ",");
-			System.out.println(favoriteVO.getHouseNO());
+			System.out.print(favoriteVO.getMemberVO().getMemNO() + ",");
+			System.out.println(favoriteVO.getHouseVO().getHouseNO());
 		}
 
 		// 刪除初始資料一筆

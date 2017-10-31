@@ -18,14 +18,19 @@ public class QandAService {
 		QandAVO qandaVO = new QandAVO();
 
 		qandaVO.getMemberVO().setMemNO(memNO);
-		qandaVO.setEmpNO(empNO);
+		if(empNO != null){
+			qandaVO.setEmpNO(empNO);
+		}
 		qandaVO.getHouseVO().setHouseNO(houseNO);
 		qandaVO.setqTime(qTime);
-		qandaVO.setaTime(aTime);
+		if(aTime != null){
+			qandaVO.setaTime(aTime);
+		}
 		qandaVO.setQaType(qaType);
 		qandaVO.setqDetail(qDetail);
-		qandaVO.setaDetail(aDetail);
-
+		if(aDetail != null){
+			qandaVO.setaDetail(aDetail);
+		}
 		dao.insert(qandaVO);
 
 		return qandaVO;
@@ -70,8 +75,12 @@ public class QandAService {
 	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
 		return dao.getAllByMemberNO(memNO);
 	}
-	// 員工查詢Q&A
-	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO){
-		return dao.getAllByBoroughNO(boroughNO);
+	// 員工(客服)查詢Q&A
+	public ArrayList<QandAVO> getAllByBoroughNO0(Integer boroughNO){
+		return dao.getAllByBoroughNO0(boroughNO);
+	}
+	// 員工(業務)查詢Q&A
+	public ArrayList<QandAVO> getAllByBoroughNO1(Integer boroughNO){
+		return dao.getAllByBoroughNO1(boroughNO);
 	}
 }

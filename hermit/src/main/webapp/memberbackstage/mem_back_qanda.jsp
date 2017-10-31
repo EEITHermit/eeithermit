@@ -25,12 +25,102 @@
 	rel='stylesheet' />
 
 <style>
-#queryTable {
-	display: none;
+ #queryTable { 
+ 	display: none; 
+ } 
+
+ #commentForm { 
+ 	display: none; 
+} 
+
+#queryBT {
+	border-top: 1px solid #000000; background : #15d48b; background :
+	-webkit-gradient( linear, left top, left bottom, from( #228f1d), to(
+	#15d48b)); background : -webkit-linear-gradient( top, #228f1d, #15d48b);
+	background : -moz-linear-gradient( top, #228f1d, #15d48b); background :
+	-ms-linear-gradient( top, #228f1d, #15d48b); background :
+	-o-linear-gradient( top, #228f1d, #15d48b); padding : 11.5px 23px;
+	-webkit-border-radius : 25px; -moz-border-radius : 25px; border-radius
+	: 25px; -webkit-box-shadow : rgba( 0, 0, 0, 1) 0 1px 0; -moz-box-shadow
+	: rgba( 0, 0, 0, 1) 0 1px 0; box-shadow : rgba( 0, 0, 0, 1) 0 1px 0;
+	text-shadow : rgba( 0, 0, 0, .4) 0 1px 0;
+	color: #a67219; font-size : 22px; font-family : 'Lucida Grande',
+	Helvetica, Arial, Sans-Serif; text-decoration : none;
+	vertical-align: middle;
+	background: #15d48b;
+	background: -webkit-gradient(linear, left top, left bottom, from(#228f1d),
+		to(#15d48b));
+	background: -webkit-linear-gradient(top, #228f1d, #15d48b);
+	background: -moz-linear-gradient(top, #228f1d, #15d48b);
+	background: -ms-linear-gradient(top, #228f1d, #15d48b);
+	background: -o-linear-gradient(top, #228f1d, #15d48b);
+	padding: 11.5px 23px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	-webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	-moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	text-shadow: rgba(0, 0, 0, .4) 0 1px 0; color : #a67219;
+	font-size: 22px;
+	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+	text-decoration: none;
 }
 
-#commentForm {
-	display: none;
+#queryBT:hover {
+	border-top-color: #bd6c49; background : #bd6c49;
+	color: #ccc;
+	background: #bd6c49;
+}
+
+#queryBT:active {
+	border-top-color: #456f8a;
+	background: #456f8a;
+}
+
+#commentBT {
+	border-top: 1px solid #000000; background : #15d48b; background :
+	-webkit-gradient( linear, left top, left bottom, from( #228f1d), to(
+	#15d48b)); background : -webkit-linear-gradient( top, #228f1d, #15d48b);
+	background : -moz-linear-gradient( top, #228f1d, #15d48b); background :
+	-ms-linear-gradient( top, #228f1d, #15d48b); background :
+	-o-linear-gradient( top, #228f1d, #15d48b); padding : 11.5px 23px;
+	-webkit-border-radius : 25px; -moz-border-radius : 25px; border-radius
+	: 25px; -webkit-box-shadow : rgba( 0, 0, 0, 1) 0 1px 0; -moz-box-shadow
+	: rgba( 0, 0, 0, 1) 0 1px 0; box-shadow : rgba( 0, 0, 0, 1) 0 1px 0;
+	text-shadow : rgba( 0, 0, 0, .4) 0 1px 0;
+	color: #a67219; font-size : 22px; font-family : 'Lucida Grande',
+	Helvetica, Arial, Sans-Serif;
+	text-decoration: none;
+	vertical-align: middle;
+	background: #15d48b;
+	background: -webkit-gradient(linear, left top, left bottom, from(#228f1d),
+		to(#15d48b));
+	background: -webkit-linear-gradient(top, #228f1d, #15d48b);
+	background: -moz-linear-gradient(top, #228f1d, #15d48b);
+	background: -ms-linear-gradient(top, #228f1d, #15d48b);
+	background: -o-linear-gradient(top, #228f1d, #15d48b);
+	padding: 11.5px 23px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	-webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	-moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	text-shadow: rgba(0, 0, 0, .4) 0 1px 0; color : #a67219;
+	font-size: 22px;
+	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+}
+
+#commentBT:hover {
+	border-top-color: #bd6c49; background : #bd6c49;
+	color: #ccc;
+	background: #bd6c49;
+}
+
+#commentBT:active {
+	border-top-color: #456f8a;
+	background: #456f8a;
 }
 </style>
 
@@ -127,54 +217,61 @@ a:link, a:visited, a:hover, a:active {
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
-							<!-- 模式選擇按鈕 -->
-							<button id="queryBT">查詢留言</button>
-							<button id="commentBT">客服申請</button>
-							<!-- 查詢留言區域 -->
-							<table id="queryTable">
-								<thead>
-									<tr>
-										<th>留言時間</th>
-										<th>留言類型</th>
-										<th>房屋連結</th>
-										<th>留言內容</th>
-										<th>回覆時間</th>
-										<th>回覆內容</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="qaVO" items="${array}">
+						<!--模式選擇按鈕 -->
+							<div class="row">
+								<div class="container col-md-6 col-md-offset-3">
+									<button id="queryBT">查詢留言</button>
+									<button id="commentBT">客服申請</button>
+								</div>
+							</div>
+						<!--查詢留言區域 -->
+							<div>
+								<table id="queryTable">
+									<thead>
 										<tr>
-											<td>${qaVO.qTime}</td>
-											<c:if test="${qaVO.qaType == 0}">
-												<td>客服</td>
-											</c:if>
-											<c:if test="${qaVO.qaType == 1}">
-												<td>詢問</td>
-											</c:if>
-											<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
-											<td>${qaVO.qDetail}</td>
-											<td>${qaVO.aTime}</td>
-											<td>${qaVO.aDetail}</td>
+											<th>留言時間</th>
+											<th>留言類型</th>
+											<th>房屋連結</th>
+											<th>留言內容</th>
+											<th>回覆時間</th>
+											<th>回覆內容</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							<!-- 客服申請區域 -->
-							<form id="commentForm"
-								action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
-								method="POST">
-								請選擇房屋：<select name="houseNO">
-									<option>請選擇</option>
-									<!-- filter會傳來houseArray 為此會員所租賃的房屋 -->
-									<c:forEach var="houseVO" items="${houseArray}">
-										<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
-									</c:forEach>
-								</select> 申訴內容：
-								<textarea id="commentArea" class="commentArea" name="qDetail"
-									style="resize: none;"></textarea>
-								<input type="button" value="提交" onclick="check()" />
-							</form>
+									</thead>
+									<tbody>
+										<c:forEach var="qaVO" items="${array}">
+											<tr>
+												<td>${qaVO.qTime}</td>
+												<c:if test="${qaVO.qaType == 0}">
+													<td>客服</td>
+												</c:if>
+												<c:if test="${qaVO.qaType == 1}">
+													<td>詢問</td>
+												</c:if>
+												<td><a style="color: blue; text-decoration: underline;"
+													href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+												<td>${qaVO.qDetail}</td>
+												<td>${qaVO.aTime}</td>
+												<td>${qaVO.aDetail}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+								<!--客服申請區域 -->
+								<form id="commentForm"
+									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
+									method="POST">
+									請選擇房屋：<select name="houseNO" class="custom-select">
+										<option>請選擇</option>
+								<!--filter會傳來houseArray 為此會員所租賃的房屋 -->
+										<c:forEach var="houseVO" items="${houseArray}">
+											<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
+										</c:forEach>
+									</select> 申訴內容：
+									<textarea id="commentArea" class="commentArea" name="qDetail"
+										style="resize: none;"></textarea>
+									<input type="button" value="提交" onclick="check()" />
+								</form>
+							</div>
 						</div>
 						<!-- /widget-content -->
 
@@ -243,7 +340,7 @@ a:link, a:visited, a:hover, a:active {
 				$("#commentForm").toggle(true, 1000);
 			});
 			//產生jqueyText
-			$('.commentArea').jqte();
+			$('#commentArea').jqte();
 		};
 
 		function check() {

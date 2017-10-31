@@ -1,6 +1,7 @@
 package com.hermit.iii.qanda.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,8 @@ public class QAndAServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
 		String mission = request.getParameter("mission");
 		if("insert".equals(mission)){
 			//取得登入後session裡的memberNO
@@ -58,7 +61,16 @@ public class QAndAServlet extends HttpServlet {
 			QandAVO qaVO = qa.getOneQandA(qaNO);
 			qa.updateQandA(qaNO, qaVO.getMemberVO().getMemNO(), empNO, qaVO.getHouseVO().getHouseNO()
 					,qaVO.getqTime(), qTime, qaVO.getQaType(), qaVO.getqDetail(), aDetail);
-			response.sendRedirect("/hermit/QAndA/AAndQ.jsp");
+			response.sendRedirect("/hermit/mention/mentionIndex.jsp");
+			return;
+		}else if("question".equals(mission)){
+			Integer memNO = Integer.valueOf(request.getParameter("member"));
+			Integer houseNO = Integer.valueOf(request.getParameter("house"));
+			String question = request.getParameter("question");
+			Date date = new Date(System.currentTimeMillis());
+			QandAService qa = new QandAService();
+			qa.addQandA(memNO, null, houseNO, date, null, (byte)1, question, null);
+			out.println("提問成功，工作人員將會盡快回答，請去Q&A區確認回復");
 			return;
 		}
 		

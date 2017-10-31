@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
 
 public class LeaseJDBCDAO implements LeaseDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -353,4 +354,6 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 
 		System.out.println("Done");
 	}
+
+
 }

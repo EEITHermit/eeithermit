@@ -91,10 +91,10 @@ public class HousePictureDAO_hibernate implements HousePictureDAO_interface {
 		HousePictureDAO_hibernate dao=new HousePictureDAO_hibernate();
 		
 		//新增
-//		HousePictureVO vo=new HousePictureVO();
-//		vo.sethPicture("0x123456");
-//		vo.setHouseNO(20001);
-//		dao.insert(vo);
+		HousePictureVO vo=new HousePictureVO();
+		vo.sethPicture("0x123456");
+		vo.setHouseNO(20001);
+		dao.insert(vo);
 		
 		//修改
 //		HousePictureVO vo=new HousePictureVO();

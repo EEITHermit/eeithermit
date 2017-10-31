@@ -1,10 +1,12 @@
 package com.hermit.iii.housepicture.model;
 
+import com.hermit.iii.house.model.HouseVO;
+
 public class HousePictureVO {
 	private Integer housePictureNO;
-
 	private String hPicture;
 	private Integer houseNO;
+	
 	public Integer getHousePictureNO() {
 		return housePictureNO;
 	}
@@ -23,4 +25,6 @@ public class HousePictureVO {
 	public void setHouseNO(Integer houseNO) {
 		this.houseNO = houseNO;
 	}
+	
+	
 }

@@ -68,7 +68,7 @@ public class QAndAFilter implements Filter {
 			ArrayList<Integer> boroughNO = mention.getBoroughNOByEmpNO(empNO);
 			array = new ArrayList<QandAVO>();
 			for(Integer boroNO :boroughNO){
-				array.addAll(qaService.getAllByBoroughNO(boroNO));
+				array.addAll(qaService.getAllByBoroughNO0(boroNO));
 			}
 			request.setAttribute("array",array);
 			chain.doFilter(request, response);
