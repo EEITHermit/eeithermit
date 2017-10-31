@@ -11,11 +11,15 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hermit.iii.member.model.MemberVO;
+
+@WebFilter(urlPatterns = { "/memberbackstage/*" })
 
 public class LoginFilter implements Filter {
 	Collection<String> url = new ArrayList<String>();
@@ -43,26 +47,20 @@ public class LoginFilter implements Filter {
 			requestURI = req.getRequestURI();
 			isRequestedSessionIdValid = req.isRequestedSessionIdValid();
 
-			if (mustLogin()) {
-				// 需要登入，已經登入
-				if (checkLogin(req)) {
-					chain.doFilter(request, response);
-					// 需要登入，尚未登入
-				} else {
-					HttpSession session = req.getSession();
-					session.setAttribute("requestURI", requestURI);
-					if (!isRequestedSessionIdValid) {
-						session.setAttribute("timeOut", "使用逾時，請重新登入");
-					}
-					resp.sendRedirect(contextPath + "/hermit/index.jsp");
-					return;
-				}
-			} else {
-				// 不需要登入
+			// 需要登入，已經登入
+			if (checkLogin(req)) {
 				chain.doFilter(request, response);
+				// 需要登入，尚未登入
+			} else {
+				HttpSession session = req.getSession();
+				if (!isRequestedSessionIdValid) {
+					session.setAttribute("timeOut", "使用逾時，請重新登入");
+				}
+				resp.sendRedirect(contextPath + "/index.jsp");
+				return;
 			}
 		} else {
-			throw new ServletException("Request/Response 形態錯誤");
+			throw new ServletException("Request / Response 型態錯誤");
 		}
 	}
 
