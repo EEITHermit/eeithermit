@@ -74,8 +74,6 @@
 						<li><a href="./mem_back_qanda.jsp"> <i
 								class="glyphicon glyphicon-comment" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
-								<span class="label label-warning pull-right"
-								style="font-size: 15px; font-family: Microsoft JhengHei">3</span>
 						</a></li>
 
 						<li class="active"><a href="./mem_back_lease.jsp"> <i

@@ -120,14 +120,14 @@ public class MemLoginServlet extends HttpServlet {
 				return;
 			}
 		}else if("check".equals(action)){
-			Object s=session.getAttribute("LoginOK");
+			Object s = session.getAttribute("LoginOK");
 			if(s!=null){
 				out.print("OK");
 				return;
 			}else{
 				out.print("NO");
 				return;
-			}
+			}			
 		}
 	}
 }

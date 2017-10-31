@@ -21,7 +21,7 @@
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
-	<div class="container">
+	<div class="container col-md-10 col-md-offset-1">
 <table id="myTable" class="table">
 		<thead>
 			<tr>
@@ -72,7 +72,8 @@
 	</table>
 
 <form action="<%=request.getContextPath()%>/House.do" method="POST" id="form" enctype="multipart/form-data">
-<table class="insertTable" class="table">
+<div class="container col-md-10 col-md-offset-1">
+<table class="insertTable" class="table ">
 	<thead>
 	<tr>
 			<th>房屋標題</th>
@@ -164,6 +165,7 @@
 		<input type="hidden" name=action>
 	</tbody>
 </table>
+</div>
 <table>
 	<thead>
 		<tr>

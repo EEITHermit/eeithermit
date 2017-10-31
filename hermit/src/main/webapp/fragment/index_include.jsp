@@ -31,8 +31,6 @@
 	href="<%=request.getContextPath()%>/css/style.css">
 <!-- Modernizr -->
 <script src="<%=request.getContextPath()%>/js/modernizr.js"></script>
-<%-- <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script> --%>
-<%-- <script src="<%=request.getContextPath()%>/js/jquery-1.11.0.min.js"></script> --%>
 <script src="<%=request.getContextPath()%>/js/main.js"></script>
 
 <style>
@@ -205,17 +203,18 @@
 	<div class="w3-bar w3-black navbar-fixed-top glcwTeXYen" style="height: 40px">
 		<button class="w3-button w3-dark-grey w3-xlarge w3-left" onclick="openLeftMenu()">&#9776;</button>
 		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button w3-xlarge w3-left glfont"><span id="hermitHome">Hermit</span></a>
-		
+		<!-- 如果有登入就不顯示 -->
 		<c:if test="${empty LoginOK}">
  		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
  		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
  		</c:if>
- 			
+ 		<!-- 如果有登入就顯示登出 -->
 		<c:if test="${!empty LoginOK}">
  			<a href="http://localhost:8081/hermit/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
  		</c:if>
-		<!-- <a href="#0" class="w3-bar-item w3-button w3-xlarge w3-right"><span id="hermitHome">登入</span></a> -->	
-			<!-- inser more links here -->	
+
+			<!-- inser more links here -->
+			<!-- 如果有登入就不顯示 -->
 			<c:if test="${empty LoginOK}">
 				<nav class="main-nav">
 				<ul>
@@ -229,8 +228,8 @@
 		<div class="w3-sidebar w3-bar-block w3-animate-left navbar-fixed-top w3-dark-gray" style="color:white;display:none;font-size:20px;font-family:Microsoft JhengHei;" id="leftMenu">
 		  <button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large"><span>Close &times</span></button>
 		  <a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button"><span>首頁</span></a>
-		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp?action=check" class="w3-bar-item w3-button"><span>會員中心</span></a>
-		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp" class="w3-bar-item w3-button"><span>我的收藏</span></a>
+		  <a href="" class="w3-bar-item w3-button" id="mbi"><span>會員中心</span></a>
+		  <a href="" class="w3-bar-item w3-button" id="mbf"><span>我的收藏</span></a>
 		</div>	   
 	</div>
 
@@ -418,17 +417,17 @@
 	<div class="w3-black w3-margin-bottom" style="height:3vh;border-bottom-left-radius:15px;border-bottom-right-radius:3px;"></div>
 	
 	<!-- 登入 -->
-	<div class="cd-user-modal">
+	<div class="cd-user-modal" id="loginmodal">
 		<!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container">
 			<!-- this is the container wrapper -->
 			<ul class="cd-switcher">
-				<li><a href="#0">Sign in</a></li>
+				<li><a href="#0" class="selected">Sign in</a></li>
 			</ul>
 
 			<div id="cd-login">
 				<!-- log in form -->
-				<form class="cd-form" action="<c:url value='/Login/login.do?action=login'/>" method="POST">
+				<form class="cd-form" id="loginform" action="<c:url value='/Login/memlogin.do?action=login'/>" method="POST">
 					<p class="fieldset">
 						<label class="image-replace cd-username" for="signup-username">Username</label>
 						<input class="full-width has-padding has-border" name="account"
@@ -753,7 +752,7 @@
 				if($("#remember").prop("checked")){
 					box = "on";
 				}
-			$.post('/hermit/Login/memlogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
+			$.post('/hermit/Login/memlogin.do?action=login',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
 				if(data == "ok"){
 				window.location = "/hermit/index.jsp";
 				}
@@ -774,8 +773,39 @@
 						}
 					}
 				})
+			})
+			
+			//進入會員中心前判斷是否已登入
+			$("#mbi").click(function(event){
+				event.preventDefault();
+				$.post('/hermit/Login/memlogin.do',{"action":"check"},function(data){
+					if(data=="OK"){
+						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp?action=check";
+					}else if(data=="NO"){
+						$('#loginmodal').modal('show');
+						$("#cd-login").toggle(true);
+						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						return;
+					}
 				})
+			})
+			
+			//進入收藏前判斷是否已登入
+			$("#mbf").click(function(event){
+				event.preventDefault();
+				$.post('/hermit/Login/memlogin.do',{"action":"check"},function(data){
+					if(data=="OK"){
+						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp?action=check";
+					}else if(data=="NO"){
+						$('#loginmodal').modal('show');
+						$("#cd-login").toggle(true);
+						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						return;
+					}
 				})
+			})
+		})
+				
 				
 		$(function(){
 		

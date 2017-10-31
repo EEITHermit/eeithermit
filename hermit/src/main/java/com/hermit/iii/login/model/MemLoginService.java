@@ -7,7 +7,7 @@ public class MemLoginService {
 
 	public MemberVO check(String account, String pwd) {
 
-		MemberJNDIDAO dao = new MemberJNDIDAO();
+		MemberDAO_hibernate dao = new MemberDAO_hibernate();
 		MemberVO vo = dao.findByAccount(account);
 		// 將取得密碼加密後跟資料庫內的密碼進行比對
 		String ercryptPwd = SecurityCipher.encryptString(pwd);
@@ -20,7 +20,7 @@ public class MemLoginService {
 
 	public MemberVO OtherCheck(String account, String name) {
 
-		MemberJNDIDAO dao = new MemberJNDIDAO();
+		MemberDAO_hibernate dao = new MemberDAO_hibernate();
 		MemberVO vo = dao.findByAccount(account);
 
 		if (vo != null && name.equals(vo.getMemName())) {
