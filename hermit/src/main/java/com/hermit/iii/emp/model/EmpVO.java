@@ -8,13 +8,13 @@ import com.hermit.iii.teammemberlist.model.TeamMemberListVO;
 
 public class EmpVO implements Serializable {
 
-	private Integer empNO;
-	private String empAccount;
-	private String empPwd;
-	private String empPhone;
-	private String empName;
-	private PostVO postVO;
-	private Boolean empStatus;
+	private Integer empNO;//員工編號
+	private String empAccount;//員工帳號
+	private String empPwd;//員工密碼
+	private String empPhone;//員工電話
+	private String empName;//員工姓名
+	private PostVO postVO = new PostVO();//職位
+	private Boolean empStatus;//員工狀態
 	private Set<TeamMemberListVO> teammemberlists = new HashSet<TeamMemberListVO>();
 
 	public Integer getEmpNO() {
