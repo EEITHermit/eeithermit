@@ -815,7 +815,7 @@
 		
 		//更新驗證碼
 		function refresh() {
-		document.getElementById("image").src = "../MemberLogin/Image.jsp?"
+		document.getElementById("image").src = "<%=request.getContextPath()%>/MemberLogin/Image.jsp?"
 				+ new Date();
 		}
 		//登入判斷
