@@ -205,7 +205,7 @@
 		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button w3-xlarge w3-left glfont"><span id="hermitHome">Hermit</span></a>
 		<!-- 如果有登入就不顯示 -->
 		<c:if test="${empty LoginOK}">
- 		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
+ 		<a href="<%=request.getContextPath()%>/register/register_select_page.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
  		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
  		</c:if>
  		<!-- 如果有登入就顯示登出 -->
@@ -284,22 +284,22 @@
 														<span class="glcwTeXYen" style="font-size:1.3em">租金 &gt;</span>
 													</label>
 													<label class="radio-inline">
-												      <input type="radio" name="houseRent">不限
+												      <input type="radio" id="租金不限" name="houseRent">不限
 												    </label>
 													<label class="radio-inline">
-												      <input type="radio" name="houseRent">5000以下
+												      <input type="radio" id="5000以下" name="houseRent">5000以下
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">5000-10000元
+												      <input type="radio" id="5000-10000元" name="houseRent">5000-10000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">10000-20000元
+												      <input type="radio" id="10000-20000元" name="houseRent">10000-20000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">20000-30000元
+												      <input type="radio" id="20000-30000元" name="houseRent">20000-30000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">30000元以上
+												      <input type="radio" id="30000元以上" name="houseRent">30000元以上
 												    </label>
 												</div>
 											</div>
@@ -312,87 +312,121 @@
 												<div id="equid" style="width:86%;">
 													<div class="col-md-2">
 														<label class="radio-inline">
-													      <input type="checkbox" name="TV">電視
+															<span>
+													      		<input type="checkbox" id="電視" name="TV">電視
+													      	</span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="aircondition">冷氣
+														    <span>
+														      <input type="checkbox" id="冷氣" name="aircondition">冷氣
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="refrigerator">冰箱
+														    <span>
+														      <input type="checkbox" id="冰箱"  name="refrigerator">冰箱
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="waterHeater">熱水器
+														    <span>
+														      <input type="checkbox" id="熱水器"   name="waterHeater">熱水器
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="gas">瓦斯
+														    <span>
+														      <input type="checkbox" id="瓦斯"   name="gas">瓦斯
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="theFourthStation">第四台
+														    <span>
+														      <input type="checkbox" id="第四台"   name="theFourthStation">第四台
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="net">網路
+														    <span>
+														      <input type="checkbox" id="網路"   name="net">網路
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name=washing>洗衣機
+														    <span>
+														      <input type="checkbox" id="洗衣機"   name=washing>洗衣機
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="bed">床
+														    <span>
+														      <input type="checkbox" id="床"   name="bed">床
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="wardrobe">衣櫃
+														    <span>
+														      <input type="checkbox" id="衣櫃"   name="wardrobe">衣櫃
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="sofa">沙發
+														    <span>
+														      <input type="checkbox" id="沙發"   name="sofa">沙發
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="parking">停車位
+														    <span>
+														      <input type="checkbox" id="停車位"   name="parking">停車位
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="elevator">電梯
+														    <span>
+														      <input type="checkbox" id="電梯"   name="elevator">電梯
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="balcony">陽台
+														    <span>
+														      <input type="checkbox" id="陽台"   name="balcony">陽台
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="permitCook">可開伙
+														    <span>
+														      <input type="checkbox" id="可開伙"   name="permitCook">可開伙
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="pet">養寵物
+														    <span>
+														      <input type="checkbox" id="養寵物"   name="pet">養寵物
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="closeMRT">近捷運
+														    <span>
+														      <input type="checkbox" id="近捷運"   name="closeMRT">近捷運
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
@@ -522,22 +556,8 @@
                 <a href="<%= request.getContextPath()%>/index.jsp" style="color:black;padding:0;">Hermit</a>
                 <i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>&nbsp;&nbsp;
             </div>
-            <div class="conditionShow clearfix">
-				<span>台北市&nbsp;&nbsp;</span>
-				<span>中正區&nbsp;&nbsp;</span>
-				<span>電梯大樓&nbsp;&nbsp;</span>
-				<span>獨立套房&nbsp;&nbsp;</span>
-				<span>10坪以下&nbsp;&nbsp;</span>
-				<span>有電視&nbsp;&nbsp;</span>
-				<span>有床&nbsp;&nbsp;</span>
-				<span>洗衣機&nbsp;&nbsp;</span>
-				<span>熱水器&nbsp;&nbsp;</span>
-				<span>網路&nbsp;&nbsp;</span>
-				<span>停車位&nbsp;&nbsp;</span>
-				<span>冷氣&nbsp;&nbsp;</span>
-				<span>冰箱&nbsp;&nbsp;</span>
-				<span>有瓦斯&nbsp;&nbsp;</span>
-            </div>
+            <div id="showSearch" class="conditionShow clearfix">
+			</div>
         </div>
     </section>
     
@@ -558,7 +578,9 @@
 			var sessionHouseSize = <%= session.getAttribute("houseSize") %>;
 			var sessionHouseRent = <%= session.getAttribute("houseRent") %>;
 			var sessionEquid = <%= session.getAttribute("equid") %>
-
+			
+			
+			
 			var spanArrow = $(".glyphicon-chevron-up"); 
 			var advencedSearch = $( "#advencedSearch" );
 			var effect = $( "#effect" );
@@ -574,6 +596,26 @@
 			var radioButtons = $("input:radio[name='houseRent']");
 			var chkboxButtions = $("#equid input:checkbox");
 			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp" | "<%= request.getRequestURI() %>" == "/hermit/";
+			var showSearch = $("#showSearch");
+			var cityOpt;
+			
+			if(indexCheck){
+				$(".breadBox").hide();
+			}else{
+				$(".breadBox").show();
+			}
+			function showBread(){
+				showSearch.empty();
+				if(sessionHouseTitle != 'null' && sessionHouseTitle != '' && ((sessionHouseTitle.replace(' ','').lenght) != 0)){
+					showSearch.append( $("<span></span>").html(sessionHouseTitle+"&nbsp;&nbsp;&nbsp;") );
+				}
+				
+			}
+			showBread();
+			
+			
+			
+			
 			
 			function runEffect(){
 				effect.toggle( "blind",  500 );
@@ -593,43 +635,21 @@
 				houseTitle.val("");
 				spanArrow.attr("class","glyphicon glyphicon-chevron-down")
 			}
-		    $.post(path+"/HouseFormServlet.do",{"action":"getAllForm"},function(data){
-				var formData = $.parseJSON(data).list;
-				houseForm.empty();
-				houseForm.append($("<option></option>").text("> 房屋型態 <").val(-1));
-					$.each(formData,function(index,value){
-						var opt = $("<option></option>").text(value.hForm);
-						opt.val(value.formNO);
-						houseForm.append(opt);
-					})
-				if(sessionFormNO != null){
-					houseForm.val(sessionFormNO);			
-				}
-		    })
-		    $.post(path+"/HouseTypeServlet.do",{"action":"getAllType"},function(data){
-				var typeData = $.parseJSON(data).list;
-				houseType.empty();
-				houseType.append($("<option></option>").text("> 房屋類型 <").val(-1));
-				$.each(typeData,function(index,value){
-					var opt = $("<option></option>").text(value.hType);
-					opt.val(value.typeNO);
-					houseType.append(opt);					
-				})
-				if(sessionTypeNO != null && (!indexCheck)){
-					houseType.val(sessionTypeNO);			
-				}
-		    })
-		    $.post(path+"")
+		   
 		    
 			
 			function getCity(){  
 				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
 					var cityData = $.parseJSON(data).list;
 					city.empty();
+					
 					$.each(cityData,function(index,value){
-					var opt = $("<option></option>").text(value.cityName);
-					opt.val(value.cityNO)
-					city.append(opt); 
+						var opt = $("<option></option>").text(value.cityName);
+						opt.val(value.cityNO)
+						city.append(opt); 
+						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
+							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
+						}
 					})
 					if(sessionCityNO != null && (!indexCheck)){
 						city.val(sessionCityNO);
@@ -646,32 +666,50 @@
 						var opt = $("<option></option>").text(value.boroughName);
 						opt.val(value.boroughNO)
 						borough.append(opt); 
+						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
+							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
+						}
 					})
 					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
 						borough.val(sessionBoroughNO);
 					}
 				});
 			}
-			if(sessionHouseSize != null && (!indexCheck)){
-				houseSize.val(sessionHouseSize);
+			function houseSizeShow(){
+				if(sessionHouseSize != null && (!indexCheck)){
+					houseSize.val(sessionHouseSize);
+				}
+				if(sessionHouseSize != -1 && sessionHouseSize != null){
+					$.each($("#houseSize>option"),function(index,size){
+						if(index == (sessionHouseSize+1)){
+							showSearch.append( $("<span></span>").html(size.text+"&nbsp;&nbsp;&nbsp;") );
+						}
+					})
+				}
 			}
-			if(sessionHouseRent != null && sessionHouseRent != -1 && (!indexCheck)){
-				$.each(radioButtons,function(index,button){
-					if(index == sessionHouseRent){
-						button.checked = true;
-					}
-				})
+			function houseRentShow(){
+				if(sessionHouseRent != null && sessionHouseRent != -1 && (!indexCheck)){
+					$.each(radioButtons,function(index,button){
+						if(index == sessionHouseRent){
+							button.checked = true;
+							showSearch.append( $("<span></span>").html(button.id+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+				}
 			}
-			if(!indexCheck){
-				$.each(sessionEquid,function(key,value){
-					if(value){
-						$.each(chkboxButtions,function(index,box){
-							if(key == box.name){
-								box.checked = true;
-							}
-						})
-					}
-				})
+			function equidShowBread(){	
+				if(!indexCheck){
+					$.each(sessionEquid,function(key,value){
+						if(value){
+							$.each(chkboxButtions,function(index,box){
+								if(key == box.name){
+									box.checked = true;
+									showSearch.append( $("<span></span>").html(box.id+"&nbsp;&nbsp;&nbsp;") );
+								}
+							})
+						}
+					})
+				}
 			}
 // 			初始化下拉選單
 			$("#clearCheckBox").on("click",function(){
@@ -683,12 +721,52 @@
 				BoroughInit = 1;
 				getBorough();
 				borough.val(-1);
+				
 			})
+			function getForm(){
+				 $.post(path+"/HouseFormServlet.do",{"action":"getAllForm"},function(data){
+						var formData = $.parseJSON(data).list;
+						houseForm.empty();
+						houseForm.append($("<option></option>").text("> 房屋型態 <").val(-1));
+							$.each(formData,function(index,value){
+								var opt = $("<option></option>").text(value.hForm);
+								opt.val(value.formNO);
+								houseForm.append(opt);
+								if(sessionFormNO != -1 && (sessionFormNO == value.formNO)){
+									showSearch.append( $("<span></span>").html(value.hForm+"&nbsp;&nbsp;&nbsp;"));
+								}
+							})
+						if(sessionFormNO != null && (!indexCheck)){
+							houseForm.val(sessionFormNO);			
+						}
+				    })
+				}
+				function getType(){
+				    $.post(path+"/HouseTypeServlet.do",{"action":"getAllType"},function(data){
+						var typeData = $.parseJSON(data).list;
+						houseType.empty();
+						houseType.append($("<option></option>").text("> 房屋類型 <").val(-1));
+						$.each(typeData,function(index,value){
+							var opt = $("<option></option>").text(value.hType);
+							opt.val(value.typeNO);
+							houseType.append(opt);	
+							if(sessionTypeNO != -1 && (sessionTypeNO == value.typeNO)){
+								showSearch.append( $("<span></span>").html(value.hType+"&nbsp;&nbsp;&nbsp;"));
+							}
+						})
+						if(sessionTypeNO != null && (!indexCheck)){
+							houseType.val(sessionTypeNO);			
+						}
+				    })
+				}
 			getCity();	
-
-
-
-
+			getType();
+			getForm();
+			houseRentShow();
+			equidShowBread();
+			houseSizeShow();
+			
+			
 //			送出查詢條件			
 		
 			$("#submit").on("click",function(){
