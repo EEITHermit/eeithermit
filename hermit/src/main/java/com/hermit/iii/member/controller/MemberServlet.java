@@ -392,7 +392,7 @@ public class MemberServlet extends HttpServlet {
 			}
 			if (!errorMsg.isEmpty()) {
 				request.setAttribute("MsgMap", errorMsg);
-				RequestDispatcher rd = request.getRequestDispatcher("/Member/member.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/mem_back_reset.jsp");
 				rd.forward(request, response);
 				return;
 			}
@@ -410,7 +410,7 @@ public class MemberServlet extends HttpServlet {
 
 			request.setAttribute("memberVO", memberVO);
 			request.setAttribute("Msg", "修改成功");
-			RequestDispatcher rd = request.getRequestDispatcher("/Member/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/index.jsp");
 			rd.forward(request, response);
 			return;
 		}

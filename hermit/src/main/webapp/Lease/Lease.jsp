@@ -28,7 +28,7 @@ textarea{
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
-	<div class="container">
+	<div class="container col-md-10 col-md-offset-1">
 <table id="leaseTable" class="table">
 	<thead>
 		<tr>
