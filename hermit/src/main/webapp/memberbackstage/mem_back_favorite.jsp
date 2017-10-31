@@ -133,6 +133,7 @@ a:link, a:visited, a:hover, a:active {
 						<span class="account-name"
 							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
 						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
+						<input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}">
 					</div>
 					<!-- /account-container -->
 
@@ -255,12 +256,15 @@ a:link, a:visited, a:hover, a:active {
 
 		});
 		
-		function loadFavorite() {		
+		function loadFavorite() {
+			var no = $("#memNO").val();
+			console.log(no);
 			$.ajax({
 				url:'<%=request.getContextPath()%>/FavoriteServlet?',
 				method : 'post',
 				data : {
 					'action' : 'favorite_getAJAX_Action',
+					'memNO' : no
 				},
 				dataType : 'JSON',
 				success : function(data) {
