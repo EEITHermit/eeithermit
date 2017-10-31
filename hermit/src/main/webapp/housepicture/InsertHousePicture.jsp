@@ -19,7 +19,6 @@
 		<div class="jumbotron">
 			<form method="post" action="<%=request.getContextPath()%>/HousePictureServlet" enctype="multipart/form-data">
 				<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >
-				<input type="hidden" name="action" value="insertHousePicture">
 				<button type="submit">Submit</button>
 			</form>
 		</div>

@@ -1,24 +1,32 @@
 package com.hermit.iii.house.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.json.simple.JSONValue;
 
+import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.city.model.CityVO;
 import com.hermit.iii.equipmentcondition.model.EquipmentConditionVO;
+import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
+import com.hermit.iii.housetype.model.HouseTypeVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 
 	private static final String GET_ALL_STMT =	"from HouseVO order by houseNO";
+	private static final String GET_ALL_JOIN_FK="from HouseVO";
 	private static final String AUTO_COMPLETE = "FROM HouseVO Where houseAddr like ?";
 	private static final String FIND_BOROUGHNO_BY_HOUSENO = "from houseVO where houseNO = ?";
+	private static final String GET_ONE_HOUSE_FK="form HouseVO where houseNO=?";
 	@Override
 	public void insert(HouseVO houseVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -108,7 +116,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		return array;
 	}
 	
-	//未寫
+	//測試完成
 	@Override
 	public Integer findAreaNoByHouseNo(Integer houseNo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -118,9 +126,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			Query query = session.createQuery(FIND_BOROUGHNO_BY_HOUSENO);
 			query.setParameter(0,houseNo);
 			List<HouseVO> list = query.list();
-			for(HouseVO h : list){
-				boroughNO = h.getBoroughNO();
-			}
+			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -129,31 +135,35 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		return boroughNO;
 	}
 
-//未寫
+//已測試OK
 	@Override
 	public List<HouseVO> GET_ALL_JOIN_FK() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
+			List<HouseVO>list=session.createQuery(GET_ALL_JOIN_FK).getResultList();
 			session.getTransaction().commit();
+			return list;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return null;
+		
 	}
 
 	@Override
 	public HouseVO GET_ONE_HOUSE_FK(Integer houseNO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		HouseVO houseVO = null;
 		try {
 			session.beginTransaction();
+			houseVO=(HouseVO)session.get(HouseVO.class, houseNO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return null;
+		return houseVO;
 	}
 
 	@Override
@@ -167,7 +177,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			List<Map<String,Object>> list=query.list(); 
 			Map m2 = new LinkedHashMap();
-			m2.put("list", list);
+			m2.put("items", list);
 			jsonStr = JSONValue.toJSONString(m2);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -190,6 +200,35 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			throw ex;
 		}
 		
+	}
+	public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
+		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.save(houseVO);
+			for(HousePictureVO housePictureVO:set){
+			housePictureVO.setHouseNO(houseVO.getHouseNO());
+			session.save(housePictureVO);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			ex.printStackTrace();
+		}
+	}
+	@Override
+	public HouseVO getPic(Integer houseNO) {
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		HouseVO houseVO=null;
+		try{
+			session.beginTransaction();
+			houseVO = (HouseVO) session.get(HouseVO.class, houseNO);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return houseVO;
 	}
 	public static void main (String args[]){
 		HouseDAO_hibernate dao = new HouseDAO_hibernate();
@@ -233,9 +272,38 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //		dao.insertHouseAndEquip(vo,evo);
 //		System.out.println("success");
 		
+		CityVO cityVO=new CityVO();
+		BoroughsVO boroughsVO=new BoroughsVO(); 
+		HouseTypeVO typeVO=new HouseTypeVO();
+		HouseFormVO formVO=new HouseFormVO();
+		HousePictureVO picVO=new HousePictureVO();
 		
+		vo.setHouseTitle("測試圖片");
+		cityVO.setCityNO(1);
+		vo.setCityVO(cityVO);
+		boroughsVO.setBoroughNO(3);
+		vo.setBoroughsVO(boroughsVO);
+		vo.setHighestFloor(20);
+		vo.setNowFloor(5);
+		vo.setHouseStatus("出租中");
+		vo.setHouseRent(18000);
+		vo.setHouseCharge(36000);
+		vo.setWaterRate("依帳單繳費");
+		vo.setPowerRate("依帳單繳費");
+		vo.setHouseVideo("http://www.youtube.com/notsweethouse");
+		typeVO.setTypeNO(2020);
+		vo.setHouseTypeVO(typeVO);
+		formVO.setFormNO(2020);
+		vo.setHouseFormVO(formVO);
+		vo.setHouseAddr("新北市板橋區大馬路2號");
+		vo.setHouseSize(18.87);
+		Set<HousePictureVO>set= new HashSet<HousePictureVO>();
+		picVO.sethPicture("0x654321");
+		set.add(picVO);
+		dao.insertHouseAndHousePicture(vo, set);
+		System.out.println("hi");
 		
-		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
+//		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
 		
 
 		//Update Test Start
@@ -321,8 +389,10 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //					vo = list.get(i);
 //					System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
 //					System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-//					System.out.println("getCityNO = \t\t" + vo.getCityNO());
-//					System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
+//					System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityNO());
+//					System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityName());
+//					System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughNO());
+//					System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughName());
 //					System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
 //					System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
 //					System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
@@ -332,10 +402,10 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //					System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
 //					System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
 //					System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//					System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
-//					System.out.println("gethType = \t\t" + vo.gethType());
-//					System.out.println("getFormNO = \t\t" + vo.getFormNO());
-//					System.out.println("gethForm = \t\t" + vo.gethForm());
+//					System.out.println("getTypeNO = \t\t" + vo.getHouseTypeVO().getTypeNO());
+//					System.out.println("gethType = \t\t" + vo.getHouseTypeVO().gethType());
+//					System.out.println("getFormNO = \t\t" + vo.getHouseFormVO().getFormNO());
+//					System.out.println("gethForm = \t\t" + vo.getHouseFormVO().gethForm());
 //					System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
 //					System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
 //					System.out.println();
@@ -348,8 +418,11 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 				//GET ONE_FK TEST BEGIN
 //				vo = dao.GET_ONE_HOUSE_FK(20001);	
 //				System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-//				System.out.println("getCityNO = \t\t" + vo.getCityNO());
-//				System.out.println("getBoroughNO = \t\t" + vo.getBoroughNO());
+//				System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityNO());
+//				System.out.println("getCityName = \t\t" + vo.getCityVO().getCityName());
+//				System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughNO());
+//				System.out.println("getBoroughName = \t\t" + vo.getBoroughsVO().getBoroughName());
+//				System.out.println("getpreviewPic = \t\t" + vo.getPreviewPic());
 //				System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
 //				System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
 //				System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
@@ -359,16 +432,28 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //				System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
 //				System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
 //				System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//				System.out.println("getTypeNO = \t\t" + vo.getTypeNO());
-//				System.out.println("gethType = \t\t" + vo.gethType());
-//				System.out.println("getFormNO = \t\t" + vo.getFormNO());
-//				System.out.println("gethForm = \t\t" +vo.gethForm());
+//				System.out.println("getTypeNO = \t\t" + vo.getHouseTypeVO().getTypeNO());
+//				System.out.println("gethType = \t\t" + vo.getHouseTypeVO().gethType());
+//				System.out.println("getFormNO = \t\t" + vo.getHouseFormVO().getFormNO());
+//				System.out.println("gethForm = \t\t" +vo.getHouseFormVO().gethForm());
 //				System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
 //				System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
 //				System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
 //				System.out.println("Search Success");
 				//GET ONE_FK TEST END
-			
-			
+
+				
+				//GetPic test
+				
+//				vo=dao.getPic(20001);
+//				
+//				vo.getHousePictureVO();
+// 			
+//				Set<HousePictureVO>set=vo.getHousePictureVO();
+//				for(HousePictureVO hvo:set){
+//					System.out.print(hvo.gethPicture());
+//				}
 	}
+
+	
 }

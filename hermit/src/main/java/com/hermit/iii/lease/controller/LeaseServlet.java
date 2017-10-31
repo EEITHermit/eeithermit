@@ -62,7 +62,7 @@ public class LeaseServlet extends HttpServlet {
 			for (LeaseVO vo2 : set) {
 				Map m1 = new HashMap();
 				m1.put("leaseNO", vo2.getLeaseNO());
-				m1.put("houseNO", vo2.getHouseNO());
+				m1.put("houseNO", vo2.getHouseVO().getHouseNO());
 				m1.put("leaseBeginDate", vo2.getLeaseBeginDate());
 				m1.put("leaseEndDate", vo2.getLeaseEndDate());
 				m1.put("memNO", vo2.getMemNO());

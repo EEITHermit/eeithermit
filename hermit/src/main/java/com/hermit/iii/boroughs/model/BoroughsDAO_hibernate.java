@@ -1,9 +1,13 @@
 package com.hermit.iii.boroughs.model;
 
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.json.simple.JSONValue;
 
 import com.hermit.iii.util.HibernateUtil;
 
@@ -11,6 +15,7 @@ public class BoroughsDAO_hibernate implements BoroughsDAO_interface {
 
 	private static final String GET_ALL_STMT = "from BoroughsVO";
 
+	private static final String GET_ALL_STMT_CITYNO="from BoroughsVO where cityNO=?";
 	@Override
 	public void insert(BoroughsVO boroughsVO) {
 		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
@@ -85,15 +90,50 @@ public class BoroughsDAO_hibernate implements BoroughsDAO_interface {
 
 	@Override
 	public String getAllWhereCity(Integer cityNO) {
-		
-		return null;
+		List list=new LinkedList();
+		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
+		String strJson="";
+		try{
+			session.beginTransaction();
+			Query query=session.createQuery(GET_ALL_STMT_CITYNO);
+			query.setParameter(0,1);
+			List<BoroughsVO>listQ=query.list();
+			for(BoroughsVO vo:listQ){
+				Map m1=new LinkedHashMap();
+				m1.put("boroughsNO", vo.getBoroughNO());
+				m1.put("boroughsName", vo.getBoroughName());
+				m1.put("cityNO", vo.getCityNO());
+				list.add(m1);
+			}
+			session.getTransaction().commit();
+			Map m2 =new LinkedHashMap();
+			m2.put("list", list);
+			strJson=JSONValue.toJSONString(m2);
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			ex.printStackTrace();
+		}
+		return strJson;
 	}
 
 	
 	@Override
 	public List<BoroughsVO> getAll_cityNO(Integer cityNO) {
-		//Json用
-		return null;
+		List<BoroughsVO> list=new LinkedList<BoroughsVO>();
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		String strJson="";
+		try{
+			session.beginTransaction();
+			Query query =session.createQuery(GET_ALL_STMT_CITYNO);
+			query.setParameter(0, 2);//先取值
+			list =query.list();
+			
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			ex.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	public static void main(String[] args) {
@@ -129,7 +169,17 @@ public class BoroughsDAO_hibernate implements BoroughsDAO_interface {
 //			System.out.println(vo.getCityNO());
 //		}
 		
+		//查詢for Json
+//		List<BoroughsVO>list=dao.getAll_cityNO(1);
+//		for(BoroughsVO vo:list){
+//			System.out.print(vo.getBoroughNO()+",");
+//			System.out.print(vo.getBoroughName()+",");
+//			System.out.println(vo.getCityNO());
+//		}
 		
+		//查詢 getAllWhereCity
+//		String strJson=dao.getAllWhereCity(1);
+//		System.out.println(strJson);
 	}
 
 }

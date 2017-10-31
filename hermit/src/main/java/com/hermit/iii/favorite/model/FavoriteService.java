@@ -2,6 +2,9 @@ package com.hermit.iii.favorite.model;
 
 import java.util.*;
 
+import com.hermit.iii.house.model.*;
+import com.hermit.iii.member.model.*;
+
 public class FavoriteService {
 	private FavoriteDAO_interface_hibernate dao;
 
@@ -10,11 +13,11 @@ public class FavoriteService {
 	}
 
 	// 新增service
-	public FavoriteVO addFavorite(Integer memNO, Integer houseNO) {
+	public FavoriteVO addFavorite(MemberVO memberVO, HouseVO houseVO) {
 		FavoriteVO favoriteVO = new FavoriteVO();
 
-		favoriteVO.setMemNO(memNO);
-		favoriteVO.setHouseNO(houseNO);
+		favoriteVO.setMemberVO(memberVO);
+		favoriteVO.setHouseVO(houseVO);
 
 		dao.insert(favoriteVO);
 
@@ -27,12 +30,12 @@ public class FavoriteService {
 	}
 
 	// 修改service
-	public FavoriteVO updateFavorite(Integer favNO, Integer memNO, Integer houseNO, java.sql.Date favDate) {
+	public FavoriteVO updateFavorite(Integer favNO, MemberVO memberVO, HouseVO houseVO, java.sql.Date favDate) {
 		FavoriteVO favoriteVO = new FavoriteVO();
 
 		favoriteVO.setFavNO(favNO);
-		favoriteVO.setMemNO(memNO);
-		favoriteVO.setHouseNO(houseNO);
+		favoriteVO.setMemberVO(memberVO);
+		favoriteVO.setHouseVO(houseVO);
 		favoriteVO.setFavDate(favDate);
 
 		dao.update(favoriteVO);

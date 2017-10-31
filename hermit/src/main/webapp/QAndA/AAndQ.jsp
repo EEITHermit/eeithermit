@@ -16,7 +16,7 @@
 	$(document).ready(work);
 	
 	function work(){
-		$("#showTable>tbody button").on("click",function(){
+		$("#qaTable>tbody button").on("click",function(){
 			$("#qaNO").val($(this).parents("tr").find("td").eq(0).text());
 			$("#answerForm").toggle(true);
 		})
@@ -35,7 +35,7 @@
 </head>
 <body>
 	<!-- 顯示未回覆回報 -->
-	<table id="showTable">
+	<table id="qaTable">
 		<thead>
 			<tr>
 				<th>留言編號</th><th>留言時間</th><th>留言會員</th><th>房屋連結</th><th>留言內容</th>

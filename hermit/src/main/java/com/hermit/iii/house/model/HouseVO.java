@@ -1,12 +1,18 @@
 package com.hermit.iii.house.model;
 
 import java.io.Serializable;
+import java.util.*;
+
+import com.hermit.iii.boroughs.model.BoroughsVO;
+import com.hermit.iii.city.model.CityVO;
+import com.hermit.iii.favorite.model.FavoriteVO;
+import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
+import com.hermit.iii.housetype.model.HouseTypeVO;
 
 public class HouseVO  implements Serializable{
 	private Integer houseNO;
 	private String houseTitle;
-	private Integer cityNO;
-	private Integer boroughNO;
 	private String previewPic;
 	private Integer highestFloor;
 	private Integer nowFloor;
@@ -16,11 +22,25 @@ public class HouseVO  implements Serializable{
 	private String waterRate;
 	private String powerRate;
 	private String houseVideo;
-	private Integer typeNO;
-	private Integer formNO;
 	private String houseAddr;
 	private Double houseSize;
+	//子傑加
+	private CityVO cityVO;
+	private BoroughsVO boroughsVO;
+	private HouseTypeVO houseTypeVO;
+	private HouseFormVO houseFormVO;
 
+	private Set<FavoriteVO> favs =new LinkedHashSet<FavoriteVO>();
+
+	private Set<HousePictureVO>housePictureVO=new HashSet<HousePictureVO>();
+	
+	
+	public Set<HousePictureVO> getHousePictureVO() {
+		return housePictureVO;
+	}
+	public void setHousePictureVO(Set<HousePictureVO> housePictureVO) {
+		this.housePictureVO = housePictureVO;
+	}
 	public Integer getHouseNO() {
 		return houseNO;
 	}
@@ -33,17 +53,29 @@ public class HouseVO  implements Serializable{
 	public void setHouseTitle(String houseTitle) {
 		this.houseTitle = houseTitle;
 	}
-	public Integer getCityNO() {
-		return cityNO;
+	public CityVO getCityVO() {
+		return cityVO;
 	}
-	public void setCityNO(Integer cityNO) {
-		this.cityNO = cityNO;
+	public void setCityVO(CityVO cityVO) {
+		this.cityVO = cityVO;
 	}
-	public Integer getBoroughNO() {
-		return boroughNO;
+	public BoroughsVO getBoroughsVO() {
+		return boroughsVO;
 	}
-	public void setBoroughNO(Integer boroughNO) {
-		this.boroughNO = boroughNO;
+	public void setBoroughsVO(BoroughsVO boroughsVO) {
+		this.boroughsVO = boroughsVO;
+	}
+	public HouseTypeVO getHouseTypeVO() {
+		return houseTypeVO;
+	}
+	public void setHouseTypeVO(HouseTypeVO houseTypeVO) {
+		this.houseTypeVO = houseTypeVO;
+	}
+	public HouseFormVO getHouseFormVO() {
+		return houseFormVO;
+	}
+	public void setHouseFormVO(HouseFormVO houseFormVO) {
+		this.houseFormVO = houseFormVO;
 	}
 	public Integer getHighestFloor() {
 		return highestFloor;
@@ -93,18 +125,7 @@ public class HouseVO  implements Serializable{
 	public void setHouseVideo(String houseVideo) {
 		this.houseVideo = houseVideo;
 	}
-	public Integer getTypeNO() {
-		return typeNO;
-	}
-	public void setTypeNO(Integer typeNO) {
-		this.typeNO = typeNO;
-	}
-	public Integer getFormNO() {
-		return formNO;
-	}
-	public void setFormNO(Integer formNO) {
-		this.formNO = formNO;
-	}
+	
 	public String getHouseAddr() {
 		return houseAddr;
 	}
@@ -122,5 +143,11 @@ public class HouseVO  implements Serializable{
 	}
 	public void setPreviewPic(String previewPic) {
 		this.previewPic = previewPic;
+	}
+	public Set<FavoriteVO> getFavs() {
+		return favs;
+	}
+	public void setFavs(Set<FavoriteVO> favs) {
+		this.favs = favs;
 	}
 }

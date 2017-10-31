@@ -120,14 +120,14 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 		return array;
 	}
 	//OK
-	private static String GET_ALL_BY_BOROUGH_NO_H = "FROM QandAVO where houseVO.boroughNO = ? AND empNO IS NULL";
+	private static String GET_ALL_BY_BOROUGH_NO0_H = "FROM QandAVO where qaType = 0 AND houseVO.boroughsVO.boroughNO = ? AND empNO IS NULL";
 	@Override
-	public ArrayList<QandAVO> getAllByBoroughNO(Integer boroughNO) {
+	public ArrayList<QandAVO> getAllByBoroughNO0(Integer boroughNO) {
 		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
-			Query query = session.createQuery(GET_ALL_BY_BOROUGH_NO_H);
+			Query query = session.createQuery(GET_ALL_BY_BOROUGH_NO0_H);
 			query.setParameter(0, boroughNO);
 			List list = query.list();
 			array.addAll(list);
@@ -138,5 +138,24 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 		} 
 		return array;
 	}
+	//OK
+		private static String GET_ALL_BY_BOROUGH_NO1_H = "FROM QandAVO where qaType = 1 AND houseVO.boroughsVO.boroughNO = ? AND empNO IS NULL";
+		@Override
+		public ArrayList<QandAVO> getAllByBoroughNO1(Integer boroughNO) {
+			ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try{
+				session.getTransaction().begin();
+				Query query = session.createQuery(GET_ALL_BY_BOROUGH_NO1_H);
+				query.setParameter(0, boroughNO);
+				List list = query.list();
+				array.addAll(list);
+				session.getTransaction().commit();
+			}catch(Exception se) { // Handle any SQL errors
+				session.getTransaction().rollback();
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+			} 
+			return array;
+		}
 	
 }

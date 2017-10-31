@@ -34,8 +34,8 @@ public class FavoriteJNDIDAO implements FavoriteDAO_interface {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERT_STMT);) {
 
-			pstmt.setInt(1, favoriteVO.getMemNO());
-			pstmt.setInt(2, favoriteVO.getHouseNO());
+//			pstmt.setInt(1, favoriteVO.getMemNO());
+//			pstmt.setInt(2, favoriteVO.getHouseNO());
 
 			pstmt.executeUpdate();
 
@@ -49,8 +49,8 @@ public class FavoriteJNDIDAO implements FavoriteDAO_interface {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);) {
 
-			pstmt.setInt(1, favoriteVO.getMemNO());
-			pstmt.setInt(2, favoriteVO.getHouseNO());
+//			pstmt.setInt(1, favoriteVO.getMemNO());
+//			pstmt.setInt(2, favoriteVO.getHouseNO());
 			pstmt.setDate(3, favoriteVO.getFavDate());
 			pstmt.setInt(4, favoriteVO.getFavNO());
 
@@ -91,8 +91,8 @@ public class FavoriteJNDIDAO implements FavoriteDAO_interface {
 				// favoriteVO = Domain objects
 				favoriteVO = new FavoriteVO();
 				favoriteVO.setFavNO(rs.getInt("favNO"));
-				favoriteVO.setMemNO(rs.getInt("memNO"));
-				favoriteVO.setHouseNO(rs.getInt("houseNO"));
+//				favoriteVO.setMemNO(rs.getInt("memNO"));
+//				favoriteVO.setHouseNO(rs.getInt("houseNO"));
 				favoriteVO.setFavDate(rs.getDate("favDate"));
 			}
 
@@ -117,8 +117,8 @@ public class FavoriteJNDIDAO implements FavoriteDAO_interface {
 				// favoriteVO = Domain objects
 				favoriteVO = new FavoriteVO();
 				favoriteVO.setFavNO(rs.getInt("favNO"));
-				favoriteVO.setMemNO(rs.getInt("memNO"));
-				favoriteVO.setHouseNO(rs.getInt("houseNO"));
+//				favoriteVO.setMemNO(rs.getInt("memNO"));
+//				favoriteVO.setHouseNO(rs.getInt("houseNO"));
 				favoriteVO.setFavDate(rs.getDate("favDate"));
 				set.add(favoriteVO); // Store the row in the list
 			}

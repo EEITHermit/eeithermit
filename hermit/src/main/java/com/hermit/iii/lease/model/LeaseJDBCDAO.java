@@ -3,6 +3,9 @@ package com.hermit.iii.lease.model;
 import java.sql.*;
 import java.util.*;
 
+import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
+
 public class LeaseJDBCDAO implements LeaseDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=Hermit";
@@ -30,7 +33,7 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, leaseVO.getHouseNO());
+			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
 			pstmt.setInt(4, leaseVO.getMemNO());
@@ -77,7 +80,7 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setInt(1, leaseVO.getHouseNO());
+			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
 			pstmt.setInt(4, leaseVO.getMemNO());
@@ -172,7 +175,9 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 				// leaseVO = Domain objects
 				leaseVO = new LeaseVO();
 				leaseVO.setLeaseNO(rs.getInt("leaseNO"));
-				leaseVO.setHouseNO(rs.getInt("houseNO"));
+				HouseVO houseVO = new HouseVO();
+				houseVO.setHouseNO(rs.getInt("houseNO"));
+				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
 				leaseVO.setMemNO(rs.getInt("memNO"));
@@ -229,7 +234,9 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 				// leaseVO = Domain objects
 				leaseVO = new LeaseVO();
 				leaseVO.setLeaseNO(rs.getInt("leaseNO"));
-				leaseVO.setHouseNO(rs.getInt("houseNO"));
+				HouseVO houseVO = new HouseVO();
+				houseVO.setHouseNO(rs.getInt("houseNO"));
+				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
 				leaseVO.setMemNO(rs.getInt("memNO"));
@@ -272,7 +279,9 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 
 		// 新增
 		LeaseVO leaseVO1 = new LeaseVO();
-		leaseVO1.setHouseNO(20001);
+		HouseVO houseVO = new HouseVO();
+		houseVO.setHouseNO(20001);
+		leaseVO1.setHouseVO(houseVO);
 		leaseVO1.setLeaseBeginDate(java.sql.Date.valueOf("2015-10-10"));
 		leaseVO1.setLeaseEndDate(java.sql.Date.valueOf("2017-01-01"));
 		leaseVO1.setMemNO(40001);
@@ -289,7 +298,9 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 		// 修改初始資料第一筆
 		LeaseVO leaseVO2 = new LeaseVO();
 		leaseVO2.setLeaseNO(200001);
-		leaseVO2.setHouseNO(20001);
+		HouseVO houseVO1 = new HouseVO();
+		houseVO.setHouseNO(20001);
+		leaseVO2.setHouseVO(houseVO1);
 		leaseVO2.setLeaseBeginDate(java.sql.Date.valueOf("2014-10-10"));
 		leaseVO2.setLeaseEndDate(java.sql.Date.valueOf("2016-01-01"));
 		leaseVO2.setMemNO(40001);
@@ -306,7 +317,7 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 		// 查詢初始資料第一筆
 		LeaseVO leaseVO3 = dao.findByPrimaryKey(200001);
 		System.out.print(leaseVO3.getLeaseNO() + ",");
-		System.out.print(leaseVO3.getHouseNO() + ",");
+		System.out.print(leaseVO3.getHouseVO().getHouseNO() + ",");
 		System.out.print(leaseVO3.getLeaseBeginDate() + ",");
 		System.out.print(leaseVO3.getLeaseEndDate() + ",");
 		System.out.print(leaseVO3.getMemNO() + ",");
@@ -324,7 +335,7 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 		Set<LeaseVO> set = dao.getAll();
 		for (LeaseVO leaseVO : set) {
 			System.out.print(leaseVO.getLeaseNO() + ",");
-			System.out.print(leaseVO.getHouseNO() + ",");
+			System.out.print(leaseVO.getHouseVO().getHouseNO() + ",");
 			System.out.print(leaseVO.getLeaseBeginDate() + ",");
 			System.out.print(leaseVO.getLeaseEndDate() + ",");
 			System.out.print(leaseVO.getMemNO() + ",");
@@ -343,4 +354,6 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 
 		System.out.println("Done");
 	}
+
+
 }

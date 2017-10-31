@@ -1,19 +1,22 @@
 package com.hermit.iii.city.contorller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.simple.JSONValue;
+
 import com.hermit.iii.city.model.CityService;
-import com.hermit.iii.city.model.CityVO_original;
-import java.io.IOException;
+import com.hermit.iii.city.model.CityVO;
 
 
 @WebServlet("/CityServlet.do")
@@ -29,12 +32,12 @@ public class CityServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String action = request.getParameter("action");
 		CityService svc=new CityService();
-		CityVO_original vo;
+		CityVO vo;
 		
 		
 		if("getAllCity".equals(action)){
-			List<CityVO_original> list=svc.getAllCity();
-			List list2=new LinkedList();
+			List<CityVO> list=svc.getAllCity();
+			LinkedList list2=new LinkedList();
 			PrintWriter out=response.getWriter();
 			for(int i=0;i<list.size();i++){
 				Map m1=new LinkedHashMap();

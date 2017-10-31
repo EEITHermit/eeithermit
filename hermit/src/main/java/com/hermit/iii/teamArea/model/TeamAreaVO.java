@@ -18,9 +18,11 @@ public class TeamAreaVO implements Serializable{
 	public void setBusinTeamVO(BusinTeamVO businTeamVO) {
 		this.businTeamVO = businTeamVO;
 	}
+
 	public Integer getCityNO() {
 		return cityNO;
 	}
+
 	public void setCityNO(Integer cityNO) {
 		this.cityNO = cityNO;
 	}

@@ -29,7 +29,7 @@ public class AdvancedSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		HttpSession session = request.getSession();
 		String searchStr =  
 				"SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize "
 				+ "FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO "
@@ -46,20 +46,39 @@ public class AdvancedSearch extends HttpServlet {
 
 		if((houseTitle.length()!= 0 ) && (houseTitle != null)){
 			searchStr = searchStr + " and (h.houseTitle like '%" + houseTitle +"%')";
+			session.setAttribute("houseTitle",houseTitle);
 		}
+		
 		if((!cityNO.equals(-1)) && (cityNO != null)){
 			searchStr = searchStr + " and (h.cityNO = " + cityNO.toString() +")";
+			session.setAttribute("cityNO",cityNO);
+		}else{
+			session.setAttribute("cityNO",cityNO);
 		}
+		
 		if((!boroughNO.equals(-1)) && (boroughNO != null)){
 			searchStr = searchStr + " and (h.boroughNO = " + boroughNO.toString() +")";
+			session.setAttribute("boroughNO",boroughNO);
+		}else{
+			session.setAttribute("boroughNO",boroughNO);
 		}
+		
 		if((!typeNO.equals(-1)) && typeNO != null){
 			searchStr = searchStr + " and (h.typeNO = " + typeNO.toString() +")";
+			session.setAttribute("typeNO",typeNO);
+		}else{
+			session.setAttribute("typeNO",typeNO);
 		}
+		
 		if((!formNO.equals(-1)) && formNO != null){
 			searchStr = searchStr + " and (h.formNO = " + formNO.toString() +")";
+			session.setAttribute("formNO",formNO);
+		}else{
+			session.setAttribute("formNO",formNO);
 		}
+		
 		if((!houseSize.equals(-1)) && (houseSize != null) ){
+			session.setAttribute("houseSize",houseSize);
 			switch(houseSize){
 				case 0:
 					searchStr = searchStr +" and (h.houseSize BETWEEN 0 AND 10)";
@@ -80,22 +99,29 @@ public class AdvancedSearch extends HttpServlet {
 					searchStr = searchStr +" and (houseSize > 0)";
 					break;
 			}
+		}else{
+			session.setAttribute("houseSize",houseSize);
 		}
-		if((!houseRent.equals(-1)) && (houseRent != null)){
+		
+		if(houseRent != null){
+			session.setAttribute("houseRent",houseRent);
 			switch(houseRent){
 			case 0:
-				searchStr = searchStr +" and (h.houseRent BETWEEN 0 AND 5000)";
+				searchStr = searchStr +" and (h.houseRent > 0)";
 				break;
 			case 1:
-				searchStr = searchStr +" and (h.houseRent BETWEEN 5000 AND 10000)";
+				searchStr = searchStr +" and (h.houseRent BETWEEN 0 AND 5000)";
 				break;
 			case 2:
-				searchStr = searchStr +" and (h.houseRent BETWEEN 10000 AND 20000)";
+				searchStr = searchStr +" and (h.houseRent BETWEEN 5000 AND 10000)";
 				break;
 			case 3:
-				searchStr = searchStr +" and (h.houseRent BETWEEN 20000 AND 30000)";
+				searchStr = searchStr +" and (h.houseRent BETWEEN 10000 AND 20000)";
 				break;
 			case 4:
+				searchStr = searchStr +" and (h.houseRent BETWEEN 20000 AND 30000)";
+				break;
+			case 5:
 				searchStr = searchStr +" and (h.houseRent > 30000)";
 				break;
 			default:
@@ -105,6 +131,7 @@ public class AdvancedSearch extends HttpServlet {
 		}
 		
 		if(equid != null){
+			session.setAttribute("equid",equid);
 			JSONObject equidObj = new JSONObject(equid);
 			JSONArray nameAry = equidObj.names();
 			JSONArray valAry = equidObj.toJSONArray(nameAry);
@@ -115,8 +142,7 @@ public class AdvancedSearch extends HttpServlet {
 			}
 		}
 		HouseService hsv = new HouseService();
-		HttpSession session = request.getSession();
-		session.setAttribute("target",hsv.advencedSearch(searchStr));
+		session.setAttribute("houseItems",hsv.advencedSearch(searchStr));
 	}
 	
 }

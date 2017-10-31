@@ -6,6 +6,9 @@ import java.util.*;
 import javax.naming.*;
 import javax.sql.*;
 
+import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.housepicture.model.HousePictureVO;
+
 public class LeaseJNDIDAO implements LeaseDAO_interface {
 	DataSource ds = null;
 
@@ -28,13 +31,13 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT leaseNO,houseNO,leaseBeginDate,leaseEndDate,memNO,empNO,leaseRent,leaseDeposit,leaseRelief,leaseDate,leasePic,houseNote,leaseRefund FROM Lease WHERE leaseNO = ?";
 	// (含PK流水號)全選，避免用＊(免PK流水號當條件全打包，PK流水號當排序使得每次結果顯示方式統一)
 	private static final String GET_ALL_STMT = "SELECT leaseNO,houseNO,leaseBeginDate,leaseEndDate,memNO,empNO,leaseRent,leaseDeposit,leaseRelief,leaseDate,leasePic,houseNote,leaseRefund FROM Lease ORDER BY leaseNO";
-
+	
 	@Override
 	public void insert(LeaseVO leaseVO) {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERT_STMT);) {
-
-			pstmt.setInt(1, leaseVO.getHouseNO());
+			
+			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
 			pstmt.setInt(4, leaseVO.getMemNO());
@@ -59,7 +62,7 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);) {
 
-			pstmt.setInt(1, leaseVO.getHouseNO());
+			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
 			pstmt.setInt(4, leaseVO.getMemNO());
@@ -110,7 +113,9 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 				// leaseVO = Domain objects
 				leaseVO = new LeaseVO();
 				leaseVO.setLeaseNO(rs.getInt("leaseNO"));
-				leaseVO.setHouseNO(rs.getInt("houseNO"));
+				HouseVO houseVO = new HouseVO();
+				houseVO.setHouseNO(rs.getInt("houseNO"));
+				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
 				leaseVO.setMemNO(rs.getInt("memNO"));
@@ -145,7 +150,9 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 				// leaseVO = Domain objects
 				leaseVO = new LeaseVO();
 				leaseVO.setLeaseNO(rs.getInt("leaseNO"));
-				leaseVO.setHouseNO(rs.getInt("houseNO"));
+				HouseVO houseVO = new HouseVO();
+				houseVO.setHouseNO(rs.getInt("houseNO"));
+				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
 				leaseVO.setMemNO(rs.getInt("memNO"));
@@ -165,4 +172,6 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 		}
 		return set;
 	}
+
+
 }
