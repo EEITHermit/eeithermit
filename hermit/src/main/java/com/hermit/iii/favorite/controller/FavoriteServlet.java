@@ -34,10 +34,10 @@ public class FavoriteServlet extends HttpServlet {
 
 			try {
 				/**** 1.接收請求參數 - 輸入格式的錯誤處理 ****/
-				// 無參數
+				Integer memNO = new Integer(request.getParameter("memNO").trim());
 				/**** 2.開始查詢資料 ****/
 				FavoriteService favoriteSvc = new FavoriteService();
-				String jsonString = favoriteSvc.accountFavoriteAJAX(40001); // 假資料測試
+				String jsonString = favoriteSvc.accountFavoriteAJAX(memNO); // 假資料測試
 				/**** 3.查詢完成 ****/
 				out.write(jsonString);
 			} catch (Exception e) {

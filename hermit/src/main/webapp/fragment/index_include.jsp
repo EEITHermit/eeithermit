@@ -205,7 +205,7 @@
 		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button w3-xlarge w3-left glfont"><span id="hermitHome">Hermit</span></a>
 		<!-- 如果有登入就不顯示 -->
 		<c:if test="${empty LoginOK}">
- 		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
+ 		<a href="<%=request.getContextPath()%>/register/register_select_page.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
  		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
  		</c:if>
  		<!-- 如果有登入就顯示登出 -->
