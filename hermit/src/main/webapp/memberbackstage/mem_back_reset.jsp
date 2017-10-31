@@ -58,32 +58,32 @@
 					<hr />
 
 					<ul id="main-nav" class="nav nav-tabs nav-stacked">
-						<li><a href="<%=request.getContextPath()%>/mem_back_index.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp"> <i
 								class="glyphicon glyphicon-home" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
 						</a></li>
 
-						<li><a href="<%=request.getContextPath()%>/mem_back_favorite.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp"> <i
 								class="glyphicon glyphicon-heart" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">收藏</span>
 						</a></li>
 
-						<li><a href="<%=request.getContextPath()%>/mem_back_calendar.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp"> <i
 								class="glyphicon glyphicon-calendar" style="height: 30px;"></i>
 								<span style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
 						</a></li>
 
-						<li><a href="<%=request.getContextPath()%>/mem_back_qanda.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp"> <i
 								class="glyphicon glyphicon-comment" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
 						</a></li>
 
-						<li><a href="<%=request.getContextPath()%>/mem_back_lease.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp"> <i
 								class="glyphicon glyphicon-file" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li class="active"><a href="<%=request.getContextPath()%>/mem_back_reset.jsp"> <i
+						<li class="active"><a href="<%=request.getContextPath()%>/memberbackstage/mem_back_reset.jsp"> <i
 								class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
