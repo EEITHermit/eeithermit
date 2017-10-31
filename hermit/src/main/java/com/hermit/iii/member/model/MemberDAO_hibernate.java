@@ -271,18 +271,18 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 //		dao.insert(memberVO1);
 //
 //		// 修改初始資料第一筆 (register由資料庫系統給)
-//		MemberVO memberVO2 = new MemberVO();
-//		memberVO2.setMemNO(40001);
-//		memberVO2.setMemTel("0905123456");
-//		memberVO2.setMemAccount("account123");
-//		memberVO2.setMemPwd("123Pwd@@");
-//		memberVO2.setMemName("小花Lin");
-//		memberVO2.setMemGender("女");
-//		memberVO2.setMemEmail("mail123@gmail.com");
-//		memberVO2.setMemStatus("一般會員驗證");
-//		memberVO2.setMemInfract(2);
-//		// memberVO2.setMimage(null); // not use
-//		dao.update(memberVO2);
+		MemberVO memberVO2 = new MemberVO();
+		memberVO2.setMemNO(40003);
+		memberVO2.setMemTel("0905123456");
+		memberVO2.setMemAccount("account123");
+		memberVO2.setMemPwd("123Pwd@@");
+		memberVO2.setMemName("小花Lin");
+		memberVO2.setMemGender("女");
+		memberVO2.setMemEmail("mail123@gmail.com");
+		memberVO2.setMemStatus("一般會員驗證");
+		memberVO2.setMemInfract(2);
+		// memberVO2.setMimage(null); // not use
+		dao.update(memberVO2);
 //
 //		// 查詢初始資料第一筆
 //		MemberVO memberVO3 = dao.findByPrimaryKey(40003);
@@ -318,7 +318,7 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 //		}
 
 		// 刪除初始資料一筆
-		dao.delete(40002);
+//		dao.delete(40002);
 
 		/**** 自訂指令 ****/
 

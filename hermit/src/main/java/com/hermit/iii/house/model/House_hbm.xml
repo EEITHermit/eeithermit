@@ -47,12 +47,5 @@
 		
 		<property name="houseAddr" column="houseAddr" />
 		<property name="houseSize" column="houseSize" />
-		
-		<set name="favs" table="Favorite" lazy="true" order-by="favNO asc">
-			<key>
-				<column name="houseNO"></column>
-			</key>
-			<one-to-many class="com.hermit.iii.favorite.model.FavoriteVO" />
-		</set>
 	</class>
 </hibernate-mapping>
