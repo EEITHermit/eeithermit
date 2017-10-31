@@ -7,12 +7,10 @@
 <title>House Test</title>
 <jsp:include page="/fragment/index_include.jsp" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/appstore.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/preloader.css">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
 <!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
 <script src="<%=request.getContextPath()%>/js/appstore.js"></script>
 <script src="<%=request.getContextPath()%>/js/lazyload.js"></script>
-<script src="<%=request.getContextPath()%>//jquery.preloader.min.js"></script>
 
 <style>
 	a:link, a:visited, a:hover ,a:active{
