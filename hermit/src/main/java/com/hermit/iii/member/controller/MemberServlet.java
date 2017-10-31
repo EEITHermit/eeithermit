@@ -356,21 +356,23 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(request, response);
 			}
 		}
-
+		//變更密碼為真實密碼
+		if("getOneMember".equals(action)){
+			MemberVO vo=(MemberVO)session.getAttribute("LoginOK");
+			String Pwd=new SecurityCipher().decryptString(vo.getMemPwd());
+			session.setAttribute("realPwd", Pwd);
+			RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/mem_back_reset.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		if ("update".equals(action)) {
 			Map<String, String> errorMsg = new HashMap<String, String>();
 
 			MemberVO memberVO = new MemberVO();
 			String memTel = request.getParameter("memTel");
-			// if (memTel.trim().length() == 0) {
-			// errorMsg.put("memTel", "請輸入電話");
-			// }
-			// else if (memTel != "memTel") {
-			// errorMsg.put("memTel", "更改"); //這邊絕對有問題，要問漢勳
-			// System.out.println(memTel);
-			// }
+			
 			String memPwd = request.getParameter("memPwd");
-			String memPwdReg = "^[(a-zA-Z0-9)]{2,10}$";
+			String memPwdReg = "^[(a-zA-Z0-9@)]{2,10}$";
 			if (memPwd.trim().length() == 0) {
 				errorMsg.put("memPwd", "請輸入密碼");
 			} else if (!memPwd.trim().matches(memPwdReg)) {
@@ -392,7 +394,7 @@ public class MemberServlet extends HttpServlet {
 			}
 			if (!errorMsg.isEmpty()) {
 				request.setAttribute("MsgMap", errorMsg);
-				RequestDispatcher rd = request.getRequestDispatcher("/Member/member.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/mem_back_reset.jsp");
 				rd.forward(request, response);
 				return;
 			}
@@ -407,11 +409,11 @@ public class MemberServlet extends HttpServlet {
 			// System.out.println(memImage);
 			memberVO = memSvc.update(memNO, memTel, memAccount, memPwd, memName, memGender, memEmail, memStatus,
 					memInfract, memImage);
-
-			request.setAttribute("memberVO", memberVO);
+			session.setAttribute("realPwd",memPwd);
+			session.setAttribute("LoginOK", memberVO);
+//			request.setAttribute("memberVO", memberVO);
 			request.setAttribute("Msg", "修改成功");
-			RequestDispatcher rd = request.getRequestDispatcher("/Member/index.jsp");
-			rd.forward(request, response);
+			response.sendRedirect("/hermit/memberbackstage/mem_back_index.jsp");
 			return;
 		}
 

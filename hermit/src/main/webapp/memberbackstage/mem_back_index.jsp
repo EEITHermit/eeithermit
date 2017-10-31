@@ -73,7 +73,7 @@ a:link, a:visited, a:hover, a:active {
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="./mem_back_reset.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
 								class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
@@ -102,6 +102,7 @@ a:link, a:visited, a:hover, a:active {
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
+						
 						</div>
 						<!-- /widget-content -->
 	
@@ -120,11 +121,6 @@ a:link, a:visited, a:hover, a:active {
 
 	<div id="footer">
 
-		<!-- 		<div class="container">
-			<hr />
-			<p style="text-align: center">Hermit House for Rent &reg;</p>
-		</div> -->
-		<!-- /container -->
 	</div>
 	<!-- /footer -->
 <footer class="navbar-fixed-bottom w3-black container-fluid text-center" >
@@ -132,8 +128,8 @@ a:link, a:visited, a:hover, a:active {
 		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
 		  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
 		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
     <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>

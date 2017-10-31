@@ -9,24 +9,25 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 .center-control {
-	margin-left: auto;
+	margin-top: 200px; margin-left : auto;
 	margin-right: auto;
+	margin-left: auto;
 	/* 	border: 3px solid red; */
 }
 
 .selectItem1 {
-	margin-left: 20%;
-	width: 16%;
+	margin-left: 80%;
+	width: 72%;
 }
 
 .selectItem2 {
 	margin-left: 10%;
-	width: 12%;
+	width: 300%;
 }
 
 .selectItem3 {
-	margin-left: 20%;
-	width: 12%;
+	margin-left: 180%;
+	width: 300%;
 }
 </style>
 </head>
@@ -57,12 +58,11 @@
 			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
 			  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
 			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
-			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
+			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
 			</ul>
 		</div>
     	<span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-		</div>
 	</footer>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
