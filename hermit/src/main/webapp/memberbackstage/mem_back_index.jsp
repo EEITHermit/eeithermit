@@ -120,11 +120,6 @@ a:link, a:visited, a:hover, a:active {
 
 	<div id="footer">
 
-		<!-- 		<div class="container">
-			<hr />
-			<p style="text-align: center">Hermit House for Rent &reg;</p>
-		</div> -->
-		<!-- /container -->
 	</div>
 	<!-- /footer -->
 <footer class="navbar-fixed-bottom w3-black container-fluid text-center" >
