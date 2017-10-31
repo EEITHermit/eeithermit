@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
+
 </head>
 <body>
 <div class="container">
@@ -46,7 +47,7 @@
 		</div>
 		<div>
 			<label for="adStatus">狀態 </label>
-			<input type="radio" name="adStatus" value="0" checked>上架
+			<input type="radio" name="adStatus" value="1" checked>上架
   		</div>
 		<div>
 			<label for="adModify">修改人</label>

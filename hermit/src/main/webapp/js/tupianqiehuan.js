@@ -51,7 +51,7 @@ $(function() {
             showPics(index);  
             index++;  
             if(index == len) {index = 0;}  
-        },2500);//此2500代表自動撥放的間隔
+        },2000);//此2500代表自動撥放的間隔
     }).trigger("mouseleave");  
       
     //顯示圖片函數，根據接收的index值顯示相應的內容  

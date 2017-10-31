@@ -2,6 +2,8 @@ package com.hermit.iii.favorite.model;
 
 import java.util.*;
 
+import org.json.*;
+
 import com.hermit.iii.house.model.*;
 import com.hermit.iii.member.model.*;
 
@@ -61,5 +63,29 @@ public class FavoriteService {
 	// 查詢全部service
 	public Set<FavoriteVO> getAll() {
 		return dao.getAll();
+	}
+	
+	// AJAX 會員編號查詢 (JSON) only add on hibernate interface
+	public String accountFavoriteAJAX(Integer memNO){
+		Set<FavoriteVO> set = dao.find_MemNO_AJAX(memNO);
+		List<Object> jsonList = new ArrayList<Object>();
+
+		for (FavoriteVO favorite : set) {
+
+			Map<String, Object> jm = new HashMap<String, Object>();
+
+			jm.put("favNO", favorite.getFavNO());
+			jm.put("houseTitle", favorite.getHouseVO().getHouseTitle());
+			jm.put("previewPic", favorite.getHouseVO().getPreviewPic());
+			jm.put("houseStatus", favorite.getHouseVO().getHouseStatus());
+			jm.put("houseRent", favorite.getHouseVO().getHouseRent());
+			jm.put("houseAddr", favorite.getHouseVO().getHouseAddr());
+			jm.put("houseSize", favorite.getHouseVO().getHouseSize());
+			jm.put("favDate", favorite.getFavDate());
+
+			jsonList.add(jm);
+		}
+		String jsonString = new JSONArray(jsonList).toString();
+		return jsonString;
 	}
 }

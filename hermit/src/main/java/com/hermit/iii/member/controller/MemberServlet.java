@@ -585,9 +585,9 @@ public class MemberServlet extends HttpServlet {
 				Set<MemberVO> set = memberSvc.getAll();
 				/**** 3.查詢完成 ****/
 				// 準備JSON包裝
-				List jsonList = new ArrayList();
+				List<Object> jsonList = new ArrayList<Object>();
 				for (MemberVO member : set) {
-					Map jm = new HashMap();
+					Map<String,Object> jm = new HashMap<String,Object>();
 					jm.put("memNO", member.getMemNO());
 					jm.put("memTel", member.getMemTel());
 					jm.put("memAccount", member.getMemAccount());
