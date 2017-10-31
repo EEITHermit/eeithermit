@@ -303,9 +303,9 @@ a:link, a:visited, a:hover, a:active {
 			<li role="presentation"><a
 				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
 			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
+				href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
 			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
 	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊
