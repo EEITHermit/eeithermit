@@ -28,7 +28,10 @@
 				area.value += jsonData.message + "\n";
 			}
 		};
-
+		websocket.onerror = function (evt) {
+	        websocket.close();
+	    };
+	    
 		$(function() {
 			$('#sendmsg').click(function() {
 				websocket.send(text.value);
