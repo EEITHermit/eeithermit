@@ -18,14 +18,19 @@
 <script src="/hermit/js/jSignature.min.js"></script>
 <script src="/hermit/js/datatables.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
+<style>
+input{
+width:100px;
+}
+
+</style>
 </head>
 <body>
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
-	<div class="container">
-	<div class="col-md-7 col-md-offset-1">
-	<div class="col-md-4">
+	<div class="container col-md-10 col-md-offset-5">
+	
 	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form">
 		<div class="form-group">
 			<label>房屋編號</label> 
@@ -109,13 +114,9 @@
 				<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
 		</div>
 		<input type="submit" value="修改">
-		
-		
-		
 	</form>
 	</div>
-	</div>
-	</div>
+	
 	<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
 	<script>
 	$(document).ready(function(){
