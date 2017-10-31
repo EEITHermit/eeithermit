@@ -89,7 +89,7 @@ header[role=banner]::after {
 
 .main-nav {
   float: right;
-  margin-right: 5%;
+  margin-right: 1%;
   width: 44px;
   height: 100%;
   background: url("../images/cd-icon-menu.svg") no-repeat center center;
@@ -137,7 +137,7 @@ header[role=banner]::after {
     -ms-transform: translateY(0);
     -o-transform: translateY(0);
     transform: translateY(0);
-    line-height: 80px;
+    line-height: 40px;
   }
   .main-nav ul.is-visible {
     -webkit-transform: translateY(0);
@@ -148,10 +148,10 @@ header[role=banner]::after {
   }
   .main-nav li {
     display: inline-block;
-    margin-left: 1em;
+/*     margin-left: 1em; */
   }
   .main-nav li:nth-last-child(2) {
-    margin-left: 2em;
+/*      margin-left: 2em; */
   }
   .main-nav a {
     display: inline-block;
@@ -160,15 +160,15 @@ header[role=banner]::after {
     background: transparent;
   }
   .main-nav a.cd-signin, .main-nav a.cd-signup {
-    padding: .6em 1em;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50em;
+    padding: 0 0em;
+/*     border: 1px solid rgba(255, 255, 255, 0.6); */
+/*     border-radius: 50em; */
   }
-  .main-nav a.cd-signup {
+/*   .main-nav a.cd-signup {
     background: #2f889a;
     border: none;
   }
-}
+} */
 
 /* -------------------------------- 
 

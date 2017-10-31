@@ -7,15 +7,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'
 	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/reset.css">
 <!-- CSS reset -->
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/style.css">
+	href="<%=request.getContextPath()%>/css/reset.css">
 <!-- Gem style -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
+<!-- Modernizr -->
 <script src="<%=request.getContextPath()%>/js/modernizr.js"></script>
 <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
-<!-- Modernizr -->
+
 
 <script type="text/javascript">
 	function refresh() {
@@ -35,7 +36,6 @@
 				box = "on";
 			}
 			$.post('/hermit/Login/memlogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
-				
 				if(data == "ok"){
 					window.location = "/hermit/MemberLogin/LoginSuccess.jsp";
 				}
@@ -158,10 +158,6 @@ body {
 .loginBtn--google:hover, .loginBtn--google:focus {
 	background: #E74B37;
 }
-
-.divstyle {
-	margin: 0px auto;
-}
 </style>
 </head>
 <body>
@@ -195,7 +191,7 @@ body {
 
 			<div id="cd-login">
 				<!-- log in form -->
-				<form class="cd-form" action=<c:url value='/Login/login.do'/>
+				<form class="cd-form" action="<c:url value='/Login/login.do'/>"
 					method="POST">
 					<p class="fieldset">
 						<label class="image-replace cd-username" for="signup-username">Username</label>
@@ -236,6 +232,15 @@ body {
 					</p>
 
 					<p class="fieldset">
+						<button class="loginBtn loginBtn--facebook" type="button"
+							id="facebook" style="margin-left: 55px">Login with
+							Facebook</button>
+
+						<button class="loginBtn loginBtn--google" type="button"
+							id="google">Login with Google</button>
+					</p>
+
+					<p class="fieldset">
 						<input class="full-width" type="submit" value="Login"
 							id="submitBtn">
 						<!-- <button class="full-width" type="button" id="submitBtn" value="Login">Login</button> -->
@@ -244,15 +249,6 @@ body {
 
 				<p class="cd-form-bottom-message">
 					<a href="#0">Forgot your password?</a>
-				</p>
-
-				<p class="fieldset">
-					<button class="loginBtn loginBtn--facebook" type="button"
-						id="facebook" style="margin-left: 88px">Login with
-						Facebook</button>
-
-					<button class="loginBtn loginBtn--google" type="button" id="google">Login
-						with Google</button>
 				</p>
 				<!-- <a href="#0" class="cd-close-form">Close</a> -->
 			</div>
