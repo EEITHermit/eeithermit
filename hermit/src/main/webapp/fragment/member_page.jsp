@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,17 @@
 <script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
 <script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'
+	rel='stylesheet' type='text/css'>
+<!-- CSS reset -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/reset.css">
+<!-- Gem style -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
+<!-- Modernizr -->
+<script src="<%=request.getContextPath()%>/js/modernizr.js"></script>
+<script src="<%=request.getContextPath()%>/js/main.js"></script>
 <style>
 	*{
 		margin:0;
@@ -74,9 +86,12 @@
 	<div class="w3-bar w3-black navbar-fixed-top glcwTeXYen">
 		<button class="w3-button w3-dark-grey w3-xlarge w3-left" onclick="openLeftMenu()">&#9776;</button>
 		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button w3-xlarge w3-left glfont"><span id="hermitHome">Hermit</span></a>
-		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
-		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
-		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right"><span id="hermitHome">登入</span></a>
+		
+ 		<!-- 如果有登入就顯示登出 -->
+		<c:if test="${!empty LoginOK}">
+ 			<a href="http://localhost:8081/hermit/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
+ 		</c:if>
+ 		
 		<div class="w3-sidebar w3-bar-block w3-animate-left navbar-fixed-top w3-dark-gray" style="color:white;display:none;font-size:20px;font-family:Microsoft JhengHei;" id="leftMenu">
 		<button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large"><span>Close &times</span></button>
 		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button"><span>首頁</span></a>

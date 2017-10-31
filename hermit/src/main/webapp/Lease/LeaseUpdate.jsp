@@ -12,14 +12,18 @@
 	href="<%=request.getContextPath()%>/css/iEdit.min.css">
 	
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<style>
+.container{
+padding-bottom:40px;
+}
+</style>
 </head>
 <body>
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
 	<div class="container">
-	<div class="col-md-7 col-md-offset-1">
+	<div class="col-md-10 col-md-offset-4">
 	<div class="col-md-4">
 	
 	<form action="/hermit/LeaseServlet.do?action=update" id="form" method="post">

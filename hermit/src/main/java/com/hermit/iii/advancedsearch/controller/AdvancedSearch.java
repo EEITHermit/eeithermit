@@ -35,7 +35,7 @@ public class AdvancedSearch extends HttpServlet {
 				+ "FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO "
 				+ "WHERE h.houseStatus = '未出租'";
 		
-		String houseTitle = request.getParameter("houseTitle");
+		String houseTitle = (request.getParameter("houseTitle")).replace(" ", "");
 		Integer cityNO = Integer.valueOf(request.getParameter("cityNO"));
 		Integer boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
 		Integer typeNO = Integer.valueOf(request.getParameter("typeNO"));
@@ -46,6 +46,8 @@ public class AdvancedSearch extends HttpServlet {
 
 		if((houseTitle.length()!= 0 ) && (houseTitle != null)){
 			searchStr = searchStr + " and (h.houseTitle like '%" + houseTitle +"%')";
+			session.setAttribute("houseTitle",houseTitle);
+		}else{
 			session.setAttribute("houseTitle",houseTitle);
 		}
 		

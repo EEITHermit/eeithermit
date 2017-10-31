@@ -10,9 +10,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>會員登出</title>
+<script>
+window.location="http://localhost:8081/hermit/index.jsp";
+</script>
 </head>
 <body>
-您已經登出<p/>
-<a href="http://localhost:8081/hermit/MemberLogin/Login.jsp">登入</a>
 </body>
 </html>

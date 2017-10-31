@@ -392,7 +392,7 @@ public class MemberServlet extends HttpServlet {
 			}
 			if (!errorMsg.isEmpty()) {
 				request.setAttribute("MsgMap", errorMsg);
-				RequestDispatcher rd = request.getRequestDispatcher("/Member/member.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/mem_back_reset.jsp");
 				rd.forward(request, response);
 				return;
 			}
@@ -410,7 +410,7 @@ public class MemberServlet extends HttpServlet {
 
 			request.setAttribute("memberVO", memberVO);
 			request.setAttribute("Msg", "修改成功");
-			RequestDispatcher rd = request.getRequestDispatcher("/Member/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/index.jsp");
 			rd.forward(request, response);
 			return;
 		}
@@ -585,9 +585,9 @@ public class MemberServlet extends HttpServlet {
 				Set<MemberVO> set = memberSvc.getAll();
 				/**** 3.查詢完成 ****/
 				// 準備JSON包裝
-				List jsonList = new ArrayList();
+				List<Object> jsonList = new ArrayList<Object>();
 				for (MemberVO member : set) {
-					Map jm = new HashMap();
+					Map<String,Object> jm = new HashMap<String,Object>();
 					jm.put("memNO", member.getMemNO());
 					jm.put("memTel", member.getMemTel());
 					jm.put("memAccount", member.getMemAccount());

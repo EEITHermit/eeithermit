@@ -28,7 +28,7 @@ textarea{
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
-	<div class="container">
+	<div class="container col-md-10 col-md-offset-1">
 <table id="leaseTable" class="table">
 	<thead>
 		<tr>
@@ -109,6 +109,7 @@ textarea{
 			</tbody>		
 	</table>
 	<table class="table">
+				<tr>
 					<th>合約圖片
 					<input type="file" style="width:75px" value="${param.leasePic}" id="file">
 					<input type="hidden" id="leasePic" name="leasePic">

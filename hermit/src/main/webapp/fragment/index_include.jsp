@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>赫米特租屋管理</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
@@ -19,6 +21,17 @@
 <script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
 <script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'
+	rel='stylesheet' type='text/css'>
+<!-- CSS reset -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/reset.css">
+<!-- Gem style -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
+<!-- Modernizr -->
+<script src="<%=request.getContextPath()%>/js/modernizr.js"></script>
+<script src="<%=request.getContextPath()%>/js/main.js"></script>
 
 <style>
 	*{
@@ -67,7 +80,78 @@
 		bottom:0;
 		left:0;
 	}
+		
+	/* Shared */
+	.loginBtn {
+	box-sizing: border-box;
+	position: relative;
+	width: 13em; /* - apply for fixed size */
+	margin: 0.2em;
+	padding: 0 15px 0 46px;
+	border: none;
+	text-align: center;
+	line-height: 34px;
+	white-space: nowrap;
+	border-radius: 0.2em;
+	font-size: 16px;
+	color: #FFF;
 	}
+
+	.loginBtn:before {
+	content: "";
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 34px;
+	height: 100%;
+	}
+
+	.loginBtn:focus {
+	outline: none;
+	}
+
+	.loginBtn:active {
+	box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+	}
+
+	/* Facebook */
+	.loginBtn--facebook {
+	background-color: #4C69BA;
+	background-image: linear-gradient(#4C69BA, #3B55A0);
+	/*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+	text-shadow: 0 -1px 0 #354C8C;
+	}
+
+	.loginBtn--facebook:before {
+	border-right: #364e92 1px solid;
+	background:
+		url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png')
+		6px 6px no-repeat;
+	}
+
+	.loginBtn--facebook:hover, .loginBtn--facebook:focus {
+	background-color: #5B7BD5;
+	background-image: linear-gradient(#5B7BD5, #4864B1);
+	}
+
+	/* Google */
+	.loginBtn--google {
+	/*font-family: "Roboto", Roboto, arial, sans-serif;*/
+	background: #DD4B39;
+	}
+
+	.loginBtn--google:before {
+	border-right: #BB3F30 1px solid;
+	background:
+		url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png')
+		6px 6px no-repeat;
+	}
+
+	.loginBtn--google:hover, .loginBtn--google:focus {
+	background: #E74B37;
+	}
+
 	.breadBox {
     	width: 100%;
     	display: block;
@@ -113,23 +197,42 @@
 	    padding-right: 0px;
 	    color: #666666;
 	}
-	
 </style>
 </head>
 <body>
-	<div class="w3-bar w3-black navbar-fixed-top glcwTeXYen">
+	<div class="w3-bar w3-black navbar-fixed-top glcwTeXYen" style="height: 40px">
 		<button class="w3-button w3-dark-grey w3-xlarge w3-left" onclick="openLeftMenu()">&#9776;</button>
 		<a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button w3-xlarge w3-left glfont"><span id="hermitHome">Hermit</span></a>
-		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
-		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
-		<a href="#" class="w3-bar-item w3-button w3-xlarge w3-right"><span id="hermitHome">登入</span></a>
+		<!-- 如果有登入就不顯示 -->
+		<c:if test="${empty LoginOK}">
+ 		<a href="<%=request.getContextPath()%>/register/register_select_page.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">註冊</span></a>
+ 		<span class="w3-bar-item  w3-xlarge w3-right" id="hermitHome">|</span>
+ 		</c:if>
+ 		<!-- 如果有登入就顯示登出 -->
+		<c:if test="${!empty LoginOK}">
+ 			<a href="http://localhost:8081/hermit/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
+ 		</c:if>
+
+			<!-- inser more links here -->
+			<!-- 如果有登入就不顯示 -->
+			<c:if test="${empty LoginOK}">
+				<nav class="main-nav">
+				<ul>
+					<li>
+					 <a class="cd-signin" href="#0" style="font-size: 24px;margin-top: 7px">登入</a>
+					</li>
+				</ul>
+				</nav>
+			</c:if>
+
 		<div class="w3-sidebar w3-bar-block w3-animate-left navbar-fixed-top w3-dark-gray" style="color:white;display:none;font-size:20px;font-family:Microsoft JhengHei;" id="leftMenu">
 		  <button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large"><span>Close &times</span></button>
 		  <a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button"><span>首頁</span></a>
-		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp" class="w3-bar-item w3-button"><span>會員中心</span></a>
-		  <a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp" class="w3-bar-item w3-button"><span>我的收藏</span></a>
+		  <a href="" class="w3-bar-item w3-button" id="mbi"><span>會員中心</span></a>
+		  <a href="" class="w3-bar-item w3-button" id="mbf"><span>我的收藏</span></a>
 		</div>	   
 	</div>
+
 	<div id="top" class="masthead" role="main" style="height:auto;padding-top:80px;padding-bottom:0">
 		<div class="container" style="overflow:hidden">
 			<span class="w3-jumbo glfont" >Hermit<span>
@@ -181,22 +284,22 @@
 														<span class="glcwTeXYen" style="font-size:1.3em">租金 &gt;</span>
 													</label>
 													<label class="radio-inline">
-												      <input type="radio" name="houseRent">不限
+												      <input type="radio" id="租金不限" name="houseRent">不限
 												    </label>
 													<label class="radio-inline">
-												      <input type="radio" name="houseRent">5000以下
+												      <input type="radio" id="5000以下" name="houseRent">5000以下
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">5000-10000元
+												      <input type="radio" id="5000-10000元" name="houseRent">5000-10000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">10000-20000元
+												      <input type="radio" id="10000-20000元" name="houseRent">10000-20000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">20000-30000元
+												      <input type="radio" id="20000-30000元" name="houseRent">20000-30000元
 												    </label>
 												    <label class="radio-inline">
-												      <input type="radio" name="houseRent">30000元以上
+												      <input type="radio" id="30000元以上" name="houseRent">30000元以上
 												    </label>
 												</div>
 											</div>
@@ -209,87 +312,121 @@
 												<div id="equid" style="width:86%;">
 													<div class="col-md-2">
 														<label class="radio-inline">
-													      <input type="checkbox" name="TV">電視
+															<span>
+													      		<input type="checkbox" id="電視" name="TV">電視
+													      	</span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="aircondition">冷氣
+														    <span>
+														      <input type="checkbox" id="冷氣" name="aircondition">冷氣
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="refrigerator">冰箱
+														    <span>
+														      <input type="checkbox" id="冰箱"  name="refrigerator">冰箱
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="waterHeater">熱水器
+														    <span>
+														      <input type="checkbox" id="熱水器"   name="waterHeater">熱水器
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="gas">瓦斯
+														    <span>
+														      <input type="checkbox" id="瓦斯"   name="gas">瓦斯
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="theFourthStation">第四台
+														    <span>
+														      <input type="checkbox" id="第四台"   name="theFourthStation">第四台
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="net">網路
+														    <span>
+														      <input type="checkbox" id="網路"   name="net">網路
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name=washing>洗衣機
+														    <span>
+														      <input type="checkbox" id="洗衣機"   name=washing>洗衣機
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="bed">床
+														    <span>
+														      <input type="checkbox" id="床"   name="bed">床
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="wardrobe">衣櫃
+														    <span>
+														      <input type="checkbox" id="衣櫃"   name="wardrobe">衣櫃
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="sofa">沙發
+														    <span>
+														      <input type="checkbox" id="沙發"   name="sofa">沙發
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="parking">停車位
+														    <span>
+														      <input type="checkbox" id="停車位"   name="parking">停車位
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="elevator">電梯
+														    <span>
+														      <input type="checkbox" id="電梯"   name="elevator">電梯
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="balcony">陽台
+														    <span>
+														      <input type="checkbox" id="陽台"   name="balcony">陽台
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="permitCook">可開伙
+														    <span>
+														      <input type="checkbox" id="可開伙"   name="permitCook">可開伙
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="pet">養寵物
+														    <span>
+														      <input type="checkbox" id="養寵物"   name="pet">養寵物
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
 													    <label class="radio-inline">
-													      <input type="checkbox" name="closeMRT">近捷運
+														    <span>
+														      <input type="checkbox" id="近捷運"   name="closeMRT">近捷運
+														    </span>
 													    </label>
 												    </div>
 												    <div class="col-md-2">
@@ -312,30 +449,118 @@
 		</div>
 	</div>
 	<div class="w3-black w3-margin-bottom" style="height:3vh;border-bottom-left-radius:15px;border-bottom-right-radius:3px;"></div>
+	
+	<!-- 登入 -->
+	<div class="cd-user-modal" id="loginmodal">
+		<!-- this is the entire modal form, including the background -->
+		<div class="cd-user-modal-container">
+			<!-- this is the container wrapper -->
+			<ul class="cd-switcher">
+				<li><a href="#0" class="selected">Sign in</a></li>
+			</ul>
+
+			<div id="cd-login">
+				<!-- log in form -->
+				<form class="cd-form" id="loginform" action="<c:url value='/Login/memlogin.do?action=login'/>" method="POST">
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signup-username">Username</label>
+						<input class="full-width has-padding has-border" name="account"
+							id="account" type="text" placeholder="Username"
+							value="${cookie.account.value}"> <small><font
+							color="red" size="-1" id="putacc"></font></small>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">Password</label>
+						<input class="full-width has-padding has-border" name="pwd"
+							id="pwd" type="password" placeholder="Password"
+							value="${cookie.pwd.value}"> <small><font
+							color="red" size="-1" id="putpwd"></font></small>
+					</p>
+
+					<p class="fieldset">
+						<small><font color="red" size="-1" id="loginErr"></font></small>
+					</p>
+
+					<div>
+						<img id="image" align="center" style="margin-left: 30px"
+							border="0" onclick="refresh()"
+							src="<%=request.getContextPath()%>/MemberLogin/Image.jsp"
+							title="點擊更換圖片"><br />
+					</div>
+
+					<p class="fieldset">
+						<label class="" for="">請輸入驗證碼:</label> <input type="text"
+							id="code" maxlength="6" size="10"><small><font
+							color="red" size="-1" id="putver"></font></small>
+					</p>
+
+					<p id="rememberBtn" class="remember-box">
+						<input type="checkbox" id="remember" ${cookie.flag.value}>
+						<label for="remember">Remember me</label>
+					</p>
+
+					<p class="fieldset">
+						<button class="loginBtn loginBtn--facebook" type="button"
+							id="facebook" style="margin-left: 55px">Login with
+							Facebook</button>
+
+						<button class="loginBtn loginBtn--google" type="button"
+							id="google">Login with Google</button>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width" type="submit" value="Login"
+							id="submitBtn">
+						<!-- <button class="full-width" type="button" id="submitBtn" value="Login">Login</button> -->
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message">
+					<a href="#0">Forgot your password?</a>
+				</p>
+			</div>
+
+			<div id="cd-reset-password">
+				<!-- reset password form -->
+				<p class="cd-form-message">Lost your password? Please enter your
+					email address. You will receive a link to create a new password.</p>
+
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="reset-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="reset-email"
+							type="email" placeholder="E-mail"> <span
+							class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit"
+							value="Reset password">
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message">
+					<a href="#0">Back to log-in</a>
+				</p>
+			</div>
+			<!-- cd-reset-password -->
+		</div>
+		<!-- cd-user-modal-container -->
+	</div>
+	<!-- cd-user-modal -->
+	
 	<section class="breadBox">
         <div class="breadNav clearfix">
             <div class="breadList" id="breadList">
                 <a href="<%= request.getContextPath()%>/index.jsp" style="color:black;padding:0;">Hermit</a>
                 <i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>&nbsp;&nbsp;
             </div>
-            <div class="conditionShow clearfix">
-				<span>台北市&nbsp;&nbsp;</span>
-				<span>中正區&nbsp;&nbsp;</span>
-				<span>電梯大樓&nbsp;&nbsp;</span>
-				<span>獨立套房&nbsp;&nbsp;</span>
-				<span>10坪以下&nbsp;&nbsp;</span>
-				<span>有電視&nbsp;&nbsp;</span>
-				<span>有床&nbsp;&nbsp;</span>
-				<span>洗衣機&nbsp;&nbsp;</span>
-				<span>熱水器&nbsp;&nbsp;</span>
-				<span>網路&nbsp;&nbsp;</span>
-				<span>停車位&nbsp;&nbsp;</span>
-				<span>冷氣&nbsp;&nbsp;</span>
-				<span>冰箱&nbsp;&nbsp;</span>
-				<span>有瓦斯&nbsp;&nbsp;</span>
-            </div>
+            <div id="showSearch" class="conditionShow clearfix">
+			</div>
         </div>
     </section>
+    
 	<script>
 		function openLeftMenu() {
 		    document.getElementById("leftMenu").style.display = "block";
@@ -353,7 +578,9 @@
 			var sessionHouseSize = <%= session.getAttribute("houseSize") %>;
 			var sessionHouseRent = <%= session.getAttribute("houseRent") %>;
 			var sessionEquid = <%= session.getAttribute("equid") %>
-
+			
+			
+			
 			var spanArrow = $(".glyphicon-chevron-up"); 
 			var advencedSearch = $( "#advencedSearch" );
 			var effect = $( "#effect" );
@@ -369,6 +596,26 @@
 			var radioButtons = $("input:radio[name='houseRent']");
 			var chkboxButtions = $("#equid input:checkbox");
 			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp" | "<%= request.getRequestURI() %>" == "/hermit/";
+			var showSearch = $("#showSearch");
+			var cityOpt;
+			
+			if(indexCheck){
+				$(".breadBox").hide();
+			}else{
+				$(".breadBox").show();
+			}
+			function showBread(){
+				showSearch.empty();
+				if(sessionHouseTitle != 'null' && sessionHouseTitle != '' && ((sessionHouseTitle.replace(' ','').lenght) != 0)){
+					showSearch.append( $("<span></span>").html(sessionHouseTitle+"&nbsp;&nbsp;&nbsp;") );
+				}
+				
+			}
+			showBread();
+			
+			
+			
+			
 			
 			function runEffect(){
 				effect.toggle( "blind",  500 );
@@ -388,43 +635,21 @@
 				houseTitle.val("");
 				spanArrow.attr("class","glyphicon glyphicon-chevron-down")
 			}
-		    $.post(path+"/HouseFormServlet.do",{"action":"getAllForm"},function(data){
-				var formData = $.parseJSON(data).list;
-				houseForm.empty();
-				houseForm.append($("<option></option>").text("> 房屋型態 <").val(-1));
-					$.each(formData,function(index,value){
-						var opt = $("<option></option>").text(value.hForm);
-						opt.val(value.formNO);
-						houseForm.append(opt);
-					})
-				if(sessionFormNO != null){
-					houseForm.val(sessionFormNO);			
-				}
-		    })
-		    $.post(path+"/HouseTypeServlet.do",{"action":"getAllType"},function(data){
-				var typeData = $.parseJSON(data).list;
-				houseType.empty();
-				houseType.append($("<option></option>").text("> 房屋類型 <").val(-1));
-				$.each(typeData,function(index,value){
-					var opt = $("<option></option>").text(value.hType);
-					opt.val(value.typeNO);
-					houseType.append(opt);					
-				})
-				if(sessionTypeNO != null && (!indexCheck)){
-					houseType.val(sessionTypeNO);			
-				}
-		    })
-		    $.post(path+"")
+		   
 		    
 			
 			function getCity(){  
 				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
 					var cityData = $.parseJSON(data).list;
 					city.empty();
+					
 					$.each(cityData,function(index,value){
-					var opt = $("<option></option>").text(value.cityName);
-					opt.val(value.cityNO)
-					city.append(opt); 
+						var opt = $("<option></option>").text(value.cityName);
+						opt.val(value.cityNO)
+						city.append(opt); 
+						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
+							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
+						}
 					})
 					if(sessionCityNO != null && (!indexCheck)){
 						city.val(sessionCityNO);
@@ -441,32 +666,50 @@
 						var opt = $("<option></option>").text(value.boroughName);
 						opt.val(value.boroughNO)
 						borough.append(opt); 
+						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
+							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
+						}
 					})
 					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
 						borough.val(sessionBoroughNO);
 					}
 				});
 			}
-			if(sessionHouseSize != null && (!indexCheck)){
-				houseSize.val(sessionHouseSize);
+			function houseSizeShow(){
+				if(sessionHouseSize != null && (!indexCheck)){
+					houseSize.val(sessionHouseSize);
+				}
+				if(sessionHouseSize != -1 && sessionHouseSize != null){
+					$.each($("#houseSize>option"),function(index,size){
+						if(index == (sessionHouseSize+1)){
+							showSearch.append( $("<span></span>").html(size.text+"&nbsp;&nbsp;&nbsp;") );
+						}
+					})
+				}
 			}
-			if(sessionHouseRent != null && sessionHouseRent != -1 && (!indexCheck)){
-				$.each(radioButtons,function(index,button){
-					if(index == sessionHouseRent){
-						button.checked = true;
-					}
-				})
+			function houseRentShow(){
+				if(sessionHouseRent != null && sessionHouseRent != -1 && (!indexCheck)){
+					$.each(radioButtons,function(index,button){
+						if(index == sessionHouseRent){
+							button.checked = true;
+							showSearch.append( $("<span></span>").html(button.id+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+				}
 			}
-			if(!indexCheck){
-				$.each(sessionEquid,function(key,value){
-					if(value){
-						$.each(chkboxButtions,function(index,box){
-							if(key == box.name){
-								box.checked = true;
-							}
-						})
-					}
-				})
+			function equidShowBread(){	
+				if(!indexCheck){
+					$.each(sessionEquid,function(key,value){
+						if(value){
+							$.each(chkboxButtions,function(index,box){
+								if(key == box.name){
+									box.checked = true;
+									showSearch.append( $("<span></span>").html(box.id+"&nbsp;&nbsp;&nbsp;") );
+								}
+							})
+						}
+					})
+				}
 			}
 // 			初始化下拉選單
 			$("#clearCheckBox").on("click",function(){
@@ -478,12 +721,52 @@
 				BoroughInit = 1;
 				getBorough();
 				borough.val(-1);
+				
 			})
+			function getForm(){
+				 $.post(path+"/HouseFormServlet.do",{"action":"getAllForm"},function(data){
+						var formData = $.parseJSON(data).list;
+						houseForm.empty();
+						houseForm.append($("<option></option>").text("> 房屋型態 <").val(-1));
+							$.each(formData,function(index,value){
+								var opt = $("<option></option>").text(value.hForm);
+								opt.val(value.formNO);
+								houseForm.append(opt);
+								if(sessionFormNO != -1 && (sessionFormNO == value.formNO)){
+									showSearch.append( $("<span></span>").html(value.hForm+"&nbsp;&nbsp;&nbsp;"));
+								}
+							})
+						if(sessionFormNO != null && (!indexCheck)){
+							houseForm.val(sessionFormNO);			
+						}
+				    })
+				}
+				function getType(){
+				    $.post(path+"/HouseTypeServlet.do",{"action":"getAllType"},function(data){
+						var typeData = $.parseJSON(data).list;
+						houseType.empty();
+						houseType.append($("<option></option>").text("> 房屋類型 <").val(-1));
+						$.each(typeData,function(index,value){
+							var opt = $("<option></option>").text(value.hType);
+							opt.val(value.typeNO);
+							houseType.append(opt);	
+							if(sessionTypeNO != -1 && (sessionTypeNO == value.typeNO)){
+								showSearch.append( $("<span></span>").html(value.hType+"&nbsp;&nbsp;&nbsp;"));
+							}
+						})
+						if(sessionTypeNO != null && (!indexCheck)){
+							houseType.val(sessionTypeNO);			
+						}
+				    })
+				}
 			getCity();	
-
-
-
-
+			getType();
+			getForm();
+			houseRentShow();
+			equidShowBread();
+			houseSizeShow();
+			
+			
 //			送出查詢條件			
 		
 			$("#submit").on("click",function(){
@@ -519,10 +802,110 @@
 			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
 					location.replace("<%= request.getContextPath()%>/advancedSearch/search.jsp");
 				})
+			})		
+		});
+
+		function openLeftMenu() {
+			document.getElementById("leftMenu").style.display = "block";
+			}
+		function closeLeftMenu() {
+			document.getElementById("leftMenu").style.display = "none";
+			}
+		
+		
+		//更新驗證碼
+		function refresh() {
+		document.getElementById("image").src = "<%=request.getContextPath()%>/MemberLogin/Image.jsp?"
+				+ new Date();
+		}
+		//登入判斷
+		$(document).ready(function(){
+			$("#submitBtn").click(function(){
+				var box;
+				// 清除錯誤訊息
+				$("#putacc").text("");
+				$("#putpwd").text("");
+				$("#putver").text("");
+				$("#loginErr").text("");
+				if($("#remember").prop("checked")){
+					box = "on";
+				}
+			$.post('/hermit/Login/memlogin.do?action=login',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
+				if(data == "ok"){
+				window.location = "/hermit/index.jsp";
+				}
+				var datas = data.split(";");
+				for(var d of datas){
+					var s = d.split(".")[0];
+					var a = d.split(".")[1];
+					if(s == "1"){
+						$("#putacc").text(a);
+					}else if(s == "2"){
+						$("#putpwd").text(a);
+					}else if(s == "3"){
+						$("#putver").text(a);
+					}else if(s == "4"){
+						$("#putver").text(a);
+					}else if(s=="5"){
+						$("#loginErr").text(a);
+						}
+					}
+				})
 			})
 			
-		});
+			//進入會員中心前判斷是否已登入
+			$("#mbi").click(function(event){
+				event.preventDefault();
+				$.post('/hermit/Login/memlogin.do',{"action":"check"},function(data){
+					if(data=="OK"){
+						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp?action=check";
+					}else if(data=="NO"){
+						$('#loginmodal').modal('show');
+						$("#cd-login").toggle(true);
+						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						return;
+					}
+				})
+			})
 			
+			//進入收藏前判斷是否已登入
+			$("#mbf").click(function(event){
+				event.preventDefault();
+				$.post('/hermit/Login/memlogin.do',{"action":"check"},function(data){
+					if(data=="OK"){
+						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp?action=check";
+					}else if(data=="NO"){
+						$('#loginmodal').modal('show');
+						$("#cd-login").toggle(true);
+						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						return;
+					}
+				})
+			})
+		})
+				
+				
+		$(function(){
+		
+		var G_CLIENT_ID = "538877171960-djc145ihldt91ec28hajlt5m66sis16g.apps.googleusercontent.com";
+		var G_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=google_login_Action";
+		var G_SCOPE = 'https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile';
+		
+		var F_CLIENT_ID = "1719931494697481";
+		var F_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=facebook_login_Action";
+		var F_SCOPE = 'email';
+		
+		
+		$("#google").click(function(){
+			window.location='https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE;
+		})
+		
+		$("#facebook").click(function(){
+			window.location='https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE;
+		})		
+		/* $('#google').attr('href','https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE);
+		$('#facebook').attr('href','https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE); */
+	})
 	</script>
 </body>
 </html>

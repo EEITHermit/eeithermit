@@ -32,6 +32,7 @@
 	<div id="content">
 
 		<div class="container">
+	
 
 			<div class="row">
 
@@ -40,7 +41,7 @@
 					<div class="account-container">
 
 						<div class="account-avatar">
-							<img src="<%=request.getContextPath()%>/css/images/god.ico" alt="" class="thumbnail" />
+							<img src="${LoginOK.memImage}" alt="memImage" class="thumbnail" />
 						</div>
 						<!-- /account-avatar -->
 
@@ -49,7 +50,7 @@
 					</div>
 					<div class="account-details">
 						<span class="account-name"
-							style="font-family: Microsoft JhengHei;">eeit9744 徐漢勳</span>
+							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
 						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
 					</div>
 					<!-- /account-container -->
@@ -75,8 +76,6 @@
 						<li><a href="./mem_back_qanda.jsp"> <i
 								class="glyphicon glyphicon-comment" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
-								<span class="label label-warning pull-right"
-								style="font-size: 15px; font-family: Microsoft JhengHei">3</span>
 						</a></li>
 
 						<li><a href="./mem_back_lease.jsp"> <i
@@ -112,63 +111,60 @@
 
 
 						<!-- 這邊是放你的資料 -->
-						<div class="widget-content">
-						<div class="row">
-		<div class="col-md-4 mid"></div>
-		<div class="col-md-4 mid">
-			
+<div class="widget-content" style="padding:20px">
+	<div class="row">
+	<div class="col-md-10 col-md-offset-4 mid">
+	<div class="col-md-4 mid">
 		<form method="POST" action="<%=request.getContextPath()%>/member.do?action=update" id="form">
 			
-			編號<input type="text" value="${memNO}" disabled><br>
-			   <input type="hidden" readonly value="${memNO}" name="memNO">
+			會員編號<input type="text" value="${memNO}" disabled><br>
+				 <input type="hidden" readonly value="${memNO}" name="memNO">
 			
 			電話 <input type="text" value="${memTel}" disabled>
 			   <input type="hidden" value="${memTel}" name="memTel">
-			<font size="-1" color="#FF0000">${MsgMap.memTel}</font>
-			<br>
+				<font size="-1" color="#FF0000">${MsgMap.memTel}</font>
+				<br>
 			
 			帳號<input type="text" value="${memAccount}" disabled>
-			<input type="hidden"  value="${memAccount}" name="memAccount"><br>
+				<input type="hidden"  value="${memAccount}" name="memAccount"><br>
 			
 			密碼<input type="password" value="${memPwd}" name="memPwd">
-			<font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
-			<br>
+				<font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
+				<br>
 			
 			姓名<input type="text" value="${memName}" name="memName">
-            <font size="-1" color="#FF0000">${MsgMap.memName}</font>
-			<br>
+            	<font size="-1" color="#FF0000">${MsgMap.memName}</font>
+				<br>
 			
 			性別<input type="text" value="${memGender}" disabled>
 			   <input type="hidden" readonly value="${memGender}" name="memGender" ><br>
 			   
 			信箱<input type="text" value="${memEmail}" name="memEmail">
-			<font size="-1" color="#FF0000">${MsgMap.memEmail}</font>
-			<br>
+				<font size="-1" color="#FF0000">${MsgMap.memEmail}</font>
+				<br>
 			註冊時間<input type="text" value="${memRegister}" disabled>
-			<input type="hidden" readonly value="${memRegister}" name="memRegister"><br>
+				<input type="hidden" readonly value="${memRegister}" name="memRegister"><br>
 			
 			會員狀態<input type="text" value="${memStatus}" disabled>
-			<input type="hidden" readonly value="${memStatus}" name="memStatus"><br>
+				<input type="hidden" readonly value="${memStatus}" name="memStatus"><br>
 			
 			違規次數<input type="text" value="${memInfract}" disabled>
-			<input type="hidden" readonly value="${memInfract}" name="memInfract"><br>
+				<input type="hidden" readonly value="${memInfract}" name="memInfract"><br>
 			
-			<div>
+				<div>
 			圖片<input type="file" id="file" > 
-			<input type="hidden" id="memImage" name="memImage" value="${memImage}"  >
+				<input type="hidden" id="memImage" name="memImage" value="${memImage}"  >
+				<img id="result" src="${memImage}" name="memImage" id="memImage" height="200" width="200">
+				</div>
+				<input type="submit" value="修改">
 			
-			<img id="result" src="${memImage}" name="memImage" id="memImage" height="200" width="200">
-			</div>
-			<input type="submit" value="修改">
-			
-			</form>
+		</form>
 		
-		
-	
-		</div>
-		<div class="col-md-4 mid"></div>
 	</div>
-						</div>
+	</div>
+	<div class="col-md-4 mid"></div>
+	</div>
+</div>
 						<!-- /widget-content -->
 						
 						
@@ -198,8 +194,8 @@
 		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
 		  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
 		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
     <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
