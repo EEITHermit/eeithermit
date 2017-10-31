@@ -23,11 +23,38 @@
 </head>
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
+
 	<style>
-	a:link, a:visited, a:hover ,a:active{
-	    text-align: left;
-	}
-	</style>
+a:link, a:visited, a:hover, a:active {
+	text-align: left;
+}
+
+#feedback {
+	font-size: 1.4em;
+}
+
+#selectable .ui-selecting {
+	background: #FECA40;
+}
+
+#selectable .ui-selected {
+	background: #F39814;
+	color: white;
+}
+
+#selectable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 95%;
+}
+
+#selectable li {
+	margin: 3px;
+	padding: 0.4em;
+	font-size: 1.4em;
+}
+</style>
 	<div id="content">
 
 		<div class="container">
@@ -39,7 +66,8 @@
 					<div class="account-container">
 
 						<div class="account-avatar">
-							<img src="<%=request.getContextPath()%>/css/images/god.ico" alt="" class="thumbnail" />
+							<img src="<%=request.getContextPath()%>/css/images/god.ico"
+								alt="" class="thumbnail" />
 						</div>
 						<!-- /account-avatar -->
 
@@ -112,10 +140,19 @@
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
+							<ol id="selectable">
+								<li class="ui-widget-content"><img width="40px"
+									src="<%=request.getContextPath()%>/images/yellowstar.png">Item1
+									<button type="button" class="close">&times;</button></li>
+								<li class="ui-widget-content"><img width="40px"
+									src="<%=request.getContextPath()%>/images/yellowstar.png">Item2
+									<button type="button" class="close">&times;</button></li>
+								<li class="ui-widget-content"><img width="40px"
+									src="<%=request.getContextPath()%>/images/yellowstar.png">Item3
+									<button type="button" class="close">&times;</button></li>
+							</ol>
 						</div>
 						<!-- /widget-content -->
-	
-						
 					</div>
 					<!-- /widget -->
 				</div>
@@ -137,18 +174,25 @@
 		<!-- /container -->
 	</div>
 	<!-- /footer -->
-<footer class="navbar-fixed-bottom w3-black container-fluid text-center" >
+	<footer
+		class="navbar-fixed-bottom w3-black container-fluid text-center">
 	<div>
-		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+		<ul class="nav nav-pills w3-centered "
+			style="display: flex; font-size: 13px; justify-content: center;">
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
-    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
+	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊
+			Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
 	</div>
-</footer>
+	</footer>
 
 
 
@@ -158,5 +202,38 @@
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$(function() {
+			
+			loadFavorite();
+
+		});
+		
+		function loadFavorite() {			
+			$.ajax({
+				url:'<%=request.getContextPath()%>/FavoriteServlet?',
+				method : 'post',
+				data : {
+					'action' : 'favorite_getAll_Action',
+				},
+				dataType : 'JSON',
+				success : function(data) {
+					var fragment = $(document.createDocumentFragment());
+					$.each(data,function(k, v) {
+						var cell1 = $('<p></p>').html('<img width="40px" src="<%=request.getContextPath()%>/images/yellowstar.png">'+v.houseTitle+'<button type="button" class="close">&times;</button>');
+
+						var row = $('<li class="ui-widget-content"></li>').append(cell1);
+						fragment.append(row);
+					});
+					$("#selectable").html(fragment);
+					$("#selectable").selectable();
+				},
+				error : function() {
+					alert("您的瀏覽器不支援Ajax!!");
+				}
+			});
+		}
+	</script>
 </body>
 </html>
