@@ -109,6 +109,7 @@ textarea{
 			</tbody>		
 	</table>
 	<table class="table">
+				<tr>
 					<th>合約圖片
 					<input type="file" style="width:75px" value="${param.leasePic}" id="file">
 					<input type="hidden" id="leasePic" name="leasePic">
