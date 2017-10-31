@@ -75,7 +75,6 @@ public class HouseService {
 		vo.setHouseFormVO(houseFormVO);
 		vo.setHouseAddr(houseAddr);
 		vo.setHouseSize(houseSize);
-		vo.getFavs().spliterator();
 		dao.update(vo);
 		return vo;
 	}

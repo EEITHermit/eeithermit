@@ -22,7 +22,9 @@
 input{
 width:100px;
 }
-
+.container{
+padding-bottom:40px;
+}
 </style>
 </head>
 <body>
@@ -84,10 +86,10 @@ width:100px;
 			<label>電費</label> 
 			<input type="text" value="${vo.powerRate}" name="powerRate">
 		</div>
-		<div class="form-group">
-			<label>影片</label>
-			 <input type="text" value="${vo.houseVideo}" name="houseVideo">
-		</div>
+<!-- 		<div class="form-group"> -->
+<!-- 			<label>影片</label> -->
+<%-- 			 <input type="text" value="${vo.houseVideo}" name="houseVideo"> --%>
+<!-- 		</div> -->
 		<div class="form-group">
 			<label>房屋類型</label> 
 			<select id="houseType" name="typeNO"></select>
@@ -110,7 +112,7 @@ width:100px;
 		</div>
 		<div>
 				<input type="file" id="file">
-				<input type="hidden" id="previewPic" name="previewPic" />
+				<input type="hidden" id="previewPic" name="previewPic" value="${vo.previewPic}" />
 				<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
 		</div>
 		<input type="submit" value="修改">

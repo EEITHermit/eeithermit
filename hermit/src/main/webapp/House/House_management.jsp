@@ -43,7 +43,7 @@ padding:30px;
 				<th>押金</th>
 				<th>水費</th>
 				<th>電費</th>
-				
+<!-- 				<th>影片</th> -->
 				<th>類型</th>
 				<th>形態</th>
 				<th>地址</th>
@@ -66,7 +66,7 @@ padding:30px;
 						<th>押金</th>
 						<th>水費</th>
 						<th>電費</th>
-						
+<!-- 						<th>影片</th> -->
 						<th>類型</th>
 						<th>形態</th>
 						<th>地址</th>
@@ -75,7 +75,8 @@ padding:30px;
 					</tr>
 				</tfoot>
 	</table>
-
+</div>
+<div class="container col-md-10 col-md-offset-2">
 <form action="<%=request.getContextPath()%>/House.do" method="POST" id="form" enctype="multipart/form-data">
 	<div class="insertHouseDiv">
 		<table class="insertTable" class="table">
@@ -116,7 +117,7 @@ padding:30px;
 						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge"></td>
 						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate"></td>
 						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseVideo}" name="houseVideo"></td>
+						
 						<td><select id="houseType" name="typeNO"></select></td>
 						<td><select id="houseForm" name="formNO"></select></td>
 						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr"></td>
