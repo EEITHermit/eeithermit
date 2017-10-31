@@ -11,6 +11,7 @@ import com.hermit.iii.util.*;
 public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 
 	private static final String GET_ALL_STMT = "from FavoriteVO order by favNO";
+	private static final String FIND_MEMNO_STMT = "from FavoriteVO where memNO=? order by favNO";
 
 	@Override
 	public void insert(FavoriteVO favoriteVO) {
@@ -84,9 +85,30 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 		return new LinkedHashSet<FavoriteVO>(list);
 	}
 
+	/**** 自訂指令 ****/
+	// AJAX 會員編號查詢
+	@Override
+	public Set<FavoriteVO> find_MemNO_AJAX(Integer memNO) {
+		List<FavoriteVO> list = null;
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			// list = session.createQuery(FIND_MEMNO_STMT).getResultList();
+			Query query = session.createQuery(FIND_MEMNO_STMT);
+			query.setParameter(0, memNO);
+			list = query.getResultList();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return new LinkedHashSet<FavoriteVO>(list);
+	}
+
 	public static void main(String[] args) {
 		FavoriteDAO_hibernate dao = new FavoriteDAO_hibernate();
-		
+
 		MemberDAO_hibernate daoMem = new MemberDAO_hibernate();
 		HouseDAO_hibernate daoHus = new HouseDAO_hibernate();
 		// 新增
@@ -125,6 +147,14 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 
 		// 刪除初始資料一筆
 		dao.delete(40001);
+
+		/**** 自訂指令 ****/
+		// AJAX 會員編號查詢
+		Set<FavoriteVO> setAJAX = dao.find_MemNO_AJAX(40003);
+		for (FavoriteVO favoriteVO : setAJAX) {
+			System.out.print(favoriteVO.getMemberVO().getMemNO() + ",");
+			System.out.println(favoriteVO.getHouseVO().getHouseNO());
+		}
 
 		System.out.println("Done");
 	}

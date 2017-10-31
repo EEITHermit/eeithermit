@@ -12,4 +12,8 @@ public interface FavoriteDAO_interface_hibernate {
 	public FavoriteVO findByPrimaryKey(Integer favNO);
 
 	public Set<FavoriteVO> getAll();
+
+	/**** 自訂指令 ****/
+	// AJAX 會員編號查詢
+	public Set<FavoriteVO> find_MemNO_AJAX(Integer memNO);
 }

@@ -47,8 +47,8 @@ a:link, a:visited, a:hover, a:active {
 					<div class="account-container">
 
 						<div class="account-avatar">
-							<img src="<%=request.getContextPath()%>/css/images/god.ico"
-								alt="" class="thumbnail" />
+
+							<img src="${LoginOK.memImage}" alt="memImage" class="thumbnail" />
 						</div>
 						<!-- /account-avatar -->
 
@@ -57,7 +57,7 @@ a:link, a:visited, a:hover, a:active {
 					</div>
 					<div class="account-details">
 						<span class="account-name"
-							style="font-family: Microsoft JhengHei;">eeit9744 徐漢勳</span>
+							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
 						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
 					</div>
 					<!-- /account-container -->
@@ -83,8 +83,6 @@ a:link, a:visited, a:hover, a:active {
 						<li><a href="./mem_back_qanda.jsp"> <i
 								class="glyphicon glyphicon-comment" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
-								<span class="label label-warning pull-right"
-								style="font-size: 15px; font-family: Microsoft JhengHei">3</span>
 						</a></li>
 
 						<li><a href="./mem_back_lease.jsp"> <i
@@ -165,16 +163,12 @@ a:link, a:visited, a:hover, a:active {
 	<footer
 		class="navbar-fixed-bottom w3-black container-fluid text-center">
 	<div>
-		<ul class="nav nav-pills w3-centered "
-			style="display: flex; font-size: 13px; justify-content: center;">
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+
+		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
+		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
 	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊

@@ -359,7 +359,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 				memVO.setMemRegister(rs.getDate("memRegister"));
 				memVO.setMemStatus(rs.getString("memStatus"));
 				memVO.setMemInfract(rs.getInt("memInfract"));
-				// memVO.setMemImage(rs.getBinaryStream("memberImage"));
+				memVO.setMemImage(rs.getString("memberImage"));
 			}
 			// Handle any SQL errors
 		} catch (SQLException se) {
@@ -420,7 +420,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 				memVO.setMemRegister(rs.getDate("memRegister"));
 				memVO.setMemStatus(rs.getString("memStatus"));
 				memVO.setMemInfract(rs.getInt("memInfract"));
-				// memVO.setMemImage(rs.getBinaryStream("memImage"));
+				memVO.setMemImage(rs.getString("memberImage"));
 			}
 			// Handle any SQL errors
 		} catch (SQLException se) {
@@ -481,7 +481,7 @@ public class MemberJNDIDAO implements MemberDAO_interface {
 				memVO.setMemRegister(rs.getDate("memRegister"));
 				memVO.setMemStatus(rs.getString("memStatus"));
 				memVO.setMemInfract(rs.getInt("memInfract"));
-				// memVO.setMemImage(rs.getBinaryStream("memImage"));
+				memVO.setMemImage(rs.getString("memberImage"));
 			}
 			// Handle any SQL errors
 		} catch (SQLException se) {

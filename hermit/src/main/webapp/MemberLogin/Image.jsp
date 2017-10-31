@@ -28,8 +28,8 @@
 	response.setDateHeader("Expires", 0);
 
 	//在內存中創建圖片
-	int width = 95;
-	int height = 25;
+	int width = 140;
+	int height = 40;
 	BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
 	//獲取圖片上下文
@@ -40,10 +40,10 @@
 	g.setColor(getRandColor(200, 250));
 	g.fillRect(0, 0, width, height);
 	//字體
-	g.setFont(new Font("Time New Roman", Font.PLAIN, 20));
+	g.setFont(new Font("Time New Roman", Font.PLAIN, 35));
 	//干擾線
 	g.setColor(getRandColor(160, 200));
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 155; i++) {
 		int x = random.nextInt(width);
 		int y = random.nextInt(height);
 		int x1 = random.nextInt(12);
@@ -63,7 +63,7 @@
 		//顯示到圖片中
 		g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
 		//調用函數出來的顏色相同，可能是因為種子太接近，所以只能直接生成
-		g.drawString(str, 13 * i + 6, 16);
+		g.drawString(str, i*(width/6),height-(height/3));
 	}
 	//生成的驗證碼存入session
 	session.setAttribute("code", code);

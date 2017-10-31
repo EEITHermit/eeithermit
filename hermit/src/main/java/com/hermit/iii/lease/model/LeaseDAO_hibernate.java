@@ -184,6 +184,10 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 
 		System.out.println("Done");
 		 //找尋房屋物件BY memberNO
+		ArrayList<HouseVO> array = dao.findHouseBymemNO(40001);
+		for(HouseVO h :array){
+			//System.out.println(h.getCityNO());
+		}
 
 //		ArrayList<HouseVO> array = dao.findHouseBymemNO(40001);
 //		for(HouseVO h :array){
