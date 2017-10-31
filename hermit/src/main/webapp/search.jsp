@@ -6,11 +6,13 @@
 <meta charset="UTF-8">
 <title>House Test</title>
 <jsp:include page="/fragment/index_include.jsp" />
-<link rel="stylesheet" href="../css/appstore.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/appstore.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/preloader.css">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
 <!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
 <script src="<%=request.getContextPath()%>/js/appstore.js"></script>
 <script src="<%=request.getContextPath()%>/js/lazyload.js"></script>
+<script src="<%=request.getContextPath()%>//jquery.preloader.min.js"></script>
 
 <style>
 	a:link, a:visited, a:hover ,a:active{
@@ -51,12 +53,10 @@
 			if(houseItems== null){
 				location.replace("<%= request.getContextPath()%>/index.jsp");
 			};
-// 			console.log(houseItems.items)
-// 			console.log(houseItems.items.length)
 			if(houseItems.items.length == 0){
 // 				alert("找不到房屋物件")
 			}
-		    $.appstore({json:houseItems});
+			$.appstore({json:houseItems});
 		})
 	</script>
 </body>

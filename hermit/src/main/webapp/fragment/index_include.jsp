@@ -716,6 +716,19 @@
 				$.each(chkboxButtions,function(index,box){
 					box.checked = false;
 				})
+				$.each(radioButtons,function(index,button){
+					
+					if(index == 0){
+						button.checked = true;
+					}else{
+						button.checked = false;
+					}
+				})
+				city.val(1);
+				borough.val(-1);
+				houseForm.val(-1);
+				houseType.val(-1);
+				houseSize.val(-1);
 			})
 			city.on("change",function(){
 				BoroughInit = 1;
@@ -800,7 +813,7 @@
 						equid:jsonStr
 				}
 			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
-					location.replace("<%= request.getContextPath()%>/advancedSearch/search.jsp");
+					location.replace("<%= request.getContextPath()%>/search.jsp");
 				})
 			})		
 		});
