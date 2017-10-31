@@ -9,24 +9,25 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 .center-control {
-	margin-left: auto;
+	margin-top: 200px; margin-left : auto;
 	margin-right: auto;
+	margin-left: auto;
 	/* 	border: 3px solid red; */
 }
 
 .selectItem1 {
-	margin-left: 20%;
-	width: 16%;
+	margin-left: 80%;
+	width: 72%;
 }
 
 .selectItem2 {
 	margin-left: 10%;
-	width: 12%;
+	width: 300%;
 }
 
 .selectItem3 {
-	margin-left: 20%;
-	width: 12%;
+	margin-left: 180%;
+	width: 300%;
 }
 </style>
 </head>
