@@ -413,7 +413,7 @@ public class MemberServlet extends HttpServlet {
 			session.setAttribute("LoginOK", memberVO);
 //			request.setAttribute("memberVO", memberVO);
 			request.setAttribute("Msg", "修改成功");
-			response.sendRedirect("/hermit/memberbackstage/mem_back_reset.jsp");
+			response.sendRedirect("/hermit/memberbackstage/mem_back_index.jsp");
 			return;
 		}
 

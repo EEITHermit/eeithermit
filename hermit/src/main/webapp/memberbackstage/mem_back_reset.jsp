@@ -111,53 +111,92 @@
 
 
 						<!-- 這邊是放你的資料 -->
-<div class="widget-content" style="padding:20px">
-	<div class="row">
-	<div class="col-md-10 col-md-offset-4 mid">
-	<div class="col-md-4 mid">
-		<form method="POST" action="<%=request.getContextPath()%>/member.do?action=update" id="form">
-			
-			會員編號<input type="text" value="${LoginOK.memNO}" disabled><br>
-				 <input type="hidden" readonly name="memNO" value="${LoginOK.memNO}">
-			
-			電話 <input type="text" value="${LoginOK.memTel}" disabled>
-			   <input type="hidden" name="memTel" value="${LoginOK.memTel}">
-				<font size="-1" color="#FF0000">${MsgMap.memTel}</font>
-				<br>
-			
-			帳號<input type="text" value="${LoginOK.memAccount}" disabled>
-				<input type="hidden" name="memAccount" value="${LoginOK.memAccount}"><br>
-			
-			密碼<input type="password" value="${realPwd}" name="memPwd">
-				<font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
-				<br>
-			
-			姓名<input type="text" value="${LoginOK.memName}" name="memName">
-            	<font size="-1" color="#FF0000">${MsgMap.memName}</font>
-				<br>
-			
-			性別<input type="text" value="${LoginOK.memGender}" disabled>
-			   <input type="hidden" readonly name="memGender" value="${LoginOK.memGender}"><br>
-			   
-			信箱<input type="text" value="${LoginOK.memEmail}" name="memEmail">
-				<font size="-1" color="#FF0000">${MsgMap.memEmail}</font>
-				<br>
-			註冊時間<input type="text" value="${LoginOK.memRegister}" disabled>
-				<input type="hidden" readonly name="memRegister" value="${LoginOK.memRegister}"><br>
-			
-			會員狀態<input type="text" value="${LoginOK.memStatus}" disabled>
-				<input type="hidden" readonly name="memStatus" value="${LoginOK.memStatus}"><br>
-			
-			違規次數<input type="text" value="${LoginOK.memInfract}" disabled>
-				<input type="hidden" readonly name="memInfract" value="${LoginOK.memInfract}"><br>
-			
-				<div>
-			圖片<input type="file" id="file" > 
-				<input type="hidden" id="memImage" name="memImage" value="${LoginOK.memImage}">
-				<img id="result" src="${LoginOK.memImage}" name="memImage" id="memImage" height="200" width="200">
+<div class="content">
+		<form method="POST" action="<%=request.getContextPath()%>/member.do?action=update" id="form" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-md-5 control-label">會員編號</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memNO}" disabled> 
+						<input type="hidden" readonly name="memNO" value="${LoginOK.memNO}">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">電話</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memTel}" disabled>
+						<input type="hidden" name="memTel" value="${LoginOK.memTel}">
+						<font size="-1" color="#FF0000">${MsgMap.memTel}</font>
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">帳號</label>
+			    	<div class="col-md-4">
+			    		<input type="text" value="${LoginOK.memAccount}" disabled>
+						<input type="hidden" name="memAccount" value="${LoginOK.memAccount}"> 
+			    	</div>
+			</div>			
+			<div class="form-group">
+				<label class="col-md-5 control-label">密碼</label>
+					<div class="col-md-4">
+						<input type="password" value="${realPwd}" name="memPwd">
+						<font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">姓名</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memName}" name="memName">
+        	    		<font size="-1" color="#FF0000">${MsgMap.memName}</font>
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">性別</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memGender}" disabled>
+						<input type="hidden" readonly name="memGender" value="${LoginOK.memGender}"> 
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">信箱</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memEmail}" name="memEmail">
+						<font size="-1" color="#FF0000">${MsgMap.memEmail}</font>
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">註冊時間</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memRegister}" disabled>
+						<input type="hidden" readonly name="memRegister" value="${LoginOK.memRegister}"> 
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">會員狀態</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memStatus}" disabled>
+						<input type="hidden" readonly name="memStatus" value="${LoginOK.memStatus}"> 
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">違規次數</label>
+					<div class="col-md-4">
+						<input type="text" value="${LoginOK.memInfract}" disabled>
+						<input type="hidden" readonly name="memInfract" value="${LoginOK.memInfract}"> 
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-5 control-label">圖片</label>
+					<div class="col-md-4">
+						<input type="file" id="file" > 
+						<input type="hidden" id="memImage" name="memImage" value="${LoginOK.memImage}">
+						<img id="result" src="${LoginOK.memImage}" name="memImage" id="memImage" height="200" width="200">
+					</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-6 control-label">
+					<input type="submit" value="修改">
 				</div>
-				<input type="submit" value="修改">
-			
+			</div>
 		</form>
 		
 	</div>
