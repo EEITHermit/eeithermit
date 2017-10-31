@@ -143,8 +143,7 @@ a:link, a:visited, a:hover, a:active {
 					<div class="account-container">
 
 						<div class="account-avatar">
-							<img src="<%=request.getContextPath()%>/css/images/god.ico"
-								alt="" class="thumbnail" />
+							<img src="${LoginOK.memImage}" alt="memImage" class="thumbnail" />
 						</div>
 						<!-- /account-avatar -->
 
@@ -153,7 +152,7 @@ a:link, a:visited, a:hover, a:active {
 					</div>
 					<div class="account-details">
 						<span class="account-name"
-							style="font-family: Microsoft JhengHei;">eeit9744 徐漢勳</span>
+							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
 						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
 					</div>
 					<!-- /account-container -->
