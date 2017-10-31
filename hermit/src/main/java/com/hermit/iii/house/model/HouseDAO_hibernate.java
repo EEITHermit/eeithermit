@@ -46,7 +46,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.update(houseVO);
+			session.saveOrUpdate(houseVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();

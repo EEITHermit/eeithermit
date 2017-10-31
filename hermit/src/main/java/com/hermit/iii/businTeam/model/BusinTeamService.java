@@ -1,17 +1,32 @@
 package com.hermit.iii.businTeam.model;
 
+import java.util.Set;
+
 public class BusinTeamService {
-	BusinTeamDAO_interface btDAO = new BusinTeamDAO_JNDI();
-	public Integer delete(Integer businNO){
-		return btDAO.delete(businNO);
+	BusinTeamDAO_interface_hibernate btDAO = new BusinTeamDAO_hibernate();
+
+	public void delete(Integer businNO) {
+		btDAO.delete(businNO);
+		return;
 	};
-	public Integer insert(BusinTeamVO_original btVO){
-		return btDAO.insert(btVO);
+
+	public void insert(BusinTeamVO btVO) {
+		btDAO.insert(btVO);
+		return;
 	};
-	public Integer update(BusinTeamVO_original btVO){
-		return btDAO.update(btVO);
+
+	public void update(BusinTeamVO btVO) {
+		btDAO.update(btVO);
+		return;
 	};
-	public BusinTeamVO_original select(Integer businNO){
-		return btDAO.select(businNO);
+
+	public BusinTeamVO select(Integer businNO) {
+
+		return btDAO.findByPrimaryKey(businNO);
 	};
+
+	public Set<BusinTeamVO> getAll() {
+		btDAO.getAll();
+		return btDAO.getAll();
+	}
 }
