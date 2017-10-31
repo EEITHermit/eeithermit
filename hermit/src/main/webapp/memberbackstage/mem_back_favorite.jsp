@@ -68,6 +68,48 @@ a:link, a:visited, a:hover, a:active {
 	font-style: italic;
 	margin-left: 10%;
 }
+/* Snackbar / Toast */
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 100px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 100px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 100px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 100px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 100px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
 </style>
 	<div id="content">
 
@@ -155,13 +197,6 @@ a:link, a:visited, a:hover, a:active {
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
 							<ol id="selectable">
-								<!-- 								<li class="ui-widget-content"><img width="40px" -->
-								<%-- 									src="<%=request.getContextPath()%>/images/yellowstar.png"><span --%>
-								<!-- 									class="favtitle">大陽台-鬧中取靜-近捷運站</span><span class="favstatus">未出租</span> -->
-								<!-- 									<button type="button" class="close">&times;</button> -->
-								<!-- 									<p class="favaddr">敦化北路100號</p> -->
-								<!-- 									<hr />圖<span class="favrent">租金：houseRent</span><span -->
-								<!-- 									class="favsize">坪數：houseSize</span></li> -->
 							</ol>
 						</div>
 						<!-- /widget-content -->
@@ -176,7 +211,7 @@ a:link, a:visited, a:hover, a:active {
 	</div>
 	<!-- /content -->
 
-
+	<div id="snackbar">已經成功移除</div>
 	<div id="footer">
 
 		<!-- 		<div class="container">
@@ -262,7 +297,9 @@ a:link, a:visited, a:hover, a:active {
 							},
 							dataType : 'text',
 							success : function(data) {
-								console.log('移除成功');
+								var thebar = document.getElementById("snackbar");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 3000);
 							},
 							error : function() {
 								alert("您的瀏覽器不支援Ajax!!");
