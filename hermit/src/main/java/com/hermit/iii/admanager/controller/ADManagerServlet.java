@@ -57,7 +57,7 @@ public class ADManagerServlet extends HttpServlet {
 			adBrowse = Integer.valueOf(0);
 			adModify = Integer.valueOf(req.getParameter("adModify"));
 			ads.insertADManager(adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
-			resp.sendRedirect("admanager/back-adindex.jsp");
+			resp.sendRedirect("admanager/back-adindex_include.jsp");
 			System.out.println("Insert OK");
 			
 		}
@@ -74,12 +74,12 @@ public class ADManagerServlet extends HttpServlet {
 			adBrowse = Integer.valueOf(0);
 			adModify = Integer.valueOf(req.getParameter("adModify"));
 			ads.updateADManager(adNO, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
-			resp.sendRedirect("admanager/back-adindex.jsp");
+			resp.sendRedirect("admanager/back-adindex_include.jsp");
 			System.out.println("Update OK");
 //			RequestDispatcher rd = req.getRequestDispatcher("/admanager/back-adindex.jsp");
 //			rd.forward(req, resp);
 		}
-//		刪除圖片(adNo)
+//		刪除圖片(adNO)
 		if ("deleteADManager".equals(action)) {
 			ads = new ADManagerService();
 			ads.deleteADManager(Integer.valueOf(req.getParameter("adNO")));
@@ -93,7 +93,7 @@ public class ADManagerServlet extends HttpServlet {
 			ads = new ADManagerService();
 			adVO = ads.getOneADManager(Integer.valueOf(req.getParameter("adNO")));
 			req.setAttribute("adVO", adVO);
-			RequestDispatcher rd = req.getRequestDispatcher("/admanager/adUpdate.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("admanager/adUpdate_include.jsp");
 			rd.forward(req, resp);
 		}
 //		查詢全部
