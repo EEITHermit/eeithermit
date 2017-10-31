@@ -20,14 +20,97 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
-</head>
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
-	<style>
-	a:link, a:visited, a:hover ,a:active{
-	    text-align: left;
-	}
-	</style>
+
+<style>
+a:link, a:visited, a:hover, a:active {
+	text-align: left;
+}
+
+#feedback {
+	font-size: 1.4em;
+}
+
+#selectable .ui-selecting {
+	background: #FECA40;
+}
+
+#selectable .ui-selected {
+	background: #F39814;
+	color: white;
+}
+
+#selectable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 95%;
+}
+
+#selectable li {
+	margin: 3px;
+	padding: 0.4em;
+	font-size: 1.4em;
+}
+
+.favtitle {
+	font-size: 1.4em;
+}
+
+.favstatus, .favrent, .favsize {
+	font-size: 0.7em;
+	margin-left: 3%;
+}
+
+.favaddr {
+	font-size: 1em;
+	font-style: italic;
+	margin-left: 10%;
+}
+/* Snackbar / Toast */
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 100px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 100px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 100px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 100px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 100px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+</style>
 	<div id="content">
 
 		<div class="container">
@@ -39,7 +122,7 @@
 					<div class="account-container">
 
 						<div class="account-avatar">
-							<img src="<%=request.getContextPath()%>/css/images/god.ico" alt="" class="thumbnail" />
+							<img src="${LoginOK.memImage}" alt="memImage" class="thumbnail" />
 						</div>
 						<!-- /account-avatar -->
 
@@ -48,7 +131,7 @@
 					</div>
 					<div class="account-details">
 						<span class="account-name"
-							style="font-family: Microsoft JhengHei;">eeit9744 徐漢勳</span>
+							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
 						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
 					</div>
 					<!-- /account-container -->
@@ -74,8 +157,6 @@
 						<li><a href="./mem_back_qanda.jsp"> <i
 								class="glyphicon glyphicon-comment" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
-								<span class="label label-warning pull-right"
-								style="font-size: 15px; font-family: Microsoft JhengHei">3</span>
 						</a></li>
 
 						<li><a href="./mem_back_lease.jsp"> <i
@@ -112,10 +193,10 @@
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
+							<ol id="selectable">
+							</ol>
 						</div>
 						<!-- /widget-content -->
-	
-						
 					</div>
 					<!-- /widget -->
 				</div>
@@ -127,7 +208,7 @@
 	</div>
 	<!-- /content -->
 
-
+	<div id="snackbar">已經成功移除</div>
 	<div id="footer">
 
 		<!-- 		<div class="container">
@@ -137,18 +218,25 @@
 		<!-- /container -->
 	</div>
 	<!-- /footer -->
-<footer class="navbar-fixed-bottom w3-black container-fluid text-center" >
+	<footer
+		class="navbar-fixed-bottom w3-black container-fluid text-center">
 	<div>
-		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+		<ul class="nav nav-pills w3-centered "
+			style="display: flex; font-size: 13px; justify-content: center;">
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
-    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
+	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊
+			Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
 	</div>
-</footer>
+	</footer>
 
 
 
@@ -158,5 +246,70 @@
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script>
+		$(function() {
+			
+			loadFavorite();
+
+		});
+		
+		function loadFavorite() {		
+			$.ajax({
+				url:'<%=request.getContextPath()%>/FavoriteServlet?',
+				method : 'post',
+				data : {
+					'action' : 'favorite_getAJAX_Action',
+				},
+				dataType : 'JSON',
+				success : function(data) {
+					var fragment = $(document.createDocumentFragment());
+					$.each(data,function(k, v) {
+						var cell = $('<p></p>').html('<img width="40px" src="<%=request.getContextPath()%>/images/yellowstar.png">'
+														+ v.houseTitle
+														+ '<span class="favstatus">'
+														+ v.houseStatus
+														+ '</span><button type="button" class="close">&times;</button><p class="favaddr">'
+														+ v.houseAddr
+														+ '</p><hr /><img height="50" width="50" src="'+v.previewPic+'"><span class="favrent">租金：'
+														+ v.houseRent
+														+ '</span><span class="favsize">坪數：'
+														+ v.houseSize
+														+ '</span><input type="hidden" name="favNO" value="'+v.favNO+'">');
+						var row = $('<li class="ui-widget-content"></li>').append(cell);
+						fragment.append(row);
+					});
+					$("#selectable").html(fragment);
+					$("#selectable").selectable();
+					//close
+					$('.close').click(function() {
+						var fav = $(this).parents('li').find('input').val();
+						$.ajax({
+							url:'<%=request.getContextPath()%>/FavoriteServlet?',
+							method : 'post',
+							data : {
+								'action' : 'favorite_delete_Action',
+								'favNO' : fav
+							},
+							dataType : 'text',
+							success : function(data) {
+								var thebar = document.getElementById("snackbar");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 3000);
+							},
+							error : function() {
+								alert("您的瀏覽器不支援Ajax!!");
+							}
+						})
+						$(this).parents('li').remove();
+					});
+				},
+				error : function() {
+					alert("您的瀏覽器不支援Ajax!!");
+				}
+			});
+		}
+	</script>
 </body>
 </html>
