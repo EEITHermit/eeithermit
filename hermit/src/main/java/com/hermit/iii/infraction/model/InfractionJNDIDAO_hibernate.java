@@ -1,6 +1,7 @@
 package com.hermit.iii.infraction.model;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 import javax.naming.*;
@@ -32,6 +33,7 @@ public class InfractionJNDIDAO_hibernate implements InfractionDAO_interface_hibe
 		Integer result = 0;
 	try{
 		session.getTransaction().begin();
+		inVO.setInDate(new Date(System.currentTimeMillis()));
 		session.saveOrUpdate(inVO);
 		session.getTransaction().commit();
 		result = 1;

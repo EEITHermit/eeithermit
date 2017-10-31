@@ -90,7 +90,7 @@ a:link, a:visited, a:hover, a:active {
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="./mem_back_reset.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
 								class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
@@ -118,8 +118,8 @@ a:link, a:visited, a:hover, a:active {
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
-							<div id="show" style="margin-top: 50px">
-								<table id="showTable">
+							<div id="show" style="margin-top: 25px">
+								<table id="showTable" class="table table-striped table-bordered">
 									<thead>
 										<tr>
 											<th>預約編號</th>
@@ -206,20 +206,7 @@ a:link, a:visited, a:hover, a:active {
 					tr.appendTo(body);
 					//產生DataTable
 					$('#showTable').DataTable({
-						"language" : {
-							"lengthMenu" : "每頁顯示 _MENU_ 筆",
-							"zeroRecords" : "Nothing found - sorry",
-							"info" : "現在正顯示   _PAGE_  共有 _PAGES_ 頁",
-							"infoEmpty" : "No records available",
-							"infoFiltered" : "(filtered from _MAX_ total records)",
-							"search" : "查詢:",
-							"paginate" : {
-								"first" : "首頁",
-								"last" : "末頁",
-								"next" : "下頁",
-								"previous" : "前頁"
-							}
-						}
+						
 					});
 				};
 			});

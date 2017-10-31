@@ -26,6 +26,8 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/css/jquery-ui.min.css"
+	rel="stylesheet" />
 <link
 	href='<%=request.getContextPath()%>/css/jqueryText/jquery-te-1.4.0.css'
 	rel='stylesheet' />
@@ -35,12 +37,11 @@
 	display: none;
 }
 
-#commentForm {
+#formDiv {
 	display: none;
 }
-.td{
- 	width:100px;
-}
+
+
 </style>
 
 </head>
@@ -71,7 +72,7 @@ a:link, a:visited, a:hover, a:active {
 					</div>
 					<div class="account-details">
 						<span class="account-name"
-							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
+							style="font-family: Microsoft JhengHei; padding-left: 75px">${LoginOK.memAccount}</span>
 						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
 					</div>
 					<!-- /account-container -->
@@ -104,7 +105,7 @@ a:link, a:visited, a:hover, a:active {
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="./mem_back_reset.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
 								class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
@@ -140,7 +141,7 @@ a:link, a:visited, a:hover, a:active {
 								</div>
 								<!--查詢留言區域 -->
 								<div id="queryDiv">
-									<table id="queryTable">
+									<table id="queryTable" class="table table-striped table-bordered" cellspacing="0">
 										<thead>
 											<tr>
 												<th>留言時間</th>
@@ -183,8 +184,9 @@ a:link, a:visited, a:hover, a:active {
 									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
 									method="POST">
 									<div class="container col-md-8">
-										<label for="houseNO" class="form-label">請選擇房屋：</label>
-										<select name="houseNO" class="form-control"  style="background-color:#DDDDDD;">
+										<label for="houseNO" class="form-label">請選擇房屋：</label> <select
+											name="houseNO" class="form-control"
+											style="background-color: #DDDDDD;">
 											<option>請選擇 房屋</option>
 											<!--filter會傳來houseArray 為此會員所租賃的房屋 -->
 											<c:forEach var="houseVO" items="${houseArray}">
@@ -216,7 +218,7 @@ a:link, a:visited, a:hover, a:active {
 		<!-- /container -->
 	</div>
 	<!-- /content -->
-
+	<div style="height:50px"></div>
 	<div id="footer">
 
 		<!-- 		<div class="container">
@@ -252,6 +254,7 @@ a:link, a:visited, a:hover, a:active {
 ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
 	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
@@ -262,37 +265,38 @@ a:link, a:visited, a:hover, a:active {
 		function work() {
 			//跳出查詢畫面
 			$("#queryBT").click(function() {
-				$("#queryDiv").toggle(true, 1000);
-				$("#commentForm").toggle(false, 1000);
+				$("#queryDiv").toggle();
 			});
 			//跳出投訴頁面
 			$("#commentBT").click(function() {
-				$("#queryDiv").toggle(false, 1000);
-				$("#commentForm").toggle(true, 1000);
+				$("#formDiv").toggle();
 			});
 			//產生jqueyText
 			$('#commentArea').jqte();
 			//產生DataTable
 			$('#queryTable').DataTable({
-				"language" : {
-					"lengthMenu" : "每頁顯示 _MENU_ 筆",
-					"zeroRecords" : "Nothing found - sorry",
-					"info" : "現在正顯示   _PAGE_  共有 _PAGES_ 頁",
-					"infoEmpty" : "No records available",
-					"infoFiltered" : "(filtered from _MAX_ total records)",
-					"search" : "查詢:",
-					"paginate" : {
-						"first" : "首頁",
-						"last" : "末頁",
-						"next" : "下頁",
-						"previous" : "前頁"
-					}
-				},
-				 "bJQueryUI":true,
-				 "sScrollX": "100%",
-              	 "sScrollXInner": "110%",
-                 "bScrollCollapse": true,
-                 "aoData": [ {"bAutoWidth":false,"sWidth":"900px"}, null,  null,  null,  null, null]
+				"autoWidth" : false,
+				//設定各個欄位屬性
+				"columnDefs" : [ {
+					"targets" : [ 0 ],
+					"width" : "10%"
+				}, {
+					"targets" : [ 1 ],
+					"width" : "10%"
+				}, {
+					"targets" : [ 2 ],
+					"width" : "15%"
+				}, {
+					"targets" : [ 3 ],
+					"width" : "28%"
+				}, {
+					"targets" : [ 4 ],
+					"width" : "10%"
+				} , {
+					"targets" : [ 5 ],
+					"width" : "27%"
+				}
+				]
 			});
 		};
 
