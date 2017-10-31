@@ -21,6 +21,11 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 			throw ex;
 		}
 	}
+	
+//	begin transataion
+//	savaorupdate
+//	getTransaction commit
+//	rollback
 
 	@Override
 	public void update(EmpVO empVO) {
@@ -65,7 +70,7 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 	}
 
 	@Override
-	public Set<EmpVO> getAll() {
+	public List<EmpVO> getAll() {
 		List<EmpVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -78,7 +83,7 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return new LinkedHashSet<EmpVO>(list);
+		return list;
 	}
 
 	/*** 自訂指令findByAccount ***/
@@ -105,69 +110,72 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 	}
 
 	public static void main(String[] args) {
+		EmpVO empVO = new EmpVO();
 		EmpDAO_hibernate dao = new EmpDAO_hibernate();
 
 		// insert
-		// EmpVO empVO1 = new EmpVO();
-		// empVO1.setEmpAccount("eeit9704");
-		// empVO1.setEmpPwd("sa123456");
-		// empVO1.setEmpPhone("0928265804");
-		// empVO1.setEmpName("藍浩天");
-		// empVO1.setPostNO(310);
-		// empVO1.setEmpStatus(false);
-		// dao.insert(empVO1);
+//		 EmpVO empVO1 = new EmpVO();
+//		 empVO1.setEmpAccount("eeit9704");
+//		 empVO1.setEmpPwd("sa123456");
+//		 empVO1.setEmpPhone("0928265804");
+//		 empVO1.setEmpName("藍浩天");
+//		 empVO1.getPostVO().setPostNO(330);
+//		 empVO1.setEmpStatus(true);
+//		 dao.insert(empVO1);
 
 		// update
-		// EmpVO empVO2 = new EmpVO();
-		// empVO2.setEmpNO(30002);
-		// empVO2.setEmpAccount("eeit97087");
-		// empVO2.setEmpPwd("12312311");
-		// empVO2.setEmpPhone("0957057006");
-		// empVO2.setEmpName("徐漢勳");
-		// empVO2.setPostNO(330);
-		// empVO2.setEmpStatus(true);
-		// dao.update(empVO2);
+//		 EmpVO empVO2 = new EmpVO();
+//		 empVO2.setEmpNO(30002);
+//		 empVO2.setEmpAccount("eeit97087");
+//		 empVO2.setEmpPwd("12312311");
+//		 empVO2.setEmpPhone("0957057006");
+//		 empVO2.setEmpName("徐漢勳");
+//		 empVO2.getPostVO().setPostNO(330);
+//		 empVO2.setEmpStatus(true);
+//		 dao.update(empVO2);
 
-		// delete
-		// dao.delete(30003);
+//		 delete
+		 System.out.println("delete start");
+		 dao.delete(30006);
+		 System.out.println("delete success");
 
 		// select one
-		EmpVO empVO3 = dao.findByPrimaryKey(30001);
-		System.out.print(empVO3.getEmpNO() + ",");
-		System.out.print(empVO3.getEmpAccount() + ",");
-		System.out.print(empVO3.getEmpPwd() + ",");
-		System.out.print(empVO3.getEmpPhone() + ",");
-		System.out.print(empVO3.getEmpName() + ",");
-		System.out.print(empVO3.getPostVO().getPostNO() + ",");
-		System.out.println(empVO3.getEmpStatus());
-		System.out.println("----------------------");
+//		EmpVO empVO3 = dao.findByPrimaryKey(30001);
+//		System.out.print(empVO3.getEmpNO() + ",");
+//		System.out.print(empVO3.getEmpAccount() + ",");
+//		System.out.print(empVO3.getEmpPwd() + ",");
+//		System.out.print(empVO3.getEmpPhone() + ",");
+//		System.out.print(empVO3.getEmpName() + ",");
+//		System.out.print(empVO3.getPostVO().getPostNO() + ",");
+//		System.out.println(empVO3.getEmpStatus());
+//		System.out.println("----------------------");
 
 		// select all
-		Set<EmpVO> set = dao.getAll();
-		for (EmpVO empVO : set) {
-			System.out.print(empVO.getEmpNO() + ",");
-			System.out.print(empVO.getEmpAccount() + ",");
-			System.out.print(empVO.getEmpPwd() + ",");
-			System.out.print(empVO.getEmpPhone() + ",");
-			System.out.print(empVO.getEmpName() + ",");
-			System.out.print(empVO.getPostVO().getPostNO() + ",");
-			System.out.print(empVO.getEmpStatus());
-			System.out.println("");
-		}
-		System.out.println("----------------------");
+//		Set<EmpVO> set = dao.getAll();
+//		for (EmpVO empVO1 : set) {
+//			System.out.print(empVO1.getEmpNO() + ",");
+//			System.out.print(empVO1.getEmpAccount() + ",");
+//			System.out.print(empVO1.getEmpPwd() + ",");
+//			System.out.print(empVO1.getEmpPhone() + ",");
+//			System.out.print(empVO1.getEmpName() + ",");
+//			System.out.print(empVO1.getPostVO().getPostNO() + ",");
+//			System.out.print(empVO1.getEmpStatus());
+//			System.out.println("");
+//		}
+//		System.out.println("----------------------");
 
 		// select account
-		EmpVO empVO4 = dao.findByAccount("Vir3");
-		System.out.print(empVO4.getEmpNO() + ",");
-		System.out.print(empVO4.getEmpAccount() + ",");
-		System.out.print(empVO4.getEmpPwd() + ",");
-		System.out.print(empVO4.getEmpPhone() + ",");
-		System.out.print(empVO4.getEmpName() + ",");
+//		EmpVO empVO4 = dao.findByAccount("Vir3");
+//		System.out.print(empVO4.getEmpNO() + ",");
+//		System.out.print(empVO4.getEmpAccount() + ",");
+//		System.out.print(empVO4.getEmpPwd() + ",");
+//		System.out.print(empVO4.getEmpPhone() + ",");
+//		System.out.print(empVO4.getEmpName() + ",");
 		// 改寫成以下三行寫法
-		System.out.print(empVO4.getPostVO().getPostNO() + ",");
-		System.out.println(empVO4.getEmpStatus());
-		System.out.println("----------------------");
-
-		System.out.println("Finish.");
+//		System.out.print(empVO.getPostVO().getPostNO() + ",");
+//		System.out.println(empVO.getEmpStatus());
+//		System.out.println("----------------------");
+//
+//		System.out.println("Finish.");
 	}
 }
