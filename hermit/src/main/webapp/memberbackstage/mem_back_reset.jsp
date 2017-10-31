@@ -32,6 +32,7 @@
 	<div id="content">
 
 		<div class="container">
+	
 
 			<div class="row">
 
@@ -110,63 +111,60 @@
 
 
 						<!-- 這邊是放你的資料 -->
-						<div class="widget-content">
-						<div class="row">
-		<div class="col-md-4 mid"></div>
-		<div class="col-md-4 mid">
-			
+<div class="widget-content" style="padding:20px">
+	<div class="row">
+	<div class="col-md-10 col-md-offset-4 mid">
+	<div class="col-md-4 mid">
 		<form method="POST" action="<%=request.getContextPath()%>/member.do?action=update" id="form">
 			
-			編號<input type="text" value="${memNO}" disabled><br>
-			   <input type="hidden" readonly value="${memNO}" name="memNO">
+			會員編號<input type="text" value="${memNO}" disabled><br>
+				 <input type="hidden" readonly value="${memNO}" name="memNO">
 			
 			電話 <input type="text" value="${memTel}" disabled>
 			   <input type="hidden" value="${memTel}" name="memTel">
-			<font size="-1" color="#FF0000">${MsgMap.memTel}</font>
-			<br>
+				<font size="-1" color="#FF0000">${MsgMap.memTel}</font>
+				<br>
 			
 			帳號<input type="text" value="${memAccount}" disabled>
-			<input type="hidden"  value="${memAccount}" name="memAccount"><br>
+				<input type="hidden"  value="${memAccount}" name="memAccount"><br>
 			
 			密碼<input type="password" value="${memPwd}" name="memPwd">
-			<font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
-			<br>
+				<font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
+				<br>
 			
 			姓名<input type="text" value="${memName}" name="memName">
-            <font size="-1" color="#FF0000">${MsgMap.memName}</font>
-			<br>
+            	<font size="-1" color="#FF0000">${MsgMap.memName}</font>
+				<br>
 			
 			性別<input type="text" value="${memGender}" disabled>
 			   <input type="hidden" readonly value="${memGender}" name="memGender" ><br>
 			   
 			信箱<input type="text" value="${memEmail}" name="memEmail">
-			<font size="-1" color="#FF0000">${MsgMap.memEmail}</font>
-			<br>
+				<font size="-1" color="#FF0000">${MsgMap.memEmail}</font>
+				<br>
 			註冊時間<input type="text" value="${memRegister}" disabled>
-			<input type="hidden" readonly value="${memRegister}" name="memRegister"><br>
+				<input type="hidden" readonly value="${memRegister}" name="memRegister"><br>
 			
 			會員狀態<input type="text" value="${memStatus}" disabled>
-			<input type="hidden" readonly value="${memStatus}" name="memStatus"><br>
+				<input type="hidden" readonly value="${memStatus}" name="memStatus"><br>
 			
 			違規次數<input type="text" value="${memInfract}" disabled>
-			<input type="hidden" readonly value="${memInfract}" name="memInfract"><br>
+				<input type="hidden" readonly value="${memInfract}" name="memInfract"><br>
 			
-			<div>
+				<div>
 			圖片<input type="file" id="file" > 
-			<input type="hidden" id="memImage" name="memImage" value="${memImage}"  >
+				<input type="hidden" id="memImage" name="memImage" value="${memImage}"  >
+				<img id="result" src="${memImage}" name="memImage" id="memImage" height="200" width="200">
+				</div>
+				<input type="submit" value="修改">
 			
-			<img id="result" src="${memImage}" name="memImage" id="memImage" height="200" width="200">
-			</div>
-			<input type="submit" value="修改">
-			
-			</form>
+		</form>
 		
-		
-	
-		</div>
-		<div class="col-md-4 mid"></div>
 	</div>
-						</div>
+	</div>
+	<div class="col-md-4 mid"></div>
+	</div>
+</div>
 						<!-- /widget-content -->
 						
 						
