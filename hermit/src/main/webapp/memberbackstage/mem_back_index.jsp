@@ -31,20 +31,12 @@ a:link, a:visited, a:hover, a:active {
 	<div id="content">
 
 		<div class="container">
-
 			<div class="row">
-
 				<div class="span3">
-
 					<div class="account-container">
-
 						<div class="account-avatar">
 							<img src="${LoginOK.memImage}" alt="memImage" class="thumbnail" />
 						</div>
-						<!-- /account-avatar -->
-
-
-						<!-- /account-details -->
 					</div>
 					<div class="account-details">
 						<span class="account-name"
