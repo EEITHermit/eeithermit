@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>House Test</title>
+<title>赫米特租屋管理</title>
 <jsp:include page="/fragment/index_include.jsp" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/appstore.css">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
@@ -22,11 +22,12 @@
 	}
 	h3 a {
 		font-family: Microsoft JhengHei;
+	}
 </style>
 </head>
 <body id="body">
 
-	<div class="container" style="margin:40px auto">
+	<div class="container" style="margin:40px auto;height:900px">
 		<div id="appstore-container"></div>
 	</div>
 
