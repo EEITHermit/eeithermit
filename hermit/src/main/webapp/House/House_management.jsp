@@ -179,8 +179,8 @@ color: 	#F9F900;
 	</form>
 	
 </div>	
-<!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
-<script src="../js/bootstrap.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script> --%>
+<!-- <script src="../js/bootstrap.js"></script> -->
 <script src="../js/flashcanvas.js"></script>
 <script src="../js/jSignature.min.js"></script>
 <script src="../js/datatables.min.js"></script>
