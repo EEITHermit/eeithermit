@@ -33,6 +33,7 @@
     <servlet-name>IdentityServlet</servlet-name>
     <url-pattern>/identity.do</url-pattern>
   </servlet-mapping>
+  <!-- QandAfilter宣告 -->
   <filter>
     <filter-name>QandAFilter</filter-name>
     <filter-class>com.hermit.iii.qanda.filter.QAndAFilter</filter-class>

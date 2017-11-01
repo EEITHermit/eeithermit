@@ -9,19 +9,234 @@
 <link href='<%=request.getContextPath()%>/css/jquery-ui.min.css'
 	rel='stylesheet' />
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-	crossorigin="anonymous">
-<script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
-<script src='<%=request.getContextPath()%>/js/jquery-ui.min.js'></script>
-<!-- Bootstrap core JavaScript-->
-<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-<!-- Core plugin JavaScript-->
-<script src="<%=request.getContextPath()%>/js/jquery.easing.min.js"></script>
-<!-- Custom scripts for all pages-->
-<script src="<%=request.getContextPath()%>/js/sb-admin.min.js"></script>
-<script>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" -->
+<!-- 	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" -->
+<!-- 	crossorigin="anonymous"> -->
+
+<style>
+table {
+	font-size: 24px;
+}
+
+#resDiv {
+	text-align: center;
+	display: none;
+	float: left;
+	position: absolute;
+}
+
+#resTable {
+	
+}
+
+#exceptDiv {
+	display: none;
+	float: left;
+	position: absolute;
+}
+
+#exceptDiv table {
+	background-color: #D1BBFF;
+	text-align: center;
+}
+
+#qaDiv {
+	display: none;
+}
+
+#qaForm {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<!-- 載入框架 -->
+	<jsp:include page="/fragment/back_side_page.jsp" />
+	<!-- 取得員工編號 -->
+	<input type="hidden" id="empNO" value="${LoginOK.empNO}" />
+
+
+	<!-- bootstrap -->
+
+	<div class="container">
+		<!-- Breadcrumbs-->
+
+		<h1>HermitのHome</h1>
+		<hr>
+		<div class="row">
+			<!-- 預約功能-->
+			<div class="col-md-3">
+				<div class="card card-inverse" style="border-radius: 10px;background-color: #00BBFF">
+				<div class="card-block">
+					<h3 class="card-title">您有<span style="font-size: 36px; color: red"> ${resSize} </span>筆未處理預約</h3>
+					<a href="#" class="btn btn-primary" id="resButton">展開</a>
+				</div>
+				</div>
+			</div>
+		
+			<!-- Q&A推播 -->
+			<div class="col-md-3">
+				<div class="card card-inverse"
+				 style="border-radius: 10px;background-color: #00DDAA">
+				<div class="card-block">
+					<h3 class="card-title">您有<span style="font-size: 36px; color: red">${qaArray.size()} </span>筆未回覆留言</h3>
+					<a href="#" class="btn btn-primary" id="qaButton">展開</a>
+				</div>
+				</div>
+			</div>
+			<!-- 其他功能的推播 -->
+			<div class="col-md-3">
+				<div class="card card-inverse"
+				 style="border-radius: 10px;background-color: #00DDAA">
+				<div class="card-block">
+<%-- 					<h3 class="card-title">您有<span style="font-size: 36px; color: red">${qaArray.size()} </span>筆未回覆留言</h3> --%>
+<!-- 					<a href="#" class="btn btn-primary" id="qaButton">展開</a> -->
+				</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card card-inverse"
+				 style="border-radius: 10px;background-color: #00DDAA">
+				<div class="card-block">
+<%-- 					<h3 class="card-title">您有<span style="font-size: 36px; color: red">${qaArray.size()} </span>筆未回覆留言</h3> --%>
+<!-- 					<a href="#" class="btn btn-primary" id="qaButton">展開</a> -->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- 顯示內容位置 -->
+		<div class="row">
+			<div id="containDiv" class="col-md-12">
+				<!-- 預約的內容 -->
+				<div id="resDiv">
+					<table id="resTable" class="table table-hover">
+						<thead>
+							<tr>
+								<th>預約編號</th>
+								<th>預約人</th>
+								<th>期望時間</th>
+								<th>房屋地址</th>
+								<th>申請時間</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="resVO" items="${resArray}">
+								<tr>
+									<td>${resVO.reservationNO}</td>
+									<td>${resVO.memberVO.memName}</td>
+									<td><button class="btn btn-primary btn-lg" type="button"
+											id="check">查看</button></td>
+									<td style="display: none;">${resVO.exceptTime}</td>
+									<td>${resVO.houseVO.houseAddr}</td>
+									<td>${resVO.applyTime}</td>
+									<td><button class="btn btn-primary btn-lg" type="button"
+											id="takeBT">接案</button></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<!-- 預約期望時間的div table -->
+				<div id="exceptDiv">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th></th>
+								<th>星期一</th>
+								<th>星期二</th>
+								<th>星期三</th>
+								<th>星期四</th>
+								<th>星期五</th>
+								<th>星期六</th>
+								<th>星期日</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>上午</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>下午</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- Q&A -->
+				<div id="qaDiv">
+					<table id="qaTable" class="table table-hover">
+						<thead>
+							<tr>
+								<th>留言編號</th>
+								<th>留言時間</th>
+								<th>留言會員</th>
+								<th>房屋連結</th>
+								<th>留言內容</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="qaVO" items="${qaArray}">
+								<tr>
+									<td>${qaVO.qaNO}</td>
+									<td>${qaVO.qTime}</td>
+									<td>${qaVO.memberVO.memName}</td>
+									<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+									<td>${qaVO.qDetail}</td>
+									<c:if test="${qaVO.qaType == 1}">
+										<td><button type="button" class="btn btn-primary btn-lg"
+												name="answer">回覆</button></td>
+									</c:if>
+									<c:if test="${qaVO.qaType == 0}">
+										<td><button type="button" class="btn btn-primary btn-lg"
+												name="dispatch">派工</button>
+											<br />
+											<button type="button" class="btn btn-primary btn-lg"
+												name="answer">回覆</button></td>
+									</c:if>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<!-- 回復Q&A表格 -->
+				<div id="qaForm" title="回覆會員">
+					<form class="form-group"
+						action="<%=request.getContextPath()%>/QAndAServlet?mission=update"
+						method="POST" id="answerForm">
+						留言編號：<input class="form-control" type="text" readonly="readonly"
+							name="qaNO" value="" id="qaNO" /> 回覆內容：
+						<textarea class="form-control" name="aDetail"
+							style="resize: none; height: 100px"></textarea>
+						<button class="btn btn-primary" type="button" onclick="check()">提交</button>
+						<button class="btn btn-primary" type="button" onclick="cancel()">取消</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src='<%=request.getContextPath()%>/js/jquery.min.js'></script>
+	<script src='<%=request.getContextPath()%>/js/jquery-ui.min.js'></script>
+	<!-- Bootstrap core JavaScript-->
+	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="<%=request.getContextPath()%>/js/jquery.easing.min.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="<%=request.getContextPath()%>/js/sb-admin.min.js"></script>
+	<script>
 	document.addEventListener("DOMContentLoaded",work);
 	
 	function work(){
@@ -150,236 +365,5 @@
 		}
 	}
 </script>
-<style>
-table {
-	font-size: 24px;
-}
-
-#resDiv {
-	text-align: center;
-	display: none;
-	float: left;
-	position: absolute;
-}
-
-#resTable {
-	
-}
-
-#exceptDiv {
-	display: none;
-	float: left;
-	position: absolute;
-}
-
-#exceptDiv table {
-	background-color: #D1BBFF;
-	text-align: center;
-}
-#qaDiv {
-	display: none;
-}
-#qaForm{
-	display:none;
-}
-
-</style>
-</head>
-<body>
-	<!-- 載入框架 -->
-	<jsp:include page="/fragment/back_side_page.jsp" />
-	<!-- 取得員工編號 -->
-	<input type="hidden" id="empNO" value="${LoginOK.empNO}" />
-
-
-	<!-- bootstrap -->
-
-	<div class="container">
-		<!-- Breadcrumbs-->
-
-		<h1>HermitのHome</h1>
-		<hr>
-		<div class="row">
-			<!-- 預約功能-->
-			<div class="col-xl-3 col-sm-6 mb-3">
-				<div class="card text-white bg-primary o-hidden h-100" id="resCard">
-					<div class="card-body">
-						<div class="card-body-icon">
-							<i class="fa fa-fw fa-comments"></i>
-						</div>
-						<div class="mr-5" style="font-size: 18px">
-							您有<span style="font-size: 36px; color: red"> ${resSize} </span>筆未處理預約
-						</div>
-					</div>
-					<a id="resButton">展開</a>
-				</div>
-			</div>
-
-
-			<!-- Q&A推播 -->
-			<div class="col-xl-3 col-sm-6 mb-3">
-				<div class="card text-white bg-primary o-hidden h-100" id="resCard">
-					<div class="card-body">
-						<div class="card-body-icon">
-							<i class="fa fa-fw fa-comments"></i>
-						</div>
-						<div class="mr-5" style="font-size: 18px">
-							您有<span style="font-size: 36px; color: red">
-								${qaArray.size()} </span>筆未回覆留言
-						</div>
-					</div>
-					<a id="qaButton">展開</a>
-				</div>
-			</div>
-			<!-- 其他功能的推播 -->
-			<div class="col-xl-3 col-sm-6 mb-3">
-				<div class="card text-white bg-success o-hidden h-100">
-					<div class="card-body">
-						<div class="card-body-icon">
-							<i class="fa fa-fw fa-shopping-cart"></i>
-						</div>
-						<div class="mr-5">123 New Orders!</div>
-					</div>
-					<a class="card-footer text-white clearfix small z-1" href="#">
-						<span class="float-left">View Details</span> <span
-						class="float-right"> <i class="fa fa-angle-right"></i>
-					</span>
-					</a>
-				</div>
-			</div>
-			<div class="col-xl-3 col-sm-6 mb-3">
-				<div class="card text-white bg-danger o-hidden h-100">
-					<div class="card-body">
-						<div class="card-body-icon">
-							<i class="fa fa-fw fa-support"></i>
-						</div>
-						<div class="mr-5">13 New Tickets!</div>
-					</div>
-					<a class="card-footer text-white clearfix small z-1" href="#">
-						<span class="float-left">View Details</span> <span
-						class="float-right"> <i class="fa fa-angle-right"></i>
-					</span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<!-- 顯示內容位置 -->
-		<div class="row">
-			<div id="containDiv" class="col-xl-12 col-sm-6 mb-3">
-				<!-- 預約的內容 -->
-				<div id="resDiv">
-					<table id="resTable" class="table table-hover">
-						<thead>
-							<tr>
-								<th>預約編號</th>
-								<th>預約人</th>
-								<th>期望時間</th>
-								<th>房屋地址</th>
-								<th>申請時間</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="resVO" items="${resArray}">
-								<tr>
-									<td>${resVO.reservationNO}</td>
-									<td>${resVO.memberVO.memName}</td>
-									<td><button class="btn btn-primary btn-lg" type="button" id="check">查看</button></td>
-									<td style="display: none;">${resVO.exceptTime}</td>
-									<td>${resVO.houseVO.houseAddr}</td>
-									<td>${resVO.applyTime}</td>
-									<td><button class="btn btn-primary btn-lg"type="button" id="takeBT">接案</button></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<!-- 預約期望時間的div table -->
-				<div id="exceptDiv">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th></th>
-								<th>星期一</th>
-								<th>星期二</th>
-								<th>星期三</th>
-								<th>星期四</th>
-								<th>星期五</th>
-								<th>星期六</th>
-								<th>星期日</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>上午</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>下午</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- Q&A -->
-				<div id="qaDiv">
-					<table id="qaTable" class="table table-hover">
-						<thead>
-							<tr>
-								<th>留言編號</th>
-								<th>留言時間</th>
-								<th>留言會員</th>
-								<th>房屋連結</th>
-								<th>留言內容</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="qaVO" items="${qaArray}">
-								<tr>
-									<td>${qaVO.qaNO}</td>
-									<td>${qaVO.qTime}</td>
-									<td>${qaVO.memberVO.memName}</td>
-									<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
-									<td>${qaVO.qDetail}</td>
-									<c:if test="${qaVO.qaType == 1}">
-									<td><button type="button" class="btn btn-primary btn-lg" name="answer">回覆</button></td>
-									</c:if>
-									<c:if test="${qaVO.qaType == 0}">
-									<td><button type="button" class="btn btn-primary btn-lg" name="dispatch">派工</button><br/>
-										<button type="button" class="btn btn-primary btn-lg" name="answer">回覆</button>
-									</td>
-									</c:if>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<!-- 回復Q&A表格 -->
-				<div id="qaForm" title="回覆會員">
-					<form class="form-group"
-						action="<%=request.getContextPath()%>/QAndAServlet?mission=update"
-						method="POST" id="answerForm">
-						留言編號：<input class="form-control"type="text" readonly="readonly" name="qaNO" value=""
-							id="qaNO" /> 回覆內容：
-						<textarea class="form-control" name="aDetail" style="resize: none;height:100px"></textarea>
-						<button class="btn btn-primary" type="button" onclick="check()">提交</button>
-						<button class="btn btn-primary" type="button" onclick="cancel()">取消</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
 </body>
 </html>
