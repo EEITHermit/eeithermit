@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Web Socket foreground Test</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 </head>
 <body>
 	<div id="websocketdiv">
@@ -20,18 +21,25 @@
 	<script>
 		var websocket = new WebSocket("ws://" + location.host
 				+ "/hermit/websocket.do");
+
 		websocket.onopen = function processOpen() {
 		};
+
 		websocket.onmessage = function(message) {
 			var jsonData = JSON.parse(message.data);
 			if (jsonData.message != null) {
 				area.value += jsonData.message + "\n";
 			}
 		};
-		websocket.onerror = function (evt) {
+
+		websocket.onclose = function (evt) {
 	        websocket.close();
 	    };
 	    
+		websocket.onerror = function(evt) {
+			websocket.close();
+		};
+
 		$(function() {
 			$('#sendmsg').click(function() {
 				websocket.send(text.value);

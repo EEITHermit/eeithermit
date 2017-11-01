@@ -4,18 +4,29 @@ import javax.servlet.http.*;
 import javax.websocket.HandshakeResponse;
 import javax.websocket.server.*;
 
-public class WebSocketConfigurator extends ServerEndpointConfig.Configurator{
+import com.hermit.iii.emp.model.*;
+import com.hermit.iii.member.model.*;
+
+public class WebSocketConfigurator extends ServerEndpointConfig.Configurator {
 
 	@Override
 	public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
 		sec.getUserProperties().put("username", "訪客");
-		
+
 		// reference
-		if (((HttpSession) request.getHttpSession()).getAttribute("loginOK") == null) {
+		if (((HttpSession) request.getHttpSession()).getAttribute("LoginOK") == null) {
 			sec.getUserProperties().put("username", "訪客");
-		} else{
-			sec.getUserProperties().put("username",
-					((HttpSession) request.getHttpSession()).getAttribute("loginOK").toString());
+		} else {
+			String allClassName = ((HttpSession) request.getHttpSession()).getAttribute("LoginOK").getClass()
+					.toString();
+			String className = allClassName.substring(allClassName.lastIndexOf(".") + 1);
+			if ("MemberVO".equals(className)) {
+				MemberVO loginToken = (MemberVO) ((HttpSession) request.getHttpSession()).getAttribute("LoginOK");
+				sec.getUserProperties().put("username", loginToken.getMemName());
+			} else if ("EmpVO".equals(className)) {
+				EmpVO loginToken = (EmpVO) ((HttpSession) request.getHttpSession()).getAttribute("LoginOK");
+				sec.getUserProperties().put("username", loginToken.getPostVO().getPostName() + loginToken.getEmpNO());
+			}
 		}
 	}
 }

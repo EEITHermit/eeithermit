@@ -17,8 +17,10 @@ public class WebSocketNoHTTP {
 		userSession.getUserProperties().put("username", endpointConfig.getUserProperties().get("username"));
 		users.add(userSession);
 		try {
-			if ("後台管理員".equals(endpointConfig.getUserProperties().get("username"))) {
-				userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "後台管理員連線成功!"));
+			if (endpointConfig.getUserProperties().get("username").toString().indexOf("系統管理員") >= 0) {
+				userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "系統管理員大人連線成功!"));
+			} else if (endpointConfig.getUserProperties().get("username").toString().indexOf("客服人員") >= 0) {
+				userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "小天使客服人員連線成功!"));
 			} else {
 				userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "連線成功!"));
 				userSession.getBasicRemote().sendText(buildJsonData("後台管理員", "請問有什麼需要服務的嗎?"));
@@ -26,7 +28,6 @@ public class WebSocketNoHTTP {
 		} catch (IOException e) {
 			System.out.println("IOException好吵");
 		}
-
 	}
 
 	@OnMessage
@@ -44,7 +45,13 @@ public class WebSocketNoHTTP {
 
 	@OnClose
 	public void handleClose(Session userSession) {
+		System.out.println("WebSocket強關才叫我..");
 		users.remove(userSession);
+		try {
+			userSession.close();
+		} catch (IOException e) {
+			System.out.println("IOException好吵");
+		}
 	}
 
 	private String buildJsonData(String username, String message) {
