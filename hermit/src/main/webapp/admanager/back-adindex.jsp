@@ -46,7 +46,7 @@
 <button class="btn info">刪除選中</button><p>
 <button class="btn info">刪除全部</button><p>
 <!-- <table id="myTable"> -->
-	<table id="myTable"style="background-image:url('../images/hermit_register_bg.png');width:100px;height:33px;" border="1">
+	<table id="myTable" style="background-image:url('../images/hermit_register_bg.png');width:100px;height:33px;" border="1">
 		<thead>
 			<tr>
 				<th>廣告編號</th>

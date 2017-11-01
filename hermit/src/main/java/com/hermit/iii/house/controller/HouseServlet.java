@@ -183,6 +183,11 @@ public class HouseServlet extends HttpServlet {
 			svc = new HouseService();
 			vo = svc.GET_ONE_HOUSE_FK(Integer.valueOf(request.getParameter("houseNO")));
 			request.setAttribute("vo", vo);
+			
+			for(HousePictureVO hVO:vo.getHousePictureVO()){
+				System.out.println(hVO.gethPicture());
+			}
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/House/SingleHouseUpdate.jsp");
 			rd.forward(request, response);
 			System.out.println("Search One Success");
@@ -225,6 +230,11 @@ public class HouseServlet extends HttpServlet {
 				m1.put("hType", vo.getHouseTypeVO().gethType());
 				m1.put("hForm", vo.getHouseFormVO().gethForm());
 				m1.put("houseInfo", vo.getHouseInfo());
+				
+				Set<HousePictureVO>set=vo.getHousePictureVO();
+				for(HousePictureVO housePictureVO:set){
+				m1.put("housePicture", housePictureVO.gethPicture());
+				}
 				list2.add(m1);
 			}
 			Map m2 = new LinkedHashMap();
