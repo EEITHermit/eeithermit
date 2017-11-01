@@ -225,6 +225,10 @@ public class HouseServlet extends HttpServlet {
 				m1.put("hType", vo.getHouseTypeVO().gethType());
 				m1.put("hForm", vo.getHouseFormVO().gethForm());
 				m1.put("houseInfo", vo.getHouseInfo());
+				Set<HousePictureVO>set=vo.getHousePictureVO();
+				for(HousePictureVO housePictureVO:set){
+				m1.put("housePicture", housePictureVO.gethPicture());
+				}
 				list2.add(m1);
 			}
 			Map m2 = new LinkedHashMap();

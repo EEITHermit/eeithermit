@@ -47,7 +47,7 @@ padding-right:200px;
 	<div class="container">
 	
 	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form" class="form-horizontal">
-		<div class="form-group">
+	<div class="form-group">
 		<div>
 			<label class="col-md-5 control-label">房屋編號</label> 
 			<div class="col-xs-2">
@@ -60,7 +60,7 @@ padding-right:200px;
 		    <input type="text" value="${vo.houseTitle}" name="houseTitle" id="houseTitle" class="form-control">
 		    </div>
 		</div>
-		</div>
+	</div>
 		
 		<div class="form-group">
 			<div>
@@ -180,6 +180,23 @@ padding-right:200px;
 				<div class="col-md-6 col-offset-1">
 					<textarea name="houseInfo" class="form-control" id="houseInfo">${vo.houseInfo}</textarea>
 				</div>
+		</div>
+		
+		<div class="form-group" id="HousePicture">
+<!-- 			<div> -->
+<!-- 				<label class="col-md-5 control-label">圖片1</label> -->
+<!-- 					<div class="col-xs-2"> -->
+<!-- 						<input type="file" id="file"> -->
+<%-- 						<img src="${vo.housePictureVO.hPicture}" border="0" style="border:none;max-height:200px;max-width:200px;"> --%>
+<!-- 					</div> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<label class="col-md-1 control-label">圖片2</label> -->
+<!-- 					<div class="col-xs-2"> -->
+<!-- 						<input type="file" id="file"> -->
+<%-- 						<img src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;"> --%>
+<!-- 					</div> -->
+<!-- 			</div> -->
 		</div>	
 		<div class="form-group" >
 			<div class="col-md-6 control-label">
@@ -188,7 +205,7 @@ padding-right:200px;
 		</div>
 	</form>
 	</div>
-	<script src="/hermit/js/jquery-3.2.1.min.js"></script>
+<!-- 	<script src="/hermit/js/jquery-3.2.1.min.js"></script> -->
 	<script src="/hermit/js/bootstrap.js"></script>
 	<script src="/hermit/js/flashcanvas.js"></script>
 	<script src="/hermit/js/jSignature.min.js"></script>
@@ -197,7 +214,25 @@ padding-right:200px;
 	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script>
 	$(document).ready(function(){
-
+			$.POST("/hermit/House.do",{action:"getAllHouseForJson"},function(data){
+				var divPic=$("#HousePciture>div");
+				var dataJson;
+				dataJson=$.parseJSON(data);
+				divPic.empty();
+				$.each(dataJson,function(index,VO){
+					var cell1=$("<label></label>").attr("class","col-md-5");
+					var cell2=$("<div><div>").attr("class","col-xs-2");
+					var cell3=$("<input>").attr("type","file");
+					var cell4=$("<img>").attr("src",housePictureVO.hPicture);
+					var div=$("<div></div>").append([cell1,cell2,cell3,cell4]);
+					divPic.append(div);
+					
+				})
+				
+			})
+		
+		
+			
 			var dataJson;
 			var selectForm= $("#houseForm");
 			var formNO = $("#formNO").val();
