@@ -49,7 +49,6 @@ tabstyle {
 			<ul class="nav nav-tabs" role="tablist">
 			  <li role="presentation" style="color:black" class="active"><a style="color:black"  href="#hInfo" aria-controls="hInfo" role="tab" data-toggle="tab">屋況介紹</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black"  href="#houseContent" aria-controls="houseContent" role="tab" data-toggle="tab">房屋規格</a></li>
-			  <li role="presentation" style="color:black" ><a style="color:black"  href="#nearMap" aria-controls="nearMap" role="tab" data-toggle="tab">附近地圖</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black" href="#houseVideo" aria-controls="houseVideo" role="tab" data-toggle="tab">房屋影片</a></li>
 			</ul>
 			<div class="tab-content" style="margin-top:5px">
@@ -260,11 +259,13 @@ tabstyle {
 								var activeFlag = '';
 								var timeout = 1000;
 								
+								var hInfo = $.parseJSON('<%= request.getAttribute("House")%>');
+								
 								// 一開始啟動Google API的CB
 								function initAdd() {							
 									//抓經緯度
 									$.getJSON('https://maps.google.com/maps/api/geocode/json', {
-										'address' : '台北101'
+										'address' : hInfo.cityName+hInfo.boroughName+hInfo.houseAddr
 									}, function(datas) {
 										jsonlat = datas.results[0].geometry.location.lat;
 										jsonlng = datas.results[0].geometry.location.lng;
