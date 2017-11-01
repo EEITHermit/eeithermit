@@ -26,6 +26,10 @@ width:100px;
 .container{
 padding-bottom:40px;
 }
+label{ 
+ 	font-family: 標楷體; 
+ 	font-size: 16px;
+ 	} 
 </style>
 </head>
 <body>
@@ -37,46 +41,46 @@ padding-bottom:40px;
 	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form" class="form-horizontal">
 		<div class="form-group">
 			<label class="col-md-5 control-label">房屋編號</label> 
-			<div class="col-md-4">
-			 <input type="text" readonly value="${vo.houseNO}" name="houseNO">
+			<div class="col-xs-2">
+			 <input type="text" readonly value="${vo.houseNO}" name="houseNO" class="form-control">
 			</div>	
 		</div>
 		<div class="form-group">
 			<label for="houseTitle" class="col-md-5 control-label">房屋標題</label>
-			<div class="col-md-4">
-		    <input type="text" value="${vo.houseTitle}" name="houseTitle" id="houseTitle">
+			<div class="col-xs-2">
+		    <input type="text" value="${vo.houseTitle}" name="houseTitle" id="houseTitle" class="form-control">
 		    </div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label">縣市</label>
-			<div class="col-md-4">
-			<select id="cityName" name="cityNO"></select> 
+			<div class="col-xs-2">
+			<select id="cityName" name="cityNO" class="form-control"></select> 
 			</div>
 			<input type="hidden" value="${vo.cityVO.cityNO}" id="cityNO" name="cityNO">
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label">地區</label> 
-			<div class="col-md-4"> 
-			<select id="boroughName" name="boroughNO"></select>
+			<div class="col-xs-2"> 
+			<select id="boroughName" name="boroughNO" class="form-control"></select>
 			</div>
 			<input type="hidden" value="${vo.boroughsVO.boroughNO}" name="boroughNOe" id="boroughNO">
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label" for="highestFloor">最高樓層</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.highestFloor}" name="highestFloor" id="highestFloor">
+			<div class="col-xs-2">
+			<input type="text" value="${vo.highestFloor}" name="highestFloor" id="highestFloor" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label" for="nowfloor">現在樓層</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.nowFloor}" name="nowFloor" id="newfloor">
+			<div class="col-xs-2">
+			<input type="text" value="${vo.nowFloor}" name="nowFloor" id="newfloor" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label">房屋狀態</label>
-			<div class="col-md-4">
-			<select name="houseStatus" id="SelectStatus">
+			<div class="col-xs-2">
+			<select name="houseStatus" id="SelectStatus" class="form-control">
 			<option>未出租</option>
 			<option>已出租</option>
 			<option>修繕中</option>
@@ -86,26 +90,26 @@ padding-bottom:40px;
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label" for="houseRent">租金</label>
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseRent}" name="houseRent" id="houserent">
+			<div class="col-xs-2">
+			<input type="text" value="${vo.houseRent}" name="houseRent" id="houserent"  class="form-control">
 			</div> 
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label" for="housecharge">押金</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseCharge}" name="housecharge" id="housecharge">
+			<div class="col-xs-2">
+			<input type="text" value="${vo.houseCharge}" name="housecharge" id="housecharge" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label" for="waterRate">水費</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.waterRate}" name="waterRate" id="waterRate">
+			<div class="col-xs-2">
+			<input type="text" value="${vo.waterRate}" name="waterRate" id="waterRate" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label" for="col-md-4">電費</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.powerRate}" name="powerRate">
+			<div class="col-xs-2">
+			<input type="text" value="${vo.powerRate}" name="powerRate" class="form-control">
 			</div>
 		</div>
 <!-- 		<div class="form-group"> -->
@@ -114,35 +118,35 @@ padding-bottom:40px;
 <!-- 		</div> -->
 		<div class="form-group">
 			<label class="col-md-5 control-label">房屋類型</label>
-			<div class="col-md-4">
-			<select id="houseType" name="typeNO"></select>
-			<input id="typeNO" type="hidden" value="${vo.houseTypeVO.typeNO}" name="typeNO">
+			<div class="col-xs-2">
+			<select id="houseType" name="typeNO" class="form-control"></select>
+			<input id="typeNO" type="hidden" value="${vo.houseTypeVO.typeNO}" name="typeNO" class="form-control">
 			</div> 
 		</div>
 		
 		<div class="form-group">
-		<lable class="col-md-5 control-label">形態</lable>
-			<div class="col-md-4">
-			<select id="houseForm" name="formNO"></select>
-			<input id="formNO" type="hidden" value="${vo.houseFormVO.formNO}" name="formNO">
+		<label class="col-md-5 control-label">形態</label>
+			<div class="col-xs-2">
+			<select id="houseForm" name="formNO" class="form-control"></select>
+			<input id="formNO" type="hidden" value="${vo.houseFormVO.formNO}" name="formNO" class="form-control">
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="col-md-5 control-label" for="houseAddr">地址</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseAddr}" name="houseAddr" id="houseAddr">
+			<div class="col-xs-2">
+			<input type="text" value="${vo.houseAddr}" name="houseAddr" id="houseAddr" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
-			<lable class="col-md-5 control-label" for="houseSize">坪數</lable>
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseSize }" name="houseSize" id="houseSize">
+			<label class="col-md-5 control-label" for="houseSize">坪數</label>
+			<div class="col-xs-2">
+			<input type="text" value="${vo.houseSize }" name="houseSize" id="houseSize" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-5 control-label">圖片</label>
-			<div class="col-md-4">	
+			<div class="col-xs-2">	
 				<input type="file" id="file">
 				<input type="hidden" id="previewPic" name="previewPic" value="${vo.previewPic}" />
 				<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">

@@ -102,26 +102,26 @@ padding:30px;
 			</thead>
 				<tbody>
 					<tr>
-						<td><input type="text" style="width: 75px" value="${param.houseTitle}" name="houseTitle"></td>
-						<td><select name="cityNO" id="cityNO"><option>請選擇</option></select></td>
-						<td><select name="boroughNO" id="boroughNO"></select></td>
-						<td><input type="text" style="width: 75px" value="${param.hightestFloor}" name="highestFloor"></td>
-						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor"></td>
-						<td><select name="houseStatus" id="SelectStatus">
+						<td><input type="text" style="width: 75px" value="${param.houseTitle}" name="houseTitle" class="form-control"></td>
+						<td><select name="cityNO" id="cityNO" class="form-control"><option>請選擇</option></select></td>
+						<td><select name="boroughNO" id="boroughNO" class="form-control"></select></td>
+						<td><input type="text" style="width: 75px" value="${param.hightestFloor}" name="highestFloor" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor" class="form-control"></td>
+						<td><select name="houseStatus" id="SelectStatus" class="form-control">
 								<option>未出租</option>
 								<option>已出租</option>
 								<option>修繕中</option>
 							</select> 
 						</td>
-						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge"></td>
-						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate"></td>
-						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate" class="form-control"></td>
 						
-						<td><select id="houseType" name="typeNO"></select></td>
-						<td><select id="houseForm" name="formNO"></select></td>
-						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize"></td>
+						<td><select id="houseType" name="typeNO" class="form-control"></select></td>
+						<td><select id="houseForm" name="formNO" class="form-control"></select></td>
+						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize" class="form-control"></td>
 						<td><button id="addHouse" class="btn">新增</button></td>
 					</tr>
 						<input type="hidden" name=action>
@@ -135,7 +135,7 @@ padding:30px;
 					<input type="file" id="file">
 					<input type="hidden" id="previewPic" name="previewPic"/>
 				</td>
-			
+
 				<td>
 					<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >	
 				</td>
