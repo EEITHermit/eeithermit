@@ -4,6 +4,7 @@ import javax.servlet.http.*;
 import javax.websocket.HandshakeResponse;
 import javax.websocket.server.*;
 
+import com.hermit.iii.emp.model.*;
 import com.hermit.iii.member.model.*;
 
 public class WebSocketConfigurator extends ServerEndpointConfig.Configurator {
@@ -22,6 +23,9 @@ public class WebSocketConfigurator extends ServerEndpointConfig.Configurator {
 			if ("MemberVO".equals(className)) {
 				MemberVO loginToken = (MemberVO) ((HttpSession) request.getHttpSession()).getAttribute("LoginOK");
 				sec.getUserProperties().put("username", loginToken.getMemName());
+			} else if ("EmpVO".equals(className)) {
+				EmpVO loginToken = (EmpVO) ((HttpSession) request.getHttpSession()).getAttribute("LoginOK");
+				sec.getUserProperties().put("username", loginToken.getPostVO().getPostName() + loginToken.getEmpNO());
 			}
 		}
 	}
