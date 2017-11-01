@@ -16,6 +16,10 @@
 .container{
 padding-bottom:40px;
 }
+label{
+	font-family: 標楷體; 
+ 	font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -28,32 +32,33 @@ padding-bottom:40px;
 	
 	<form action="/hermit/LeaseServlet.do?action=update" id="form" method="post">
 	<div class="form-group">
-	<lable>合約編號</lable>
-	<input type="text" readonly value="${vo.leaseNO}" name="leaseNO" class="form-control">
+	<label>合約編號</label>
+	<input type="text" readonly value="${vo.leaseNO}" class="form-control" disabled="disabled">
+	<input type="hidden" readonly value="${vo.leaseNO}" name="leaseNO" class="form-control">
 	</div>
 	
 	<div class="form-group">
-	<lable>房屋編號</lable>
+	<label>房屋編號</label>
 	<input type="text" value="${vo.houseVO.houseNO}" name="houseNO"  class="form-control">
 	</div>
 	
 	<div class="form-group">
-	<lable>合約起始日期</lable>
+	<label>合約起始日期</label>
 	<input type="date" value="${vo.leaseBeginDate}" name="leaseBeginDate" class="form-control">
 	</div>
 	
 	<div class="form-group">
-	<lable>合約結束日期</lable>
+	<label>合約結束日期</label>
 	<input type="date" value="${vo.leaseEndDate}" name="leaseEndDate" class="form-control">	
 	</div>
 	
 	<div class="form-group">
-	<lable>承租會員編號</lable>
+	<label>承租會員編號</label>
 	<input type="text" value="${vo.memNO}" name="memNO" class="form-control">
 	</div>
 	
 	<div class="form-group">
-	<lable>簽約員工編號</lable>
+	<label>簽約員工編號</label>
 	<input type="text" value="${vo.empNO}" name="empNO" class="form-control">
 	</div>
 	
@@ -63,29 +68,29 @@ padding-bottom:40px;
 	</div>
 	
 	<div class="form-group">
-	<lable>押金</lable>
+	<label>押金</label>
 	<input type="text" value="${vo.leaseDeposit}" name="leaseDeposit" class="form-control">
 	</div>
 	
 	<div class="form-group">
-	<lable>折扣</lable>
+	<label>折扣</label>
 	<input type="text" value="${vo.leaseRelief}" name="leaseRelief" class="form-control">	
 	</div>
 	
 	<div class="form-group">
-	<lable>簽約日起</lable>
+	<label>簽約日起</label>
 	<input type="date" value="${vo.leaseDate}" name="leaseDate" class="form-control">
 	</div>
 	
 	<div class="form-group">
-	<lable>合約照片</lable>
+	<label>合約照片</label>
 	<input type="file" style="width:75px" value="${vo.leasePic}" id="file">
 	<input type="hidden" id="leasePic" name="leasePic">
 	<img id="result" style="width:75px" src="${vo.leasePic}" />
 	</div>
 	
 	<div class="form-group">
-	<lable>備註</lable>
+	<label>備註</label>
 	<input type="text" value="${vo.houseNote}" name="houseNote" class="form-control">
 	</div>
 	
