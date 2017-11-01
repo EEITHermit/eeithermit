@@ -211,7 +211,7 @@
  		</c:if>
  		<!-- 如果有登入就顯示登出 -->
 		<c:if test="${!empty LoginOK}">
- 			<a href="http://localhost:8081/hermit/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
+ 			<a href="<%=request.getContextPath()%>/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
  		</c:if>
 
 			<!-- inser more links here -->
