@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.hermit.iii.member.model.MemberDAO_hibernate;
 import com.hermit.iii.member.model.MemberJNDIDAO;
 import com.hermit.iii.member.model.MemberVO;
 import com.hermit.iii.util.CipherUtils;
@@ -23,7 +25,7 @@ public class CheckAndDecryptAccount extends HttpServlet {
 		String account = request.getParameter("account"); // 接收到BASE64編碼的帳號資訊
 		String memAccount = decryptAccount(account); // BASE64解碼後再解密的帳號
 
-		MemberJNDIDAO dao = new MemberJNDIDAO();
+		MemberDAO_hibernate dao = new MemberDAO_hibernate();
 		MemberVO memVO = dao.findByAccount(memAccount);
 
 		if (memAccount.equals(memVO.getMemAccount())) {
