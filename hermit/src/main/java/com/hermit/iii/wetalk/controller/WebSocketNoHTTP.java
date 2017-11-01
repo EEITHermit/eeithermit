@@ -10,22 +10,40 @@ import javax.websocket.server.ServerEndpoint;
 public class WebSocketNoHTTP {
 	static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
 	private String user = "";
-	List<String> recordmsg = new ArrayList<String>();
-	Map<String,String> recordMap = new HashMap<String,String>();
-	
+	static private List<Object> recordmsg = new ArrayList<Object>();
+	static private Map<String, String> recordMap = new HashMap<String, String>();
+
 	@OnOpen
 	public void handleOpen(EndpointConfig endpointConfig, Session userSession) {
 		System.out.println("WebSocket成功啟動");
+		String msgPackage = "";
+		String mykey = "";
 		userSession.getUserProperties().put("username", endpointConfig.getUserProperties().get("username"));
 		users.add(userSession);
 		try {
 			if (endpointConfig.getUserProperties().get("username").toString().indexOf("系統管理員") >= 0) {
-				userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "系統管理員大人連線成功!"));
+				msgPackage = buildJsonData("系統訊息", "系統管理員大人連線成功!");
+				userSession.getBasicRemote().sendText(msgPackage);
 			} else if (endpointConfig.getUserProperties().get("username").toString().indexOf("客服人員") >= 0) {
-				userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "小天使客服人員連線成功!"));
+				msgPackage = buildJsonData("系統訊息", "小天使客服人員連線成功!");
+				userSession.getBasicRemote().sendText(msgPackage);
+				if (recordmsg != null) {
+					Iterator<Object> itmsg = recordmsg.iterator();
+					while (itmsg.hasNext()) {
+						Iterator<String> keys = ((Map<String, String>) itmsg.next()).keySet().iterator();
+						while (keys.hasNext()) {
+							mykey = keys.next();
+							msgPackage = buildJsonData(mykey, recordMap.get(mykey));
+							userSession.getBasicRemote().sendText(msgPackage);
+						}
+					}
+				}
 			} else {
-				userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "連線成功!"));
-				userSession.getBasicRemote().sendText(buildJsonData("後台管理員", "請問有什麼需要服務的嗎?"));
+				msgPackage = buildJsonData("系統訊息", "連線成功!");
+				userSession.getBasicRemote().sendText(msgPackage);
+
+				msgPackage = buildJsonData("後台管理員", "稍等片刻馬上有專人為您服務!");
+				userSession.getBasicRemote().sendText(msgPackage);
 			}
 		} catch (IOException e) {
 			System.out.println("IOException好吵");
@@ -34,14 +52,21 @@ public class WebSocketNoHTTP {
 
 	@OnMessage
 	public void handleMessage(String message, Session userSession) {
-		
-		String keyWord = userSession.getUserProperties().get("username").toString().substring(0,1);
+
+		String keyWord = userSession.getUserProperties().get("username").toString().substring(0, 1);
 		user = userSession.getUserProperties().get("username").toString().substring(1);
 
 		Iterator<Session> iterator = users.iterator();
 		try {
 			while (iterator.hasNext()) {
-				iterator.next().getBasicRemote().sendText(buildJsonData(user, message));
+
+				if ("M".equals(keyWord)) {
+					recordMap.put(user, message);
+				}
+				recordmsg.add(recordMap);
+
+				String msgPackage = buildJsonData(user, message);
+				iterator.next().getBasicRemote().sendText(msgPackage);
 			}
 		} catch (IOException e) {
 			System.out.println("IOException好吵");
