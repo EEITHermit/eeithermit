@@ -10,7 +10,9 @@ import javax.websocket.server.ServerEndpoint;
 public class WebSocketNoHTTP {
 	static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
 	private String user = "";
-
+	List<String> recordmsg = new ArrayList<String>();
+	Map<String,String> recordMap = new HashMap<String,String>();
+	
 	@OnOpen
 	public void handleOpen(EndpointConfig endpointConfig, Session userSession) {
 		System.out.println("WebSocket成功啟動");
@@ -32,7 +34,10 @@ public class WebSocketNoHTTP {
 
 	@OnMessage
 	public void handleMessage(String message, Session userSession) {
-		user = userSession.getUserProperties().get("username").toString();
+		
+		String keyWord = userSession.getUserProperties().get("username").toString().substring(0,1);
+		user = userSession.getUserProperties().get("username").toString().substring(1);
+
 		Iterator<Session> iterator = users.iterator();
 		try {
 			while (iterator.hasNext()) {
