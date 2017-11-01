@@ -81,7 +81,7 @@
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="./mem_back_reset.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
 								class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>

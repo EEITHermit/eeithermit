@@ -12,12 +12,13 @@
 <link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 房屋表格用↑ class="table"	 -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
 <script src="/hermit/js/jquery-3.2.1.min.js"></script>
 <script src="/hermit/js/bootstrap.js"></script>
 <script src="/hermit/js/flashcanvas.js"></script>
 <script src="/hermit/js/jSignature.min.js"></script>
 <script src="/hermit/js/datatables.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
+
 <style>
 input{
 width:100px;
@@ -31,91 +32,127 @@ padding-bottom:40px;
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
-	<div class="container col-md-10 col-md-offset-5">
+	<div class="container">
 	
-	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form">
+	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form" class="form-horizontal">
 		<div class="form-group">
-			<label>房屋編號</label> 
-			<input type="text" readonly value="${vo.houseNO}" name="houseNO">
+			<label class="col-md-5 control-label">房屋編號</label> 
+			<div class="col-md-4">
+			 <input type="text" readonly value="${vo.houseNO}" name="houseNO">
+			</div>	
 		</div>
 		<div class="form-group">
-			<label>房屋標題</label>
-		    <input type="text" value="${vo.houseTitle}" name="houseTitle">
+			<label for="houseTitle" class="col-md-5 control-label">房屋標題</label>
+			<div class="col-md-4">
+		    <input type="text" value="${vo.houseTitle}" name="houseTitle" id="houseTitle">
+		    </div>
 		</div>
 		<div class="form-group">
-			<label>縣市</label>
+			<label class="col-md-5 control-label">縣市</label>
+			<div class="col-md-4">
 			<select id="cityName" name="cityNO"></select> 
+			</div>
 			<input type="hidden" value="${vo.cityVO.cityNO}" id="cityNO" name="cityNO">
 		</div>
 		<div class="form-group">
-			<label>地區</label> 
+			<label class="col-md-5 control-label">地區</label> 
+			<div class="col-md-4"> 
 			<select id="boroughName" name="boroughNO"></select>
+			</div>
 			<input type="hidden" value="${vo.boroughsVO.boroughNO}" name="boroughNOe" id="boroughNO">
 		</div>
 		<div class="form-group">
-			<label>最高樓層</label> 
-			<input type="text" value="${vo.highestFloor}" name="highestFloor">
+			<label class="col-md-5 control-label" for="highestFloor">最高樓層</label> 
+			<div class="col-md-4">
+			<input type="text" value="${vo.highestFloor}" name="highestFloor" id="highestFloor">
+			</div>
 		</div>
 		<div class="form-group">
-			<label>現在樓層</label> 
-			<input type="text" value="${vo.nowFloor}" name="nowFloor">
+			<label class="col-md-5 control-label" for="nowfloor">現在樓層</label> 
+			<div class="col-md-4">
+			<input type="text" value="${vo.nowFloor}" name="nowFloor" id="newfloor">
+			</div>
 		</div>
 		<div class="form-group">
-			<label>房屋狀態</label>
+			<label class="col-md-5 control-label">房屋狀態</label>
+			<div class="col-md-4">
 			<select name="houseStatus" id="SelectStatus">
 			<option>未出租</option>
 			<option>已出租</option>
 			<option>修繕中</option>
-			
 			</select> 
+			</div>
 <%-- 			<input type="hidden" value="${vo.houseStatus}" name="houseStatus"> --%>
 		</div>
 		<div class="form-group">
-			<label>租金</label> 
-			<input type="text" value="${vo.houseRent}" name="houseRent">
+			<label class="col-md-5 control-label" for="houseRent">租金</label>
+			<div class="col-md-4">
+			<input type="text" value="${vo.houseRent}" name="houseRent" id="houserent">
+			</div> 
 		</div>
 		<div class="form-group">
-			<label>押金</label> 
-			<input type="text" value="${vo.houseCharge}" name="housecharge">
+			<label class="col-md-5 control-label" for="housecharge">押金</label> 
+			<div class="col-md-4">
+			<input type="text" value="${vo.houseCharge}" name="housecharge" id="housecharge">
+			</div>
 		</div>
 		<div class="form-group">
-			<label>水費</label> 
-			<input type="text" value="${vo.waterRate}" name="waterRate">
+			<label class="col-md-5 control-label" for="waterRate">水費</label> 
+			<div class="col-md-4">
+			<input type="text" value="${vo.waterRate}" name="waterRate" id="waterRate">
+			</div>
 		</div>
 		<div class="form-group">
-			<label>電費</label> 
+			<label class="col-md-5 control-label" for="col-md-4">電費</label> 
+			<div class="col-md-4">
 			<input type="text" value="${vo.powerRate}" name="powerRate">
+			</div>
 		</div>
 <!-- 		<div class="form-group"> -->
 <!-- 			<label>影片</label> -->
 <%-- 			 <input type="text" value="${vo.houseVideo}" name="houseVideo"> --%>
 <!-- 		</div> -->
 		<div class="form-group">
-			<label>房屋類型</label> 
+			<label class="col-md-5 control-label">房屋類型</label>
+			<div class="col-md-4">
 			<select id="houseType" name="typeNO"></select>
 			<input id="typeNO" type="hidden" value="${vo.houseTypeVO.typeNO}" name="typeNO">
+			</div> 
 		</div>
 		
 		<div class="form-group">
-		<lable>形態</lable>
+		<lable class="col-md-5 control-label">形態</lable>
+			<div class="col-md-4">
 			<select id="houseForm" name="formNO"></select>
 			<input id="formNO" type="hidden" value="${vo.houseFormVO.formNO}" name="formNO">
+			</div>
 		</div>
 		
 		<div class="form-group">
-			<label>地址</label> <input type="text" value="${vo.houseAddr}"
-				name="houseAddr">
+			<label class="col-md-5 control-label" for="houseAddr">地址</label> 
+			<div class="col-md-4">
+			<input type="text" value="${vo.houseAddr}" name="houseAddr" id="houseAddr">
+			</div>
 		</div>
 		<div class="form-group">
-			<lable>坪數</lable>
-			<input type="text" value="${vo.houseSize }" name="houseSize">
+			<lable class="col-md-5 control-label" for="houseSize">坪數</lable>
+			<div class="col-md-4">
+			<input type="text" value="${vo.houseSize }" name="houseSize" id="houseSize">
+			</div>
 		</div>
-		<div>
+		<div class="form-group">
+			<label class="col-md-5 control-label">圖片</label>
+			<div class="col-md-4">	
 				<input type="file" id="file">
 				<input type="hidden" id="previewPic" name="previewPic" value="${vo.previewPic}" />
 				<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
+			</div>
 		</div>
-		<input type="submit" value="修改">
+		<div class="form-group" >
+			<div class="col-md-6 control-label">
+				<input type="submit" value="修改">
+			</div>
+		</div>
 	</form>
 	</div>
 	

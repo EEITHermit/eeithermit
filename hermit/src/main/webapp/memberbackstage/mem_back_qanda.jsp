@@ -9,9 +9,15 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<link href='<%=request.getContextPath()%>/css/bootstrap.min.css'
+	rel='stylesheet' />
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-responsive.min.css"
 	rel="stylesheet" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/datatables.min.css" />
 <link href="<%=request.getContextPath()%>/css/font-awesome.css"
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/adminia.css"
@@ -20,108 +26,22 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/css/jquery-ui.min.css"
+	rel="stylesheet" />
 <link
 	href='<%=request.getContextPath()%>/css/jqueryText/jquery-te-1.4.0.css'
 	rel='stylesheet' />
 
 <style>
- #queryTable { 
- 	display: none; 
- } 
-
- #commentForm { 
- 	display: none; 
-} 
-
-#queryBT {
-	border-top: 1px solid #000000; background : #15d48b; background :
-	-webkit-gradient( linear, left top, left bottom, from( #228f1d), to(
-	#15d48b)); background : -webkit-linear-gradient( top, #228f1d, #15d48b);
-	background : -moz-linear-gradient( top, #228f1d, #15d48b); background :
-	-ms-linear-gradient( top, #228f1d, #15d48b); background :
-	-o-linear-gradient( top, #228f1d, #15d48b); padding : 11.5px 23px;
-	-webkit-border-radius : 25px; -moz-border-radius : 25px; border-radius
-	: 25px; -webkit-box-shadow : rgba( 0, 0, 0, 1) 0 1px 0; -moz-box-shadow
-	: rgba( 0, 0, 0, 1) 0 1px 0; box-shadow : rgba( 0, 0, 0, 1) 0 1px 0;
-	text-shadow : rgba( 0, 0, 0, .4) 0 1px 0;
-	color: #a67219; font-size : 22px; font-family : 'Lucida Grande',
-	Helvetica, Arial, Sans-Serif; text-decoration : none;
-	vertical-align: middle;
-	background: #15d48b;
-	background: -webkit-gradient(linear, left top, left bottom, from(#228f1d),
-		to(#15d48b));
-	background: -webkit-linear-gradient(top, #228f1d, #15d48b);
-	background: -moz-linear-gradient(top, #228f1d, #15d48b);
-	background: -ms-linear-gradient(top, #228f1d, #15d48b);
-	background: -o-linear-gradient(top, #228f1d, #15d48b);
-	padding: 11.5px 23px;
-	-webkit-border-radius: 25px;
-	-moz-border-radius: 25px;
-	border-radius: 25px;
-	-webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-	-moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-	box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-	text-shadow: rgba(0, 0, 0, .4) 0 1px 0; color : #a67219;
-	font-size: 22px;
-	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
-	text-decoration: none;
+#queryDiv {
+	display: none;
 }
 
-#queryBT:hover {
-	border-top-color: #bd6c49; background : #bd6c49;
-	color: #ccc;
-	background: #bd6c49;
+#formDiv {
+	display: none;
 }
 
-#queryBT:active {
-	border-top-color: #456f8a;
-	background: #456f8a;
-}
 
-#commentBT {
-	border-top: 1px solid #000000; background : #15d48b; background :
-	-webkit-gradient( linear, left top, left bottom, from( #228f1d), to(
-	#15d48b)); background : -webkit-linear-gradient( top, #228f1d, #15d48b);
-	background : -moz-linear-gradient( top, #228f1d, #15d48b); background :
-	-ms-linear-gradient( top, #228f1d, #15d48b); background :
-	-o-linear-gradient( top, #228f1d, #15d48b); padding : 11.5px 23px;
-	-webkit-border-radius : 25px; -moz-border-radius : 25px; border-radius
-	: 25px; -webkit-box-shadow : rgba( 0, 0, 0, 1) 0 1px 0; -moz-box-shadow
-	: rgba( 0, 0, 0, 1) 0 1px 0; box-shadow : rgba( 0, 0, 0, 1) 0 1px 0;
-	text-shadow : rgba( 0, 0, 0, .4) 0 1px 0;
-	color: #a67219; font-size : 22px; font-family : 'Lucida Grande',
-	Helvetica, Arial, Sans-Serif;
-	text-decoration: none;
-	vertical-align: middle;
-	background: #15d48b;
-	background: -webkit-gradient(linear, left top, left bottom, from(#228f1d),
-		to(#15d48b));
-	background: -webkit-linear-gradient(top, #228f1d, #15d48b);
-	background: -moz-linear-gradient(top, #228f1d, #15d48b);
-	background: -ms-linear-gradient(top, #228f1d, #15d48b);
-	background: -o-linear-gradient(top, #228f1d, #15d48b);
-	padding: 11.5px 23px;
-	-webkit-border-radius: 25px;
-	-moz-border-radius: 25px;
-	border-radius: 25px;
-	-webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-	-moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-	box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-	text-shadow: rgba(0, 0, 0, .4) 0 1px 0; color : #a67219;
-	font-size: 22px;
-	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
-}
-
-#commentBT:hover {
-	border-top-color: #bd6c49; background : #bd6c49;
-	color: #ccc;
-	background: #bd6c49;
-}
-
-#commentBT:active {
-	border-top-color: #456f8a;
-	background: #456f8a;
-}
 </style>
 
 </head>
@@ -152,7 +72,7 @@ a:link, a:visited, a:hover, a:active {
 					</div>
 					<div class="account-details">
 						<span class="account-name"
-							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
+							style="font-family: Microsoft JhengHei; padding-left: 75px">${LoginOK.memAccount}</span>
 						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
 					</div>
 					<!-- /account-container -->
@@ -185,7 +105,7 @@ a:link, a:visited, a:hover, a:active {
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="./mem_back_reset.jsp"> <i
+						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
 								class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
@@ -214,59 +134,75 @@ a:link, a:visited, a:hover, a:active {
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
-						<!--模式選擇按鈕 -->
-							<div class="row">
-								<div class="container col-md-6 col-md-offset-3">
-									<button id="queryBT">查詢留言</button>
-									<button id="commentBT">客服申請</button>
+							<!--模式選擇按鈕 -->
+							<div>
+								<div class="container col-md-8 col-md-offset-2">
+									<button id="queryBT" class="btn btn-primary btn-lg btn-block">查詢留言</button>
+								</div>
+								<!--查詢留言區域 -->
+								<div id="queryDiv">
+									<table id="queryTable" class="table table-striped table-bordered" cellspacing="0">
+										<thead>
+											<tr>
+												<th>留言時間</th>
+												<th>留言類型</th>
+												<th>房屋連結</th>
+												<th>留言內容</th>
+												<th>回覆時間</th>
+												<th>回覆內容</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="qaVO" items="${array}">
+												<tr>
+													<td>${qaVO.qTime}</td>
+													<c:if test="${qaVO.qaType == 0}">
+														<td>客服</td>
+													</c:if>
+													<c:if test="${qaVO.qaType == 1}">
+														<td>詢問</td>
+													</c:if>
+													<td><a
+														style="color: blue; text-decoration: underline;"
+														href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+													<td>${qaVO.qDetail}</td>
+													<td>${qaVO.aTime}</td>
+													<td>${qaVO.aDetail}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+								<div class="container col-md-8 col-md-offset-2">
+									<button id="commentBT" class="btn btn-primary btn-lg btn-block">客服申請</button>
 								</div>
 							</div>
-						<!--查詢留言區域 -->
-							<div>
-								<table id="queryTable">
-									<thead>
-										<tr>
-											<th>留言時間</th>
-											<th>留言類型</th>
-											<th>房屋連結</th>
-											<th>留言內容</th>
-											<th>回覆時間</th>
-											<th>回覆內容</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="qaVO" items="${array}">
-											<tr>
-												<td>${qaVO.qTime}</td>
-												<c:if test="${qaVO.qaType == 0}">
-													<td>客服</td>
-												</c:if>
-												<c:if test="${qaVO.qaType == 1}">
-													<td>詢問</td>
-												</c:if>
-												<td><a style="color: blue; text-decoration: underline;"
-													href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
-												<td>${qaVO.qDetail}</td>
-												<td>${qaVO.aTime}</td>
-												<td>${qaVO.aDetail}</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-								<!--客服申請區域 -->
-								<form id="commentForm"
+
+							<!--客服申請區域 -->
+							<div id="formDiv">
+								<form id="commentForm" class="form-group"
 									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
 									method="POST">
-									請選擇房屋：<select name="houseNO" class="custom-select">
-										<option>請選擇</option>
-								<!--filter會傳來houseArray 為此會員所租賃的房屋 -->
-										<c:forEach var="houseVO" items="${houseArray}">
-											<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
-										</c:forEach>
-									</select> 申訴內容：
-									<textarea id="commentArea" class="commentArea" name="qDetail"
-										style="resize: none;"></textarea>
-									<input type="button" value="提交" onclick="check()" />
+									<div class="container col-md-8">
+										<label for="houseNO" class="form-label">請選擇房屋：</label> <select
+											name="houseNO" class="form-control"
+											style="background-color: #DDDDDD;">
+											<option>請選擇 房屋</option>
+											<!--filter會傳來houseArray 為此會員所租賃的房屋 -->
+											<c:forEach var="houseVO" items="${houseArray}">
+												<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="container col-md-12">
+										<label for="qDetail" class="form-label"> 申訴內容： </label>
+										<textarea id="commentArea" class="commentArea" name="qDetail"
+											style="resize: none;"></textarea>
+									</div>
+									<div class="container col-md-4 col-md-offset-5">
+										<button class="btn btn-secondary btn-lg" type="button"
+											onclick="check()">提交</button>
+									</div>
 								</form>
 							</div>
 						</div>
@@ -282,8 +218,7 @@ a:link, a:visited, a:hover, a:active {
 		<!-- /container -->
 	</div>
 	<!-- /content -->
-
-
+	<div style="height:50px"></div>
 	<div id="footer">
 
 		<!-- 		<div class="container">
@@ -319,25 +254,50 @@ a:link, a:visited, a:hover, a:active {
 ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
 	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", work);
 
 		function work() {
 			//跳出查詢畫面
 			$("#queryBT").click(function() {
-				$("#queryTable").toggle(true, 1000);
-				$("#commentForm").toggle(false, 1000);
+				$("#queryDiv").toggle();
 			});
 			//跳出投訴頁面
 			$("#commentBT").click(function() {
-				$("#queryTable").toggle(false, 1000);
-				$("#commentForm").toggle(true, 1000);
+				$("#formDiv").toggle();
 			});
 			//產生jqueyText
 			$('#commentArea').jqte();
+			//產生DataTable
+			$('#queryTable').DataTable({
+				"autoWidth" : false,
+				//設定各個欄位屬性
+				"columnDefs" : [ {
+					"targets" : [ 0 ],
+					"width" : "10%"
+				}, {
+					"targets" : [ 1 ],
+					"width" : "10%"
+				}, {
+					"targets" : [ 2 ],
+					"width" : "15%"
+				}, {
+					"targets" : [ 3 ],
+					"width" : "28%"
+				}, {
+					"targets" : [ 4 ],
+					"width" : "10%"
+				} , {
+					"targets" : [ 5 ],
+					"width" : "27%"
+				}
+				]
+			});
 		};
 
 		function check() {
