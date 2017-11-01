@@ -82,8 +82,7 @@ ul, li {
 				<li><a target="_blank" href="#"><img src="images/a.jpg"></a></li>
 				<li><a target="_blank" href="#"><img src="images/b.jpg"></a></li>
 				<li><a target="_blank" href="#"><img src="images/c.jpg"></a></li>
-				<li><a target="_blank" href="#"><img src="images/d.jpg"></a></li>
-				<li><a target="_blank" href="#"><img src="images/e.jpg"></a></li>
+
 			</ul>
 		</div>
 		<div class="abgne-control">
