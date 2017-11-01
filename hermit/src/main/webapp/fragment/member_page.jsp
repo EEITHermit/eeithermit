@@ -31,6 +31,12 @@
 <!-- Modernizr -->
 <script src="<%=request.getContextPath()%>/js/modernizr.js"></script>
 <script src="<%=request.getContextPath()%>/js/main.js"></script>
+<!-- Action panel -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/st.action-panel.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/font-awesome.min.css">
+<script src="<%=request.getContextPath()%>/js/st.action-panel.js"></script>
 <style>
 	*{
 		margin:0;
@@ -100,7 +106,29 @@
 		</div>	   
 	</div>
 	
+	<!-- Action panel -->
+	<div class="st-actionContainer right-bottom">
+		<div class="st-panel">
+			<div class="st-panel-header">小天使視窗</div>
+			<div class="st-panel-contents">
+				<textarea id="talkarea" style="font-size: 1em; resize: none; color: black;"
+					readonly="readonly" rows="20em" cols="40em"></textarea>
+				<hr />
+				<input type="text" id="talktext" size="32em" style="color: black" /><input
+					id="sendmsg" style="color: black" type="button" value="送出" />
+			</div>
+		</div>
+		<div class="st-btn-container right-bottom" >
+			<div class="st-button-main" id="icon-button">
+				<i class="fa fa-bell" aria-hidden="true"></i>
+			</div>
+		</div>
+	</div>
+
 	<script>
+	// Action panel -1
+	$('st-actionContainer').launchBtn();
+	
 	$( function() {
 		var spanArrow = $(".glyphicon-chevron-down"); 
 		var btn = $( "#button" );
@@ -118,17 +146,41 @@
 		btn.on( "click", function() {
 		      runEffect();
 		});
-	    effect.hide(); 
-	  });
+	    effect.hide();
+	    
+		// Action panel -2
+		$('#icon-button').click(function() {
+			var area = document.getElementById('talkarea');
+			var text = document.getElementById('talktext');
+			var websocket = new WebSocket("ws://"+location.host+"/hermit/websocket.do");
 
-		function openLeftMenu() {
-		    document.getElementById("leftMenu").style.display = "block";
-		    
-		}
-		function closeLeftMenu() {
-		    document.getElementById("leftMenu").style.display = "none";
-		}
+			websocket.onopen = function processOpen() {
+			};
 
+			websocket.onmessage = function(message) {
+				var jsonData = JSON.parse(message.data);
+				if (jsonData.message != null) {
+					console.log(area);
+					area.value += jsonData.message + "\n";
+				}
+			};
+
+			$(function() {
+				$('#sendmsg').click(function() {
+					websocket.send(text.value);
+					text.value = "";
+				});
+			});
+		});
+	});
+
+	function openLeftMenu() {
+	    document.getElementById("leftMenu").style.display = "block";	    
+	}
+	
+	function closeLeftMenu() {
+	    document.getElementById("leftMenu").style.display = "none";
+	}
 	</script>
 
 </body>
