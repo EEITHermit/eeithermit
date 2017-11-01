@@ -46,7 +46,7 @@
 	<div id="dialog-insert" title="新增預約">
 		<form id="insertForm">
 			
-				<input id="empNo" type="hidden" name="empNo"value="${LoginOK.empNO}"/>
+				<input id="empNo" type="hidden" name="empNo"value="${empLoginOK.empNO}"/>
 				預約會員：<input id="memberIn"type="text" name="member" value=""/><br/>
 				開始時間：<input id="startTimeIn"type="text" name="startTime"value="" readonly/><br/>
 				結束時間：<input id="endTimeIn"type="text" name="endTime" value="" readonly/><br/>
@@ -94,7 +94,7 @@
 		    				eventArray.push(eventObject);
 		    			}
 		    			//傳送eventArray的JSON字串
-		    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":"${LoginOK.empNO}"},function(data){
+		    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":"${empLoginOK.empNO}"},function(data){
 		    				alert(data);
 		    				calendar.fullCalendar("refetchEvents"); //重取資料庫事件
 		    			});
@@ -111,7 +111,7 @@
 			events:function(start,end,timezone,callback){
 				var startTime = start.format("YYYY-MM-DD HH:mm:SS");
 				var endTime = end.format("YYYY-MM-DD HH:mm:SS");
-				$.get("<%= request.getContextPath() %>/calendarServlet?mission=query",{empNo:"${LoginOK.empNO}",STime:startTime,ETime:endTime},function(data){
+				$.get("<%= request.getContextPath() %>/calendarServlet?mission=query",{empNo:"${empLoginOK.empNO}",STime:startTime,ETime:endTime},function(data){
 					temp.val(""); //切換畫面則清除暫存
 					callback(JSON.parse(data)); //傳回data值輸入事件
 				})
@@ -187,7 +187,7 @@
 	    					,start:start,end:end};
 	    			eventArray.push(eventObject);
 	    			//傳送eventArray的JSON字串
-	    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":"${LoginOK.empNO}"},function(data){
+	    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":"${empLoginOK.empNO}"},function(data){
 						alert(data);
 	    				if(data=="更改成功"){
 	    					calendar.fullCalendar("gotoDate",moment(start)) //前往該時間

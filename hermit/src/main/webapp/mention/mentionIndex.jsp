@@ -54,7 +54,7 @@ table {
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- 取得員工編號 -->
-	<input type="hidden" id="empNO" value="${LoginOK.empNO}" />
+	<input type="hidden" id="empNO" value="${empLoginOK.empNO}" />
 
 
 	<!-- bootstrap -->

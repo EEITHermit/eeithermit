@@ -53,7 +53,7 @@ public class QAndAServlet extends HttpServlet {
 		}else if("update".equals(mission)){
 			//取得登入後session裡的empNO
 			HttpSession session = request.getSession();
-			EmpVO empVO = (EmpVO) session.getAttribute("LoginOK");
+			EmpVO empVO = (EmpVO) session.getAttribute("empLoginOK");
 			Integer empNO = empVO.getEmpNO();
 			Integer qaNO = Integer.valueOf(request.getParameter("qaNO"));
 			String aDetail = request.getParameter("aDetail");

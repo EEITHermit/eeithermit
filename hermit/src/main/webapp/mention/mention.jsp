@@ -109,7 +109,7 @@
 </style>
 </head>
 <body>
-	<input type="hidden" id="empNO" value="${LoginOK.empNO}"/>
+	<input type="hidden" id="empNO" value="${empLoginOK.empNO}"/>
 	<h3>您有 ${resSize} 筆未處理預約  <button type="button" id="resButton">展開</button></h3>
 	<table id="resTable">
 		<thead>

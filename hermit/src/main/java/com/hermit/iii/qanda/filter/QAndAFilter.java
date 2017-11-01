@@ -60,7 +60,7 @@ public class QAndAFilter implements Filter {
 		}else if("AAndQ.jsp".equals(servletPath)){
 			//取得登入後session裡的empNO
 			HttpSession session = req.getSession();
-			EmpVO empVO = (EmpVO) session.getAttribute("LoginOK");
+			EmpVO empVO = (EmpVO) session.getAttribute("empLoginOK");
 			 Integer empNO = empVO.getEmpNO();
 			//取得boroughNO
 			MentionService mention = new MentionService();
