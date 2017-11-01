@@ -325,6 +325,21 @@ h5{
 									});
 									// 載入地圖資訊
 									infowindow = new google.maps.InfoWindow();
+									
+									// 清空目前標記
+									clearMarker();
+									// 加入預設Marker定位
+									var marker = new google.maps.Marker({
+										map : map,
+										position : pyrmont,
+									});
+									markers.push(marker);
+									// Marker點擊事件
+									google.maps.event.addListener(marker, 'click', function() {
+										// infowindow.setContent(place.name + thisResult);
+										infowindow.setContent('<strong>'+hInfo.houseTitle+'：</strong><hr/><i>'+hInfo.cityName+hInfo.boroughName+hInfo.houseAddr+'</i>');
+										infowindow.open(map, this);
+									});	
 								}
 
 								// (bus_station公車，subway_station捷運，train_station火車站)
