@@ -37,4 +37,7 @@ public class HousePictureService {
 	public List<HousePictureVO> getAllHousePicture(){
 		return dao.getAll();
 	}
+	public List<HousePictureVO> getHousePictures(Integer houseNO){
+		return dao.getHousePictures(houseNO);
+	}
 }

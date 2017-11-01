@@ -8,4 +8,5 @@ public interface HousePictureDAO_interface {
     public void delete(Integer housePictureNO);
     public HousePictureVO findByPrimaryKey(Integer housePictureNO);
     public List<HousePictureVO> getAll();
+    public List<HousePictureVO> getHousePictures(Integer houseNO);
 }
