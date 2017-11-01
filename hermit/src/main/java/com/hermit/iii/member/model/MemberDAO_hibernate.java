@@ -141,8 +141,9 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 			for(MemberVO vo : list){
 				vo.setMemInfract(vo.getMemInfract()+1);
 				session.saveOrUpdate(vo);
+				result = 1;
 			}
-			result = 1;
+			
 			session.getTransaction().commit();
 		}catch(Exception e){
 			e.printStackTrace();

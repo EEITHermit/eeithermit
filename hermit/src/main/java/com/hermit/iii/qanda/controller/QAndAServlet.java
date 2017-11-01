@@ -46,7 +46,7 @@ public class QAndAServlet extends HttpServlet {
 			Date qTime = new Date(System.currentTimeMillis());
 			//新增時，無回應員工、內容、時間
 			qa.addQandA(memNO, null, houseNO, qTime, null, qaType, qDetail, null);
-			response.sendRedirect("/hermit/QAndA/QAndA.jsp");
+			response.sendRedirect("/hermit/memberbackstage/mem_back_qanda.jsp");
 			return;
 		}else if("update".equals(mission)){
 			//取得登入後session裡的empNO

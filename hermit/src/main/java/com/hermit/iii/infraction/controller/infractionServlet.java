@@ -33,8 +33,9 @@ public class infractionServlet extends HttpServlet {
 				inVO.setEmpNO(Integer.valueOf(request.getParameter("empNO")));
 				inVO.setMemNO(memNO);
 				inVO.setReason(request.getParameter("reason"));
-				result = inDAO.insert(inVO);
-				result = memDAO.infractPlus1(memNO);
+				if(memDAO.infractPlus1(memNO) == 1){
+					result = inDAO.insert(inVO);
+				}
 				memDAO.checkInfraction(memNO);
 				if(result==1){
 					out.print("申請成功");

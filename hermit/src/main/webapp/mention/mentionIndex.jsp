@@ -53,6 +53,14 @@
 				qaDiv.hide("drop",1000);
 			}
 		});
+		//設定table
+		var tds = $("#qaTable>tbody td");
+		$(tds[0]).css("width","15%");
+		$(tds[1]).css("width","15%");
+		$(tds[2]).css("width","15%");
+		$(tds[3]).css("width","15%");
+		$(tds[4]).css("width","30%");
+		$(tds[5]).css("width","10%");
 		//設定回應表單彈出視窗
 		$("#qaForm").dialog({
 			  autoOpen: false,
@@ -62,9 +70,17 @@
 		      resizable:false,
 		})
 		//Q&A用回應表單
-		$("#qaTable>tbody button").on("click",function(){
+		$('#qaTable>tbody button[name="answer"]').on("click",function(){
 			$("#qaNO").val($(this).parents("tr").find("td").eq(0).text());
 			$("#qaForm").dialog("open");
+		});
+		//Q&A連結至派工單
+		$('#qaTable>tbody button[name="dispatch"]').on("click",function(){
+			if(confirm("是否確認轉入派工單")){
+				var number = $(this).parents("tr").find("td").eq(0).text();
+				var memName = $(this).parents("tr").find("td").eq(2).text();
+				window.location = "<%=request.getContextPath()%>/DispatchList/SignatureInsert.jsp?qaNO="+number+"&memName="+memName;
+			}
 		});
 		//設定期望時間內容
 		var button1 = $("#resTable>tbody button:even").on("click",function(){
@@ -336,7 +352,14 @@ table {
 									<td>${qaVO.memberVO.memName}</td>
 									<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 									<td>${qaVO.qDetail}</td>
-									<td><button type="button" class="btn btn-primary btn-lg">回覆</button></td>
+									<c:if test="${qaVO.qaType == 1}">
+									<td><button type="button" class="btn btn-primary btn-lg" name="answer">回覆</button></td>
+									</c:if>
+									<c:if test="${qaVO.qaType == 0}">
+									<td><button type="button" class="btn btn-primary btn-lg" name="dispatch">派工</button><br/>
+										<button type="button" class="btn btn-primary btn-lg" name="answer">回覆</button>
+									</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>
