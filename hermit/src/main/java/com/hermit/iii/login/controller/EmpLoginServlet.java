@@ -47,7 +47,7 @@ public class EmpLoginServlet extends HttpServlet {
 		// 同時將傳回值放入EmpVO型別的變數vo之內。
 		EmpVO vo = ls.check(account, pwd);
 		if (vo != null) {
-			session.setAttribute("LoginOK", vo);
+			session.setAttribute("empLoginOK", vo);
 		} else {
 			errMsg += "3.該帳號不存在或密碼錯誤;";
 		}

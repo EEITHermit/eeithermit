@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,16 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.hermit.iii.member.model.MemberVO;
 
 @WebFilter(urlPatterns = { "/memberbackstage/*" })
 
-public class LoginFilter implements Filter {
+public class MemberLoginFilter implements Filter {
 	Collection<String> url = new ArrayList<String>();
 	String servletPath;
 	String contextPath;
@@ -42,6 +39,7 @@ public class LoginFilter implements Filter {
 		if (request instanceof HttpServletRequest && response instanceof HttpServletResponse) {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse resp = (HttpServletResponse) response;
+			
 			servletPath = req.getServletPath();
 			contextPath = req.getContextPath();
 			requestURI = req.getRequestURI();
@@ -95,5 +93,6 @@ public class LoginFilter implements Filter {
 
 	@Override
 	public void destroy() {
+
 	}
 }
