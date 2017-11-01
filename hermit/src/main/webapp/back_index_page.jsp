@@ -16,10 +16,10 @@ $(document).ready(function(){
 		if($("#remember").prop("checked")){
 			box = "on";
 		}
-		$.post('/hermit/Login/emplogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),remember:box},function(data){
+		$.post('<%=request.getContextPath()%>/Login/emplogin.do',{account:$("#account").val(),pwd:$("#pwd").val(),remember:box},function(data){
 			
 			if(data == "ok"){
-				window.location = "/hermit/mention/mentionIndex.jsp";
+				window.location = "<%=request.getContextPath()%>/mention/mentionIndex.jsp";
 			}
 			
 			var datas = data.split(";");
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			<nav>
 
 			<center>
-				<form action="<c:url value='/hermit/Login/emplogin.do'/>"
+				<form action="<c:url value='<%=request.getContextPath()%>/Login/emplogin.do'/>"
 					method="POST">
 					<table width="400" border="1">
 						<tr>

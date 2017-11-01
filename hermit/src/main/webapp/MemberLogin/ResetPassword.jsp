@@ -13,38 +13,24 @@
 		<div style="height: 80px"></div>
 		<div class="container">
 			<form action=<c:url value='/Login/resetpwd.do'/> method="POST">
-				<table width="600">
+				<p>
+					<label>帳號</label> <input type="text" name="account"
+						value="<%=request.getParameter("account")%>" readonly="readonly" />
+				</p>
+				<br />
+				<hr>
+				<p>
+					<label>請輸入新密碼</label> <input type="password" name="newPassword" /><small><font
+						color="red" size="-1">${errors.newPassword}</font></small>
+				</p>
+				<br />
+				<hr>
+				<p>
+					<label>請確認新密碼</label> <input type="password" name="newPassword2" /><small><font
+						color="red" size="-1">${errors.newPassword2}</font></small>
 
-					<tr>
-						<td align="right">帳號:</td>
-						<td width="400"><input type="text" name="account"
-							value="<%=request.getParameter("account")%>" readonly="readonly" /></td>
-					</tr>
+				</p>
 
-					<tr>
-						<td align="right"><font style="color: red;">*</font>請輸入新密碼:</td>
-						<td><input type="password" name="newPassword" /><small><font
-								color="red" size="-1">${errors.newPassword}</font></small></td>
-					</tr>
-
-					<tr>
-						<td align="right"><font style="color: red;">*</font>請確認新密碼:</td>
-						<td><input type="password" name="newPassword2" /><small><font
-								color="red" size="-1">${errors.newPassword2}</font></small></td>
-					</tr>
-					
-					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="修改"></td>
-					</tr>
-				</table>
-					<label>帳號</label>
-					<input>
-					<label>請輸入新密碼</label>
-					<input>
-					<label>請確認新密碼</label>
-					<input>
-					
 			</form>
 		</div>
 		<footer
