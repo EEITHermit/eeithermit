@@ -11,7 +11,7 @@ public interface CalendarEventDAO_interface_hibernate {
 	public Integer insert(CalendarEventVO resVO);
 	public Integer delete(int ID);
 	public ArrayList<CalendarEventVO> selectByMember(Integer memberNo);
-	public Integer deleteNotice(Integer eventNO);
+	public Integer deleteNotice(Integer eventNO,String ps);
 	public ArrayList<CalendarEventVO> selectDeleteNotice(Integer empNO);
 	
 }

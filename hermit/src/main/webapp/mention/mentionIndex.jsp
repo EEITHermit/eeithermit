@@ -8,27 +8,13 @@
 <title>員工首頁</title>
 <link href='<%=request.getContextPath()%>/css/jquery-ui.min.css'
 	rel='stylesheet' />
-<!-- Bootstrap core CSS -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" -->
-<!-- 	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" -->
-<!-- 	crossorigin="anonymous"> -->
 
 <style>
 table {
 	font-size: 24px;
 }
 
-#resDiv {
-	text-align: center;
-	display: none;
-	float: left;
-	position: absolute;
-}
 
-#resTable {
-	
-}
 
 #exceptDiv {
 	display: none;
@@ -43,10 +29,25 @@ table {
 
 #qaDiv {
 	display: none;
+	position: absolute;
 }
 
 #qaForm {
 	display: none;
+}
+#resDiv {
+	text-align: center;
+	display: none;
+	float: left;
+	position: absolute;
+}
+#resTable {
+	
+}
+#eventDiv{
+	display: none;
+	float: left;
+	position: absolute;
 }
 </style>
 </head>
@@ -85,22 +86,23 @@ table {
 				</div>
 				</div>
 			</div>
+			<!-- 取消預約申請的推播 -->
+			<div class="col-md-3">
+				<div class="card card-inverse"
+				 style="border-radius: 10px;background-color: #FF8000">
+				<div class="card-block">
+					<h3 class="card-title">您有<span style="font-size: 36px; color: red">${eventArray.size()} </span>筆申請取消預約</h3>
+					<a href="#" class="btn btn-primary" id="eventButton">展開</a>
+				</div>
+				</div>
+			</div>
 			<!-- 其他功能的推播 -->
 			<div class="col-md-3">
 				<div class="card card-inverse"
 				 style="border-radius: 10px;background-color: #00DDAA">
 				<div class="card-block">
-<%-- 					<h3 class="card-title">您有<span style="font-size: 36px; color: red">${qaArray.size()} </span>筆未回覆留言</h3> --%>
-<!-- 					<a href="#" class="btn btn-primary" id="qaButton">展開</a> -->
-				</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-inverse"
-				 style="border-radius: 10px;background-color: #00DDAA">
-				<div class="card-block">
-<%-- 					<h3 class="card-title">您有<span style="font-size: 36px; color: red">${qaArray.size()} </span>筆未回覆留言</h3> --%>
-<!-- 					<a href="#" class="btn btn-primary" id="qaButton">展開</a> -->
+<%-- 					<h3 class="card-title">您有<span style="font-size: 36px; color: red">${eventArray.size()} </span>筆未回覆留言</h3> --%>
+<!-- 					<a href="#" class="btn btn-primary" id="eventButton">展開</a> -->
 				</div>
 				</div>
 			</div>
@@ -225,6 +227,34 @@ table {
 						<button class="btn btn-primary" type="button" onclick="cancel()">取消</button>
 					</form>
 				</div>
+				
+				<!-- 取消預約 -->
+				<div id="eventDiv">
+					<table id="eventTable" class="table table-hover">
+						<thead>
+							<tr>
+								<th>預約編號</th>
+								<th>預約會員</th>
+								<th>房屋連結</th>
+								<th>取消事由</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="eventVO" items="${eventArray}">
+								<tr>
+									<td>${eventVO.eventNO}</td>
+									<td>${eventVO.memberVO.memName}</td>
+									<td><a href="${eventVO.houseVO.houseNO}">${eventVO.houseVO.houseTitle}</a></td>
+									<td>${eventVO.ps}</td>
+										<td><button type="button" class="btn btn-primary btn-lg"
+												name="known">我知道了</button></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<!-- 取消預約end -->
 			</div>
 		</div>
 	</div>
@@ -242,12 +272,15 @@ table {
 	function work(){
 		var resDiv = $("#resDiv");  //預約功能的div
 		var qaDiv = $("#qaDiv"); //Q&A功能的div
+		var eventDiv = $("#eventDiv") //取消預約的div
 		//展開預約
 		$("#resButton").on("click",function(){
 			var resDiv = $("#resDiv");
 			if($(this).text() == "展開"){
+				$("#eventButton").text("展開");
 				$("#qaButton").text("展開");
 				$(this).text("收起");
+				eventDiv.hide("drop",1000);
 				qaDiv.hide("drop",1000);
 				resDiv.show("drop",1000);
 			}else{
@@ -259,8 +292,10 @@ table {
 		$("#qaButton").on("click",function(){
 			
 			if($(this).text() == "展開"){
+				$("#eventButton").text("展開");
 				$("#resButton").text("展開");
 				$(this).text("收起");
+				eventDiv.hide("drop",1000);
 				resDiv.hide("drop",1000);
 				qaDiv.show("drop",1000);
 			}else{
@@ -268,6 +303,21 @@ table {
 				qaDiv.hide("drop",1000);
 			}
 		});
+		//展開取消預約
+		$("#eventButton").on("click",function(){
+			if($(this).text() == "展開"){
+				$("#qaButton").text("展開");
+				$("#resButton").text("展開");
+				$(this).text("收起");
+				resDiv.hide("drop",1000);
+				qaDiv.hide("drop",1000);
+				eventDiv.show("drop",1000);
+			}else{
+				$(this).text("展開");
+				eventDiv.hide("drop",1000);
+			};
+		});
+		
 		//設定table
 		var tds = $("#qaTable>tbody td");
 		$(tds[0]).css("width","15%");
@@ -351,6 +401,22 @@ table {
 					alert(data);
 				});
 				$(this).text("已處理").attr("disabled",true);
+			}
+		});
+		//設定取消預約之我知道了的按鈕
+		$("#eventTable>tbody button").on("click",function(){
+			var eventNO = $($(this).parents("tr").find("td")[0]).text();
+			var thisButton = $(this);
+			if(confirm("此筆資料將會永久刪除，是否確認?")){
+				$.post("<%=request.getContextPath()%>/calendarServlet?mission=delete"
+						,{"id":eventNO}
+						,function(data){
+							alert(data);
+							if(data == "刪除成功"){
+								thisButton.text("已刪除").attr("disabled",true);
+							};
+						}
+				);
 			}
 		});
 	};

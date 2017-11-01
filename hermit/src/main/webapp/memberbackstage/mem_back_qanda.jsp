@@ -135,7 +135,7 @@ a:link, a:visited, a:hover, a:active {
 						<div class="widget-content">
 							<!--模式選擇按鈕 -->
 							<div>
-								<div class="container col-md-8 col-md-offset-2">
+								<div class="container col-md-12">
 									<button id="queryBT" class="btn btn-primary btn-lg btn-block">查詢留言</button>
 								</div>
 								<!--查詢留言區域 -->
@@ -172,7 +172,7 @@ a:link, a:visited, a:hover, a:active {
 										</tbody>
 									</table>
 								</div>
-								<div class="container col-md-8 col-md-offset-2">
+								<div class="container col-md-12">
 									<button id="commentBT" class="btn btn-primary btn-lg btn-block">客服申請</button>
 								</div>
 							</div>

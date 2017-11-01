@@ -159,8 +159,9 @@ public class calendarServlet extends HttpServlet {
 			//通知員工刪除預約
 		}else if("deleteNotice".equals(mission)){
 			int id = Integer.valueOf(request.getParameter("id"));
-			if(rs.deleteNotice(id) == 1){
-				out.print("已通知業務人員");
+			String ps= request.getParameter("ps");
+			if(rs.deleteNotice(id,ps) == 1){
+				out.print("已通知業務人員，24小時內會將您的預約清除");
 				return;
 			}else{
 				out.print("送出失敗，請再次確認");

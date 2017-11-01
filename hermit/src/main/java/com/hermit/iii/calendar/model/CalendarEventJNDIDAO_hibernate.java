@@ -184,13 +184,14 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 		}
 	//會員通知員工要刪除預約，將開始時間改為結束時間
 		@Override
-		public Integer deleteNotice(Integer eventNO){
+		public Integer deleteNotice(Integer eventNO,String ps){
 			Integer result = 0;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try{
 				session.getTransaction().begin();
 				CalendarEventVO eventVO = session.get(CalendarEventVO.class, eventNO);
 				eventVO.setEventStartTime(eventVO.getEventEndTime());
+				eventVO.setPs(ps);
 				session.saveOrUpdate(eventVO);
 				session.getTransaction().commit();
 				result = 1;
