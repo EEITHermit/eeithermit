@@ -811,11 +811,11 @@
 						houseSize:houseSize.val(),
 						houseRent:radioButtons.index(radioButtons.filter(':checked')),
 						equid:jsonStr
-				}
+				};
 			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
 					location.replace("<%= request.getContextPath()%>/search.jsp");
 				})
-			})		
+			});		
 		});
 
 		function openLeftMenu() {
@@ -873,9 +873,10 @@
 					if(data=="OK"){
 						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp?action=check";
 					}else if(data=="NO"){
-						$('#loginmodal').modal('show');
-						$("#cd-login").toggle(true);
-						$('#loginmodal').attr('class','cd-user-modal is-visible');
+// 						$('#loginmodal').modal('show');
+// 						$("#cd-login").toggle(true);
+// 						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						$('.main-nav').children('ul').toggleClass('is-visible');
 						return;
 					}
 				})
@@ -888,9 +889,9 @@
 					if(data=="OK"){
 						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp?action=check";
 					}else if(data=="NO"){
-						$('#loginmodal').modal('show');
-						$("#cd-login").toggle(true);
-						$('#loginmodal').attr('class','cd-user-modal is-visible');
+// 						$('#loginmodal').modal('show');
+// 						$("#cd-login").toggle(true);
+// 						$('#loginmodal').attr('class','cd-user-modal is-visible');
 						return;
 					}
 				})
