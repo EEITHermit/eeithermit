@@ -26,18 +26,18 @@
             $.each(data.items,function(i){
                 var item = 
                 '<div id="as-item-'+i+'" class="as-item" '+((opts.theme!="light")?"style=\'background-color:"+opts.backgroundColor+";box-shadow:none\'":"")+'>'+
-                '<a href="'+data.items[i].link+'">'+
+                '<a href="HousePage?NO='+data.items[i].houseNO+' ">'+
                 '<div class="as-item-thumbnail"><img class="lazyload" height="180" width="300" style="max-height:180px;max-width:300px" src="'+ data.items[i].previewPic +'"/>  </div>'+
                 '</a><div class="as-item-desc"><span class="as-icon as-icon-small"><span class="as-icon-tag"></span></span><span class="as-tag">'+data.items[i].cityName+'</span>'+
                 '&nbsp;&nbsp;<span class="as-icon as-icon-small"><span class="as-icon-tag"></span>'+
                 '</span><span class="as-tag">'+data.items[i].hForm+'</span>'+
                 '&nbsp;&nbsp;<span class="as-icon as-icon-small"><span class="as-icon-tag"></span>'+
                 '</span><span class="as-tag">坪數:'+data.items[i].houseSize+'坪</span>'+
-                '<h4 '+((opts.theme!="light")?"style=\'color:"+opts.titleColor+"\'":"")+
-                '><a style="color:black;font-weight: bold;text-decoration: none;" href="'+data.items[i].link+'">'+data.items[i].houseTitle+'</a></h4>'+
+                '<h3 '+((opts.theme!="light")?"style=\'color:"+opts.titleColor+"\'":"")+
+                '><a style="color:black;font-weight: bold;text-decoration: none;" href="HousePage?NO='+data.items[i].houseNO+'">'+data.items[i].houseTitle+'</a></h3>'+
                 '<p '+((opts.theme!="light")?"style=\'color:"+opts.descColor+"\'":"")+'><span>租金:&nbsp;</span><span style="font-size:1.5em;color:red;">'+data.items[i].houseRent+'</span><span>/月</span></p>'+
                 '<p '+((opts.theme!="light")?"style=\'color:"+opts.descColor+"\'":"")+'><span>地址:&nbsp;</span>'+data.items[i].cityName+data.items[i].boroughName+data.items[i].houseAddr+'</p>'+
-                '<a href="'+data.items[i].link+'" class="as-btn" style="background-color:'+opts.buttonColor+((opts.theme!="light")?";box-shadow:none":"")+'">'+opts.buttonValue+'</a></div></div>';
+                '<a href="HousePage?NO='+data.items[i].houseNO+'" class="as-btn" style="background-color:'+opts.buttonColor+((opts.theme!="light")?";box-shadow:none":"")+'">'+opts.buttonValue+'</a></div></div>';
                 $("#appstore-container").append(item);
             });
     	}
@@ -55,12 +55,12 @@
 //                $.each(data.items,function(i){
 //                    var item = '<div id="as-item-'+i+'" class="as-item" '+
 //                    ((opts.theme!="light")?"style=\'background-color:"+opts.backgroundColor+";box-shadow:none\'":"")+
-//                    '><a href="'+data.items[i].link+'"><div class="as-item-thumbnail" style="background-size:100% 100%;background-image:url(\''+
+//                    '><a href="'+data.items[i].houseNO+'"><div class="as-item-thumbnail" style="background-size:100% 100%;background-image:url(\''+
 //                    data.items[i].thumbnail+'\')"></div></a><div class="as-item-desc"><span class="as-icon as-icon-small"><span class="as-icon-tag"></span></span><span class="as-tag">'+
 //                    data.items[i].tag+'</span>&nbsp;&nbsp;<span class="as-icon as-icon-small"><span class="as-icon-calendar"></span></span><span class="as-date">'+
-//                    data.items[i].date+'</span><h3 '+((opts.theme!="light")?"style=\'color:"+opts.titleColor+"\'":"")+'><a style="color:black;font-weight: bold;text-decoration: none;" href="'+data.items[i].link+'">'+
+//                    data.items[i].date+'</span><h3 '+((opts.theme!="light")?"style=\'color:"+opts.titleColor+"\'":"")+'><a style="color:black;font-weight: bold;text-decoration: none;" href="'+data.items[i].houseNO+'">'+
 //                    data.items[i].title+'</a></h3><p '+((opts.theme!="light")?"style=\'color:"+opts.descColor+"\'":"")+'>'+
-//                    data.items[i].description+'</p><a href="'+data.items[i].link+'" class="as-btn" style="background-color:'+
+//                    data.items[i].description+'</p><a href="'+data.items[i].houseNO+'" class="as-btn" style="background-color:'+
 //                    opts.buttonColor+((opts.theme!="light")?";box-shadow:none":"")+'">'+opts.buttonValue+'</a></div></div>';
 //                    $("#appstore-container").append(item);
 //                });
@@ -76,13 +76,13 @@
 //                    var item = '<div id="as-item-'+i+'" class="as-item" '+
 //                    ((opts.theme!="light")?"style=\'background-color:"+opts.backgroundColor+";box-shadow:none\'":"")+
 //                    '><div class="as-item-thumbnail" style="background-image:url(\''+
-//                    data.items[i].thumbnail+'\')"><a href="'+data.items[i].link+'"><img src="'+data.items[i].logo+
+//                    data.items[i].thumbnail+'\')"><a href="'+data.items[i].houseNO+'"><img src="'+data.items[i].logo+
 //                    '" class="as-item-logo" '+((opts.theme!="light")?"style=\'background-color:"+opts.backgroundColor+"\'":"")+
 //                    '/></a></div><div class="as-item-desc"><span class="as-icon as-icon-small"><span class="as-icon-tag"></span></span><span class="as-tag">'+
 //                    data.items[i].tag+'</span>&nbsp;&nbsp;<span class="as-icon as-icon-small"><span class="as-icon-calendar"></span></span><span class="as-date">'+
 //                    data.items[i].date+'</span><h3 '+((opts.theme!="light")?"style=\'color:"+opts.titleColor+"\'":"")+'>'+
 //                    data.items[i].title+'</h3><p '+((opts.theme!="light")?"style=\'color:"+opts.descColor+"\'":"")+'>'+
-//                    data.items[i].description+'</p><a href="'+data.items[i].link+'" class="as-btn" style="background-color:'+
+//                    data.items[i].description+'</p><a href="'+data.items[i].houseNO+'" class="as-btn" style="background-color:'+
 //                    opts.buttonColor+((opts.theme!="light")?";box-shadow:none":"")+'">'+opts.buttonValue+'</a></div></div>';
 //                    $("#appstore-container").append(item);
 //                });
