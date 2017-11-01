@@ -22,11 +22,12 @@
 	}
 	h3 a {
 		font-family: Microsoft JhengHei;
+	}
 </style>
 </head>
 <body id="body">
 
-	<div class="container" style="margin:40px auto">
+	<div class="container" style="margin:40px auto;height:900px">
 		<div id="appstore-container"></div>
 	</div>
 

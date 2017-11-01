@@ -18,11 +18,26 @@
 		height:500px;
 		width:100%;
 	}
+	equidDiv{
+		height:50px;
+	}
+	.col-md-2 span{
+		vertical-align:sub;
+		font-family: Microsoft JhengHei;
+		font-weight: bold;
+	}
+	.col-md-12 span,a{
+		font-family: Microsoft JhengHei;
+		font-size: 1.2em;
+	}
+	#addressTag span{
+		font-size:0.8em; 
+	}
 </style>
 </head>
 <body>
 	<div class="container" style="margin-top:2%;margin-bottom:2%;padding-top:3%;">
-		<div class="col-md-12"><a style="color:black;padding-right:0px;" href="<%= request.getContextPath() %>">Hermit&nbsp;&nbsp;&gt;&nbsp;&nbsp;</a><span>縣市&nbsp;&nbsp;&gt;&nbsp;&nbsp;</span><span>行政區&nbsp;&nbsp;&gt;&nbsp;&nbsp;</span><span>地址</span></div>
+		<div class="col-md-12" id="addressTag"><a style="color:black;padding-right:0px;" href="<%= request.getContextPath() %>">Hermit&nbsp;&nbsp;&gt;&nbsp;&nbsp;</a><span id="cityName"></span><span id="boroughName"></span><span id="houseAddr"></span></div>
 		<div class="col-md-12" style="height:550px">
 			<div id="carousel">
 			</div>
@@ -38,7 +53,26 @@
 			</ul>
 			<div class="tab-content" style="margin-top:5px">
 			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%" class="tab-pane active" id="hInfo"></div>
-			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="houseContent"></div>
+			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="houseContent">
+					<div class="col-md-2"  style="height:32px;margin:9px auto;"><img style="height:32px;width:32px" id="TV" src='images/television.png'><span>&nbsp;電視</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="aircondition" src='images/air.png'><span>&nbsp;冷氣</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="refrigerator" src='images/refrigerator.png'><span>&nbsp;冰箱</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="waterHeater" src='images/waterheater.png'><span>&nbsp;熱水器</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="gas" src='images/gas.png'><span>&nbsp;瓦斯</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="theFourthStation" src='images/thefour.png'><span>&nbsp;第四台</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="net" src='images/wifi-connection-signal-symbol.png'><span>&nbsp;網路</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="washing" src='images/washing.png'><span>&nbsp;洗衣機</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="bed" src='images/bed.png'><span>&nbsp;床</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="wardrobe" src='images/wardrobe.png'><span>&nbsp;衣櫃</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="sofa" src='images/sofa.png'><span>&nbsp;沙發</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="parking" src='images/parking.png'><span>&nbsp;停車位</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="elevator" src='images/elevator.png'><span>&nbsp;電梯</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="balcony" src='images/balcony.png'><span>&nbsp;陽台</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="permitCook" src='images/cooking.png'><span>&nbsp;開伙</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="pet" src='images/pet.png'><span>&nbsp;養寵物</span></div>
+					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="closeMRT" src='images/closeMRT.png'><span>&nbsp;近捷運</span></div>
+					
+			  </div>
 			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="nearMap"></div>
 			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="houseVideo"></div>
 			</div>
@@ -60,7 +94,21 @@
 		function loadCarousel(){
 			var house = $.parseJSON('<%= request.getAttribute("House")%>');
 			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
-			var eqVO = '<%= request.getAttribute("equid")%>'; 
+			var eqStatus = $.parseJSON('<%= request.getAttribute("eq")%>');
+			var hContentImg = $("#houseContent img");
+			$("#cityName").text(house.cityName+"  >  ");
+			$("#boroughName").text(house.boroughName+"  >  ");
+			$("#houseAddr").text(house.houseAddr);
+			if(eqStatus != null)
+				$.each(eqStatus,function(eqName,value){
+					if(!value){
+						$.each(hContentImg,function(index,eqImg){
+							if(eqImg.id == eqName){
+								eqImg.src="images/no.png";
+							}
+						})
+					}
+				})
 			$('#carousel').carousel({
 			  images:hPics,  
 			  currentImageIndex: 0,
@@ -70,10 +118,6 @@
 	          useArrows: false,
 	          interval: 10000
 			});
-			console.log(eqVO)
-			$.each(eqVO,function(key,value){
-			})
-			
 			$("#hInfo").html(house.houseInfo);
 		}
 		loadCarousel();	

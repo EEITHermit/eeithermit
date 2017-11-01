@@ -24,8 +24,8 @@
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'
 	rel='stylesheet' type='text/css'>
 <!-- CSS reset -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/reset.css">
+<!-- <link rel="stylesheet" -->
+<%-- 	href="<%=request.getContextPath()%>/css/reset.css"> --%>
 <!-- Gem style -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css">
