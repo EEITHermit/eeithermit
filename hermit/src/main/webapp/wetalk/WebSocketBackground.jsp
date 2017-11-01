@@ -28,28 +28,41 @@
 	</div>
 
 	<script>
-		var area = document.getElementById('talkarea');
-		var text = document.getElementById('talktext');
-		var websocket = new WebSocket("ws://" + location.host
-				+ "/hermit/websocket.do");
-
-		websocket.onopen = function processOpen() {
-		};
-
-		websocket.onmessage = function(message) {
-			var jsonData = JSON.parse(message.data);
-			if (jsonData.message != null) {
-				console.log(area);
-				area.value += jsonData.message + "\n";
-			}
-		};
-
 		$(function() {
+			openWebsocket();
+
+		});
+
+		function openWebsocket() {
+			var area = document.getElementById('talkarea');
+			var text = document.getElementById('talktext');
+			var websocket = new WebSocket("ws://" + location.host
+					+ "/hermit/websocket.do");
+
+			websocket.onopen = function(evt) {
+
+			};
+
+			websocket.onmessage = function(message) {
+				var jsonData = JSON.parse(message.data);
+				if (jsonData.message != null) {
+					area.value += jsonData.message + "\n";
+				}
+			};
+
+			websocket.onclose = function(evt) {
+				websocket.close();
+			};
+
+			websocket.onerror = function(evt) {
+				websocket.close();
+			};
+
 			$('#sendmsg').click(function() {
 				websocket.send(text.value);
 				text.value = "";
 			});
-		});
+		}
 	</script>
 </body>
 </html>

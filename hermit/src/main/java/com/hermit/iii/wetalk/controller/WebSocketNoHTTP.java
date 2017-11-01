@@ -44,7 +44,13 @@ public class WebSocketNoHTTP {
 
 	@OnClose
 	public void handleClose(Session userSession) {
+		System.out.println("WebSocket強關才叫我..");
 		users.remove(userSession);
+		try {
+			userSession.close();
+		} catch (IOException e) {
+			System.out.println("IOException好吵");
+		}
 	}
 
 	private String buildJsonData(String username, String message) {
