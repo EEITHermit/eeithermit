@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>赫米特租屋管理</title>
+<link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
@@ -598,6 +599,43 @@
 			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp" | "<%= request.getRequestURI() %>" == "/hermit/";
 			var showSearch = $("#showSearch");
 			var cityOpt;
+			function getCity(){  
+				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
+					var cityData = $.parseJSON(data).list;
+					city.empty();
+					
+					$.each(cityData,function(index,value){
+						var opt = $("<option></option>").text(value.cityName);
+						opt.val(value.cityNO)
+						city.append(opt); 
+						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
+							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+					if(sessionCityNO != null && (!indexCheck)){
+						city.val(sessionCityNO);
+					}
+					getBorough();
+				});
+			}
+			function getBorough(){
+				$.post(path+"/BoroughsServlet.do",{"action":"getAllBoroughByCity","cityNO":city.val()},function(data){
+					var boroughData = $.parseJSON(data).list;
+					borough.empty();
+					borough.append($("<option></option>").text("> 鄉鎮區 <").val(-1));
+					$.each(boroughData,function(index,value){
+						var opt = $("<option></option>").text(value.boroughName);
+						opt.val(value.boroughNO)
+						borough.append(opt); 
+						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
+							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
+						borough.val(sessionBoroughNO);
+					}
+				});
+			}
 			
 			if(indexCheck){
 				$(".breadBox").hide();
@@ -638,43 +676,6 @@
 		   
 		    
 			
-			function getCity(){  
-				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
-					var cityData = $.parseJSON(data).list;
-					city.empty();
-					
-					$.each(cityData,function(index,value){
-						var opt = $("<option></option>").text(value.cityName);
-						opt.val(value.cityNO)
-						city.append(opt); 
-						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
-							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
-						}
-					})
-					if(sessionCityNO != null && (!indexCheck)){
-						city.val(sessionCityNO);
-					}
-					getBorough();
-				});
-			}
-			function getBorough(){
-				$.post(path+"/BoroughsServlet.do",{"action":"getAllBoroughByCity","cityNO":city.val()},function(data){
-					var boroughData = $.parseJSON(data).list;
-					borough.empty();
-					borough.append($("<option></option>").text("> 鄉鎮區 <").val(-1));
-					$.each(boroughData,function(index,value){
-						var opt = $("<option></option>").text(value.boroughName);
-						opt.val(value.boroughNO)
-						borough.append(opt); 
-						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
-							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
-						}
-					})
-					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
-						borough.val(sessionBoroughNO);
-					}
-				});
-			}
 			function houseSizeShow(){
 				if(sessionHouseSize != null && (!indexCheck)){
 					houseSize.val(sessionHouseSize);

@@ -24,6 +24,13 @@ public class HouseVO  implements Serializable{
 	private String houseVideo;
 	private String houseAddr;
 	private Double houseSize;
+	private String houseInfo;
+	public String getHouseInfo() {
+		return houseInfo;
+	}
+	public void setHouseInfo(String houseInfo) {
+		this.houseInfo = houseInfo;
+	}
 	//子傑加
 	private CityVO cityVO;
 	private BoroughsVO boroughsVO;
