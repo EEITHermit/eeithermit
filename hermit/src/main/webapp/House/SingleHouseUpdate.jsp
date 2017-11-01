@@ -13,11 +13,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 房屋表格用↑ class="table"	 -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
-<script src="/hermit/js/jquery-3.2.1.min.js"></script>
-<script src="/hermit/js/bootstrap.js"></script>
-<script src="/hermit/js/flashcanvas.js"></script>
-<script src="/hermit/js/jSignature.min.js"></script>
-<script src="/hermit/js/datatables.min.js"></script>
+<link
+	href='<%=request.getContextPath()%>/css/jqueryText/jquery-te-1.4.0.css'
+	rel='stylesheet' />
+
 
 <style>
 input{
@@ -25,6 +24,19 @@ width:100px;
 }
 .container{
 padding-bottom:40px;
+}
+label{ 
+ 	font-family: 標楷體; 
+ 	font-size: 16px;
+ 	} 
+ textarea{
+    padding: 20px; 
+    width: 280px;
+    resize: none;
+    overflow: auto;
+}
+.form-group{
+padding-right:200px;
 }
 </style>
 </head>
@@ -36,118 +48,139 @@ padding-bottom:40px;
 	
 	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form" class="form-horizontal">
 		<div class="form-group">
+		<div>
 			<label class="col-md-5 control-label">房屋編號</label> 
-			<div class="col-md-4">
-			 <input type="text" readonly value="${vo.houseNO}" name="houseNO">
+			<div class="col-xs-2">
+			 <input type="text" readonly value="${vo.houseNO}" name="houseNO" class="form-control">
 			</div>	
 		</div>
-		<div class="form-group">
-			<label for="houseTitle" class="col-md-5 control-label">房屋標題</label>
-			<div class="col-md-4">
-		    <input type="text" value="${vo.houseTitle}" name="houseTitle" id="houseTitle">
+		<div>
+			<label for="houseTitle" class="col-md-1 control-label">房屋標題</label>
+			<div class="col-xs-2">
+		    <input type="text" value="${vo.houseTitle}" name="houseTitle" id="houseTitle" class="form-control">
 		    </div>
 		</div>
-		<div class="form-group">
-			<label class="col-md-5 control-label">縣市</label>
-			<div class="col-md-4">
-			<select id="cityName" name="cityNO"></select> 
-			</div>
-			<input type="hidden" value="${vo.cityVO.cityNO}" id="cityNO" name="cityNO">
 		</div>
+		
 		<div class="form-group">
-			<label class="col-md-5 control-label">地區</label> 
-			<div class="col-md-4"> 
-			<select id="boroughName" name="boroughNO"></select>
+			<div>
+				<label class="col-md-5 control-label">縣市</label>
+					<div class="col-xs-2">
+						<select id="cityName" name="cityNO" class="form-control"></select> 
+					</div>
+				<input type="hidden" value="${vo.cityVO.cityNO}" id="cityNO" name="cityNO">
 			</div>
-			<input type="hidden" value="${vo.boroughsVO.boroughNO}" name="boroughNOe" id="boroughNO">
-		</div>
-		<div class="form-group">
-			<label class="col-md-5 control-label" for="highestFloor">最高樓層</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.highestFloor}" name="highestFloor" id="highestFloor">
+			<div>
+				<label class="col-md-1 control-label">地區</label> 
+					<div class="col-xs-2"> 
+						<select id="boroughName" name="boroughNO" class="form-control"></select>
+					</div>
+				<input type="hidden" value="${vo.boroughsVO.boroughNO}" name="boroughNOe" id="boroughNO">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-5 control-label" for="nowfloor">現在樓層</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.nowFloor}" name="nowFloor" id="newfloor">
+			<div>
+				<label class="col-md-5 control-label" for="highestFloor">最高樓層</label> 
+					<div class="col-xs-2">
+						<input type="text" value="${vo.highestFloor}" name="highestFloor" id="highestFloor" class="form-control">
+					</div>
+			</div>
+			<div>
+				<label class="col-md-1 control-label" for="nowfloor">現在樓層</label> 
+					<div class="col-xs-2">
+						<input type="text" value="${vo.nowFloor}" name="nowFloor" id="newfloor" class="form-control">
+					</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-5 control-label">房屋狀態</label>
-			<div class="col-md-4">
-			<select name="houseStatus" id="SelectStatus">
-			<option>未出租</option>
-			<option>已出租</option>
-			<option>修繕中</option>
-			</select> 
+			<div>
+				<label class="col-md-5 control-label">房屋狀態</label>
+					<div class="col-xs-2">
+						<select name="houseStatus" id="SelectStatus" class="form-control">
+							<option>未出租</option>
+							<option>已出租</option>
+							<option>修繕中</option>
+						</select> 
+					</div>
 			</div>
-<%-- 			<input type="hidden" value="${vo.houseStatus}" name="houseStatus"> --%>
-		</div>
-		<div class="form-group">
-			<label class="col-md-5 control-label" for="houseRent">租金</label>
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseRent}" name="houseRent" id="houserent">
-			</div> 
-		</div>
-		<div class="form-group">
-			<label class="col-md-5 control-label" for="housecharge">押金</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseCharge}" name="housecharge" id="housecharge">
+			<div>
+				<label class="col-md-1 control-label" for="houseRent">租金</label>
+					<div class="col-xs-2">
+						<input type="text" value="${vo.houseRent}" name="houseRent" id="houserent"  class="form-control">
+					</div> 
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-5 control-label" for="waterRate">水費</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.waterRate}" name="waterRate" id="waterRate">
+			<div>
+				<label class="col-md-5 control-label" for="housecharge">管理費</label> 
+					<div class="col-xs-2">
+						<input type="text" value="${vo.houseCharge}" name="housecharge" id="housecharge" class="form-control">
+					</div>
+			</div>
+			<div>
+				<label class="col-md-1 control-label" for="waterRate">水費</label> 
+					<div class="col-xs-2">
+						<input type="text" value="${vo.waterRate}" name="waterRate" id="waterRate" class="form-control">
+					</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-5 control-label" for="col-md-4">電費</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.powerRate}" name="powerRate">
+			<div>
+				<label class="col-md-5 control-label" for="col-md-4">電費</label> 
+					<div class="col-xs-2">
+						<input type="text" value="${vo.powerRate}" name="powerRate" class="form-control">
+					</div>
 			</div>
-		</div>
 <!-- 		<div class="form-group"> -->
 <!-- 			<label>影片</label> -->
 <%-- 			 <input type="text" value="${vo.houseVideo}" name="houseVideo"> --%>
 <!-- 		</div> -->
-		<div class="form-group">
-			<label class="col-md-5 control-label">房屋類型</label>
-			<div class="col-md-4">
-			<select id="houseType" name="typeNO"></select>
-			<input id="typeNO" type="hidden" value="${vo.houseTypeVO.typeNO}" name="typeNO">
-			</div> 
-		</div>
-		
-		<div class="form-group">
-		<lable class="col-md-5 control-label">形態</lable>
-			<div class="col-md-4">
-			<select id="houseForm" name="formNO"></select>
-			<input id="formNO" type="hidden" value="${vo.houseFormVO.formNO}" name="formNO">
+			<div>
+				<label class="col-md-1 control-label">房屋類型</label>
+					<div class="col-xs-2">
+						<select id="houseType" name="typeNO" class="form-control"></select>
+							<input id="typeNO" type="hidden" value="${vo.houseTypeVO.typeNO}" name="typeNO" class="form-control">
+					</div> 
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label class="col-md-5 control-label" for="houseAddr">地址</label> 
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseAddr}" name="houseAddr" id="houseAddr">
+			<div>
+				<label class="col-md-5 control-label">形態</label>
+					<div class="col-xs-2">
+						<select id="houseForm" name="formNO" class="form-control"></select>
+						<input id="formNO" type="hidden" value="${vo.houseFormVO.formNO}" name="formNO" class="form-control">
+					</div>
+			</div>
+			<div>
+				<label class="col-md-1 control-label" for="houseAddr">地址</label> 
+					<div class="col-xs-2">
+						<input type="text" value="${vo.houseAddr}" name="houseAddr" id="houseAddr" class="form-control">
+					</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<lable class="col-md-5 control-label" for="houseSize">坪數</lable>
-			<div class="col-md-4">
-			<input type="text" value="${vo.houseSize }" name="houseSize" id="houseSize">
+			<div>
+				<label class="col-md-5 control-label" for="houseSize">坪數</label>
+					<div class="col-xs-2">
+						<input type="text" value="${vo.houseSize}" name="houseSize" id="houseSize" class="form-control">
+					</div>
+			</div>
+			<div>
+				<label class="col-md-1 control-label">圖片</label>
+					<div class="col-xs-2">	
+						<input type="file" id="file">
+						<input type="hidden" id="previewPic" name="previewPic" value="${vo.previewPic}" />
+						<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
+					</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-5 control-label">圖片</label>
-			<div class="col-md-4">	
-				<input type="file" id="file">
-				<input type="hidden" id="previewPic" name="previewPic" value="${vo.previewPic}" />
-				<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
-			</div>
-		</div>
+			<label class="col-md-5 control-label">房屋介紹</label>
+				<div class="col-md-6 col-offset-1">
+					<textarea name="houseInfo" class="form-control" id="houseInfo">${vo.houseInfo}</textarea>
+				</div>
+		</div>	
 		<div class="form-group" >
 			<div class="col-md-6 control-label">
 				<input type="submit" value="修改">
@@ -155,8 +188,13 @@ padding-bottom:40px;
 		</div>
 	</form>
 	</div>
-	
+	<script src="/hermit/js/jquery-3.2.1.min.js"></script>
+	<script src="/hermit/js/bootstrap.js"></script>
+	<script src="/hermit/js/flashcanvas.js"></script>
+	<script src="/hermit/js/jSignature.min.js"></script>
+	<script src="/hermit/js/datatables.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
+	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script>
 	$(document).ready(function(){
 
@@ -280,6 +318,7 @@ padding-bottom:40px;
 					  $("#previewPic").val($("#result").attr("src"));
 				  }) 
 				});
+			$('#houseInfo').jqte();
 		})
 	</script>
 </body>
