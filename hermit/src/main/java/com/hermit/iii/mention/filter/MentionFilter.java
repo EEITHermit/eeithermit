@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hermit.iii.calendar.model.CalendarEventService;
+import com.hermit.iii.calendar.model.CalendarEventVO;
 import com.hermit.iii.emp.model.EmpDAO_hibernate;
 import com.hermit.iii.emp.model.EmpDAO_interface_hibernate;
 import com.hermit.iii.emp.model.EmpVO;
@@ -40,6 +42,7 @@ public class MentionFilter implements Filter {
 		EmpDAO_interface_hibernate empService = new EmpDAO_hibernate();
 		ReservationService reservation = new ReservationService();
 		QandAService qaService = new QandAService();
+		CalendarEventService eventService = new CalendarEventService();
 		HttpServletRequest req = null;
 		HttpServletResponse resp = null;
 		if(request instanceof HttpServletRequest && response instanceof HttpServletResponse){
@@ -57,6 +60,7 @@ public class MentionFilter implements Filter {
 		Integer postNO = empVO.getPostVO().getPostNO();
 		ArrayList<ReservationVO> resArray = new ArrayList<ReservationVO>();
 		ArrayList<QandAVO> qaArray = new ArrayList<QandAVO>();
+		ArrayList<CalendarEventVO> eventArray = new ArrayList<CalendarEventVO>();
 		if(!boroughNOs.isEmpty()){
 			for(Integer boroughNO : boroughNOs){
 				//若是業務
@@ -73,8 +77,11 @@ public class MentionFilter implements Filter {
 				}
 			}
 		}
+		//取得員工所負責被取消的預約
+		eventArray = eventService.selectDeleteNotice(empNO);
 		request.setAttribute("qaArray", qaArray);
 		request.setAttribute("resArray", resArray);
+		request.setAttribute("eventArray", eventArray);
 		request.setAttribute("resSize",resArray.size());
 		request.setAttribute("empVO",empVO);
 		chain.doFilter(request, response);

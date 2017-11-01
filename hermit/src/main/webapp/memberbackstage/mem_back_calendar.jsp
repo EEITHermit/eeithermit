@@ -200,15 +200,16 @@ a:link, a:visited, a:hover, a:active {
 					var tdAddr = $("<td>"+res["houseVO"]["houseAddr"]+"</td>");
 					var tdTel = $("<td>"+res["empVO"]["empPhone"]+"</td>");
 					var tdStart = $("<td>"+res["eventStartTime"]+"</td>");
-					var tdButton = $("<td><button>刪除</button></td>")
+					var tdButton = $("<td><button class='btn btn-primary'>刪除</button></td>")
 					
 					tr.append(tdId).append(tdName).append(tdTitle).append(tdAddr).append(tdTel).append(tdStart).append(tdButton);
 					tr.appendTo(body);
 					//產生DataTable
 					$('#showTable').DataTable({
+						"destroy": true,
+						"paging": false,
 						"searching": false,
 						"info": false,
-						"paging": false,
 						"autoWidth" : false,
 						//設定各個欄位屬性
 						"columnDefs" : [ {
@@ -238,12 +239,11 @@ a:link, a:visited, a:hover, a:active {
 					});
 				};
 			});
-			
-			
+		
 		//會員刪除預約
 		body.on("click","button",function(event){
 			if(confirm("確定要刪除此預約?")){
-				$.post("<%=request.getContextPath()%>/calendarServlet?mission=delete"
+				$.post("<%=request.getContextPath()%>/calendarServlet?mission=deleteNotice"
 						,{id:$(event.target).parent("tr").children("td").eq(0).text()}
 						,function(data){
 							alert(data);
