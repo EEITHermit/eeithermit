@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>後台管理頁面</title>
+<link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -26,21 +28,21 @@
 </style>
 <body>
 	<div>
-	<aside>
-	<div class="navBtn">+</div>
-	<nav> <a href="<%=request.getContextPath()%>/mention/mentionIndex.jsp">首頁</a>
-	<a href="/hermit/House/House_management.jsp">房屋產品維護</a> 
-	<a href="">房屋租賃維護</a> 
-	<a href="/hermit/Lease/Lease.jsp">合約租賃管理</a> 
-	<a href="<%=request.getContextPath()%>/calendar/calendar.jsp">預約行程管理</a> 
-	<a href="">廣告輪播管理</a> 
-	<a href="">派工回報系統</a> 
-	<a href="">會員留言管理</a> 
-	<a href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
-	<a href="">員工資料管理</a> 
-	<a href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a> </nav> </aside>
+		<aside>
+		<div class="navBtn">+</div>
+		<nav> <a
+			href="<%=request.getContextPath()%>/mention/mentionIndex.jsp">首頁</a>
+		<a href="/hermit/House/House_management.jsp">房屋產品維護</a> <a href="">房屋租賃維護</a>
+		<a href="/hermit/Lease/Lease.jsp">合約租賃管理</a> <a
+			href="<%=request.getContextPath()%>/calendar/calendar.jsp">預約行程管理</a>
+		<a href="">廣告輪播管理</a> <a href="">派工回報系統</a> <a href="">會員留言管理</a> <a
+			href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
+		<a href="">員工資料管理</a> <a
+			href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a>
+		<a href="<%=request.getContextPath()%>/wetalk/WebSocketBackground.jsp">線上客服(測試版)</a>
+		</nav> </aside>
 
-	<div class="main">
+		<div class="main">
 		<!-- do it !!!! -->
 		<header> <nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -53,14 +55,18 @@
 				</button>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
+			<c:if test="${empty empLoginOK}">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-home"></span>
-							浩天登入</a></li>
+					<li><a href="<%=request.getContextPath()%>/back_side_page.jsp"><span class="glyphicon glyphicon-home"></span>登入</a></li>
 				</ul>
+			</c:if>
+			
+			<c:if test="${!empty empLoginOK}">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span>
-							浩天登出</a></li>
+					<li><span style="color:#ADADAD;font-size: 24px">${empLoginOK.empName}，你好</span></li>
+					<li><a href="<%=request.getContextPath()%>/EmpLogin/Logout.jsp"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
 				</ul>
+			</c:if>
 			</div>
 		</div>
 		</nav></header>

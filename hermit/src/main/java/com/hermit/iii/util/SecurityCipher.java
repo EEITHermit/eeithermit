@@ -186,7 +186,7 @@ public class SecurityCipher {
 	}
 
 	public static void main(String[] args) {
-		String teststr = "wu5678"
+		String teststr = "測試123"
 				+ "";
 
 		String encIVStr = encryptStringWithIV(teststr);

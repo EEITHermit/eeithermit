@@ -29,6 +29,8 @@
 		<property name="waterRate" column="waterRate" />
 		<property name="powerRate" column="powerRate" />
 		<property name="houseVideo" column="houseVideo" />
+		<property name="houseInfo" column="houseInfo" />
+		
 <!-- 		<property name="typeNO" column="typeNO" /> -->
 		<many-to-one name="houseTypeVO" class="com.hermit.iii.housetype.model.HouseTypeVO" lazy="false">
 		<column name="typeNO"></column>

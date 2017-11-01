@@ -10,37 +10,78 @@ import javax.websocket.server.ServerEndpoint;
 public class WebSocketNoHTTP {
 	static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
 	private String user = "";
+	static private List<Object> recordmsg = new ArrayList<Object>();
+	static private Map<String, String> recordMap = new HashMap<String, String>();
 
 	@OnOpen
 	public void handleOpen(EndpointConfig endpointConfig, Session userSession) {
 		System.out.println("WebSocket成功啟動");
+		String msgPackage = "";
+		String mykey = "";
 		userSession.getUserProperties().put("username", endpointConfig.getUserProperties().get("username"));
 		users.add(userSession);
-		try{
-		if ("後台管理員".equals(endpointConfig.getUserProperties().get("username"))) {
-			userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "後台管理員連線成功!"));
-		} else {
-			userSession.getBasicRemote().sendText(buildJsonData("系統訊息", "連線成功!"));
-			userSession.getBasicRemote().sendText(buildJsonData("後台管理員", "請問有什麼需要服務的嗎?"));
-		}
-		}catch(IOException e){
+		try {
+			if (endpointConfig.getUserProperties().get("username").toString().indexOf("系統管理員") >= 0) {
+				msgPackage = buildJsonData("系統訊息", "系統管理員大人連線成功!");
+				userSession.getBasicRemote().sendText(msgPackage);
+			} else if (endpointConfig.getUserProperties().get("username").toString().indexOf("客服人員") >= 0) {
+				msgPackage = buildJsonData("系統訊息", "小天使客服人員連線成功!");
+				userSession.getBasicRemote().sendText(msgPackage);
+				if (recordmsg != null) {
+					Iterator<Object> itmsg = recordmsg.iterator();
+					while (itmsg.hasNext()) {
+						Iterator<String> keys = ((Map<String, String>) itmsg.next()).keySet().iterator();
+						while (keys.hasNext()) {
+							mykey = keys.next();
+							msgPackage = buildJsonData(mykey, recordMap.get(mykey));
+							userSession.getBasicRemote().sendText(msgPackage);
+						}
+					}
+				}
+			} else {
+				msgPackage = buildJsonData("系統訊息", "連線成功!");
+				userSession.getBasicRemote().sendText(msgPackage);
+
+				msgPackage = buildJsonData("後台管理員", "稍等片刻馬上有專人為您服務!");
+				userSession.getBasicRemote().sendText(msgPackage);
+			}
+		} catch (IOException e) {
 			System.out.println("IOException好吵");
 		}
-
 	}
 
 	@OnMessage
-	public void handleMessage(String message, Session userSession) throws IOException {
-		user = userSession.getUserProperties().get("username").toString();
+	public void handleMessage(String message, Session userSession) {
+
+		String keyWord = userSession.getUserProperties().get("username").toString().substring(0, 1);
+		user = userSession.getUserProperties().get("username").toString().substring(1);
+
 		Iterator<Session> iterator = users.iterator();
-		while (iterator.hasNext()) {
-			iterator.next().getBasicRemote().sendText(buildJsonData(user, message));
+		try {
+			while (iterator.hasNext()) {
+
+				if ("M".equals(keyWord)) {
+					recordMap.put(user, message);
+				}
+				recordmsg.add(recordMap);
+
+				String msgPackage = buildJsonData(user, message);
+				iterator.next().getBasicRemote().sendText(msgPackage);
+			}
+		} catch (IOException e) {
+			System.out.println("IOException好吵");
 		}
 	}
 
 	@OnClose
 	public void handleClose(Session userSession) {
+		System.out.println("WebSocket強關才叫我..");
 		users.remove(userSession);
+		try {
+			userSession.close();
+		} catch (IOException e) {
+			System.out.println("IOException好吵");
+		}
 	}
 
 	private String buildJsonData(String username, String message) {

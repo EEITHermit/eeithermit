@@ -10,9 +10,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>員工登出</title>
+<script>
+window.location="<%=request.getContextPath()%>/back_index_page.jsp";
+</script>
 </head>
 <body>
-您已經登出<p/>
-<a href="http://localhost:8081/hermit/back_index_page.jsp">登入</a>
+<a href="<%=request.getContextPath()%>/back_index_page.jsp">登入</a>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>赫米特租屋管理</title>
+<link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
@@ -210,7 +211,7 @@
  		</c:if>
  		<!-- 如果有登入就顯示登出 -->
 		<c:if test="${!empty LoginOK}">
- 			<a href="http://localhost:8081/hermit/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
+ 			<a href="<%=request.getContextPath()%>/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
  		</c:if>
 
 			<!-- inser more links here -->
@@ -219,7 +220,7 @@
 				<nav class="main-nav">
 				<ul>
 					<li>
-					 <a class="cd-signin" href="#0" style="font-size: 24px;margin-top: 7px">登入</a>
+					 <a class="cd-signin" href="#0" style="font-size: 24px;margin-top: 8px;border:none;">登入</a>
 					</li>
 				</ul>
 				</nav>
@@ -230,7 +231,10 @@
 		  <a href="<%=request.getContextPath()%>/index.jsp" class="w3-bar-item w3-button"><span>首頁</span></a>
 		  <a href="" class="w3-bar-item w3-button" id="mbi"><span>會員中心</span></a>
 		  <a href="" class="w3-bar-item w3-button" id="mbf"><span>我的收藏</span></a>
-		</div>	   
+		  <a href="" class="w3-bar-item w3-button" id="mbc"><span>我的預約</span></a>
+		  <a href="" class="w3-bar-item w3-button" id="mbq"><span>Q&A</span></a>
+		  <a href="" class="w3-bar-item w3-button" id="mbl"><span>租賃紀錄</span></a>
+		</div>
 	</div>
 
 	<div id="top" class="masthead" role="main" style="height:auto;padding-top:80px;padding-bottom:0">
@@ -463,9 +467,9 @@
 				<!-- log in form -->
 				<form class="cd-form" id="loginform" action="<c:url value='/Login/memlogin.do?action=login'/>" method="POST">
 					<p class="fieldset">
-						<label class="image-replace cd-username" for="signup-username">Username</label>
+						<label class="image-replace cd-username" for="signup-username">Account</label>
 						<input class="full-width has-padding has-border" name="account"
-							id="account" type="text" placeholder="Username"
+							id="account" type="text" placeholder="Account"
 							value="${cookie.account.value}"> <small><font
 							color="red" size="-1" id="putacc"></font></small>
 					</p>
@@ -524,19 +528,20 @@
 			<div id="cd-reset-password">
 				<!-- reset password form -->
 				<p class="cd-form-message">Lost your password? Please enter your
-					email address. You will receive a link to create a new password.</p>
-
-				<form class="cd-form">
+					Account. You will receive a link to create a new password.</p>
+					
+				<form class="cd-form" method="POST">
+				
 					<p class="fieldset">
-						<label class="image-replace cd-email" for="reset-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="reset-email"
-							type="email" placeholder="E-mail"> <span
-							class="cd-error-message">Error message here!</span>
+						<label class="image-replace cd-username" for="reset-account">Account</label>
+						<input class="full-width has-padding has-border" name="findByAccount" id="resetAccount"
+							type="text" placeholder="Account">
+						<small><font color="red" size="-1" id="reseterror"></font></small>
 					</p>
 
 					<p class="fieldset">
-						<input class="full-width has-padding" type="submit"
-							value="Reset password">
+						<input class="full-width has-padding" type="button" 
+						value="Reset password" id="submitReset">
 					</p>
 				</form>
 
@@ -598,6 +603,43 @@
 			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp" | "<%= request.getRequestURI() %>" == "/hermit/";
 			var showSearch = $("#showSearch");
 			var cityOpt;
+			function getCity(){  
+				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
+					var cityData = $.parseJSON(data).list;
+					city.empty();
+					
+					$.each(cityData,function(index,value){
+						var opt = $("<option></option>").text(value.cityName);
+						opt.val(value.cityNO)
+						city.append(opt); 
+						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
+							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+					if(sessionCityNO != null && (!indexCheck)){
+						city.val(sessionCityNO);
+					}
+					getBorough();
+				});
+			}
+			function getBorough(){
+				$.post(path+"/BoroughsServlet.do",{"action":"getAllBoroughByCity","cityNO":city.val()},function(data){
+					var boroughData = $.parseJSON(data).list;
+					borough.empty();
+					borough.append($("<option></option>").text("> 鄉鎮區 <").val(-1));
+					$.each(boroughData,function(index,value){
+						var opt = $("<option></option>").text(value.boroughName);
+						opt.val(value.boroughNO)
+						borough.append(opt); 
+						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
+							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
+						borough.val(sessionBoroughNO);
+					}
+				});
+			}
 			
 			if(indexCheck){
 				$(".breadBox").hide();
@@ -638,43 +680,6 @@
 		   
 		    
 			
-			function getCity(){  
-				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
-					var cityData = $.parseJSON(data).list;
-					city.empty();
-					
-					$.each(cityData,function(index,value){
-						var opt = $("<option></option>").text(value.cityName);
-						opt.val(value.cityNO)
-						city.append(opt); 
-						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
-							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
-						}
-					})
-					if(sessionCityNO != null && (!indexCheck)){
-						city.val(sessionCityNO);
-					}
-					getBorough();
-				});
-			}
-			function getBorough(){
-				$.post(path+"/BoroughsServlet.do",{"action":"getAllBoroughByCity","cityNO":city.val()},function(data){
-					var boroughData = $.parseJSON(data).list;
-					borough.empty();
-					borough.append($("<option></option>").text("> 鄉鎮區 <").val(-1));
-					$.each(boroughData,function(index,value){
-						var opt = $("<option></option>").text(value.boroughName);
-						opt.val(value.boroughNO)
-						borough.append(opt); 
-						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
-							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
-						}
-					})
-					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
-						borough.val(sessionBoroughNO);
-					}
-				});
-			}
 			function houseSizeShow(){
 				if(sessionHouseSize != null && (!indexCheck)){
 					houseSize.val(sessionHouseSize);
@@ -811,11 +816,11 @@
 						houseSize:houseSize.val(),
 						houseRent:radioButtons.index(radioButtons.filter(':checked')),
 						equid:jsonStr
-				}
+				};
 			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
 					location.replace("<%= request.getContextPath()%>/search.jsp");
 				})
-			})		
+			});		
 		});
 
 		function openLeftMenu() {
@@ -826,13 +831,25 @@
 			}
 		
 		
-		//更新驗證碼
+		// 更新驗證碼
 		function refresh() {
 		document.getElementById("image").src = "<%=request.getContextPath()%>/MemberLogin/Image.jsp?"
 				+ new Date();
 		}
-		//登入判斷
+		// 登入判斷
 		$(document).ready(function(){
+			//登入資訊用-start
+			var $form_modal = $('.cd-user-modal'),
+			$form_login = $form_modal.find('#cd-login'),
+			$form_signup = $form_modal.find('#cd-signup'),
+			$form_forgot_password = $form_modal.find('#cd-reset-password'),
+			$form_modal_tab = $('.cd-switcher'),
+			$tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+			$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
+			$forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
+			$back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
+			$main_nav = $('.main-nav');
+			//登入資訊用-end
 			$("#submitBtn").click(function(){
 				var box;
 				// 清除錯誤訊息
@@ -843,9 +860,9 @@
 				if($("#remember").prop("checked")){
 					box = "on";
 				}
-			$.post('/hermit/Login/memlogin.do?action=login',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
+			$.post('<%=request.getContextPath()%>/Login/memlogin.do?action=login',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
 				if(data == "ok"){
-				window.location = "/hermit/index.jsp";
+				window.location = "<%=request.getContextPath()%>/index.jsp";
 				}
 				var datas = data.split(";");
 				for(var d of datas){
@@ -865,17 +882,36 @@
 					}
 				})
 			})
+			// 送出重設密碼連結
+			$("#submitReset").click(function(){
+				$("#submitReset").prop("disabled",true);
+				// 清除錯誤訊息
+				$("#reseterror").text("");
+				$.post('<%=request.getContextPath()%>/Login/forgotpwd.do',{account:$("#resetAccount").val()},function(data){
+					if(data == "此帳號不存在！"){
+						$("#reseterror").text(data);
+						$("#submitReset").prop("disabled",false);
+					}else{
+						alert(data);
+						window.location = "<%=request.getContextPath()%>/index.jsp";
+					}
+				})			
+			})
 			
-			//進入會員中心前判斷是否已登入
+			// 進入會員中心前判斷是否已登入
 			$("#mbi").click(function(event){
 				event.preventDefault();
-				$.post('/hermit/Login/memlogin.do',{"action":"check"},function(data){
+				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
 					if(data=="OK"){
 						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp?action=check";
 					}else if(data=="NO"){
-						$('#loginmodal').modal('show');
-						$("#cd-login").toggle(true);
-						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						$main_nav.children('ul').removeClass('is-visible');
+						$form_modal.addClass('is-visible');	
+						$form_login.addClass('is-selected');
+						$form_signup.removeClass('is-selected');
+						$form_forgot_password.removeClass('is-selected');
+						$tab_login.addClass('selected');
+						$tab_signup.removeClass('selected');
 						return;
 					}
 				})
@@ -884,17 +920,79 @@
 			//進入收藏前判斷是否已登入
 			$("#mbf").click(function(event){
 				event.preventDefault();
-				$.post('/hermit/Login/memlogin.do',{"action":"check"},function(data){
+				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
 					if(data=="OK"){
 						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp?action=check";
 					}else if(data=="NO"){
-						$('#loginmodal').modal('show');
-						$("#cd-login").toggle(true);
-						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						$main_nav.children('ul').removeClass('is-visible');
+						$form_modal.addClass('is-visible');	
+						$form_login.addClass('is-selected');
+						$form_signup.removeClass('is-selected');
+						$form_forgot_password.removeClass('is-selected');
+						$tab_login.addClass('selected');
+						$tab_signup.removeClass('selected');
 						return;
 					}
 				})
 			})
+
+			//進入預約前判斷是否已登入
+			$("#mbc").click(function(event){
+				event.preventDefault();
+				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+					if(data=="OK"){
+						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp?action=check";
+					}else if(data=="NO"){
+						$main_nav.children('ul').removeClass('is-visible');
+						$form_modal.addClass('is-visible');	
+						$form_login.addClass('is-selected');
+						$form_signup.removeClass('is-selected');
+						$form_forgot_password.removeClass('is-selected');
+						$tab_login.addClass('selected');
+						$tab_signup.removeClass('selected');
+						return;
+					}
+				})
+			})
+			
+			//進入Q&A前判斷是否已登入
+			$("#mbq").click(function(event){
+				event.preventDefault();
+				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+					if(data=="OK"){
+						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp?action=check";
+					}else if(data=="NO"){
+						$main_nav.children('ul').removeClass('is-visible');
+						$form_modal.addClass('is-visible');	
+						$form_login.addClass('is-selected');
+						$form_signup.removeClass('is-selected');
+						$form_forgot_password.removeClass('is-selected');
+						$tab_login.addClass('selected');
+						$tab_signup.removeClass('selected');
+						return;
+					}
+				})
+			})
+			
+			//進入租賃紀錄前判斷是否已登入
+			$("#mbl").click(function(event){
+				event.preventDefault();
+				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+					if(data=="OK"){
+						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp?action=check";
+					}else if(data=="NO"){
+						$main_nav.children('ul').removeClass('is-visible');
+						$form_modal.addClass('is-visible');	
+						$form_login.addClass('is-selected');
+						$form_signup.removeClass('is-selected');
+						$form_forgot_password.removeClass('is-selected');
+						$tab_login.addClass('selected');
+						$tab_signup.removeClass('selected');
+						return;
+					}
+				})
+			})
+		//登入判斷結束
 		})
 				
 				
@@ -915,9 +1013,7 @@
 		
 		$("#facebook").click(function(){
 			window.location='https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE;
-		})		
-		/* $('#google').attr('href','https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE);
-		$('#facebook').attr('href','https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE); */
+		})
 	})
 	</script>
 </body>
