@@ -183,13 +183,14 @@ padding-right:200px;
 		</div>
 		
 		<div class="form-group" id="HousePicture">
-<!-- 			<div> -->
+			<div>
 <!-- 				<label class="col-md-5 control-label">圖片1</label> -->
 <!-- 					<div class="col-xs-2"> -->
 <!-- 						<input type="file" id="file"> -->
-<%-- 						<img src="${vo.housePictureVO.hPicture}" border="0" style="border:none;max-height:200px;max-width:200px;"> --%>
+<!-- 						<input type="hidden" id="housePicture" name="housePicture"/> -->
+<%-- 						<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;"> --%>
 <!-- 					</div> -->
-<!-- 			</div> -->
+			</div>
 <!-- 			<div> -->
 <!-- 				<label class="col-md-1 control-label">圖片2</label> -->
 <!-- 					<div class="col-xs-2"> -->
@@ -214,31 +215,11 @@ padding-right:200px;
 	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script>
 	$(document).ready(function(){
-			$.POST("/hermit/House.do",{action:"getAllHouseForJson"},function(data){
-				var divPic=$("#HousePciture>div");
-				var dataJson;
-				dataJson=$.parseJSON(data);
-				divPic.empty();
-				$.each(dataJson,function(index,VO){
-					var cell1=$("<label></label>").attr("class","col-md-5");
-					var cell2=$("<div><div>").attr("class","col-xs-2");
-					var cell3=$("<input>").attr("type","file");
-					var cell4=$("<img>").attr("src",housePictureVO.hPicture);
-					var div=$("<div></div>").append([cell1,cell2,cell3,cell4]);
-					divPic.append(div);
-					
-				})
-				
-			})
 		
-		
-			
 			var dataJson;
 			var selectForm= $("#houseForm");
 			var formNO = $("#formNO").val();
-			
-			
-			
+
 			var selectCity=$("#cityName")
 			var cityNO=$("#cityNO").val();
 			
