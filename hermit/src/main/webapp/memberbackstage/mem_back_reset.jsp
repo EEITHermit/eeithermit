@@ -220,10 +220,13 @@ label {
 											id="memImage" height="200" width="200">
 									</div>
 								</div>
+
 								<div class="form-group">
 									<div class="col-md-6 control-label">
+
 										<input type="submit" value="修改">
 									</div>
+									<div style="margin-bottom: 100px"></div>
 								</div>
 							</form>
 
@@ -233,8 +236,6 @@ label {
 				</div>
 			</div>
 			<!-- /widget-content -->
-
-
 		</div>
 		<!-- /widget -->
 	</div>
