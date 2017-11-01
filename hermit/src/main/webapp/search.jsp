@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>House Test</title>
+<title>赫米特租屋管理</title>
 <jsp:include page="/fragment/index_include.jsp" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/appstore.css">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
