@@ -2,6 +2,8 @@ package com.hermit.iii.infraction.model;
 
 import java.util.*;
 
+import com.hermit.iii.member.model.MemberVO;
+
 public class InfractionService {
 	InfractionDAO_interface_hibernate inDAO = new InfractionJNDIDAO_hibernate();
 
@@ -15,7 +17,9 @@ public class InfractionService {
 		InfractionVO infractionVO = new InfractionVO();
 
 		infractionVO.setInNO(inNO);
-		infractionVO.setMemNO(memNO);
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemNO(memNO);
+		infractionVO.setMemberVO(memberVO);
 		infractionVO.setReason(reason);
 		infractionVO.setInDate(inDate);
 		infractionVO.setEmpNO(empNO);

@@ -7,7 +7,9 @@
 		<id name="inNO" column="inNO">
 			<generator class="identity"/>
 		</id>
-		<property name="memNO" column="memNO"></property>
+		<many-to-one name="memberVO" class="com.hermit.iii.member.model.MemberVO" lazy="false">
+			<column name="memNO"></column>
+		</many-to-one>
 		<property name="reason" column="reason"></property>
 		<property name="inDate" column="inDate"></property>
 		<property name="empNO" column="empNO"></property>
