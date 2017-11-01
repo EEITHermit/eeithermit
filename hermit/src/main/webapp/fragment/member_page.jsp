@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>赫米特租屋管理</title>
+<link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
