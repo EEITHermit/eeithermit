@@ -13,6 +13,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 房屋表格用↑ class="table"	 -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
+<link
+	href='<%=request.getContextPath()%>/css/jqueryText/jquery-te-1.4.0.css'
+	rel='stylesheet' />
 <style>
 .HousePictureDiv{
 padding:50px;
@@ -20,8 +23,18 @@ padding:50px;
 .insertHouseDiv{
 padding:30px;
 }
-
-</style>
+textarea{
+    padding: 20px; 
+    width: 280px;
+    resize: none;
+    overflow: auto;
+}
+#quickinsert{
+font-size: 50px;
+font-family: 標楷體;
+color: 	#F9F900;
+}
+</style>-
 </head>
 <body>
 	<!-- 載入框架 -->
@@ -40,7 +53,7 @@ padding:30px;
 				<th>房屋樓層</th>
 				<th>狀態</th>
 				<th>租金</th>
-				<th>押金</th>
+				<th>管理費</th>
 				<th>水費</th>
 				<th>電費</th>
 <!-- 				<th>影片</th> -->
@@ -63,7 +76,7 @@ padding:30px;
 						<th>房屋樓層</th>
 						<th>房屋狀態</th>
 						<th>租金</th>
-						<th>押金</th>
+						<th>管理費</th>
 						<th>水費</th>
 						<th>電費</th>
 <!-- 						<th>影片</th> -->
@@ -75,6 +88,9 @@ padding:30px;
 					</tr>
 				</tfoot>
 	</table>
+</div>
+<div class="container">
+<label class="control-label" id="quickinsert">快速新增</label>
 </div>
 <div class="container col-md-10 col-md-offset-2">
 <form action="<%=request.getContextPath()%>/House.do" method="POST" id="form" enctype="multipart/form-data">
@@ -89,7 +105,7 @@ padding:30px;
 					<th scope="col">房屋樓層</th>
 					<th scope="col">房屋狀態</th>
 					<th scope="col">租金</th>
-					<th scope="col">押金</th>
+					<th scope="col">管理費</th>
 					<th scope="col">水費</th>
 					<th scope="col">電費</th>
 					
@@ -102,26 +118,26 @@ padding:30px;
 			</thead>
 				<tbody>
 					<tr>
-						<td><input type="text" style="width: 75px" value="${param.houseTitle}" name="houseTitle"></td>
-						<td><select name="cityNO" id="cityNO"><option>請選擇</option></select></td>
-						<td><select name="boroughNO" id="boroughNO"></select></td>
-						<td><input type="text" style="width: 75px" value="${param.hightestFloor}" name="highestFloor"></td>
-						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor"></td>
-						<td><select name="houseStatus" id="SelectStatus">
+						<td><input type="text" style="width: 75px" value="${param.houseTitle}" name="houseTitle" class="form-control"></td>
+						<td><select name="cityNO" id="cityNO" class="form-control"><option>請選擇</option></select></td>
+						<td><select name="boroughNO" id="boroughNO" class="form-control"></select></td>
+						<td><input type="text" style="width: 75px" value="${param.hightestFloor}" name="highestFloor" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor" class="form-control"></td>
+						<td><select name="houseStatus" id="SelectStatus" class="form-control">
 								<option>未出租</option>
 								<option>已出租</option>
 								<option>修繕中</option>
 							</select> 
 						</td>
-						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge"></td>
-						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate"></td>
-						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate" class="form-control"></td>
 						
-						<td><select id="houseType" name="typeNO"></select></td>
-						<td><select id="houseForm" name="formNO"></select></td>
-						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize"></td>
+						<td><select id="houseType" name="typeNO" class="form-control"></select></td>
+						<td><select id="houseForm" name="formNO" class="form-control"></select></td>
+						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize" class="form-control"></td>
 						<td><button id="addHouse" class="btn">新增</button></td>
 					</tr>
 						<input type="hidden" name=action>
@@ -132,10 +148,18 @@ padding:30px;
 		<table class="table">
 			<tr>
 				<td>
+					<div class="form-group col-md-10">
+						<label>房屋介紹</label>
+						<textarea name="houseInfo" class="form-control" id="houseInfo"></textarea>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<input type="file" id="file">
 					<input type="hidden" id="previewPic" name="previewPic"/>
 				</td>
-			
+				
 				<td>
 					<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >	
 				</td>
@@ -161,6 +185,7 @@ padding:30px;
 <script src="../js/jSignature.min.js"></script>
 <script src="../js/datatables.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
+<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 <script>
 $(document).ready(function(){
 	
@@ -305,6 +330,7 @@ $(document).ready(function(){
 			$("#addHouse").click(function(){
 				$('input[name="action"]').val("insertHouse");
 			})
+			$('#houseInfo').jqte();
 		
 })
 </script>

@@ -42,13 +42,13 @@ public class ResetPasswordServlet extends HttpServlet {
 			return;
 		}
 
-		MemberJNDIDAO dao = new MemberJNDIDAO();
+		MemberDAO_hibernate dao = new MemberDAO_hibernate();
 		MemberVO memVO = dao.findByAccount(memAccount);// 取得帳號資訊
 		memVO.setMemPwd(newPassword);
 		dao.update(memVO);
 
 		request.setAttribute("pwdModifyMsg", "密碼修改成功！");
-		request.getRequestDispatcher("/MemberLogin/ResetPasswordSuccess.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

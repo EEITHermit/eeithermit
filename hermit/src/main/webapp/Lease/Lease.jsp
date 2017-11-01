@@ -23,16 +23,21 @@ textarea{
     resize: none;
     overflow: auto;
 }
+.all-fonts{
+font-family:Microsoft JhengHei;
+font-size: 16px;
+}
 </style>
 <body>
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
-	<div class="container col-md-10 col-md-offset-1">
+<div class="container col-md-10 col-md-offset-1">
+<div class="all-fonts">
 <table id="leaseTable" class="table">
 	<thead>
 		<tr>
-			<th class="thead">合約編號</th>
+			<th>合約編號</th>
 			<th>房屋編號</th>
 			<th>合約起始日</th>
 			<th>合約到期日</th>
@@ -88,19 +93,20 @@ textarea{
 				<th>簽約日期</th>
 				<th>備註</th>
 				<th>押金返還</th>
+				<th>編輯</th>
 			</tr>
 		</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="width:60px" value="${param.houseNO}" name="houseNO"></td>
-					<td><input type="date" style="width:130px" value="${param.leaseBeginDate}" name="leaseBeginDate"></td>
-					<td><input type="date" style="width:130px" value="${param.leaseEndDate}" name="leaseEndDate"></td>
-					<td><input type="text" style="width:55px" value="${param.memNO}" name="memNO"></td>
-					<td><input type="text" style="width:55px" value="${param.empNO}" name="empNO"></td>
-					<td><input type="text" style="width:50px" value="${param.leaseRent}" name="leaseRent"></td>
-					<td><input type="text" style="width:50px" value="${param.leaseDeposit}" name="leaseDeposit"></td>
-					<td><input type="text" style="width:50px" value="${param.leaseRelief}" name="leaseRelief"></td>
-					<td><input type="date" style="width:130px" value="${param.leaseDate}" name="leaseDate"></td>
+					<td><input type="text" style="width:70px" value="${param.houseNO}" name="houseNO" class="form-control"></td>
+					<td><input type="date" style="width:140px" value="${param.leaseBeginDate}" name="leaseBeginDate" class="form-control"></td>
+					<td><input type="date" style="width:140px" value="${param.leaseEndDate}" name="leaseEndDate" class="form-control"></td>
+					<td><input type="text" style="width:70px" value="${param.memNO}" name="memNO" class="form-control"></td>
+					<td><input type="text" style="width:70px" value="${param.empNO}" name="empNO" class="form-control"></td>
+					<td><input type="text" style="width:90px" value="${param.leaseRent}" name="leaseRent" class="form-control"></td>
+					<td><input type="text" style="width:90px" value="${param.leaseDeposit}" name="leaseDeposit" class="form-control"></td>
+					<td><input type="text" style="width:90px" value="${param.leaseRelief}" name="leaseRelief" class="form-control"></td>
+					<td><input type="date" style="width:140px" value="${param.leaseDate}" name="leaseDate" class="form-control"></td>
 					<td><textarea name="houseNote"></textarea></td>
 <%-- 					<td><input type="text" style="width:70px" value="${param.houseNote}" name="houseNote"></td> --%>
 					<td><select name="leaseRefund" id="selectleaseRefund"><option value=1>是</option><option value=0>否</option></select></td>
@@ -119,6 +125,7 @@ textarea{
 					<input type="hidden" name=action>
 	</table>
 </form>
+</div>
 </div>
 <%-- <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script> --%>
 <script src="../js/bootstrap.js"></script>

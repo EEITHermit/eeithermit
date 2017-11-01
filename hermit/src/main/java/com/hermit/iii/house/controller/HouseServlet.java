@@ -63,7 +63,7 @@ public class HouseServlet extends HttpServlet {
 		Integer formNO = null;
 		String houseAddr = null;
 		Double houseSize = null;
-
+		String houseInfo=null;
 		if ("insertHouse".equals(action)) {
 			ConvertToBase64 ctb = new ConvertToBase64();
 			HouseVO houseVO = new HouseVO();
@@ -109,7 +109,8 @@ public class HouseServlet extends HttpServlet {
 			houseVO.setHouseAddr(houseAddr);
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
 			houseVO.setHouseSize(houseSize);
-
+			houseInfo=request.getParameter("houseInfo");
+			houseVO.setHouseInfo(houseInfo);
 			Collection<Part> parts = request.getParts();
 			for (Part item : request.getParts()) {
 				strBase64 = ctb.encode(item);
@@ -152,8 +153,10 @@ public class HouseServlet extends HttpServlet {
 			formNO = Integer.valueOf(request.getParameter("formNO"));
 			houseAddr = request.getParameter("houseAddr");
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
+			houseInfo=request.getParameter("houseInfo");
+			
 			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO, previewPic, highestFloor, nowFloor, houseStatus,
-					houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize);
+					houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize,houseInfo);
 			// RequestDispatcher
 			// rd=request.getRequestDispatcher("/House/House_management.jsp");
 			// rd.forward(request, response);
@@ -221,6 +224,7 @@ public class HouseServlet extends HttpServlet {
 				m1.put("houseSize", vo.getHouseSize());
 				m1.put("hType", vo.getHouseTypeVO().gethType());
 				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseInfo", vo.getHouseInfo());
 				list2.add(m1);
 			}
 			Map m2 = new LinkedHashMap();

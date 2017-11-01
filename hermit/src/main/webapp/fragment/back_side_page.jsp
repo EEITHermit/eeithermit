@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,14 +55,18 @@
 				</button>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
+			<c:if test="${empty empLoginOK}">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-home"></span>
-							浩天登入</a></li>
+					<li><a href="<%=request.getContextPath()%>/back_side_page.jsp"><span class="glyphicon glyphicon-home"></span>登入</a></li>
 				</ul>
+			</c:if>
+			
+			<c:if test="${!empty empLoginOK}">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span>
-							浩天登出</a></li>
+					<li><span style="color:#ADADAD;font-size: 24px">${empLoginOK.empName}，你好</span></li>
+					<li><a href="<%=request.getContextPath()%>/EmpLogin/Logout.jsp"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
 				</ul>
+			</c:if>
 			</div>
 		</div>
 		</nav></header>

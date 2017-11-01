@@ -161,11 +161,18 @@
 			websocket.onmessage = function(message) {
 				var jsonData = JSON.parse(message.data);
 				if (jsonData.message != null) {
-					console.log(area);
 					area.value += jsonData.message + "\n";
 				}
 			};
 
+			websocket.onclose = function (evt) {
+		        websocket.close();
+		    };
+			
+			websocket.onerror = function (evt) {
+		        websocket.close();
+		    };
+		    
 			$(function() {
 				$('#sendmsg').click(function() {
 					websocket.send(text.value);

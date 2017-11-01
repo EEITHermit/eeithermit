@@ -48,7 +48,7 @@ public class HouseService {
 		return vo;
 	}
 	
-	public HouseVO updateHouse(Integer houseNO,String houseTitle,Integer cityNO,Integer boroughNO,String previewPic,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize){
+	public HouseVO updateHouse(Integer houseNO,String houseTitle,Integer cityNO,Integer boroughNO,String previewPic,Integer highestFloor,Integer nowFloor,String houseStatus,Integer houseRent,Integer houseCharge,String waterRate,String powerRate,String houseVideo,Integer typeNO,Integer formNO,String houseAddr,Double houseSize,String houseInfo){
 		HouseVO vo = new HouseVO();
 		vo.setHouseNO(houseNO);
 		vo.setHouseTitle(houseTitle);
@@ -75,6 +75,7 @@ public class HouseService {
 		vo.setHouseFormVO(houseFormVO);
 		vo.setHouseAddr(houseAddr);
 		vo.setHouseSize(houseSize);
+		vo.setHouseInfo(houseInfo);
 		dao.update(vo);
 		return vo;
 	}
