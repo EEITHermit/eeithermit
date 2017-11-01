@@ -37,22 +37,7 @@
 		<servlet-name>IdentityServlet</servlet-name>
 		<url-pattern>/identity.do</url-pattern>
 	</servlet-mapping>
-	<filter>
-		<filter-name>QandAFilter</filter-name>
-		<filter-class>com.hermit.iii.qanda.filter.QAndAFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>QandAFilter</filter-name>
-		<url-pattern>/QAndA/QAndA.jsp</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>QandAFilter</filter-name>
-		<url-pattern>/QAndA/AAndQ.jsp</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>QandAFilter</filter-name>
-		<url-pattern>/memberbackstage/mem_back_qanda.jsp</url-pattern>
-	</filter-mapping>
+	
 
 	<filter>
 		<filter-name>EmpLoginFilter</filter-name>
@@ -85,5 +70,22 @@
 	<filter-mapping>
 		<filter-name>EmpLoginFilter</filter-name>
 		<url-pattern>/wetalk/WebSocketBackground.jsp</url-pattern>
+	</filter-mapping>
+	<!-- Q&A用 -->
+	<filter>
+		<filter-name>QandAFilter</filter-name>
+		<filter-class>com.hermit.iii.qanda.filter.QAndAFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>QandAFilter</filter-name>
+		<url-pattern>/QAndA/QAndA.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>QandAFilter</filter-name>
+		<url-pattern>/QAndA/AAndQ.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>QandAFilter</filter-name>
+		<url-pattern>/memberbackstage/mem_back_qanda.jsp</url-pattern>
 	</filter-mapping>
 </web-app>
