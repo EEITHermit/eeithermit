@@ -275,6 +275,20 @@ a:link, a:visited, a:hover, a:active {
 			$('#commentArea').jqte();
 			//產生DataTable
 			$('#queryTable').DataTable({
+				"language": {
+		            "lengthMenu": "每頁顯示 _MENU_ 筆",
+		            "zeroRecords": "Nothing found - sorry",
+		            "info": "現在正顯示   _PAGE_  共有 _PAGES_ 頁",
+		            "infoEmpty": "No records available",
+		            "infoFiltered": "(filtered from _MAX_ total records)",
+		            "search": "查詢:",
+		            "paginate": {
+		        		"first":      "首頁",
+		        		"last":       "末頁",
+		        		"next":       "下頁",
+		        		"previous":   "前頁"
+		        	}
+		        },
 				"autoWidth" : false,
 				//設定各個欄位屬性
 				"columnDefs" : [ {

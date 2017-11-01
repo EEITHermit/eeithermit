@@ -188,8 +188,8 @@ table {
 <body>
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
-	<!-- 員工編號=>假資料 -->
-	<input type="hidden" id="empNO" value="30001" />
+	<!-- 取得員工編號 -->
+	<input type="hidden" id="empNO" value="${LoginOK.empNO}" />
 
 
 	<!-- bootstrap -->

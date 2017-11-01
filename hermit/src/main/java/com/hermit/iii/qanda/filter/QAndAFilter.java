@@ -15,8 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.lease.model.LeaseService;
+import com.hermit.iii.member.model.MemberVO;
 import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.qanda.model.QandAService;
 import com.hermit.iii.qanda.model.QandAVO;
@@ -42,10 +44,9 @@ public class QAndAFilter implements Filter {
 		String servletPath = (req.getServletPath().split("/")[2]).trim();
 		if("QAndA.jsp".equals(servletPath) || "mem_back_qanda.jsp".equals(servletPath)){
 			//取得登入後session裡的memberNO
-//			HttpSession session = req.getSession();
-//			Integer memberNO = (Integer) session.getAttribute("member");
-			//memNO假資料
-			Integer memNO = 40001;
+			HttpSession session = req.getSession();
+			MemberVO memberVO = (MemberVO) session.getAttribute("LoginOK");
+			Integer memNO = memberVO.getMemNO();
 			QandAService qaService = new QandAService();
 			QandAVO qaVO = qaService.getOneQandA(memNO);
 			array = qaService.getAllByMemberNO(memNO);
@@ -58,10 +59,9 @@ public class QAndAFilter implements Filter {
 			chain.doFilter(request, response);
 		}else if("AAndQ.jsp".equals(servletPath)){
 			//取得登入後session裡的empNO
-//			HttpSession session = req.getSession();
-//			Integer empNO = (Integer) session.getAttribute("emp");
-			//empNO假資料
-			Integer empNO = 30001;
+			HttpSession session = req.getSession();
+			EmpVO empVO = (EmpVO) session.getAttribute("LoginOK");
+			 Integer empNO = empVO.getEmpNO();
 			//取得boroughNO
 			MentionService mention = new MentionService();
 			QandAService qaService = new QandAService();

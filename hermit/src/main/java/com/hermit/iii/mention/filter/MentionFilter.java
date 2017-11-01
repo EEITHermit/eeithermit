@@ -49,10 +49,9 @@ public class MentionFilter implements Filter {
 			return;
 		}
 		//暫定從session內取得員工編號
-//		HttpSession session = req.getSession();	
-//		Integer empNO = Integer.valueOf((String)session.getAttribute("empNO"));
-		//測試用假資料 員工30001
-		Integer empNO = 30001;
+		HttpSession session = req.getSession();	
+		EmpVO empVO1 = (EmpVO)session.getAttribute("LoginOK");
+		Integer empNO = empVO1.getEmpNO();
 		ArrayList<Integer> boroughNOs = mention.getBoroughNOByEmpNO(empNO);
 		EmpVO empVO= empService.findByPrimaryKey(30001);
 		Integer postNO = empVO.getPostVO().getPostNO();

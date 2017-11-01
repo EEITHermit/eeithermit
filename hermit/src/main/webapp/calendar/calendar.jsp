@@ -46,8 +46,7 @@
 	<div id="dialog-insert" title="新增預約">
 		<form id="insertForm">
 			
-				<!-- empNo為假資料 -->
-				<input id="empNo" type="hidden" name="empNo"value="30001"/>
+				<input id="empNo" type="hidden" name="empNo"value="${LoginOK.empNO}"/>
 				預約會員：<input id="memberIn"type="text" name="member" value=""/><br/>
 				開始時間：<input id="startTimeIn"type="text" name="startTime"value="" readonly/><br/>
 				結束時間：<input id="endTimeIn"type="text" name="endTime" value="" readonly/><br/>
@@ -67,7 +66,6 @@
 	
 <script>
 	$(document).ready(createCalendar);
-	<%-- var empNO = <%=session.getAttribute("empNo")%> --%> //取得當前登入會員id
 	function createCalendar(){
 		//設定fullCalendar
 		var calendar = $('#calendar');
@@ -95,8 +93,8 @@
 		    				var eventObject = {id:((event.id).toString()),title:event.title,start:(event.start).format("YYYY-MM-DD HH:mm:ss"),end:(event.end).format("YYYY-MM-DD HH:mm:ss")};
 		    				eventArray.push(eventObject);
 		    			}
-		    			//傳送eventArray的JSON字串，empNo假資料
-		    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":30001},function(data){
+		    			//傳送eventArray的JSON字串
+		    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":"${LoginOK.empNO}"},function(data){
 		    				alert(data);
 		    				calendar.fullCalendar("refetchEvents"); //重取資料庫事件
 		    			});
@@ -113,8 +111,7 @@
 			events:function(start,end,timezone,callback){
 				var startTime = start.format("YYYY-MM-DD HH:mm:SS");
 				var endTime = end.format("YYYY-MM-DD HH:mm:SS");
-				//empNo為假資料
-				$.get("<%= request.getContextPath() %>/calendarServlet?mission=query",{empNo:30001,STime:startTime,ETime:endTime},function(data){
+				$.get("<%= request.getContextPath() %>/calendarServlet?mission=query",{empNo:"${LoginOK.empNO}",STime:startTime,ETime:endTime},function(data){
 					temp.val(""); //切換畫面則清除暫存
 					callback(JSON.parse(data)); //傳回data值輸入事件
 				})
@@ -189,8 +186,8 @@
 	    			var eventObject = {id:id,title:(member+"\n"+house+"\n"+ps)
 	    					,start:start,end:end};
 	    			eventArray.push(eventObject);
-	    			//傳送eventArray的JSON字串，empNo假資料
-	    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":30001},function(data){
+	    			//傳送eventArray的JSON字串
+	    			$.post("<%= request.getContextPath() %>/calendarServlet?mission=update",{"events":JSON.stringify(eventArray),"empNo":"${LoginOK.empNO}"},function(data){
 						alert(data);
 	    				if(data=="更改成功"){
 	    					calendar.fullCalendar("gotoDate",moment(start)) //前往該時間

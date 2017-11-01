@@ -109,8 +109,7 @@
 </style>
 </head>
 <body>
-	<!-- 員工編號=>假資料 -->
-	<input type="hidden" id="empNO" value="30001"/>
+	<input type="hidden" id="empNO" value="${LoginOK.empNO}"/>
 	<h3>您有 ${resSize} 筆未處理預約  <button type="button" id="resButton">展開</button></h3>
 	<table id="resTable">
 		<thead>

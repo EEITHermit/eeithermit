@@ -190,7 +190,7 @@ a:link, a:visited, a:hover, a:active {
 	
 	function work(){
 		var body = $("#showTable>tbody");
-			$.get("<%=request.getContextPath()%>/reservationServlet?mission=queryReservation",{memberNo:"40001"},function(data){
+			$.get("<%=request.getContextPath()%>/reservationServlet?mission=queryReservation",{memberNo:"${LoginOK.memNO}"},function(data){
 				array = JSON.parse(data);
 				for(var res of array){
 					var tr = $("<tr></tr>");
@@ -206,6 +206,34 @@ a:link, a:visited, a:hover, a:active {
 					tr.appendTo(body);
 					//產生DataTable
 					$('#showTable').DataTable({
+						"searching": false,
+						"info": false,
+						"paging": false,
+						"autoWidth" : false,
+						//設定各個欄位屬性
+						"columnDefs" : [ {
+							"targets" : [ 0 ],
+							"width" : "10%"
+						}, {
+							"targets" : [ 1 ],
+							"width" : "10%"
+						}, {
+							"targets" : [ 2 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 3 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 4 ],
+							"width" : "10%"
+						} , {
+							"targets" : [ 5 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 6 ],
+							"width" : "10%"
+						}
+						]
 						
 					});
 				};

@@ -66,8 +66,7 @@
 	<form class="form-group" style="font-size:20px;">
 		會員資料:<input  class="form-control" type="text" id="memNO" name="memNO" value="${param.member}"/><br/>
 		<p style="float:left">申請原因:<p><textarea class="form-control" style="resize:none" id="reason" name="reason"></textarea><br/>
-		<!-- 會員帳號(假資料) -->
-		<input   type="hidden" value="30001" id="empNO">
+		<input   type="hidden" value="${LoginOK.empNO}" id="empNO">
 		<button class="btn btn-primary" type="button" id="bt">提交</button>
 	</form>
 	</div>
