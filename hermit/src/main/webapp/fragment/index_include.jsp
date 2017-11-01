@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>赫米特租屋管理</title>
+<link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
@@ -599,6 +600,43 @@
 			var indexCheck = "<%= request.getRequestURI() %>" == "/hermit/index.jsp" | "<%= request.getRequestURI() %>" == "/hermit/";
 			var showSearch = $("#showSearch");
 			var cityOpt;
+			function getCity(){  
+				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
+					var cityData = $.parseJSON(data).list;
+					city.empty();
+					
+					$.each(cityData,function(index,value){
+						var opt = $("<option></option>").text(value.cityName);
+						opt.val(value.cityNO)
+						city.append(opt); 
+						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
+							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+					if(sessionCityNO != null && (!indexCheck)){
+						city.val(sessionCityNO);
+					}
+					getBorough();
+				});
+			}
+			function getBorough(){
+				$.post(path+"/BoroughsServlet.do",{"action":"getAllBoroughByCity","cityNO":city.val()},function(data){
+					var boroughData = $.parseJSON(data).list;
+					borough.empty();
+					borough.append($("<option></option>").text("> 鄉鎮區 <").val(-1));
+					$.each(boroughData,function(index,value){
+						var opt = $("<option></option>").text(value.boroughName);
+						opt.val(value.boroughNO)
+						borough.append(opt); 
+						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
+							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
+						}
+					})
+					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
+						borough.val(sessionBoroughNO);
+					}
+				});
+			}
 			
 			if(indexCheck){
 				$(".breadBox").hide();
@@ -639,43 +677,6 @@
 		   
 		    
 			
-			function getCity(){  
-				$.post(path+"/CityServlet.do",{"action":"getAllCity"},function(data){
-					var cityData = $.parseJSON(data).list;
-					city.empty();
-					
-					$.each(cityData,function(index,value){
-						var opt = $("<option></option>").text(value.cityName);
-						opt.val(value.cityNO)
-						city.append(opt); 
-						if(sessionCityNO != -1 && (sessionCityNO == value.cityNO)){
-							showSearch.append( $("<span></span>").html(value.cityName+"&nbsp;&nbsp;&nbsp;"));
-						}
-					})
-					if(sessionCityNO != null && (!indexCheck)){
-						city.val(sessionCityNO);
-					}
-					getBorough();
-				});
-			}
-			function getBorough(){
-				$.post(path+"/BoroughsServlet.do",{"action":"getAllBoroughByCity","cityNO":city.val()},function(data){
-					var boroughData = $.parseJSON(data).list;
-					borough.empty();
-					borough.append($("<option></option>").text("> 鄉鎮區 <").val(-1));
-					$.each(boroughData,function(index,value){
-						var opt = $("<option></option>").text(value.boroughName);
-						opt.val(value.boroughNO)
-						borough.append(opt); 
-						if(sessionBoroughNO != -1 && (sessionBoroughNO == value.boroughNO)){
-							showSearch.append( $("<span></span>").html(value.boroughName+"&nbsp;&nbsp;&nbsp;"));
-						}
-					})
-					if(sessionBoroughNO != null && BoroughInit == 0  && (!indexCheck)){
-						borough.val(sessionBoroughNO);
-					}
-				});
-			}
 			function houseSizeShow(){
 				if(sessionHouseSize != null && (!indexCheck)){
 					houseSize.val(sessionHouseSize);
@@ -812,11 +813,11 @@
 						houseSize:houseSize.val(),
 						houseRent:radioButtons.index(radioButtons.filter(':checked')),
 						equid:jsonStr
-				}
+				};
 			$.post("<%=request.getContextPath()%>/AdvancedSearch",searchStr,function(data){
 					location.replace("<%= request.getContextPath()%>/search.jsp");
 				})
-			})		
+			});		
 		});
 
 		function openLeftMenu() {
@@ -834,6 +835,18 @@
 		}
 		// 登入判斷
 		$(document).ready(function(){
+			//登入資訊用-start
+			var $form_modal = $('.cd-user-modal'),
+			$form_login = $form_modal.find('#cd-login'),
+			$form_signup = $form_modal.find('#cd-signup'),
+			$form_forgot_password = $form_modal.find('#cd-reset-password'),
+			$form_modal_tab = $('.cd-switcher'),
+			$tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+			$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
+			$forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
+			$back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
+			$main_nav = $('.main-nav');
+			//登入資訊用-end
 			$("#submitBtn").click(function(){
 				var box;
 				// 清除錯誤訊息
@@ -889,9 +902,13 @@
 					if(data=="OK"){
 						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp?action=check";
 					}else if(data=="NO"){
-						$('#loginmodal').modal('show');
-						$("#cd-login").toggle(true);
-						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						$main_nav.children('ul').removeClass('is-visible');
+						$form_modal.addClass('is-visible');	
+						$form_login.addClass('is-selected');
+						$form_signup.removeClass('is-selected');
+						$form_forgot_password.removeClass('is-selected');
+						$tab_login.addClass('selected');
+						$tab_signup.removeClass('selected');
 						return;
 					}
 				})
@@ -904,9 +921,13 @@
 					if(data=="OK"){
 						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp?action=check";
 					}else if(data=="NO"){
-						$('#loginmodal').modal('show');
-						$("#cd-login").toggle(true);
-						$('#loginmodal').attr('class','cd-user-modal is-visible');
+						$main_nav.children('ul').removeClass('is-visible');
+						$form_modal.addClass('is-visible');	
+						$form_login.addClass('is-selected');
+						$form_signup.removeClass('is-selected');
+						$form_forgot_password.removeClass('is-selected');
+						$tab_login.addClass('selected');
+						$tab_signup.removeClass('selected');
 						return;
 					}
 				})

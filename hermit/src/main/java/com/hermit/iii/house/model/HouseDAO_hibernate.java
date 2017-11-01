@@ -235,73 +235,86 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		HouseVO vo = new HouseVO();
 		EquipmentConditionVO evo = new EquipmentConditionVO();
 		List<HouseVO> list = null;
-//		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
-//		vo.setCityNO(1);
-//		vo.setBoroughNO(1);
-//		vo.setHighestFloor(13);
-//		vo.setNowFloor(5);
-//		vo.setHouseStatus("未出租");
-//		vo.setHouseRent(20000);
-//		vo.setHouseCharge(40000);     //押金
-//		vo.setWaterRate("依帳單繳費");
-//		vo.setPowerRate("依帳單繳費");
-//		vo.setHouseVideo("http://www.youtube.com");
-//		vo.setTypeNO(2010);
-//		vo.setFormNO(2010);
-//		vo.setHouseAddr("新北市板橋區大馬路3號");
-//		vo.setHouseSize(10.32);
-//		
-//		evo.setTV((byte) 1);
-//		evo.setAircondition((byte) 1);
-//		evo.setRefrigerator((byte) 1);
-//		evo.setWaterHeater((byte) 1);
-//		evo.setGas((byte) 1);
-//		evo.setTheFourthStation((byte) 1);
-//		evo.setNet((byte) 1);
-//		evo.setWashing((byte) 1);
-//		evo.setBed((byte) 1);
-//		evo.setWardrobe((byte) 1);
-//		evo.setSofa((byte) 1);
-//		evo.setParking((byte) 1);
-//		evo.setElevator((byte) 1);
-//		evo.setBalcony((byte) 1);
-//		evo.setPermitCook((byte) 1);
-//		evo.setPet((byte) 1);
-//		evo.setCloseMRT((byte) 1);
-//		
-//		dao.insertHouseAndEquip(vo,evo);
-//		System.out.println("success");
-		
+		vo.setHouseTitle("東區忠孝復興站,極簡設計師裝潢");
 		CityVO cityVO=new CityVO();
-		BoroughsVO boroughsVO=new BoroughsVO(); 
-		HouseTypeVO typeVO=new HouseTypeVO();
-		HouseFormVO formVO=new HouseFormVO();
-		HousePictureVO picVO=new HousePictureVO();
-		
-		vo.setHouseTitle("測試圖片");
 		cityVO.setCityNO(1);
 		vo.setCityVO(cityVO);
-		boroughsVO.setBoroughNO(3);
+		BoroughsVO boroughsVO=new BoroughsVO(); 
+		boroughsVO.setBoroughNO(1);
 		vo.setBoroughsVO(boroughsVO);
-		vo.setHighestFloor(20);
-		vo.setNowFloor(5);
-		vo.setHouseStatus("出租中");
-		vo.setHouseRent(18000);
-		vo.setHouseCharge(36000);
-		vo.setWaterRate("依帳單繳費");
-		vo.setPowerRate("依帳單繳費");
-		vo.setHouseVideo("http://www.youtube.com/notsweethouse");
+		HouseTypeVO typeVO=new HouseTypeVO();
+		HouseFormVO formVO=new HouseFormVO();
 		typeVO.setTypeNO(2020);
 		vo.setHouseTypeVO(typeVO);
 		formVO.setFormNO(2020);
 		vo.setHouseFormVO(formVO);
-		vo.setHouseAddr("新北市板橋區大馬路2號");
-		vo.setHouseSize(18.87);
-		Set<HousePictureVO>set= new HashSet<HousePictureVO>();
-		picVO.sethPicture("0x654321");
-		set.add(picVO);
-		dao.insertHouseAndHousePicture(vo, set);
-		System.out.println("hi");
+		
+		vo.getBoroughsVO().setBoroughNO(1);
+		vo.setHighestFloor(13);
+		vo.setNowFloor(5);
+		vo.setHouseStatus("未出租");
+		vo.setHouseRent(20000);
+		vo.setHouseCharge(40000);     //押金
+		vo.setWaterRate("依帳單繳費");
+		vo.setPowerRate("依帳單繳費");
+		vo.setHouseVideo("http://www.youtube.com");
+		vo.getHouseTypeVO().setTypeNO(2010);
+		vo.getHouseFormVO().setFormNO(2010);
+		vo.setHouseAddr("新北市板橋區大馬路3號");
+		vo.setHouseSize(10.32);
+		vo.setHouseInfo("<h3>樓中樓  挑高設計  高級廳衛  絕佳享受</h3><br><p> 高級生活饗宴</p>");
+		
+		evo.setTV((byte) 1);
+		evo.setAircondition((byte) 1);
+		evo.setRefrigerator((byte) 1);
+		evo.setWaterHeater((byte) 1);
+		evo.setGas((byte) 1);
+		evo.setTheFourthStation((byte) 1);
+		evo.setNet((byte) 1);
+		evo.setWashing((byte) 1);
+		evo.setBed((byte) 1);
+		evo.setWardrobe((byte) 1);
+		evo.setSofa((byte) 1);
+		evo.setParking((byte) 1);
+		evo.setElevator((byte) 1);
+		evo.setBalcony((byte) 1);
+		evo.setPermitCook((byte) 1);
+		evo.setPet((byte) 1);
+		evo.setCloseMRT((byte) 1);
+		
+		dao.insertHouseAndEquip(vo,evo);
+		System.out.println("success");
+		
+//		CityVO cityVO=new CityVO();
+//		BoroughsVO boroughsVO=new BoroughsVO(); 
+//		HouseTypeVO typeVO=new HouseTypeVO();
+//		HouseFormVO formVO=new HouseFormVO();
+//		HousePictureVO picVO=new HousePictureVO();
+//		
+//		vo.setHouseTitle("測試圖片");
+//		cityVO.setCityNO(1);
+//		vo.setCityVO(cityVO);
+//		boroughsVO.setBoroughNO(3);
+//		vo.setBoroughsVO(boroughsVO);
+//		vo.setHighestFloor(20);
+//		vo.setNowFloor(5);
+//		vo.setHouseStatus("出租中");
+//		vo.setHouseRent(18000);
+//		vo.setHouseCharge(36000);
+//		vo.setWaterRate("依帳單繳費");
+//		vo.setPowerRate("依帳單繳費");
+//		vo.setHouseVideo("http://www.youtube.com/notsweethouse");
+//		typeVO.setTypeNO(2020);
+//		vo.setHouseTypeVO(typeVO);
+//		formVO.setFormNO(2020);
+//		vo.setHouseFormVO(formVO);
+//		vo.setHouseAddr("新北市板橋區大馬路2號");
+//		vo.setHouseSize(18.87);
+//		Set<HousePictureVO>set= new HashSet<HousePictureVO>();
+//		picVO.sethPicture("0x654321");
+//		set.add(picVO);
+//		dao.insertHouseAndHousePicture(vo, set);
+//		System.out.println("hi");
 		
 //		System.out.println(dao.advencedSearch("SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO WHERE h.houseStatus = '未出租' and (h.cityNO = 1)"));
 		
