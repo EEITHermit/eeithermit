@@ -86,7 +86,7 @@ tr {
 <body>
 	<div class="container">
 		<button class="btn info"
-			onclick="javascrtpt:window.location.href=' '">新增員工</button> 
+			onclick="javascrtpt:window.location.href='empInsert_include.jsp'">新增員工</button> 
 <!-- 			尚未放入新增員工頁面 -->
 		<p>
 			<table id="myTable" style="width:1130px;height:600px;" border="1">

@@ -49,33 +49,33 @@ a:link, a:visited, a:hover, a:active {
 
 					<ul id="main-nav" class="nav nav-tabs nav-stacked">
 						<li class="active"><a href="./mem_back_index.jsp"> <i
-								class="glyphicon glyphicon-home" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-home" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
 						</a></li>
 
 						<li><a href="./mem_back_favorite.jsp"> <i
-								class="glyphicon glyphicon-heart" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-heart" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">收藏</span>
 						</a></li>
 
 						<li><a href="./mem_back_calendar.jsp"> <i
-								class="glyphicon glyphicon-calendar" style="height: 30px;"></i>
+								class="glyphicon glyphicon-calendar" style="height: 30px;font-size: 30px"></i>
 								<span style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
 						</a></li>
 
 						<li><a href="./mem_back_qanda.jsp"> <i
-								class="glyphicon glyphicon-comment" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-comment" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
 						</a></li>
 
 						<li><a href="./mem_back_lease.jsp"> <i
-								class="glyphicon glyphicon-file" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-file" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
 						<li><a
 							href="<%=request.getContextPath()%>/member.do?action=getOneMember">
-								<i class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
+								<i class="glyphicon glyphicon-edit" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
 					</ul>
@@ -96,16 +96,15 @@ a:link, a:visited, a:hover, a:active {
 						<div class="widget-header">
 							<i class="glyphicon glyphicon-list"
 								style="font-size: 20px; padding-left: 8px"></i> <span
-								style="font-weight: bold; font-size: 18px; font-family: Microsoft JhengHei">會員基本資料</span>
+								style="font-weight: bold; font-size: 18px; font-family: Microsoft JhengHei">會員首頁</span>
 						</div>
 						<!-- /widget-header -->
 
 
 						<!-- 這邊是放你的資料 -->
 						<div class="widget-content">
-							<center>
-
-							</center>
+							<table width="770px">
+							</table>
 						</div>
 						<!-- /widget-content -->
 

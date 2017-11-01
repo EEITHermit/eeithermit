@@ -156,6 +156,16 @@ public class calendarServlet extends HttpServlet {
 				out.print("此時段已有行程");
 				return;
 			}
+			//通知員工刪除預約
+		}else if("deleteNotice".equals(mission)){
+			int id = Integer.valueOf(request.getParameter("id"));
+			if(rs.deleteNotice(id) == 1){
+				out.print("已通知業務人員");
+				return;
+			}else{
+				out.print("送出失敗，請再次確認");
+				return;
+			}
 		}
 	}
 }

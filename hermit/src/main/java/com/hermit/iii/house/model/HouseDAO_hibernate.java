@@ -441,7 +441,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 				//GET ALL_FK TEST END
 			
 				//GET ONE_FK TEST BEGIN
-//				vo = dao.GET_ONE_HOUSE_FK(20001);	
+//				vo = dao.GET_ONE_HOUSE_FK(20006);	
 //				System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
 //				System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityNO());
 //				System.out.println("getCityName = \t\t" + vo.getCityVO().getCityName());
@@ -464,6 +464,10 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //				System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
 //				System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
 //				System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
+//				Set<HousePictureVO> set = vo.getHousePictureVO();
+//				for(HousePictureVO housePictureVO:set){
+//				System.out.println("gethousePicture=\t\t"+housePictureVO.gethPicture());
+//				}
 //				System.out.println("Search Success");
 				//GET ONE_FK TEST END
 

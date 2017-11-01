@@ -66,32 +66,32 @@ a:link, a:visited, a:hover, a:active {
 
 					<ul id="main-nav" class="nav nav-tabs nav-stacked">
 						<li><a href="./mem_back_index.jsp"> <i
-								class="glyphicon glyphicon-home" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-home" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
 						</a></li>
 
 						<li><a href="./mem_back_favorite.jsp"> <i
-								class="glyphicon glyphicon-heart" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-heart" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">收藏</span>
 						</a></li>
 
 						<li class="active"><a href="./mem_back_calendar.jsp"> <i
-								class="glyphicon glyphicon-calendar" style="height: 30px;"></i>
+								class="glyphicon glyphicon-calendar" style="height: 30px;font-size: 30px"></i>
 								<span style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
 						</a></li>
 
 						<li><a href="./mem_back_qanda.jsp"> <i
-								class="glyphicon glyphicon-comment" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-comment" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
 						</a></li>
 
 						<li><a href="./mem_back_lease.jsp"> <i
-								class="glyphicon glyphicon-file" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-file" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
 						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
-								class="glyphicon glyphicon-edit" style="height: 30px;"></i> <span
+								class="glyphicon glyphicon-edit" style="height: 30px;font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
 					</ul>
@@ -190,7 +190,7 @@ a:link, a:visited, a:hover, a:active {
 	
 	function work(){
 		var body = $("#showTable>tbody");
-			$.get("<%=request.getContextPath()%>/reservationServlet?mission=queryReservation",{memberNo:"40001"},function(data){
+			$.get("<%=request.getContextPath()%>/reservationServlet?mission=queryReservation",{memberNo:"${LoginOK.memNO}"},function(data){
 				array = JSON.parse(data);
 				for(var res of array){
 					var tr = $("<tr></tr>");
@@ -200,22 +200,50 @@ a:link, a:visited, a:hover, a:active {
 					var tdAddr = $("<td>"+res["houseVO"]["houseAddr"]+"</td>");
 					var tdTel = $("<td>"+res["empVO"]["empPhone"]+"</td>");
 					var tdStart = $("<td>"+res["eventStartTime"]+"</td>");
-					var tdButton = $("<td><button>刪除</button></td>")
+					var tdButton = $("<td><button class='btn btn-primary'>刪除</button></td>")
 					
 					tr.append(tdId).append(tdName).append(tdTitle).append(tdAddr).append(tdTel).append(tdStart).append(tdButton);
 					tr.appendTo(body);
 					//產生DataTable
 					$('#showTable').DataTable({
+						"destroy": true,
+						"paging": false,
+						"searching": false,
+						"info": false,
+						"autoWidth" : false,
+						//設定各個欄位屬性
+						"columnDefs" : [ {
+							"targets" : [ 0 ],
+							"width" : "10%"
+						}, {
+							"targets" : [ 1 ],
+							"width" : "10%"
+						}, {
+							"targets" : [ 2 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 3 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 4 ],
+							"width" : "10%"
+						} , {
+							"targets" : [ 5 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 6 ],
+							"width" : "10%"
+						}
+						]
 						
 					});
 				};
 			});
-			
-			
+		
 		//會員刪除預約
 		body.on("click","button",function(event){
 			if(confirm("確定要刪除此預約?")){
-				$.post("<%=request.getContextPath()%>/calendarServlet?mission=delete"
+				$.post("<%=request.getContextPath()%>/calendarServlet?mission=deleteNotice"
 						,{id:$(event.target).parent("tr").children("td").eq(0).text()}
 						,function(data){
 							alert(data);

@@ -24,5 +24,11 @@ public class CalendarEventService {
 	public ArrayList<CalendarEventVO> selectByMember(Integer memberNo){
 		return resDAO.selectByMember(memberNo);
 	};
+	public Integer deleteNotice(Integer eventNO){
+		return resDAO.deleteNotice(eventNO);
+	};
+	public ArrayList<CalendarEventVO> selectDeleteNotice(Integer empNO){
+		return resDAO.selectDeleteNotice(empNO);
+	}
 	
 }
