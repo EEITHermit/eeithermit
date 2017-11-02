@@ -54,6 +54,9 @@
 	    bottom: 100px;
 	    font-size: 17px;
 	}
+	.houseInformation{
+		font-family: 'cwTeXYen', sans-serif;
+	}
 	
 	#snackbar.show {
 	    visibility: visible;
@@ -100,15 +103,16 @@
 			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;font-family:Microsoft JhengHei;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
 		</div>
 		<!-- favorite HTML End -->
-		<div class="col-md-12 houseInformation" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:10px;float:right;padding:15px">
-			<div class="col-md-3" id="Rent"></div>
-			<div class="col-md-3" id="Size"></div>
-			<div class="col-md-3" id="Charge"></div>
-			<div class="col-md-3" id="floor"></div>
-			<div class="col-md-3" id="water"></div>
-			<div class="col-md-3" id="elePower"></div>
-			<div class="col-md-3" id="hType"></div>
-			<div class="col-md-3" id="hForm"></div>
+		<div class="col-md-12 houseInformation" style="height:250px;width:100%;border-radius: 10px;margin-top:10px;float:right;padding:15px">
+			<div class="col-md-12" style="margin:10px 3px;" id="Rent"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="Size"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="Charge"></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="reservation"><button>預約</button></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="floor"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="hFormType"></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="QandA"><button>詢問</button></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="water"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="elePower"></div>
 		</div>
 		<div class="col-md-12" style="margin-top:10px;float:left;display:block;">
 			<ul class="nav nav-tabs" role="tablist" style="font-family: Microsoft JhengHei;">
@@ -1675,7 +1679,7 @@
 	<!-- 配合AJAX的bootstrap特效snackbar HTML Start-->
 	<div id="snackbar">已經成功操作</div>
 	<!-- 配合AJAX的bootstrap特效snackbar HTML End-->
-	<footer class="w3-bottom w3-black container-fluid text-center" style=" position: static">
+	<footer class="w3-black container-fluid text-center">
 		<div>
 			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
 			  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
@@ -1685,7 +1689,6 @@
 			</ul>
 		</div>
 	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-		</div>
 	</footer>
 	<script>
 	// 大家一起用
@@ -1699,14 +1702,13 @@
 			$("#cityName").text(house.cityName+"  >  ");
 			$("#boroughName").text(house.boroughName+"  >  ");
 			$("#houseAddr").text(house.houseAddr);
-			$(".houseInformation>#Rent").html("<span>租金:&nbsp;&nbsp;</span><span style='font-size:2.3em;color:red;'>"+house.houseRent+"</span>&nbsp;&nbsp;元/月")
-			console.log($(".houseInformation>#Size"));
-			console.log($(".houseInformation>#Charge"));
-			console.log($(".houseInformation>#floor"));
-			console.log($(".houseInformation>#water"));
-			console.log($(".houseInformation>#elePower"));
-			console.log($(".houseInformation>#hType"));
-			console.log($(".houseInformation>#hForm"));
+			$(".houseInformation>#Rent").html("<span style='font-size:20px'>租金:&nbsp;&nbsp;</span><span style='font-size:2.3em;color:red;'>"+house.houseRent+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
+			$(".houseInformation>#Size").html("<span style='font-size:20px'>房屋大小:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseSize+"</span><span  style='font-size:20px'>&nbsp;&nbsp;坪</span>")
+			$(".houseInformation>#Charge").html("<span style='font-size:20px'>管理費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseCharge+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
+			$(".houseInformation>#floor").html("<span style='font-size:20px'>房屋樓層:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.nowFloor+"/"+house.highestFloor+"</span><span  style='font-size:20px'>&nbsp;&nbsp;樓</span>")
+			$(".houseInformation>#water").html("<span style='font-size:20px'>水費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.waterRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+			$(".houseInformation>#elePower").html("<span style='font-size:20px'>電費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.powerRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+			$(".houseInformation>#hFormType").html("<span style='font-size:20px'>房屋型態:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.hForm+"/"+house.hType+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
 			
 			if(eqStatus != null)
 				$.each(eqStatus,function(eqName,value){
