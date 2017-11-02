@@ -11,7 +11,6 @@ public class WebSocketNoHTTP {
 	static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
 	private String user = "";
 	static private List<Object> recordmsg = new ArrayList<Object>();
-	static private Map<String, String> recordMap = new HashMap<String, String>();
 
 	@OnOpen
 	public void handleOpen(EndpointConfig endpointConfig, Session userSession) {
@@ -30,7 +29,8 @@ public class WebSocketNoHTTP {
 				if (recordmsg != null) {
 					Iterator<Object> itmsg = recordmsg.iterator();
 					while (itmsg.hasNext()) {
-						Iterator<String> keys = ((Map<String, String>) itmsg.next()).keySet().iterator();
+						Map<String, String> recordMap = (Map<String, String>) itmsg.next();
+						Iterator<String> keys = recordMap.keySet().iterator();
 						while (keys.hasNext()) {
 							mykey = keys.next();
 							msgPackage = buildJsonData(mykey, recordMap.get(mykey));
@@ -59,7 +59,7 @@ public class WebSocketNoHTTP {
 		Iterator<Session> iterator = users.iterator();
 		try {
 			while (iterator.hasNext()) {
-
+				Map<String, String> recordMap = new HashMap<String, String>();
 				if ("M".equals(keyWord)) {
 					recordMap.put(user, message);
 				}

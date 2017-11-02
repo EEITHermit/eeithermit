@@ -13,23 +13,10 @@
 <script src="<%=request.getContextPath()%>/js/jquery.otg-carousel.js"></script>
 <style>
 
-	tabstyle{
-		border:1px solid rgba(221,221,221,0.7);
-		border-radius:10px;padding:40px;
-		height:500px;
-		width:100%;
-	}
-	equidDiv{
-		height:50px;
-	}
 	.col-md-2 span{
 		vertical-align:sub;
 		font-family: Microsoft JhengHei;
 		font-weight: bold;
-	}
-	.col-md-12 span,a{
-		font-family: Microsoft JhengHei;
-		font-size: 1.2em;
 	}
 	
 	#addressTag span{
@@ -50,6 +37,49 @@
 	color: black;
 }
 /* 	Google Map CSS End */
+/* 	配合AJAX的bootstrap特效snackbar CSS Start */
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 100px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 100px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 100px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 100px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 100px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+/* 	配合AJAX的bootstrap特效snackbar CSS End */
 h5{
 	font-size: 0.83em
 }
@@ -62,17 +92,32 @@ h5{
 			<div id="carousel">
 			</div>
 		</div>
-		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:50px;float:right">
+		<!-- favorite HTML Start -->
+		<div class="col-md-12" style="margin-top:1.5em;">
+			<div class="col-md-4"><input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}"></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
+		</div>
+		<!-- favorite HTML End -->
+		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:10px;float:right">
+			<div class="col-md-3" id="Rent"></div>
+			<div class="col-md-3" id="Size"></div>
+			<div class="col-md-3" id="Charge"></div>
+			<div class="col-md-3" id="floor"></div>
+			<div class="col-md-3" id="water"></div>
+			<div class="col-md-3" id="elePower"></div>
+			<div class="col-md-3" id="hType"></div>
+			<div class="col-md-3" id="hForm"></div>
 		</div>
 		<div class="col-md-12" style="margin-top:10px;float:left;display:block;">
 			<ul class="nav nav-tabs" role="tablist">
 			  <li role="presentation" style="color:black" class="active"><a style="color:black"  href="#hInfo" aria-controls="hInfo" role="tab" data-toggle="tab">屋況介紹</a></li>
-			  <li role="presentation" style="color:black" ><a style="color:black"  href="#houseContent" aria-controls="houseContent" role="tab" data-toggle="tab">房屋規格</a></li>
+			  <li role="presentation" style="color:black" ><a style="color:black"  href="#houseContent" aria-controls="houseContent" role="tab" data-toggle="tab">房屋配備</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black" href="#houseVideo" aria-controls="houseVideo" role="tab" data-toggle="tab">房屋影片</a></li>
 			</ul>
 			<div class="tab-content" style="margin-top:5px">
-			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%" class="tab-pane active" id="hInfo"></div>
-			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="houseContent">
+			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%" class="tab-pane active" id="hInfo"></div>
+			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%"  class="tab-pane" id="houseContent">
 					<div class="col-md-2"  style="height:32px;margin:9px auto;"><img style="height:32px;width:32px" id="TV" src='images/television.png'><span>&nbsp;電視</span></div>
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="aircondition" src='images/air.png'><span>&nbsp;冷氣</span></div>
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="refrigerator" src='images/refrigerator.png'><span>&nbsp;冰箱</span></div>
@@ -91,7 +136,7 @@ h5{
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="pet" src='images/pet.png'><span>&nbsp;養寵物</span></div>
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="closeMRT" src='images/closeMRT.png'><span>&nbsp;近捷運</span></div>
 			  </div>
-			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="houseVideo"></div>
+			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%"  class="tab-pane" id="houseVideo"></div>
 			</div>
 		</div>
 	</div>
@@ -1626,7 +1671,9 @@ h5{
 		</div>
 	</div>
 	<!--  Google Map HTML End -->
-
+	<!-- 配合AJAX的bootstrap特效snackbar HTML Start-->
+	<div id="snackbar">已經成功操作</div>
+	<!-- 配合AJAX的bootstrap特效snackbar HTML End-->
 	<footer class="w3-bottom w3-black container-fluid text-center" style=" position: static">
 		<div>
 			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
@@ -1640,8 +1687,10 @@ h5{
 		</div>
 	</footer>
 	<script>
+	// 大家一起用
+	var house = $.parseJSON('<%= request.getAttribute("House")%>');
+
 		function loadCarousel(){
-			var house = $.parseJSON('<%= request.getAttribute("House")%>');
 			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
 			var eqStatus = $.parseJSON('<%= request.getAttribute("eq")%>');
 			var hContentImg = $("#houseContent img");
@@ -1649,6 +1698,15 @@ h5{
 			$("#cityName").text(house.cityName+"  >  ");
 			$("#boroughName").text(house.boroughName+"  >  ");
 			$("#houseAddr").text(house.houseAddr);
+// 			id="Rent"
+// 			<div class="col-md-3" id="Size"></div>
+// 			<div class="col-md-3" id="Charge"></div>
+// 			<div class="col-md-3" id="floor"></div>
+// 			<div class="col-md-3" id="water"></div>
+// 			<div class="col-md-3" id="elePower"></div>
+// 			<div class="col-md-3" id="hType"></div>
+// 			<div class="col-md-3" id="hForm"></div>
+			
 			if(eqStatus != null)
 				$.each(eqStatus,function(eqName,value){
 					if(!value){
@@ -1672,6 +1730,97 @@ h5{
 		}
 		loadCarousel();	
 		$('#tabs-container').scrollingTabs();
+
+		/* favorite JS code Start */
+		var starStatus ="dark";
+		var no = $("#memNO").val();
+		var hno = location.search.split('NO=')[1] ? location.search.split('NO=')[1] : null;
+		var fno = -1;
+		
+		loadFavorite();
+
+		function loadFavorite() {
+			if (no) {
+				console.log('會員編號:'+no+', 房屋編號:'+hno);
+				$.ajax({
+					url:'<%=request.getContextPath()%>/FavoriteServlet?',
+					method : 'post',
+					data : {
+						'action' : 'house_checkAJAX_Action',
+						'memNO' : no,
+						'houseNO' : hno
+					},
+					dataType : 'text',
+					success : function(data) {
+						fno = data;
+						if (data != -1) {
+							$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/like_y.png');
+							starStatus ="red";
+						}
+					},
+					error : function() {
+						alert("您的瀏覽器不支援Ajax!!");
+					}
+				});
+			}
+			// heart control
+			$('#myFavStar img').click(function() {
+				if (starStatus == "dark"){
+					if (no) {
+						console.log('會員編號:'+no+', 房屋編號:'+hno);
+						$.ajax({
+							url:'<%=request.getContextPath()%>/FavoriteServlet?',
+							method : 'post',
+							data : {
+								'action' : 'house_insertAJAX_Action',
+								'memNO' : no,
+								'houseNO' : hno
+							},
+							dataType : 'text',
+							success : function(data) {
+								fno = data;
+								var thebar = document.getElementById("snackbar");
+								$('#snackbar').text("已新增此房屋至收藏庫");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 1000);
+							},
+							error : function() {
+								alert("您的瀏覽器不支援Ajax!!");
+							}
+						});
+					}
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/like_y.png');
+					starStatus ="red";
+				}else{
+					if (no && (fno != -1)) {
+						console.log('開刪');
+						$.ajax({
+							url:'<%=request.getContextPath()%>/FavoriteServlet?',
+							method : 'post',
+							data : {
+								'action' : 'house_deleteAJAX_Action',
+								'favNO' : fno,
+								'houseNO' : hno
+							},
+							dataType : 'text',
+							success : function(data) {
+								fno = -1;
+								var thebar = document.getElementById("snackbar");
+								$('#snackbar').text("已從收藏庫移除此房屋");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 1000);
+							},
+							error : function() {
+								alert("您的瀏覽器不支援Ajax!!");
+							}
+						});
+					}
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/like_n.png');
+					starStatus ="dark";
+				}
+			});
+		}
+		/* favorite JS code End */
 	</script>
 </body>
 </html>

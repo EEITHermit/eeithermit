@@ -12,9 +12,11 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 
 	private static final String GET_ALL_STMT = "from FavoriteVO order by favNO";
 	private static final String FIND_MEMNO_STMT = "from FavoriteVO where memNO=? order by favNO";
+	private static final String CEK_MEMHOUSE_STMT = "from FavoriteVO where memNO=? and HouseNO=? order by favNO";
 
 	@Override
 	public void insert(FavoriteVO favoriteVO) {
+
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -28,6 +30,7 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 
 	@Override
 	public void update(FavoriteVO favoriteVO) {
+
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -41,6 +44,7 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 
 	@Override
 	public void delete(Integer favNO) {
+
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			// 【注意多方不可(不宜)採用cascade聯級刪除】
@@ -57,6 +61,7 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 	@Override
 	public FavoriteVO findByPrimaryKey(Integer favNO) {
 		FavoriteVO favoriteVO = null;
+
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -104,6 +109,27 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 			throw ex;
 		}
 		return new LinkedHashSet<FavoriteVO>(list);
+	}
+
+	// AJAX 會員房屋編號查詢
+	@Override
+	public Integer check_MemHouseNO_AJAX(Integer memNO, Integer houseNO) {
+		FavoriteVO favoriteVO = null;
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(CEK_MEMHOUSE_STMT);
+			query.setParameter(0, memNO);
+			query.setParameter(1, houseNO);
+			favoriteVO = (FavoriteVO) query.getResultList().get(0);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			// throw ex;
+			return -1;
+		}
+		return favoriteVO.getFavNO();
 	}
 
 	public static void main(String[] args) {
@@ -155,6 +181,10 @@ public class FavoriteDAO_hibernate implements FavoriteDAO_interface_hibernate {
 			System.out.print(favoriteVO.getMemberVO().getMemNO() + ",");
 			System.out.println(favoriteVO.getHouseVO().getHouseNO());
 		}
+
+		// AJAX 會員房屋編號查詢
+		System.out.println("---------------------");
+		System.out.println(dao.check_MemHouseNO_AJAX(40003, 20005));
 
 		System.out.println("Done");
 	}

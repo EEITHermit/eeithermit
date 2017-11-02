@@ -55,9 +55,9 @@ label {
 						<!-- /account-details -->
 					</div>
 					<div class="account-details">
-						<span class="account-name"
-							style="font-family: Microsoft JhengHei; padding-left: 75px">${LoginOK.memAccount}</span>
-						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
+						<p class="account-name"
+							style="font-family: Microsoft JhengHei; text-align: center; font-size: 24px">${LoginOK.memName}
+						</p>
 					</div>
 					<!-- /account-container -->
 
@@ -220,10 +220,13 @@ label {
 											id="memImage" height="200" width="200">
 									</div>
 								</div>
+
 								<div class="form-group">
 									<div class="col-md-6 control-label">
+
 										<input type="submit" value="修改">
 									</div>
+									<div style="margin-bottom: 100px"></div>
 								</div>
 							</form>
 
@@ -233,8 +236,6 @@ label {
 				</div>
 			</div>
 			<!-- /widget-content -->
-
-
 		</div>
 		<!-- /widget -->
 	</div>
