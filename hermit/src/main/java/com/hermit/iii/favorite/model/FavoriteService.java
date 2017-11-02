@@ -88,4 +88,9 @@ public class FavoriteService {
 		String jsonString = new JSONArray(jsonList).toString();
 		return jsonString;
 	}
+	
+	// AJAX 會員房屋編號查詢 (回傳流水favNO，而-1表查無此筆資料)	
+	public Integer checkFavoriteAJAX(Integer memNO, Integer houseNO){
+		return dao.check_MemHouseNO_AJAX(memNO, houseNO);
+	}
 }

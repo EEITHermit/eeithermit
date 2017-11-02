@@ -62,6 +62,13 @@ h5{
 			<div id="carousel">
 			</div>
 		</div>
+		<!-- favorite HTML Start -->
+		<div class="col-md-12">
+			<div class="col-md-4"><input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}"></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="myFavStar"><img height="100" width="100" style="margin-bottom: 1.5em" src="<%=request.getContextPath()%>/images/darkstar.png" /><span style="font-size: 2.5em; font-weight: 900; margin-left: 3%;">我的最愛</span></div>
+		</div>
+		<!-- favorite HTML End -->
 		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:50px;float:right">
 		</div>
 		<div class="col-md-12" style="margin-top:10px;float:left;display:block;">
@@ -333,11 +340,11 @@ h5{
 										map : map,
 										position : pyrmont,
 									});
-									markers.push(marker);
+									// markers.push(marker);
 									// Marker點擊事件
 									google.maps.event.addListener(marker, 'click', function() {
 										// infowindow.setContent(place.name + thisResult);
-										infowindow.setContent('<strong>'+hInfo.houseTitle+'：</strong><hr/><i>'+hInfo.cityName+hInfo.boroughName+hInfo.houseAddr+'</i>');
+										infowindow.setContent('<strong>'+hInfo.houseTitle+'：</strong><hr/><img height="45" width="45" src="'+hInfo.previewPic+'"><i>'+hInfo.cityName+hInfo.boroughName+hInfo.houseAddr+'</i>');
 										infowindow.open(map, this);
 									});	
 								}
@@ -1640,8 +1647,10 @@ h5{
 		</div>
 	</footer>
 	<script>
+	// 大家一起用
+	var house = $.parseJSON('<%= request.getAttribute("House")%>');
+
 		function loadCarousel(){
-			var house = $.parseJSON('<%= request.getAttribute("House")%>');
 			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
 			var eqStatus = $.parseJSON('<%= request.getAttribute("eq")%>');
 			var hContentImg = $("#houseContent img");
@@ -1672,6 +1681,50 @@ h5{
 		}
 		loadCarousel();	
 		$('#tabs-container').scrollingTabs();
+
+		/* favorite JS code Start */
+		var starStatus ="dark";
+		
+		loadFavorite();
+		
+		function loadFavorite() {
+			var no = $("#memNO").val();
+			var hno = location.search.split('NO=')[1] ? location.search.split('NO=')[1] : null;
+			if (no) {
+				console.log('會員編號:'+no+', 房屋編號:'+hno);
+				$.ajax({
+					url:'<%=request.getContextPath()%>/FavoriteServlet?',
+					method : 'post',
+					data : {
+						'action' : 'house_checkAJAX_Action',
+						'memNO' : no,
+						'houseNO' : hno
+					},
+					dataType : 'text',
+					success : function(data) {
+						console.log(data);
+						if (data != -1) {
+							$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
+							starStatus ="yellow";
+						}
+					},
+					error : function() {
+						alert("您的瀏覽器不支援Ajax!!");
+					}
+				});
+			}
+			// Star control
+			$('#myFavStar img').click(function() {
+				if (starStatus == "dark"){
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
+					starStatus ="yellow";
+				}else{
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/darkstar.png');
+					starStatus ="dark";
+				}
+			});
+		}
+		/* favorite JS code End */
 	</script>
 </body>
 </html>

@@ -9,11 +9,14 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<link href='<%=request.getContextPath() %>/css/jquery-ui.min.css' rel='stylesheet' />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-responsive.min.css"
 	rel="stylesheet" />
+<link href='<%=request.getContextPath() %>/css/jquery-ui.structure.min.css' rel='stylesheet' />
+<link href='<%=request.getContextPath() %>/css/jquery-ui.theme.min.css' rel='stylesheet' />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
@@ -135,7 +138,21 @@ a:link, a:visited, a:hover, a:active {
 									</tbody>
 								</table>
 							</div>
-
+							<!-- 放置給刪除預約所需填方塊 -->
+							<div  id="reasonDiv" title="刪除預約">
+							<form id="reasonDiv" class="form-group">
+								<input id="resNO" type="hidden" value="">
+								<label class="form-label">請簡述取消預約之緣由：</label>
+								<textarea class="form-control" id="reason" style="resize: none;height:110px;background-color:#d0d0d0"> </textarea>
+								<br/><p style="color:gray;">__________________________________</p>
+								<div class="" style="float:left">
+								<button type="button"class="btn btn-primary" id="reasonButton">送出</button>
+								</div>
+								<div class="" style="float:right">
+								<button type="button"class="btn btn-primary" id="cancel">取消</button>
+								</div>
+							</form>
+							</div>
 						</div>
 						<!-- /widget-content -->
 
@@ -185,12 +202,13 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 	<script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	<script src='<%=request.getContextPath() %>/js/jquery-ui.min.js'></script>
 <script>
 	$("document").ready(work);
 	
 	function work(){
 		var body = $("#showTable>tbody");
-			$.get("<%=request.getContextPath()%>/reservationServlet?mission=queryReservation",{memberNo:"40001"},function(data){
+			$.get("<%=request.getContextPath()%>/reservationServlet?mission=queryReservation",{memberNo:"${LoginOK.memNO}"},function(data){
 				array = JSON.parse(data);
 				for(var res of array){
 					var tr = $("<tr></tr>");
@@ -200,29 +218,77 @@ a:link, a:visited, a:hover, a:active {
 					var tdAddr = $("<td>"+res["houseVO"]["houseAddr"]+"</td>");
 					var tdTel = $("<td>"+res["empVO"]["empPhone"]+"</td>");
 					var tdStart = $("<td>"+res["eventStartTime"]+"</td>");
-					var tdButton = $("<td><button>刪除</button></td>")
+					var tdButton = $("<td><button class='btn btn-primary'>刪除</button></td>")
 					
 					tr.append(tdId).append(tdName).append(tdTitle).append(tdAddr).append(tdTel).append(tdStart).append(tdButton);
 					tr.appendTo(body);
 					//產生DataTable
 					$('#showTable').DataTable({
+						"destroy": true,
+						"paging": false,
+						"searching": false,
+						"info": false,
+						"autoWidth" : false,
+						//設定各個欄位屬性
+						"columnDefs" : [ {
+							"targets" : [ 0 ],
+							"width" : "10%"
+						}, {
+							"targets" : [ 1 ],
+							"width" : "10%"
+						}, {
+							"targets" : [ 2 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 3 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 4 ],
+							"width" : "10%"
+						} , {
+							"targets" : [ 5 ],
+							"width" : "20%"
+						}, {
+							"targets" : [ 6 ],
+							"width" : "10%"
+						}
+						]
 						
 					});
 				};
 			});
-			
-			
+		
 		//會員刪除預約
+		var thisButton;
 		body.on("click","button",function(event){
+			thisButton = $(this);
+			$("#reasonDiv").dialog("open");
+			$("#resNO").val($(event.target).parents("tr").children("td").eq(0).text());
+		});
+		//設定刪除預約之dialog
+		$("#reasonDiv").dialog({
+			autoOpen: false,
+			 height: 330,
+		     width: 350,
+		     modal: true,
+		     resizable:false
+		});
+		$("#cancel").click(function(){
+			$("#reasonDiv").dialog("close");
+		});
+		$("#reasonButton").click(function(){
 			if(confirm("確定要刪除此預約?")){
-				$.post("<%=request.getContextPath()%>/calendarServlet?mission=delete"
-						,{id:$(event.target).parent("tr").children("td").eq(0).text()}
-						,function(data){
-							alert(data);
-							query();  //重新查詢
-						})
+				$.post("<%=request.getContextPath()%>/calendarServlet?mission=deleteNotice"
+			 			,{id:$("#resNO").val(),ps:$("#reason").val()}
+			 			,function(data){
+			 				alert(data);
+			 				thisButton.text("已回報").attr("disabled",true);
+			 				$("#reasonDiv").dialog("close");
+			 				$("#reason").val("");
+			 			})
 			}
-		})
+		});
+		
 	}
 </script>
 </body>

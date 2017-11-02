@@ -59,6 +59,7 @@ public class HousePageForward extends HttpServlet {
 		houseMap.put("powerRate",hvo.getPowerRate());
 		houseMap.put("hForm",hvo.getHouseFormVO().gethForm());
 		houseMap.put("hType",hvo.getHouseTypeVO().gethType());
+		houseMap.put("previewPic",hvo.getPreviewPic());
 		
 		EquipmentConditionService eqSvc = new EquipmentConditionService();
 		EquipmentConditionVO eqVO = eqSvc.getOneEquipmentCondition(houseNO);

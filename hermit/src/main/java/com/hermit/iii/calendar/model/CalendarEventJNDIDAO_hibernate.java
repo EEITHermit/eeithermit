@@ -182,4 +182,41 @@ public class CalendarEventJNDIDAO_hibernate implements CalendarEventDAO_interfac
 			}
 			return array;
 		}
+	//會員通知員工要刪除預約，將開始時間改為結束時間
+		@Override
+		public Integer deleteNotice(Integer eventNO,String ps){
+			Integer result = 0;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try{
+				session.getTransaction().begin();
+				CalendarEventVO eventVO = session.get(CalendarEventVO.class, eventNO);
+				eventVO.setEventStartTime(eventVO.getEventEndTime());
+				eventVO.setPs(ps);
+				session.saveOrUpdate(eventVO);
+				session.getTransaction().commit();
+				result = 1;
+			}catch(Exception e){
+				session.getTransaction().rollback();
+				e.printStackTrace();
+			}
+			return result;
+		}
+	//員工搜尋會員通知要刪除的預約
+		private String selectDeleteNotice = "From CalendarEventVO where eventStartTime = eventEndTime";
+		@Override
+		public ArrayList<CalendarEventVO> selectDeleteNotice(Integer empNO){
+			ArrayList<CalendarEventVO> array = new ArrayList<CalendarEventVO>();
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try{
+				session.getTransaction().begin();
+				Query query = session.createQuery(selectDeleteNotice);
+				List<CalendarEventVO> list = query.list();
+				array.addAll(list);
+				session.getTransaction().commit();
+			}catch(Exception e){
+				e.printStackTrace();
+				session.getTransaction().rollback();
+			}
+			return array;
+		}
 }	

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.hermit.iii.member.model.MemberVO;
 
-@WebFilter(urlPatterns = { "/memberbackstage/*" })
 
 public class MemberLoginFilter implements Filter {
 	Collection<String> url = new ArrayList<String>();
