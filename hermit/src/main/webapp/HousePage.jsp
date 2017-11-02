@@ -13,46 +13,27 @@
 <script src="<%=request.getContextPath()%>/js/jquery.otg-carousel.js"></script>
 <style>
 
-	tabstyle{
-		border:1px solid rgba(221,221,221,0.7);
-		border-radius:10px;padding:40px;
-		height:500px;
-		width:100%;
-	}
-	equidDiv{
-		height:50px;
-	}
-	.col-md-2 span{
-		vertical-align:sub;
-		font-family: Microsoft JhengHei;
-		font-weight: bold;
-	}
-	.col-md-12 span,a{
-		font-family: Microsoft JhengHei;
-		font-size: 1.2em;
-	}
-	
 	#addressTag span{
 		font-size:0.8em; 
 	}
-/* 	Google Map CSS Start */
-#map {
-	height: 400px;
-	width: 100%;
-}
-
-.myScroll {
-	height: 150px;
-	overflow: scroll;
-}
-
-#accordion a {
-	color: black;
-}
-/* 	Google Map CSS End */
-h5{
-	font-size: 0.83em
-}
+	/* 	Google Map CSS Start */
+	#map {
+		height: 400px;
+		width: 100%;
+	}
+	
+	.myScroll {
+		height: 150px;
+		overflow: scroll;
+	}
+	
+	#accordion a {
+		color: black;
+	}
+	/* 	Google Map CSS End */
+	h5{
+		font-size: 0.83em
+	}
 </style>
 </head>
 <body>
@@ -69,7 +50,7 @@ h5{
 			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
 		</div>
 		<!-- favorite HTML End -->
-		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:10px;float:right">
+		<div class="col-md-12 houseInformation" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:10px;float:right;padding:15px">
 			<div class="col-md-3" id="Rent"></div>
 			<div class="col-md-3" id="Size"></div>
 			<div class="col-md-3" id="Charge"></div>
@@ -1666,14 +1647,14 @@ h5{
 			$("#cityName").text(house.cityName+"  >  ");
 			$("#boroughName").text(house.boroughName+"  >  ");
 			$("#houseAddr").text(house.houseAddr);
-// 			id="Rent"
-// 			<div class="col-md-3" id="Size"></div>
-// 			<div class="col-md-3" id="Charge"></div>
-// 			<div class="col-md-3" id="floor"></div>
-// 			<div class="col-md-3" id="water"></div>
-// 			<div class="col-md-3" id="elePower"></div>
-// 			<div class="col-md-3" id="hType"></div>
-// 			<div class="col-md-3" id="hForm"></div>
+			$(".houseInformation>#Rent").html("<span>租金:&nbsp;&nbsp;</span><span style='font-size:2.3em;color:red;'>"+house.houseRent+"</span>&nbsp;&nbsp;元/月")
+			console.log($(".houseInformation>#Size"));
+			console.log($(".houseInformation>#Charge"));
+			console.log($(".houseInformation>#floor"));
+			console.log($(".houseInformation>#water"));
+			console.log($(".houseInformation>#elePower"));
+			console.log($(".houseInformation>#hType"));
+			console.log($(".houseInformation>#hForm"));
 			
 			if(eqStatus != null)
 				$.each(eqStatus,function(eqName,value){
