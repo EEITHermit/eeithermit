@@ -24,7 +24,7 @@
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'
 	rel='stylesheet' type='text/css'>
 <!-- CSS reset -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css"> --%>
 <!-- Gem style -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css">
@@ -338,9 +338,8 @@
 						<!-- <button class="full-width" type="button" id="submitBtn" value="Login">Login</button> -->
 					</p>
 				</form>
-
 				<p class="cd-form-bottom-message">
-					<a href="#0">Forgot your password?</a>
+					<a href="#0" style="color: black">Forgot your password?</a>
 				</p>
 			</div>
 
@@ -363,7 +362,7 @@
 						value="Reset password" id="submitReset">
 					</p>
 				</form>
-
+				<div style="padding-top: 100px"></div>
 				<p class="cd-form-bottom-message">
 					<a href="#0">Back to log-in</a>
 				</p>
