@@ -47,6 +47,7 @@ float:right;
 	
 	<label for="postVO">職稱 </label>
 	<select>
+		<option value="310">系統管理員</option>
 		<option value="320">業務人員</option>
 		<option value="330">客服人員</option>
 		<option value="340">修繕人員</option>
@@ -56,9 +57,7 @@ float:right;
 <label for="empStatus">員工狀態 </label>
 	<select>
 		<option value="0">可上班</option>
-		<option value="1">休長假</option>
-		<option value="2">陪(產假)</option>
-		<option value="3">已離職</option>
+		<option value="1">已離職</option>
 	</select><br><br><br>
 
 	<input type="hidden" name="action" value="InsertEmp">	
