@@ -40,7 +40,6 @@
 #formDiv {
 	display: none;
 }
-
 </style>
 
 </head>
@@ -70,42 +69,54 @@ a:link, a:visited, a:hover, a:active {
 						<!-- /account-details -->
 					</div>
 					<div class="account-details">
-						<span class="account-name"
-							style="font-family: Microsoft JhengHei; padding-left: 75px">${LoginOK.memAccount}</span>
-						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
+						<p class="account-name"
+							style="font-family: Microsoft JhengHei; text-align: center; font-size: 24px">${LoginOK.memName}
+						</p>
 					</div>
 					<!-- /account-container -->
 
 					<hr />
 
 					<ul id="main-nav" class="nav nav-tabs nav-stacked">
-						<li><a href="./mem_back_index.jsp"> <i
-								class="glyphicon glyphicon-home" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp">
+								<i class="glyphicon glyphicon-home"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
 						</a></li>
 
-						<li><a href="./mem_back_favorite.jsp"> <i
-								class="glyphicon glyphicon-heart" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp">
+								<i class="glyphicon glyphicon-heart"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">收藏</span>
 						</a></li>
 
-						<li><a href="./mem_back_calendar.jsp"> <i
-								class="glyphicon glyphicon-calendar" style="height: 30px;font-size: 30px"></i>
-								<span style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp">
+								<i class="glyphicon glyphicon-calendar"
+								style="height: 30px; font-size: 30px"></i> <span
+								style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
 						</a></li>
 
-						<li class="active"><a href="./mem_back_qanda.jsp"> <i
-								class="glyphicon glyphicon-comment" style="height: 30px;font-size: 30px"></i> <span
+						<li class="active"><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp">
+								<i class="glyphicon glyphicon-comment"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
 						</a></li>
 
-						<li><a href="./mem_back_lease.jsp"> <i
-								class="glyphicon glyphicon-file" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+								<i class="glyphicon glyphicon-file"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
-								class="glyphicon glyphicon-edit" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/member.do?action=getOneMember">
+								<i class="glyphicon glyphicon-edit"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
 					</ul>
@@ -140,7 +151,8 @@ a:link, a:visited, a:hover, a:active {
 								</div>
 								<!--查詢留言區域 -->
 								<div id="queryDiv">
-									<table id="queryTable" class="table table-striped table-bordered" cellspacing="0">
+									<table id="queryTable"
+										class="table table-striped table-bordered" cellspacing="0">
 										<thead>
 											<tr>
 												<th>留言時間</th>
@@ -217,7 +229,7 @@ a:link, a:visited, a:hover, a:active {
 		<!-- /container -->
 	</div>
 	<!-- /content -->
-	<div style="height:50px"></div>
+	<div style="height: 50px"></div>
 	<div id="footer">
 
 		<!-- 		<div class="container">
@@ -274,20 +286,20 @@ a:link, a:visited, a:hover, a:active {
 			$('#commentArea').jqte();
 			//產生DataTable
 			$('#queryTable').DataTable({
-				"language": {
-		            "lengthMenu": "每頁顯示 _MENU_ 筆",
-		            "zeroRecords": "Nothing found - sorry",
-		            "info": "現在正顯示   _PAGE_  共有 _PAGES_ 頁",
-		            "infoEmpty": "No records available",
-		            "infoFiltered": "(filtered from _MAX_ total records)",
-		            "search": "查詢:",
-		            "paginate": {
-		        		"first":      "首頁",
-		        		"last":       "末頁",
-		        		"next":       "下頁",
-		        		"previous":   "前頁"
-		        	}
-		        },
+				"language" : {
+					"lengthMenu" : "每頁顯示 _MENU_ 筆",
+					"zeroRecords" : "Nothing found - sorry",
+					"info" : "現在正顯示   _PAGE_  共有 _PAGES_ 頁",
+					"infoEmpty" : "No records available",
+					"infoFiltered" : "(filtered from _MAX_ total records)",
+					"search" : "查詢:",
+					"paginate" : {
+						"first" : "首頁",
+						"last" : "末頁",
+						"next" : "下頁",
+						"previous" : "前頁"
+					}
+				},
 				"autoWidth" : false,
 				//設定各個欄位屬性
 				"columnDefs" : [ {
@@ -305,11 +317,10 @@ a:link, a:visited, a:hover, a:active {
 				}, {
 					"targets" : [ 4 ],
 					"width" : "10%"
-				} , {
+				}, {
 					"targets" : [ 5 ],
 					"width" : "27%"
-				}
-				]
+				} ]
 			});
 		};
 
