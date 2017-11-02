@@ -203,6 +203,16 @@
 	    padding-right: 0px;
 	    color: #666666;
 	}
+	nav.main-nav:hover {
+   	 	background-color: #d0d0d0;
+	}
+	.main-nav{
+	    width: 80px;
+	    height:40px;
+	}
+	.main-nav ul{
+		margin-left:18px;
+	}
 </style>
 </head>
 <body>

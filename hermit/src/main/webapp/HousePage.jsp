@@ -333,11 +333,11 @@ h5{
 										map : map,
 										position : pyrmont,
 									});
-									markers.push(marker);
+									// markers.push(marker);
 									// Marker點擊事件
 									google.maps.event.addListener(marker, 'click', function() {
 										// infowindow.setContent(place.name + thisResult);
-										infowindow.setContent('<strong>'+hInfo.houseTitle+'：</strong><hr/><i>'+hInfo.cityName+hInfo.boroughName+hInfo.houseAddr+'</i>');
+										infowindow.setContent('<strong>'+hInfo.houseTitle+'：</strong><hr/><img height="45" width="45" src="'+hInfo.previewPic+'"><i>'+hInfo.cityName+hInfo.boroughName+hInfo.houseAddr+'</i>');
 										infowindow.open(map, this);
 									});	
 								}

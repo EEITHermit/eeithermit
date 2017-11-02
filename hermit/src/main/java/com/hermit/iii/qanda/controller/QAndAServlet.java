@@ -9,7 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.member.model.MemberVO;
 import com.hermit.iii.qanda.model.QandAService;
 import com.hermit.iii.qanda.model.QandAVO;
 
@@ -34,10 +37,9 @@ public class QAndAServlet extends HttpServlet {
 		String mission = request.getParameter("mission");
 		if("insert".equals(mission)){
 			//取得登入後session裡的memberNO
-//			HttpSession session = req.getSession();
-//			Integer memberNO = (Integer) session.getAttribute("member");
-			//memNO假資料
-			Integer memNO = 40001;
+			HttpSession session = request.getSession();
+			MemberVO memberVO = (MemberVO) session.getAttribute("LoginOK");
+			Integer memNO = memberVO.getMemNO();
 			QandAService qa = new QandAService();
 			Integer houseNO = Integer.valueOf(request.getParameter("houseNO"));
 			String qDetail = request.getParameter("qDetail");
@@ -50,10 +52,9 @@ public class QAndAServlet extends HttpServlet {
 			return;
 		}else if("update".equals(mission)){
 			//取得登入後session裡的empNO
-//			HttpSession session = req.getSession();
-//			Integer empNO = (Integer) session.getAttribute("emp");
-			//memNO假資料
-			Integer empNO = 30001;
+			HttpSession session = request.getSession();
+			EmpVO empVO = (EmpVO) session.getAttribute("empLoginOK");
+			Integer empNO = empVO.getEmpNO();
 			Integer qaNO = Integer.valueOf(request.getParameter("qaNO"));
 			String aDetail = request.getParameter("aDetail");
 			Date qTime = new Date(System.currentTimeMillis());
