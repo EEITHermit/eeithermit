@@ -8,6 +8,7 @@ public interface EmpDAO_interface_hibernate {
 	public void delete(Integer empNO);
 	public EmpVO findByPrimaryKey(Integer empNO);
 	public List<EmpVO> getAll();
+	public String getAllForJson();
 	/*** 自訂指令 ***/
 	// 驗證帳號是否存在
 	public EmpVO findByAccount(String empAccount);

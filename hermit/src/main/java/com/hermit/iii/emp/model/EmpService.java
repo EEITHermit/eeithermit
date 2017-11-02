@@ -52,4 +52,8 @@ public class EmpService {
 	public EmpVO findByAccount(String empAccount){
 		return dao.findByAccount(empAccount);
 	}
+
+	public String getAllForJson() {
+		return dao.getAllForJson();
+	}
 }
