@@ -24,9 +24,9 @@
 		     resizable:false,
 		     buttons:{
 		    	 "送出":function(){
-		    		 //memberNO houseNO為假資料
+		    		 //houseNO為假資料
 		    		 $.post("<%=request.getContextPath()%>/QAndAServlet?mission=question"
-		    				 ,{question:$("#question").val(),member:40001,house:20001}
+		    				 ,{question:$("#question").val(),member:"${LoginOK.memNO}",house:20001}
 		    		 ,function(data){
 		    			 alert(data);
 		    			 $("#question").val("");

@@ -3,11 +3,13 @@ package com.hermit.iii.infraction.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.hermit.iii.member.model.MemberVO;
+
 public class InfractionVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Integer inNO;
-	private Integer memNO;
+	private MemberVO memberVO;
 	private String reason;
 	private Date inDate;
 	private Integer empNO;
@@ -17,11 +19,12 @@ public class InfractionVO implements Serializable{
 	public void setInNO(Integer inNO) {
 		this.inNO = inNO;
 	}
-	public Integer getMemNO() {
-		return memNO;
+	
+	public MemberVO getMemberVO() {
+		return memberVO;
 	}
-	public void setMemNO(Integer memNO) {
-		this.memNO = memNO;
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
 	public String getReason() {
 		return reason;

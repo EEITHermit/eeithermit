@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
@@ -37,22 +38,14 @@
 		<url-pattern>/identity.do</url-pattern>
 	</servlet-mapping>
 	<filter>
-		<filter-name>QandAFilter</filter-name>
-		<filter-class>com.hermit.iii.qanda.filter.QAndAFilter</filter-class>
+		<filter-name>MemberLoginFilter</filter-name>
+		<filter-class>com.hermit.iii.login.controller.MemberLoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>QandAFilter</filter-name>
-		<url-pattern>/QAndA/QAndA.jsp</url-pattern>
+		<filter-name>MemberLoginFilter</filter-name>
+		<url-pattern>/memberbackstage/*</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
-		<filter-name>QandAFilter</filter-name>
-		<url-pattern>/QAndA/AAndQ.jsp</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>QandAFilter</filter-name>
-		<url-pattern>/memberbackstage/mem_back_qanda.jsp</url-pattern>
-	</filter-mapping>
-
+	
 	<filter>
 		<filter-name>EmpLoginFilter</filter-name>
 		<filter-class>com.hermit.iii.login.controller.EmpLoginFilter</filter-class>
@@ -85,4 +78,24 @@
 		<filter-name>EmpLoginFilter</filter-name>
 		<url-pattern>/wetalk/WebSocketBackground.jsp</url-pattern>
 	</filter-mapping>
+	<!-- Q&A用 -->
+	<filter>
+		<filter-name>QandAFilter</filter-name>
+		<filter-class>com.hermit.iii.qanda.filter.QAndAFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>QandAFilter</filter-name>
+		<url-pattern>/QAndA/QAndA.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>QandAFilter</filter-name>
+		<url-pattern>/QAndA/AAndQ.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>QandAFilter</filter-name>
+		<url-pattern>/memberbackstage/mem_back_qanda.jsp</url-pattern>
+	</filter-mapping>
 </web-app>
+
+	
+	
