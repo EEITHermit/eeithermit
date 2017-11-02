@@ -83,4 +83,12 @@ public class QandAService {
 	public ArrayList<QandAVO> getAllByBoroughNO1(Integer boroughNO){
 		return dao.getAllByBoroughNO1(boroughNO);
 	}
+	//查詢已處理
+	public ArrayList<QandAVO> getAllNotDeal(){
+		return dao.getAllNotDeal();
+	}
+	//查詢未處理
+	public ArrayList<QandAVO> getAllDealed(){
+		return dao.getAllDealed();
+	}
 }
