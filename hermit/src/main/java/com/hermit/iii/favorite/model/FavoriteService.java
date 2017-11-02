@@ -26,6 +26,24 @@ public class FavoriteService {
 		return favoriteVO;
 	}
 
+	// 新增service (Hibernate Many/One)
+	public FavoriteVO addFavorite(Integer memNO, Integer houseNO) {
+		FavoriteVO favoriteVO = new FavoriteVO();
+
+		MemberService memberSvc = new MemberService();
+		MemberVO memberVO = memberSvc.findByPrimaryKey(memNO);
+		
+		HouseService houseSvc = new HouseService();
+		HouseVO houseVO = houseSvc.GET_ONE_HOUSE_FK(houseNO);
+
+		favoriteVO.setMemberVO(memberVO);
+		favoriteVO.setHouseVO(houseVO);
+
+		dao.insert(favoriteVO);
+
+		return favoriteVO;
+	}
+
 	// 新增service Struts 2可 用(預留)
 	public void addFavorite(FavoriteVO favoriteVO) {
 		dao.insert(favoriteVO);
@@ -64,9 +82,9 @@ public class FavoriteService {
 	public Set<FavoriteVO> getAll() {
 		return dao.getAll();
 	}
-	
+
 	// AJAX 會員編號查詢 (JSON) only add on hibernate interface
-	public String accountFavoriteAJAX(Integer memNO){
+	public String accountFavoriteAJAX(Integer memNO) {
 		Set<FavoriteVO> set = dao.find_MemNO_AJAX(memNO);
 		List<Object> jsonList = new ArrayList<Object>();
 
@@ -87,5 +105,10 @@ public class FavoriteService {
 		}
 		String jsonString = new JSONArray(jsonList).toString();
 		return jsonString;
+	}
+
+	// AJAX 會員房屋編號查詢 (回傳流水favNO，而-1表查無此筆資料)
+	public Integer checkFavoriteAJAX(Integer memNO, Integer houseNO) {
+		return dao.check_MemHouseNO_AJAX(memNO, houseNO);
 	}
 }
