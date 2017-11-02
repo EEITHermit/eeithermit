@@ -1684,12 +1684,13 @@ h5{
 
 		/* favorite JS code Start */
 		var starStatus ="dark";
+		var no = $("#memNO").val();
+		var hno = location.search.split('NO=')[1] ? location.search.split('NO=')[1] : null;
+		var fno = -1;
 		
 		loadFavorite();
-		
+
 		function loadFavorite() {
-			var no = $("#memNO").val();
-			var hno = location.search.split('NO=')[1] ? location.search.split('NO=')[1] : null;
 			if (no) {
 				console.log('會員編號:'+no+', 房屋編號:'+hno);
 				$.ajax({
@@ -1702,7 +1703,7 @@ h5{
 					},
 					dataType : 'text',
 					success : function(data) {
-						console.log(data);
+						fno = data;
 						if (data != -1) {
 							$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
 							starStatus ="yellow";
@@ -1716,9 +1717,48 @@ h5{
 			// Star control
 			$('#myFavStar img').click(function() {
 				if (starStatus == "dark"){
+					if (no) {
+						console.log('會員編號:'+no+', 房屋編號:'+hno);
+						$.ajax({
+							url:'<%=request.getContextPath()%>/FavoriteServlet?',
+							method : 'post',
+							data : {
+								'action' : 'house_insertAJAX_Action',
+								'memNO' : no,
+								'houseNO' : hno
+							},
+							dataType : 'text',
+							success : function(data) {
+								fno = data;
+							},
+							error : function() {
+								alert("您的瀏覽器不支援Ajax!!");
+							}
+						});
+					}
 					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
 					starStatus ="yellow";
 				}else{
+					console.log('收藏編號(-1就GG):'+fno);
+					if (no && (fno != -1)) {
+						console.log('開刪');
+						$.ajax({
+							url:'<%=request.getContextPath()%>/FavoriteServlet?',
+							method : 'post',
+							data : {
+								'action' : 'house_deleteAJAX_Action',
+								'favNO' : fno,
+								'houseNO' : hno
+							},
+							dataType : 'text',
+							success : function(data) {
+								
+							},
+							error : function() {
+								alert("您的瀏覽器不支援Ajax!!");
+							}
+						});
+					}
 					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/darkstar.png');
 					starStatus ="dark";
 				}
