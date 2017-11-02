@@ -63,7 +63,7 @@ public class FavoriteServlet extends HttpServlet {
 				FavoriteService favoriteSvc = new FavoriteService();
 				Integer favNO = favoriteSvc.checkFavoriteAJAX(memNO, houseNO);
 				/**** 3.查詢完成 ****/
-				out.write(favNO);
+				out.write(favNO.toString());
 			} catch (Exception e) {
 				errorMsgMap.put("Exception", e.getMessage());
 				if (houseNO == null) {

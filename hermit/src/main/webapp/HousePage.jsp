@@ -1683,29 +1683,46 @@ h5{
 		$('#tabs-container').scrollingTabs();
 
 		/* favorite JS code Start */
+		var starStatus ="dark";
+		
 		loadFavorite();
 		
 		function loadFavorite() {
 			var no = $("#memNO").val();
+			var hno = location.search.split('NO=')[1] ? location.search.split('NO=')[1] : null;
 			if (no) {
-				console.log(no);
+				console.log('會員編號:'+no+', 房屋編號:'+hno);
 				$.ajax({
 					url:'<%=request.getContextPath()%>/FavoriteServlet?',
 					method : 'post',
 					data : {
 						'action' : 'house_checkAJAX_Action',
 						'memNO' : no,
-						'houseNO' : 1
+						'houseNO' : hno
 					},
-					dataType : 'JSON',
-					success : function(data) {		
-						
+					dataType : 'text',
+					success : function(data) {
+						console.log(data);
+						if (data != -1) {
+							$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
+							starStatus ="yellow";
+						}
 					},
 					error : function() {
 						alert("您的瀏覽器不支援Ajax!!");
 					}
 				});
 			}
+			// Star control
+			$('#myFavStar img').click(function() {
+				if (starStatus == "dark"){
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
+					starStatus ="yellow";
+				}else{
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/darkstar.png');
+					starStatus ="dark";
+				}
+			});
 		}
 		/* favorite JS code End */
 	</script>
