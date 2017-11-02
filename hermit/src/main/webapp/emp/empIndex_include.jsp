@@ -1,73 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <style>
-
-style>.btn {
-	border: none;
-	color: white;
-	padding: 14px 28px;
-	font-size: 16px;
-	cursor: pointer;
+.btn {
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 img {
-	width: 150px;
-	height: 150px;
+	width:150px;
+	height:150px;
 	padding: 5px 5px 5px 5px;
 }
 
+
+
 td {
-	width: 450px;
-	height: 150px;
+	width:450px;
+	height:150px;
 }
 
 th {
-	width: 300px;
-	height: 100px;
+	width:300px;
+	height:100px;
 }
+
 
 tr {
-	width: 200px;
-	height: 100px;
+	width:200px;
+	height:100px;
 }
 
-.success {
-	background-color: #4CAF50;
-} /* Green */
-.success:hover {
-	background-color: #46a049;
-}
 
-.info {
-	background-color: #2196F3;
-} /* Blue */
-.info:hover {
-	background: #0b7dda;
-}
+.success {background-color: #4CAF50;} /* Green */
+.success:hover {background-color: #46a049;}
 
-.warning {
-	background-color: #ff9800;
-} /* Orange */
-.warning:hover {
-	background: #e68a00;
-}
+.info {background-color: #2196F3;} /* Blue */
+.info:hover {background: #0b7dda;}
 
-.danger {
-	background-color: #f44336;
-} /* Red */
-.danger:hover {
-	background: #da190b;
-}
+.warning {background-color: #ff9800;} /* Orange */
+.warning:hover {background: #e68a00;}
 
-.default {
-	background-color: #e7e7e7;
-	color: black;
-} /* Gray */
-.default:hover {
-	background: #ddd;
-}
+.danger {background-color: #f44336;} /* Red */ 
+.danger:hover {background: #da190b;}
+
+.default {background-color: #e7e7e7; color: black;} /* Gray */ 
+.default:hover {background: #ddd;}
 /* 按鈕樣式 */
 </style>
 <head>
@@ -84,19 +66,16 @@ tr {
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<button class="btn info"
-			onclick="javascrtpt:window.location.href='empInsert_include.jsp'">新增員工</button> 
-<!-- 			尚未放入新增員工頁面 -->
-		<p>
-			<table id="myTable" style="width:1130px;height:600px;" border="1">
+<div class="container" >
+<button class="btn info" onclick="javascrtpt:window.location.href='empInsert_include.jsp'">新增員工資料</button><p>
+	<table id="myTable"style="width:1130px;height:600px;" border="1">
 		<thead>
 			<tr>
 				<th>員工編號</th>
-				<th>員工姓名</th>
 				<th>員工帳號</th>
 				<th>員工密碼</th>
 				<th>員工電話</th>
+				<th>員工姓名</th>
 				<th>職位</th>
 				<th>員工狀態</th>
 				<th>編輯</th>
@@ -106,34 +85,34 @@ tr {
 		<tfoot>
 			<tr>
 				<th>員工編號</th>
-				<th>員工姓名</th>
 				<th>員工帳號</th>
 				<th>員工密碼</th>
 				<th>員工電話</th>
+				<th>員工姓名</th>
 				<th>職位</th>
 				<th>員工狀態</th>
 				<th>編輯</th>
 			</tr>
 		</tfoot>
 	</table>
-	<form id="modify" method="get" action="../EmpServlet">	
+	<form id="modify" method="get" action="../emp/EmpServlet">	
 		<input type="hidden" name="action" value="getOneEmp">
-		<input type="hidden" id="empNO" name="empNO">
+		<input type="hidden" id="empNO" name="empNO" >
 	</form>
 </div>
-
-
-  <script> 
+<script> 
 	$(document).ready(function(){
 		var dataJson;
+		
 		var table = $("#myTable");
 		var tbody = $("#myTable>tbody");
+		
 		function ajaxPost(){
-			$.post("../EmpServlet",{"action":"getAllADManagerForJson"},function(data){
-				//尚未修改
+			$.post("../emp/EmpServlet",{"action":"getAllEmpJson"},function(data){
+ 				console.log(data);
 				dataJson = $.parseJSON(data).list;
-//  				console.log(data);
-//  				console.log(dataJson);
+ 				console.log(dataJson);
+ 				
 				tbody.empty();
 				$.each(dataJson,function(index,VO){
 					var cell1 = $("<td></td>").text(VO.empNO);
@@ -141,12 +120,10 @@ tr {
 					var cell3 = $("<td></td>").text(VO.empPwd);
 					var cell4 = $("<td></td>").text(VO.empPhone);
 					var cell5 = $("<td></td>").text(VO.empName);
-					var cell6 = $("<td></td>").text(VO.adStatus);
-					var cell7 = $("<td></td>").text(VO.postVO);
-					var cell8 = $("<td></td>").text(VO.empStatus);
-					var cell9 = $("<td></td>").html('<button class="btn btn-primary" onclick="javascrtpt:window.location.reload("adUpdate_include.jsp")">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
-					//尚未修改
-					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9]);
+					var cell6 = $("<td></td>").text(VO.postVO);
+					var cell7 = $("<td></td>").text(VO.empStatus);
+					var cell8 = $("<td></td>").html('<button class="btn btn-primary" onclick="javascrtpt:window.location.reload("empUpdate_include.jsp")">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
+					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]);
 					tbody.append(row);
 				})
 // 				刪除
@@ -154,7 +131,7 @@ tr {
 					var tr = $(this).parents("tr");
 					var empNO = $(this).parents("tr").children("td:eq(0)").text();
 					if (confirm("您確定要刪除?") == true) {
-						$.get("../EmpServlet",{"action":"deleteEmp","empNO":empNO},function(){
+						$.get("../emp/EmpServlet",{"action":"deleteEmp","empNO":empNO},function(){
 							window.location.reload();
 						})  
 						
@@ -165,8 +142,8 @@ tr {
 // 				修改
 				$(".btn-primary").on("click",function(){
 					var tr = $(this).parents("tr");
-					var adNO = $(this).parents("tr").children("td:eq(0)").text();
-					$("#empNO").val(adNO);
+					var empNO = $(this).parents("tr").children("td:eq(0)").text();
+					$("#empNO").val(empNO);
 					$("#modify").submit();
 				})
 				
@@ -197,5 +174,5 @@ tr {
 
 	});
 	</script>
-		</body>
+</body>
 </html>

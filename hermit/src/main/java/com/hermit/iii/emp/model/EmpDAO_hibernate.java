@@ -1,8 +1,16 @@
 package com.hermit.iii.emp.model;
 
-import java.util.*;
-import org.hibernate.*;
-import com.hermit.iii.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.json.simple.JSONValue;
+
+import com.hermit.iii.admanager.model.ADManagerVO;
+import com.hermit.iii.util.HibernateUtil;
 
 public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 
@@ -108,6 +116,37 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 		}
 		return account;
 	}
+	
+	public String getAllForJson() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		String jsonString = null;
+		
+		try {
+			session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<EmpVO> resultList = session.createQuery(GET_ALL_STMT).getResultList();
+			session.getTransaction().commit();
+			List list = new LinkedList();
+			for (EmpVO vo : resultList) {
+				Map m1 = new LinkedHashMap();
+				m1.put("empNO", vo.getEmpNO());
+				m1.put("empAccount", vo.getEmpAccount());
+				m1.put("empPwd", vo.getEmpPwd());
+				m1.put("empPhone",vo.getEmpPhone());
+				m1.put("empName",vo.getEmpName());
+				m1.put("postNO",vo.getPostVO());
+				m1.put("empStatus",vo.getEmpStatus());
+				list.add(m1);
+			}
+			Map m2 = new LinkedHashMap();
+			m2.put("list",list);
+			jsonString = JSONValue.toJSONString(m2);
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return jsonString;
+	}
 
 	public static void main(String[] args) {
 		EmpVO empVO = new EmpVO();
@@ -135,9 +174,9 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 //		 dao.update(empVO2);
 
 //		 delete
-		 System.out.println("delete start");
-		 dao.delete(30006);
-		 System.out.println("delete success");
+//		 System.out.println("delete start");
+//		 dao.delete(30006);
+//		 System.out.println("delete success");
 
 		// select one
 //		EmpVO empVO3 = dao.findByPrimaryKey(30001);
