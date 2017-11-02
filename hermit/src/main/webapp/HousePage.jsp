@@ -63,23 +63,31 @@ h5{
 			</div>
 		</div>
 		<!-- favorite HTML Start -->
-		<div class="col-md-12">
+		<div class="col-md-12" style="margin-top:1.5em;">
 			<div class="col-md-4"><input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}"></div>
 			<div class="col-md-4"></div>
-			<div class="col-md-4" id="myFavStar"><img height="100" width="100" style="margin-bottom: 1.5em" src="<%=request.getContextPath()%>/images/darkstar.png" /><span style="font-size: 2.5em; font-weight: 900; margin-left: 3%;">我的最愛</span></div>
+			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
 		</div>
 		<!-- favorite HTML End -->
-		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:50px;float:right">
+		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:10px;float:right">
+			<div class="col-md-3" id="Rent"></div>
+			<div class="col-md-3" id="Size"></div>
+			<div class="col-md-3" id="Charge"></div>
+			<div class="col-md-3" id="floor"></div>
+			<div class="col-md-3" id="water"></div>
+			<div class="col-md-3" id="elePower"></div>
+			<div class="col-md-3" id="hType"></div>
+			<div class="col-md-3" id="hForm"></div>
 		</div>
 		<div class="col-md-12" style="margin-top:10px;float:left;display:block;">
 			<ul class="nav nav-tabs" role="tablist">
 			  <li role="presentation" style="color:black" class="active"><a style="color:black"  href="#hInfo" aria-controls="hInfo" role="tab" data-toggle="tab">屋況介紹</a></li>
-			  <li role="presentation" style="color:black" ><a style="color:black"  href="#houseContent" aria-controls="houseContent" role="tab" data-toggle="tab">房屋規格</a></li>
+			  <li role="presentation" style="color:black" ><a style="color:black"  href="#houseContent" aria-controls="houseContent" role="tab" data-toggle="tab">房屋配備</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black" href="#houseVideo" aria-controls="houseVideo" role="tab" data-toggle="tab">房屋影片</a></li>
 			</ul>
 			<div class="tab-content" style="margin-top:5px">
-			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%" class="tab-pane active" id="hInfo"></div>
-			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="houseContent">
+			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%" class="tab-pane active" id="hInfo"></div>
+			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%"  class="tab-pane" id="houseContent">
 					<div class="col-md-2"  style="height:32px;margin:9px auto;"><img style="height:32px;width:32px" id="TV" src='images/television.png'><span>&nbsp;電視</span></div>
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="aircondition" src='images/air.png'><span>&nbsp;冷氣</span></div>
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="refrigerator" src='images/refrigerator.png'><span>&nbsp;冰箱</span></div>
@@ -98,7 +106,7 @@ h5{
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="pet" src='images/pet.png'><span>&nbsp;養寵物</span></div>
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="closeMRT" src='images/closeMRT.png'><span>&nbsp;近捷運</span></div>
 			  </div>
-			  <div role="tabpanel" style="border:1px solid rgba(221,221,221,0.7);border-radius:10px;padding:40px;height:500px;width:100%"  class="tab-pane" id="houseVideo"></div>
+			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%"  class="tab-pane" id="houseVideo"></div>
 			</div>
 		</div>
 	</div>
@@ -1658,6 +1666,15 @@ h5{
 			$("#cityName").text(house.cityName+"  >  ");
 			$("#boroughName").text(house.boroughName+"  >  ");
 			$("#houseAddr").text(house.houseAddr);
+// 			id="Rent"
+// 			<div class="col-md-3" id="Size"></div>
+// 			<div class="col-md-3" id="Charge"></div>
+// 			<div class="col-md-3" id="floor"></div>
+// 			<div class="col-md-3" id="water"></div>
+// 			<div class="col-md-3" id="elePower"></div>
+// 			<div class="col-md-3" id="hType"></div>
+// 			<div class="col-md-3" id="hForm"></div>
+			
 			if(eqStatus != null)
 				$.each(eqStatus,function(eqName,value){
 					if(!value){
@@ -1704,8 +1721,8 @@ h5{
 					success : function(data) {
 						console.log(data);
 						if (data != -1) {
-							$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
-							starStatus ="yellow";
+							$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/like_y.png');
+							starStatus ="red";
 						}
 					},
 					error : function() {
@@ -1716,10 +1733,10 @@ h5{
 			// Star control
 			$('#myFavStar img').click(function() {
 				if (starStatus == "dark"){
-					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/yellowstar.png');
-					starStatus ="yellow";
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/like_y.png');
+					starStatus ="red";
 				}else{
-					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/darkstar.png');
+					$('#myFavStar img').attr('src','<%=request.getContextPath()%>/images/like_n.png');
 					starStatus ="dark";
 				}
 			});
