@@ -78,6 +78,10 @@
 		<filter-name>EmpLoginFilter</filter-name>
 		<url-pattern>/wetalk/WebSocketBackground.jsp</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>EmpLoginFilter</filter-name>
+		<url-pattern>/QAndA/backQA.jsp</url-pattern>
+	</filter-mapping>
 	<!-- Q&A用 -->
 	<filter>
 		<filter-name>QandAFilter</filter-name>

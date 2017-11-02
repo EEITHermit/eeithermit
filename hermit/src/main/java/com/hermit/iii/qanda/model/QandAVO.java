@@ -43,10 +43,16 @@ public class QandAVO implements Serializable {
 	public Date getqTime() {
 		return qTime;
 	}
+	public Date getQTime() {
+		return qTime;
+	}
 	public void setqTime(Date qTime) {
 		this.qTime = qTime;
 	}
 	public Date getaTime() {
+		return aTime;
+	}
+	public Date getATime() {
 		return aTime;
 	}
 	public void setaTime(Date aTime) {
@@ -61,10 +67,16 @@ public class QandAVO implements Serializable {
 	public String getqDetail() {
 		return qDetail;
 	}
+	public String getQDetail() {
+		return qDetail;
+	}
 	public void setqDetail(String qDetail) {
 		this.qDetail = qDetail;
 	}
 	public String getaDetail() {
+		return aDetail;
+	}
+	public String getADetail() {
 		return aDetail;
 	}
 	public void setaDetail(String aDetail) {
