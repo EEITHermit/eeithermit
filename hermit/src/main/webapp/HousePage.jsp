@@ -62,6 +62,13 @@ h5{
 			<div id="carousel">
 			</div>
 		</div>
+		<!-- favorite HTML Start -->
+		<div class="col-md-12">
+			<div class="col-md-4"><input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}"></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="myFavStar"><img height="100" width="100" style="margin-bottom: 1.5em" src="<%=request.getContextPath()%>/images/darkstar.png" /><span style="font-size: 2.5em; font-weight: 900; margin-left: 3%;">我的最愛</span></div>
+		</div>
+		<!-- favorite HTML End -->
 		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:50px;float:right">
 		</div>
 		<div class="col-md-12" style="margin-top:10px;float:left;display:block;">
@@ -1672,6 +1679,32 @@ h5{
 		}
 		loadCarousel();	
 		$('#tabs-container').scrollingTabs();
+
+		/* favorite JS code Start */
+		loadFavorite();
+		
+		function loadFavorite() {
+			var no = $("#memNO").val();
+			if (no) {
+				console.log(no);
+				$.ajax({
+					url:'<%=request.getContextPath()%>/FavoriteServlet?',
+					method : 'post',
+					data : {
+						'action' : 'favorite_getAJAX_Action',
+						'memNO' : no
+					},
+					dataType : 'JSON',
+					success : function(data) {		
+						
+					},
+					error : function() {
+						alert("您的瀏覽器不支援Ajax!!");
+					}
+				});
+			}
+		}
+		/* favorite JS code End */
 	</script>
 </body>
 </html>
