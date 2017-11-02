@@ -1647,8 +1647,10 @@ h5{
 		</div>
 	</footer>
 	<script>
+	// 大家一起用
+	var house = $.parseJSON('<%= request.getAttribute("House")%>');
+
 		function loadCarousel(){
-			var house = $.parseJSON('<%= request.getAttribute("House")%>');
 			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
 			var eqStatus = $.parseJSON('<%= request.getAttribute("eq")%>');
 			var hContentImg = $("#houseContent img");
@@ -1691,8 +1693,9 @@ h5{
 					url:'<%=request.getContextPath()%>/FavoriteServlet?',
 					method : 'post',
 					data : {
-						'action' : 'favorite_getAJAX_Action',
-						'memNO' : no
+						'action' : 'house_checkAJAX_Action',
+						'memNO' : no,
+						'houseNO' : 1
 					},
 					dataType : 'JSON',
 					success : function(data) {		
