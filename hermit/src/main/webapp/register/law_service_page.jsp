@@ -35,6 +35,7 @@ header h1 {
 
 .container {
 	margin-top: 70px;
+	margin-bottom: 5em;
 }
 </style>
 </head>
