@@ -37,6 +37,49 @@
 	color: black;
 }
 /* 	Google Map CSS End */
+/* 	配合AJAX的bootstrap特效snackbar CSS Start */
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 100px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 100px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 100px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 100px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 100px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+/* 	配合AJAX的bootstrap特效snackbar CSS End */
 h5{
 	font-size: 0.83em
 }
@@ -1628,7 +1671,9 @@ h5{
 		</div>
 	</div>
 	<!--  Google Map HTML End -->
-
+	<!-- 配合AJAX的bootstrap特效snackbar HTML Start-->
+	<div id="snackbar">已經成功操作</div>
+	<!-- 配合AJAX的bootstrap特效snackbar HTML End-->
 	<footer class="w3-bottom w3-black container-fluid text-center" style=" position: static">
 		<div>
 			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
@@ -1718,7 +1763,7 @@ h5{
 					}
 				});
 			}
-			// Star control
+			// heart control
 			$('#myFavStar img').click(function() {
 				if (starStatus == "dark"){
 					if (no) {
@@ -1734,6 +1779,10 @@ h5{
 							dataType : 'text',
 							success : function(data) {
 								fno = data;
+								var thebar = document.getElementById("snackbar");
+								$('#snackbar').text("已新增此房屋至收藏庫");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 1000);
 							},
 							error : function() {
 								alert("您的瀏覽器不支援Ajax!!");
@@ -1755,7 +1804,11 @@ h5{
 							},
 							dataType : 'text',
 							success : function(data) {
-								
+								fno = -1;
+								var thebar = document.getElementById("snackbar");
+								$('#snackbar').text("已從收藏庫移除此房屋");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 1000);
 							},
 							error : function() {
 								alert("您的瀏覽器不支援Ajax!!");

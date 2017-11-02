@@ -56,6 +56,7 @@ a:link, a:visited, a:hover, a:active {
 
 .favtitle {
 	font-size: 1.4em;
+	margin-left: 3%;
 }
 
 .favstatus, .favrent, .favsize {
@@ -311,9 +312,9 @@ to {
 				success : function(data) {
 					var fragment = $(document.createDocumentFragment());
 					$.each(data,function(k, v) {
-						var cell = $('<p></p>').html('<img width="40px" src="<%=request.getContextPath()%>/images/yellowstar.png">'
+						var cell = $('<p></p>').html('<img width="40px" src="<%=request.getContextPath()%>/images/like_y.png"><span class="favtitle">'
 														+ v.houseTitle
-														+ '<span class="favstatus">'
+														+ '</span><span class="favstatus">'
 														+ v.houseStatus
 														+ '</span><button type="button" class="close">&times;</button><p class="favaddr">'
 														+ v.houseAddr
