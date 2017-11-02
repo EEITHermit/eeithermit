@@ -12,11 +12,15 @@
 <script src="<%=request.getContextPath()%>/js/jquery.scrolling-tabs.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery.otg-carousel.js"></script>
 <style>
-
-	#addressTag span{
-		font-size:0.8em; 
+	
+	.col-md-2 span{
+		vertical-align:sub;
+		font-family: Microsoft JhengHei;
+		font-weight: bold;
 	}
-	/* 	Google Map CSS Start */
+	#addressTag span{
+			font-size:0.8em; 
+		}
 	#map {
 		height: 400px;
 		width: 100%;
@@ -30,7 +34,53 @@
 	#accordion a {
 		color: black;
 	}
+	.nearMap a{
+		font-family: Microsoft JhengHei;
+	}
 	/* 	Google Map CSS End */
+	/* 	配合AJAX的bootstrap特效snackbar CSS Start */
+	#snackbar {
+	    visibility: hidden;
+	    min-width: 250px;
+	    margin-left: -125px;
+	    background-color: #333;
+	    color: #fff;
+	    text-align: center;
+	    border-radius: 2px;
+	    padding: 16px;
+	    position: fixed;
+	    z-index: 1;
+	    left: 50%;
+	    bottom: 100px;
+	    font-size: 17px;
+	}
+	
+	#snackbar.show {
+	    visibility: visible;
+	    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	}
+	
+	@-webkit-keyframes fadein {
+	    from {bottom: 0; opacity: 0;} 
+	    to {bottom: 100px; opacity: 1;}
+	}
+	
+	@keyframes fadein {
+	    from {bottom: 0; opacity: 0;}
+	    to {bottom: 100px; opacity: 1;}
+	}
+	
+	@-webkit-keyframes fadeout {
+	    from {bottom: 100px; opacity: 1;} 
+	    to {bottom: 0; opacity: 0;}
+	}
+	
+	@keyframes fadeout {
+	    from {bottom: 100px; opacity: 1;}
+	    to {bottom: 0; opacity: 0;}
+	}
+	/* 	配合AJAX的bootstrap特效snackbar CSS End */
 	h5{
 		font-size: 0.83em
 	}
@@ -47,7 +97,7 @@
 		<div class="col-md-12" style="margin-top:1.5em;">
 			<div class="col-md-4"><input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}"></div>
 			<div class="col-md-4"></div>
-			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
+			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;font-family:Microsoft JhengHei;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
 		</div>
 		<!-- favorite HTML End -->
 		<div class="col-md-12 houseInformation" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:10px;float:right;padding:15px">
@@ -61,7 +111,7 @@
 			<div class="col-md-3" id="hForm"></div>
 		</div>
 		<div class="col-md-12" style="margin-top:10px;float:left;display:block;">
-			<ul class="nav nav-tabs" role="tablist">
+			<ul class="nav nav-tabs" role="tablist" style="font-family: Microsoft JhengHei;">
 			  <li role="presentation" style="color:black" class="active"><a style="color:black"  href="#hInfo" aria-controls="hInfo" role="tab" data-toggle="tab">屋況介紹</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black"  href="#houseContent" aria-controls="houseContent" role="tab" data-toggle="tab">房屋配備</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black" href="#houseVideo" aria-controls="houseVideo" role="tab" data-toggle="tab">房屋影片</a></li>
@@ -93,7 +143,7 @@
 	</div>
 
 	<!--  Google Map HTML Start -->
-	<div class="container" style="margin-bottom: 10em;">
+	<div class="container nearMap" style="margin-bottom: 10em;">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="panel-group" id="accordion">
@@ -1622,7 +1672,9 @@
 		</div>
 	</div>
 	<!--  Google Map HTML End -->
-
+	<!-- 配合AJAX的bootstrap特效snackbar HTML Start-->
+	<div id="snackbar">已經成功操作</div>
+	<!-- 配合AJAX的bootstrap特效snackbar HTML End-->
 	<footer class="w3-bottom w3-black container-fluid text-center" style=" position: static">
 		<div>
 			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
@@ -1712,7 +1764,7 @@
 					}
 				});
 			}
-			// Star control
+			// heart control
 			$('#myFavStar img').click(function() {
 				if (starStatus == "dark"){
 					if (no) {
@@ -1728,6 +1780,10 @@
 							dataType : 'text',
 							success : function(data) {
 								fno = data;
+								var thebar = document.getElementById("snackbar");
+								$('#snackbar').text("已新增此房屋至收藏庫");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 1000);
 							},
 							error : function() {
 								alert("您的瀏覽器不支援Ajax!!");
@@ -1749,7 +1805,11 @@
 							},
 							dataType : 'text',
 							success : function(data) {
-								
+								fno = -1;
+								var thebar = document.getElementById("snackbar");
+								$('#snackbar').text("已從收藏庫移除此房屋");
+								thebar.className = "show";
+								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 1000);
 							},
 							error : function() {
 								alert("您的瀏覽器不支援Ajax!!");
