@@ -222,6 +222,8 @@
  		<!-- 如果有登入就顯示登出 -->
 		<c:if test="${!empty LoginOK}">
  			<a href="<%=request.getContextPath()%>/MemberLogin/Logout.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right" ><span id="hermitHome">登出</span></a>
+  			<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp" class="w3-bar-item w3-button w3-xlarge w3-right w3-margin-right"><span id="hermitHome">${LoginOK.memName}</span></a>
+ 			<span style="margin-top: 8px;" class="w3-xlarge w3-right w3-margin-right" id="hermitHome">您好！</span>
  		</c:if>
 
 			<!-- inser more links here -->

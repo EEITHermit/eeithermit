@@ -141,4 +141,6 @@ public class MemberService {
 	public String checkAccountAJAX(String memAccount) {
 		return dao.count_MemAccount_AJAX(memAccount);
 	}
+	
+	
 }
