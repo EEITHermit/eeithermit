@@ -93,6 +93,7 @@ public class FavoriteService {
 			Map<String, Object> jm = new HashMap<String, Object>();
 
 			jm.put("favNO", favorite.getFavNO());
+			jm.put("houseNO", favorite.getHouseVO().getHouseNO());
 			jm.put("houseTitle", favorite.getHouseVO().getHouseTitle());
 			jm.put("previewPic", favorite.getHouseVO().getPreviewPic());
 			jm.put("houseStatus", favorite.getHouseVO().getHouseStatus());
