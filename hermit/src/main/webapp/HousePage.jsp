@@ -1659,6 +1659,7 @@ h5{
 						})
 					}
 				})
+				console.log(hPics);
 			$('#carousel').carousel({
 			  images:hPics,  
 			  currentImageIndex: 0,

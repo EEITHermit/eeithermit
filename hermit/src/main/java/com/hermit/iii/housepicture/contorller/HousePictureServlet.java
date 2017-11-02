@@ -26,13 +26,13 @@ public class HousePictureServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		ConvertToBase64 ctb = new ConvertToBase64();
-
 		HousePictureService svc=new HousePictureService();
 		String strBase64=null;
 		int count=0;
-		Integer houseNO =Integer.valueOf(request.getParameter("houseNO"));
+		Integer houseNO =null;
 		if("insertHousePicture".equals(action)){
-			Collection<Part> parts = request.getParts();
+			houseNO = Integer.valueOf(request.getParameter("houseNO"));
+			Collection<Part> parts = request.getParts(); 
 			for(Part item : request.getParts()){
 				strBase64 = ctb.encode(item);
 				if(strBase64 != null){
@@ -44,6 +44,16 @@ public class HousePictureServlet extends HttpServlet {
 				}
 			}
 			response.sendRedirect("/hermit/housepicture/InsertHousePicture.jsp");
+		}
+		if("deleteHousePic".equals(action)){
+			Integer housePictureNO=Integer.valueOf(request.getParameter("housePictureNO"));
+			svc.deletePicture(housePictureNO);
+		}
+		if("updateHousPic".equals(action)){
+			Integer housePictureNO=Integer.valueOf(request.getParameter("housePictureNO"));
+			String hPicture=request.getParameter("hPicture");
+			houseNO = Integer.valueOf(request.getParameter("houseNO"));
+			svc.updateHousePicture(housePictureNO, hPicture, houseNO);
 		}
 	}
 }
