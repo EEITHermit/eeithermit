@@ -128,6 +128,13 @@ public class MemberServlet extends HttpServlet {
 				Integer memInfract = 0;
 				memberSvc.addMember(memTel, memAccount, memPwd, memName, memGender, memEmail, memRegister, memStatus,
 						memInfract, memImage);
+				
+				// 註冊完直接登入
+				MemberDAO_hibernate dao = new MemberDAO_hibernate();
+				MemberVO vo = dao.findByAccount(memAccount);
+				System.out.println(vo.getMemAccount());
+				session.setAttribute("LoginOK", vo);
+				
 				/**** 3.新增完成 ****/
 				smscode = new SendBySMS().Process(memTel); // 傳送簡訊驗證
 				session.setAttribute("SMScode", smscode);
@@ -347,7 +354,7 @@ public class MemberServlet extends HttpServlet {
 				/**** 2.開始新增資料 ****/
 				MemberService memberSvc = new MemberService();
 				memberSvc.addMember(memTel, memAccount, memPwd, memName, memGender, memEmail, memRegister, memStatus,
-						memInfract, memImage);
+						memInfract, memImage);		
 				/**** 3.新增完成 ****/
 				response.sendRedirect("management/manage_member_page.jsp");
 			} catch (Exception e) {

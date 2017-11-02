@@ -9,14 +9,18 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link href='<%=request.getContextPath() %>/css/jquery-ui.min.css' rel='stylesheet' />
+<link href='<%=request.getContextPath()%>/css/jquery-ui.min.css'
+	rel='stylesheet' />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-responsive.min.css"
 	rel="stylesheet" />
-<link href='<%=request.getContextPath() %>/css/jquery-ui.structure.min.css' rel='stylesheet' />
-<link href='<%=request.getContextPath() %>/css/jquery-ui.theme.min.css' rel='stylesheet' />
+<link
+	href='<%=request.getContextPath()%>/css/jquery-ui.structure.min.css'
+	rel='stylesheet' />
+<link href='<%=request.getContextPath()%>/css/jquery-ui.theme.min.css'
+	rel='stylesheet' />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
@@ -59,42 +63,54 @@ a:link, a:visited, a:hover, a:active {
 						<!-- /account-details -->
 					</div>
 					<div class="account-details">
-						<span class="account-name"
-							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
-						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
+						<p class="account-name"
+							style="font-family: Microsoft JhengHei; text-align: center; font-size: 24px">${LoginOK.memName}
+						</p>
 					</div>
 					<!-- /account-container -->
 
 					<hr />
 
 					<ul id="main-nav" class="nav nav-tabs nav-stacked">
-						<li><a href="./mem_back_index.jsp"> <i
-								class="glyphicon glyphicon-home" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp">
+								<i class="glyphicon glyphicon-home"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
 						</a></li>
 
-						<li><a href="./mem_back_favorite.jsp"> <i
-								class="glyphicon glyphicon-heart" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp">
+								<i class="glyphicon glyphicon-heart"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">收藏</span>
 						</a></li>
 
-						<li class="active"><a href="./mem_back_calendar.jsp"> <i
-								class="glyphicon glyphicon-calendar" style="height: 30px;font-size: 30px"></i>
-								<span style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
+						<li class="active"><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp">
+								<i class="glyphicon glyphicon-calendar"
+								style="height: 30px; font-size: 30px"></i> <span
+								style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
 						</a></li>
 
-						<li><a href="./mem_back_qanda.jsp"> <i
-								class="glyphicon glyphicon-comment" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp">
+								<i class="glyphicon glyphicon-comment"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
 						</a></li>
 
-						<li><a href="./mem_back_lease.jsp"> <i
-								class="glyphicon glyphicon-file" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+								<i class="glyphicon glyphicon-file"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
-								class="glyphicon glyphicon-edit" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/member.do?action=getOneMember">
+								<i class="glyphicon glyphicon-edit"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
 					</ul>
@@ -139,19 +155,22 @@ a:link, a:visited, a:hover, a:active {
 								</table>
 							</div>
 							<!-- 放置給刪除預約所需填方塊 -->
-							<div  id="reasonDiv" title="刪除預約">
-							<form id="reasonDiv" class="form-group">
-								<input id="resNO" type="hidden" value="">
-								<label class="form-label">請簡述取消預約之緣由：</label>
-								<textarea class="form-control" id="reason" style="resize: none;height:110px;background-color:#d0d0d0"> </textarea>
-								<br/><p style="color:gray;">__________________________________</p>
-								<div class="" style="float:left">
-								<button type="button"class="btn btn-primary" id="reasonButton">送出</button>
-								</div>
-								<div class="" style="float:right">
-								<button type="button"class="btn btn-primary" id="cancel">取消</button>
-								</div>
-							</form>
+							<div id="reasonDiv" title="刪除預約">
+								<form id="reasonDiv" class="form-group">
+									<input id="resNO" type="hidden" value=""> <label
+										class="form-label">請簡述取消預約之緣由：</label>
+									<textarea class="form-control" id="reason"
+										style="resize: none; height: 110px; background-color: #d0d0d0"> </textarea>
+									<br />
+									<p style="color: gray;">__________________________________</p>
+									<div class="" style="float: left">
+										<button type="button" class="btn btn-primary"
+											id="reasonButton">送出</button>
+									</div>
+									<div class="" style="float: right">
+										<button type="button" class="btn btn-primary" id="cancel">取消</button>
+									</div>
+								</form>
 							</div>
 						</div>
 						<!-- /widget-content -->
@@ -181,11 +200,16 @@ a:link, a:visited, a:hover, a:active {
 		class="navbar-fixed-bottom w3-black container-fluid text-center">
 	<div>
 
-		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
-		  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
+		<ul class="nav nav-pills w3-centered "
+			style="display: flex; font-size: 13px; justify-content: center;">
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
 		</ul>
 	</div>
 	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊
@@ -202,8 +226,8 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 	<script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
-	<script src='<%=request.getContextPath() %>/js/jquery-ui.min.js'></script>
-<script>
+	<script src='<%=request.getContextPath()%>/js/jquery-ui.min.js'></script>
+	<script>
 	$("document").ready(work);
 	
 	function work(){

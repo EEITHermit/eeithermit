@@ -43,7 +43,7 @@
 }
 
 .container {
-	margin-top: 50px;
+	margin-top: 60px;
 }
 </style>
 </head>
@@ -67,7 +67,7 @@
 				<h1 id="note2">
 					<span class="label label-warning">以便完成認證手續</span>
 				</h1>
-				<form method="post" action="../sms.do" id="theForm">
+				<form method="post" action="<%=request.getContextPath()%>/sms.do" id="theForm">
 					<fieldset>
 						<legend></legend>
 						<div>
@@ -82,7 +82,7 @@
 						<input type="hidden" name="action" value="register_SMS_Action">
 					</fieldset>
 				</form>
-				<form method="post" action="sms.do">
+				<form method="post" action="<%=request.getContextPath()%>/sms.do">
 					<div>
 						<input type="submit" value="重寄" />
 					</div>

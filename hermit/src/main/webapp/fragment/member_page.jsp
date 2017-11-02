@@ -24,8 +24,7 @@
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'
 	rel='stylesheet' type='text/css'>
 <!-- CSS reset -->
-<!-- <link rel="stylesheet" -->
-<%-- 	href="<%=request.getContextPath()%>/css/reset.css"> --%>
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css"> --%>
 <!-- Gem style -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css">
@@ -207,10 +206,10 @@
    	 	background-color: #d0d0d0;
 	}
 	.main-nav{
-	    width: 80px;
-	    height:40px;
+	    width: 75px;
+	    height:52px;
 	}
-	.main-nav ul{
+	#loginul{
 		margin-left:18px;
 	}
 </style>
@@ -235,9 +234,9 @@
  		<!-- 如果有登入就不顯示 -->
 		<c:if test="${empty LoginOK}">
 			<nav class="main-nav">
-				<ul>
+				<ul id="loginul">
 					<li>
-					 <a class="cd-signin" href="#0" style="font-size: 24px;margin-top: 8px;border:none;">登入</a>
+					 <a class="cd-signin" href="#0" style="font-size: 24px;margin-top: 8px;border:none;padding-top: 6px">登入</a>
 					</li>
 				</ul>
 			</nav>
@@ -339,11 +338,12 @@
 						<!-- <button class="full-width" type="button" id="submitBtn" value="Login">Login</button> -->
 					</p>
 				</form>
-
+				<div style="padding-top:10px;background:rgba(52, 54, 66, 0.9);opacity: 1"></div>
 				<p class="cd-form-bottom-message">
 					<a href="#0">Forgot your password?</a>
 				</p>
 			</div>
+
 
 			<div id="cd-reset-password">
 				<!-- reset password form -->
@@ -358,13 +358,13 @@
 							type="text" placeholder="Account">
 						<small><font color="red" size="-1" id="reseterror"></font></small>
 					</p>
-
+					
 					<p class="fieldset">
 						<input class="full-width has-padding" type="button" 
 						value="Reset password" id="submitReset">
 					</p>
 				</form>
-
+				<div style="padding-top:10px;background:rgba(52, 54, 66, 0.9);opacity: 1"></div>
 				<p class="cd-form-bottom-message">
 					<a href="#0">Back to log-in</a>
 				</p>
@@ -438,6 +438,191 @@
 	function closeLeftMenu() {
 	    document.getElementById("leftMenu").style.display = "none";
 	}
+	
+	// 更新驗證碼
+	function refresh() {
+	document.getElementById("image").src = "<%=request.getContextPath()%>/MemberLogin/Image.jsp?"
+			+ new Date();
+	}
+	// 登入判斷
+	$(document).ready(function(){
+		//登入資訊用-start
+		var $form_modal = $('.cd-user-modal'),
+		$form_login = $form_modal.find('#cd-login'),
+		$form_signup = $form_modal.find('#cd-signup'),
+		$form_forgot_password = $form_modal.find('#cd-reset-password'),
+		$form_modal_tab = $('.cd-switcher'),
+		$tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+		$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
+		$forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
+		$back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
+		$main_nav = $('.main-nav');
+		//登入資訊用-end
+		$("#submitBtn").click(function(){
+			var box;
+			// 清除錯誤訊息
+			$("#putacc").text("");
+			$("#putpwd").text("");
+			$("#putver").text("");
+			$("#loginErr").text("");
+			if($("#remember").prop("checked")){
+				box = "on";
+			}
+		$.post('<%=request.getContextPath()%>/Login/memlogin.do?action=login',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
+			if(data == "ok"){
+			window.location = "<%=request.getContextPath()%>/index.jsp";
+			}
+			var datas = data.split(";");
+			for(var d of datas){
+				var s = d.split(".")[0];
+				var a = d.split(".")[1];
+				if(s == "1"){
+					$("#putacc").text(a);
+				}else if(s == "2"){
+					$("#putpwd").text(a);
+				}else if(s == "3"){
+					$("#putver").text(a);
+				}else if(s == "4"){
+					$("#putver").text(a);
+				}else if(s=="5"){
+					$("#loginErr").text(a);
+					}
+				}
+			})
+		})
+		// 送出重設密碼連結
+		$("#submitReset").click(function(){
+			$("#submitReset").prop("disabled",true);
+			// 清除錯誤訊息
+			$("#reseterror").text("");
+			$.post('<%=request.getContextPath()%>/Login/forgotpwd.do',{account:$("#resetAccount").val()},function(data){
+				if(data == "此帳號不存在！"){
+					$("#reseterror").text(data);
+					$("#submitReset").prop("disabled",false);
+				}else{
+					alert(data);
+					window.location = "<%=request.getContextPath()%>/index.jsp";
+				}
+			})			
+		})
+		
+		// 進入會員中心前判斷是否已登入
+		$("#mbi").click(function(event){
+			event.preventDefault();
+			$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+				if(data=="OK"){
+					window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp?action=check";
+				}else if(data=="NO"){
+					$main_nav.children('ul').removeClass('is-visible');
+					$form_modal.addClass('is-visible');	
+					$form_login.addClass('is-selected');
+					$form_signup.removeClass('is-selected');
+					$form_forgot_password.removeClass('is-selected');
+					$tab_login.addClass('selected');
+					$tab_signup.removeClass('selected');
+					return;
+				}
+			})
+		})
+		
+		//進入收藏前判斷是否已登入
+		$("#mbf").click(function(event){
+			event.preventDefault();
+			$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+				if(data=="OK"){
+					window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp?action=check";
+				}else if(data=="NO"){
+					$main_nav.children('ul').removeClass('is-visible');
+					$form_modal.addClass('is-visible');	
+					$form_login.addClass('is-selected');
+					$form_signup.removeClass('is-selected');
+					$form_forgot_password.removeClass('is-selected');
+					$tab_login.addClass('selected');
+					$tab_signup.removeClass('selected');
+					return;
+				}
+			})
+		})
+
+		//進入預約前判斷是否已登入
+		$("#mbc").click(function(event){
+			event.preventDefault();
+			$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+				if(data=="OK"){
+					window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp?action=check";
+				}else if(data=="NO"){
+					$main_nav.children('ul').removeClass('is-visible');
+					$form_modal.addClass('is-visible');	
+					$form_login.addClass('is-selected');
+					$form_signup.removeClass('is-selected');
+					$form_forgot_password.removeClass('is-selected');
+					$tab_login.addClass('selected');
+					$tab_signup.removeClass('selected');
+					return;
+				}
+			})
+		})
+		
+		//進入Q&A前判斷是否已登入
+		$("#mbq").click(function(event){
+			event.preventDefault();
+			$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+				if(data=="OK"){
+					window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp?action=check";
+				}else if(data=="NO"){
+					$main_nav.children('ul').removeClass('is-visible');
+					$form_modal.addClass('is-visible');	
+					$form_login.addClass('is-selected');
+					$form_signup.removeClass('is-selected');
+					$form_forgot_password.removeClass('is-selected');
+					$tab_login.addClass('selected');
+					$tab_signup.removeClass('selected');
+					return;
+				}
+			})
+		})
+		
+		//進入租賃紀錄前判斷是否已登入
+		$("#mbl").click(function(event){
+			event.preventDefault();
+			$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
+				if(data=="OK"){
+					window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp?action=check";
+				}else if(data=="NO"){
+					$main_nav.children('ul').removeClass('is-visible');
+					$form_modal.addClass('is-visible');	
+					$form_login.addClass('is-selected');
+					$form_signup.removeClass('is-selected');
+					$form_forgot_password.removeClass('is-selected');
+					$tab_login.addClass('selected');
+					$tab_signup.removeClass('selected');
+					return;
+				}
+			})
+		})
+	//登入判斷結束
+	})
+			
+			
+	$(function(){
+	
+	var G_CLIENT_ID = "538877171960-djc145ihldt91ec28hajlt5m66sis16g.apps.googleusercontent.com";
+	var G_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=google_login_Action";
+	var G_SCOPE = 'https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile';
+	
+	var F_CLIENT_ID = "1719931494697481";
+	var F_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=facebook_login_Action";
+	var F_SCOPE = 'email';
+	
+	
+	$("#google").click(function(){
+		window.location='https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE;
+	})
+	
+	$("#facebook").click(function(){
+		window.location='https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE;
+	})
+})
 	</script>
 
 </body>

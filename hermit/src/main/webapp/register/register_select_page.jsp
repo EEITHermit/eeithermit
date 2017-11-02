@@ -29,6 +29,9 @@
 	margin-left: 180%;
 	width: 300%;
 }
+.container {
+	margin-top: 60px;
+}
 </style>
 </head>
 <body>
@@ -39,12 +42,12 @@
 				<h2>請選擇註冊方式</h2>
 			</div>
 			<div class="center-control">
-				<span class="carouselItem"> <a href="#" id="google"><img class="selectItem2 carouselItemInner"
+				<span class="carouselItem"> <a href="#" id="mygoogle"><img class="selectItem2 carouselItemInner"
 						src="<%=request.getContextPath()%>/images/googleplus-reflection.png" /></a>
 				</span> <span class="carouselItem"> <a href="register_page.jsp"><img
 						class="selectItem1 carouselItemInner"
 						src="<%=request.getContextPath()%>/images/register-reflection.png" /></a>
-				</span> <span class="carouselItem"> <a href="#" id="facebook"><img
+				</span> <span class="carouselItem"> <a href="#" id="myfacebook"><img
 						class="selectItem3 carouselItemInner"
 						src="<%=request.getContextPath()%>/images/facebook-reflection.png" /></a>
 				</span>
@@ -79,9 +82,9 @@
 		var F_REDIRECT_URL = 'http://localhost:8081/hermit/identity.do?action=facebook_process_Action';
 		var F_SCOPE = 'email';
 
-		$('#google').attr('href','https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE);
+		$('#mygoogle').attr('href','https://accounts.google.com/o/oauth2/auth?response_type=code&state=/profile&client_id='+G_CLIENT_ID+'&redirect_uri='+G_REDIRECT_URL+'&scope='+G_SCOPE);
 		
-		$('#facebook').attr('href','https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE);
+		$('#myfacebook').attr('href','https://www.facebook.com/v2.10/dialog/oauth?response_type=code&state=/profile&client_id='+F_CLIENT_ID+'&redirect_uri='+F_REDIRECT_URL+'&scope='+F_SCOPE);
 
 		init();
 	})

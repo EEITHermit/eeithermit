@@ -29,6 +29,7 @@ header h1 {
 
 .container {
 	margin-top: 70px;
+	margin-bottom: 5em;
 }
 </style>
 </head>
@@ -40,8 +41,8 @@ header h1 {
 			<span class="label label label-default">隱私權聲明</span>
 		</h1>
 		</header>
-		<div class="container background-image">
-			<div class="row" style="line-height: 1.8em;">
+		<div class="container">
+			<div class="row background-image" style="line-height: 1.8em;">
 				<article> <section>
 				<p>本隱私權聲明適用於Hermit租屋網(以下稱「本網站」)於http://www.hermit.com.tw
 					網站域名及次級網域名(以下稱「本網站」)所提供的服務。在使用本網站時，您同意受本隱私權聲明條款及條件所拘束，如果您不同意，請不要使用或取得本網站所

@@ -8,9 +8,15 @@
 		<id name="dlNO" column="dlNO">
 			<generator class="identity" />
 		</id>
-		<property name="dempNO" column="dempNO" />
-		<property name="aempNO" column="aempNO" />
-		<property name="qaNO" column="qaNO" />
+		<many-to-one name="dempVO" class="com.hermit.iii.emp.model.empVO" lazy="false">
+			<column name="dempNO"></column>
+		</many-to-one>
+		<many-to-one name="aempVO" class="com.hermit.iii.emp.model.empVO" lazy="false">
+			<column name="aempNO"></column>
+		</many-to-one>
+		<many-to-one name="qaVO" class="com.hermit.iii.qanda.model.QandAVO" lazy="false">
+			<column name="qaNO"></column>
+		</many-to-one>
 		<property name="dlStime" column="dlStime" />
 		<property name="dlEtime" column="dlEtime" />
 		<property name="elesign" column="elesign" />

@@ -56,7 +56,7 @@
 	margin-bottom: 10px;
 }
 .container {
-	margin-top: 50px;
+	margin-top: 60px;
 }
 </style>
 </head>
@@ -197,79 +197,80 @@
 				</div>
 			</form>
 		</div>
-		<!-- /footer -->
-		<footer class="navbar-fixed-bottom w3-black container-fluid text-center" >
-			<div>
-				<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
-				  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-				  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-				  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
-				  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
-				</ul>
-			</div>
-    		<span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-		</footer>
-		<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
-		<script>
-		var txres = null;
+	</div>
+	<!-- /footer -->
+	<footer class="w3-bottom w3-black container-fluid text-center">
+		<div>
+			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
+				<li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+				<li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+				<li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
+				<li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+			</ul>
+		</div>
+	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
+	</footer>
+	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
+	<script>
+	var txres = null;
 
-		// 新增
-		$('#buttonAdd').click(function() {
-			$('.modal-body b').text('請確認是否新增');
+	// 新增
+	$('#buttonAdd').click(function() {
+		$('.modal-body b').text('請確認是否新增');
+	});
+
+	// 重置(button type="reset"回復原始值，在本程式需利用新頁面進階清空EL)
+	$('#buttonReset').click(function() {
+		location.replace('<%=request.getContextPath()%>/register/register_page.jsp');
+	});
+
+	// 圖檔操作
+	$("#fileImg").change(function(e) {
+
+		var img = e.target.files[0];
+
+		if (!img.type.match('image.*')) {
+			alert("Whoops! That is not an image.");
+			return;
+		}
+		iEdit.open(img, true, function(res) {
+			$("#resultImg").attr("src", res);
+			txres = res;
 		});
+	});
 
-		// 重置(button type="reset"回復原始值，在本程式需利用新頁面進階清空EL)
-		$('#buttonReset').click(function() {
-			location.replace('<%=request.getContextPath()%>/register/register_page.jsp');
-		});
+	$('#buttonConfirm').click(function() {
+		$('input[name="memImage"]').val(txres);
+		$('form[name="myForm"]').submit();
+	});
 
-		// 圖檔操作
-		$("#fileImg").change(function(e) {
+	// AJAX 帳號檢查
+	$('#memAccount').blur(function() {
+		var account = this.value;
+		var msg = document.querySelector("#ajax-check-account");
 
-			var img = e.target.files[0];
-
-			if (!img.type.match('image.*')) {
-				alert("Whoops! That is not an image.");
-				return;
-			}
-			iEdit.open(img, true, function(res) {
-				$("#resultImg").attr("src", res);
-				txres = res;
-			});
-		});
-
-		$('#buttonConfirm').click(function() {
-			$('input[name="memImage"]').val(txres);
-			$('form[name="myForm"]').submit();
-		});
-
-		// AJAX 帳號檢查
-		$('#memAccount').blur(function() {
-			var account = this.value;
-			var msg = document.querySelector("#ajax-check-account");
-
-			$.ajax({
-				url:'<%=request.getContextPath()%>/member.do?',
-				method:'post',
-				data:{'action':'register_check_account_Action','memAccount':account},
-				dataType:'text',
-				success:function(data) {
-					if(data == "帳號已存在") {
-						msg.innerHTML = data;
-						$('#buttonAdd').prop('disabled',true);
-					}
-					else {
-						msg.innerHTML = "";
-						$('#buttonAdd').prop('disabled',false);
-					}
-				},
-				error:function() {
-					alert("您的瀏覽器不支援Ajax!!");
+		$.ajax({
+			url:'<%=request.getContextPath()%>/member.do?',
+			method:'post',
+			data:{'action':'register_check_account_Action','memAccount':account},
+			dataType:'text',
+			success:function(data) {
+				if(data == "帳號已存在") {
+					msg.innerHTML = data;
+					$('#buttonAdd').prop('disabled',true);
 				}
-			});
+				else {
+					msg.innerHTML = "";
+					$('#buttonAdd').prop('disabled',false);
+				}
+			},
+			error:function() {
+				alert("您的瀏覽器不支援Ajax!!");
+			}
 		});
-		</script>
+	});
+	</script>
 </body>
 </html>

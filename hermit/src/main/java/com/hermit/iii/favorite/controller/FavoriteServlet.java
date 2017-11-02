@@ -37,13 +37,73 @@ public class FavoriteServlet extends HttpServlet {
 				Integer memNO = new Integer(request.getParameter("memNO").trim());
 				/**** 2.開始查詢資料 ****/
 				FavoriteService favoriteSvc = new FavoriteService();
-				String jsonString = favoriteSvc.accountFavoriteAJAX(memNO); // 假資料測試
+				String jsonString = favoriteSvc.accountFavoriteAJAX(memNO);
 				/**** 3.查詢完成 ****/
 				out.write(jsonString);
 			} catch (Exception e) {
 				errorMsgMap.put("Exception", e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/memberbackstage/mem_back_favorite.jsp");
 				failureView.forward(request, response);
+			}
+		}
+
+		if ("house_checkAJAX_Action".equals(action)) {
+			// 準備存放錯誤訊息的Map物件
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			// 將errorMsgMap放入request物件內，識別字串為 "ErrorMsgKey"
+			request.setAttribute("ErrorMsgKey", errorMsgMap);
+
+			Integer houseNO = null;
+
+			try {
+				/**** 1.接收請求參數 - 輸入格式的錯誤處理 ****/
+				Integer memNO = new Integer(request.getParameter("memNO").trim());
+				houseNO = new Integer(request.getParameter("houseNO").trim());
+				/**** 2.開始查詢資料 ****/
+				FavoriteService favoriteSvc = new FavoriteService();
+				Integer favNO = favoriteSvc.checkFavoriteAJAX(memNO, houseNO);
+				/**** 3.查詢完成 ****/
+				out.write(favNO.toString());
+			} catch (Exception e) {
+				errorMsgMap.put("Exception", e.getMessage());
+				if (houseNO == null) {
+					RequestDispatcher failureView = request.getRequestDispatcher("/index.jsp");
+					failureView.forward(request, response);
+				} else {
+					RequestDispatcher failureView = request.getRequestDispatcher("/HousePage.jsp?NO=" + houseNO);
+					failureView.forward(request, response);
+				}
+			}
+		}
+
+		if ("house_insertAJAX_Action".equals(action)) {
+			// 準備存放錯誤訊息的Map物件
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			// 將errorMsgMap放入request物件內，識別字串為 "ErrorMsgKey"
+			request.setAttribute("ErrorMsgKey", errorMsgMap);
+
+			Integer houseNO = null;
+
+			try {
+				/**** 1.接收請求參數 - 輸入格式的錯誤處理 ****/
+				Integer memNO = new Integer(request.getParameter("memNO").trim());
+				houseNO = new Integer(request.getParameter("houseNO").trim());
+				/**** 2.開始新增資料 ****/
+				FavoriteService favoriteSvc = new FavoriteService();
+				favoriteSvc.addFavorite(memNO, houseNO);
+				/**** 3.新增完成 ****/
+				// 檢查
+				Integer favNO = favoriteSvc.checkFavoriteAJAX(memNO, houseNO);
+				out.write(favNO.toString());
+			} catch (Exception e) {
+				errorMsgMap.put("Exception", e.getMessage());
+				if (houseNO == null) {
+					RequestDispatcher failureView = request.getRequestDispatcher("/index.jsp");
+					failureView.forward(request, response);
+				} else {
+					RequestDispatcher failureView = request.getRequestDispatcher("/HousePage.jsp?NO=" + houseNO);
+					failureView.forward(request, response);
+				}
 			}
 		}
 
@@ -65,6 +125,35 @@ public class FavoriteServlet extends HttpServlet {
 				errorMsgMap.put("Exception", e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/memberbackstage/mem_back_favorite.jsp");
 				failureView.forward(request, response);
+			}
+		}
+
+		if ("house_deleteAJAX_Action".equals(action)) {
+			// 準備存放錯誤訊息的Map物件
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			// 將errorMsgMap放入request物件內，識別字串為 "ErrorMsgKey"
+			request.setAttribute("ErrorMsgKey", errorMsgMap);
+
+			Integer houseNO = null;
+
+			try {
+				/**** 1.接收請求參數 - 輸入格式的錯誤處理 ****/
+				Integer favNO = new Integer(request.getParameter("favNO").trim());
+				houseNO = new Integer(request.getParameter("houseNO").trim());
+				/**** 2.開始刪除資料 ****/
+				FavoriteService favoriteSvc = new FavoriteService();
+				favoriteSvc.deleteFavorite(favNO);
+				/**** 3.刪除完成 ****/
+				response.sendRedirect("HousePage.jsp?NO=" + houseNO);
+			} catch (Exception e) {
+				errorMsgMap.put("Exception", e.getMessage());
+				if (houseNO == null) {
+					RequestDispatcher failureView = request.getRequestDispatcher("/index.jsp");
+					failureView.forward(request, response);
+				} else {
+					RequestDispatcher failureView = request.getRequestDispatcher("/HousePage.jsp?NO=" + houseNO);
+					failureView.forward(request, response);
+				}
 			}
 		}
 	}

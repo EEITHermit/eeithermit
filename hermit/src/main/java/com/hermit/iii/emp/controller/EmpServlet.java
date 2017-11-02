@@ -1,8 +1,8 @@
 package com.hermit.iii.emp.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hermit.iii.dispatchlist.model.DispatchListService;
 import com.hermit.iii.emp.model.EmpService;
 import com.hermit.iii.emp.model.EmpVO;
-import com.hermit.iii.post.model.PostVO;
 
-@WebServlet("/EmpServlet")
+@WebServlet("/emp/EmpServlet")
 public class EmpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -84,16 +82,29 @@ public class EmpServlet extends HttpServlet {
 			es = new EmpService();
 			empVO = es.getOneEmp(Integer.valueOf(request.getParameter("empNO")));
 			request.setAttribute("empVO", empVO);
-			RequestDispatcher rd =request.getRequestDispatcher("");//尚未輸入
+			RequestDispatcher rd =request.getRequestDispatcher("empIndex_include.jsp");//尚未輸入
 			rd.forward(request, response);
 		}
 		
 		if("getAllEmp".equals(action)){
+			System.out.println("test getall");
 			es = new EmpService();
 			List<EmpVO> list = es.getAllEmp();
 			request.setAttribute("list", list);
-			RequestDispatcher rd = request.getRequestDispatcher("");//尚未輸入
+			RequestDispatcher rd = request.getRequestDispatcher("empIndex_include.jsp");//尚未輸入
 			rd.forward(request, response);
+		}
+		if("getAllEmpForJson".equals(action)){
+			System.out.println("Get All For JSON");
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			es = new EmpService();
+			String stringjson = es.getAllForJson();
+			out.println(stringjson);
+			out.flush();
+			out.close();
+			
 		}
 		
 		if("findByAccount".equals(action)){
@@ -101,7 +112,7 @@ public class EmpServlet extends HttpServlet {
 			es = new EmpService();
 			empVO = es.findByAccount(request.getParameter("empAccount"));
 			request.setAttribute("empVO", empVO);
-			RequestDispatcher rd = request.getRequestDispatcher("");//尚未輸入
+			RequestDispatcher rd = request.getRequestDispatcher("empIndex_include.jsp");//尚未輸入
 			rd.forward(request, response);
 			
 

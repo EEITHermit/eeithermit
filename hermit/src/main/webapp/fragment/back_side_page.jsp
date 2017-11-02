@@ -40,7 +40,7 @@
 			href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
 		<a href="">員工資料管理</a> <a
 			href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a>
-		<a href="<%=request.getContextPath()%>/wetalk/WebSocketBackground.jsp">線上客服(測試版)</a>
+		<a href="<%=request.getContextPath()%>/wetalk/WebSocketBackground.jsp">線上客服</a>
 		</nav> </aside>
 
 		<div class="main">

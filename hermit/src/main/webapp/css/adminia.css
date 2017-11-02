@@ -311,7 +311,7 @@ input {
 }
 
 .account-details {
-	
+	width: 200px;
 }
 
 .account-details span {
@@ -321,7 +321,7 @@ input {
 .account-details .account-name {
 	font-size: 15px;
 	font-weight: 600;
-	padding-left: 40px;
+/* 	padding-left: 40px; */
 }
 
 .account-details .account-role {
