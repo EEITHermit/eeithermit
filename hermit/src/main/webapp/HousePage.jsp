@@ -13,23 +13,10 @@
 <script src="<%=request.getContextPath()%>/js/jquery.otg-carousel.js"></script>
 <style>
 
-	tabstyle{
-		border:1px solid rgba(221,221,221,0.7);
-		border-radius:10px;padding:40px;
-		height:500px;
-		width:100%;
-	}
-	equidDiv{
-		height:50px;
-	}
 	.col-md-2 span{
 		vertical-align:sub;
 		font-family: Microsoft JhengHei;
 		font-weight: bold;
-	}
-	.col-md-12 span,a{
-		font-family: Microsoft JhengHei;
-		font-size: 1.2em;
 	}
 	
 	#addressTag span{

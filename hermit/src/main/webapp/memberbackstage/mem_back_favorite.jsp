@@ -23,7 +23,7 @@
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
 
-<style>
+	<style>
 a:link, a:visited, a:hover, a:active {
 	text-align: left;
 }
@@ -71,45 +71,73 @@ a:link, a:visited, a:hover, a:active {
 }
 /* Snackbar / Toast */
 #snackbar {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 100px;
-    font-size: 17px;
+	visibility: hidden;
+	min-width: 250px;
+	margin-left: -125px;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	bottom: 100px;
+	font-size: 17px;
 }
 
 #snackbar.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 100px; opacity: 1;}
+@
+-webkit-keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
 }
 
-@keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 100px; opacity: 1;}
+to {
+	bottom: 100px;
+	opacity: 1;
 }
 
-@-webkit-keyframes fadeout {
-    from {bottom: 100px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
+}
+@
+keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
 }
 
-@keyframes fadeout {
-    from {bottom: 100px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+to {
+	bottom: 100px;
+	opacity: 1;
+}
+
+}
+@
+-webkit-keyframes fadeout {
+	from {bottom: 100px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
+
+}
+@
+keyframes fadeout {
+	from {bottom: 100px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
 }
 </style>
 	<div id="content">
@@ -131,43 +159,56 @@ a:link, a:visited, a:hover, a:active {
 						<!-- /account-details -->
 					</div>
 					<div class="account-details">
-						<span class="account-name"
-							style="font-family: Microsoft JhengHei;padding-left: 75px">${LoginOK.memAccount}</span>
-						<!-- 	<span class="account-name" style="font-family: Microsoft JhengHei">徐漢勳</span> -->
-						<input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}">
+						<p class="account-name"
+							style="font-family: Microsoft JhengHei; text-align: center; font-size: 24px">${LoginOK.memName}
+						</p>
+						<input type="hidden" id="memNO" name="memNO"
+							value="${LoginOK.memNO}">
 					</div>
 					<!-- /account-container -->
 
 					<hr />
 
 					<ul id="main-nav" class="nav nav-tabs nav-stacked">
-						<li><a href="./mem_back_index.jsp"> <i
-								class="glyphicon glyphicon-home" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp">
+								<i class="glyphicon glyphicon-home"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
 						</a></li>
 
-						<li class="active"><a href="./mem_back_favorite.jsp"> <i
-								class="glyphicon glyphicon-heart" style="height: 30px;font-size: 30px"></i> <span
+						<li class="active"><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp">
+								<i class="glyphicon glyphicon-heart"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">收藏</span>
 						</a></li>
 
-						<li><a href="./mem_back_calendar.jsp"> <i
-								class="glyphicon glyphicon-calendar" style="height: 30px;font-size: 30px"></i>
-								<span style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp">
+								<i class="glyphicon glyphicon-calendar"
+								style="height: 30px; font-size: 30px"></i> <span
+								style="font-size: 15px; font-family: Microsoft JhengHei">預約</span>
 						</a></li>
 
-						<li><a href="./mem_back_qanda.jsp"> <i
-								class="glyphicon glyphicon-comment" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp">
+								<i class="glyphicon glyphicon-comment"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">Q&A</span>
 						</a></li>
 
-						<li><a href="./mem_back_lease.jsp"> <i
-								class="glyphicon glyphicon-file" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+								<i class="glyphicon glyphicon-file"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
 						</a></li>
 
-						<li><a href="<%=request.getContextPath()%>/member.do?action=getOneMember"> <i
-								class="glyphicon glyphicon-edit" style="height: 30px;font-size: 30px"></i> <span
+						<li><a
+							href="<%=request.getContextPath()%>/member.do?action=getOneMember">
+								<i class="glyphicon glyphicon-edit"
+								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">修改會員資料</span>
 						</a></li>
 					</ul>
@@ -291,29 +332,38 @@ a:link, a:visited, a:hover, a:active {
 					$('.close').click(function() {
 						var fav = $(this).parents('li').find('input').val();
 						$.ajax({
-							url:'<%=request.getContextPath()%>/FavoriteServlet?',
-							method : 'post',
-							data : {
-								'action' : 'favorite_delete_Action',
-								'favNO' : fav
-							},
-							dataType : 'text',
-							success : function(data) {
-								var thebar = document.getElementById("snackbar");
-								thebar.className = "show";
-								setTimeout(function(){ thebar.className = thebar.className.replace("show", ""); }, 3000);
-							},
-							error : function() {
-								alert("您的瀏覽器不支援Ajax!!");
-							}
-						})
-						$(this).parents('li').remove();
+							url:'<%=request.getContextPath()%>
+		/FavoriteServlet?',
+															method : 'post',
+															data : {
+																'action' : 'favorite_delete_Action',
+																'favNO' : fav
+															},
+															dataType : 'text',
+															success : function(
+																	data) {
+																var thebar = document
+																		.getElementById("snackbar");
+																thebar.className = "show";
+																setTimeout(
+																		function() {
+																			thebar.className = thebar.className
+																					.replace(
+																							"show",
+																							"");
+																		}, 3000);
+															},
+															error : function() {
+																alert("您的瀏覽器不支援Ajax!!");
+															}
+														})
+												$(this).parents('li').remove();
+											});
+						},
+						error : function() {
+							alert("您的瀏覽器不支援Ajax!!");
+						}
 					});
-				},
-				error : function() {
-					alert("您的瀏覽器不支援Ajax!!");
-				}
-			});
 		}
 	</script>
 </body>
