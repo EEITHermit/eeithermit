@@ -332,38 +332,29 @@ to {
 					$('.close').click(function() {
 						var fav = $(this).parents('li').find('input').val();
 						$.ajax({
-							url:'<%=request.getContextPath()%>
-		/FavoriteServlet?',
-															method : 'post',
-															data : {
-																'action' : 'favorite_delete_Action',
-																'favNO' : fav
-															},
-															dataType : 'text',
-															success : function(
-																	data) {
-																var thebar = document
-																		.getElementById("snackbar");
-																thebar.className = "show";
-																setTimeout(
-																		function() {
-																			thebar.className = thebar.className
-																					.replace(
-																							"show",
-																							"");
-																		}, 3000);
-															},
-															error : function() {
-																alert("您的瀏覽器不支援Ajax!!");
-															}
-														})
-												$(this).parents('li').remove();
-											});
-						},
-						error : function() {
-							alert("您的瀏覽器不支援Ajax!!");
-						}
+							url:'<%=request.getContextPath()%>/FavoriteServlet?',
+							method : 'post',
+							data : {
+								'action' : 'favorite_delete_Action',
+								'favNO' : fav
+							},
+							dataType : 'text',
+							success : function(data) {
+								var thebar = document.getElementById("snackbar");
+								thebar.className = "show";
+								setTimeout(function() {thebar.className = thebar.className.replace("show","");}, 3000);
+							},
+							error : function() {
+								alert("您的瀏覽器不支援Ajax!!");
+							}
+						})
+						$(this).parents('li').remove();
 					});
+				},
+				error : function() {
+					alert("您的瀏覽器不支援Ajax!!");
+				}
+			});
 		}
 	</script>
 </body>

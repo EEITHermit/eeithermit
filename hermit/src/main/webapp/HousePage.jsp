@@ -7,6 +7,8 @@
 <title></title>
 <link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico">
 <jsp:include page="/fragment/member_page.jsp" />
+<link href='<%= request.getContextPath() %>/css/jquery-ui.structure.min.css' rel='stylesheet' />
+<link href='<%= request.getContextPath() %>/css/jquery-ui.theme.min.css' rel='stylesheet' />
 <link href="<%=request.getContextPath()%>/css/jquery.scrolling-tabs.min.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/jquery.otg-carousel.css" rel="stylesheet" />
 <script src="<%=request.getContextPath()%>/js/jquery.scrolling-tabs.min.js"></script>
@@ -87,6 +89,21 @@
 	h5{
 		font-size: 0.83em
 	}
+/* 	reservation css */
+	#reservationDiv div>div{
+		width:90px;
+		border:1px solid gray;
+		background-color: #46A3FF;
+		position:absolute;
+		clear:left;
+		display:none;
+	}
+ 	#reservationDiv div{ 
+ 		float:left;
+ 		margin:3px;
+ 		
+ 	} 
+ 	/* 	reservation css end*/
 </style>
 </head>
 <body>
@@ -107,10 +124,10 @@
 			<div class="col-md-12" style="margin:10px 3px;" id="Rent"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="Size"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="Charge"></div>
-			<div class="col-md-3" style="margin:10px 3px;" id="reservation"><button>預約</button></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="reservation"><button id="bt">預約</button></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="floor"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="hFormType"></div>
-			<div class="col-md-3" style="margin:10px 3px;" id="QandA"><button>詢問</button></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="QandA"><button id="questionBT">詢問</button></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="water"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="elePower"></div>
 		</div>
@@ -1690,6 +1707,79 @@
 		</div>
 	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
 	</footer>
+		<!-- 預約彈出div -->
+		<div id="reservationDiv" title="預約時間" style="z-index: 1001;">
+		<form id="reservationForm" action="<%= request.getContextPath() %>/reservationServlet?mission=reservation" method="POST">
+			<!-- 取得會員帳號 -->
+			<input type="hidden" name="memberNo" value="${LoginOK.memNO}"/>
+			<!-- 取得房屋帳號-->
+			<input type="hidden" name="houseNo" value="${param.NO}"/>
+			<h3>請選擇期望預約時間</h3>
+			<div id="MonDiv">
+				<input type="checkbox" name="week" value="一" id="Mon"/><label for="Mon">星期一</label> 
+				<div id="MonTime">
+					<input type="checkbox" name="Time" value="一上" id="MonMon"/><label for="MonMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="一下" id="MonAf"/><label for="MonAf">下午</label>
+				</div>
+			</div>
+			<div id="TuesDiv">
+				<input type="checkbox" name="week" value="二"id="Tues"/><label for="Tues">星期二</label> 
+				<div id="TuesTime">
+					<input type="checkbox" name="Time" value="二上" id="TuesMon"/><label for="TuesMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="二下" id="TuesAf"/><label for="TuesAf">下午</label>
+				</div>
+			</div>
+			<div id="WednDiv">
+				<input type="checkbox" name="week" value="三"id="Wedn"/><label for="Wedn">星期三 </label>
+				<div id="WednTime">
+					<input type="checkbox" name="Time" value="三上" id="WednMon"/><label for="WednMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="三下" id="WednAf"/><label for="WednAf">下午</label>
+				</div>
+			</div>
+			<div id="ThurDiv">
+				<input type="checkbox" name="week" value="四"id="Thur"/><label for="Thur">星期四 </label>
+				<div id="ThurTime">
+					<input type="checkbox" name="Time" value="四上" id="ThurMon"/><label for="ThurMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="四下" id="ThurAf"/><label for="ThurAf">下午</label>
+				</div>
+			</div>
+			<div id="FriDiv">
+				<input type="checkbox" name="week" value="五" id="Fri"/><label for="Fri">星期五 </label>
+				<div id="FriTime">
+					<input type="checkbox" name="Time" value="五上" id="FriMon"/><label for="FriMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="五下" id="FriAf"/><label for="FriAf">下午</label>
+				</div>
+			</div>
+			<div id="SatDiv">
+				<input type="checkbox" name="week" value="六" id="Sat"/><label for="Sat">星期六 </label>
+				<div id="SatTime">
+					<input type="checkbox" name="Time" value="六上" id="SatMon"/><label for="SatMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="六下" id="SatAf"/><label for="SatAf">下午</label>
+				</div>
+			</div>
+			<div id="SunDiv">
+				<input type="checkbox" name="week" value="日" id="Sun"/><label for="Sun">星期日 </label>
+				<div id="SunTime">
+					<input type="checkbox" name="Time" value="日上" id="SunMon"/><label for="SunMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="日下" id="SunAf"/><label for="SunAf">下午</label>
+				</div>
+			</div>
+			<div style="clear:both;margin-top:50px">
+			<button type="button"id="btSubmit">確認</button>
+			<button type="reset"id="btCancel">取消</button>
+			</div>
+		</form>
+	</div>
+	<!-- 預約彈出表格end -->
+	<!-- 詢問彈出表格 -->
+	<div id="dialog" title="提問方塊">
+		<form class="form-group">
+		<label for="question">請輸入提問內容：</label>
+		<textarea name="question"class="form-control"id="question" style="resize:none;height:150px"></textarea>
+		</form>
+	</div>
+	<!-- 詢問彈出表格end -->
+	<script src="<%= request.getContextPath() %>/js/jquery-form.js"></script>
 	<script>
 	// 大家一起用
 	var house = $.parseJSON('<%= request.getAttribute("House")%>');
@@ -1825,6 +1915,80 @@
 			});
 		}
 		/* favorite JS code End */
+		//reservation js code
+		//設定顯示上午下午
+		$("#reservationForm>div").hover(function(){
+			$(this).children("div").toggle("blind",100)
+		});
+		//設定星期與上午下午checked連動
+		$("#reservationForm>div>input").on("click",function(){
+			var th = $(this);
+			th.parent("div").children("div").children("input").prop("checked",th.prop("checked"));
+		});
+		//設定上午下午與星期checked連動
+		$("#reservationForm>div>div>input").on("click",function(){
+			$(this).parent("div").parent("div").children("input").prop("checked",true);
+		});
+		//設定預約跳出視窗
+		var dialog = $("#reservationDiv").dialog({
+			autoOpen:false,
+			modal: true,
+			resizable: false
+		});	
+		//跳出按鈕
+		$("#bt").on("click",function(){
+			dialog.dialog("open");
+		});
+		//取消按鈕
+		$("#btCancel").on("click",function(){
+			dialog.dialog("close");
+		});
+		//送出表單資料設定
+		$("#btSubmit").on("click",function(){
+			if("${LoginOK.memNO}" == ""){
+				alert("請先登入");
+			}else{
+			//jquery的form插件，太神啦
+					$("#reservationForm").ajaxSubmit(function(data){
+					alert(data);
+					dialog.dialog("close");
+				});
+			}
+		});
+		//reservation js code end
+		//question js code
+		var dialogQ = $("#dialog");
+		dialogQ.dialog({
+			 autoOpen: false,
+			 height: 330,
+		     width: 350,
+		     modal: true,
+		     resizable:false,
+		     buttons:{
+		    	 "送出":function(){
+		    		 if("${LoginOK.memNO}" == ""){
+		    			 alert("請先登入");
+		    		 }else{
+		    			 $.post("<%=request.getContextPath()%>/QAndAServlet?mission=question"
+		    					 ,{question:$("#question").val(),member:"${LoginOK.memNO}",house:${param.NO}}
+		    		 	,function(data){
+		    				 alert(data);
+		    				 $("#question").val("");
+		    				 dialogQ.dialog("close");	 
+		    		 	});
+		    		 };
+		    	 },
+		    	 "取消":function(){
+		    		 dialogQ.dialog("close");
+		    	 }
+		     }
+		})
+		
+		$("#questionBT").click(function(){
+			dialogQ.dialog("open");
+			
+		});
+		//question js code end
 	</script>
 </body>
 </html>
