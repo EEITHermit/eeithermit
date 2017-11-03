@@ -378,14 +378,14 @@ table {
 			};
 		});
 		
-		//設定table
-		var tds = $("#qaTable>tbody td");
-		$(tds[0]).css("width","15%");
-		$(tds[1]).css("width","15%");
-		$(tds[2]).css("width","15%");
-		$(tds[3]).css("width","15%");
-		$(tds[4]).css("width","30%");
-		$(tds[5]).css("width","10%");
+// 		//設定table
+// 		var tds = $("#qaTable>tbody td");
+// 		$(tds[0]).css("width","15%");
+// 		$(tds[1]).css("width","15%");
+// 		$(tds[2]).css("width","15%");
+// 		$(tds[3]).css("width","15%");
+// 		$(tds[4]).css("width","30%");
+// 		$(tds[5]).css("width","10%");
 		//設定回應表單彈出視窗
 		$("#qaForm").dialog({
 			  autoOpen: false,

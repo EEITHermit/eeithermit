@@ -67,8 +67,9 @@
 				<h1 id="note2">
 					<span class="label label-warning">以便完成認證手續</span>
 				</h1>
+
 				<form method="post" action="<%=request.getContextPath()%>/sms.do" id="theForm">
-					<fieldset>
+					<fieldset style="border: none;">
 						<legend></legend>
 						<div>
 							<label for="code"> 驗證碼&nbsp;:&nbsp;</label> <input type="text"
@@ -80,6 +81,7 @@
 							<small>${ErrorMsgKey.CodeEmptyError}</small><small>${ErrorMsgKey.CodeFormatError}</small>
 						</div>
 						<input type="hidden" name="action" value="register_SMS_Action">
+						<input type="hidden" name="memAccount" value="${param.memAccount}" />
 					</fieldset>
 				</form>
 				<form method="post" action="<%=request.getContextPath()%>/sms.do">
@@ -93,17 +95,23 @@
 	</div>
 
 	<!-- /footer -->
-	<footer class="navbar-fixed-bottom w3-black container-fluid text-center" >
-		<div>
-			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
-			  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
-			  <li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
-			</ul>
-		</div>
-    	<span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-	</footer>
+	<footer
+		class="navbar-fixed-bottom w3-black container-fluid text-center">
+	<div>
+		<ul class="nav nav-pills w3-centered "
+			style="display: flex; font-size: 13px; justify-content: center;">
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
+		</ul>
+	</div>
+	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊
+			Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span> </footer>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

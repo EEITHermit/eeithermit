@@ -37,16 +37,18 @@
 	<div>
 		<aside>
 		<div class="navBtn">+</div>
-		<nav> <a
-			href="<%=request.getContextPath()%>/mention/mentionIndex.jsp">首頁</a>
-		<a href="/hermit/House/House_management.jsp">房屋產品維護</a> <a href="">房屋租賃維護</a>
-		<a href="/hermit/Lease/Lease.jsp">合約租賃管理</a> <a
-			href="<%=request.getContextPath()%>/calendar/calendar.jsp">預約行程管理</a>
-		<a href="">廣告輪播管理</a> <a href="">派工回報系統</a>
-		<a href="<%=request.getContextPath()%>/QAndA/backQA.jsp">會員留言查詢</a> <a
-			href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
-		<a href="">員工資料管理</a> <a
-			href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a>
+		<nav> 
+		<a href="<%=request.getContextPath()%>/mention/mentionIndex.jsp">首頁</a>
+		<a href="/hermit/House/House_management.jsp">房屋產品維護</a> 
+		<a href="">房屋租賃維護</a>
+		<a href="/hermit/Lease/Lease.jsp">合約租賃管理</a> 
+		<a href="<%=request.getContextPath()%>/calendar/calendar.jsp">預約行程管理</a>
+		<a href="">廣告輪播管理</a> 
+		<a href="">派工回報系統</a>
+		<a href="<%=request.getContextPath()%>/QAndA/backQA.jsp">會員留言查詢</a>
+	    <a href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
+		<a href="">員工資料管理</a> 
+		<a href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a>
 		<a href="<%=request.getContextPath()%>/wetalk/WebSocketBackground.jsp">線上客服</a>
 		</nav> </aside>
 
@@ -65,7 +67,7 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 			<c:if test="${empty empLoginOK}">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<%=request.getContextPath()%>/back_side_page.jsp"><span class="glyphicon glyphicon-home"></span>登入</a></li>
+					<li><a href="<%=request.getContextPath()%>/back_index_page.jsp"><span class="glyphicon glyphicon-home"></span>登入</a></li>
 				</ul>
 			</c:if>
 			
