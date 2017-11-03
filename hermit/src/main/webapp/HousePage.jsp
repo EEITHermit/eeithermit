@@ -1810,8 +1810,13 @@
 						})
 					}
 				})
+		if(hPics.length ==0){
+			hPics = [
+					{src:"<%= request.getContextPath()%>/images/no-img-1.jpg"}
+					];
+		}				
 			$('#carousel').carousel({
-			  images:hPics,  
+			  images: hPics,  
 			  currentImageIndex: 0,
 	          useDots: true,
 	          useThumbnails: true,
@@ -1819,6 +1824,7 @@
 	          useArrows: false,
 	          interval: 10000
 			});
+			
 			$("#hInfo").html(house.houseInfo);
 		}
 		loadCarousel();	

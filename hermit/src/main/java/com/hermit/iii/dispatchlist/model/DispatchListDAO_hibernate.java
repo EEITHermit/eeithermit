@@ -8,6 +8,8 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.json.simple.JSONValue;
 
+import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.qanda.model.QandAVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibernate {
@@ -97,9 +99,12 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 			for(DispatchListVO vo : resultList){
 				Map m1 = new LinkedHashMap();
 				m1.put("dlNO", vo.getDlNO());
-				m1.put("dempNO", vo.getDempNO());
-				m1.put("aempNO", vo.getAempNO());
-				m1.put("qaNO", vo.getQaNO());
+				m1.put("dempNO", vo.getDempVO().getEmpNO());
+				m1.put("dempName", vo.getDempVO().getEmpName());
+				m1.put("aempNO", vo.getAempVO().getEmpNO());
+				m1.put("aempName", vo.getAempVO().getEmpName());
+				m1.put("qaNO", vo.getQaVO().getQaNO());
+				m1.put("qDetail", vo.getQaVO().getqDetail());
 				m1.put("dlStime", vo.getDlStime().toString());
 				m1.put("dlEtime", vo.getDlEtime().toString());
 				m1.put("elesign", vo.getElesign().toString());
@@ -119,13 +124,18 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 	public static void main (String args[]){
 		DispatchListVO dvo = new DispatchListVO();
 		DispatchListDAO_hibernate dao= new DispatchListDAO_hibernate();
+		EmpVO dempVO = new EmpVO();
+		dvo.setDempVO(dempVO);
+		EmpVO aempVO = new EmpVO();
+		dvo.setAempVO(aempVO);
+		QandAVO qaVO = new QandAVO();
+		dvo.setQaVO(qaVO);
 		
 //Insert Test Start
-		
 //		System.out.println("insert start");
-//		dvo.setDempNO(30001);
-//		dvo.setAempNO(30002);
-//		dvo.setQaNO(60000001);
+//		dvo.getDempVO().setEmpNO(30001);
+//		dvo.getAempVO().setEmpNO(30002);
+//		dvo.getQaVO().setQaNO(60000001);;
 //		dvo.setDlStime(java.sql.Date.valueOf("2017-10-28"));
 //		dao.insert(dvo);
 //		System.out.println("insert success");
@@ -134,10 +144,10 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 ////Update Test Start
 
 //		System.out.println("update start");
-//		dvo.setDlNO(70000002);
-//		dvo.setDempNO(30001);
-//		dvo.setAempNO(30002);
-//		dvo.setQaNO(60000001);
+//		dvo.setDlNO(70000014);
+//		dvo.getDempVO().setEmpNO(30001);
+//		dvo.getAempVO().setEmpNO(30002);
+//		dvo.getQaVO().setQaNO(60000001);;
 //		dvo.setDlStime(java.sql.Date.valueOf("2017-10-28"));
 //		dvo.setDlEtime(java.sql.Date.valueOf("2017-11-17"));
 //		dvo.setElesign("date:image/png;base64,1234");
@@ -149,7 +159,7 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 //Delete Test Start
 		
 //		System.out.println("delete start");
-//		dao.delete(70000007);
+//		dao.delete(70000014);
 //		System.out.println("delete success");
 		
 //Delete Test End		
@@ -158,9 +168,12 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 //		System.out.println("Search One Start");
 //		dvo = dao.findByPrimaryKey(70000001);
 //		System.out.println("dlNO \t= " + dvo.getDlNO());
-//		System.out.println("dempNO \t= " + dvo.getDempNO());
-//		System.out.println("aempNO \t= " + dvo.getAempNO());
-//		System.out.println("qaNO \t= " + dvo.getQaNO());
+//		System.out.println("dempNO \t= " + dvo.getDempVO().getEmpNO());
+//		System.out.println("dempName = " + dvo.getDempVO().getEmpName());
+//		System.out.println("aempNO \t= " + dvo.getAempVO().getEmpNO());
+//		System.out.println("aempName = " + dvo.getAempVO().getEmpName());
+//		System.out.println("qaNO \t= " + dvo.getQaVO().getQaNO());
+//		System.out.println("qDetial = " + dvo.getQaVO().getQDetail());
 //		System.out.println("dlStime = " + dvo.getDlStime());
 //		System.out.println("dlEtime = " + dvo.getDlEtime());
 //		System.out.println("elesign = " + dvo.getElesign());
@@ -176,9 +189,12 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 //		for(int i=0;i<list.size();i++){
 //			dvo = list.get(i);
 //			System.out.println("dlNO \t= " + dvo.getDlNO());
-//			System.out.println("dempNO \t= " + dvo.getDempNO());
-//			System.out.println("aempNO \t= " + dvo.getAempNO());
-//			System.out.println("qaNO \t= " + dvo.getQaNO());
+//			System.out.println("dempNO \t= " + dvo.getDempVO().getEmpNO());
+//			System.out.println("dempName = " + dvo.getDempVO().getEmpName());
+//			System.out.println("aempNO \t= " + dvo.getAempVO().getEmpNO());
+//			System.out.println("aempName = " + dvo.getAempVO().getEmpName());
+//			System.out.println("qaNO \t= " + dvo.getQaVO().getQaNO());
+//			System.out.println("qDetial = " + dvo.getQaVO().getQDetail());
 //			System.out.println("dlStime = " + dvo.getDlStime());
 //			System.out.println("dlEtime = " + dvo.getDlEtime());
 //			System.out.println("elesign = " + dvo.getElesign());

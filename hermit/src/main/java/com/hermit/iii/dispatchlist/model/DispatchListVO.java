@@ -2,39 +2,43 @@ package com.hermit.iii.dispatchlist.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.qanda.model.QandAVO;
+
 public class DispatchListVO implements Serializable{
 
 	private Integer dlNO;
-	private Integer dempNO;
-	private Integer aempNO;
-	private Integer qaNO;
+	private EmpVO dempVO;
+	private EmpVO aempVO;
+	private QandAVO qaVO;
 	private Date dlStime;
 	private Date dlEtime;
 	private String elesign;
 	private String dlNote;
+	
 	public Integer getDlNO() {
 		return dlNO;
 	}
 	public void setDlNO(Integer dlNO) {
 		this.dlNO = dlNO;
 	}
-	public Integer getDempNO() {
-		return dempNO;
+	public EmpVO getDempVO() {
+		return dempVO;
 	}
-	public void setDempNO(Integer dempNO) {
-		this.dempNO = dempNO;
+	public void setDempVO(EmpVO dempVO) {
+		this.dempVO = dempVO;
 	}
-	public Integer getAempNO() {
-		return aempNO;
+	public EmpVO getAempVO() {
+		return aempVO;
 	}
-	public void setAempNO(Integer aempNO) {
-		this.aempNO = aempNO;
+	public void setAempVO(EmpVO aempVO) {
+		this.aempVO = aempVO;
 	}
-	public Integer getQaNO() {
-		return qaNO;
+	public QandAVO getQaVO() {
+		return qaVO;
 	}
-	public void setQaNO(Integer qaNO) {
-		this.qaNO = qaNO;
+	public void setQaVO(QandAVO qaVO) {
+		this.qaVO = qaVO;
 	}
 	public Date getDlStime() {
 		return dlStime;
@@ -60,5 +64,6 @@ public class DispatchListVO implements Serializable{
 	public void setDlNote(String dlNote) {
 		this.dlNote = dlNote;
 	}
+
 	
 }
