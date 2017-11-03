@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.min.css"/>
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
@@ -469,9 +470,16 @@
 				box = "on";
 			}
 		$.post('<%=request.getContextPath()%>/Login/memlogin.do?action=login',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
-			if(data == "ok"){
-			window.location = "<%=request.getContextPath()%>/index.jsp";
+			
+			var header1 = data.split("*")[0];
+			var header2 = data.split("*")[1];
+			if(header1 == "ok"){
+				console.log(data);
+				console.log(header2);
+				window.location = header2;
+				location.reload();
 			}
+			
 			var datas = data.split(";");
 			for(var d of datas){
 				var s = d.split(".")[0];

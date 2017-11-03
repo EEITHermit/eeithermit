@@ -9,7 +9,6 @@
 <jsp:include page="/fragment/index_include.jsp" />
 </head>
 <body id="body">
-
 	<footer class="w3-bottom w3-black container-fluid text-center">
 	<div>
 		<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center; position: static">

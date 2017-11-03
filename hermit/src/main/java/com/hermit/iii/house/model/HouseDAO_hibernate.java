@@ -441,34 +441,34 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 				//GET ALL_FK TEST END
 			
 				//GET ONE_FK TEST BEGIN
-//				vo = dao.GET_ONE_HOUSE_FK(20006);	
-//				System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-//				System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityNO());
-//				System.out.println("getCityName = \t\t" + vo.getCityVO().getCityName());
-//				System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughNO());
-//				System.out.println("getBoroughName = \t\t" + vo.getBoroughsVO().getBoroughName());
-//				System.out.println("getpreviewPic = \t\t" + vo.getPreviewPic());
-//				System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
-//				System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
-//				System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
-//				System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
-//				System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
-//				System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
-//				System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
-//				System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//				System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-//				System.out.println("getTypeNO = \t\t" + vo.getHouseTypeVO().getTypeNO());
-//				System.out.println("gethType = \t\t" + vo.getHouseTypeVO().gethType());
-//				System.out.println("getFormNO = \t\t" + vo.getHouseFormVO().getFormNO());
-//				System.out.println("gethForm = \t\t" +vo.getHouseFormVO().gethForm());
-//				System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
-//				System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
-//				System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
-//				Set<HousePictureVO> set = vo.getHousePictureVO();
-//				for(HousePictureVO housePictureVO:set){
-//				System.out.println("gethousePicture=\t\t"+housePictureVO.gethPicture());
-//				}
-//				System.out.println("Search Success");
+				vo = dao.GET_ONE_HOUSE_FK(20006);	
+				System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
+				System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityNO());
+				System.out.println("getCityName = \t\t" + vo.getCityVO().getCityName());
+				System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughNO());
+				System.out.println("getBoroughName = \t\t" + vo.getBoroughsVO().getBoroughName());
+				System.out.println("getpreviewPic = \t\t" + vo.getPreviewPic());
+				System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
+				System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
+				System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
+				System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
+				System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
+				System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
+				System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
+				System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+				System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+				System.out.println("getTypeNO = \t\t" + vo.getHouseTypeVO().getTypeNO());
+				System.out.println("gethType = \t\t" + vo.getHouseTypeVO().gethType());
+				System.out.println("getFormNO = \t\t" + vo.getHouseFormVO().getFormNO());
+				System.out.println("gethForm = \t\t" +vo.getHouseFormVO().gethForm());
+				System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
+				System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
+				System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
+				Set<HousePictureVO> set = vo.getHousePictureVO();
+				for(HousePictureVO housePictureVO:set){
+				System.out.println("gethousePicture=\t\t"+housePictureVO.gethPicture());
+				}
+				System.out.println("Search Success");
 				//GET ONE_FK TEST END
 
 				
