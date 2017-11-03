@@ -31,7 +31,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 label {
-	font-family: 標楷體;
+	font-family: Microsoft JhengHei;
 	font-size: 20px;
 }
 </style>
