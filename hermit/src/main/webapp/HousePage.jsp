@@ -1894,23 +1894,23 @@
 	<script>
 	// 大家一起用
 	var house = $.parseJSON('<%= request.getAttribute("House")%>');
-
 		function loadCarousel(){
 			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
 			var eqStatus = $.parseJSON('<%= request.getAttribute("eq")%>');
 			var hContentImg = $("#houseContent img");
 			document.title = house.cityName+house.boroughName+house.houseAddr+"";
-			$("#cityName").text(house.cityName+"  >  ");
-			$("#boroughName").text(house.boroughName+"  >  ");
-			$("#houseAddr").text(house.houseAddr);
-			$(".houseInformation>#Rent").html("<span style='font-size:20px'>租金:&nbsp;&nbsp;</span><span style='font-size:2.3em;color:red;'>"+house.houseRent+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
-			$(".houseInformation>#Size").html("<span style='font-size:20px'>房屋大小:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseSize+"</span><span  style='font-size:20px'>&nbsp;&nbsp;坪</span>")
-			$(".houseInformation>#Charge").html("<span style='font-size:20px'>管理費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseCharge+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
-			$(".houseInformation>#floor").html("<span style='font-size:20px'>房屋樓層:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.nowFloor+"/"+house.highestFloor+"</span><span  style='font-size:20px'>&nbsp;&nbsp;樓</span>")
-			$(".houseInformation>#water").html("<span style='font-size:20px'>水費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.waterRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
-			$(".houseInformation>#elePower").html("<span style='font-size:20px'>電費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.powerRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
-			$(".houseInformation>#hFormType").html("<span style='font-size:20px'>房屋型態:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.hForm+"/"+house.hType+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
-			
+			if(house != null){
+				$("#cityName").text(house.cityName+"  >  ");
+				$("#boroughName").text(house.boroughName+"  >  ");
+				$("#houseAddr").text(house.houseAddr);
+				$(".houseInformation>#Rent").html("<span style='font-size:20px'>租金:&nbsp;&nbsp;</span><span style='font-size:2.3em;color:red;'>"+house.houseRent+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
+				$(".houseInformation>#Size").html("<span style='font-size:20px'>房屋大小:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseSize+"</span><span  style='font-size:20px'>&nbsp;&nbsp;坪</span>")
+				$(".houseInformation>#Charge").html("<span style='font-size:20px'>管理費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseCharge+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
+				$(".houseInformation>#floor").html("<span style='font-size:20px'>房屋樓層:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.nowFloor+"/"+house.highestFloor+"</span><span  style='font-size:20px'>&nbsp;&nbsp;樓</span>")
+				$(".houseInformation>#water").html("<span style='font-size:20px'>水費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.waterRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+				$(".houseInformation>#elePower").html("<span style='font-size:20px'>電費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.powerRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+				$(".houseInformation>#hFormType").html("<span style='font-size:20px'>房屋型態:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.hForm+"/"+house.hType+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+			}
 			if(eqStatus != null)
 				$.each(eqStatus,function(eqName,value){
 					if(!value){
@@ -1921,8 +1921,13 @@
 						})
 					}
 				})
+		if(hPics.length ==0){
+			hPics = [
+					{src:"<%= request.getContextPath()%>/images/no-img-1.jpg"}
+					];
+		}				
 			$('#carousel').carousel({
-			  images:hPics,  
+			  images: hPics,  
 			  currentImageIndex: 0,
 	          useDots: true,
 	          useThumbnails: true,
@@ -1930,6 +1935,7 @@
 	          useArrows: false,
 	          interval: 10000
 			});
+			
 			$("#hInfo").html(house.houseInfo);
 		}
 		loadCarousel();	

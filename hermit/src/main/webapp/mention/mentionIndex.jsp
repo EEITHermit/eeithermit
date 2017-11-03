@@ -402,7 +402,7 @@ table {
 			if(confirm("是否確認轉入派工單")){
 				var number = $(this).parents("tr").find("td").eq(0).text();
 				var memName = $(this).parents("tr").find("td").eq(2).text();
-				window.location = "<%=request.getContextPath()%>/DispatchList/SignatureInsert.jsp?qaNO="+number+"&memName="+memName;
+				window.location = "<%=request.getContextPath()%>/DispatchList/InsertDispatchList.jsp?qaNO="+number;
 			}
 		});
 		//設定期望時間內容

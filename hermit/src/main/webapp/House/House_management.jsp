@@ -31,7 +31,7 @@ textarea{
 }
 #quickinsert{
 font-size: 50px;
-font-family: 標楷體;
+
 color: 	#F9F900;
 }
 </style>-
@@ -154,6 +154,7 @@ color: 	#F9F900;
 					</div>
 				</td>
 			</tr>
+			
 			<tr>
 				<td>
 					<input type="file" id="file">

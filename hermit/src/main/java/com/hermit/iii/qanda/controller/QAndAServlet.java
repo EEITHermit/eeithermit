@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.JSONValue;
 
 import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.member.model.MemberVO;
@@ -114,6 +117,15 @@ public class QAndAServlet extends HttpServlet {
 			QandAService qa = new QandAService();
 			qa.addQandA(memNO, null, houseNO, date, null, (byte) 1, question, null);
 			out.println("提問成功，工作人員將會盡快回答，請去Q&A區確認回復");
+			return;
+		}else if(("getOneQA").equals(mission)){
+			QandAService qa = new QandAService();
+			Integer qaNO = Integer.valueOf(request.getParameter("qaNO"));
+			QandAVO qaVO = qa.getOneQandA(qaNO);
+			Map m1 = new HashMap();
+			m1.put("qDetail", qaVO.getqDetail());
+			String qaNameStr = JSONValue.toJSONString(m1);
+			out.println(qaNameStr);
 			return;
 		}
 

@@ -181,30 +181,28 @@ padding-right:200px;
 					<textarea name="houseInfo" class="form-control" id="houseInfo">${vo.houseInfo}</textarea>
 				</div>
 		</div>
-		
-		<div class="form-group" id="HousePicture">
-			<div>
-<!-- 				<label class="col-md-5 control-label">圖片1</label> -->
-<!-- 					<div class="col-xs-2"> -->
-<!-- 						<input type="file" id="file"> -->
-<!-- 						<input type="hidden" id="housePicture" name="housePicture"/> -->
-<%-- 						<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;"> --%>
-<!-- 					</div> -->
-			</div>
-<!-- 			<div> -->
-<!-- 				<label class="col-md-1 control-label">圖片2</label> -->
-<!-- 					<div class="col-xs-2"> -->
-<!-- 						<input type="file" id="file"> -->
-<%-- 						<img src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;"> --%>
-<!-- 					</div> -->
-<!-- 			</div> -->
-		</div>	
 		<div class="form-group" >
 			<div class="col-md-6 control-label">
 				<input type="submit" value="修改">
 			</div>
 		</div>
-	</form>
+		</form>
+		<form id="insertPicForm" method="post" action="<%=request.getContextPath()%>/HousePictureServlet" enctype="multipart/form-data">
+			<div class="form-group">
+				<div class="col-md-12 control-label">
+					<input type="hidden" value="${vo.houseNO}" name="houseNO">
+					<input type="hidden" name="action" action="insertHousePicture" >
+					<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >
+					<button id="addhPicture" class="addhPicture">新增廣告圖</button>
+				</div>
+			</div>
+		</form>
+		
+		<div class="form-group" id="HousePicture">
+			<div>	
+			</div>
+		</div>	
+	
 	</div>
 <!-- 	<script src="/hermit/js/jquery-3.2.1.min.js"></script> -->
 	<script src="/hermit/js/bootstrap.js"></script>
@@ -215,7 +213,67 @@ padding-right:200px;
 	<script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 	<script>
 	$(document).ready(function(){
-		
+			var dataJson;
+			var houseDiv=$("#HousePicture>div");
+			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
+// 			console.log(hPics);
+
+			$.each(hPics,function(index,pic){
+				var cell1 = $("<div class='col-xs-2'></div>");
+				var cell2=$("<img style='border:none;height:200px;width:200px' id='hpic'>").attr("src",pic.housepic);
+				var cell3 = $("<input type='hidden'>").val(pic.housePictureNO);
+				var cell4 = $("<button type='button' class='delBtn'></button)").text("刪除");
+				var imgDiv=$("<div class='col-md-4'></div>").append(cell1,cell2,cell3,cell4);
+				houseDiv.append(imgDiv);
+				})
+				$("#addhPicture").click(function(){
+					$('input[name="action"]').val("insertHousePicture");
+					$("#insertPicForm").submit(function(e){
+						if(confirm("確定要新增嗎?")==true){
+							return;
+						}else{
+							e.preventDefault();
+						}
+					})
+				})
+// 					
+// // 					$('input[name="action"]').val("insertHousePicture");
+// 					$.post("/hermit/HousePictureServlet",{action:"insertHousePicture"},function(){
+						
+// 					})
+// 					}
+				
+// 			$("#file2").change(function(e){
+				  
+// 				  var img = e.target.files[0];
+
+// 				  if(!img.type.match('image.*')){
+// 				    alert("Whoops! That is not an image.");
+// 				    return;
+// 				  }
+// 				  iEdit.open(img, true, function(res){
+// 					  console.log(res);
+// 				    $("#hpic").attr("src", res);
+// 				  });
+				  
+// 				  $("#updatePicForm").submit(function(event){
+// // 						console.log($("#hPicture"));				  
+// 					  $("#hPicture").val($("#hpic").attr("src"));
+// 				  })
+// 				  });
+				
+				
+			$(".delBtn").on('click',function(){
+				var picNO =$(this).parent().children("input").val();
+				var picDiv = $(this).parent();
+				if(confirm("確定要刪除嗎?")==true){
+				$.post("/hermit/HousePictureServlet",{"action":"deleteHousePic","housePictureNO":picNO},function(){
+					picDiv.remove();
+				})
+				}
+			})
+			
+			
 			var dataJson;
 			var selectForm= $("#houseForm");
 			var formNO = $("#formNO").val();
@@ -251,7 +309,7 @@ padding-right:200px;
 			$.post("/hermit/HouseTypeServlet.do",{action:"getAllType"},function(data){
 // 				console.log(data);
 				var dataJson2 = $.parseJSON(data).list;
- 				console.log(dataJson2);
+//  				console.log(dataJson2);
 				$.each(dataJson2,function(index,VO){
 					var cell2=$("<option></option>").text(VO.hType);
 					cell2.val(VO.typeNO);
@@ -314,7 +372,7 @@ padding-right:200px;
 				console.log(SelectStatus.find("option").eq(2));
 			}else if(houseStatus == "未出租"){
 				SelectStatus.find("option").eq(0).prop("selected","true");
-				console.log(SelectStatus.find("option").eq(1));
+// 				console.log(SelectStatus.find("option").eq(1));
 			}else if(houseStatus=="修繕中"){
 				SelectStatus.find("option").eq(2).prop("selected","true");
 			}
