@@ -3,6 +3,7 @@ package com.hermit.iii.house.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -25,6 +26,7 @@ import com.hermit.iii.city.model.CityVO;
 import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.houseform.model.HouseFormVO;
+import com.hermit.iii.housepicture.model.HousePictureService;
 import com.hermit.iii.housepicture.model.HousePictureVO;
 import com.hermit.iii.housetype.model.HouseTypeVO;
 import com.hermit.iii.util.ConvertToBase64;
@@ -180,13 +182,28 @@ public class HouseServlet extends HttpServlet {
 			System.out.println("Search One Success");
 		}
 		if ("getOneHouse_FK".equals(action)) {
+			houseNO = Integer.valueOf(request.getParameter("houseNO"));
 			svc = new HouseService();
-			vo = svc.GET_ONE_HOUSE_FK(Integer.valueOf(request.getParameter("houseNO")));
+			vo = svc.GET_ONE_HOUSE_FK(houseNO);
 			request.setAttribute("vo", vo);
+			//測試↓
 			
-			for(HousePictureVO hVO:vo.getHousePictureVO()){
-				System.out.println(hVO.gethPicture());
+			HousePictureService Picsvc =new HousePictureService();
+			List<HousePictureVO>list=Picsvc.getHousePictures(houseNO);
+			List housePic=new LinkedList();
+			for(int i=0;i<list.size();i++){
+				Map m1=new HashMap();
+				m1.put("housepic", list.get(i).gethPicture());
+				m1.put("housePictureNO", list.get(i).getHousePictureNO());
+				housePic.add(m1);
 			}
+			String hPicJSON=JSONValue.toJSONString(housePic);
+			request.setAttribute("hPics",hPicJSON);
+			//↑測試
+			
+//			for(HousePictureVO hVO:vo.getHousePictureVO()){
+//				System.out.println(hVO.gethPicture());
+//			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/House/SingleHouseUpdate.jsp");
 			rd.forward(request, response);
