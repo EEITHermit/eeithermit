@@ -201,6 +201,8 @@ table {
 									<td>${qaVO.qaNO}</td>
 									<td>${qaVO.qTime}</td>
 									<td>${qaVO.memberVO.memName}</td>
+									<td style="display:none">$(qaVO.memberVO.memNO)</td>
+									<td style="display:none">$(qaVO.houseVO.houseNO)</td>
 									<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 									<td>${qaVO.qDetail}</td>
 									<c:if test="${qaVO.qaType == 1}">
@@ -401,8 +403,9 @@ table {
 		$('#qaTable>tbody button[name="dispatch"]').on("click",function(){
 			if(confirm("是否確認轉入派工單")){
 				var number = $(this).parents("tr").find("td").eq(0).text();
-				var memName = $(this).parents("tr").find("td").eq(2).text();
-				window.location = "<%=request.getContextPath()%>/DispatchList/InsertDispatchList.jsp?qaNO="+number;
+				var memNO = $(this).parents("tr").find("td").eq(3).text();
+				var houseNO = $(this).parents("tr").find("td").eq(4).text();
+				window.location = "<%=request.getContextPath()%>/DispatchList/InsertDispatchList.jsp?qaNO="+number+"&memNO="+memNO+"&houseNO="+houseNO;
 			}
 		});
 		//設定期望時間內容
