@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.min.css"/>
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>

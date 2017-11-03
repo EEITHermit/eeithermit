@@ -100,10 +100,121 @@
 	}
  	#reservationDiv div{ 
  		float:left;
- 		margin:3px;
+ 		padding:3px;
  		
- 	} 
+ 	}
+ 	#reservationIn *{
+  		margin:0;
+  		padding:0;
+	}
+ 	#bt {
+ 		box-sizing:border-box;
+  		transition:0.4s ease;
+  		position: relative;
+  		display:block; width:140px; height:50px; line-height: 50px; text-decoration: none; color:#2dcb70;
+  		font-weight: bolder;
+  		padding-left: 0px; margin:0 auto;
+  		font-family: 'Noto Sans TC', sans-serif;
+  		font-weight:800;
+  		font-size:30px;
+  		background: url(./images/arrow.png) no-repeat 100px center;
+  		background-size:30px 30px;
+	}
+	#bt:hover {
+ 		 background-position: 140px center;
+	}
+	#bt .line {
+  		position: absolute; background: none; transition:0.4s;
+	}
+	#bt:hover .line {
+ 		 background: #019858;
+	}
+ 
+	#bt .line-top {
+ 		 width:0px; height:2px; top:-2px; left:-110%;
+	}
+	#bt:hover .line-top {
+  		width:140px; left:-2px;
+	}
+ 
+	#bt .line-right {
+  		width:2px; height:0px; right:-2px; top:-110%;
+	}
+	#bt:hover .line-right {
+  		height:50px; top:-2px;
+	}
+ 
+	#bt .line-bottom {
+	  width:0px; height:2px; bottom:-2px; right:-110%;
+	}
+	#bt:hover .line-bottom {
+ 		 width:140px; right:-2px;
+	}
+ 
+	#bt .line-left {
+  		width:2px; height:0px; left:-2px; bottom:-110%;
+	}
+	#bt:hover .line-left {
+  		height:50px; bottom:-2px;
+	}
  	/* 	reservation css end*/
+ 	/*  question css */
+ 	#QandAIn *{
+  		margin:0;
+  		padding:0;
+	}
+ 	#questionBT {
+ 		box-sizing:border-box;
+  		transition:0.4s ease;
+  		position: relative;
+  		display:block; width:140px; height:50px; line-height: 50px; text-decoration: none; color:#f00;
+  		font-weight: bolder;
+  		padding-left: 0px; margin:0 auto;
+  		font-family: 'Noto Sans TC', sans-serif;
+  		font-weight:800;
+  		font-size:30px;
+  		background: url(./images/arrow.png) no-repeat 100px center;
+  		background-size:30px 30px;
+	}
+	#questionBT:hover {
+ 		 background-position: 140px center;
+	}
+	#questionBT .line {
+  		position: absolute; background: none; transition:0.4s;
+	}
+	#questionBT:hover .line {
+ 		 background: #f00;
+	}
+ 
+	#questionBT .line-top {
+ 		 width:0px; height:2px; top:-2px; left:-110%;
+	}
+	#questionBT:hover .line-top {
+  		width:140px; left:-2px;
+	}
+ 
+	#questionBT .line-right {
+  		width:2px; height:0px; right:-2px; top:-110%;
+	}
+	#questionBT:hover .line-right {
+  		height:50px; top:-2px;
+	}
+ 
+	#questionBT .line-bottom {
+	  width:0px; height:2px; bottom:-2px; right:-110%;
+	}
+	#questionBT:hover .line-bottom {
+ 		 width:140px; right:-2px;
+	}
+ 
+	#questionBT .line-left {
+  		width:2px; height:0px; left:-2px; bottom:-110%;
+	}
+	#questionBT:hover .line-left {
+  		height:50px; bottom:-2px;
+	}
+ 	/*  question css end*/
+ 	
 </style>
 </head>
 <body>
@@ -124,10 +235,10 @@
 			<div class="col-md-12" style="margin:10px 3px;" id="Rent"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="Size"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="Charge"></div>
-			<div class="col-md-3" style="margin:10px 3px;" id="reservation"><button id="bt">預約</button></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="reservation"><div id="reservationIn"><a id="bt"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span>預約</a></div></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="floor"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="hFormType"></div>
-			<div class="col-md-3" style="margin:10px 3px;" id="QandA"><button id="questionBT">詢問</button></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="QandA"><div id="QandAIn"><a id="questionBT"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span>詢問</a></div></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="water"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="elePower"></div>
 		</div>
@@ -1969,7 +2080,7 @@
 		    			 alert("請先登入");
 		    		 }else{
 		    			 $.post("<%=request.getContextPath()%>/QAndAServlet?mission=question"
-		    					 ,{question:$("#question").val(),member:"${LoginOK.memNO}",house:${param.NO}}
+		    					 ,{question:$("#question").val(),member:"${LoginOK.memNO}",house:"${param.NO}"}
 		    		 	,function(data){
 		    				 alert(data);
 		    				 $("#question").val("");
