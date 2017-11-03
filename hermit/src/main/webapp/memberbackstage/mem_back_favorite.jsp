@@ -69,6 +69,14 @@ a:link, a:visited, a:hover, a:active {
 	font-style: italic;
 	margin-left: 10%;
 }
+
+.favremove {
+	font-size: 1em;
+	font-weight: 900;
+	margin-left: 2%;
+	color : red;
+}
+
 /* Snackbar / Toast */
 #snackbar {
 	visibility: hidden;
@@ -92,53 +100,30 @@ a:link, a:visited, a:hover, a:active {
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@
--webkit-keyframes fadein {
-	from {bottom: 0;
-	opacity: 0;
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 100px; opacity: 1;}
+}
+	
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 100px; opacity: 1;}
+}
+	
+@-webkit-keyframes fadeout {
+    from {bottom: 100px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+	
+@keyframes fadeout {
+    from {bottom: 100px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }
 
-to {
-	bottom: 100px;
-	opacity: 1;
+#content {
+	margin-bottom: 5em;
 }
 
-}
-@
-keyframes fadein {
-	from {bottom: 0;
-	opacity: 0;
-}
-
-to {
-	bottom: 100px;
-	opacity: 1;
-}
-
-}
-@
--webkit-keyframes fadeout {
-	from {bottom: 100px;
-	opacity: 1;
-}
-
-to {
-	bottom: 0;
-	opacity: 0;
-}
-
-}
-@
-keyframes fadeout {
-	from {bottom: 100px;
-	opacity: 1;
-}
-
-to {
-	bottom: 0;
-	opacity: 0;
-}
-}
 </style>
 	<div id="content">
 
@@ -252,36 +237,18 @@ to {
 	<!-- /content -->
 
 	<div id="snackbar">已經成功移除</div>
-	<div id="footer">
-
-		<!-- 		<div class="container">
-			<hr />
-			<p style="text-align: center">Hermit House for Rent &reg;</p>
-		</div> -->
-		<!-- /container -->
-	</div>
-	<!-- /footer -->
-	<footer
-		class="navbar-fixed-bottom w3-black container-fluid text-center">
-	<div>
-		<ul class="nav nav-pills w3-centered "
-			style="display: flex; font-size: 13px; justify-content: center;">
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_service_page.jsp">服務條款</a></li>
-			<li role="presentation"><a
-				href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">隱私權聲明</a></li>
-		</ul>
-	</div>
-	<span class="text-center"><p style="font-size: 10px">赫米特開發團隊
-			Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-	</div>
+	
+	<footer class="w3-bottom w3-black container-fluid text-center">
+		<div>
+			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
+				<li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
+				<li role="presentation"><a href="<%=request.getContextPath()%>/register/law_duty_page.jsp">免責聲明</a></li>
+				<li role="presentation"><a href="<%=request.getContextPath()%>/register/law_privacy_page.jsp">服務條款</a></li>
+				<li role="presentation"><a href="<%=request.getContextPath()%>/register/law_service_page.jsp">隱私權聲明</a></li>
+			</ul>
+		</div>
+	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
 	</footer>
-
-
 
 	<!-- Le javascript
 ================================================== -->
@@ -312,11 +279,21 @@ to {
 				success : function(data) {
 					var fragment = $(document.createDocumentFragment());
 					$.each(data,function(k, v) {
+						var addlink = '';
+						
+						if (v.houseStatus == '未出租') {
+							addlink = '<a href="<%=request.getContextPath()%>/HousePage?NO='+v.houseNO+'"><button type="button" title="前往" class="btn btn-success"><span class="glyphicon glyphicon-forward"></span></button></a>'
+						} else {
+							addlink = '<span class="favremove">此房屋頁面資訊已下架，煩請移除追蹤</span>'
+						}
+						
 						var cell = $('<p></p>').html('<img width="40px" src="<%=request.getContextPath()%>/images/like_y.png"><span class="favtitle">'
 														+ v.houseTitle
 														+ '</span><span class="favstatus">'
 														+ v.houseStatus
-														+ '</span><button type="button" class="close">&times;</button><p class="favaddr">'
+														+ '</span>'
+														+ addlink
+														+'<button type="button" class="close">&times;</button><p class="favaddr">'
 														+ v.houseAddr
 														+ '</p><hr /><img height="50" width="50" src="'+v.previewPic+'"><span class="favrent">租金：'
 														+ v.houseRent
@@ -328,6 +305,9 @@ to {
 					});
 					$("#selectable").html(fragment);
 					$("#selectable").selectable();
+					
+					$('.favremove').parents('li').css('background','#DDDDDD');
+					
 					//close
 					$('.close').click(function() {
 						var fav = $(this).parents('li').find('input').val();
