@@ -29,8 +29,8 @@ public class MemLoginServlet extends HttpServlet {
 		String account = request.getParameter("account");
 		String pwd = request.getParameter("pwd");
 		String flag = request.getParameter("remember");
-
 		String action = request.getParameter("action");
+		String requestHeader = request.getHeader("Referer");
 
 		if ("login".equals(action)) {
 			// 驗證碼
@@ -113,21 +113,21 @@ public class MemLoginServlet extends HttpServlet {
 					response.addCookie(pwdCookie);
 					response.addCookie(flagCookie);
 				}
-				out.print("ok");
+				out.println("ok*" + requestHeader);
 				return;
 			} else {
 				out.print(errMsg);
 				return;
 			}
-		}else if("check".equals(action)){
+		} else if ("check".equals(action)) {
 			Object s = session.getAttribute("LoginOK");
-			if(s!=null){
+			if (s != null) {
 				out.print("OK");
 				return;
-			}else{
+			} else {
 				out.print("NO");
 				return;
-			}			
+			}
 		}
 	}
 }

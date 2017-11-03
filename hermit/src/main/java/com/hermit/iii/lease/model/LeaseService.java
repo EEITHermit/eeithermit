@@ -89,4 +89,8 @@ public class LeaseService {
 	public ArrayList<HouseVO> findHouseBymemNO(Integer memNO){
 		return dao.findHouseBymemNO(memNO);
 	}
+	//查詢快過期之租賃契約
+	public ArrayList<LeaseVO> getAllByBoroughNO(Integer boroughNO){
+		return dao.getAllByBoroughNO(boroughNO);
+	}
 }
