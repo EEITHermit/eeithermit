@@ -19,7 +19,7 @@ import com.hermit.iii.dispatchlist.model.DispatchListService;
 import com.hermit.iii.dispatchlist.model.DispatchListVO;
 import com.hermit.iii.dispatchlist.model.DispatchListVO_orignal;
 
-@WebServlet("/DispatchList/DispatchListServlet")
+@WebServlet("/Dispatch")
 public class DispatchListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,9 +42,12 @@ public class DispatchListServlet extends HttpServlet {
 		
 		if("InsertDispatchList".equals(action)){
 			dls = new DispatchListService();
-			dempno = Integer.valueOf(request.getParameter("dempno"));
-			aempno = Integer.valueOf(request.getParameter("aempno"));
-			qano = Integer.valueOf(request.getParameter("qano"));
+			System.out.println(request.getParameter("dempNO"));
+			System.out.println(request.getParameter("aempNO"));
+			System.out.println(request.getParameter("qaNO"));
+			dempno = Integer.valueOf(request.getParameter("dempNO"));
+			aempno = Integer.valueOf(request.getParameter("aempNO"));
+			qano = Integer.valueOf(request.getParameter("qaNO"));
 			dlstime = java.sql.Date.valueOf(LocalDate.now());
 			
 			dls.addDispatchList(dempno, aempno, qano, dlstime);

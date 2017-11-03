@@ -664,7 +664,7 @@ create table DispatchList(
 	dlNO		decimal(8,0) IDENTITY(70000001,1)	NOT NULL,	--派工單號
 	dempNO		decimal(5,0)		NOT NULL,					--指派人
 	aempNO		decimal(5,0)		NOT NULL,					--負責人
-	qaNO		decimal(8, 0)		NOT NULL,					--問與答編號
+	qaNO		decimal(8, 0)		NULL,						--問與答編號
 	dlStime		date				NOT NULL,					--起始時間
 	dlEtime		date,											--結束時間
 	elesign		varchar(max),									--電子簽名

@@ -25,6 +25,13 @@
 	.main{
  		background-color:#ADADAD; 
 	}
+	aside a {
+		font-family: Microsoft JhengHei;
+	}
+	aside a:HOVER {
+		font-size:1.5em;
+		text-decoration:none;
+	}
 </style>
 <body>
 	<div>

@@ -201,8 +201,8 @@ table {
 									<td>${qaVO.qaNO}</td>
 									<td>${qaVO.qTime}</td>
 									<td>${qaVO.memberVO.memName}</td>
-									<td style="display:none">$(qaVO.memberVO.memNO)</td>
-									<td style="display:none">$(qaVO.houseVO.houseNO)</td>
+									<td style="display:none">${qaVO.memberVO.memNO}</td>
+									<td style="display:none">${qaVO.houseVO.houseNO}</td>
 									<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 									<td>${qaVO.qDetail}</td>
 									<c:if test="${qaVO.qaType == 1}">

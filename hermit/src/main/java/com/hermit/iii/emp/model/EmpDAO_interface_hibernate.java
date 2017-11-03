@@ -12,4 +12,6 @@ public interface EmpDAO_interface_hibernate {
 	/*** 自訂指令 ***/
 	// 驗證帳號是否存在
 	public EmpVO findByAccount(String empAccount);
+	//依職位搜尋，派工用
+	public List<EmpVO> getByPost(Integer post);
 }

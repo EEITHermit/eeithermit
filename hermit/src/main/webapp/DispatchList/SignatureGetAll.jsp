@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>查詢全部</title>
-
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
@@ -56,7 +55,7 @@
 		var table = $("#myTable");
 		var tbody = $("#myTable>tbody");
 		function ajaxPost(){
-				$.post("DispatchListServlet",{"action":"getAllDispatchListForJson"},function(data){
+				$.post("<%= request.getContextPath()%>/Dispatch",{"action":"getAllDispatchListForJson"},function(data){
 					console.log(data);
 					dataJson = $.parseJSON(data).list;
 					tbody.empty();

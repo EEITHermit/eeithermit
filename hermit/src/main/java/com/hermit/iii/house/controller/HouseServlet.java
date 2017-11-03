@@ -262,6 +262,19 @@ public class HouseServlet extends HttpServlet {
 			out.close();
 			System.out.println("Get All For JSON success");
 		}
+		if ("getOneHouseToJSON".equals(action)) {
+			svc = new HouseService();
+			vo = svc.getOneHouse(Integer.valueOf(request.getParameter("houseNO")));
+			Map m1 = new HashMap();
+			String address = vo.getCityVO().getCityName()+vo.getBoroughsVO().getBoroughName()+vo.getHouseAddr();
+			m1.put("houseAddress", address);
+			m1.put("borough", vo.getBoroughsVO().getBoroughNO());
+			PrintWriter out = response.getWriter();
+			String addrJSON = JSONValue.toJSONString(m1);
+			out.print(addrJSON);
+			out.flush();
+			return;
+		}
 
 	}
 
