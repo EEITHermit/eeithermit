@@ -69,6 +69,15 @@ public class MemLoginServlet extends HttpServlet {
 			// 同時將傳回值放入MemVO型別的變數vo之內。
 			MemberVO vo = ls.check(account, pwd);
 			if (vo != null) {
+				if (vo.getMemStatus().equals("黑名單會員")) {
+					errMsg += "5.*您的帳號已達違規次數不能使用;";
+					out.println(errMsg);
+					return;
+				} else if (vo.getMemStatus().equals("未驗證會員")) {
+					errMsg += ("6.您的帳號未完成手機驗證，現在會再傳一組新的驗證碼至您的手機，請先完成驗證。");
+					out.println(errMsg);
+					return;
+				}
 				session.setAttribute("LoginOK", vo);
 			} else {
 				errMsg += "5.*該帳號不存在或密碼錯誤;";
@@ -113,7 +122,7 @@ public class MemLoginServlet extends HttpServlet {
 					response.addCookie(pwdCookie);
 					response.addCookie(flagCookie);
 				}
-				out.println("ok*" + requestHeader);
+				out.print("ok*" + requestHeader);
 				return;
 			} else {
 				out.print(errMsg);

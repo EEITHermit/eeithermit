@@ -13,11 +13,7 @@ import org.hibernate.Session;
 import com.hermit.iii.util.HibernateUtil;
 
 public class InfractionJNDIDAO_hibernate implements InfractionDAO_interface_hibernate {
-	Session session;
-	public InfractionJNDIDAO_hibernate() {
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-	}
-
+	
 	private static final String INSERT = "insert into Infraction values(?,?,getDate(),?)";
 	// 同上順序，全改通吃法(PK流水號當條件)
 	private static final String UPDATE_STMT = "UPDATE Infraction SET memNO=?, reason=?, inDate=?, empNO=? WHERE inNO = ?";
@@ -31,6 +27,7 @@ public class InfractionJNDIDAO_hibernate implements InfractionDAO_interface_hibe
 	@Override
 	public Integer insert(InfractionVO inVO) {
 		Integer result = 0;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	try{
 		session.getTransaction().begin();
 		inVO.setInDate(new Date(System.currentTimeMillis()));
@@ -46,6 +43,7 @@ public class InfractionJNDIDAO_hibernate implements InfractionDAO_interface_hibe
 
 	@Override
 	public void update(InfractionVO infractionVO) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			session.saveOrUpdate(infractionVO);
@@ -59,6 +57,7 @@ public class InfractionJNDIDAO_hibernate implements InfractionDAO_interface_hibe
 
 	@Override
 	public void delete(Integer inNO) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			InfractionVO inVO = session.get(InfractionVO.class, inNO);
@@ -73,6 +72,7 @@ public class InfractionJNDIDAO_hibernate implements InfractionDAO_interface_hibe
 	@Override
 	public InfractionVO findByPrimaryKey(Integer inNO) {
 		InfractionVO infractionVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			infractionVO = session.get(InfractionVO.class, inNO);
@@ -87,6 +87,7 @@ public class InfractionJNDIDAO_hibernate implements InfractionDAO_interface_hibe
 	@Override
 	public Set<InfractionVO> getAll() {
 		Set<InfractionVO> set = new LinkedHashSet<InfractionVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.getTransaction().begin();
 			Query query = session.createQuery(GET_ALL_STMT_H);

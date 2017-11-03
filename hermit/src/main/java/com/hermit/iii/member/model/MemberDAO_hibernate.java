@@ -123,6 +123,7 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 			}
 			session.getTransaction().commit();
 		}catch(Exception e){
+			e.printStackTrace();
 			session.getTransaction().rollback();
 		}
 	}
