@@ -128,13 +128,7 @@ public class MemberServlet extends HttpServlet {
 				Integer memInfract = 0;
 				memberSvc.addMember(memTel, memAccount, memPwd, memName, memGender, memEmail, memRegister, memStatus,
 						memInfract, memImage);
-				
-				// 註冊完直接登入
-				MemberDAO_hibernate dao = new MemberDAO_hibernate();
-				MemberVO vo = dao.findByAccount(memAccount);
-				System.out.println(vo.getMemAccount());
-				session.setAttribute("LoginOK", vo);
-				
+
 				/**** 3.新增完成 ****/
 				smscode = new SendBySMS().Process(memTel); // 傳送簡訊驗證
 				session.setAttribute("SMScode", smscode);
@@ -354,7 +348,7 @@ public class MemberServlet extends HttpServlet {
 				/**** 2.開始新增資料 ****/
 				MemberService memberSvc = new MemberService();
 				memberSvc.addMember(memTel, memAccount, memPwd, memName, memGender, memEmail, memRegister, memStatus,
-						memInfract, memImage);		
+						memInfract, memImage);
 				/**** 3.新增完成 ****/
 				response.sendRedirect("management/manage_member_page.jsp");
 			} catch (Exception e) {
@@ -363,10 +357,10 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(request, response);
 			}
 		}
-		//變更密碼為真實密碼
-		if("getOneMember".equals(action)){
-			MemberVO vo=(MemberVO)session.getAttribute("LoginOK");
-			String Pwd=new SecurityCipher().decryptString(vo.getMemPwd());
+		// 變更密碼為真實密碼
+		if ("getOneMember".equals(action)) {
+			MemberVO vo = (MemberVO) session.getAttribute("LoginOK");
+			String Pwd = new SecurityCipher().decryptString(vo.getMemPwd());
 			session.setAttribute("realPwd", Pwd);
 			RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/mem_back_reset.jsp");
 			rd.forward(request, response);
@@ -377,7 +371,7 @@ public class MemberServlet extends HttpServlet {
 
 			MemberVO memberVO = new MemberVO();
 			String memTel = request.getParameter("memTel");
-			
+
 			String memPwd = request.getParameter("memPwd");
 			String memPwdReg = "^[(a-zA-Z0-9@)]{2,10}$";
 			if (memPwd.trim().length() == 0) {
@@ -416,9 +410,9 @@ public class MemberServlet extends HttpServlet {
 			// System.out.println(memImage);
 			memberVO = memSvc.update(memNO, memTel, memAccount, memPwd, memName, memGender, memEmail, memStatus,
 					memInfract, memImage);
-			session.setAttribute("realPwd",memPwd);
+			session.setAttribute("realPwd", memPwd);
 			session.setAttribute("LoginOK", memberVO);
-//			request.setAttribute("memberVO", memberVO);
+			// request.setAttribute("memberVO", memberVO);
 			request.setAttribute("Msg", "修改成功");
 			response.sendRedirect("/hermit/memberbackstage/mem_back_index.jsp");
 			return;
@@ -596,7 +590,7 @@ public class MemberServlet extends HttpServlet {
 				// 準備JSON包裝
 				List<Object> jsonList = new ArrayList<Object>();
 				for (MemberVO member : set) {
-					Map<String,Object> jm = new HashMap<String,Object>();
+					Map<String, Object> jm = new HashMap<String, Object>();
 					jm.put("memNO", member.getMemNO());
 					jm.put("memTel", member.getMemTel());
 					jm.put("memAccount", member.getMemAccount());
@@ -621,6 +615,17 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher failureView = request.getRequestDispatcher("/management/manage_member_page.jsp");
 				failureView.forward(request, response);
 			}
+		}
+		if ("checkAgain".equals(action)) {
+			String memAccount = request.getParameter("memAccount");
+			MemberDAO_hibernate memberDAO = new MemberDAO_hibernate();
+			String memTel = (memberDAO.findByAccount(memAccount)).getMemTel();
+
+			smscode = new SendBySMS().Process(memTel); // 傳送簡訊驗證
+			session.setAttribute("SMScode", smscode);
+			session.setAttribute("telholder", memTel);
+			System.out.println(memAccount + "123456");
+			response.sendRedirect("register/register_notice_page.jsp?memAccount=" + memAccount);
 		}
 	}
 }

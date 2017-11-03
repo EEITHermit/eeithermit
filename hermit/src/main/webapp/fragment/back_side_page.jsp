@@ -58,7 +58,7 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 			<c:if test="${empty empLoginOK}">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<%=request.getContextPath()%>/back_side_page.jsp"><span class="glyphicon glyphicon-home"></span>登入</a></li>
+					<li><a href="<%=request.getContextPath()%>/back_index_page.jsp"><span class="glyphicon glyphicon-home"></span>登入</a></li>
 				</ul>
 			</c:if>
 			
