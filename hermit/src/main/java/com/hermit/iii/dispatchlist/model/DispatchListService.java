@@ -1,6 +1,10 @@
 package com.hermit.iii.dispatchlist.model;
 
 import java.util.List;
+
+import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.qanda.model.QandAVO;
+
 import java.sql.Date;
 
 
@@ -13,9 +17,15 @@ public class DispatchListService {
 	
 	public DispatchListVO addDispatchList(int dempno , int aempno , int qano , Date dlstime){
 		DispatchListVO dlVO = new DispatchListVO();
-		dlVO.setDempNO(dempno);
-		dlVO.setAempNO(aempno);
-		dlVO.setQaNO(qano);
+		EmpVO dempVO = new EmpVO();
+		dlVO.setDempVO(dempVO);
+		EmpVO aempVO = new EmpVO();
+		dlVO.setAempVO(aempVO);
+		QandAVO qaVO = new QandAVO();
+		dlVO.setQaVO(qaVO);
+		dlVO.getDempVO().setEmpNO(dempno);
+		dlVO.getAempVO().setEmpNO(aempno);
+		dlVO.getQaVO().setQaNO(qano);
 		dlVO.setDlStime(dlstime);
 		dao.insert(dlVO);
 		return dlVO;
@@ -24,16 +34,23 @@ public class DispatchListService {
 	
 	public DispatchListVO updateDispatchList(int dlno, int dempno,int aempno,int qano,Date dlstime,Date dletime,String elesign,String dlnote){
 		 DispatchListVO dlVO = new DispatchListVO();
-		 dlVO.setDlNO(dlno);
-		 dlVO.setDempNO(dempno);
-		 dlVO.setAempNO(aempno);
-		 dlVO.setQaNO(qano);
-		 dlVO.setDlStime(dlstime);
-		 dlVO.setDlEtime(dletime);
-		 dlVO.setElesign(elesign);
-		 dlVO.setDlNote(dlnote);
-		 dao.update(dlVO);
-		 return dlVO;
+		 EmpVO dempVO = new EmpVO();
+		dlVO.setDempVO(dempVO);
+		EmpVO aempVO = new EmpVO();
+		dlVO.setAempVO(aempVO);
+		QandAVO qaVO = new QandAVO();
+		dlVO.setQaVO(qaVO);
+			
+		dlVO.setDlNO(dlno);
+		dlVO.getDempVO().setEmpNO(dempno);
+		dlVO.getAempVO().setEmpNO(aempno);
+		dlVO.getQaVO().setQaNO(qano);
+		dlVO.setDlStime(dlstime);
+		dlVO.setDlEtime(dletime);
+		dlVO.setElesign(elesign);
+		dlVO.setDlNote(dlnote);
+		dao.update(dlVO);
+		return dlVO;
 	}
 	
 	public void deleteDispatchList(int dlno){
