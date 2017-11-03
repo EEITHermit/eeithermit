@@ -67,9 +67,9 @@
 				<h1 id="note2">
 					<span class="label label-warning">以便完成認證手續</span>
 				</h1>
-				<form method="post" action="<%=request.getContextPath()%>/sms.do"
-					id="theForm">
-					<fieldset>
+
+				<form method="post" action="<%=request.getContextPath()%>/sms.do" id="theForm">
+					<fieldset style="border: none;">
 						<legend></legend>
 						<div>
 							<label for="code"> 驗證碼&nbsp;:&nbsp;</label> <input type="text"
