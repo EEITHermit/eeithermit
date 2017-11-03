@@ -177,7 +177,9 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 				session.saveOrUpdate(vo);
 			}
 			session.getTransaction().commit();
-		} catch (Exception e) {
+			
+		}catch(Exception e){
+			e.printStackTrace();
 			session.getTransaction().rollback();
 		}
 	}

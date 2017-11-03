@@ -201,8 +201,8 @@ table {
 									<td>${qaVO.qaNO}</td>
 									<td>${qaVO.qTime}</td>
 									<td>${qaVO.memberVO.memName}</td>
-									<td style="display:none">$(qaVO.memberVO.memNO)</td>
-									<td style="display:none">$(qaVO.houseVO.houseNO)</td>
+									<td style="display:none">${qaVO.memberVO.memNO}</td>
+									<td style="display:none">${qaVO.houseVO.houseNO}</td>
 									<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 									<td>${qaVO.qDetail}</td>
 									<c:if test="${qaVO.qaType == 1}">
@@ -378,14 +378,14 @@ table {
 			};
 		});
 		
-		//設定table
-		var tds = $("#qaTable>tbody td");
-		$(tds[0]).css("width","15%");
-		$(tds[1]).css("width","15%");
-		$(tds[2]).css("width","15%");
-		$(tds[3]).css("width","15%");
-		$(tds[4]).css("width","30%");
-		$(tds[5]).css("width","10%");
+// 		//設定table
+// 		var tds = $("#qaTable>tbody td");
+// 		$(tds[0]).css("width","15%");
+// 		$(tds[1]).css("width","15%");
+// 		$(tds[2]).css("width","15%");
+// 		$(tds[3]).css("width","15%");
+// 		$(tds[4]).css("width","30%");
+// 		$(tds[5]).css("width","10%");
 		//設定回應表單彈出視窗
 		$("#qaForm").dialog({
 			  autoOpen: false,

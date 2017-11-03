@@ -1,11 +1,19 @@
 package com.hermit.iii.sms.controller;
 
-import java.io.*;
-import java.util.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.hermit.iii.member.model.MemberDAO_hibernate;
 import com.hermit.iii.member.model.MemberService;
+import com.hermit.iii.member.model.MemberVO;
 import com.hermit.iii.util.SendBySMS;
 
 public class SMSServlet extends HttpServlet {
@@ -25,7 +33,8 @@ public class SMSServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String action = request.getParameter("action");
-
+		String memAccount = request.getParameter("memAccount");
+		System.out.println(memAccount);
 		if ("register_SMS_Action".equals(action)) {
 			// 準備存放錯誤訊息的Map物件
 			Map<String, String> errorMsgMap = new HashMap<String, String>();
@@ -73,6 +82,13 @@ public class SMSServlet extends HttpServlet {
 					memberSvc.updateStatusByTel(memTel, "FB驗證");
 				else
 					memberSvc.updateStatusByTel(memTel, "一般會員驗證");
+
+				// 註冊完直接登入
+				MemberDAO_hibernate dao = new MemberDAO_hibernate();
+				MemberVO vo = dao.findByAccount(memAccount);
+				System.out.println(vo.getMemAccount());
+				session.setAttribute("LoginOK", vo);
+
 				/**** 3.處理完成 ****/
 				response.sendRedirect("register/register_success_page.jsp");
 			} catch (Exception e) {
