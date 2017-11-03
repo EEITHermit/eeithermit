@@ -187,18 +187,21 @@ padding-right:200px;
 			</div>
 		</div>
 		</form>
+		<form id="insertPicForm" method="post" action="<%=request.getContextPath()%>/HousePictureServlet" enctype="multipart/form-data">
+			<div class="form-group">
+				<div class="col-md-12 control-label">
+					<input type="hidden" value="${vo.houseNO}" name="houseNO">
+					<input type="hidden" name="action" action="insertHousePicture" >
+					<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >
+					<button id="addhPicture" class="addhPicture">新增廣告圖</button>
+				</div>
+			</div>
+		</form>
+		
 		<div class="form-group" id="HousePicture">
 			<div>	
 			</div>
 		</div>	
-		<form id="insertPicForm" method="post" action="<%=request.getContextPath()%>/HousePictureServlet">
-			<div>
-				<input type="hidden" value="${vo.houseNO}" name="houseNO">
-				<input type="hidden" name="action" >
-				<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >
-				<button id="addhPicture" class="addhPicture">新增廣告圖</button>
-			</div>
-		</form>
 	
 	</div>
 <!-- 	<script src="/hermit/js/jquery-3.2.1.min.js"></script> -->
@@ -216,16 +219,30 @@ padding-right:200px;
 // 			console.log(hPics);
 
 			$.each(hPics,function(index,pic){
-				var cell1=$("<img style='border:none;max-height:200px;max-width:200px' id='hpic'>").attr("src",pic.housepic);
-				var cell2 = $("<input type='hidden'>").val(pic.housePictureNO);
-				var cell3 = $("<button type='button' class='delBtn'></button)").text("刪除");
-				var cell4 = $("<input type='file'>").attr("id","file2");
-				var imgDiv=$("<div></div>").append(cell1,cell2,cell3,cell4);
+				var cell1 = $("<div class='col-xs-2'></div>");
+				var cell2=$("<img style='border:none;height:200px;width:200px' id='hpic'>").attr("src",pic.housepic);
+				var cell3 = $("<input type='hidden'>").val(pic.housePictureNO);
+				var cell4 = $("<button type='button' class='delBtn'></button)").text("刪除");
+				var imgDiv=$("<div class='col-md-4'></div>").append(cell1,cell2,cell3,cell4);
 				houseDiv.append(imgDiv);
 				})
 				$("#addhPicture").click(function(){
-					$('input[name="action"]').val("insertHousePicture")
+					$('input[name="action"]').val("insertHousePicture");
+					$("#insertPicForm").submit(function(e){
+						if(confirm("確定要新增嗎?")==true){
+							return;
+						}else{
+							e.preventDefault();
+						}
+					})
 				})
+// 					
+// // 					$('input[name="action"]').val("insertHousePicture");
+// 					$.post("/hermit/HousePictureServlet",{action:"insertHousePicture"},function(){
+						
+// 					})
+// 					}
+				
 // 			$("#file2").change(function(e){
 				  
 // 				  var img = e.target.files[0];

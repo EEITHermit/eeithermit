@@ -3,6 +3,7 @@ package com.hermit.iii.housepicture.contorller;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +44,10 @@ public class HousePictureServlet extends HttpServlet {
 					svc.insertHousePicture(strBase64, houseNO);
 				}
 			}
-			response.sendRedirect("/hermit/housepicture/InsertHousePicture.jsp");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/House.do?action=getOneHouse_FK&houseNO="+houseNO);
+			rd.forward(request, response);
+//			response.sendRedirect("/hermit/House/SingleHouseUpdate.jsp");
 		}
 		if("deleteHousePic".equals(action)){
 			Integer housePictureNO=Integer.valueOf(request.getParameter("housePictureNO"));
