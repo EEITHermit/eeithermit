@@ -35,7 +35,8 @@
 		<a href="/hermit/House/House_management.jsp">房屋產品維護</a> <a href="">房屋租賃維護</a>
 		<a href="/hermit/Lease/Lease.jsp">合約租賃管理</a> <a
 			href="<%=request.getContextPath()%>/calendar/calendar.jsp">預約行程管理</a>
-		<a href="">廣告輪播管理</a> <a href="">派工回報系統</a> <a href="">會員留言管理</a> <a
+		<a href="">廣告輪播管理</a> <a href="">派工回報系統</a>
+		<a href="<%=request.getContextPath()%>/QAndA/backQA.jsp">會員留言查詢</a> <a
 			href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
 		<a href="">員工資料管理</a> <a
 			href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a>

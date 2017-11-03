@@ -102,7 +102,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 		}
 		return set;
 	}
-	private static String GET_ALL_BY_MEMBER_NO_H = "from QandAVO where memNO = ? ORDER BY qTime DESC";
+	private static String GET_ALL_BY_MEMBER_NO_H = "from QandAVO where memNO = ? ORDER BY qaNO DESC";
 	public ArrayList<QandAVO> getAllByMemberNO(Integer memNO){
 		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -157,5 +157,39 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 			} 
 			return array;
 		}
-	
+		private static String GET_ALL_NOT_DEAL = "FROM QandAVO where empNO = null";
+		@Override
+		public ArrayList<QandAVO> getAllNotDeal(){
+			ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try{
+				session.getTransaction().begin();
+				Query query = session.createQuery(GET_ALL_NOT_DEAL);
+				List<QandAVO> list = query.list();
+				array.addAll(list);
+				session.getTransaction().commit();
+			}catch(Exception e){
+				session.getTransaction().rollback();
+				e.printStackTrace();
+			}
+			return array;
+		}
+		
+		private static String GET_ALL_DEALED = "FROM QandAVO where empNO != null";
+		@Override
+		public ArrayList<QandAVO> getAllDealed(){
+			ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try{
+				session.getTransaction().begin();
+				Query query = session.createQuery(GET_ALL_DEALED);
+				List<QandAVO> list = query.list();
+				array.addAll(list);
+				session.getTransaction().commit();
+			}catch(Exception e){
+				session.getTransaction().rollback();
+				e.printStackTrace();
+			}
+			return array;
+		}
 }

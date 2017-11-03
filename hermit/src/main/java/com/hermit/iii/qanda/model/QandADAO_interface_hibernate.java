@@ -19,4 +19,8 @@ public interface QandADAO_interface_hibernate {
 	public ArrayList<QandAVO> getAllByBoroughNO0(Integer boroughNO);
 	//漢勳加
 	public ArrayList<QandAVO> getAllByBoroughNO1(Integer boroughNO);
+	//漢勳加
+	public ArrayList<QandAVO> getAllNotDeal();
+	//漢勳加
+	public ArrayList<QandAVO> getAllDealed();
 }
