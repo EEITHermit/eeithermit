@@ -1,9 +1,10 @@
 package com.hermit.iii.member.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
 
-import org.springframework.context.*;
-import org.springframework.context.support.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MemberService {
 
