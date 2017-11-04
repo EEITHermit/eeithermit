@@ -34,7 +34,7 @@
 		<p style="color:#97CBFF">___________________________________________________________________________________________________</p><br/>
 		<button type="button" class="btn btn-primary btn-lg" id="query">查看黑名單事件</button><br/><br/>
 		<div id = "queryDiv">
-			<table id="queryTable" class="hover">
+			<table id="queryTable" class="hover" style="background-color:orange;">
 			<thead>
 				<tr>
 					<th>事件編號</th><th>會員編號</th><th>會員姓名</th><th>申請原由</th><th>申請時間</th><th>申請員工</th>

@@ -36,7 +36,7 @@ public class mentionServlet extends HttpServlet {
 			Integer empNO = Integer.valueOf(request.getParameter("empNO"));
 			Integer result = res.updateStatus(resNO, empNO);
 			if(result == 1){
-				out.print("接案成功，請盡快與會員聯絡");
+				out.print("接案成功，即將前往預約頁面");
 				return;
 			}else{
 				out.print("接案失敗，已有別人接管此案");

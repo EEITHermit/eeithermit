@@ -341,6 +341,14 @@
 			"timeFormat":"HH:mm:ss",
 			controlType:"select"  //選擇方式
 		});
+		//設定推播頁面傳來之請求，開啟新增方塊
+		if("${param.mission}" == "mentionInsert"){
+			dialogIn.dialog("open");
+			var memberIn = "${param.member}\t";
+			var houseIn = "${param.house}\t";
+			$("#memberIn").val(memberIn);
+			$("#houseIn").val(houseIn);
+		}
 	}
 	
 	
