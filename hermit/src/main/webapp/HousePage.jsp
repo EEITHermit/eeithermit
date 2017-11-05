@@ -1819,7 +1819,7 @@
 	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
 	</footer>
 		<!-- 預約彈出div -->
-		<div id="reservationDiv" title="預約時間" style="z-index: 1001;">
+		<div id="reservationDiv" title="預約時間" style="background-color:lemonchiffon;">
 		<form id="reservationForm" action="<%= request.getContextPath() %>/reservationServlet?mission=reservation" method="POST">
 			<!-- 取得會員帳號 -->
 			<input type="hidden" name="memberNo" value="${LoginOK.memNO}"/>
@@ -1827,57 +1827,57 @@
 			<input type="hidden" name="houseNo" value="${param.NO}"/>
 			<h3>請選擇期望預約時間</h3>
 			<div id="MonDiv">
-				<input type="checkbox" name="week" value="一" id="Mon"/><label for="Mon">星期一</label> 
+				<input type="checkbox" name="week" value="一" id="Mon"class="custom-control-input"/><label for="Mon">星期一</label> 
 				<div id="MonTime">
-					<input type="checkbox" name="Time" value="一上" id="MonMon"/><label for="MonMon">上午</label><br/>
-					<input type="checkbox" name="Time" value="一下" id="MonAf"/><label for="MonAf">下午</label>
+					<input type="checkbox" name="Time" value="一上" id="MonMon"class="custom-control-input"/><label for="MonMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="一下" id="MonAf"class="custom-control-input"/><label for="MonAf">下午</label>
 				</div>
 			</div>
 			<div id="TuesDiv">
-				<input type="checkbox" name="week" value="二"id="Tues"/><label for="Tues">星期二</label> 
+				<input type="checkbox" name="week" value="二"id="Tues"class="custom-control-input"/><label for="Tues">星期二</label> 
 				<div id="TuesTime">
-					<input type="checkbox" name="Time" value="二上" id="TuesMon"/><label for="TuesMon">上午</label><br/>
-					<input type="checkbox" name="Time" value="二下" id="TuesAf"/><label for="TuesAf">下午</label>
+					<input type="checkbox" name="Time" value="二上" id="TuesMon"class="custom-control-input"/><label for="TuesMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="二下" id="TuesAf"class="custom-control-input"/><label for="TuesAf">下午</label>
 				</div>
 			</div>
 			<div id="WednDiv">
-				<input type="checkbox" name="week" value="三"id="Wedn"/><label for="Wedn">星期三 </label>
+				<input type="checkbox" name="week" value="三"id="Wedn"class="custom-control-input"/><label for="Wedn">星期三 </label>
 				<div id="WednTime">
-					<input type="checkbox" name="Time" value="三上" id="WednMon"/><label for="WednMon">上午</label><br/>
-					<input type="checkbox" name="Time" value="三下" id="WednAf"/><label for="WednAf">下午</label>
+					<input type="checkbox" name="Time" value="三上" id="WednMon"class="custom-control-input"/><label for="WednMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="三下" id="WednAf"class="custom-control-input"/><label for="WednAf">下午</label>
 				</div>
 			</div>
 			<div id="ThurDiv">
-				<input type="checkbox" name="week" value="四"id="Thur"/><label for="Thur">星期四 </label>
+				<input type="checkbox" name="week" value="四"id="Thur"class="custom-control-input"/><label for="Thur">星期四 </label>
 				<div id="ThurTime">
-					<input type="checkbox" name="Time" value="四上" id="ThurMon"/><label for="ThurMon">上午</label><br/>
-					<input type="checkbox" name="Time" value="四下" id="ThurAf"/><label for="ThurAf">下午</label>
+					<input type="checkbox" name="Time" value="四上" id="ThurMon"class="custom-control-input"/><label for="ThurMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="四下" id="ThurAf"class="custom-control-input"/><label for="ThurAf">下午</label>
 				</div>
 			</div>
 			<div id="FriDiv">
-				<input type="checkbox" name="week" value="五" id="Fri"/><label for="Fri">星期五 </label>
+				<input type="checkbox" name="week" value="五" id="Fri"class="custom-control-input"/><label for="Fri">星期五 </label>
 				<div id="FriTime">
-					<input type="checkbox" name="Time" value="五上" id="FriMon"/><label for="FriMon">上午</label><br/>
-					<input type="checkbox" name="Time" value="五下" id="FriAf"/><label for="FriAf">下午</label>
+					<input type="checkbox" name="Time" value="五上" id="FriMon"class="custom-control-input"/><label for="FriMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="五下" id="FriAf"class="custom-control-input"/><label for="FriAf">下午</label>
 				</div>
 			</div>
 			<div id="SatDiv">
-				<input type="checkbox" name="week" value="六" id="Sat"/><label for="Sat">星期六 </label>
+				<input type="checkbox" name="week" value="六" id="Sat"class="custom-control-input"/><label for="Sat">星期六 </label>
 				<div id="SatTime">
-					<input type="checkbox" name="Time" value="六上" id="SatMon"/><label for="SatMon">上午</label><br/>
-					<input type="checkbox" name="Time" value="六下" id="SatAf"/><label for="SatAf">下午</label>
+					<input type="checkbox" name="Time" value="六上" id="SatMon"class="custom-control-input"/><label for="SatMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="六下" id="SatAf"class="custom-control-input"/><label for="SatAf">下午</label>
 				</div>
 			</div>
 			<div id="SunDiv">
-				<input type="checkbox" name="week" value="日" id="Sun"/><label for="Sun">星期日 </label>
+				<input type="checkbox" name="week" value="日" id="Sun"class="custom-control-input"/><label for="Sun">星期日 </label>
 				<div id="SunTime">
-					<input type="checkbox" name="Time" value="日上" id="SunMon"/><label for="SunMon">上午</label><br/>
-					<input type="checkbox" name="Time" value="日下" id="SunAf"/><label for="SunAf">下午</label>
+					<input type="checkbox" name="Time" value="日上" id="SunMon"class="custom-control-input"/><label for="SunMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="日下" id="SunAf"class="custom-control-input"/><label for="SunAf">下午</label>
 				</div>
 			</div>
 			<div style="clear:both;margin-top:50px">
-			<button type="button"id="btSubmit">確認</button>
-			<button type="reset"id="btCancel">取消</button>
+			<button type="button"id="btSubmit" class="btn btn-info"	>確認</button>
+			<button type="reset"id="btCancel" class="btn btn-info">取消</button>
 			</div>
 		</form>
 	</div>

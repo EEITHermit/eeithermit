@@ -38,7 +38,7 @@
 }
 
 #formDiv {
-	display: none;
+/* 	display: none; */
 }
 </style>
 
@@ -184,12 +184,13 @@ a:link, a:visited, a:hover, a:active {
 										</tbody>
 									</table>
 								</div>
+							</div>
+							<!--客服申請區域 -->
+							<div>
 								<div class="container col-md-12">
 									<button id="commentBT" class="btn btn-primary btn-lg btn-block">客服申請</button>
 								</div>
-							</div>
 
-							<!--客服申請區域 -->
 							<div id="formDiv">
 								<form id="commentForm" class="form-group"
 									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
@@ -205,17 +206,18 @@ a:link, a:visited, a:hover, a:active {
 											</c:forEach>
 										</select>
 									</div>
-									<div class="container col-md-12">
+									<div class="col-md-12">
 										<label for="qDetail" class="form-label"> 申訴內容： </label>
 										<textarea id="commentArea" class="commentArea" name="qDetail"
 											style="resize: none;"></textarea>
 									</div>
-									<div class="container col-md-4 col-md-offset-5">
+									<div class="col-md-4 col-md-offset-5">
 										<button class="btn btn-secondary btn-lg" type="button"
 											onclick="check()">提交</button>
 									</div>
 								</form>
 							</div>
+						  </div>
 						</div>
 						<!-- /widget-content -->
 
@@ -276,12 +278,17 @@ a:link, a:visited, a:hover, a:active {
 		function work() {
 			//跳出查詢畫面
 			$("#queryBT").click(function() {
-				$("#queryDiv").toggle();
+				$("#queryDiv").toggle("blind",400);
+				$("#queryDiv").position({
+					of:$("#queryBT"),
+					my:"center top",
+					at:"center bottom"
+				});
 			});
-			//跳出投訴頁面
-			$("#commentBT").click(function() {
-				$("#formDiv").toggle();
-			});
+			//跳出投訴頁面，暫不使用
+// 			$("#commentBT").click(function() {
+// 				$("#formDiv").toggle();
+// 			});
 			//產生jqueyText
 			$('#commentArea').jqte();
 			//產生DataTable
@@ -310,7 +317,7 @@ a:link, a:visited, a:hover, a:active {
 					"width" : "10%"
 				}, {
 					"targets" : [ 2 ],
-					"width" : "15%"
+					"width" : "20%"
 				}, {
 					"targets" : [ 3 ],
 					"width" : "28%"

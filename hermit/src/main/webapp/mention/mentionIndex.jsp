@@ -131,10 +131,12 @@ table {
 							<c:forEach var="resVO" items="${resArray}">
 								<tr>
 									<td>${resVO.reservationNO}</td>
+									<td style="display: none;">${resVO.memberVO.memNO}</td>
 									<td>${resVO.memberVO.memName}</td>
 									<td><button class="btn btn-primary btn-lg" type="button"
 											id="check">查看</button></td>
 									<td style="display: none;">${resVO.exceptTime}</td>
+									<td style="display: none;">${resVO.houseVO.houseNO}</td>
 									<td>${resVO.houseVO.houseAddr}</td>
 									<td>${resVO.applyTime}</td>
 									<td><button class="btn btn-primary btn-lg" type="button"
@@ -410,7 +412,7 @@ table {
 		});
 		//設定期望時間內容
 		var button1 = $("#resTable>tbody button:even").on("click",function(){
-			var exceptTime = $(this).parents("tr").find("td").eq(3).text();
+			var exceptTime = $(this).parents("tr").find("td").eq(4).text();
 			var bt = $(this);
 			var div = $("#exceptDiv");
 			if(bt.text() == "收回"){
@@ -458,8 +460,11 @@ table {
 			if(confirm("確認接管此預約?")){
 				var resNO = $($(this).parents("tr").find("td")[0]).text();
 				var empNO = $("#empNO").val();
+				var memNO = $($(this).parents("tr").find("td")[1]).text();
+				var houseNO = $($(this).parents("tr").find("td")[5]).text();
 				$.post("<%=request.getContextPath()%>/mentionServlet?mission=takeOver",{resNO:resNO,empNO:empNO},function(data){
 					alert(data);
+					window.location = "<%=request.getContextPath()%>/calendar/calendar.jsp?mission=mentionInsert&member="+memNO+"&house="+houseNO;
 				});
 				$(this).text("已處理").attr("disabled",true);
 			}

@@ -37,8 +37,8 @@
 			
 		</div>
 		<div class="col-md-12">
-			<div id="showDiv" style="display:none">
-				<table id="showTable" class="hover">
+			<div id="showDiv" style="display:none;">
+				<table id="showTable" class="hover" style="background-color: #02F78E">
 <!-- 				<thead> -->
 <!-- 					<tr> -->
 <!-- 						<th>留言編號</th><th>留言類型</th><th>留言會員</th><th>留言房屋</th><th>提問時間</th> -->
