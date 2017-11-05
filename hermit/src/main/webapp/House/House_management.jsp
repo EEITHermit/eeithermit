@@ -133,7 +133,6 @@ color: 	#F9F900;
 						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge" class="form-control"></td>
 						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate" class="form-control"></td>
 						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate" class="form-control"></td>
-						
 						<td><select id="houseType" name="typeNO" class="form-control"></select></td>
 						<td><select id="houseForm" name="formNO" class="form-control"></select></td>
 						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr" class="form-control"></td>
@@ -143,6 +142,10 @@ color: 	#F9F900;
 						<input type="hidden" name=action>
 				</tbody>
 		</table>
+	</div>
+	<div>
+		<input type="checkbox" name="TV">
+		<label>TV</label>
 	</div>
 	<div>
 		<table class="table">
