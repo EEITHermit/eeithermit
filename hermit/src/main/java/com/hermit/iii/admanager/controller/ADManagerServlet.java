@@ -76,7 +76,7 @@ public class ADManagerServlet extends HttpServlet {
 			ads.updateADManager(adNO, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
 			resp.sendRedirect("admanager/back-adindex_include.jsp");
 			System.out.println("Update OK");
-//			RequestDispatcher rd = req.getRequestDispatcher("/admanager/back-adindex.jsp");
+//			RequestDispatcher rd = req.getRequestDispatcher("admanager/back-adindex.jsp");
 //			rd.forward(req, resp);
 		}
 //		刪除圖片(adNO)
