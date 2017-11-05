@@ -25,6 +25,7 @@ public class ADManagerService {
 	
 	public void updateADManager(Integer adNO, String adImage , String adLink, String adMessage, Date adTimeStart , Date adTimeEnd , Boolean adStatus, Integer adBrowse , Integer adModify){
 		ADManagerVO adVO = new ADManagerVO();
+		adVO.setadNO(adNO);
 		adVO.setAdImage(adImage);
 		adVO.setAdLink(adLink);
 		adVO.setAdMessage(adMessage);

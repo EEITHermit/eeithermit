@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新增廣告</title>
+<title>修改廣告</title>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 <script src="../js/flashcanvas.js"></script>
@@ -15,7 +15,7 @@
 <style type="text/css">
 #DIV2{
 margin-top:35px;
-width:800px;
+width:1100px;
 padding:20px;
 
 margin-right:10px;
@@ -27,7 +27,7 @@ float:right;
 <jsp:include page="/fragment/back_side_page.jsp" />
 
 <div class="container" id="DIV2">
-	<form method="post" action="../EmpServlet" enctype="multipart/form-data" >
+	<form method="post" action="empServlet" >
 		<label for="EmpNO">員工編號</label><br>
 		<span>${empVO.empNO}</span>
 		<input type="hidden" name="EmpNO" readonly value="${empVO.empNO}" id="text" size="20">&nbsp;<br>
@@ -36,10 +36,10 @@ float:right;
 		<input type="text" name="empName" value="${empVO.empName}" id="text" size="20"><p/><br>
 		
 		<label for="empAccount">員工帳號</label><br>
-		<input type="text" value="${empVO.empAccount}"  size="20" name="empAccount" >(請輸入6~8位英文字含數字、不可輸入中文字及特殊字元)<p/><br>
+		<input type="text" value="${empVO.empAccount}"  size="20" name="empAccount" >(請輸入6~12位英文字含數字、不可輸入中文字及特殊字元)<p/><br>
 		
 		<label for="empPwd">員工密碼</label><br>
-		<input type='text' name='empPwd' size="20" value="${empVO.empPwd}">(請輸入8~10位大小寫英文含數字、大小寫區分)<P/><br>
+		<input type='text' name='empPwd' size="20" value="${empVO.empPwd}">(請輸入6~12位大小寫英文含數字、大小寫區分)<P/><br>
 		
 		<label for="empPhone">員工電話</label><br>
 		<input type="text" name="empPhone" id="empPhone" size="20" value="${empVO.empPhone}">(請輸入手機號碼0987-654-321)<p/><br>
@@ -59,7 +59,7 @@ float:right;
 			<option value="1">已離職</option>
 		</select><br><br><br>
 	
-		<input type="hidden" name="action" value="InsertEmp">	
+		<input type="hidden" name="action" value="UpdatetEmp">	
 		<button type="button" class="btn btn-default" id="submit" onclick="doSubmit(this);">確認</button>
 		<button type="reset" class="btn btn-default">清除</button>
 		
@@ -115,6 +115,7 @@ function doSubmit(src){
 			alert(text+"為空")	//modify here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			$(src).prop("disabled", false);
 			return false;
+			
 		}
 	});
 	$("#submitBtn").click();

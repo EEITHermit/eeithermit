@@ -20,7 +20,7 @@ public class ADManagerDAO_hebernate implements ADManagerDAO_interface_hibernate{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(adManagerVO);
+			session.save(adManagerVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -34,7 +34,7 @@ public class ADManagerDAO_hebernate implements ADManagerDAO_interface_hibernate{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(adManagerVO);
+			session.update(adManagerVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
