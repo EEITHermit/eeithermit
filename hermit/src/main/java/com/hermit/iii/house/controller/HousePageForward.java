@@ -44,22 +44,22 @@ public class HousePageForward extends HttpServlet {
 		}
 		
 		Map houseMap = new LinkedHashMap();
-		houseMap.put("houseTitle",hvo.getHouseTitle());
-		houseMap.put("cityName",hvo.getCityVO().getCityName());
-		houseMap.put("boroughName",hvo.getBoroughsVO().getBoroughName());
-		houseMap.put("houseAddr",hvo.getHouseAddr());
-		houseMap.put("highestFloor",hvo.getHighestFloor());
-		houseMap.put("nowFloor",hvo.getNowFloor());
-		houseMap.put("houseRent",hvo.getHouseRent());
-		houseMap.put("houseSize",hvo.getHouseSize());
-		houseMap.put("houseInfo",hvo.getHouseInfo());
-		houseMap.put("houseCharge",hvo.getHouseCharge());
-		houseMap.put("houseVideo",hvo.getHouseVideo());
-		houseMap.put("waterRate",hvo.getWaterRate());
-		houseMap.put("powerRate",hvo.getPowerRate());
-		houseMap.put("hForm",hvo.getHouseFormVO().gethForm());
-		houseMap.put("hType",hvo.getHouseTypeVO().gethType());
-		houseMap.put("previewPic",hvo.getPreviewPic());
+		houseMap.put("houseTitle",hvo.getHouseTitle().toString());
+		houseMap.put("cityName",hvo.getCityVO().getCityName().toString());
+		houseMap.put("boroughName",hvo.getBoroughsVO().getBoroughName().toString());
+		houseMap.put("houseAddr",hvo.getHouseAddr().toString());
+		houseMap.put("highestFloor",hvo.getHighestFloor().toString());
+		houseMap.put("nowFloor",hvo.getNowFloor().toString());
+		houseMap.put("houseRent",hvo.getHouseRent().toString());
+		houseMap.put("houseSize",hvo.getHouseSize().toString());
+		houseMap.put("houseInfo",hvo.getHouseInfo().toString());
+		houseMap.put("houseCharge",hvo.getHouseCharge().toString());
+		houseMap.put("houseVideo",hvo.getHouseVideo().toString());
+		houseMap.put("waterRate",hvo.getWaterRate().toString());
+		houseMap.put("powerRate",hvo.getPowerRate().toString());
+		houseMap.put("hForm",hvo.getHouseFormVO().gethForm().toString());
+		houseMap.put("hType",hvo.getHouseTypeVO().gethType().toString());
+		houseMap.put("previewPic",hvo.getPreviewPic().toString());
 		
 		EquipmentConditionService eqSvc = new EquipmentConditionService();
 		EquipmentConditionVO eqVO = eqSvc.getOneEquipmentCondition(houseNO);

@@ -473,7 +473,7 @@
 								var jsonlat, jsonlng;
 								var activeFlag = '';
 								var timeout = 1000;
-								
+								console.log('<%= request.getAttribute("House")%>')
 								var hInfo = $.parseJSON('<%= request.getAttribute("House")%>');
 								
 								// 一開始啟動Google API的CB

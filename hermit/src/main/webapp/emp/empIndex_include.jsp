@@ -95,7 +95,7 @@ tr {
 			</tr>
 		</tfoot>
 	</table>
-	<form id="modify" method="get" action="../emp/EmpServlet">	
+	<form id="modify" method="post" action="EmpServlet">	
 		<input type="hidden" name="action" value="getOneEmp">
 		<input type="hidden" id="empNO" name="empNO" >
 	</form>
@@ -109,20 +109,22 @@ tr {
 		
 		function ajaxPost(){
 			$.post("../emp/EmpServlet",{"action":"getAllEmpJson"},function(data){
- 				console.log(data);
-				dataJson = $.parseJSON(data).list;
+ 				console.log("000000000="+(data));
+				dataJson = JSON.parse(data);//$.parseJSON(data);
  				console.log(dataJson);
  				
+// 					console.dir(data["list"]);
 				tbody.empty();
-				$.each(dataJson,function(index,VO){
+				$.each(dataJson["list"],function(index,VO){
+					
 					var cell1 = $("<td></td>").text(VO.empNO);
 					var cell2 = $("<td></td>").text(VO.empAccount);
 					var cell3 = $("<td></td>").text(VO.empPwd);
 					var cell4 = $("<td></td>").text(VO.empPhone);
 					var cell5 = $("<td></td>").text(VO.empName);
-					var cell6 = $("<td></td>").text(VO.postVO);
+					var cell6 = $("<td></td>").text(VO.postNO);
 					var cell7 = $("<td></td>").text(VO.empStatus);
-					var cell8 = $("<td></td>").html('<button class="btn btn-primary" onclick="javascrtpt:window.location.reload("empUpdate_include.jsp")">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
+					var cell8 = $("<td></td>").html('<button class="btn btn-primary" onclick="toUpdate('+VO.empNO+');">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
 					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]);
 					tbody.append(row);
 				})
@@ -173,6 +175,13 @@ tr {
 		ajaxPost();
 
 	});
-	</script>
+	
+	function toUpdate(id){
+		
+		$("#empNO").val(id);
+		$("#modify").submit();
+	}
+	
+</script>
 </body>
 </html>

@@ -59,7 +59,7 @@ float:right;
 	<input type='text' name='adModify' size="40" placeholder="請輸入員工代號  ex:00000"><P/><br>
 	
 	<label for="adMessage">廣告訊息(限10字內)</label><br>
-	<input type="text" id="adMessage" size="40" value="${adMessage}" placeholder="請輸入訊息..."><br><br>
+	<input type="text" id="adMessage" name="adMessage" size="40" value="${adMessage}" placeholder="請輸入訊息..."><br><br>
 	
 	<label for="adStatus">狀態 </label><br>
 	<input type="radio" name="adStatus" value="${adStatus}" checked>上架<br><br><br>
