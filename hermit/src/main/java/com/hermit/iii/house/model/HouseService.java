@@ -115,4 +115,7 @@ public class HouseService {
     public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
     	dao.insertHouseAndHousePicture(houseVO, set);
     }
+    public List<HouseVO> getNewThree(){
+    	return dao.getNewThree();
+    }
 }
