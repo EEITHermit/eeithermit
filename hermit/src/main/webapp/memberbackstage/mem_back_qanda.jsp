@@ -38,7 +38,7 @@
 }
 
 #formDiv {
-/* 	display: none; */
+  	display: block; 
 }
 </style>
 
@@ -192,11 +192,11 @@ a:link, a:visited, a:hover, a:active {
 								</div>
 
 							<div id="formDiv" class="row">
-								<form id="commentForm" class="form-group"
+								<form id="commentForm" class="form-group" style="margin-top:0px"
 									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
 									method="POST">
 									<div class="col-md-8">
-										<label for="houseNO" class="form-label">請選擇房屋：</label> <select
+										<label for="houseNO" class="form-label" style="margin-top:0px">請選擇房屋：</label> <select
 											name="houseNO" class="form-control"
 											style="background-color: #DDDDDD;">
 											<option>請選擇 房屋</option>
@@ -276,6 +276,7 @@ a:link, a:visited, a:hover, a:active {
 		document.addEventListener("DOMContentLoaded", work);
 
 		function work() {
+			
 			//跳出查詢畫面
 			$("#queryBT").click(function() {
 				$("#queryDiv").toggle("blind",400);
@@ -284,6 +285,11 @@ a:link, a:visited, a:hover, a:active {
 					my:"center top",
 					at:"center bottom"
 				});
+			});
+			$("#formDiv").position({
+				of:$("#commentBT").parent("div"),
+				my:"center top",
+				at:"center bottom"
 			});
 			//跳出投訴頁面，暫不使用
 			$("#commentBT").click(function() {
