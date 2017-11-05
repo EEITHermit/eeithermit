@@ -177,8 +177,8 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 				session.saveOrUpdate(vo);
 			}
 			session.getTransaction().commit();
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
 		}
@@ -271,22 +271,30 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 	// 驗證帳號是否存在
 	@Override
 	public MemberVO findByAccount(String memAccount) {
-		List<MemberVO> list = null;
-		MemberVO account = new MemberVO();
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		// List<MemberVO> list = null;
+		// MemberVO account = new MemberVO();
+		// Session session =
+		// HibernateUtil.getSessionFactory().getCurrentSession();
+		//
+		// try {
+		// session.beginTransaction();
+		// Query query = session.createQuery(SELECT_BY_ACCOUNT);
+		// query.setParameter(0, memAccount);
+		// list = query.list();
+		// for (MemberVO memberVO : list) {
+		// account = memberVO;
+		// }
+		// session.getTransaction().commit();
+		// } catch (RuntimeException ex) {
+		// session.getTransaction().rollback();
+		// throw ex;
+		// }
 
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery(SELECT_BY_ACCOUNT);
-			query.setParameter(0, memAccount);
-			list = query.list();
-			for (MemberVO memberVO : list) {
-				account = memberVO;
-			}
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
+		MemberVO account = new MemberVO();
+		Object obj = hibernateTemplate.find(SELECT_BY_ACCOUNT, memAccount);// 可封裝查詢條件,必須使用find方法.
+		List<MemberVO> list = (List<MemberVO>) obj;
+		for (MemberVO memberVO : list) {
+			account = memberVO;
 		}
 		return account;
 	}
@@ -294,22 +302,31 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 	// 忘記帳號查詢
 	@Override
 	public MemberVO findByTel(String memTel) {
-		List<MemberVO> list = null;
-		MemberVO tel = new MemberVO();
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		// List<MemberVO> list = null;
+		// MemberVO tel = new MemberVO();
+		// Session session =
+		// HibernateUtil.getSessionFactory().getCurrentSession();
+		//
+		// try {
+		// session.beginTransaction();
+		// Query query = session.createQuery(SELECT_BY_TEL);
+		// query.setParameter(0, memTel);
+		// list = query.list();
+		// for (MemberVO memberVO : list) {
+		// tel = memberVO;
+		// }
+		// session.getTransaction().commit();
+		// } catch (RuntimeException ex) {
+		// session.getTransaction().rollback();
+		// throw ex;
+		// }
+		// return tel;
 
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery(SELECT_BY_TEL);
-			query.setParameter(0, memTel);
-			list = query.list();
-			for (MemberVO memberVO : list) {
-				tel = memberVO;
-			}
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
+		MemberVO tel = new MemberVO();
+		Object obj = hibernateTemplate.find(SELECT_BY_TEL, memTel);// 可封裝查詢條件,必須使用find方法.
+		List<MemberVO> list = (List<MemberVO>) obj;
+		for (MemberVO memberVO : list) {
+			tel = memberVO;
 		}
 		return tel;
 	}
@@ -320,72 +337,72 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 		MemberDAO_hibernate dao = new MemberDAO_hibernate();
 
 		// 為方便一般應用程式main方的測試,所以底下的model-config1內部dataSource設定是採用org.springframework.jdbc.datasource.DriverManagerDataSource
-		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-model-JNDIcfg.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-model-JDBCcfg.xml");
 		// 建立DAO物件
 		MemberDAO_interface_hibernate daSP = (MemberDAO_interface_hibernate) context.getBean("memDAO");
 
 		// 新增 (register由資料庫系統給)
-		MemberVO memberVO1 = new MemberVO();
-		memberVO1.setMemTel("0905123456");
-		memberVO1.setMemAccount("account123");
-		memberVO1.setMemPwd("123Pwd@@");
-		memberVO1.setMemName("小明Lin");
-		memberVO1.setMemGender("男");
-		memberVO1.setMemEmail("mail123@gmail.com");
-		memberVO1.setMemStatus("未驗證會員");
-		memberVO1.setMemInfract(0);
-		memberVO1.setMemImage(null);
-		daSP.insert(memberVO1);
-
-		// 修改初始資料第一筆 (register由資料庫系統給)
-		MemberVO memberVO2 = new MemberVO();
-		memberVO2.setMemNO(40003);
-		memberVO2.setMemTel("0905123456");
-		memberVO2.setMemAccount("account123");
-		memberVO2.setMemPwd("123Pwd@@");
-		memberVO2.setMemName("小花Lin");
-		memberVO2.setMemGender("女");
-		memberVO2.setMemEmail("mail123@gmail.com");
-		memberVO2.setMemStatus("一般會員驗證");
-		memberVO2.setMemInfract(2);
-		// memberVO2.setMimage(null); // not use
-		daSP.update(memberVO2);
-
-		// 查詢初始資料第一筆
-		MemberVO memberVO3 = daSP.findByPrimaryKey(40003);
-		System.out.print(memberVO3.getMemNO() + ",");
-		System.out.print(memberVO3.getMemTel() + ",");
-		System.out.print(memberVO3.getMemAccount() + ",");
-		System.out.print(memberVO3.getMemPwd() + ",");
-		System.out.print(memberVO3.getMemName() + ",");
-		System.out.print(memberVO3.getMemGender() + ",");
-		System.out.print(memberVO3.getMemEmail() + ",");
-		System.out.print(memberVO3.getMemRegister() + ",");
-		System.out.print(memberVO3.getMemStatus() + ",");
-		System.out.print(memberVO3.getMemInfract() + ",");
-		// System.out.println(memberHibernateVO3.getMemImage());
-		System.out.println();
-		System.out.println("---------------------");
-
-		// 查詢全部
-		Set<MemberVO> set = daSP.getAll();
-		for (MemberVO memberVO : set) {
-			System.out.print(memberVO.getMemNO() + ",");
-			System.out.print(memberVO.getMemTel() + ",");
-			System.out.print(memberVO.getMemAccount() + ",");
-			System.out.print(memberVO.getMemPwd() + ",");
-			System.out.print(memberVO.getMemName() + ",");
-			System.out.print(memberVO.getMemGender() + ",");
-			System.out.print(memberVO.getMemEmail() + ",");
-			System.out.print(memberVO.getMemRegister() + ",");
-			System.out.print(memberVO.getMemStatus() + ",");
-			System.out.print(memberVO.getMemInfract() + ",");
-			// System.out.println(memberHibernateVO.getMemImage());
-			System.out.println();
-		}
+		// MemberVO memberVO1 = new MemberVO();
+		// memberVO1.setMemTel("0905123456");
+		// memberVO1.setMemAccount("account123");
+		// memberVO1.setMemPwd("123Pwd@@");
+		// memberVO1.setMemName("小明Lin");
+		// memberVO1.setMemGender("男");
+		// memberVO1.setMemEmail("mail123@gmail.com");
+		// memberVO1.setMemStatus("未驗證會員");
+		// memberVO1.setMemInfract(0);
+		// memberVO1.setMemImage(null);
+		// daSP.insert(memberVO1);
+		//
+		// // 修改初始資料第一筆 (register由資料庫系統給)
+		// MemberVO memberVO2 = new MemberVO();
+		// memberVO2.setMemNO(40003);
+		// memberVO2.setMemTel("0905123456");
+		// memberVO2.setMemAccount("account123");
+		// memberVO2.setMemPwd("123Pwd@@");
+		// memberVO2.setMemName("小花Lin");
+		// memberVO2.setMemGender("女");
+		// memberVO2.setMemEmail("mail123@gmail.com");
+		// memberVO2.setMemStatus("一般會員驗證");
+		// memberVO2.setMemInfract(2);
+		// // memberVO2.setMimage(null); // not use
+		// daSP.update(memberVO2);
+		//
+		// // 查詢初始資料第一筆
+		// MemberVO memberVO3 = daSP.findByPrimaryKey(40003);
+		// System.out.print(memberVO3.getMemNO() + ",");
+		// System.out.print(memberVO3.getMemTel() + ",");
+		// System.out.print(memberVO3.getMemAccount() + ",");
+		// System.out.print(memberVO3.getMemPwd() + ",");
+		// System.out.print(memberVO3.getMemName() + ",");
+		// System.out.print(memberVO3.getMemGender() + ",");
+		// System.out.print(memberVO3.getMemEmail() + ",");
+		// System.out.print(memberVO3.getMemRegister() + ",");
+		// System.out.print(memberVO3.getMemStatus() + ",");
+		// System.out.print(memberVO3.getMemInfract() + ",");
+		// // System.out.println(memberHibernateVO3.getMemImage());
+		// System.out.println();
+		// System.out.println("---------------------");
+		//
+		// // 查詢全部
+		// Set<MemberVO> set = daSP.getAll();
+		// for (MemberVO memberVO : set) {
+		// System.out.print(memberVO.getMemNO() + ",");
+		// System.out.print(memberVO.getMemTel() + ",");
+		// System.out.print(memberVO.getMemAccount() + ",");
+		// System.out.print(memberVO.getMemPwd() + ",");
+		// System.out.print(memberVO.getMemName() + ",");
+		// System.out.print(memberVO.getMemGender() + ",");
+		// System.out.print(memberVO.getMemEmail() + ",");
+		// System.out.print(memberVO.getMemRegister() + ",");
+		// System.out.print(memberVO.getMemStatus() + ",");
+		// System.out.print(memberVO.getMemInfract() + ",");
+		// // System.out.println(memberHibernateVO.getMemImage());
+		// System.out.println();
+		// }
 
 		// 刪除初始資料一筆
-//		dao.delete(40002);
+		// dao.delete(40002);
 
 		/**** 自訂指令 ****/
 
@@ -402,34 +419,32 @@ public class MemberDAO_hibernate implements MemberDAO_interface_hibernate {
 		// System.out.println(dao.count_MemAccount_AJAX("account123"));
 
 		// 驗證帳號是否存在
-		// MemberVO memberVO4 = dao.findByAccount("Vir333");
-		// System.out.print(memberVO4.getMemNO() + ",");
-		// System.out.print(memberVO4.getMemTel() + ",");
-		// System.out.print(memberVO4.getMemAccount() + ",");
-		// System.out.print(memberVO4.getMemPwd() + ",");
-		// System.out.print(memberVO4.getMemName() + ",");
-		// System.out.print(memberVO4.getMemGender() + ",");
-		// System.out.print(memberVO4.getMemEmail() + ",");
-		// System.out.print(memberVO4.getMemRegister() + ",");
-		// System.out.print(memberVO4.getMemStatus() + ",");
-		// System.out.print(memberVO4.getMemInfract() + ",");
-		// // System.out.println(memberVO4.getMemImage());
-		// System.out.println();
-		//
-		// // 忘記帳號查詢
-		// MemberVO memberVO5 = dao.findByTel("0912345689");
-		// System.out.print(memberVO5.getMemNO() + ",");
-		// System.out.print(memberVO5.getMemTel() + ",");
-		// System.out.print(memberVO5.getMemAccount() + ",");
-		// System.out.print(memberVO5.getMemPwd() + ",");
-		// System.out.print(memberVO5.getMemName() + ",");
-		// System.out.print(memberVO5.getMemGender() + ",");
-		// System.out.print(memberVO5.getMemEmail() + ",");
-		// System.out.print(memberVO5.getMemRegister() + ",");
-		// System.out.print(memberVO5.getMemStatus() + ",");
-		// System.out.print(memberVO5.getMemInfract() + ",");
-		// // System.out.println(memberVO4.getMemImage());
-		// System.out.println();
+		MemberVO memberVO4 = daSP.findByAccount("Vir111");
+		System.out.print(memberVO4.getMemNO() + ",");
+		System.out.print(memberVO4.getMemTel() + ",");
+		System.out.print(memberVO4.getMemAccount() + ",");
+		System.out.print(memberVO4.getMemPwd() + ",");
+		System.out.print(memberVO4.getMemName() + ",");
+		System.out.print(memberVO4.getMemGender() + ",");
+		System.out.print(memberVO4.getMemEmail() + ",");
+		System.out.print(memberVO4.getMemRegister() + ",");
+		System.out.print(memberVO4.getMemStatus() + ",");
+		System.out.print(memberVO4.getMemInfract() + ",");
+		System.out.println(memberVO4.getMemImage());
+
+		// 忘記帳號查詢
+		MemberVO memberVO5 = daSP.findByTel("0911841573");
+		System.out.print(memberVO5.getMemNO() + ",");
+		System.out.print(memberVO5.getMemTel() + ",");
+		System.out.print(memberVO5.getMemAccount() + ",");
+		System.out.print(memberVO5.getMemPwd() + ",");
+		System.out.print(memberVO5.getMemName() + ",");
+		System.out.print(memberVO5.getMemGender() + ",");
+		System.out.print(memberVO5.getMemEmail() + ",");
+		System.out.print(memberVO5.getMemRegister() + ",");
+		System.out.print(memberVO5.getMemStatus() + ",");
+		System.out.print(memberVO5.getMemInfract() + ",");
+		System.out.println(memberVO4.getMemImage());
 
 		System.out.println("Done");
 	}

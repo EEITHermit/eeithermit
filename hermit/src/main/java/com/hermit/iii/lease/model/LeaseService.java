@@ -93,4 +93,9 @@ public class LeaseService {
 	public ArrayList<LeaseVO> getAllByBoroughNO(Integer boroughNO){
 		return dao.getAllByBoroughNO(boroughNO);
 	}
+
+	public List<LeaseVO> getAllLease(Integer memNO) {
+		return dao.getAllLease(memNO);
+	}
+	
 }

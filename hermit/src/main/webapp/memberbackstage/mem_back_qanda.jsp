@@ -82,7 +82,7 @@ a:link, a:visited, a:hover, a:active {
 							href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp">
 								<i class="glyphicon glyphicon-home"
 								style="height: 30px; font-size: 30px"></i> <span
-								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
+								style="font-size: 15px; font-family: Microsoft JhengHei">會員中心</span>
 						</a></li>
 
 						<li><a
@@ -107,7 +107,7 @@ a:link, a:visited, a:hover, a:active {
 						</a></li>
 
 						<li><a
-							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease">
 								<i class="glyphicon glyphicon-file"
 								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
