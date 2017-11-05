@@ -124,8 +124,38 @@ a:link, a:visited, a:hover, a:active {
 						<div class="widget-content">
 							<div id="leaseDiv">
 								<div>
-									<input type="text" value="${LoginOK.memNO}" readonly>
-									<input type="text" value="${vo.leaseNO}">
+								<table border="1px">
+									<tr>
+										<td>合約編號</td>
+										<td>合約起始日期</td>
+										<td>合約結束日期</td>
+										<td>員工編號</td>
+										<td>租金</td>
+										<td>押金</td>
+										<td>折扣</td>
+										<td>簽約日期</td>
+										<td>備註</td>
+										<td>是否退還押金</td>
+									</tr>
+									<c:forEach var="Lease" items="${list}">
+										<tr>
+											<td>${Lease.leaseNO}</td>
+											
+											<td>${Lease.leaseBeginDate}</td>
+											<td>${Lease.leaseEndDate}</td>
+											
+											<td>${Lease.empNO}</td>
+											<td>${Lease.leaseRent}</td>
+											<td>${Lease.leaseDeposit}</td>
+											<td>${Lease.leaseRelief}</td>
+											<td>${Lease.leaseDate}</td>
+											<td>${Lease.houseNote}</td>
+											<td>${Lease.leaseRefund}</td>
+										</tr>
+										<input type="hidden" value="${Lease.memNO}" name="memNO" readonly>
+										<input type="hidden" value="${Lease.leaseNO}" name="leaseNO">
+									</c:forEach>
+								</table>
 								</div>
 							</div>						
 						</div>

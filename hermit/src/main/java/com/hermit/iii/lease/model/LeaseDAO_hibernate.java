@@ -129,7 +129,7 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 	}
 	private static String GET_ONE_LEASE_BY_MEMNO="from LeaseVO where memNO=?";
 	@Override
-	public List<LeaseVO> getOneLeaseByMemberNO(Integer memNO) {
+	public List<LeaseVO> getAllLease(Integer memNO) {
 		List<LeaseVO>list=new LinkedList();
 		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
 		try{

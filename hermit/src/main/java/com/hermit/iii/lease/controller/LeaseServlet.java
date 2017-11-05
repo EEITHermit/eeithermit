@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.simple.JSONValue;
 
 import com.hermit.iii.lease.model.LeaseService;
 import com.hermit.iii.lease.model.LeaseVO;
@@ -41,7 +39,7 @@ public class LeaseServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		LeaseService svc = new LeaseService();
 		LeaseVO vo = null;
-
+		
 		Integer leaseNO = null;
 		Integer houseNO = null;
 		Date leaseBeginDate = null;
@@ -115,7 +113,15 @@ public class LeaseServlet extends HttpServlet {
 			rd.forward(request, response);
 //			System.out.println("Search One Success");
 		}
-		
+		if("getAllLease".equals(action)){
+			svc=new LeaseService();
+			memNO=Integer.valueOf(request.getParameter("memNO"));
+			List<LeaseVO>list=svc.getAllLease(memNO);
+			request.setAttribute("list", list);
+			RequestDispatcher rd = request.getRequestDispatcher("/memberbackstage/mem_back_lease.jsp");
+			rd.forward(request, response);
+			System.out.println("Search One Success");
+		}
 		if("update".equals(action)){
 			System.out.println("aaa");
 			leaseNO=Integer.valueOf(request.getParameter("leaseNO"));
@@ -136,6 +142,7 @@ public class LeaseServlet extends HttpServlet {
 			svc.updateLease(leaseNO, houseNO, leaseBeginDate, leaseEndDate, memNO, empNO, leaseRent, leaseDeposit, leaseRelief, leaseDate, leasePic, houseNote, leaseRefund);
 			response.sendRedirect("/hermit/Lease/Lease.jsp");
 		}
+		
 	
 	}
 

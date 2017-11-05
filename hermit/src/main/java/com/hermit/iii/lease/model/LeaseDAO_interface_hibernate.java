@@ -20,7 +20,7 @@ public interface LeaseDAO_interface_hibernate {
 	//漢勳加
 	public ArrayList<LeaseVO> getAllByBoroughNO(Integer boroughNO);
 	//子傑加
-	public List<LeaseVO>getOneLeaseByMemberNO(Integer memNO);
+	public List<LeaseVO>getAllLease(Integer memNO);
 	
 
 
