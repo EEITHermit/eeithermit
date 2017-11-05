@@ -21,7 +21,7 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(dispatchListVO);
+			session.save(dispatchListVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -34,7 +34,7 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(dispatchListVO);
+			session.update(dispatchListVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -92,9 +92,7 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 		String jsonString = null;
 		try{
 			session.beginTransaction();
-			@SuppressWarnings("unchecked")
 			List<DispatchListVO> resultList = session.createQuery(GET_ALL_STMT).getResultList();
-			session.getTransaction().commit();
 			List list = new LinkedList();
 			for(DispatchListVO vo : resultList){
 				Map m1 = new LinkedHashMap();
@@ -106,14 +104,17 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 				m1.put("qaNO", vo.getQaVO().getQaNO());
 				m1.put("qDetail", vo.getQaVO().getqDetail());
 				m1.put("dlStime", vo.getDlStime().toString());
-				m1.put("dlEtime", vo.getDlEtime().toString());
-				m1.put("elesign", vo.getElesign().toString());
-				m1.put("dlNote", vo.getDlNote().toString());
+				if(vo.getDlEtime() != null){
+					m1.put("dlEtime", vo.getDlEtime().toString());
+				}
+				m1.put("elesign", vo.getElesign());
+				m1.put("dlNote", vo.getDlNote());
 				list.add(m1);
 			}
 			Map m2 = new LinkedHashMap();
 			m2.put("list",list);
 			jsonString = JSONValue.toJSONString(m2);
+			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;

@@ -15,7 +15,7 @@ public class DispatchListService {
 		dao = new DispatchListDAO_hibernate();
 	}
 	
-	public DispatchListVO addDispatchList(int dempno , int aempno , int qano , Date dlstime){
+	public DispatchListVO addDispatchList(int dempno , int aempno , int qano , Date dlstime,String dlNote){
 		DispatchListVO dlVO = new DispatchListVO();
 		EmpVO dempVO = new EmpVO();
 		dlVO.setDempVO(dempVO);
@@ -25,8 +25,13 @@ public class DispatchListService {
 		dlVO.setQaVO(qaVO);
 		dlVO.getDempVO().setEmpNO(dempno);
 		dlVO.getAempVO().setEmpNO(aempno);
-		dlVO.getQaVO().setQaNO(qano);
+		if(qano != 0){
+			dlVO.getQaVO().setQaNO(qano);
+		}else{
+			dlVO.getQaVO().setQaNO(null);
+		}
 		dlVO.setDlStime(dlstime);
+		dlVO.setDlNote(dlNote);
 		dao.insert(dlVO);
 		return dlVO;
 		
