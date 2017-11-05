@@ -144,8 +144,72 @@ color: 	#F9F900;
 		</table>
 	</div>
 	<div>
-		<input type="checkbox" name="TV">
+		<input type="checkbox" name="TV" id="TV">
 		<label>TV</label>
+	</div>
+	<div>
+		<input type="checkbox" name="aircondition" id="aircondition">
+		<label>aircondition</label>
+	</div>
+	<div>
+		<input type="checkbox" name="refrigerator" id="refrigerator">
+		<label>refrigerator</label>
+	</div>
+	<div>
+		<input type="checkbox" name="waterHeater" id="waterHeater">
+		<label>waterHeater</label>
+	</div>
+	<div>
+		<input type="checkbox" name="gas" id="gas">
+		<label>gas</label>
+	</div>
+	<div>
+		<input type="checkbox" name="theFourthStation" id="theFourthStation">
+		<label>theFourthStation</label>
+	</div>
+	<div>
+		<input type="checkbox" name="net" id="net">
+		<label>net</label>
+	</div>
+	<div>
+		<input type="checkbox" name="washing" id="washing">
+		<label>washing</label>
+	</div>
+	<div>
+		<input type="checkbox" name="bed" id="bed">
+		<label>bed</label>
+	</div>
+	<div>
+		<input type="checkbox" name="wardrobe" id="wardrobe">
+		<label>wardrobe</label>
+	</div>
+	<div>
+		<input type="checkbox" name="sofa" id="sofa">
+		<label>sofa</label>
+	</div>
+	<div>
+		<input type="checkbox" name="parking" id="parking">
+		<label>parking</label>
+	</div>
+	<div>
+		<input type="checkbox" name="elevator" id="elevator">
+		<label>elevator</label>
+	</div>
+	<div>
+		<input type="checkbox" name="balcony" id="balcony">
+		<label>balcony</label>
+	</div>
+	<div>
+		<input type="checkbox" name="permitCook" id="permitCook">
+		<label>permitCook</label>
+	</div>
+	<div>
+		<input type="checkbox" name="pet" id="pet">
+		<label>pet</label>
+	</div>
+	<div>
+		<input type="checkbox" name="closeMRT" id="closeMRT">
+		<label>closeMRT</label>
 	</div>
 	<div>
 		<table class="table">
@@ -335,6 +399,7 @@ $(document).ready(function(){
 				$('input[name="action"]').val("insertHouse");
 			})
 			$('#houseInfo').jqte();
+		
 		
 })
 </script>
