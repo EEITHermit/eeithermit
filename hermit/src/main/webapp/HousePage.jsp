@@ -7,82 +7,214 @@
 <title></title>
 <link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico">
 <jsp:include page="/fragment/member_page.jsp" />
+<link href='<%= request.getContextPath() %>/css/jquery-ui.structure.min.css' rel='stylesheet' />
+<link href='<%= request.getContextPath() %>/css/jquery-ui.theme.min.css' rel='stylesheet' />
 <link href="<%=request.getContextPath()%>/css/jquery.scrolling-tabs.min.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/jquery.otg-carousel.css" rel="stylesheet" />
 <script src="<%=request.getContextPath()%>/js/jquery.scrolling-tabs.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery.otg-carousel.js"></script>
 <style>
-
+	
 	.col-md-2 span{
 		vertical-align:sub;
 		font-family: Microsoft JhengHei;
 		font-weight: bold;
 	}
-	
 	#addressTag span{
-		font-size:0.8em; 
+			font-size:0.8em; 
+		}
+	#map {
+		height: 400px;
+		width: 100%;
 	}
-/* 	Google Map CSS Start */
-#map {
-	height: 400px;
-	width: 100%;
-}
-
-.myScroll {
-	height: 150px;
-	overflow: scroll;
-}
-
-#accordion a {
-	color: black;
-}
-/* 	Google Map CSS End */
-/* 	配合AJAX的bootstrap特效snackbar CSS Start */
-#snackbar {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 100px;
-    font-size: 17px;
-}
-
-#snackbar.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 100px; opacity: 1;}
-}
-
-@keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 100px; opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-    from {bottom: 100px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
-}
-
-@keyframes fadeout {
-    from {bottom: 100px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-}
-/* 	配合AJAX的bootstrap特效snackbar CSS End */
-h5{
-	font-size: 0.83em
-}
+	
+	.myScroll {
+		height: 150px;
+		overflow: scroll;
+	}
+	
+	#accordion a {
+		color: black;
+	}
+	.nearMap a{
+		font-family: Microsoft JhengHei;
+	}
+	/* 	Google Map CSS End */
+	/* 	配合AJAX的bootstrap特效snackbar CSS Start */
+	#snackbar {
+	    visibility: hidden;
+	    min-width: 250px;
+	    margin-left: -125px;
+	    background-color: #333;
+	    color: #fff;
+	    text-align: center;
+	    border-radius: 2px;
+	    padding: 16px;
+	    position: fixed;
+	    z-index: 1;
+	    left: 50%;
+	    bottom: 100px;
+	    font-size: 17px;
+	}
+	.houseInformation{
+		font-family: 'cwTeXYen', sans-serif;
+	}
+	
+	#snackbar.show {
+	    visibility: visible;
+	    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	}
+	
+	@-webkit-keyframes fadein {
+	    from {bottom: 0; opacity: 0;} 
+	    to {bottom: 100px; opacity: 1;}
+	}
+	
+	@keyframes fadein {
+	    from {bottom: 0; opacity: 0;}
+	    to {bottom: 100px; opacity: 1;}
+	}
+	
+	@-webkit-keyframes fadeout {
+	    from {bottom: 100px; opacity: 1;} 
+	    to {bottom: 0; opacity: 0;}
+	}
+	
+	@keyframes fadeout {
+	    from {bottom: 100px; opacity: 1;}
+	    to {bottom: 0; opacity: 0;}
+	}
+	/* 	配合AJAX的bootstrap特效snackbar CSS End */
+	h5{
+		font-size: 0.83em
+	}
+/* 	reservation css */
+	#reservationDiv div>div{
+		width:90px;
+		border:1px solid gray;
+		background-color: #46A3FF;
+		position:absolute;
+		clear:left;
+		display:none;
+	}
+ 	#reservationDiv div{ 
+ 		float:left;
+ 		padding:3px;
+ 		
+ 	}
+ 	#reservationIn *{
+  		margin:0;
+  		padding:0;
+	}
+ 	#bt {
+ 		box-sizing:border-box;
+  		transition:0.4s ease;
+  		position: relative;
+  		display:block; width:140px; height:50px; line-height: 50px; text-decoration: none; color:#2dcb70;
+  		font-weight: bolder;
+  		padding-left: 0px; margin:0 auto;
+  		font-family: 'Noto Sans TC', sans-serif;
+  		font-weight:800;
+  		font-size:30px;
+  		background: url(./images/arrow.png) no-repeat 100px center;
+  		background-size:30px 30px;
+	}
+	#bt:hover {
+ 		 background-position: 140px center;
+	}
+	#bt .line {
+  		position: absolute; background: none; transition:0.4s;
+	}
+	#bt:hover .line {
+ 		 background: #019858;
+	}
+ 
+	#bt .line-top {
+ 		 width:0px; height:2px; top:-2px; left:-110%;
+	}
+	#bt:hover .line-top {
+  		width:140px; left:-2px;
+	}
+ 
+	#bt .line-right {
+  		width:2px; height:0px; right:-2px; top:-110%;
+	}
+	#bt:hover .line-right {
+  		height:50px; top:-2px;
+	}
+ 
+	#bt .line-bottom {
+	  width:0px; height:2px; bottom:-2px; right:-110%;
+	}
+	#bt:hover .line-bottom {
+ 		 width:140px; right:-2px;
+	}
+ 
+	#bt .line-left {
+  		width:2px; height:0px; left:-2px; bottom:-110%;
+	}
+	#bt:hover .line-left {
+  		height:50px; bottom:-2px;
+	}
+ 	/* 	reservation css end*/
+ 	/*  question css */
+ 	#QandAIn *{
+  		margin:0;
+  		padding:0;
+	}
+ 	#questionBT {
+ 		box-sizing:border-box;
+  		transition:0.4s ease;
+  		position: relative;
+  		display:block; width:140px; height:50px; line-height: 50px; text-decoration: none; color:#f00;
+  		font-weight: bolder;
+  		padding-left: 0px; margin:0 auto;
+  		font-family: 'Noto Sans TC', sans-serif;
+  		font-weight:800;
+  		font-size:30px;
+  		background: url(./images/arrow.png) no-repeat 100px center;
+  		background-size:30px 30px;
+	}
+	#questionBT:hover {
+ 		 background-position: 140px center;
+	}
+	#questionBT .line {
+  		position: absolute; background: none; transition:0.4s;
+	}
+	#questionBT:hover .line {
+ 		 background: #f00;
+	}
+ 
+	#questionBT .line-top {
+ 		 width:0px; height:2px; top:-2px; left:-110%;
+	}
+	#questionBT:hover .line-top {
+  		width:140px; left:-2px;
+	}
+ 
+	#questionBT .line-right {
+  		width:2px; height:0px; right:-2px; top:-110%;
+	}
+	#questionBT:hover .line-right {
+  		height:50px; top:-2px;
+	}
+ 
+	#questionBT .line-bottom {
+	  width:0px; height:2px; bottom:-2px; right:-110%;
+	}
+	#questionBT:hover .line-bottom {
+ 		 width:140px; right:-2px;
+	}
+ 
+	#questionBT .line-left {
+  		width:2px; height:0px; left:-2px; bottom:-110%;
+	}
+	#questionBT:hover .line-left {
+  		height:50px; bottom:-2px;
+	}
+ 	/*  question css end*/
+ 	
 </style>
 </head>
 <body>
@@ -96,21 +228,22 @@ h5{
 		<div class="col-md-12" style="margin-top:1.5em;">
 			<div class="col-md-4"><input type="hidden" id="memNO" name="memNO" value="${LoginOK.memNO}"></div>
 			<div class="col-md-4"></div>
-			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
+			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;font-family:Microsoft JhengHei;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
 		</div>
 		<!-- favorite HTML End -->
-		<div class="col-md-12" style="height:300px;width:100%;border:1px solid #dddddd;border-radius: 10px;margin-top:10px;float:right">
-			<div class="col-md-3" id="Rent"></div>
-			<div class="col-md-3" id="Size"></div>
-			<div class="col-md-3" id="Charge"></div>
-			<div class="col-md-3" id="floor"></div>
-			<div class="col-md-3" id="water"></div>
-			<div class="col-md-3" id="elePower"></div>
-			<div class="col-md-3" id="hType"></div>
-			<div class="col-md-3" id="hForm"></div>
+		<div class="col-md-12 houseInformation" style="height:250px;width:100%;border-radius: 10px;margin-top:10px;float:right;padding:15px">
+			<div class="col-md-12" style="margin:10px 3px;" id="Rent"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="Size"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="Charge"></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="reservation"><div id="reservationIn"><a id="bt"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span>預約</a></div></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="floor"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="hFormType"></div>
+			<div class="col-md-3" style="margin:10px 3px;" id="QandA"><div id="QandAIn"><a id="questionBT"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span>詢問</a></div></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="water"></div>
+			<div class="col-md-4" style="margin:10px 3px;" id="elePower"></div>
 		</div>
 		<div class="col-md-12" style="margin-top:10px;float:left;display:block;">
-			<ul class="nav nav-tabs" role="tablist">
+			<ul class="nav nav-tabs" role="tablist" style="font-family: Microsoft JhengHei;">
 			  <li role="presentation" style="color:black" class="active"><a style="color:black"  href="#hInfo" aria-controls="hInfo" role="tab" data-toggle="tab">屋況介紹</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black"  href="#houseContent" aria-controls="houseContent" role="tab" data-toggle="tab">房屋配備</a></li>
 			  <li role="presentation" style="color:black" ><a style="color:black" href="#houseVideo" aria-controls="houseVideo" role="tab" data-toggle="tab">房屋影片</a></li>
@@ -142,7 +275,7 @@ h5{
 	</div>
 
 	<!--  Google Map HTML Start -->
-	<div class="container" style="margin-bottom: 10em;">
+	<div class="container nearMap" style="margin-bottom: 10em;">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="panel-group" id="accordion">
@@ -1674,7 +1807,7 @@ h5{
 	<!-- 配合AJAX的bootstrap特效snackbar HTML Start-->
 	<div id="snackbar">已經成功操作</div>
 	<!-- 配合AJAX的bootstrap特效snackbar HTML End-->
-	<footer class="w3-bottom w3-black container-fluid text-center" style=" position: static">
+	<footer class="w3-black container-fluid text-center">
 		<div>
 			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
 			  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
@@ -1684,29 +1817,100 @@ h5{
 			</ul>
 		</div>
 	    <span class="text-center"><p style="font-size:10px">赫米特開發團隊  Copyright © 2017-2017 by Hermit Group EEIT97 All Rights reserved</p></span>
-		</div>
 	</footer>
+		<!-- 預約彈出div -->
+		<div id="reservationDiv" title="預約時間" style="background-color:lemonchiffon;">
+		<form id="reservationForm" action="<%= request.getContextPath() %>/reservationServlet?mission=reservation" method="POST">
+			<!-- 取得會員帳號 -->
+			<input type="hidden" name="memberNo" value="${LoginOK.memNO}"/>
+			<!-- 取得房屋帳號-->
+			<input type="hidden" name="houseNo" value="${param.NO}"/>
+			<h3>請選擇期望預約時間</h3>
+			<div id="MonDiv">
+				<input type="checkbox" name="week" value="一" id="Mon"class="custom-control-input"/><label for="Mon">星期一</label> 
+				<div id="MonTime">
+					<input type="checkbox" name="Time" value="一上" id="MonMon"class="custom-control-input"/><label for="MonMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="一下" id="MonAf"class="custom-control-input"/><label for="MonAf">下午</label>
+				</div>
+			</div>
+			<div id="TuesDiv">
+				<input type="checkbox" name="week" value="二"id="Tues"class="custom-control-input"/><label for="Tues">星期二</label> 
+				<div id="TuesTime">
+					<input type="checkbox" name="Time" value="二上" id="TuesMon"class="custom-control-input"/><label for="TuesMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="二下" id="TuesAf"class="custom-control-input"/><label for="TuesAf">下午</label>
+				</div>
+			</div>
+			<div id="WednDiv">
+				<input type="checkbox" name="week" value="三"id="Wedn"class="custom-control-input"/><label for="Wedn">星期三 </label>
+				<div id="WednTime">
+					<input type="checkbox" name="Time" value="三上" id="WednMon"class="custom-control-input"/><label for="WednMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="三下" id="WednAf"class="custom-control-input"/><label for="WednAf">下午</label>
+				</div>
+			</div>
+			<div id="ThurDiv">
+				<input type="checkbox" name="week" value="四"id="Thur"class="custom-control-input"/><label for="Thur">星期四 </label>
+				<div id="ThurTime">
+					<input type="checkbox" name="Time" value="四上" id="ThurMon"class="custom-control-input"/><label for="ThurMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="四下" id="ThurAf"class="custom-control-input"/><label for="ThurAf">下午</label>
+				</div>
+			</div>
+			<div id="FriDiv">
+				<input type="checkbox" name="week" value="五" id="Fri"class="custom-control-input"/><label for="Fri">星期五 </label>
+				<div id="FriTime">
+					<input type="checkbox" name="Time" value="五上" id="FriMon"class="custom-control-input"/><label for="FriMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="五下" id="FriAf"class="custom-control-input"/><label for="FriAf">下午</label>
+				</div>
+			</div>
+			<div id="SatDiv">
+				<input type="checkbox" name="week" value="六" id="Sat"class="custom-control-input"/><label for="Sat">星期六 </label>
+				<div id="SatTime">
+					<input type="checkbox" name="Time" value="六上" id="SatMon"class="custom-control-input"/><label for="SatMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="六下" id="SatAf"class="custom-control-input"/><label for="SatAf">下午</label>
+				</div>
+			</div>
+			<div id="SunDiv">
+				<input type="checkbox" name="week" value="日" id="Sun"class="custom-control-input"/><label for="Sun">星期日 </label>
+				<div id="SunTime">
+					<input type="checkbox" name="Time" value="日上" id="SunMon"class="custom-control-input"/><label for="SunMon">上午</label><br/>
+					<input type="checkbox" name="Time" value="日下" id="SunAf"class="custom-control-input"/><label for="SunAf">下午</label>
+				</div>
+			</div>
+			<div style="clear:both;margin-top:50px">
+			<button type="button"id="btSubmit" class="btn btn-info"	>確認</button>
+			<button type="reset"id="btCancel" class="btn btn-info">取消</button>
+			</div>
+		</form>
+	</div>
+	<!-- 預約彈出表格end -->
+	<!-- 詢問彈出表格 -->
+	<div id="dialog" title="提問方塊">
+		<form class="form-group">
+		<label for="question">請輸入提問內容：</label>
+		<textarea name="question"class="form-control"id="question" style="resize:none;height:150px"></textarea>
+		</form>
+	</div>
+	<!-- 詢問彈出表格end -->
+	<script src="<%= request.getContextPath() %>/js/jquery-form.js"></script>
 	<script>
 	// 大家一起用
 	var house = $.parseJSON('<%= request.getAttribute("House")%>');
-
 		function loadCarousel(){
 			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
 			var eqStatus = $.parseJSON('<%= request.getAttribute("eq")%>');
 			var hContentImg = $("#houseContent img");
 			document.title = house.cityName+house.boroughName+house.houseAddr+"";
-			$("#cityName").text(house.cityName+"  >  ");
-			$("#boroughName").text(house.boroughName+"  >  ");
-			$("#houseAddr").text(house.houseAddr);
-// 			id="Rent"
-// 			<div class="col-md-3" id="Size"></div>
-// 			<div class="col-md-3" id="Charge"></div>
-// 			<div class="col-md-3" id="floor"></div>
-// 			<div class="col-md-3" id="water"></div>
-// 			<div class="col-md-3" id="elePower"></div>
-// 			<div class="col-md-3" id="hType"></div>
-// 			<div class="col-md-3" id="hForm"></div>
-			
+			if(house != null){
+				$("#cityName").text(house.cityName+"  >  ");
+				$("#boroughName").text(house.boroughName+"  >  ");
+				$("#houseAddr").text(house.houseAddr);
+				$(".houseInformation>#Rent").html("<span style='font-size:20px'>租金:&nbsp;&nbsp;</span><span style='font-size:2.3em;color:red;'>"+house.houseRent+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
+				$(".houseInformation>#Size").html("<span style='font-size:20px'>房屋大小:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseSize+"</span><span  style='font-size:20px'>&nbsp;&nbsp;坪</span>")
+				$(".houseInformation>#Charge").html("<span style='font-size:20px'>管理費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseCharge+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
+				$(".houseInformation>#floor").html("<span style='font-size:20px'>房屋樓層:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.nowFloor+"/"+house.highestFloor+"</span><span  style='font-size:20px'>&nbsp;&nbsp;樓</span>")
+				$(".houseInformation>#water").html("<span style='font-size:20px'>水費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.waterRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+				$(".houseInformation>#elePower").html("<span style='font-size:20px'>電費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.powerRate+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+				$(".houseInformation>#hFormType").html("<span style='font-size:20px'>房屋型態:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.hForm+"/"+house.hType+"</span><span  style='font-size:20px'>&nbsp;&nbsp;</span>")
+			}
 			if(eqStatus != null)
 				$.each(eqStatus,function(eqName,value){
 					if(!value){
@@ -1717,8 +1921,13 @@ h5{
 						})
 					}
 				})
+		if(hPics.length ==0){
+			hPics = [
+					{src:"<%= request.getContextPath()%>/images/no-img-1.jpg"}
+					];
+		}				
 			$('#carousel').carousel({
-			  images:hPics,  
+			  images: hPics,  
 			  currentImageIndex: 0,
 	          useDots: true,
 	          useThumbnails: true,
@@ -1726,6 +1935,7 @@ h5{
 	          useArrows: false,
 	          interval: 10000
 			});
+			
 			$("#hInfo").html(house.houseInfo);
 		}
 		loadCarousel();	
@@ -1821,6 +2031,80 @@ h5{
 			});
 		}
 		/* favorite JS code End */
+		//reservation js code
+		//設定顯示上午下午
+		$("#reservationForm>div").hover(function(){
+			$(this).children("div").toggle("blind",100)
+		});
+		//設定星期與上午下午checked連動
+		$("#reservationForm>div>input").on("click",function(){
+			var th = $(this);
+			th.parent("div").children("div").children("input").prop("checked",th.prop("checked"));
+		});
+		//設定上午下午與星期checked連動
+		$("#reservationForm>div>div>input").on("click",function(){
+			$(this).parent("div").parent("div").children("input").prop("checked",true);
+		});
+		//設定預約跳出視窗
+		var dialog = $("#reservationDiv").dialog({
+			autoOpen:false,
+			modal: true,
+			resizable: false
+		});	
+		//跳出按鈕
+		$("#bt").on("click",function(){
+			dialog.dialog("open");
+		});
+		//取消按鈕
+		$("#btCancel").on("click",function(){
+			dialog.dialog("close");
+		});
+		//送出表單資料設定
+		$("#btSubmit").on("click",function(){
+			if("${LoginOK.memNO}" == ""){
+				alert("請先登入");
+			}else{
+			//jquery的form插件，太神啦
+					$("#reservationForm").ajaxSubmit(function(data){
+					alert(data);
+					dialog.dialog("close");
+				});
+			}
+		});
+		//reservation js code end
+		//question js code
+		var dialogQ = $("#dialog");
+		dialogQ.dialog({
+			 autoOpen: false,
+			 height: 330,
+		     width: 350,
+		     modal: true,
+		     resizable:false,
+		     buttons:{
+		    	 "送出":function(){
+		    		 if("${LoginOK.memNO}" == ""){
+		    			 alert("請先登入");
+		    		 }else{
+		    			 $.post("<%=request.getContextPath()%>/QAndAServlet?mission=question"
+		    					 ,{question:$("#question").val(),member:"${LoginOK.memNO}",house:"${param.NO}"}
+		    		 	,function(data){
+		    				 alert(data);
+		    				 $("#question").val("");
+		    				 dialogQ.dialog("close");	 
+		    		 	});
+		    		 };
+		    	 },
+		    	 "取消":function(){
+		    		 dialogQ.dialog("close");
+		    	 }
+		     }
+		})
+		
+		$("#questionBT").click(function(){
+			dialogQ.dialog("open");
+			
+		});
+		//question js code end
 	</script>
 </body>
 </html>

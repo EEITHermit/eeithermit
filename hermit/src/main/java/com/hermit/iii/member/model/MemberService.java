@@ -1,13 +1,22 @@
 package com.hermit.iii.member.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MemberService {
 
 	private MemberDAO_interface_hibernate dao ;
-
+	private MemberDAO_interface_hibernate daoSP;
+	
 	public MemberService() {
 		dao = new MemberDAO_hibernate();
+		
+		//為方便一般應用程式main方的測試,所以底下的Spring-model-JDBCcfg內部dataSource設定是採用org.springframework.jdbc.datasource.DriverManagerDataSource
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-model-JDBCcfg.xml");
+		daoSP = (MemberDAO_interface_hibernate) context.getBean("memDAO");
 	}
 
 	public MemberVO insert(String memTel, String memAccount, String memPwd, String memName, String memGender,
@@ -22,7 +31,7 @@ public class MemberService {
 		memberVO1.setMemStatus(memStatus);
 		memberVO1.setMemInfract(memInfract);
 		// memberVO1.setMemImage(memImage);
-		dao.insert(memberVO1);
+		daoSP.insert(memberVO1);
 		return memberVO1;
 	}
 
@@ -39,13 +48,13 @@ public class MemberService {
 		memberVO1.setMemStatus(memStatus);
 		memberVO1.setMemInfract(memInfract);
 		memberVO1.setMemImage(memImage);
-		dao.update(memberVO1);
-		return dao.findByPrimaryKey(memNO);
+		daoSP.update(memberVO1);
+		return daoSP.findByPrimaryKey(memNO);
 	}
 
 	public MemberVO findByPrimaryKey(Integer memNO) {
 
-		return dao.findByPrimaryKey(memNO);
+		return daoSP.findByPrimaryKey(memNO);
 
 	}
 
@@ -65,7 +74,7 @@ public class MemberService {
 		memberVO.setMemInfract(memInfract);
 		memberVO.setMemImage(memImage);
 
-		dao.insert(memberVO);
+		daoSP.insert(memberVO);
 
 		return memberVO;
 	}
@@ -86,24 +95,24 @@ public class MemberService {
 		memberVO.setMemInfract(memInfract);
 		memberVO.setMemImage(memImage);
 
-		dao.update(memberVO);
+		daoSP.update(memberVO);
 
 		return memberVO;
 	}
 
 	// 刪除service
 	public void deleteMember(Integer memNO) {
-		dao.delete(memNO);
+		daoSP.delete(memNO);
 	}
 
 	// 查詢一筆service
 	public MemberVO getOneMember(Integer memNO) {
-		return dao.findByPrimaryKey(memNO);
+		return daoSP.findByPrimaryKey(memNO);
 	}
 
 	// 查詢全部service
 	public Set<MemberVO> getAll() {
-		return dao.getAll();
+		return daoSP.getAll();
 	}
 
 	/**** 自訂指令 ****/

@@ -17,4 +17,6 @@ public interface LeaseDAO_interface_hibernate {
 	public Set<LeaseVO> getAll();
 	
 	public ArrayList<HouseVO> findHouseBymemNO(Integer memNO);
+	//漢勳加
+	public ArrayList<LeaseVO> getAllByBoroughNO(Integer boroughNO);
 }

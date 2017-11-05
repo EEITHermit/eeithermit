@@ -43,8 +43,8 @@ public class infractionServlet extends HttpServlet {
 				if(memDAO.infractPlus1(memNO) == 1){
 					result = inDAO.insert(inVO);
 				}
-				memDAO.checkInfraction(memNO);
 				if(result==1){
+					memDAO.checkInfraction(memNO);
 					out.print("申請成功");
 					return;
 				}else{

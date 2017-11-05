@@ -102,7 +102,25 @@ public class LeaseDAO_hibernate implements LeaseDAO_interface_hibernate {
 		}
 		return array;
 	}
-
+	//推播用 找尋快到期的房子
+	private static String FIND_BY_BOROUGHNO = "from LeaseVO where houseVO.boroughsVO.boroughNO = ? AND leaseEndDate <= getDate()+60";
+	@Override 
+	public ArrayList<LeaseVO> getAllByBoroughNO(Integer boroughNO){
+		ArrayList<LeaseVO> array = new ArrayList<LeaseVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.getTransaction().begin();
+			Query query = session.createQuery(FIND_BY_BOROUGHNO);
+			query.setParameter(0, boroughNO);
+			List<LeaseVO> list = query.list();
+			array.addAll(list);
+			session.getTransaction().commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return array;
+	}
 	public static void main(String[] args) {
 		LeaseDAO_hibernate dao = new LeaseDAO_hibernate();
 

@@ -20,6 +20,8 @@ import com.hermit.iii.calendar.model.CalendarEventVO;
 import com.hermit.iii.emp.model.EmpDAO_hibernate;
 import com.hermit.iii.emp.model.EmpDAO_interface_hibernate;
 import com.hermit.iii.emp.model.EmpVO;
+import com.hermit.iii.lease.model.LeaseService;
+import com.hermit.iii.lease.model.LeaseVO;
 import com.hermit.iii.mention.model.MentionService;
 import com.hermit.iii.qanda.model.QandAService;
 import com.hermit.iii.qanda.model.QandAVO;
@@ -43,6 +45,7 @@ public class MentionFilter implements Filter {
 		ReservationService reservation = new ReservationService();
 		QandAService qaService = new QandAService();
 		CalendarEventService eventService = new CalendarEventService();
+		LeaseService leaseService = new LeaseService();
 		HttpServletRequest req = null;
 		HttpServletResponse resp = null;
 		if(request instanceof HttpServletRequest && response instanceof HttpServletResponse){
@@ -61,19 +64,23 @@ public class MentionFilter implements Filter {
 		ArrayList<ReservationVO> resArray = new ArrayList<ReservationVO>();
 		ArrayList<QandAVO> qaArray = new ArrayList<QandAVO>();
 		ArrayList<CalendarEventVO> eventArray = new ArrayList<CalendarEventVO>();
+		ArrayList<LeaseVO> leaseArray = new ArrayList<LeaseVO>();
 		if(!boroughNOs.isEmpty()){
 			for(Integer boroughNO : boroughNOs){
 				//若是業務
 				if(postNO == 320){
 					resArray.addAll(reservation.selectByArea(boroughNO));
 					qaArray.addAll(qaService.getAllByBoroughNO1(boroughNO));
+					leaseArray.addAll(leaseService.getAllByBoroughNO(boroughNO));
 				//若是客服
 				}else if(postNO == 330){
 					qaArray.addAll(qaService.getAllByBoroughNO0(boroughNO));
+				//管理員帳戶
 				}else if(postNO == 310){
 					resArray.addAll(reservation.selectByArea(boroughNO));
 					qaArray.addAll(qaService.getAllByBoroughNO1(boroughNO));
 					qaArray.addAll(qaService.getAllByBoroughNO0(boroughNO));
+					leaseArray.addAll(leaseService.getAllByBoroughNO(boroughNO));
 				}
 			}
 		}
@@ -83,6 +90,7 @@ public class MentionFilter implements Filter {
 		request.setAttribute("resArray", resArray);
 		request.setAttribute("eventArray", eventArray);
 		request.setAttribute("resSize",resArray.size());
+		request.setAttribute("leaseArray", leaseArray);
 		request.setAttribute("empVO",empVO);
 		chain.doFilter(request, response);
 		return;	

@@ -56,4 +56,7 @@ public class EmpService {
 	public String getAllForJson() {
 		return dao.getAllForJson();
 	}
+	public List<EmpVO> getByPostJSON(Integer post){
+		return  dao.getByPost(post);
+	}
 }

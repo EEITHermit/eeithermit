@@ -27,13 +27,6 @@
 a:link, a:visited, a:hover, a:active {
 	text-align: left;
 }
-
-.panel panel-primary{
-	border-color: #000000;
-}
-.panel-heading{
-	background:#000000;
-}
 </style>
 	<div id="content">
 		<div class="container">
@@ -51,56 +44,48 @@ a:link, a:visited, a:hover, a:active {
 				<!-- /span3 -->
 			</div>
 
+			<!-- 四格資訊 -->
 			<div class="row" style="padding-top: 5%">
 				<div class="col-md-3">
-					<div class="panel panel-primary" style="border-color: #000000">
-						<div class="panel-heading" style="background:#000000">
-							<i class="glyphicon glyphicon-heart" style="font-size: 24px"></i><a
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<i class="glyphicon glyphicon-heart" style="font-size: 20px"><a
 								href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp"
-								style="font-size: 24px">收藏</a>
+								style="font-size: 20px">個人喜好管理</a></i>
 						</div>
-						<div class="panel-body">Panel Content</div>
+						<div class="panel-body">管理您收藏的房屋物件以及取消不要的收藏。</div>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<i class="glyphicon glyphicon-calendar" style="font-size: 24px"></i><a
+							<i class="glyphicon glyphicon-calendar" style="font-size: 20px"><a
 								href="<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp"
-								style="font-size: 24px">預約</a>
+								style="font-size: 20px">看屋排程預約</a></i>
 						</div>
-						<div class="panel-body">Panel Content</div>
+						<div class="panel-body">對喜歡的房屋進行預約且有專人聯繫並安排時間帶您看屋。</div>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<i class="glyphicon glyphicon-comment" style="font-size: 24px"></i><a
+							<i class="glyphicon glyphicon-comment" style="font-size: 20px"><a
 								href="<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp"
-								style="font-size: 24px">問與答</a>
+								style="font-size: 20px">問與答</a></i>
 						</div>
-						<div class="panel-body">Panel Content</div>
+						<div class="panel-body">記錄對房屋提出問題的留言和使用客服回報的資訊。</div>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<i class="glyphicon glyphicon-file" style="font-size: 24px"></i><a
+							<i class="glyphicon glyphicon-file" style="font-size: 20px"><a
 								href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp"
-								style="font-size: 24px">租賃紀錄</a>
+								style="font-size: 20px">個人租賃紀錄</a></i>
 						</div>
-						<div class="panel-body">Panel Content</div>
+						<div class="panel-body">存放以往簽約的合約，確保雙方的權利。</div>
 					</div>
 				</div>
-			</div>
-
-
-			<div class="">
-				<!-- 這邊是放你的資料 -->
-				<div>
-					<div class="container"></div>
-				</div>
-				<!-- /widget-content -->
 			</div>
 			<!-- /widget -->
 		</div>

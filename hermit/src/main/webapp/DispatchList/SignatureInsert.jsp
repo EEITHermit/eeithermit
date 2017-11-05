@@ -18,15 +18,15 @@
 		<form method="get" action="DispatchListServlet">
 			<div class="form-group">
 				<label for="dempno">指派人</label>
-				<input type="text" class="form-control" id="dempno" value="1001" >
+				<input type="text" class="form-control" id="dempno" value="30001" >
 			</div>
 			<div class="form-group">
 			 	<label for="aempno">負責人</label>
-			 	<input type="text" class="form-control" id="aempno" value="1002">
+			 	<input type="text" class="form-control" id="aempno" value="30002">
 			</div>
 			<div class="form-group">
 			 	<label for="qano">問答單號</label>
-			 	<input type="text" class="form-control" id="qano" value="10000001">
+			 	<input type="text" class="form-control" id="qano" value="60000001">
 			 	<input type="hidden" class="form-control" id="action" value="InsertDispatchList">
 			</div>
 			<button type="button" class="btn btn-default" id="submit">Submit</button>
