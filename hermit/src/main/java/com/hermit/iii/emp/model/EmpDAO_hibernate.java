@@ -222,17 +222,17 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 //		System.out.println("----------------------");
 
 		// select account
-//		EmpVO empVO4 = dao.findByAccount("Vir3");
-//		System.out.print(empVO4.getEmpNO() + ",");
-//		System.out.print(empVO4.getEmpAccount() + ",");
-//		System.out.print(empVO4.getEmpPwd() + ",");
-//		System.out.print(empVO4.getEmpPhone() + ",");
-//		System.out.print(empVO4.getEmpName() + ",");
+		EmpVO empVO4 = dao.findByAccount("Vir3");
+		System.out.print(empVO4.getEmpNO() + ",");
+		System.out.print(empVO4.getEmpAccount() + ",");
+		System.out.print(empVO4.getEmpPwd() + ",");
+		System.out.print(empVO4.getEmpPhone() + ",");
+		System.out.print(empVO4.getEmpName() + ",");
 		// 改寫成以下三行寫法
-//		System.out.print(empVO.getPostVO().getPostNO() + ",");
-//		System.out.println(empVO.getEmpStatus());
-//		System.out.println("----------------------");
-//
-//		System.out.println("Finish.");
+		System.out.print(empVO.getPostVO().getPostNO() + ",");
+		System.out.println(empVO.getEmpStatus());
+		System.out.println("----------------------");
+
+		System.out.println("Finish.");
 	}
 }
