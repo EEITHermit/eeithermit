@@ -38,8 +38,9 @@
 }
 
 #formDiv {
-  	display: block; 
-}
+  	display:inline-block;
+  	position:static;
+ }
 </style>
 
 </head>
@@ -197,9 +198,9 @@ a:link, a:visited, a:hover, a:active {
 									method="POST">
 									<div class="col-md-8">
 										<label for="houseNO" class="form-label" style="margin-top:0px">請選擇房屋：</label> <select
-											name="houseNO" class="form-control"
+											name="houseNO" class="form-control" id="houseNO"
 											style="background-color: #DDDDDD;">
-											<option>請選擇 房屋</option>
+											<option>請選擇房屋</option>
 											<!--filter會傳來houseArray 為此會員所租賃的房屋 -->
 											<c:forEach var="houseVO" items="${houseArray}">
 												<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
@@ -232,14 +233,14 @@ a:link, a:visited, a:hover, a:active {
 	</div>
 	<!-- /content -->
 	<div style="height: 50px"></div>
-	<div id="footer">
+<!-- 	<div id="footer"> -->
 
 		<!-- 		<div class="container">
 			<hr />
 			<p style="text-align: center">Hermit House for Rent &reg;</p>
 		</div> -->
 		<!-- /container -->
-	</div>
+<!-- 	</div> -->
 	<!-- /footer -->
 	<footer
 		class="navbar-fixed-bottom w3-black container-fluid text-center">
@@ -286,13 +287,14 @@ a:link, a:visited, a:hover, a:active {
 					at:"center bottom"
 				});
 			});
-			$("#formDiv").position({
-				of:$("#commentBT").parent("div"),
-				my:"center top",
-				at:"center bottom"
-			});
+			
 			//跳出投訴頁面，暫不使用
 			$("#commentBT").click(function() {
+// 				$("#formDiv").position({
+// 					of:$("#commentBT").parent("div"),
+// 					my:"center top",
+// 					at:"center bottom"
+// 				});
 				$("#formDiv").toggle("blind",400);
 			});
 			//產生jqueyText
@@ -338,9 +340,18 @@ a:link, a:visited, a:hover, a:active {
 		};
 
 		function check() {
+			console.log($("#commentArea").val());
+			if($("#commentArea").val().trim().length == 0){
+				alert("請先輸入投訴內容");
+				return;
+			};
+			if($("#houseNO").val() == "請選擇房屋"){
+				alert("請先選擇房屋");
+				return;
+			};
 			if (confirm("是否確認送出投訴")) {
 				(document.getElementById("commentForm")).submit();
-			}
+			};
 		};
 	</script>
 </body>

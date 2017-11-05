@@ -230,7 +230,7 @@ table {
 						method="POST" id="answerForm">
 						留言編號：<input class="form-control" type="text" readonly="readonly"
 							name="qaNO" value="" id="qaNO" /> 回覆內容：
-						<textarea class="form-control" name="aDetail"
+						<textarea class="form-control" name="aDetail" id="aDetail"
 							style="resize: none; height: 100px"></textarea>
 						<button class="btn btn-primary" type="button" onclick="check()">提交</button>
 						<button class="btn btn-primary" type="button" onclick="cancel()">取消</button>
@@ -495,6 +495,10 @@ table {
 	}
 	//回應表單確認按鈕
 	function check(){
+		if($("#aDetail").val().trim().length == 0){
+			alert("請先輸入回覆內容");
+			return;
+		}
 		if(confirm("是否確認送出此回覆?")){
 			$("#qaForm>form")[0].submit();
 		}
