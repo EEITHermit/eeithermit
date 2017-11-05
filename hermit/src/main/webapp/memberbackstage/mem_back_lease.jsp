@@ -118,10 +118,17 @@ a:link, a:visited, a:hover, a:active {
 								style="font-weight: bold; font-size: 18px; font-family: Microsoft JhengHei">我的租賃記錄</span>
 						</div>
 						<!-- /widget-header -->
-
+							
 
 						<!-- 這邊是放你的資料 -->
-						<div class="widget-content"></div>
+						<div class="widget-content">
+							<div id="leaseDiv">
+								<div>
+									<input type="text" value="${LoginOK.memNO}" readonly>
+									<input type="text" value="${vo.leaseNO}">
+								</div>
+							</div>						
+						</div>
 						<!-- /widget-content -->
 
 
@@ -174,5 +181,22 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script>
+// 	$(document).ready(function(){
+// 		var leasediv=$("#leaseDiv>div");
+// 		var memNO="${LoginOK.memNO}";
+// 		var dataJson;
+// // 		console.log(memNO);
+// 		$.post("/hermit/LeaseServlet.do",{action:"getOneLeaseForJson","memNO":memNO},function(data){
+// 			console.log(data);
+// 			dataJson=$.parseJSON(data);
+// 			$.each(dataJson,function(index,vo){
+// 				var cell1 = $("<input type='text' readonly name='leaseNO'>");
+// 				var div = $("<div></div>").append(cell1);
+// 				leasediv.append(div);
+// 			})
+// 		})
+// 	});
+	</script>
 </body>
 </html>

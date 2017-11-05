@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.simple.JSONValue;
 
-import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.lease.model.LeaseService;
 import com.hermit.iii.lease.model.LeaseVO;
 
@@ -38,7 +40,7 @@ public class LeaseServlet extends HttpServlet {
 
 		String action = request.getParameter("action");
 		LeaseService svc = new LeaseService();
-		LeaseVO vo;
+		LeaseVO vo = null;
 
 		Integer leaseNO = null;
 		Integer houseNO = null;
@@ -134,6 +136,7 @@ public class LeaseServlet extends HttpServlet {
 			svc.updateLease(leaseNO, houseNO, leaseBeginDate, leaseEndDate, memNO, empNO, leaseRent, leaseDeposit, leaseRelief, leaseDate, leasePic, houseNote, leaseRefund);
 			response.sendRedirect("/hermit/Lease/Lease.jsp");
 		}
+	
 	}
 
 }

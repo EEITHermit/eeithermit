@@ -107,7 +107,7 @@ a:link, a:visited, a:hover, a:active {
 						</a></li>
 
 						<li><a
-							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getOneLeaseByMemNO&memNO="+${LoginOK.memNO}>
 								<i class="glyphicon glyphicon-file"
 								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
