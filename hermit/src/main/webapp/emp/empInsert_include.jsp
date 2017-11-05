@@ -59,7 +59,7 @@ float:right;
 		</select><br><br><br>
 	
 		<input type="hidden" name="action" value="InsertEmp">	
-		<button type="button" class="btn btn-default" id="submit" onclick="doSubmit(this);">確認</button>
+		<button type="submit" class="btn btn-default" id="submit" onclick="doSubmit(this);">確認</button>
 		<button type="reset" class="btn btn-default">清除</button>
 		
 		<div style="display:none">

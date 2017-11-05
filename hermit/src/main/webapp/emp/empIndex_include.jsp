@@ -95,7 +95,7 @@ tr {
 			</tr>
 		</tfoot>
 	</table>
-	<form id="modify" method="get" action="EmpServlet">	
+	<form id="modify" method="post" action="EmpServlet">	
 		<input type="hidden" name="action" value="getOneEmp">
 		<input type="hidden" id="empNO" name="empNO" >
 	</form>
@@ -122,7 +122,7 @@ tr {
 					var cell3 = $("<td></td>").text(VO.empPwd);
 					var cell4 = $("<td></td>").text(VO.empPhone);
 					var cell5 = $("<td></td>").text(VO.empName);
-					var cell6 = $("<td></td>").text(VO.postName);
+					var cell6 = $("<td></td>").text(VO.postNO);
 					var cell7 = $("<td></td>").text(VO.empStatus);
 					var cell8 = $("<td></td>").html('<button class="btn btn-primary" onclick="toUpdate('+VO.empNO+');">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
 					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]);
