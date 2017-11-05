@@ -164,7 +164,7 @@ public class calendarServlet extends HttpServlet {
 				out.print("已通知業務人員，24小時內會將您的預約清除");
 				return;
 			}else{
-				out.print("送出失敗，請再次確認");
+				out.print("字數太長，送出失敗，請再次確認");
 				return;
 			}
 		}

@@ -82,7 +82,7 @@ a:link, a:visited, a:hover, a:active {
 							href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp">
 								<i class="glyphicon glyphicon-home"
 								style="height: 30px; font-size: 30px"></i> <span
-								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
+								style="font-size: 15px; font-family: Microsoft JhengHei">會員中心</span>
 						</a></li>
 
 						<li><a
@@ -107,7 +107,7 @@ a:link, a:visited, a:hover, a:active {
 						</a></li>
 
 						<li><a
-							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease">
 								<i class="glyphicon glyphicon-file"
 								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
@@ -152,7 +152,7 @@ a:link, a:visited, a:hover, a:active {
 								<!--查詢留言區域 -->
 								<div id="queryDiv">
 									<table id="queryTable"
-										class="table table-striped table-bordered" cellspacing="0">
+										class="table table-striped table-bordered" cellspacing="0" style="table-layout:fixed;word-break:break-all;">
 										<thead>
 											<tr>
 												<th>留言時間</th>
@@ -175,7 +175,7 @@ a:link, a:visited, a:hover, a:active {
 													</c:if>
 													<td><a
 														style="color: blue; text-decoration: underline;"
-														href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+														href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 													<td>${qaVO.qDetail}</td>
 													<td>${qaVO.aTime}</td>
 													<td>${qaVO.aDetail}</td>
@@ -191,11 +191,11 @@ a:link, a:visited, a:hover, a:active {
 									<button id="commentBT" class="btn btn-primary btn-lg btn-block">客服申請</button>
 								</div>
 
-							<div id="formDiv">
+							<div id="formDiv" class="row">
 								<form id="commentForm" class="form-group"
 									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
 									method="POST">
-									<div class="container col-md-8">
+									<div class="col-md-8">
 										<label for="houseNO" class="form-label">請選擇房屋：</label> <select
 											name="houseNO" class="form-control"
 											style="background-color: #DDDDDD;">
@@ -286,9 +286,9 @@ a:link, a:visited, a:hover, a:active {
 				});
 			});
 			//跳出投訴頁面，暫不使用
-// 			$("#commentBT").click(function() {
-// 				$("#formDiv").toggle();
-// 			});
+			$("#commentBT").click(function() {
+				$("#formDiv").toggle("blind",400);
+			});
 			//產生jqueyText
 			$('#commentArea').jqte();
 			//產生DataTable
@@ -311,22 +311,22 @@ a:link, a:visited, a:hover, a:active {
 				//設定各個欄位屬性
 				"columnDefs" : [ {
 					"targets" : [ 0 ],
-					"width" : "10%"
+					"width" : "13%"
 				}, {
 					"targets" : [ 1 ],
 					"width" : "10%"
 				}, {
 					"targets" : [ 2 ],
-					"width" : "20%"
+					"width" : "16%"
 				}, {
 					"targets" : [ 3 ],
-					"width" : "28%"
+					"width" : "26%"
 				}, {
 					"targets" : [ 4 ],
-					"width" : "10%"
+					"width" : "13%"
 				}, {
 					"targets" : [ 5 ],
-					"width" : "27%"
+					"width" : "22%"
 				} ]
 			});
 		};
