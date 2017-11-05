@@ -897,7 +897,7 @@ nav.main-nav:hover {
 		}
 		// 登入判斷
 		$(document).ready(function(){
-			//登入資訊用-start
+			// 登入資訊用-start
 			var $form_modal = $('.cd-user-modal'),
 			$form_login = $form_modal.find('#cd-login'),
 			$form_signup = $form_modal.find('#cd-signup'),
@@ -908,7 +908,7 @@ nav.main-nav:hover {
 			$forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
 			$back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
 			$main_nav = $('.main-nav');
-			//登入資訊用-end
+			// 登入資訊用-end
 			
 			$("#submitBtn").click(function(){
 				var box;
@@ -920,6 +920,8 @@ nav.main-nav:hover {
 				if($("#remember").prop("checked")){
 					box = "on";
 				}
+				
+			// 登入後判斷是否是驗證會員
 			$.post('<%=request.getContextPath()%>/Login/memlogin.do?action=login',{account:$("#account").val(),pwd:$("#pwd").val(),code:$("#code").val(),remember:box},function(data){
 				
 				var header1 = data.split("*")[0];
@@ -950,6 +952,7 @@ nav.main-nav:hover {
 					}
 				})
 			})
+			
 			// 送出重設密碼連結
 			$("#submitReset").click(function(){
 				$("#submitReset").prop("disabled",true);
@@ -985,7 +988,7 @@ nav.main-nav:hover {
 				})
 			})
 			
-			//進入收藏前判斷是否已登入
+			// 進入收藏前判斷是否已登入
 			$("#mbf").click(function(event){
 				event.preventDefault();
 				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
@@ -1004,7 +1007,7 @@ nav.main-nav:hover {
 				})
 			})
 
-			//進入預約前判斷是否已登入
+			// 進入預約前判斷是否已登入
 			$("#mbc").click(function(event){
 				event.preventDefault();
 				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
@@ -1023,7 +1026,7 @@ nav.main-nav:hover {
 				})
 			})
 			
-			//進入Q&A前判斷是否已登入
+			// 進入Q&A前判斷是否已登入
 			$("#mbq").click(function(event){
 				event.preventDefault();
 				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
@@ -1042,7 +1045,7 @@ nav.main-nav:hover {
 				})
 			})
 			
-			//進入租賃紀錄前判斷是否已登入
+			// 進入租賃紀錄前判斷是否已登入
 			$("#mbl").click(function(event){
 				event.preventDefault();
 				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
@@ -1060,7 +1063,7 @@ nav.main-nav:hover {
 					}
 				})
 			})
-		//登入判斷結束
+		// 登入判斷結束
 		})
 				
 				
