@@ -24,10 +24,10 @@
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
 	<style>
-a:link, a:visited, a:hover, a:active {
-	text-align: left;
-}
-</style>
+	a:link, a:visited, a:hover, a:active {
+		text-align: left;
+	}
+	</style>
 	<div id="content">
 		<div class="container">
 			<div class="row">
