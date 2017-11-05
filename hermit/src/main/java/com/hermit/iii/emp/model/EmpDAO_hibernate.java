@@ -16,6 +16,7 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 
 	private static final String GET_ALL_STMT = "FROM EmpVO order by empNO";
 	private static final String SELECT_BY_ACCOUNT = "FROM EmpVO where empAccount=?";
+	private static final String GET_BY_POST = "FROM EmpVO where postNO=?";
 
 	@Override
 	public void insert(EmpVO empVO) {
@@ -146,6 +147,23 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 			throw ex;
 		}
 		return jsonString;
+	}
+	@Override
+	public List<EmpVO> getByPost(Integer post) {
+		List<EmpVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_BY_POST);
+			query.setParameter(0, post);
+			list = query.list(); // getResultList()
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
 	}
 
 	public static void main(String[] args) {

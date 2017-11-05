@@ -35,10 +35,10 @@ float:right;
 		<input type="text" name="empName" id="empName" size="20" required><p/><br>
 		
 		<label for="empAccount">員工帳號</label><br>
-		<input type="text" name="empAccount" size="20">(請輸入6~12位英文字含數字、不可輸入中文字及特殊字元)<p/><br>
+		<input type="text" name="empAccount" size="20">(請輸入6~8位英文字含數字、不可輸入中文字及特殊字元)<p/><br>
 		
 		<label for="empPwd">員工密碼</label><br>
-		<input type='text' name='empPwd' size="20">(請輸入6~12位大小寫英文含數字、大小寫區分)<P/><br>
+		<input type='text' name='empPwd' size="20">(請輸入8~10位大小寫英文含數字、大小寫區分)<P/><br>
 		
 		<label for="empPhone">員工電話</label><br>
 		<input type="text" name="empPhone" size="20">(請輸入手機號碼0987-654-321)<p/><br>
