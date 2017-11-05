@@ -306,9 +306,11 @@ a:link, a:visited, a:hover, a:active {
 			 			,{id:$("#resNO").val(),ps:$("#reason").val()}
 			 			,function(data){
 			 				alert(data);
-			 				thisButton.text("已回報").attr("disabled",true);
-			 				$("#reasonDiv").dialog("close");
-			 				$("#reason").val("");
+			 				if(data == "已通知業務人員，24小時內會將您的預約清除"){
+			 					thisButton.text("已回報").attr("disabled",true);
+			 					$("#reasonDiv").dialog("close");
+			 					$("#reason").val("");
+			 				}
 			 			})
 			}
 		});
