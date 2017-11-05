@@ -10,8 +10,6 @@
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
 <!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
 <script src="<%=request.getContextPath()%>/js/appstore.js"></script>
-<script src="<%=request.getContextPath()%>/js/lazyload.js"></script>
-
 <style>
 	a:link, a:visited, a:hover ,a:active{
 		color : white;
@@ -47,7 +45,6 @@
 		$(function(){
 			
 			var houseItems = <%= session.getAttribute("houseItems") %>
-			console.log(houseItems)
 			if(houseItems== null){
 				location.replace("<%= request.getContextPath()%>/index.jsp");
 			};
