@@ -6,6 +6,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.json.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hermit.iii.member.model.*;
 import com.hermit.iii.util.*;
@@ -617,14 +619,16 @@ public class MemberServlet extends HttpServlet {
 			}
 		}
 		if ("checkAgain".equals(action)) {
+			// 為方便一般應用程式main方的測試,所以底下的model-config1內部dataSource設定是採用org.springframework.jdbc.datasource.DriverManagerDataSource
+			ApplicationContext context = new ClassPathXmlApplicationContext("Spring-model-JDBCcfg.xml");
+			// 建立DAO物件
+			MemberDAO_interface_hibernate daSP = (MemberDAO_interface_hibernate) context.getBean("memDAO");
 			String memAccount = request.getParameter("memAccount");
-			MemberDAO_hibernate memberDAO = new MemberDAO_hibernate();
-			String memTel = (memberDAO.findByAccount(memAccount)).getMemTel();
+			String memTel = (daSP.findByAccount(memAccount)).getMemTel();
 
 			smscode = new SendBySMS().Process(memTel); // 傳送簡訊驗證
 			session.setAttribute("SMScode", smscode);
 			session.setAttribute("telholder", memTel);
-			System.out.println(memAccount + "123456");
 			response.sendRedirect("register/register_notice_page.jsp?memAccount=" + memAccount);
 		}
 	}
