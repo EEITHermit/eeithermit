@@ -74,7 +74,7 @@
 					aria-valuemax="100" style="width: 33%">33%</div>
 			</div>
 
-			<form method="post" action="<%=request.getContextPath()%>/member.do"
+			<form method="post" action="<%=request.getContextPath()%>/MemberNewServlet/registerInsert.do"
 				name="myForm">
 				<fieldset class="background-image">
 					<legend>

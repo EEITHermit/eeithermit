@@ -54,7 +54,7 @@ public class HousePageForward extends HttpServlet {
 		houseMap.put("houseSize",hvo.getHouseSize().toString());
 		houseMap.put("houseInfo",hvo.getHouseInfo().toString());
 		houseMap.put("houseCharge",hvo.getHouseCharge().toString());
-		houseMap.put("houseVideo",hvo.getHouseVideo().toString());
+		houseMap.put("houseVideo",hvo.getHouseVideo());
 		houseMap.put("waterRate",hvo.getWaterRate().toString());
 		houseMap.put("powerRate",hvo.getPowerRate().toString());
 		houseMap.put("hForm",hvo.getHouseFormVO().gethForm().toString());

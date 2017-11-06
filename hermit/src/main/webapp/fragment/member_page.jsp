@@ -91,7 +91,7 @@
 	.loginBtn {
 	box-sizing: border-box;
 	position: relative;
-	width: 13em; /* - apply for fixed size */
+	width: 14em; /* - apply for fixed size */
 	margin: 0.2em;
 	padding: 0 15px 0 46px;
 	border: none;
@@ -328,7 +328,7 @@
 
 					<p class="fieldset">
 						<button class="loginBtn loginBtn--facebook" type="button"
-							id="facebook" style="margin-left: 55px">Login with
+							id="facebook" style="margin-left: 43px">Login with
 							Facebook</button>
 
 						<button class="loginBtn loginBtn--google" type="button"
@@ -488,8 +488,6 @@
 			var header1 = data.split("*")[0];
 			var header2 = data.split("*")[1];
 			if(header1 == "ok"){
-				console.log(data);
-				console.log(header2);
 				window.location = header2;
 				location.reload();
 			}

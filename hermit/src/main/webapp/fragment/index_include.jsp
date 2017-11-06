@@ -104,7 +104,7 @@ a:link, a:visited, a:hover, a:active {
 .loginBtn {
 	box-sizing: border-box;
 	position: relative;
-	width: 13em; /* - apply for fixed size */
+	width: 14em; /* - apply for fixed size */
 	margin: 0.2em;
 	padding: 0 15px 0 46px;
 	border: none;
@@ -304,8 +304,8 @@ nav.main-nav:hover {
 		<div class="row" style="height: auto">
 			<div class="col-md-6 col-sm-12 col-md-offset-3 subscribe">
 				<form class="form-horizontal" role="form"
-					action="<%=request.getContextPath()%>/index.jsp"
-					id="subscribeForm" method="POST">
+					action="<%=request.getContextPath()%>/index.jsp" id="subscribeForm"
+					method="POST">
 					<div class="form-group" style="overflow: hidden">
 						<div class="input-group">
 							<input class="form-control input-lg" name="houstTitle"
@@ -564,7 +564,7 @@ nav.main-nav:hover {
 
 					<p class="fieldset">
 						<button class="loginBtn loginBtn--facebook" type="button"
-							id="facebook" style="margin-left: 55px">Login with
+							id="facebook" style="margin-left: 43px">Login with
 							Facebook</button>
 
 						<button class="loginBtn loginBtn--google" type="button"

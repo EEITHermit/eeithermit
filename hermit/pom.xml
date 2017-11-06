@@ -275,7 +275,26 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- Spring by teacher吳 【end】 -->
-
+		
+		<!-- 基本spring上面已載完，已下是MVC輔助開發使用 -->
+		<!-- spring MVC 補充【start】 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.4.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-impl</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-spec</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+		<!-- spring MVC 補充【end】 -->
+		
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
