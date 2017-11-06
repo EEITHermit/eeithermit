@@ -20,7 +20,7 @@
 			<form action="<%= request.getContextPath()%>/Dispatch" method="get">
 				<div class="form-group">
 					<label for="exampleInputEmail1">指派人</label>
-					<input type="hidden" class="form-control" id="dempNO" name="dempNO" readonly="readonly" placeholder="指派人" value="${empLoginOK.empNO}">
+					<input type="hidden" class="form-control" id="dempNO" readonly="readonly" name="dempNO" readonly="readonly" placeholder="指派人" value="${empLoginOK.empNO}">
 					<input type="text" class="form-control" readonly="readonly" disabled="disabled"  placeholder="指派人" value="${empLoginOK.empName}">
 				</div>
 				<div class="form-group">

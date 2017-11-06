@@ -35,4 +35,5 @@ public interface HouseDAO_interface_hibernate {
 	public Integer insertHouseAndHousePicture(HouseVO houseVO, Set<HousePictureVO> set);
 	
 	public List<HouseVO> getNewThree();
+	public List<HouseVO> getHotHouse();
 }

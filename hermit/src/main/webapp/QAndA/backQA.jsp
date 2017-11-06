@@ -60,6 +60,7 @@
 		//選擇
 		$("#querySelect").on("change",function(){
 			var mission = $(this).val();
+			var qrs = [];
 			$.get("<%=request.getContextPath()%>/QAndAServlet",{mission:mission},function(data){
 				$("#showDiv").toggle(true);
 // 				$("#showTable>tbody").html("");
@@ -72,13 +73,23 @@
 						type="客服";
 					}else if(vo.qaType == 1){
 						type="問題"
+					};
+					var q ;
+					var qr;
+					if(vo.QDetail.length > 8){
+						q = vo.QDetail.substring(0,8)+"...<a><span style='font-size:10px;float:right;'>[更多內容]</span></a>";
+						qr = vo.QDetail+"<a><span style='font-size:10px;float:right;'>[收起]</span></a>";
+					}else{
+						q = vo.QDetail;
+						qr = "";
 					}
+					qrs.push(qr);
 					var data = [vo.qaNO
 								,type
 								,vo.memberVO.memNO+" "+vo.memberVO.memName
 								,"<a href='"+vo.houseVO.houseNO+"'>"+vo.houseVO.houseTitle+"</a>"
 								,vo.QTime
-								,vo.QDetail
+								,q
 								,vo.ATime
 								,vo.empNO
 								,vo.ADetail];
@@ -102,19 +113,20 @@
 					},
 					data:datas,
 					columns: [
-			            { title: "留言編號" },
-			            { title: "留言類型" },
-			            { title: "留言會員" },
-			            { title: "留言房屋" },
-			            { title: "提問時間" },
-			            { title: "留言內容" },
-			            { title: "回覆時間","defaultContent": "----"},
-			            { title: "回覆員工","defaultContent": "----"},
-			            { title: "回覆內容","defaultContent": "尚未回覆"}
+			            { title: "留言編號" ,width:"10%"},
+			            { title: "留言類型" ,width:"6%"},
+			            { title: "留言會員" ,width:"10%"},
+			            { title: "留言房屋" ,width:"10%"},
+			            { title: "提問時間" ,width:"10%"},
+			            { title: "留言內容" ,width:"17%"},
+			            { title: "回覆時間" ,width:"10%","defaultContent": "----"},
+			            { title: "回覆員工" ,width:"10%","defaultContent": "----"},
+			            { title: "回覆內容" ,width:"17%","defaultContent": "尚未回覆"}
 			        ]
 				})
 			});
 		});
+		
 	};
 </script>
 </body>

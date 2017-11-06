@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.hermit.iii.member.model.MemberDAO_hibernate;
+import com.hermit.iii.member.model.MemberDAO_interface_hibernate;
 import com.hermit.iii.member.model.MemberService;
 import com.hermit.iii.member.model.MemberVO;
 import com.hermit.iii.util.SendBySMS;
@@ -84,9 +88,11 @@ public class SMSServlet extends HttpServlet {
 					memberSvc.updateStatusByTel(memTel, "一般會員驗證");
 
 				// 註冊完直接登入
-				MemberDAO_hibernate dao = new MemberDAO_hibernate();
-				MemberVO vo = dao.findByAccount(memAccount);
-				System.out.println(vo.getMemAccount());
+				// 為方便一般應用程式main方的測試,所以底下的model-config1內部dataSource設定是採用org.springframework.jdbc.datasource.DriverManagerDataSource
+				ApplicationContext context = new ClassPathXmlApplicationContext("Spring-model-JDBCcfg.xml");
+				// 建立DAO物件
+				MemberDAO_interface_hibernate daSP = (MemberDAO_interface_hibernate) context.getBean("memDAO");
+				MemberVO vo = daSP.findByAccount(memAccount);
 				session.setAttribute("LoginOK", vo);
 
 				/**** 3.處理完成 ****/

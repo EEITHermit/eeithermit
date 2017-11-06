@@ -3,6 +3,7 @@ package com.hermit.iii.house.model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,8 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 	private static final String AUTO_COMPLETE = "FROM HouseVO Where houseAddr like ?";
 	private static final String FIND_BOROUGHNO_BY_HOUSENO = "from houseVO where houseNO = ?";
 	private static final String GET_ONE_HOUSE_FK="form HouseVO where houseNO=?";
-	private static final String GET_TOP_THREE_BY_POST_TIME="FROM HouseVO ORDER BY houseNO DESC";
+	private static final String GET_TOP_THREE_BY_POST_TIME="FROM HouseVO WHERE houseStatus='未出租' ORDER BY houseNO DESC";
+	private static final String GET_HOT_HOUSE ="FROM HouseVO WHERE houseStatus='未出租'";
 	@Override
 	public Integer insert(HouseVO houseVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -250,8 +252,38 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		
-		
+	}
+	@Override
+	public List<HouseVO> getHotHouse(){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			List<HouseVO> list = new LinkedList();
+			session.beginTransaction();
+			TypedQuery<HouseVO> query = session.createQuery(GET_HOT_HOUSE);
+			List<HouseVO> fullList = query.getResultList();
+			int maxCount = fullList.size();
+			int rdm = (int)((Math.random()*maxCount));
+			int getNum = maxCount+1;
+			while(true){
+				System.out.println("getNum = " + getNum + ", rdm = " + rdm );
+				if( getNum != rdm && list.size() < 3){
+					getNum = rdm; 
+					list.add(fullList.get(getNum));
+					fullList.remove(getNum);
+					maxCount = fullList.size();
+					rdm = (int)((Math.random()*maxCount));
+				}else if(list.size() >= 3){
+					break;
+				}else{
+					rdm = (int)((Math.random()*maxCount));
+				}
+			}
+			session.getTransaction().commit();
+			return list;
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
 	}
 	
 	public static void main (String args[]){
@@ -507,26 +539,49 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 //					System.out.print(hvo.gethPicture());
 //				}
 		
-		list = dao.getNewThree();
-		for(int i=0;i<list.size();i++){
-			vo = list.get(i);
-			System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
-			System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
-			System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityNO());
-			System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughNO());
-			System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
-			System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
-			System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
-			System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
-			System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
-			System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
-			System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
-			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
-			System.out.println("getTypeNO = \t\t" + vo.getHouseTypeVO().getTypeNO());
-			System.out.println("getFormNO = \t\t" + vo.getHouseFormVO().getFormNO());
-			System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
-			System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
+//		list = dao.getNewThree();
+//		for(int i=0;i<list.size();i++){
+//			vo = list.get(i);
+//			System.out.println("getHouseNO = \t\t" + vo.getHouseNO());
+//			System.out.println("getHouseTitle = \t" + vo.getHouseTitle());
+//			System.out.println("getCityNO = \t\t" + vo.getCityVO().getCityNO());
+//			System.out.println("getBoroughNO = \t\t" + vo.getBoroughsVO().getBoroughNO());
+//			System.out.println("getHighestFloor = \t" + vo.getHighestFloor());
+//			System.out.println("getNowFloor = \t\t" + vo.getNowFloor());
+//			System.out.println("getHouseStatus = \t" + vo.getHouseStatus());
+//			System.out.println("getHouseRent = \t\t" + vo.getHouseRent());
+//			System.out.println("getHouseCharge = \t" + vo.getHouseCharge());
+//			System.out.println("getWaterRate = \t\t" + vo.getWaterRate());
+//			System.out.println("getPowerRate = \t\t" + vo.getPowerRate());
+//			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+//			System.out.println("getHouseVideo = \t" + vo.getHouseVideo());
+//			System.out.println("getTypeNO = \t\t" + vo.getHouseTypeVO().getTypeNO());
+//			System.out.println("getFormNO = \t\t" + vo.getHouseFormVO().getFormNO());
+//			System.out.println("getHouseAddr = \t\t" + vo.getHouseAddr());
+//			System.out.println("getHouseSize = \t\t" + vo.getHouseSize());
+//			System.out.println();
+//			System.out.println("------------------------------next---------------------------------------------");
+//			System.out.println();
+//		}
+		list = dao.getHotHouse();
+		for(HouseVO lvo : list){
+			System.out.println("getHouseNO = \t\t" + lvo.getHouseNO());
+			System.out.println("getHouseTitle = \t" + lvo.getHouseTitle());
+			System.out.println("getCityNO = \t\t" + lvo.getCityVO().getCityNO());
+			System.out.println("getBoroughNO = \t\t" + lvo.getBoroughsVO().getBoroughNO());
+			System.out.println("getHighestFloor = \t" + lvo.getHighestFloor());
+			System.out.println("getNowFloor = \t\t" + lvo.getNowFloor());
+			System.out.println("getHouseStatus = \t" + lvo.getHouseStatus());
+			System.out.println("getHouseRent = \t\t" + lvo.getHouseRent());
+			System.out.println("getHouseCharge = \t" + lvo.getHouseCharge());
+			System.out.println("getWaterRate = \t\t" + lvo.getWaterRate());
+			System.out.println("getPowerRate = \t\t" + lvo.getPowerRate());
+			System.out.println("getHouseVideo = \t" + lvo.getHouseVideo());
+			System.out.println("getHouseVideo = \t" + lvo.getHouseVideo());
+			System.out.println("getTypeNO = \t\t" + lvo.getHouseTypeVO().getTypeNO());
+			System.out.println("getFormNO = \t\t" + lvo.getHouseFormVO().getFormNO());
+			System.out.println("getHouseAddr = \t\t" + lvo.getHouseAddr());
+			System.out.println("getHouseSize = \t\t" + lvo.getHouseSize());
 			System.out.println();
 			System.out.println("------------------------------next---------------------------------------------");
 			System.out.println();

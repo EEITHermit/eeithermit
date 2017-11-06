@@ -394,6 +394,44 @@ public class HouseServlet extends HttpServlet {
 			out.flush();
 			return;
 		}
+		
+		if("getHotHouse".equals(action)){
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			List<HouseVO> list = svc.getHotHouse();
+			List getThree = new LinkedList();
+			for(int i=0;i<3;i++){
+				Map m1 = new LinkedHashMap();
+				vo = list.get(i);
+				m1.put("houseNO", vo.getHouseNO());
+				m1.put("houseTitle", vo.getHouseTitle());
+				m1.put("cityNO", vo.getCityVO().getCityNO());
+				m1.put("cityName", vo.getCityVO().getCityName());
+				m1.put("boroughNO", vo.getBoroughsVO().getBoroughNO());
+				m1.put("boroughName", vo.getBoroughsVO().getBoroughName());
+				m1.put("highestFloor", vo.getHighestFloor());
+				m1.put("nowFloor", vo.getNowFloor());
+				m1.put("houseStatus", vo.getHouseStatus());
+				m1.put("houseRent", vo.getHouseRent());
+				m1.put("houseCharge", vo.getHouseCharge());
+				m1.put("previewPic", vo.getPreviewPic());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseAddr", vo.getHouseAddr());
+				m1.put("houseSize", vo.getHouseSize());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseInfo", vo.getHouseInfo());
+				getThree.add(m1);
+			}
+			Map m2 = new HashMap();
+			m2.put("newHouse", getThree);
+			String newThree = JSONValue.toJSONString(m2);
+			out.print(newThree);
+			out.flush();
+			return;
+		}
 
 	}
 

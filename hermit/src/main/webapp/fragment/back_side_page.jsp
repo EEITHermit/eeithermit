@@ -73,7 +73,7 @@
 			
 			<c:if test="${!empty empLoginOK}">
 				<ul class="nav navbar-nav navbar-right">
-					<li><span style="color:#ADADAD;font-size: 24px">${empLoginOK.empName}，你好</span></li>
+					<li style="margin-top: 9px"><span style="color:#ADADAD;font-size: 20px;">${empLoginOK.postVO.postName} ${empLoginOK.empName}</span></li>
 					<li><a href="<%=request.getContextPath()%>/EmpLogin/Logout.jsp"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
 				</ul>
 			</c:if>

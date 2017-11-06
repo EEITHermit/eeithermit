@@ -1,0 +1,20 @@
+member
+0.藍浩天 eeit9704 123Pwd@@ eeit9704@gmail.com 0911841573 一般會員驗證
+1.林志玲 Vir111 123Pwd@@ lin@gmail.com 0912345681 一般會員驗證
+2.藍正龍 Bbb222 lan456 lan@gmail.com 0912345682 未驗證會員
+3.周杰倫 Ccc333 jay456 jay@gmail.com 0912345683 FB驗證
+4.波多野結衣 Ddd444 bo987 bo@gmail.com 0912345684 Google驗證
+5.林依晨 Eee555 lic654 linchen@gmail.com 0912345685 一般會員驗證
+6.蔡康永 Fff666 tsai321 tsai@gmail.com 0912345686 一般會員驗證
+7.小S Ggg777 sss000 sss123@gmail.com 0912345687 一般會員驗證
+8.大S Hhh888 sss111 sss456@gmail.com 0912345688 未驗證會員
+9.李安 Iii999 iii974 lee@gmail.com 0912345689 Google驗證
+10.阿信 Jjj000 jjj000 shin@gmail.com 0922654321 未驗證會員
+11. 陳奕迅 Kkk111 kkk111 chen@gmail.com 0922123456 一般驗證會員
+12.趙麗穎 Lll zhao01 zhao@gmail.com 0922456789 Google驗證
+13.明道 Ming00 ming00 ming@gmail.com 0922951159 一般會員驗證
+14.楊丞琳 Yang11 yang11 yang@gmail.com 0922753357 一般會員驗證
+15.劉德華 Liu987 liu987 liu@gmail.com 0987654322 一般會員驗證
+16.吳宗憲 Wu0123 wu1234 wu@gmail.com 0987654323 Google驗證
+17.吳尊 Wu4567 wu5678 wu456@gmail.com 0987654324 一般會員驗證
+

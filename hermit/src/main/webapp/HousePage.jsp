@@ -231,7 +231,7 @@
 			<div class="col-md-4" id="myFavStar"><img height="50" width="50" src="<%=request.getContextPath()%>/images/like_n.png" /><span style="font-size: 1.5em; font-weight: 700; margin-left: 3%;font-family:Microsoft JhengHei;vertical-align: -webkit-baseline-middle;">收藏物件</span></div>
 		</div>
 		<!-- favorite HTML End -->
-		<div class="col-md-12 houseInformation" style="height:250px;width:100%;border-radius: 10px;margin-top:10px;float:right;padding:15px">
+		<div class="col-md-12 houseInformation" style="height:250px;width:100%;border-radius: 10px;margin-top:10px;margin-bottom:40px;float:right;padding:15px">
 			<div class="col-md-12" style="margin:10px 3px;" id="Rent"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="Size"></div>
 			<div class="col-md-4" style="margin:10px 3px;" id="Charge"></div>
