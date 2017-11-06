@@ -53,14 +53,22 @@
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 <script>
 	$(document).ready(work);
-	
+	//展開縮起留言內容
+	function more(event){
+		console.log($(event.target));
+		$($(event.target).parents("td").find("li")[0]).toggle(false);
+		$($(event.target).parents("td").find("li")[1]).toggle(true);
+	};
+	function less(event){
+		$($(event.target).parents("td").find("li")[0]).toggle(true);
+		$($(event.target).parents("td").find("li")[1]).toggle(false);
+	};
 	function work(){
+				
 		//套用datatable
-		
 		//選擇
 		$("#querySelect").on("change",function(){
 			var mission = $(this).val();
-			var qrs = [];
 			$.get("<%=request.getContextPath()%>/QAndAServlet",{mission:mission},function(data){
 				$("#showDiv").toggle(true);
 // 				$("#showTable>tbody").html("");
@@ -74,16 +82,22 @@
 					}else if(vo.qaType == 1){
 						type="問題"
 					};
+					//設定回報內容
 					var q ;
-					var qr;
 					if(vo.QDetail.length > 8){
-						q = vo.QDetail.substring(0,8)+"...<a><span style='font-size:10px;float:right;'>[更多內容]</span></a>";
-						qr = vo.QDetail+"<a><span style='font-size:10px;float:right;'>[收起]</span></a>";
+						q ="<ul style='list-style-type:none;margin:0px;padding:0px;'><li>"+vo.QDetail.substring(0,8)+"...<a onclick='more(event)'><span style='font-size:10px;float:right;'>[更多內容]</span></a></li>"
+							+"<li style='display:none;'>"+vo.QDetail+"<a onclick='less(event)'><span style='font-size:10px;float:right;'>[收起]</span></a></li></ul>";
 					}else{
 						q = vo.QDetail;
-						qr = "";
 					}
-					qrs.push(qr);
+					//設定回應內容
+					var a;
+					if(vo.ADetail != null && vo.ADetail.length > 8){
+						a = "<ul style='list-style-type:none;margin:0px;padding:0px;'><li>"+vo.ADetail.substring(0,8)+"...<a onclick='more(event)'><span style='font-size:10px;float:right;'>[更多內容]</span></a></li>"
+						+"<li style='display:none;'>"+vo.ADetail+"<a onclick='less(event)'><span style='font-size:10px;float:right;'>[收起]</span></a></li></ul>";
+					}else{
+						a = vo.ADetail;
+					}
 					var data = [vo.qaNO
 								,type
 								,vo.memberVO.memNO+" "+vo.memberVO.memName
@@ -92,7 +106,7 @@
 								,q
 								,vo.ATime
 								,vo.empNO
-								,vo.ADetail];
+								,a];
 					datas.push(data);
 				};
 				$("#showTable").DataTable({
