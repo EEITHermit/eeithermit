@@ -4,85 +4,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hermit</title>
 <script src='<%=request.getContextPath()%>/js/jquery-3.2.1.min.js'></script>
 <script src='<%=request.getContextPath()%>/js/tupianqiehuan.js'></script>
 <link href='<%=request.getContextPath()%>/css/tupianqiehuan.css' rel='stylesheet' />
 <style>
-
-ul, li {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
-#abgne-block-20110317 {
-	width: 1000px;	/* 圖片的寬 */
-	height: 360px;	/* 圖片的高 + 30 */
-}
-.abgne-player {
-	width: 1000px;	/* 圖片的寬 */
-	height: 360px;	/* 圖片的高 */
-	position: relative;
-	overflow: hidden;
-}
-.abgne-player ul.abgne-list {
-	position: absolute;
-	width: 9999px;
-	height: 100%;
-}
-.abgne-player ul.abgne-list li {
-	float: left;
-	width: 1000px;	/* 圖片的寬 */
-	height: 100%;
-}
-.abgne-player ul.abgne-list img{
-	width: 100%;
-	height: 100%;
-	border: 0;
-}
-.abgne-control {
-	height: 24px;
-	padding: 3px;
-	color: #fff;
-	font-size: 13px;
-	background: #333;
-}
-.abgne-control ul {
-	float: left;
-}
-.abgne-control ul li {
-	float: left;
-	padding: 0 5px;
-	line-height: 20px;
-	margin: 2px;
-	background: #666;
-	cursor: pointer;
-}
-.abgne-control ul.numbers {
-	margin-left: 13px;
-}
-.abgne-control ul li.current {
-	background: #fff;
-	color:#000;
-}
-.abgne-control ul li.hover {
-	background: #fff;
-	color:#000;
-}
-
+ul, li {padding: 0;	margin: 0; list-style: none;}
+#abgne-block-20110317 {width: 1000px;	/* 圖片的寬 */	height: 360px;	/* 圖片的高 + 30 */}
+.abgne-player {width: 1000px;	/* 圖片的寬 */	height: 360px;	/* 圖片的高 */	position: relative;	overflow: hidden;}
+.abgne-player ul.abgne-list {position: absolute; width: 9999px;	height: 100%;}
+.abgne-player ul.abgne-list li {float: left; width: 1000px;	/* 圖片的寬 */	height: 100%;}
+.abgne-player ul.abgne-list img{width: 100%;height: 100%; border: 0;}
+.abgne-control {height: 24px; padding: 3px;	color: #fff; font-size: 13px; background: #333;}
+.abgne-control ul {float: left;}
+.abgne-control ul li {float: left; padding: 0 5px; line-height: 20px; margin: 2px;	background: #666;	cursor: pointer;}
+.abgne-control ul.numbers {	margin-left: 13px;}
+.abgne-control ul li.current {	background: #fff; color:#000;}
+.abgne-control ul li.hover { background: #fff; color:#000;}
 </style>
 </head>
-
 <body>
-	<h2>Hermit</h2>
-
 	<div id="abgne-block-20110317">
 		<div class="abgne-player">
 			<ul id="adul" class="abgne-list">
-<!-- 				<li><a target="_blank" href="#"><img src="images/a.jpg"></a></li> -->
-<!-- 				<li><a target="_blank" href="#"><img src="images/b.jpg"></a></li> -->
-<!-- 				<li><a target="_blank" href="#"><img src="images/c.jpg"></a></li> -->
-
 			</ul>
 		</div>
 		<div class="abgne-control">
@@ -92,9 +35,7 @@ ul, li {
 			</ul>
 		</div>
 	</div>
-
 		<script>
-	
 	$(function(){
 		function ajaxPost() {
  			var ul = $("#adul");
@@ -108,9 +49,7 @@ ul, li {
  					aTag.append(img1);
  					li.append(aTag);
 					ul.append(li);
-				})
-			
-	
+				})			
 		// 先取得必要的元素並用 jQuery 包裝
 		// 再來取得 $block 的高度及設定動畫時間
 		var $block = $('#abgne-block-20110317'),
@@ -179,7 +118,6 @@ ul, li {
 			_stop = false;
 			timer = setTimeout(move, _showSpeed);
 		});
-	 
 		// 計時器使用
 		function move(){
 			$control.find('ul.arrows li.next').click();
@@ -190,47 +128,12 @@ ul, li {
 });
 
 	</script>
-<!-- 	<div class="wrapper"> -->
-<!-- 		<div id="focus"> -->
-<!-- 			<ul id="adul"> -->
-				
-<!-- 				<li><a href="" target="_blank"><img -->
-<!-- 						src="" alt="x" /></a></li> -->
-<!-- 				<li><a href="" target="_blank"><img -->
-<!-- 						src="" alt="x" /></a></li> -->
-<!-- 				<li><a href="" target="_blank"><img -->
-<!-- 						src="" alt="x" /></a></li> -->
-<!-- 				<li><a href="" target="_blank"><img -->
-<!-- 						src="" alt="x" /></a></li> -->
-
-<!-- 			</ul> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
 	<div>
 		<form id="modify" method="get" action="../ADManagerServlet">
 			<input type="hidden" name="action" value="getOneADManager"> <input
 				type="hidden" id="adNO" name="adNO">
 		</form>
 	</div>
-<!-- 	<script> -->
-<!-- // 		function ajaxPost() { -->
-<!-- // 			var ul = $("#adul"); -->
-<!-- // 			$.post("../ADManagerServlet", { -->
-<!-- // 				"action" : "getAllADManagerForJson" -->
-<!-- // 			}, function(data) { -->
-<!-- // 				dataJson = $.parseJSON(data).list; -->
-<!-- // 				ul.empty(); -->
-<!-- // 				$.each(dataJson, function(index, VO) { -->
-<!-- // 					var li = $("<li></li>"); -->
-<!-- // 					var aTag = $("<a></a>").attr("href", VO.adLink); -->
-<!-- // 					var img1 = $("<img>").attr("src", VO.adImage); -->
-<!-- // 					aTag.append(img1); -->
-<!-- // 					li.append(aTag); -->
-<!-- // 					ul.append(li); -->
-<!-- // 				}) -->
-<!-- // 			}) -->
-<!-- // 		} -->
-<!-- // 		ajaxPost(); -->
-<!-- 	</script> -->
+
 </body>
 </html>
