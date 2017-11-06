@@ -287,7 +287,7 @@ table {
 									<td>${dispatchVO.dempVO.empName}</td>
 									<td>${dispatchVO.dlNote}</td>
 									<td><button class="btn btn-primary btn-lg" type="button"
-											id="dispatchBT">前往處理此合約</button></td>
+											id="dispatchBT">前往處理此派工</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
