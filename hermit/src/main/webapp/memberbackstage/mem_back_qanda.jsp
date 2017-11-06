@@ -38,8 +38,9 @@
 }
 
 #formDiv {
-/* 	display: none; */
-}
+  	display:inline-block;
+  	position:static;
+ }
 </style>
 
 </head>
@@ -82,7 +83,7 @@ a:link, a:visited, a:hover, a:active {
 							href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp">
 								<i class="glyphicon glyphicon-home"
 								style="height: 30px; font-size: 30px"></i> <span
-								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
+								style="font-size: 15px; font-family: Microsoft JhengHei">會員中心</span>
 						</a></li>
 
 						<li><a
@@ -107,7 +108,7 @@ a:link, a:visited, a:hover, a:active {
 						</a></li>
 
 						<li><a
-							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease">
 								<i class="glyphicon glyphicon-file"
 								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
@@ -152,7 +153,7 @@ a:link, a:visited, a:hover, a:active {
 								<!--查詢留言區域 -->
 								<div id="queryDiv">
 									<table id="queryTable"
-										class="table table-striped table-bordered" cellspacing="0">
+										class="table table-striped table-bordered" cellspacing="0" style="table-layout:fixed;word-break:break-all;">
 										<thead>
 											<tr>
 												<th>留言時間</th>
@@ -175,7 +176,7 @@ a:link, a:visited, a:hover, a:active {
 													</c:if>
 													<td><a
 														style="color: blue; text-decoration: underline;"
-														href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+														href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 													<td>${qaVO.qDetail}</td>
 													<td>${qaVO.aTime}</td>
 													<td>${qaVO.aDetail}</td>
@@ -191,15 +192,15 @@ a:link, a:visited, a:hover, a:active {
 									<button id="commentBT" class="btn btn-primary btn-lg btn-block">客服申請</button>
 								</div>
 
-							<div id="formDiv">
-								<form id="commentForm" class="form-group"
+							<div id="formDiv" class="row">
+								<form id="commentForm" class="form-group" style="margin-top:0px"
 									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
 									method="POST">
-									<div class="container col-md-8">
-										<label for="houseNO" class="form-label">請選擇房屋：</label> <select
-											name="houseNO" class="form-control"
+									<div class="col-md-8">
+										<label for="houseNO" class="form-label" style="margin-top:0px">請選擇房屋：</label> <select
+											name="houseNO" class="form-control" id="houseNO"
 											style="background-color: #DDDDDD;">
-											<option>請選擇 房屋</option>
+											<option>請選擇房屋</option>
 											<!--filter會傳來houseArray 為此會員所租賃的房屋 -->
 											<c:forEach var="houseVO" items="${houseArray}">
 												<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
@@ -232,14 +233,14 @@ a:link, a:visited, a:hover, a:active {
 	</div>
 	<!-- /content -->
 	<div style="height: 50px"></div>
-	<div id="footer">
+<!-- 	<div id="footer"> -->
 
 		<!-- 		<div class="container">
 			<hr />
 			<p style="text-align: center">Hermit House for Rent &reg;</p>
 		</div> -->
 		<!-- /container -->
-	</div>
+<!-- 	</div> -->
 	<!-- /footer -->
 	<footer
 		class="navbar-fixed-bottom w3-black container-fluid text-center">
@@ -276,6 +277,7 @@ a:link, a:visited, a:hover, a:active {
 		document.addEventListener("DOMContentLoaded", work);
 
 		function work() {
+			
 			//跳出查詢畫面
 			$("#queryBT").click(function() {
 				$("#queryDiv").toggle("blind",400);
@@ -285,10 +287,16 @@ a:link, a:visited, a:hover, a:active {
 					at:"center bottom"
 				});
 			});
+			
 			//跳出投訴頁面，暫不使用
-// 			$("#commentBT").click(function() {
-// 				$("#formDiv").toggle();
-// 			});
+			$("#commentBT").click(function() {
+// 				$("#formDiv").position({
+// 					of:$("#commentBT").parent("div"),
+// 					my:"center top",
+// 					at:"center bottom"
+// 				});
+				$("#formDiv").toggle("blind",400);
+			});
 			//產生jqueyText
 			$('#commentArea').jqte();
 			//產生DataTable
@@ -311,30 +319,39 @@ a:link, a:visited, a:hover, a:active {
 				//設定各個欄位屬性
 				"columnDefs" : [ {
 					"targets" : [ 0 ],
-					"width" : "10%"
+					"width" : "13%"
 				}, {
 					"targets" : [ 1 ],
 					"width" : "10%"
 				}, {
 					"targets" : [ 2 ],
-					"width" : "20%"
+					"width" : "16%"
 				}, {
 					"targets" : [ 3 ],
-					"width" : "28%"
+					"width" : "26%"
 				}, {
 					"targets" : [ 4 ],
-					"width" : "10%"
+					"width" : "13%"
 				}, {
 					"targets" : [ 5 ],
-					"width" : "27%"
+					"width" : "22%"
 				} ]
 			});
 		};
 
 		function check() {
+			console.log($("#commentArea").val());
+			if($("#commentArea").val().trim().length == 0){
+				alert("請先輸入投訴內容");
+				return;
+			};
+			if($("#houseNO").val() == "請選擇房屋"){
+				alert("請先選擇房屋");
+				return;
+			};
 			if (confirm("是否確認送出投訴")) {
 				(document.getElementById("commentForm")).submit();
-			}
+			};
 		};
 	</script>
 </body>

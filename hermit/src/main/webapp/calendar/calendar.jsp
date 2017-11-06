@@ -12,9 +12,6 @@
 <link href='<%=request.getContextPath() %>/css/jquery-ui.theme.min.css' rel='stylesheet' />
 <link href='<%=request.getContextPath() %>/css/jquery-ui-timepicker-addon.min.css' rel='stylesheet'/>
 <%-- <script src='<%=request.getContextPath() %>/js/jquery-3.2.1.min.js'></script> --%>
-
-
-
 </head>
 
 <body>
@@ -98,6 +95,8 @@
 		    				alert(data);
 		    				calendar.fullCalendar("refetchEvents"); //重取資料庫事件
 		    			});
+		    			//設定開始時拖拉更改按鈕不可使用
+		    			calendar.find("button").eq(4).prop("disabled",true).css("color","gray");
 		    		}
 		    	}
 		    },
@@ -127,18 +126,21 @@
 				$("#house").val(title[1]);
 				$("#ps").text(title[2]);
 			},
-			//拖拉事件，儲存事件ID於暫存
+			//拖拉事件，儲存事件ID於暫存，開啟更改按鈕
 			eventDrop:function(event){
 				var tempID = temp.val();
 				temp.val(tempID+"%"+event.id);
+				calendar.find("button").eq(4).prop("disabled",false).css("color","black");
 			},
-			//resize事件，儲存事件ID於暫存
+			//resize事件，儲存事件ID於暫存，開啟更改按鈕
 			eventResize:function(event){
 				var tempID = temp.val();
 				temp.val(tempID+"%"+event.id);
+				calendar.find("button").eq(4).prop("disabled",false).css("color","black");
 			}
 		});
-		
+		//設定開始時拖拉更改按鈕不可使用
+		calendar.find("button").eq(4).prop("disabled",true).css("color","gray");
 		//設定選擇日期按鈕
 		var datepicker = $("#datepicker");
 		

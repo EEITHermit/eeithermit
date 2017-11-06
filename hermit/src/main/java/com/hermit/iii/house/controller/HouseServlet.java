@@ -23,6 +23,8 @@ import org.json.simple.JSONValue;
 
 import com.hermit.iii.boroughs.model.BoroughsVO;
 import com.hermit.iii.city.model.CityVO;
+import com.hermit.iii.equipmentcondition.model.EquipmentConditionService;
+import com.hermit.iii.equipmentcondition.model.EquipmentConditionVO;
 import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.house.model.HouseVO;
 import com.hermit.iii.houseform.model.HouseFormVO;
@@ -103,10 +105,12 @@ public class HouseServlet extends HttpServlet {
 			HouseTypeVO typeVO = new HouseTypeVO();
 			typeVO.setTypeNO(typeNO);
 			houseVO.setHouseTypeVO(typeVO);
+			
 			formNO = Integer.valueOf(request.getParameter("formNO"));
 			HouseFormVO formVO = new HouseFormVO();
 			formVO.setFormNO(formNO);
 			houseVO.setHouseFormVO(formVO);
+			
 			houseAddr = request.getParameter("houseAddr");
 			houseVO.setHouseAddr(houseAddr);
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
@@ -122,8 +126,44 @@ public class HouseServlet extends HttpServlet {
 					picVO.sethPicture(strBase64);
 					set.add(picVO);
 				}
-
-				
+			EquipmentConditionService eqsvc=new EquipmentConditionService();
+			System.out.println(request.getParameter("TV"));
+			Byte TV=Byte.valueOf(request.getParameter("TV"));
+			Byte aircondition=Byte.valueOf(request.getParameter("air"));
+			Byte refrigerator=Byte.valueOf(request.getParameter("rerefrigerator"));
+			Byte waterHeater=Byte.valueOf(request.getParameter("waterHeater"));
+			Byte gas=Byte.valueOf(request.getParameter("gas"));
+			Byte theFourthStation=Byte.valueOf(request.getParameter("theFourthStation"));
+			Byte net=Byte.valueOf(request.getParameter("net"));
+			Byte washing=Byte.valueOf(request.getParameter("washing"));
+			Byte bed=Byte.valueOf(request.getParameter("bed"));
+			Byte wardrobe=Byte.valueOf(request.getParameter("wardrobe"));
+			Byte sofa=Byte.valueOf(request.getParameter("sofa"));
+			Byte parking=Byte.valueOf(request.getParameter("parking"));
+			Byte elevator=Byte.valueOf(request.getParameter("elevator"));
+			Byte balcony=Byte.valueOf(request.getParameter("balcony"));
+			Byte permitCook=Byte.valueOf(request.getParameter("permitCook"));
+			Byte pet=Byte.valueOf(request.getParameter("pet"));
+			Byte closeMRT=Byte.valueOf(request.getParameter("closeMRT"));
+			EquipmentConditionVO eqVO=new EquipmentConditionVO();
+			eqVO.setTV(TV);
+			eqVO.setAircondition(aircondition);
+			eqVO.setRefrigerator(refrigerator);
+			eqVO.setWaterHeater(waterHeater);
+			eqVO.setGas(gas);
+			eqVO.setTheFourthStation(theFourthStation);
+			eqVO.setNet(net);
+			eqVO.setWashing(washing);
+			eqVO.setBed(bed);
+			eqVO.setWardrobe(wardrobe);
+			eqVO.setSofa(sofa);
+			eqVO.setParking(parking);
+			eqVO.setElevator(elevator);
+			eqVO.setBalcony(balcony);
+			eqVO.setPermitCook(permitCook);
+			eqVO.setPet(pet);
+			eqVO.setCloseMRT(closeMRT);
+			eqsvc.addEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
 				// svc.insertHouse(houseTitle, cityNO, boroughNO,
 				// previewPic,highestFloor, nowFloor, houseStatus, houseRent,
 				// houseCharge, waterRate, powerRate, houseVideo, typeNO,
@@ -131,6 +171,7 @@ public class HouseServlet extends HttpServlet {
 				
 			}
 			svc.insertHouseAndHousePicture(houseVO, set);
+			
 			response.sendRedirect("/hermit/House/House_management.jsp");
 			return;
 		}
@@ -272,6 +313,44 @@ public class HouseServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			String addrJSON = JSONValue.toJSONString(m1);
 			out.print(addrJSON);
+			out.flush();
+			return;
+		}
+		
+		if("getThree".equals(action)){
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			List<HouseVO> list = svc.getNewThree();
+			List getThree = new LinkedList();
+			for(int i=0;i<3;i++){
+				Map m1 = new LinkedHashMap();
+				vo = list.get(i);
+				m1.put("houseNO", vo.getHouseNO());
+				m1.put("houseTitle", vo.getHouseTitle());
+				m1.put("cityNO", vo.getCityVO().getCityNO());
+				m1.put("cityName", vo.getCityVO().getCityName());
+				m1.put("boroughNO", vo.getBoroughsVO().getBoroughNO());
+				m1.put("boroughName", vo.getBoroughsVO().getBoroughName());
+				m1.put("highestFloor", vo.getHighestFloor());
+				m1.put("nowFloor", vo.getNowFloor());
+				m1.put("houseStatus", vo.getHouseStatus());
+				m1.put("houseRent", vo.getHouseRent());
+				m1.put("houseCharge", vo.getHouseCharge());
+				m1.put("previewPic", vo.getPreviewPic());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseAddr", vo.getHouseAddr());
+				m1.put("houseSize", vo.getHouseSize());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseInfo", vo.getHouseInfo());
+				getThree.add(m1);
+			}
+			Map m2 = new HashMap();
+			m2.put("newHouse", getThree);
+			String newThree = JSONValue.toJSONString(m2);
+			out.print(newThree);
 			out.flush();
 			return;
 		}

@@ -5,10 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>編輯廣告</title>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
@@ -43,7 +39,7 @@ float:right;
 	<label for="adImage">廣告圖片</label><br>
 	<img id="result" src="${adVO.adImage}" height="450" width="450" ><br>
 	<input id="file" name="adImage" type="file" value="${adVO.adImage}">
-	<input type="hidden" name="adImage" id="adImage"><p/><br>
+	<input type="hidden" name="adImage" id="adImage" ><p/><br>
 </div>
 <div class="form-group" id="DIV2">
 	<label for="adNO">廣告編號</label><br>
@@ -55,13 +51,13 @@ float:right;
 	<input type="date" name="adTimeEnd" value="${adVO.adTimeEnd}" id="date1" size="60" placeholder="2015-09-18"><p/><br>
 	
 	<label for="adLink">圖片連結網址</label><br>
-	<input type="text" value="${adVO.adLink}"  size="40" placeholder="請輸入範例格式:http://www.example.com.tw" name="adLink" ><p/><br>
+	<input type="text" name="adLink" value="${adVO.adLink}"  size="40" placeholder="請輸入範例格式:http://www.example.com.tw" name="adLink" ><p/><br>
 	
 	<label for="adModify">修改人員編號</label><br>
 	<input type='text' name='adModify' value="${adVO.adModify}" size="40" placeholder="請輸入員工代號  ex:00000"><P/><br>
 	
 	<label for="adMessage">廣告訊息(限10字內)</label><br>
-	<input type="text" id="adMessage" size="40" value="${adVO.adMessage}" placeholder="請輸入訊息..."><br><br>
+	<input type="text" id="adMessage" name="adMessage" size="40" value="${adVO.adMessage}" placeholder="請輸入訊息..."><br><br>
 	
 	<label for="adStatus">狀態 </label><br>
 	<input type="radio" name="adStatus" value="${adVO.adStatus}" checked>下架

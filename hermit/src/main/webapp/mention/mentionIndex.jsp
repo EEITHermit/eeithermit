@@ -120,11 +120,11 @@ table {
 					<table id="resTable" class="table table-hover">
 						<thead>
 							<tr>
-								<th>預約編號</th>
-								<th>預約人</th>
-								<th>期望時間</th>
-								<th>房屋地址</th>
-								<th>申請時間</th>
+								<th style="width:15%">預約編號</th>
+								<th style="width:15%">預約人</th>
+								<th style="width:15%">期望時間</th>
+								<th style="width:40%">房屋地址</th>
+								<th style="width:15%">申請時間</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -187,32 +187,32 @@ table {
 				</div>
 				<!-- Q&A -->
 				<div id="qaDiv">
-					<table id="qaTable" class="table table-hover">
+					<table id="qaTable" class="table table-hover" style="table-layout:fixed;">
 						<thead>
 							<tr>
 								<th>留言編號</th>
 								<th>留言時間</th>
 								<th>留言會員</th>
 								<th>房屋連結</th>
-								<th>留言內容</th>
+								<th width="200px">留言內容</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="qaVO" items="${qaArray}">
 								<tr>
-									<td>${qaVO.qaNO}</td>
-									<td>${qaVO.qTime}</td>
-									<td>${qaVO.memberVO.memName}</td>
+									<td style="width:15%">${qaVO.qaNO}</td>
+									<td style="width:15%">${qaVO.qTime}</td>
+									<td style="width:15%">${qaVO.memberVO.memName}</td>
 									<td style="display:none">${qaVO.memberVO.memNO}</td>
 									<td style="display:none">${qaVO.houseVO.houseNO}</td>
-									<td><a href="${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
-									<td>${qaVO.qDetail}</td>
+									<td style="width:15%"><a href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+									<td style="width:30%;word-break:break-all;">${qaVO.qDetail}</td>
 									<c:if test="${qaVO.qaType == 1}">
-										<td><button type="button" class="btn btn-primary btn-lg"
+										<td style="width:10%"><button type="button" class="btn btn-primary btn-lg"
 												name="answer">回覆</button></td>
 									</c:if>
 									<c:if test="${qaVO.qaType == 0}">
-										<td><button type="button" class="btn btn-primary btn-lg"
+										<td style="width:10%"><button type="button" class="btn btn-primary btn-lg"
 												name="dispatch">派工</button>
 											<br />
 											<button type="button" class="btn btn-primary btn-lg"
@@ -230,7 +230,7 @@ table {
 						method="POST" id="answerForm">
 						留言編號：<input class="form-control" type="text" readonly="readonly"
 							name="qaNO" value="" id="qaNO" /> 回覆內容：
-						<textarea class="form-control" name="aDetail"
+						<textarea class="form-control" name="aDetail" id="aDetail"
 							style="resize: none; height: 100px"></textarea>
 						<button class="btn btn-primary" type="button" onclick="check()">提交</button>
 						<button class="btn btn-primary" type="button" onclick="cancel()">取消</button>
@@ -242,10 +242,10 @@ table {
 					<table id="eventTable" class="table table-hover">
 						<thead>
 							<tr>
-								<th>預約編號</th>
-								<th>預約會員</th>
-								<th>房屋連結</th>
-								<th>取消事由</th>
+								<th style="width:15%">預約編號</th>
+								<th style="width:15%">預約會員</th>
+								<th style="width:15%">房屋連結</th>
+								<th style="width:55%">取消事由</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -254,8 +254,8 @@ table {
 								<tr>
 									<td>${eventVO.eventNO}</td>
 									<td>${eventVO.memberVO.memName}</td>
-									<td><a href="${eventVO.houseVO.houseNO}">${eventVO.houseVO.houseTitle}</a></td>
-									<td>${eventVO.ps}</td>
+									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${eventVO.houseVO.houseNO}">${eventVO.houseVO.houseTitle}</a></td>
+									<td style="word-break:break-all;">${eventVO.ps}</td>
 										<td><button type="button" class="btn btn-primary btn-lg"
 												name="known">我知道了</button></td>
 								</tr>
@@ -269,12 +269,12 @@ table {
 					<table id="leaseTable" class="table table-hover">
 						<thead>
 							<tr>
-								<th>租賃編號</th>
-								<th>租賃會員</th>
-								<th>租賃房屋</th>
-								<th>租賃期間</th>
-								<th>租賃備註</th>
-								<th>簽約員工</th>
+								<th style="width:15%">租賃編號</th>
+								<th style="width:15%">租賃會員</th>
+								<th style="width:15%">租賃房屋</th>
+								<th style="width:25%">租賃期間</th>
+								<th style="width:15%">租賃備註</th>
+								<th style="width:15%">簽約員工</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -282,7 +282,7 @@ table {
 								<tr>
 									<td>${leaseVO.leaseNO}</td>
 									<td>${leaseVO.memNO}</td>
-									<td><a href="${leaseVO.houseVO.houseNO}">${leaseVO.houseVO.houseTitle}</a></td>
+									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${leaseVO.houseVO.houseNO}">${leaseVO.houseVO.houseTitle}</a></td>
 									<td>${leaseVO.leaseBeginDate} - ${leaseVO.leaseEndDate}</td>
 									<td>${leaseVO.houseNote}</td>
 									<td>${leaseVO.empNO}</td>
@@ -495,6 +495,10 @@ table {
 	}
 	//回應表單確認按鈕
 	function check(){
+		if($("#aDetail").val().trim().length == 0){
+			alert("請先輸入回覆內容");
+			return;
+		}
 		if(confirm("是否確認送出此回覆?")){
 			$("#qaForm>form")[0].submit();
 		}

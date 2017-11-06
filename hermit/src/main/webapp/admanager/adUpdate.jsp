@@ -5,12 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>編輯廣告</title>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
+<!-- <script src="../js/bootstrap.js"></script> -->
+<!-- <script src="../js/flashcanvas.js"></script> -->
+<!-- <script src="../js/jSignature.min.js"></script> -->
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css"> --%>
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css"> --%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
 
 </head>

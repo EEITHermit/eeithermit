@@ -60,7 +60,7 @@ a:link, a:visited, a:hover, a:active {
 							href="<%=request.getContextPath()%>/memberbackstage/mem_back_index.jsp">
 								<i class="glyphicon glyphicon-home"
 								style="height: 30px; font-size: 30px"></i> <span
-								style="font-size: 15px; font-family: Microsoft JhengHei">首頁</span>
+								style="font-size: 15px; font-family: Microsoft JhengHei">會員中心</span>
 						</a></li>
 
 						<li><a
@@ -118,10 +118,47 @@ a:link, a:visited, a:hover, a:active {
 								style="font-weight: bold; font-size: 18px; font-family: Microsoft JhengHei">我的租賃記錄</span>
 						</div>
 						<!-- /widget-header -->
-
+							
 
 						<!-- 這邊是放你的資料 -->
-						<div class="widget-content"></div>
+						<div class="widget-content">
+							<div id="leaseDiv">
+								<div>
+								<table border="1px">
+									<tr>
+										<td>合約編號</td>
+										<td>合約起始日期</td>
+										<td>合約結束日期</td>
+										<td>員工編號</td>
+										<td>租金</td>
+										<td>押金</td>
+										<td>折扣</td>
+										<td>簽約日期</td>
+										<td>備註</td>
+										<td>是否退還押金</td>
+									</tr>
+									<c:forEach var="Lease" items="${list}">
+										<tr>
+											<td>${Lease.leaseNO}</td>
+											
+											<td>${Lease.leaseBeginDate}</td>
+											<td>${Lease.leaseEndDate}</td>
+											
+											<td>${Lease.empNO}</td>
+											<td>${Lease.leaseRent}</td>
+											<td>${Lease.leaseDeposit}</td>
+											<td>${Lease.leaseRelief}</td>
+											<td>${Lease.leaseDate}</td>
+											<td>${Lease.houseNote}</td>
+											<td>${Lease.leaseRefund}</td>
+										</tr>
+										<input type="hidden" value="${Lease.memNO}" name="memNO" readonly>
+										<input type="hidden" value="${Lease.leaseNO}" name="leaseNO">
+									</c:forEach>
+								</table>
+								</div>
+							</div>						
+						</div>
 						<!-- /widget-content -->
 
 
@@ -174,5 +211,22 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script>
+// 	$(document).ready(function(){
+// 		var leasediv=$("#leaseDiv>div");
+// 		var memNO="${LoginOK.memNO}";
+// 		var dataJson;
+// // 		console.log(memNO);
+// 		$.post("/hermit/LeaseServlet.do",{action:"getOneLeaseForJson","memNO":memNO},function(data){
+// 			console.log(data);
+// 			dataJson=$.parseJSON(data);
+// 			$.each(dataJson,function(index,vo){
+// 				var cell1 = $("<input type='text' readonly name='leaseNO'>");
+// 				var div = $("<div></div>").append(cell1);
+// 				leasediv.append(div);
+// 			})
+// 		})
+// 	});
+	</script>
 </body>
 </html>

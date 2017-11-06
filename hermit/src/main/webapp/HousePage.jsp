@@ -473,7 +473,7 @@
 								var jsonlat, jsonlng;
 								var activeFlag = '';
 								var timeout = 1000;
-								
+								console.log('<%= request.getAttribute("House")%>')
 								var hInfo = $.parseJSON('<%= request.getAttribute("House")%>');
 								
 								// 一開始啟動Google API的CB
@@ -2084,6 +2084,8 @@
 		    	 "送出":function(){
 		    		 if("${LoginOK.memNO}" == ""){
 		    			 alert("請先登入");
+		    		 }else if($("#question").val().trim().length == 0){
+		    			 alert("請輸入問題");
 		    		 }else{
 		    			 $.post("<%=request.getContextPath()%>/QAndAServlet?mission=question"
 		    					 ,{question:$("#question").val(),member:"${LoginOK.memNO}",house:"${param.NO}"}

@@ -65,6 +65,7 @@ public class ADManagerServlet extends HttpServlet {
 		if ("updateADManager".equals(action)) {
 			ads = new ADManagerService();			
 			adNO = Integer.valueOf(req.getParameter("adNO"));
+			System.out.println(adNO);
 			adImage = String.valueOf(req.getParameter("adImage"));
 			adLink = String.valueOf(req.getParameter("adLink"));
 			adMessage = String.valueOf(req.getParameter("adMessage"));
@@ -76,7 +77,7 @@ public class ADManagerServlet extends HttpServlet {
 			ads.updateADManager(adNO, adImage, adLink, adMessage, adTimeStart, adTimeEnd, adStatus, adBrowse, adModify);
 			resp.sendRedirect("admanager/back-adindex_include.jsp");
 			System.out.println("Update OK");
-//			RequestDispatcher rd = req.getRequestDispatcher("/admanager/back-adindex.jsp");
+//			RequestDispatcher rd = req.getRequestDispatcher("admanager/back-adindex_include.jsp");
 //			rd.forward(req, resp);
 		}
 //		刪除圖片(adNO)

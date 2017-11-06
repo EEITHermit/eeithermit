@@ -10,8 +10,6 @@
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
 <!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
 <script src="<%=request.getContextPath()%>/js/appstore.js"></script>
-<script src="<%=request.getContextPath()%>/js/lazyload.js"></script>
-
 <style>
 	a:link, a:visited, a:hover ,a:active{
 		color : white;
@@ -28,10 +26,9 @@
 <body id="body">
 
 	<div class="container" style="margin:40px auto;height:900px">
-		<div id="appstore-container"></div>
+		<div id="appstore-container" style="margin-bottom:150px"></div>
 	</div>
-
-	<footer class="w3-bottom w3-black container-fluid text-center" style=" position: static">
+	<footer class="w3-bottom w3-black container-fluid text-center">
 		<div>
 			<ul class="nav nav-pills w3-centered " style="display: flex;font-size:13px;justify-content: center;">
 			  <li role="presentation"><a href="<%=request.getContextPath()%>/index.jsp">關於我們</a></li>
@@ -52,6 +49,7 @@
 				location.replace("<%= request.getContextPath()%>/index.jsp");
 			};
 			if(houseItems.items.length == 0){
+				$("#body").HTML("<h2 style='margin:auto auto;'>找不到這個條件下的房屋物件，是否考慮再看看其他條件的房屋呢？</h2>")
 			}
 			$.appstore({json:houseItems});
 		})

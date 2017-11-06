@@ -42,33 +42,48 @@ public class DispatchListServlet extends HttpServlet {
 		
 		if("InsertDispatchList".equals(action)){
 			dls = new DispatchListService();
-			System.out.println(request.getParameter("dempNO"));
-			System.out.println(request.getParameter("aempNO"));
-			System.out.println(request.getParameter("qaNO"));
 			dempno = Integer.valueOf(request.getParameter("dempNO"));
 			aempno = Integer.valueOf(request.getParameter("aempNO"));
 			qano = Integer.valueOf(request.getParameter("qaNO"));
+			if(request.getParameter("dlNote") != null){
+				dlnote =request.getParameter("dlNote"); 
+			}else{
+				dlnote = "";
+			}
 			dlstime = java.sql.Date.valueOf(LocalDate.now());
 			
-			dls.addDispatchList(dempno, aempno, qano, dlstime);
-			
-			System.out.println("Servlet Insert success");
+			dls.addDispatchList(dempno, aempno, qano, dlstime,dlnote);
+			response.sendRedirect(request.getContextPath()+"/DispatchList/DispatchList.jsp");
 		}
 		
 		if("updateDispatchList".equals(action)){
 			dls = new DispatchListService();
 			
-			dlno = Integer.valueOf(request.getParameter("dlno"));
-			dempno = Integer.valueOf(request.getParameter("dempno"));
-			aempno = Integer.valueOf(request.getParameter("aempno"));
-			qano = Integer.valueOf(request.getParameter("qano"));
-			dlstime = java.sql.Date.valueOf(request.getParameter("dlstime"));
-			dletime = java.sql.Date.valueOf(request.getParameter("dletime"));
+			dlno = Integer.valueOf(request.getParameter("dlNO"));
+			dempno = Integer.valueOf(request.getParameter("dempNO"));
+			aempno = Integer.valueOf(request.getParameter("aempNO"));
+			qano = Integer.valueOf(request.getParameter("qaNO"));
+			dlstime = java.sql.Date.valueOf(request.getParameter("dlStime"));
+			dletime = java.sql.Date.valueOf(request.getParameter("dlEtime"));
+			elesign = request.getParameter("elesign");
+			dlnote = request.getParameter("dlNote");
+			dls.updateDispatchList(dlno, dempno, aempno, qano, dlstime, dletime, elesign, dlnote);
+			RequestDispatcher rd = request.getRequestDispatcher("/DispatchList/DispatchList.jsp");
+			rd.forward(request, response);
+		}
+		if("endDispatchList".equals(action)){
+			dls = new DispatchListService();
+			
+			dlno = Integer.valueOf(request.getParameter("dlNO"));
+			dempno = Integer.valueOf(request.getParameter("dempNO"));
+			aempno = Integer.valueOf(request.getParameter("aempNO"));
+			qano = Integer.valueOf(request.getParameter("qaNO"));
+			dlstime = java.sql.Date.valueOf(request.getParameter("dlStime"));
+			dletime = java.sql.Date.valueOf(LocalDate.now());
 			elesign = request.getParameter("elesign");
 			dlnote = request.getParameter("dlnote");
 			dls.updateDispatchList(dlno, dempno, aempno, qano, dlstime, dletime, elesign, dlnote);
-			System.out.println("Update success");
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/DispatchList/DispatchList.jsp");
 			rd.forward(request, response);
 		}
 		
@@ -78,12 +93,19 @@ public class DispatchListServlet extends HttpServlet {
 		}
 		
 		if("getOneDispatchList".equals(action)){
-			System.out.println("Get One success");
 			DispatchListVO dlVO = new DispatchListVO();
 			dls = new DispatchListService();
 			dlVO = dls.getOneDispatchList(Integer.valueOf(request.getParameter("dlno")));
 			request.setAttribute("dlVO",dlVO);
-			RequestDispatcher rd = request.getRequestDispatcher("SignatureUpdate.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/DispatchList/updateDispatchList.jsp");
+			rd.forward(request,response);
+		}
+		if("queryDispatchList".equals(action)){
+			DispatchListVO dlVO = new DispatchListVO();
+			dls = new DispatchListService();
+			dlVO = dls.getOneDispatchList(Integer.valueOf(request.getParameter("dlno")));
+			request.setAttribute("dlVO",dlVO);
+			RequestDispatcher rd = request.getRequestDispatcher("/DispatchList/queryDispatchList.jsp");
 			rd.forward(request,response);
 		}
 
@@ -100,14 +122,12 @@ public class DispatchListServlet extends HttpServlet {
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
-			
 			dls = new DispatchListService();
 			String stringjson = dls.getAllForJson();
 			System.out.println(stringjson);
 			out.println(stringjson);
 			out.flush();
 			out.close();
-			System.out.println("Get All For JSON success");
 		}
 		
 	}
