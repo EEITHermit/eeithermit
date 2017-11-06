@@ -56,9 +56,13 @@ public class WebSocketNoHTTP {
 		String keyWord = userSession.getUserProperties().get("username").toString().substring(0, 1);
 		user = userSession.getUserProperties().get("username").toString().substring(1);
 
+		if (message == null || message.trim().length() == 0)
+			return;
+
 		Iterator<Session> iterator = users.iterator();
 		try {
 			while (iterator.hasNext()) {
+
 				Map<String, String> recordMap = new HashMap<String, String>();
 				if ("M".equals(keyWord)) {
 					recordMap.put(user, message);
@@ -66,6 +70,7 @@ public class WebSocketNoHTTP {
 				recordmsg.add(recordMap);
 
 				String msgPackage = buildJsonData(user, message);
+				// userSession.getBasicRemote().sendText(msgPackage);
 				iterator.next().getBasicRemote().sendText(msgPackage);
 			}
 		} catch (IOException e) {

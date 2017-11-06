@@ -34,6 +34,9 @@ font-size: 50px;
 
 color: 	#F9F900;
 }
+#houseeq{
+font-size:18px;
+}
 </style>-
 </head>
 <body>
@@ -143,73 +146,57 @@ color: 	#F9F900;
 				</tbody>
 		</table>
 	</div>
-	<div>
+	<div class="container col-md-10" id="houseeq">
 		<input type="checkbox" name="TV" id="TV">
-		<label>TV</label>
-	</div>
-	<div>
+		<label for="TV">電視</label>
+	
 		<input type="checkbox" name="aircondition" id="aircondition">
-		<label>aircondition</label>
-	</div>
-	<div>
+		<label for="aircondition">冷氣</label>
+	
 		<input type="checkbox" name="refrigerator" id="refrigerator">
-		<label>refrigerator</label>
-	</div>
-	<div>
+		<label for="refrigerator">冰箱</label>
+	
 		<input type="checkbox" name="waterHeater" id="waterHeater">
-		<label>waterHeater</label>
-	</div>
-	<div>
+		<label for="waterHeater">熱水器</label>
+	
 		<input type="checkbox" name="gas" id="gas">
-		<label>gas</label>
-	</div>
-	<div>
+		<label for="gas">瓦斯</label>
+	
 		<input type="checkbox" name="theFourthStation" id="theFourthStation">
-		<label>theFourthStation</label>
-	</div>
-	<div>
+		<label for="theFourthStation">第四台</label>
+	
 		<input type="checkbox" name="net" id="net">
-		<label>net</label>
-	</div>
-	<div>
+		<label for="net">網路</label>
+	
 		<input type="checkbox" name="washing" id="washing">
-		<label>washing</label>
-	</div>
-	<div>
+		<label for="washing">洗衣機</label>
+	
 		<input type="checkbox" name="bed" id="bed">
-		<label>bed</label>
-	</div>
-	<div>
+		<label for="bed">床</label>
+	
 		<input type="checkbox" name="wardrobe" id="wardrobe">
-		<label>wardrobe</label>
-	</div>
-	<div>
+		<label for="wardrobe">衣櫃</label>
+	
 		<input type="checkbox" name="sofa" id="sofa">
-		<label>sofa</label>
-	</div>
-	<div>
+		<label for="sofa">沙發</label>
+
 		<input type="checkbox" name="parking" id="parking">
-		<label>parking</label>
-	</div>
-	<div>
+		<label for="parking">停車位</label>
+	
 		<input type="checkbox" name="elevator" id="elevator">
-		<label>elevator</label>
-	</div>
-	<div>
+		<label for="elevator">電梯</label>
+	
 		<input type="checkbox" name="balcony" id="balcony">
-		<label>balcony</label>
-	</div>
-	<div>
+		<label for="balcony">陽台</label>
+	
 		<input type="checkbox" name="permitCook" id="permitCook">
-		<label>permitCook</label>
-	</div>
-	<div>
+		<label for="permitCook">開伙</label>
+
 		<input type="checkbox" name="pet" id="pet">
-		<label>pet</label>
-	</div>
-	<div>
+		<label for="pet">養寵物</label>
+	
 		<input type="checkbox" name="closeMRT" id="closeMRT">
-		<label>closeMRT</label>
+		<label for="closeMRT">近捷運</label>
 	</div>
 	<div>
 		<table class="table">

@@ -123,38 +123,16 @@ public class HouseServlet extends HttpServlet {
 			for (Part item : request.getParts()) {
 				strBase64 = ctb.encode(item);
 				if (strBase64 != null) {
-					// System.out.println(strBase64);
-					HousePictureVO picVO = new HousePictureVO();
-					picVO.sethPicture(strBase64);
-					set.add(picVO);
+					if(strBase64.length() >= 40){
+						// System.out.println(strBase64);
+						HousePictureVO picVO = new HousePictureVO();
+						picVO.sethPicture(strBase64);
+						set.add(picVO);
+					}
 				}
-				
-			
-//			EquipmentConditionVO eqVO=new EquipmentConditionVO();
-//			eqVO.setTV(TV);
-//			eqVO.setAircondition(aircondition);
-//			eqVO.setRefrigerator(refrigerator);
-//			eqVO.setWaterHeater(waterHeater);
-//			eqVO.setGas(gas);
-//			eqVO.setTheFourthStation(theFourthStation);
-//			eqVO.setNet(net);
-//			eqVO.setWashing(washing);
-//			eqVO.setBed(bed);
-//			eqVO.setWardrobe(wardrobe);
-//			eqVO.setSofa(sofa);
-//			eqVO.setParking(parking);
-//			eqVO.setElevator(elevator);
-//			eqVO.setBalcony(balcony);
-//			eqVO.setPermitCook(permitCook);
-//			eqVO.setPet(pet);
-//			eqVO.setCloseMRT(closeMRT);
-			
-//				 svc.insertHouse(houseTitle, cityNO, boroughNO,
-//				 previewPic,highestFloor, nowFloor, houseStatus, houseRent,
-//				 houseCharge, waterRate, powerRate, houseVideo, typeNO,
-//				 formNO, houseAddr, houseSize);
-				
+
 			}
+			
 			EquipmentConditionService eqsvc=new EquipmentConditionService();
 			Byte TV = 0;
 			if("on".equals(request.getParameter("TV"))){
@@ -225,11 +203,8 @@ public class HouseServlet extends HttpServlet {
 			if("on".equals(request.getParameter("closeMRT"))){
 				closeMRT=1;
 			}
-//			request.getParameter("houseNO");
-//			System.out.println(houseNO);
-//			eqsvc.addEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
-			svc.insertHouseAndHousePicture(houseVO, set);
-			
+			houseNO= svc.insertHouseAndHousePicture(houseVO, set);
+			eqsvc.addEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
 			response.sendRedirect("/hermit/House/House_management.jsp");
 			return;
 		}
@@ -298,6 +273,12 @@ public class HouseServlet extends HttpServlet {
 			}
 			String hPicJSON=JSONValue.toJSONString(housePic);
 			request.setAttribute("hPics",hPicJSON);
+			
+			EquipmentConditionService eqsvc=new EquipmentConditionService();
+			EquipmentConditionVO eqvo=null;
+			eqvo=eqsvc.getOneEquipmentCondition(houseNO);
+			request.setAttribute("eqhouse", eqvo);
+			System.out.println(eqvo.getTV());
 			//↑測試
 			
 //			for(HousePictureVO hVO:vo.getHousePictureVO()){
@@ -371,6 +352,82 @@ public class HouseServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			String addrJSON = JSONValue.toJSONString(m1);
 			out.print(addrJSON);
+			out.flush();
+			return;
+		}
+		
+		if("getThree".equals(action)){
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			List<HouseVO> list = svc.getNewThree();
+			List getThree = new LinkedList();
+			for(int i=0;i<3;i++){
+				Map m1 = new LinkedHashMap();
+				vo = list.get(i);
+				m1.put("houseNO", vo.getHouseNO());
+				m1.put("houseTitle", vo.getHouseTitle());
+				m1.put("cityNO", vo.getCityVO().getCityNO());
+				m1.put("cityName", vo.getCityVO().getCityName());
+				m1.put("boroughNO", vo.getBoroughsVO().getBoroughNO());
+				m1.put("boroughName", vo.getBoroughsVO().getBoroughName());
+				m1.put("highestFloor", vo.getHighestFloor());
+				m1.put("nowFloor", vo.getNowFloor());
+				m1.put("houseStatus", vo.getHouseStatus());
+				m1.put("houseRent", vo.getHouseRent());
+				m1.put("houseCharge", vo.getHouseCharge());
+				m1.put("previewPic", vo.getPreviewPic());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseAddr", vo.getHouseAddr());
+				m1.put("houseSize", vo.getHouseSize());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseInfo", vo.getHouseInfo());
+				getThree.add(m1);
+			}
+			Map m2 = new HashMap();
+			m2.put("newHouse", getThree);
+			String newThree = JSONValue.toJSONString(m2);
+			out.print(newThree);
+			out.flush();
+			return;
+		}
+		
+		if("getHotHouse".equals(action)){
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			List<HouseVO> list = svc.getHotHouse();
+			List getThree = new LinkedList();
+			for(int i=0;i<3;i++){
+				Map m1 = new LinkedHashMap();
+				vo = list.get(i);
+				m1.put("houseNO", vo.getHouseNO());
+				m1.put("houseTitle", vo.getHouseTitle());
+				m1.put("cityNO", vo.getCityVO().getCityNO());
+				m1.put("cityName", vo.getCityVO().getCityName());
+				m1.put("boroughNO", vo.getBoroughsVO().getBoroughNO());
+				m1.put("boroughName", vo.getBoroughsVO().getBoroughName());
+				m1.put("highestFloor", vo.getHighestFloor());
+				m1.put("nowFloor", vo.getNowFloor());
+				m1.put("houseStatus", vo.getHouseStatus());
+				m1.put("houseRent", vo.getHouseRent());
+				m1.put("houseCharge", vo.getHouseCharge());
+				m1.put("previewPic", vo.getPreviewPic());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseAddr", vo.getHouseAddr());
+				m1.put("houseSize", vo.getHouseSize());
+				m1.put("hType", vo.getHouseTypeVO().gethType());
+				m1.put("hForm", vo.getHouseFormVO().gethForm());
+				m1.put("houseInfo", vo.getHouseInfo());
+				getThree.add(m1);
+			}
+			Map m2 = new HashMap();
+			m2.put("newHouse", getThree);
+			String newThree = JSONValue.toJSONString(m2);
+			out.print(newThree);
 			out.flush();
 			return;
 		}

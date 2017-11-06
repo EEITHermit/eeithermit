@@ -38,8 +38,9 @@
 }
 
 #formDiv {
-/* 	display: none; */
-}
+  	display:inline-block;
+  	position:static;
+ }
 </style>
 
 </head>
@@ -192,14 +193,14 @@ a:link, a:visited, a:hover, a:active {
 								</div>
 
 							<div id="formDiv" class="row">
-								<form id="commentForm" class="form-group"
+								<form id="commentForm" class="form-group" style="margin-top:0px"
 									action="<%=request.getContextPath()%>/QAndAServlet?mission=insert&type=0"
 									method="POST">
 									<div class="col-md-8">
-										<label for="houseNO" class="form-label">請選擇房屋：</label> <select
-											name="houseNO" class="form-control"
+										<label for="houseNO" class="form-label" style="margin-top:0px">請選擇房屋：</label> <select
+											name="houseNO" class="form-control" id="houseNO"
 											style="background-color: #DDDDDD;">
-											<option>請選擇 房屋</option>
+											<option>請選擇房屋</option>
 											<!--filter會傳來houseArray 為此會員所租賃的房屋 -->
 											<c:forEach var="houseVO" items="${houseArray}">
 												<option value="${houseVO.houseNO}">${houseVO.houseAddr}</option>
@@ -207,9 +208,11 @@ a:link, a:visited, a:hover, a:active {
 										</select>
 									</div>
 									<div class="col-md-12">
+										<div>
 										<label for="qDetail" class="form-label"> 申訴內容： </label>
 										<textarea id="commentArea" class="commentArea" name="qDetail"
 											style="resize: none;"></textarea>
+									</div>
 									</div>
 									<div class="col-md-4 col-md-offset-5">
 										<button class="btn btn-secondary btn-lg" type="button"
@@ -232,14 +235,14 @@ a:link, a:visited, a:hover, a:active {
 	</div>
 	<!-- /content -->
 	<div style="height: 50px"></div>
-	<div id="footer">
+<!-- 	<div id="footer"> -->
 
 		<!-- 		<div class="container">
 			<hr />
 			<p style="text-align: center">Hermit House for Rent &reg;</p>
 		</div> -->
 		<!-- /container -->
-	</div>
+<!-- 	</div> -->
 	<!-- /footer -->
 	<footer
 		class="navbar-fixed-bottom w3-black container-fluid text-center">
@@ -276,6 +279,7 @@ a:link, a:visited, a:hover, a:active {
 		document.addEventListener("DOMContentLoaded", work);
 
 		function work() {
+			
 			//跳出查詢畫面
 			$("#queryBT").click(function() {
 				$("#queryDiv").toggle("blind",400);
@@ -285,8 +289,14 @@ a:link, a:visited, a:hover, a:active {
 					at:"center bottom"
 				});
 			});
-			//跳出投訴頁面，暫不使用
+			
+			//跳出投訴頁面
 			$("#commentBT").click(function() {
+// 				$("#formDiv").position({
+// 					of:$("#commentBT").parent("div"),
+// 					my:"center top",
+// 					at:"center bottom"
+// 				});
 				$("#formDiv").toggle("blind",400);
 			});
 			//產生jqueyText
@@ -332,9 +342,18 @@ a:link, a:visited, a:hover, a:active {
 		};
 
 		function check() {
+			console.log($("#commentArea").val());
+			if($("#commentArea").val().trim().length == 0){
+				alert("請先輸入投訴內容");
+				return;
+			};
+			if($("#houseNO").val() == "請選擇房屋"){
+				alert("請先選擇房屋");
+				return;
+			};
 			if (confirm("是否確認送出投訴")) {
 				(document.getElementById("commentForm")).submit();
-			}
+			};
 		};
 	</script>
 </body>

@@ -91,7 +91,7 @@
 	.loginBtn {
 	box-sizing: border-box;
 	position: relative;
-	width: 13em; /* - apply for fixed size */
+	width: 14em; /* - apply for fixed size */
 	margin: 0.2em;
 	padding: 0 15px 0 46px;
 	border: none;
@@ -328,7 +328,7 @@
 
 					<p class="fieldset">
 						<button class="loginBtn loginBtn--facebook" type="button"
-							id="facebook" style="margin-left: 55px">Login with
+							id="facebook" style="margin-left: 43px">Login with
 							Facebook</button>
 
 						<button class="loginBtn loginBtn--google" type="button"
@@ -387,6 +387,8 @@
 		var btn = $( "#button" );
 		var effect = $( "#effect" );
 		var leftMenu = $("#leftMenu");
+		var myToggle = '關';
+		
 		function runEffect(){
 			effect.toggle( "blind",  500 );
 			console.log(spanArrow.attr('class'));
@@ -402,35 +404,43 @@
 	    effect.hide();
 	    
 		// Action panel -2
+		var websocket = null;
+		
 		$('#icon-button').click(function() {
-			var area = document.getElementById('talkarea');
-			var text = document.getElementById('talktext');
-			var websocket = new WebSocket("ws://"+location.host+"/hermit/websocket.do");
+			if (myToggle == '關') {
+				myToggle = '開';
+				var area = document.getElementById('talkarea');
+				var text = document.getElementById('talktext');
+				websocket = new WebSocket("ws://"+location.host+"/hermit/websocket.do");
 
-			websocket.onopen = function processOpen() {
-			};
+				websocket.onopen = function processOpen() {
+				};
 
-			websocket.onmessage = function(message) {
-				var jsonData = JSON.parse(message.data);
-				if (jsonData.message != null) {
-					area.value += jsonData.message + "\n";
-				}
-			};
+				websocket.onmessage = function(message) {
+					var jsonData = JSON.parse(message.data);
+					if (jsonData.message != null) {
+						area.value += jsonData.message + "\n";
+					}
+				};
 
-			websocket.onclose = function (evt) {
-		        websocket.close();
-		    };
-			
-			websocket.onerror = function (evt) {
-		        websocket.close();
-		    };
-		    
-			$(function() {
-				$('#sendmsg').click(function() {
-					websocket.send(text.value);
-					text.value = "";
+				websocket.onclose = function (evt) {
+					websocket.close();
+			   	};
+				
+				websocket.onerror = function (evt) {
+			       	websocket.close();
+			   	};
+			    
+				$(function() {
+					$('#sendmsg').click(function() {
+						websocket.send(text.value);
+						text.value = "";
+					});
 				});
-			});
+			}else{
+				websocket.close();
+				myToggle = '關';
+			}		
 		});
 	});
 
@@ -478,8 +488,6 @@
 			var header1 = data.split("*")[0];
 			var header2 = data.split("*")[1];
 			if(header1 == "ok"){
-				console.log(data);
-				console.log(header2);
 				window.location = header2;
 				location.reload();
 			}

@@ -10,24 +10,18 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/iEdit.min.css">
 <style type="text/css">
 #DIV1{
-margin-top:35px;
-width:500px;
-
+margin-top:25px;
+width:1200px;
 padding:20px;
-
 margin-right:10px;
 float:left;
 }
 #DIV2{
-margin-top:35px;
-width:600px;
-
+width:1200px;
 padding:20px;
-
 margin-right:10px;
-float:right;
+float:left;
 }
-
 </style>
 </head>
 <body>
@@ -37,7 +31,7 @@ float:right;
 	<form method="post" action="ADManagerServlet" enctype="multipart/form-data" >
 <div id="DIV1">
 	<label for="adImage">廣告圖片</label><br>
-	<img id="result" src="${adVO.adImage}" height="450" width="450" ><br>
+	<img id="result" src="${adVO.adImage}" height="360" width="1000" ><br>
 	<input id="file" name="adImage" type="file" value="${adVO.adImage}">
 	<input type="hidden" name="adImage" id="adImage" ><p/><br>
 </div>
@@ -53,15 +47,21 @@ float:right;
 	<label for="adLink">圖片連結網址</label><br>
 	<input type="text" name="adLink" value="${adVO.adLink}"  size="40" placeholder="請輸入範例格式:http://www.example.com.tw" name="adLink" ><p/><br>
 	
-	<label for="adModify">修改人員編號</label><br>
-	<input type='text' name='adModify' value="${adVO.adModify}" size="40" placeholder="請輸入員工代號  ex:00000"><P/><br>
+	<label for="adModify">修改人員</label><br>
+	<input type='text' readonly value="${empLoginOK.empName}" size="40"><P/>
+	<input type='hidden' class="form-control" id="adModify" name='adModify' readonly value="${empLoginOK.empNO}" size="40"><P/><br>
+	
+<!-- 	<label for="adModify">修改人員</label><br> -->
+<%-- 			<input type="text" readonly value="${empLoginOK.empName}" size="40"><br> --%>
+<%-- 			<input type='hidden' class="form-control" id="adModify" name='adModify' readonly value="${empLoginOK.empNO}" size="40"><P/><br> --%>
+	
 	
 	<label for="adMessage">廣告訊息(限10字內)</label><br>
 	<input type="text" id="adMessage" name="adMessage" size="40" value="${adVO.adMessage}" placeholder="請輸入訊息..."><br><br>
 	
 	<label for="adStatus">狀態 </label><br>
 	<input type="radio" name="adStatus" value="${adVO.adStatus}" checked>下架
-	<input type="radio" name="adStatus" value="" checked>上架
+	<input type="radio" name="adStatus" checked>上架
 	
 </div>
 	<input type="hidden" name="action" value="updateADManager">	

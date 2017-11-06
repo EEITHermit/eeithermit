@@ -36,8 +36,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
-			pstmt.setInt(4, leaseVO.getMemNO());
-			pstmt.setInt(5, leaseVO.getEmpNO());
+//			pstmt.setInt(4, leaseVO.getMemNO());
+//			pstmt.setInt(5, leaseVO.getEmpNO());
 			pstmt.setInt(6, leaseVO.getLeaseRent());
 			pstmt.setInt(7, leaseVO.getLeaseDeposit());
 			pstmt.setInt(8, leaseVO.getLeaseRelief());
@@ -83,8 +83,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
-			pstmt.setInt(4, leaseVO.getMemNO());
-			pstmt.setInt(5, leaseVO.getEmpNO());
+//			pstmt.setInt(4, leaseVO.getMemNO());
+//			pstmt.setInt(5, leaseVO.getEmpNO());
 			pstmt.setInt(6, leaseVO.getLeaseRent());
 			pstmt.setInt(7, leaseVO.getLeaseDeposit());
 			pstmt.setInt(8, leaseVO.getLeaseRelief());
@@ -180,8 +180,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
-				leaseVO.setMemNO(rs.getInt("memNO"));
-				leaseVO.setEmpNO(rs.getInt("empNO"));
+//				leaseVO.setMemNO(rs.getInt("memNO"));
+//				leaseVO.setEmpNO(rs.getInt("empNO"));
 				leaseVO.setLeaseRent(rs.getInt("leaseRent"));
 				leaseVO.setLeaseDeposit(rs.getInt("leaseDeposit"));
 				leaseVO.setLeaseRelief(rs.getInt("leaseRelief"));
@@ -239,8 +239,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
-				leaseVO.setMemNO(rs.getInt("memNO"));
-				leaseVO.setEmpNO(rs.getInt("empNO"));
+//				leaseVO.setMemNO(rs.getInt("memNO"));
+//				leaseVO.setEmpNO(rs.getInt("empNO"));
 				leaseVO.setLeaseRent(rs.getInt("leaseRent"));
 				leaseVO.setLeaseDeposit(rs.getInt("leaseDeposit"));
 				leaseVO.setLeaseRelief(rs.getInt("leaseRelief"));
@@ -284,8 +284,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 		leaseVO1.setHouseVO(houseVO);
 		leaseVO1.setLeaseBeginDate(java.sql.Date.valueOf("2015-10-10"));
 		leaseVO1.setLeaseEndDate(java.sql.Date.valueOf("2017-01-01"));
-		leaseVO1.setMemNO(40001);
-		leaseVO1.setEmpNO(30001);
+//		leaseVO1.setMemNO(40001);
+//		leaseVO1.setEmpNO(30001);
 		leaseVO1.setLeaseRent(1000);
 		leaseVO1.setLeaseDeposit(1000);
 		leaseVO1.setLeaseRelief(1000);
@@ -303,8 +303,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 		leaseVO2.setHouseVO(houseVO1);
 		leaseVO2.setLeaseBeginDate(java.sql.Date.valueOf("2014-10-10"));
 		leaseVO2.setLeaseEndDate(java.sql.Date.valueOf("2016-01-01"));
-		leaseVO2.setMemNO(40001);
-		leaseVO2.setEmpNO(30001);
+//		leaseVO2.setMemNO(40001);
+//		leaseVO2.setEmpNO(30001);
 		leaseVO2.setLeaseRent(1000);
 		leaseVO2.setLeaseDeposit(1000);
 		leaseVO2.setLeaseRelief(1000);
@@ -320,8 +320,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 		System.out.print(leaseVO3.getHouseVO().getHouseNO() + ",");
 		System.out.print(leaseVO3.getLeaseBeginDate() + ",");
 		System.out.print(leaseVO3.getLeaseEndDate() + ",");
-		System.out.print(leaseVO3.getMemNO() + ",");
-		System.out.print(leaseVO3.getEmpNO() + ",");
+//		System.out.print(leaseVO3.getMemNO() + ",");
+//		System.out.print(leaseVO3.getEmpNO() + ",");
 		System.out.print(leaseVO3.getLeaseRent() + ",");
 		System.out.print(leaseVO3.getLeaseDeposit() + ",");
 		System.out.print(leaseVO3.getLeaseRelief() + ",");
@@ -338,8 +338,8 @@ public class LeaseJDBCDAO implements LeaseDAO_interface {
 			System.out.print(leaseVO.getHouseVO().getHouseNO() + ",");
 			System.out.print(leaseVO.getLeaseBeginDate() + ",");
 			System.out.print(leaseVO.getLeaseEndDate() + ",");
-			System.out.print(leaseVO.getMemNO() + ",");
-			System.out.print(leaseVO.getEmpNO() + ",");
+//			System.out.print(leaseVO.getMemNO() + ",");
+//			System.out.print(leaseVO.getEmpNO() + ",");
 			System.out.print(leaseVO.getLeaseRent() + ",");
 			System.out.print(leaseVO.getLeaseDeposit() + ",");
 			System.out.print(leaseVO.getLeaseRelief() + ",");

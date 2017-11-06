@@ -56,7 +56,7 @@ public class EmpServlet extends HttpServlet {
 			
 			Map<String, String> errorMsgMap = checkData(request);
 			if (!errorMsgMap.isEmpty()) {
-				RequestDispatcher failureView = request.getRequestDispatcher("/empInsert_include.jsp");//尚未輸入
+				RequestDispatcher failureView = request.getRequestDispatcher("empInsert_include.jsp");//尚未輸入
 				failureView.forward(request, response);
 				return;
 			}
@@ -80,7 +80,6 @@ public class EmpServlet extends HttpServlet {
 				failureView.forward(request, response);
 				return;
 			}
-			
 			empNO = Integer.valueOf(request.getParameter("empNO"));
 			empAccount = request.getParameter("empAccount");
 			empPwd = request.getParameter("empPwd");
@@ -90,6 +89,8 @@ public class EmpServlet extends HttpServlet {
 			empStatus = "0".equals(request.getParameter("empStatus"));
 			es.updateEmp(empNO, empAccount, empPwd, empPhone, empName, postNO, empStatus);
 			System.out.println("Update success");
+			RequestDispatcher rd =request.getRequestDispatcher("empIndex_include.jsp");
+			rd.forward(request, response);
 
 		}
 		

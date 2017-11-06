@@ -49,7 +49,7 @@ table {
 	float: left;
 	position: absolute;
 }
-#leaseDiv{
+#dispatchDiv{
 	display: none;
 	float: left;
 	position: absolute;
@@ -101,13 +101,13 @@ table {
 				</div>
 				</div>
 			</div>
-			<!-- 租賃到期的推播 -->
+			<!-- 派工未處理的推播 -->
 			<div class="col-md-3">
 				<div class="card card-inverse"
 				 style="border-radius: 10px;background-color: white">
 				<div class="card-block">
-					<h3 class="card-title">將有<span style="font-size: 36px; color: red"> ${leaseArray.size()} </span>筆契約到期</h3>
-					<a href="#" class="btn btn-primary" id="leaseButton">展開</a>
+					<h3 class="card-title">您有<span style="font-size: 36px; color: red"> ${dispatchArray.size()} </span>筆派工未處理</h3>
+					<a href="#" class="btn btn-primary" id="dispatchButton">展開</a>
 				</div>
 				</div>
 			</div>
@@ -206,7 +206,13 @@ table {
 									<td style="display:none">${qaVO.memberVO.memNO}</td>
 									<td style="display:none">${qaVO.houseVO.houseNO}</td>
 									<td style="width:15%"><a href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+									<c:if test = "${qaVO.qDetail.length() > 5}">
+									<td style="width:30%;word-break:break-all;">${qaVO.qDetail.substring(0,5)}...<br/><a><span style="font-size:10px;float:right">[查看更多]</span></a></td>
+									<td style="width:30%;word-break:break-all;display:none">${qaVO.qDetail}<br/><a><span style="font-size:10px;float:right">[收起]</span></a></td>
+									</c:if>
+									<c:if test = "${qaVO.qDetail.length() <= 5}">
 									<td style="width:30%;word-break:break-all;">${qaVO.qDetail}</td>
+									</c:if>
 									<c:if test="${qaVO.qaType == 1}">
 										<td style="width:10%"><button type="button" class="btn btn-primary btn-lg"
 												name="answer">回覆</button></td>
@@ -230,7 +236,7 @@ table {
 						method="POST" id="answerForm">
 						留言編號：<input class="form-control" type="text" readonly="readonly"
 							name="qaNO" value="" id="qaNO" /> 回覆內容：
-						<textarea class="form-control" name="aDetail"
+						<textarea class="form-control" name="aDetail" id="aDetail"
 							style="resize: none; height: 100px"></textarea>
 						<button class="btn btn-primary" type="button" onclick="check()">提交</button>
 						<button class="btn btn-primary" type="button" onclick="cancel()">取消</button>
@@ -255,7 +261,13 @@ table {
 									<td>${eventVO.eventNO}</td>
 									<td>${eventVO.memberVO.memName}</td>
 									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${eventVO.houseVO.houseNO}">${eventVO.houseVO.houseTitle}</a></td>
-									<td style="word-break:break-all;">${eventVO.ps}</td>
+									<c:if test="${eventVO.ps.length()>30}">
+									<td style="word-break:break-all;">${eventVO.ps.substring(0,30)}...<br/><a><span style="font-size:10px;float:right">[查看更多]</span></a></td>
+									<td style="word-break:break-all;display:none;">${eventVO.ps}<a><span style="font-size:10px;float:right">[收起]</span></a></td>
+									</c:if>
+									<c:if test="${eventVO.ps.length()<=30}">
+										<td style="word-break:break-all;">${eventVO.ps}</td>
+									</c:if>
 										<td><button type="button" class="btn btn-primary btn-lg"
 												name="known">我知道了</button></td>
 								</tr>
@@ -264,30 +276,36 @@ table {
 					</table>
 				</div>
 				<!-- 取消預約end -->
-				<!-- 租賃到期 -->
-				<div id="leaseDiv">
-					<table id="leaseTable" class="table table-hover">
+				<!-- 未處理派工單 -->
+				<div id="dispatchDiv">
+					<table id="dispatchTable" class="table table-hover">
 						<thead>
 							<tr>
-								<th style="width:15%">租賃編號</th>
-								<th style="width:15%">租賃會員</th>
-								<th style="width:15%">租賃房屋</th>
-								<th style="width:25%">租賃期間</th>
-								<th style="width:15%">租賃備註</th>
-								<th style="width:15%">簽約員工</th>
+								<th style="width:15%">派工編號</th>
+								<th style="width:15%">申請會員</th>
+								<th style="width:15%">申請房屋</th>
+								<th style="width:15%">申請時間</th>
+								<th style="width:15%">派工人員</th>
+								<th style="width:25%">派工備註</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="leaseVO" items="${leaseArray}">
+							<c:forEach var="dispatchVO" items="${dispatchArray}">
 								<tr>
-									<td>${leaseVO.leaseNO}</td>
-									<td>${leaseVO.memNO}</td>
-									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${leaseVO.houseVO.houseNO}">${leaseVO.houseVO.houseTitle}</a></td>
-									<td>${leaseVO.leaseBeginDate} - ${leaseVO.leaseEndDate}</td>
-									<td>${leaseVO.houseNote}</td>
-									<td>${leaseVO.empNO}</td>
+									<td>${dispatchVO.dlNO}</td>
+									<td>${dispatchVO.qaVO.memberVO.memName}</td>
+									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${dispatchVO.qaVO.houseVO.houseNO}">${dispatchVO.qaVO.houseVO.houseTitle}</a></td>
+									<td>${dispatchVO.dlStime}</td>
+									<td>${dispatchVO.dempVO.empName}</td>
+									<c:if test="${dispatchVO.dlNote.length()<=7}">
+									<td>${dispatchVO.dlNote}</td>
+									</c:if>
+									<c:if test="${dispatchVO.dlNote.length()>7}">
+									<td>${dispatchVO.dlNote.substring(0,7)}...<br/><a><span style="font-size:10px;float:right">[查看更多]</span></a></td>
+									<td style="display:none">${dispatchVO.dlNote}<br/><a><span style="font-size:10px;float:right">[收起內容]</span></a></td>
+									</c:if>
 									<td><button class="btn btn-primary btn-lg" type="button"
-											id="leaseBT">前往處理此合約</button></td>
+											id="dispatchBT">前往處理此派工</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -312,18 +330,18 @@ table {
 		var resDiv = $("#resDiv");  //預約功能的div
 		var qaDiv = $("#qaDiv"); //Q&A功能的div
 		var eventDiv = $("#eventDiv"); //取消預約的div
-		var leaseDiv = $("#leaseDiv"); //租賃到期的div
+		var dispatchDiv = $("#dispatchDiv"); //租賃到期的div
 		//展開預約
 		$("#resButton").on("click",function(){
 			var resDiv = $("#resDiv");
 			if($(this).text() == "展開"){
 				$("#eventButton").text("展開");
 				$("#qaButton").text("展開");
-				$("#leaseButton").text("展開");
+				$("#dispatchButton").text("展開");
 				$(this).text("收起");
 				eventDiv.hide("drop",1000);
 				qaDiv.hide("drop",1000);
-				leaseDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 				resDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
@@ -336,11 +354,11 @@ table {
 			if($(this).text() == "展開"){
 				$("#eventButton").text("展開");
 				$("#resButton").text("展開");
-				$("#leaseButton").text("展開");
+				$("#dispatchButton").text("展開");
 				$(this).text("收起");
 				eventDiv.hide("drop",1000);
 				resDiv.hide("drop",1000);
-				leaseDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 				qaDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
@@ -352,11 +370,11 @@ table {
 			if($(this).text() == "展開"){
 				$("#qaButton").text("展開");
 				$("#resButton").text("展開");
-				$("#leaseButton").text("展開");
+				$("#dispatchButton").text("展開");
 				$(this).text("收起");
 				resDiv.hide("drop",1000);
 				qaDiv.hide("drop",1000);
-				leaseDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 				eventDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
@@ -364,7 +382,7 @@ table {
 			};
 		});
 		//展開租賃到期
-		$("#leaseButton").on("click",function(){
+		$("#dispatchButton").on("click",function(){
 			if($(this).text() == "展開"){
 				$("#qaButton").text("展開");
 				$("#eventButton").text("展開");
@@ -373,10 +391,10 @@ table {
 				resDiv.hide("drop",1000);
 				qaDiv.hide("drop",1000);
 				eventDiv.hide("drop",1000);
-				leaseDiv.show("drop",1000);
+				dispatchDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
-				eventDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 			};
 		});
 		
@@ -485,8 +503,42 @@ table {
 				);
 			}
 		});
-		$("#leaseTable>tbody button").on("click",function(){
-			window.location = "<%=request.getContextPath()%>/Lease/Lease.jsp";
+		$("#dispatchTable>tbody button").on("click",function(){
+			var dlNO = $(this).parents("tr").children("td").eq(0).text();
+			window.location = "<%=request.getContextPath()%>/Dispatch?action=getOneDispatchList&dlno="+dlNO;
+		})
+		//設定會員回報內容縮減
+ 		var qDetail7 = $("#qaTable>tbody td:nth-child(7)");
+		var qDetail8 = $("#qaTable>tbody td:nth-child(8)");
+		qDetail7.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(6).toggle(false);
+			$(this).parents("tr").find("td").eq(7).toggle(true);
+		});
+		qDetail8.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(6).toggle(true);
+			$(this).parents("tr").find("td").eq(7).toggle(false);
+		})
+		//設定會員取消預約事由縮減顯示
+		var eventPs4 = $("#eventTable>tbody td:nth-child(4)");
+		var eventPs5 = $("#eventTable>tbody td:nth-child(5)");
+		eventPs4.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(3).toggle(false);
+			$(this).parents("tr").find("td").eq(4).toggle(true);
+		});
+		eventPs5.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(3).toggle(true);
+			$(this).parents("tr").find("td").eq(4).toggle(false);
+		})
+		//設定派工備註縮減顯示
+		var dispatchPs6 = $("#dispatchTable>tbody td:nth-child(6)");
+		var dispatchPs7 = $("#dispatchTable>tbody td:nth-child(7)");
+		dispatchPs6.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(5).toggle(false);
+			$(this).parents("tr").find("td").eq(6).toggle(true);
+		});
+		dispatchPs7.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(5).toggle(true);
+			$(this).parents("tr").find("td").eq(6).toggle(false);
 		})
 	};
 	//回應表單取消按鈕
@@ -495,6 +547,10 @@ table {
 	}
 	//回應表單確認按鈕
 	function check(){
+		if($("#aDetail").val().trim().length == 0){
+			alert("請先輸入回覆內容");
+			return;
+		}
 		if(confirm("是否確認送出此回覆?")){
 			$("#qaForm>form")[0].submit();
 		}

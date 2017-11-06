@@ -238,7 +238,7 @@ a:link, a:visited, a:hover, a:active {
 					var tr = $("<tr></tr>");
 					var tdId = $("<td>"+res["eventNO"]+"</td>");
 					var tdName = $("<td>"+res["empVO"]["empName"]+"</td>");
-					var tdTitle = $("<td>"+res["houseVO"]["houseTitle"]+"</td>");
+					var tdTitle = $("<td></td>").append($("<a  style='color:blue;' href='/hermit/HousePage?NO="+res["houseVO"]["houseNO"]+"'>"+res["houseVO"]["houseTitle"]+"</a>"));
 					var tdAddr = $("<td>"+res["houseVO"]["houseAddr"]+"</td>");
 					var tdTel = $("<td>"+res["empVO"]["empPhone"]+"</td>");
 					var tdStart = $("<td>"+res["eventStartTime"]+"</td>");

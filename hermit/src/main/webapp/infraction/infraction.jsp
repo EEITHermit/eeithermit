@@ -72,8 +72,11 @@
 			if(memNO.trim().length == 0){
 				error = error + "請輸入會員資料\n";
 			}else if(! memReg.test(memNO.trim())){
-				error = error + "輸入格式錯誤\n"
+				error = error + "輸入格式錯誤\n";
 			};
+			if(reason.trim().length == 0){
+				error = error + "請輸入原因\n";
+			}
 			if(error != ""){
 				alert(error);
 				return;
@@ -93,6 +96,7 @@
 		})
 		
 		$("#query").click(function(){
+			$("#queryTable>tbody").html("");
 			$.get("<%=request.getContextPath()%>/infractionServlet"
 					,{mission:"query"}
 			,function(data){
@@ -110,6 +114,7 @@
 				}
 				$("#queryDiv").toggle(true);
 				$("#queryTable").DataTable({
+					"distory":true,
 					"language": {
 			            "lengthMenu": "每頁顯示 _MENU_ 筆",
 			            "zeroRecords": "Nothing found - sorry",
@@ -123,8 +128,7 @@
 			        		"next":       "下頁",
 			        		"previous":   "前頁"
 			        	}
-			        },
-			        "distory":true
+			        }
 				});
 			});
 		});
