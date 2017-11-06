@@ -123,38 +123,15 @@ public class HouseServlet extends HttpServlet {
 			for (Part item : request.getParts()) {
 				strBase64 = ctb.encode(item);
 				if (strBase64 != null) {
-					// System.out.println(strBase64);
-					HousePictureVO picVO = new HousePictureVO();
-					picVO.sethPicture(strBase64);
-					set.add(picVO);
+					if(strBase64.length() >= 40){
+						// System.out.println(strBase64);
+						HousePictureVO picVO = new HousePictureVO();
+						picVO.sethPicture(strBase64);
+						set.add(picVO);
+					}
 				}
-				
-			
-//			EquipmentConditionVO eqVO=new EquipmentConditionVO();
-//			eqVO.setTV(TV);
-//			eqVO.setAircondition(aircondition);
-//			eqVO.setRefrigerator(refrigerator);
-//			eqVO.setWaterHeater(waterHeater);
-//			eqVO.setGas(gas);
-//			eqVO.setTheFourthStation(theFourthStation);
-//			eqVO.setNet(net);
-//			eqVO.setWashing(washing);
-//			eqVO.setBed(bed);
-//			eqVO.setWardrobe(wardrobe);
-//			eqVO.setSofa(sofa);
-//			eqVO.setParking(parking);
-//			eqVO.setElevator(elevator);
-//			eqVO.setBalcony(balcony);
-//			eqVO.setPermitCook(permitCook);
-//			eqVO.setPet(pet);
-//			eqVO.setCloseMRT(closeMRT);
-			
-//				 svc.insertHouse(houseTitle, cityNO, boroughNO,
-//				 previewPic,highestFloor, nowFloor, houseStatus, houseRent,
-//				 houseCharge, waterRate, powerRate, houseVideo, typeNO,
-//				 formNO, houseAddr, houseSize);
-				
 			}
+			
 			EquipmentConditionService eqsvc=new EquipmentConditionService();
 			Byte TV = 0;
 			if("on".equals(request.getParameter("TV"))){
@@ -225,10 +202,9 @@ public class HouseServlet extends HttpServlet {
 			if("on".equals(request.getParameter("closeMRT"))){
 				closeMRT=1;
 			}
-//			request.getParameter("houseNO");
-//			System.out.println(houseNO);
-//			eqsvc.addEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
-			svc.insertHouseAndHousePicture(houseVO, set);
+			houseNO= svc.insertHouseAndHousePicture(houseVO, set);
+			eqsvc.addEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
+			
 			
 			response.sendRedirect("/hermit/House/House_management.jsp");
 			return;
@@ -298,6 +274,12 @@ public class HouseServlet extends HttpServlet {
 			}
 			String hPicJSON=JSONValue.toJSONString(housePic);
 			request.setAttribute("hPics",hPicJSON);
+			
+			EquipmentConditionService eqsvc=new EquipmentConditionService();
+			EquipmentConditionVO eqvo=null;
+			eqvo=eqsvc.getOneEquipmentCondition(houseNO);
+			request.setAttribute("eqhouse", eqvo);
+			System.out.println(eqvo.getTV());
 			//↑測試
 			
 //			for(HousePictureVO hVO:vo.getHousePictureVO()){

@@ -206,11 +206,12 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		}
 		
 	}
-	public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
+	public Integer insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
 		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer houseNO=null;
 		try{
 			session.beginTransaction();
-			session.save(houseVO);
+			houseNO=(Integer)session.save(houseVO);
 			for(HousePictureVO housePictureVO:set){
 			housePictureVO.setHouseNO(houseVO.getHouseNO());
 			session.save(housePictureVO);
@@ -220,6 +221,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			session.getTransaction().rollback();
 			ex.printStackTrace();
 		}
+		return houseNO;
 	}
 	@Override
 	public HouseVO getPic(Integer houseNO) {

@@ -41,8 +41,8 @@ font-size: 16px;
 			<th>房屋編號</th>
 			<th>合約起始日</th>
 			<th>合約到期日</th>
-			<th>承租會員編號</th>
-			<th>簽約員工編號</th>
+			<th>承租會員</th>
+			<th>簽約員工</th>
 			<th>租金</th>
 			<th>押金</th>
 			<th>折扣</th>
@@ -61,8 +61,8 @@ font-size: 16px;
 			<th>房屋編號</th>
 			<th>合約起始日</th>
 			<th>合約到期日</th>
-			<th>承租會員編號</th>
-			<th>簽約員工編號</th>
+			<th>承租會員</th>
+			<th>簽約員工</th>
 			<th>租金</th>
 			<th>押金</th>
 			<th>折扣</th>
@@ -85,8 +85,8 @@ font-size: 16px;
 				<th>房屋編號</th>
 				<th>合約起始日</th>
 				<th>合約到期日</th>
-				<th>承租會員編號</th>
-				<th>簽約員工編號</th>
+				<th>承租會員</th>
+				<th>簽約員工</th>
 				<th>租金</th>
 				<th>押金</th>
 				<th>折扣</th>
@@ -150,8 +150,8 @@ $(document).ready(function(){
 			var cell2=$("<td></td>").text(VO.houseNO);
 			var cell3=$("<td></td>").text(VO.leaseBeginDate);
 			var cell4=$("<td></td>").text(VO.leaseEndDate);
-			var cell5=$("<td></td>").text(VO.memNO);
-			var cell6=$("<td></td>").text(VO.empNO);
+			var cell5=$("<td></td>").text(VO.memName);
+			var cell6=$("<td></td>").text(VO.empName);
 			var cell7=$("<td></td>").text(VO.leaseRent);
 			var cell8=$("<td></td>").text(VO.leaseDeposit);
 			var cell9=$("<td></td>").text(VO.leaseRelief);
@@ -159,7 +159,7 @@ $(document).ready(function(){
 			var cell11=$("<td></td>").text(VO.houseNote);
 			var cell12=$("<td></td>").text(VO.leaseRefund);
 			    cell12.attr("class","Refund");
-			var cell13=$("<td></td>").html('<button class="btn btn-primary">修改</button>');
+			var cell13=$("<td></td>").html('<button class="btn btn-primary">查看</button>');
 			var row=$("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5
 				,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,
 				]);

@@ -39,52 +39,63 @@ label{
 	
 	<div class="form-group">
 	<label>房屋編號</label>
-	<input type="text" value="${vo.houseVO.houseNO}" name="houseNO"  class="form-control">
+	<input type="text" value="${vo.houseVO.houseNO}" name="houseNO"  class="form-control" disabled>
+	<input type="hidden" value="${vo.houseVO.houseNO}" name="houseNO"  class="form-control">
 	</div>
 	
 	<div class="form-group">
 	<label>合約起始日期</label>
-	<input type="date" value="${vo.leaseBeginDate}" name="leaseBeginDate" class="form-control">
+	<input type="date" value="${vo.leaseBeginDate}" name="leaseBeginDate" class="form-control" disabled>
+	<input type="hidden" value="${vo.leaseBeginDate}" name="leaseBeginDate" class="form-control" >
 	</div>
 	
 	<div class="form-group">
 	<label>合約結束日期</label>
-	<input type="date" value="${vo.leaseEndDate}" name="leaseEndDate" class="form-control">	
+	<input type="date" value="${vo.leaseEndDate}" name="leaseEndDate" class="form-control" disabled>	
+	<input type="hidden" value="${vo.leaseEndDate}" name="leaseEndDate" class="form-control">	
 	</div>
 	
 	<div class="form-group">
-	<label>承租會員編號</label>
-	<input type="text" value="${vo.memNO}" name="memNO" class="form-control">
+	<label>承租會員</label>
+	<input type="text" value="${vo.memberVO.memName}" name="memName" class="form-control" disabled>
+	<input type="hidden" value="${vo.memberVO.memName}" name="memName" class="form-control">
+	<input type="hidden" value="${vo.memberVO.memNO}" name="memNO" >
 	</div>
 	
 	<div class="form-group">
-	<label>簽約員工編號</label>
-	<input type="text" value="${vo.empNO}" name="empNO" class="form-control">
+	<label>簽約員工</label>
+	<input type="text" value="${vo.empVO.empName}" name="empName" class="form-control" disabled>
+	<input type="hidden" value="${vo.empVO.empName}" name="empName" class="form-control">
+	<input type="hidden" value="${vo.empVO.empNO}" name="empNO" class="form-control">
 	</div>
 	
 	<div class="form-group">
 	<label>租金</label>
-	<input type="text" value="${vo.leaseRent}" name="leaseRent" class="form-control">
+	<input type="text" value="${vo.leaseRent}" name="leaseRent" class="form-control" disabled>
+	<input type="hidden" value="${vo.leaseRent}" name="leaseRent" class="form-control">
 	</div>
 	
 	<div class="form-group">
 	<label>押金</label>
-	<input type="text" value="${vo.leaseDeposit}" name="leaseDeposit" class="form-control">
+	<input type="text" value="${vo.leaseDeposit}" name="leaseDeposit" class="form-control" disabled="disabled">
+	<input type="hidden" value="${vo.leaseDeposit}" name="leaseDeposit" class="form-control">
 	</div>
 	
 	<div class="form-group">
 	<label>折扣</label>
-	<input type="text" value="${vo.leaseRelief}" name="leaseRelief" class="form-control">	
+	<input type="text" value="${vo.leaseRelief}" name="leaseRelief" class="form-control" disabled>	
+	<input type="hidden" value="${vo.leaseRelief}" name="leaseRelief" class="form-control">	
 	</div>
 	
 	<div class="form-group">
 	<label>簽約日起</label>
-	<input type="date" value="${vo.leaseDate}" name="leaseDate" class="form-control">
+	<input type="date" value="${vo.leaseDate}" name="leaseDate" class="form-control" disabled>
+	<input type="hidden" value="${vo.leaseDate}" name="leaseDate" class="form-control">
 	</div>
 	
 	<div class="form-group">
 	<label>合約照片</label>
-	<input type="file" style="width:75px" value="${vo.leasePic}" id="file">
+<%-- 	<input type="file" style="width:75px" value="${vo.leasePic}" id="file"> --%>
 	<input type="hidden" id="leasePic" name="leasePic">
 	<img id="result" style="width:75px" src="${vo.leasePic}" />
 	</div>

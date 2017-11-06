@@ -44,7 +44,9 @@ public class HouseService {
 		vo.setHouseFormVO(houseFormVO);
 		vo.setHouseAddr(houseAddr);
 		vo.setHouseSize(houseSize);
-		dao.insert(vo);
+		
+		Integer houseNO=dao.insert(vo);
+		vo.setHouseNO(houseNO);
 		return vo;
 	}
 	
@@ -112,8 +114,8 @@ public class HouseService {
     public HouseVO getPic(Integer houseNO){
     	return dao.getPic(houseNO);
     }
-    public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
-    	dao.insertHouseAndHousePicture(houseVO, set);
+    public Integer insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
+    	return dao.insertHouseAndHousePicture(houseVO, set);
     }
     public List<HouseVO> getNewThree(){
     	return dao.getNewThree();
