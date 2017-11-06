@@ -118,4 +118,7 @@ public class HouseService {
     public List<HouseVO> getNewThree(){
     	return dao.getNewThree();
     }
+    public List<HouseVO> getHotHouse(){
+    	return dao.getHotHouse();
+    }
 }

@@ -18,7 +18,7 @@
 <a href="<%= request.getContextPath()%>/DispatchList/DispatchList.jsp"><span  style="margin-bottom: 50px" class="btn btn-primary">回到派工清單</span></a>
 		<div class="form-group">
 			<label for="dempno">派工單號</label>
-			<input type="text" class="form-control" name="dlNO" value=${dlVO.dlNO}>
+			<input type="text" class="form-control" readonly="readonly" name="dlNO" value=${dlVO.dlNO}>
 		</div>
 		<div class="form-group">
 			<label for="dempno">指派人</label>
