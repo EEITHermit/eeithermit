@@ -301,11 +301,11 @@ padding-right:200px;
 			var dataeq;
 			var houseNO=$("#houseNO").val();
 			var checkbox=$("#houseeq input:checkbox")
-			console.log(houseNO);
+// 			console.log(houseNO);
 			$.post("/hermit/EquipmentConditionServlet",{action:"getOneEquip","houseNO":houseNO},function(data){
-				console.log(data);
+// 				console.log(data);
 				dataeq=$.parseJSON(data);
-				console.log(dataeq.aircondition);
+// 				console.log(dataeq);
 				
 				$.each(checkbox,function(index,box){
 					//name=box.name

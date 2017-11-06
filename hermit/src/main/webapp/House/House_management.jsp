@@ -146,6 +146,7 @@ font-size:18px;
 				</tbody>
 		</table>
 	</div>
+
 	<div class="container col-md-10" id="houseeq">
 		<input type="checkbox" name="TV" id="TV">
 		<label for="TV">電視</label>

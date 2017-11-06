@@ -233,9 +233,79 @@ public class HouseServlet extends HttpServlet {
 			
 			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO, previewPic, highestFloor, nowFloor, houseStatus,
 					houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize,houseInfo);
-			// RequestDispatcher
-			// rd=request.getRequestDispatcher("/House/House_management.jsp");
-			// rd.forward(request, response);
+			
+			EquipmentConditionService eqsvc=new EquipmentConditionService();
+			Byte TV=0;
+			if("on".equals(request.getParameter("TV"))){
+				TV=1;
+			}
+			Byte aircondition=0;
+			if("on".equals(request.getParameter("aircondition"))){
+				aircondition=1;
+			}
+			Byte refrigerator=0;
+			if("on".equals(request.getParameter("refrigerator"))){
+				refrigerator=1;
+			}
+			Byte waterHeater=0;
+			if("on".equals(request.getParameter("waterHeater"))){
+				waterHeater=1;
+			}
+			Byte gas=0;
+			if("on".equals(request.getParameter("gas"))){
+				gas=1;
+			}
+			Byte theFourthStation=0;
+			if("on".equals(request.getParameter("theFourthStation"))){
+				theFourthStation=1;
+			}
+			Byte net=0;
+			if("on".equals(request.getParameter("net"))){
+				net=1;
+			}
+			Byte washing=0;
+			if("on".equals(request.getParameter("washing"))){
+				washing=1;
+			}
+			Byte bed=0;
+			if("on".equals(request.getParameter("bed"))){
+				bed=1;
+			}
+			Byte wardrobe=0;
+			if("on".equals(request.getParameter("wardrobe"))){
+				wardrobe=1;
+			}
+			Byte sofa=0;
+			if("on".equals(request.getParameter("sofa"))){
+				sofa=1;
+			}
+			Byte parking=0;
+			if("on".equals(request.getParameter("parking"))){
+				parking=1;
+			}
+			Byte elevator=0;
+			if("on".equals(request.getParameter("elevator"))){
+				elevator=1;
+			}
+			Byte balcony=0;
+			if("on".equals(request.getParameter("balcony"))){
+				balcony=1;
+			}
+			Byte permitCook=0;
+			if("on".equals(request.getParameter("permitCook"))){
+				permitCook=1;
+			}
+			Byte pet=0;
+			if("on".equals(request.getParameter("pet"))){
+				pet=1;
+			}
+			Byte closeMRT=0;
+			if("on".equals(request.getParameter("closeMRT"))){
+				closeMRT=1;
+			}
+			
+			eqsvc.updateEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
+			
 			response.sendRedirect("/hermit/House/House_management.jsp");
 			System.out.println("Update Success");
 			return;
@@ -274,11 +344,11 @@ public class HouseServlet extends HttpServlet {
 			String hPicJSON=JSONValue.toJSONString(housePic);
 			request.setAttribute("hPics",hPicJSON);
 			
-			EquipmentConditionService eqsvc=new EquipmentConditionService();
-			EquipmentConditionVO eqvo=null;
-			eqvo=eqsvc.getOneEquipmentCondition(houseNO);
-			request.setAttribute("eqhouse", eqvo);
-			System.out.println(eqvo.getTV());
+//			EquipmentConditionService eqsvc=new EquipmentConditionService();
+//			EquipmentConditionVO eqvo=null;
+//			eqvo=eqsvc.getOneEquipmentCondition(houseNO);
+//			request.setAttribute("eqhouse", eqvo);
+//			System.out.println(eqvo.getTV());
 			//↑測試
 			
 //			for(HousePictureVO hVO:vo.getHousePictureVO()){
