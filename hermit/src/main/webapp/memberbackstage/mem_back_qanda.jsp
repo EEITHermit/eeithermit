@@ -288,7 +288,7 @@ a:link, a:visited, a:hover, a:active {
 				});
 			});
 			
-			//跳出投訴頁面，暫不使用
+			//跳出投訴頁面
 			$("#commentBT").click(function() {
 // 				$("#formDiv").position({
 // 					of:$("#commentBT").parent("div"),

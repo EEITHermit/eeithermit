@@ -1,5 +1,6 @@
 package com.hermit.iii.dispatchlist.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hermit.iii.emp.model.EmpVO;
@@ -71,6 +72,10 @@ public class DispatchListService {
 	}
 	public String getAllForJson(){
 		return dao.getAllForJson();
+	}
+	//漢勳加
+	public ArrayList<DispatchListVO> getAllByEmpNO(Integer empNO){
+		return dao.getAllByEmpNO(empNO);
 	}
 	
 }
