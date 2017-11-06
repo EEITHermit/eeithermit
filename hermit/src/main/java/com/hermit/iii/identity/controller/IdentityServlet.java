@@ -25,10 +25,12 @@ public class IdentityServlet extends HttpServlet {
 	private final String G_CLIENT_ID = "538877171960-djc145ihldt91ec28hajlt5m66sis16g.apps.googleusercontent.com";
 	private final String G_CLIENT_SECRET = "tXgMa9kOdHwrM02EgEeOa1Zs";
 	private final String G_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=google_process_Action";
+	private final String G_REDIRECT_URL2 = "http://localhost:8081/hermit/identity.do?action=google_login_Action";
 	/**** Facebook ****/
 	private final String F_CLIENT_ID = "1719931494697481";
 	private final String F_CLIENT_SECRET = "e510e1f84173c944fbc3254a94739510";
 	private final String F_REDIRECT_URL = "http://localhost:8081/hermit/identity.do?action=facebook_process_Action";
+	private final String F_REDIRECT_URL2 = "http://localhost:8081/hermit/identity.do?action=facebook_login_Action";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,7 +42,6 @@ public class IdentityServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// session物件來存放共用資料。
 		HttpSession session = request.getSession();
-
 		String action = request.getParameter("action");
 
 		if ("google_process_Action".equals(action)) {
@@ -157,10 +158,11 @@ public class IdentityServlet extends HttpServlet {
 			writer.write("code=" + request.getParameter("code") + "&"); // 取得Google回傳的參數code
 			writer.write("client_id=" + G_CLIENT_ID + "&"); // 自己的client_id
 			writer.write("client_secret=" + G_CLIENT_SECRET + "&"); // 自己的client_serect
-			writer.write("redirect_uri=" + G_REDIRECT_URL + "&"); // 自己的redirect_uri
+			writer.write("redirect_uri=" + G_REDIRECT_URL2 + "&"); // 自己的redirect_uri
 			writer.write("grant_type=authorization_code");
 			writer.close();
 
+			System.out.println(connectionObtainToken.getResponseCode());
 			// 認證成功
 			if (connectionObtainToken.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				// 取得Google回傳的JSON格式資料
@@ -213,7 +215,8 @@ public class IdentityServlet extends HttpServlet {
 					MemberVO vo = ls.OtherCheck(jsonObject.getString("id"), jsonObject.getString("name"));
 
 					if (vo != null) {
-						response.sendRedirect("/hermit/MemberLogin/LoginSuccess.jsp");
+						session.setAttribute("LoginOK", vo);
+						response.sendRedirect("/hermit/index.jsp");
 						return;
 					} else {
 						response.sendRedirect("/hermit/MemberLogin/LoginError.jsp");
@@ -227,7 +230,7 @@ public class IdentityServlet extends HttpServlet {
 				response.sendRedirect("/hermit/MemberLogin/LoginError.jsp");
 				return;
 			}
-			response.sendRedirect("/hermit/MemberLogin/Login.jsp");
+			response.sendRedirect("/hermit/index.jsp");
 		}
 
 		if ("facebook_process_Action".equals(action)) {
@@ -337,7 +340,7 @@ public class IdentityServlet extends HttpServlet {
 			writer.write("code=" + request.getParameter("code") + "&");
 			writer.write("client_id=" + F_CLIENT_ID + "&");
 			writer.write("client_secret=" + F_CLIENT_SECRET + "&");
-			writer.write("redirect_uri=" + F_REDIRECT_URL);
+			writer.write("redirect_uri=" + F_REDIRECT_URL2);
 			writer.close();
 			System.out.println(connectionObtainToken.getResponseCode());
 
@@ -398,7 +401,8 @@ public class IdentityServlet extends HttpServlet {
 					MemberVO vo = ls.OtherCheck(jsonObject.getString("id"), jsonObject.getString("name"));
 
 					if (vo != null) {
-						response.sendRedirect("/hermit/MemberLogin/LoginSuccess.jsp");
+						session.setAttribute("LoginOK", vo);
+						response.sendRedirect("/hermit/index.jsp");
 						return;
 					} else {
 						response.sendRedirect("/hermit/MemberLogin/LoginError.jsp");
@@ -411,7 +415,7 @@ public class IdentityServlet extends HttpServlet {
 				response.sendRedirect("/hermit/MemberLogin/LoginError.jsp");
 				return;
 			}
-			response.sendRedirect("/hermit/MemberLogin/Login.jsp");
+			response.sendRedirect("/hermit/index.jsp");
 		}
 	}
 }

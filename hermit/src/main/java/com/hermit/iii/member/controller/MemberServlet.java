@@ -136,7 +136,7 @@ public class MemberServlet extends HttpServlet {
 				session.setAttribute("SMScode", smscode);
 				session.setAttribute("telholder", memTel);
 
-				response.sendRedirect("register/register_notice_page.jsp");
+				response.sendRedirect("register/register_notice_page.jsp?memAccount=" + memAccount);
 			} catch (Exception e) {
 				errorMsgMap.put("Exception", e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/register/register_page.jsp");
@@ -217,7 +217,7 @@ public class MemberServlet extends HttpServlet {
 				session.setAttribute("SMScode", smscode);
 				session.setAttribute("telholder", memTel);
 
-				response.sendRedirect("register/register_notice_page.jsp");
+				response.sendRedirect("register/register_notice_page.jsp?memAccount=" + memAccount);
 			} catch (Exception e) {
 				errorMsgMap.put("Exception", e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/register/register_easy_page.jsp");
@@ -440,25 +440,26 @@ public class MemberServlet extends HttpServlet {
 					errorMsgMap.put("TelFormatError", "請輸入正確格式");
 				}
 
-//				String memAccount = request.getParameter("memAccount");
-//				if (memAccount == null || memAccount.trim().length() == 0) {
-//					errorMsgMap.put("AccountEmptyError", "請勿空白");
-//				}
-//
-//				String accountReg = "^[(a-zA-Z0-9)]{6,12}$";
-//				if (!memAccount.trim().matches(accountReg)) {
-//					errorMsgMap.put("AccountFormatError", "請輸入英文、數字 ,且長度必需在6到12之間");
-//				}
+				// String memAccount = request.getParameter("memAccount");
+				// if (memAccount == null || memAccount.trim().length() == 0) {
+				// errorMsgMap.put("AccountEmptyError", "請勿空白");
+				// }
+				//
+				// String accountReg = "^[(a-zA-Z0-9)]{6,12}$";
+				// if (!memAccount.trim().matches(accountReg)) {
+				// errorMsgMap.put("AccountFormatError", "請輸入英文、數字
+				// ,且長度必需在6到12之間");
+				// }
 
-//				String memPwd = request.getParameter("memPwd");
-//				if (memPwd == null || memPwd.trim().length() == 0) {
-//					errorMsgMap.put("PwdEmptyError", "請勿空白");
-//				}
-//
-//				String pwdReg = "^.{6,12}$";
-//				if (!memPwd.trim().matches(pwdReg)) {
-//					errorMsgMap.put("PwdFormatError", "長度必需在6到12之間");
-//				}
+				// String memPwd = request.getParameter("memPwd");
+				// if (memPwd == null || memPwd.trim().length() == 0) {
+				// errorMsgMap.put("PwdEmptyError", "請勿空白");
+				// }
+				//
+				// String pwdReg = "^.{6,12}$";
+				// if (!memPwd.trim().matches(pwdReg)) {
+				// errorMsgMap.put("PwdFormatError", "長度必需在6到12之間");
+				// }
 
 				String memName = request.getParameter("memName");
 				if (memName == null || memName.trim().length() == 0) {
