@@ -440,25 +440,25 @@ public class MemberServlet extends HttpServlet {
 					errorMsgMap.put("TelFormatError", "請輸入正確格式");
 				}
 
-				String memAccount = request.getParameter("memAccount");
-				if (memAccount == null || memAccount.trim().length() == 0) {
-					errorMsgMap.put("AccountEmptyError", "請勿空白");
-				}
+//				String memAccount = request.getParameter("memAccount");
+//				if (memAccount == null || memAccount.trim().length() == 0) {
+//					errorMsgMap.put("AccountEmptyError", "請勿空白");
+//				}
+//
+//				String accountReg = "^[(a-zA-Z0-9)]{6,12}$";
+//				if (!memAccount.trim().matches(accountReg)) {
+//					errorMsgMap.put("AccountFormatError", "請輸入英文、數字 ,且長度必需在6到12之間");
+//				}
 
-				String accountReg = "^[(a-zA-Z0-9)]{6,12}$";
-				if (!memAccount.trim().matches(accountReg)) {
-					errorMsgMap.put("AccountFormatError", "請輸入英文、數字 ,且長度必需在6到12之間");
-				}
-
-				String memPwd = request.getParameter("memPwd");
-				if (memPwd == null || memPwd.trim().length() == 0) {
-					errorMsgMap.put("PwdEmptyError", "請勿空白");
-				}
-
-				String pwdReg = "^.{6,12}$";
-				if (!memPwd.trim().matches(pwdReg)) {
-					errorMsgMap.put("PwdFormatError", "長度必需在6到12之間");
-				}
+//				String memPwd = request.getParameter("memPwd");
+//				if (memPwd == null || memPwd.trim().length() == 0) {
+//					errorMsgMap.put("PwdEmptyError", "請勿空白");
+//				}
+//
+//				String pwdReg = "^.{6,12}$";
+//				if (!memPwd.trim().matches(pwdReg)) {
+//					errorMsgMap.put("PwdFormatError", "長度必需在6到12之間");
+//				}
 
 				String memName = request.getParameter("memName");
 				if (memName == null || memName.trim().length() == 0) {
@@ -518,6 +518,9 @@ public class MemberServlet extends HttpServlet {
 				}
 				/**** 2.開始修改資料 ****/
 				MemberService memberSvc = new MemberService();
+				MemberVO memberVO = memberSvc.findByPrimaryKey(memNO);
+				String memAccount = memberVO.getMemAccount();
+				String memPwd = new SecurityCipher().decryptString(memberVO.getMemPwd());
 				memberSvc.updateMember(memNO, memTel, memAccount, memPwd, memName, memGender, memEmail, memStatus,
 						memInfract, memImage);
 				/**** 3.修改完成 ****/
