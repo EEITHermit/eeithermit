@@ -19,7 +19,7 @@
 	<form id="ListForm" method="post" action="<%= request.getContextPath() %>/Dispatch">
 		<div class="form-group">
 			<label for="dempno">派工單號</label>
-			<input type="text" class="form-control" name="dlNO" value=${dlVO.dlNO}>
+			<input type="text" class="form-control" readonly="readonly" name="dlNO" value=${dlVO.dlNO}>
 		</div>
 		<div class="form-group">
 			<label for="dempno">指派人</label>
@@ -42,10 +42,6 @@
 		<div class="form-group">
 		 	<label for="stime">派工時間</label>
 		 	<input type="text" class="form-control"  readonly="readonly"  name="dlStime" value=${dlVO.dlStime}>
-		</div>
- 		<label for="elesign">簽名</label><br>
-		<div class="form-group" style="background-color: white;height:250px;width:800px">
-		 	<img id="elesignImg" src=${dlVO.elesign}>
 		</div>
 		<div class="form-group">
 		<label for="signature">簽名板</label>
