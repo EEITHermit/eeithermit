@@ -82,25 +82,25 @@ public class EquipmentConditionDAO_hibernate implements EquipmentConditionDAO_in
 	public static void main(String args[]){
 		EquipmentConditionVO vo = new EquipmentConditionVO();
 		EquipmentConditionDAO_hibernate dao = new EquipmentConditionDAO_hibernate();
-//		vo.setHouseNO(20001);
-//		vo.setTV((byte) 1);
-//		vo.setAircondition((byte) 1);
-//		vo.setRefrigerator((byte) 1);
-//		vo.setWaterHeater((byte) 1);
-//		vo.setGas((byte) 1);
-//		vo.setTheFourthStation((byte) 1);
-//		vo.setNet((byte) 1);
-//		vo.setWashing((byte) 1);
-//		vo.setBed((byte) 1);
-//		vo.setWardrobe((byte) 1);
-//		vo.setSofa((byte) 1);
-//		vo.setParking((byte) 1);
-//		vo.setElevator((byte) 1);
-//		vo.setBalcony((byte) 1);
-//		vo.setPermitCook((byte) 1);
-//		vo.setPet((byte) 1);
-//		vo.setCloseMRT((byte) 1);
-//		dao.insert(vo);
+		vo.setHouseNO(20007);
+		vo.setTV((byte) 1);
+		vo.setAircondition((byte) 1);
+		vo.setRefrigerator((byte) 1);
+		vo.setWaterHeater((byte) 1);
+		vo.setGas((byte) 1);
+		vo.setTheFourthStation((byte) 1);
+		vo.setNet((byte) 1);
+		vo.setWashing((byte) 1);
+		vo.setBed((byte) 1);
+		vo.setWardrobe((byte) 1);
+		vo.setSofa((byte) 1);
+		vo.setParking((byte) 1);
+		vo.setElevator((byte) 1);
+		vo.setBalcony((byte) 1);
+		vo.setPermitCook((byte) 1);
+		vo.setPet((byte) 1);
+		vo.setCloseMRT((byte) 1);
+		dao.insert(vo);
 
 		// 修改初始資料第一筆
 //		EquipmentConditionVO EquipmentConditionVO2 = new EquipmentConditionVO();
@@ -147,31 +147,31 @@ public class EquipmentConditionDAO_hibernate implements EquipmentConditionDAO_in
 //		System.out.println("---------------------");
 //
 //		// 查詢全部
-//		List<EquipmentConditionVO> list = dao.getAll();
-//		for (EquipmentConditionVO EquipmentConditionVO : list) {
-//			System.out.print(EquipmentConditionVO.getHouseNO() + ",");
-//			System.out.print(EquipmentConditionVO.getTV() + ",");
-//			System.out.print(EquipmentConditionVO.getAircondition() + ",");
-//			System.out.print(EquipmentConditionVO.getRefrigerator() + ",");
-//			System.out.print(EquipmentConditionVO.getWaterHeater() + ",");
-//			System.out.print(EquipmentConditionVO.getGas() + ",");
-//			System.out.print(EquipmentConditionVO.getTheFourthStation() + ",");
-//			System.out.print(EquipmentConditionVO.getNet() + ",");
-//			System.out.print(EquipmentConditionVO.getWashing() + ",");
-//			System.out.print(EquipmentConditionVO.getBed() + ",");
-//			System.out.print(EquipmentConditionVO.getWardrobe() + ",");
-//			System.out.print(EquipmentConditionVO.getSofa() + ",");
-//			System.out.print(EquipmentConditionVO.getParking() + ",");
-//			System.out.print(EquipmentConditionVO.getElevator() + ",");
-//			System.out.print(EquipmentConditionVO.getBalcony() + ",");
-//			System.out.print(EquipmentConditionVO.getPermitCook() + ",");
-//			System.out.print(EquipmentConditionVO.getPet() + ",");
-//			System.out.println(EquipmentConditionVO.getCloseMRT());
-//			System.out.println();
-//		}
+		List<EquipmentConditionVO> list = dao.getAll();
+		for (EquipmentConditionVO EquipmentConditionVO : list) {
+			System.out.print(EquipmentConditionVO.getHouseNO() + ",");
+			System.out.print(EquipmentConditionVO.getTV() + ",");
+			System.out.print(EquipmentConditionVO.getAircondition() + ",");
+			System.out.print(EquipmentConditionVO.getRefrigerator() + ",");
+			System.out.print(EquipmentConditionVO.getWaterHeater() + ",");
+			System.out.print(EquipmentConditionVO.getGas() + ",");
+			System.out.print(EquipmentConditionVO.getTheFourthStation() + ",");
+			System.out.print(EquipmentConditionVO.getNet() + ",");
+			System.out.print(EquipmentConditionVO.getWashing() + ",");
+			System.out.print(EquipmentConditionVO.getBed() + ",");
+			System.out.print(EquipmentConditionVO.getWardrobe() + ",");
+			System.out.print(EquipmentConditionVO.getSofa() + ",");
+			System.out.print(EquipmentConditionVO.getParking() + ",");
+			System.out.print(EquipmentConditionVO.getElevator() + ",");
+			System.out.print(EquipmentConditionVO.getBalcony() + ",");
+			System.out.print(EquipmentConditionVO.getPermitCook() + ",");
+			System.out.print(EquipmentConditionVO.getPet() + ",");
+			System.out.println(EquipmentConditionVO.getCloseMRT());
+			System.out.println();
+		}
 //
 //		// 刪除初始資料一筆
-		dao.delete(20001);
+//		dao.delete(20001);
 
 		System.out.println("Done");
 	}

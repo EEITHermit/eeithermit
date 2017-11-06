@@ -7,7 +7,7 @@ import java.util.Set;
 import com.hermit.iii.housepicture.model.HousePictureVO;
 
 public interface HouseDAO_interface_hibernate {
-	public void insert(HouseVO houseVO);
+	public Integer insert(HouseVO houseVO);
 
 	public void update(HouseVO houseVO);
 

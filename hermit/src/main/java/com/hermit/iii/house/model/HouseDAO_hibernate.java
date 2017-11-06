@@ -28,17 +28,19 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 	private static final String FIND_BOROUGHNO_BY_HOUSENO = "from houseVO where houseNO = ?";
 	private static final String GET_ONE_HOUSE_FK="form HouseVO where houseNO=?";
 	@Override
-	public void insert(HouseVO houseVO) {
+	public Integer insert(HouseVO houseVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer houseNO=null;
 		try {
 			session.beginTransaction();
-			session.save(houseVO);
+			houseNO=(Integer)session.save(houseVO);
+			System.out.println(houseNO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		
+		return houseNO;
 	}
 
 	@Override
