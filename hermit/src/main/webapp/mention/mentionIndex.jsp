@@ -49,7 +49,7 @@ table {
 	float: left;
 	position: absolute;
 }
-#leaseDiv{
+#dispatchDiv{
 	display: none;
 	float: left;
 	position: absolute;
@@ -101,13 +101,13 @@ table {
 				</div>
 				</div>
 			</div>
-			<!-- 租賃到期的推播 -->
+			<!-- 派工未處理的推播 -->
 			<div class="col-md-3">
 				<div class="card card-inverse"
 				 style="border-radius: 10px;background-color: white">
 				<div class="card-block">
-					<h3 class="card-title">將有<span style="font-size: 36px; color: red"> ${leaseArray.size()} </span>筆契約到期</h3>
-					<a href="#" class="btn btn-primary" id="leaseButton">展開</a>
+					<h3 class="card-title">您有<span style="font-size: 36px; color: red"> ${dispatchArray.size()} </span>筆派工未處理</h3>
+					<a href="#" class="btn btn-primary" id="dispatchButton">展開</a>
 				</div>
 				</div>
 			</div>
@@ -264,30 +264,30 @@ table {
 					</table>
 				</div>
 				<!-- 取消預約end -->
-				<!-- 租賃到期 -->
-				<div id="leaseDiv">
-					<table id="leaseTable" class="table table-hover">
+				<!-- 未處理派工單 -->
+				<div id="dispatchDiv">
+					<table id="dispatchTable" class="table table-hover">
 						<thead>
 							<tr>
-								<th style="width:15%">租賃編號</th>
-								<th style="width:15%">租賃會員</th>
-								<th style="width:15%">租賃房屋</th>
-								<th style="width:25%">租賃期間</th>
-								<th style="width:15%">租賃備註</th>
-								<th style="width:15%">簽約員工</th>
+								<th style="width:15%">派工編號</th>
+								<th style="width:15%">申請會員</th>
+								<th style="width:15%">申請房屋</th>
+								<th style="width:15%">申請時間</th>
+								<th style="width:15%">派工人員</th>
+								<th style="width:25%">派工備註</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="leaseVO" items="${leaseArray}">
+							<c:forEach var="dispatchVO" items="${dispatchArray}">
 								<tr>
-									<td>${leaseVO.leaseNO}</td>
-									<td>${leaseVO.memNO}</td>
-									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${leaseVO.houseVO.houseNO}">${leaseVO.houseVO.houseTitle}</a></td>
-									<td>${leaseVO.leaseBeginDate} - ${leaseVO.leaseEndDate}</td>
-									<td>${leaseVO.houseNote}</td>
-									<td>${leaseVO.empNO}</td>
+									<td>${dispatchVO.dlNO}</td>
+									<td>${dispatchVO.qaVO.memberVO.memName}</td>
+									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${dispatchVO.qaVO.houseVO.houseNO}">${dispatchVO.qaVO.houseVO.houseTitle}</a></td>
+									<td>${dispatchVO.dlStime}</td>
+									<td>${dispatchVO.dempVO.empName}</td>
+									<td>${dispatchVO.dlNote}</td>
 									<td><button class="btn btn-primary btn-lg" type="button"
-											id="leaseBT">前往處理此合約</button></td>
+											id="dispatchBT">前往處理此合約</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -312,18 +312,18 @@ table {
 		var resDiv = $("#resDiv");  //預約功能的div
 		var qaDiv = $("#qaDiv"); //Q&A功能的div
 		var eventDiv = $("#eventDiv"); //取消預約的div
-		var leaseDiv = $("#leaseDiv"); //租賃到期的div
+		var dispatchDiv = $("#dispatchDiv"); //租賃到期的div
 		//展開預約
 		$("#resButton").on("click",function(){
 			var resDiv = $("#resDiv");
 			if($(this).text() == "展開"){
 				$("#eventButton").text("展開");
 				$("#qaButton").text("展開");
-				$("#leaseButton").text("展開");
+				$("#dispatchButton").text("展開");
 				$(this).text("收起");
 				eventDiv.hide("drop",1000);
 				qaDiv.hide("drop",1000);
-				leaseDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 				resDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
@@ -336,11 +336,11 @@ table {
 			if($(this).text() == "展開"){
 				$("#eventButton").text("展開");
 				$("#resButton").text("展開");
-				$("#leaseButton").text("展開");
+				$("#dispatchButton").text("展開");
 				$(this).text("收起");
 				eventDiv.hide("drop",1000);
 				resDiv.hide("drop",1000);
-				leaseDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 				qaDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
@@ -352,11 +352,11 @@ table {
 			if($(this).text() == "展開"){
 				$("#qaButton").text("展開");
 				$("#resButton").text("展開");
-				$("#leaseButton").text("展開");
+				$("#dispatchButton").text("展開");
 				$(this).text("收起");
 				resDiv.hide("drop",1000);
 				qaDiv.hide("drop",1000);
-				leaseDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 				eventDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
@@ -364,7 +364,7 @@ table {
 			};
 		});
 		//展開租賃到期
-		$("#leaseButton").on("click",function(){
+		$("#dispatchButton").on("click",function(){
 			if($(this).text() == "展開"){
 				$("#qaButton").text("展開");
 				$("#eventButton").text("展開");
@@ -373,10 +373,10 @@ table {
 				resDiv.hide("drop",1000);
 				qaDiv.hide("drop",1000);
 				eventDiv.hide("drop",1000);
-				leaseDiv.show("drop",1000);
+				dispatchDiv.show("drop",1000);
 			}else{
 				$(this).text("展開");
-				eventDiv.hide("drop",1000);
+				dispatchDiv.hide("drop",1000);
 			};
 		});
 		
@@ -485,8 +485,9 @@ table {
 				);
 			}
 		});
-		$("#leaseTable>tbody button").on("click",function(){
-			window.location = "<%=request.getContextPath()%>/Lease/Lease.jsp";
+		$("#dispatchTable>tbody button").on("click",function(){
+			var dlNO = $(this).parents("tr").children("td").eq(0).text();
+			window.location = "<%=request.getContextPath()%>/Dispatch?action=getOneDispatchList&dlno="+dlNO;
 		})
 	};
 	//回應表單取消按鈕

@@ -1,11 +1,14 @@
 package com.hermit.iii.dispatchlist.model;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.json.simple.JSONValue;
 
 import com.hermit.iii.emp.model.EmpVO;
@@ -121,6 +124,24 @@ public class DispatchListDAO_hibernate implements DispatchListDAO_interface_hibe
 		}
 		
 		return jsonString;
+	}
+	private static String GET_ALL_BY_EMP_NO = "from DispatchListVO where aempNO = ? And elesign is null";
+	@Override
+	public ArrayList<DispatchListVO> getAllByEmpNO(Integer empNO){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		ArrayList<DispatchListVO> array = new ArrayList<DispatchListVO>();
+		try{
+			session.getTransaction().begin();
+			Query query = session.createQuery(GET_ALL_BY_EMP_NO);
+			query.setParameter(0, empNO);
+			List<DispatchListVO> list = query.list();
+			array.addAll(list);
+			session.getTransaction().commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return array;
 	}
 	public static void main (String args[]){
 		DispatchListVO dvo = new DispatchListVO();
