@@ -80,7 +80,7 @@
 							<th>會員頭像</th>
 							<th>會員電話</th>
 							<th>會員帳號</th>
-							<th>會員密碼</th>
+							<!-- <th>會員密碼</th> -->
 							<th>會員姓名</th>
 							<th>會員性別</th>
 							<th>會員信箱</th>
@@ -119,18 +119,18 @@
 								<div class="error-data-style">
 									<small>${ErrorMsgKey.TelEmptyError}</small><small>${ErrorMsgKey.TelFormatError}</small>
 								</div></td>
-							<td><input type="text" style="width: 90px"
-								class="form-control" id="memAccount" name="memAccount"
-								placeholder="會員帳號" value="${param.memAccount}">
-								<div class="error-data-style">
-									<small id="ajax-check-account"></small><small>${ErrorMsgKey.AccountEmptyError}</small><small>${ErrorMsgKey.AccountFormatError}</small>
-								</div></td>
-							<td><input type="text" style="width: 90px"
-								class="form-control" id="memPwd" name="memPwd"
-								placeholder="會員密碼" value="${param.memPwd}">
-								<div class="error-data-style">
-									<small>${ErrorMsgKey.PwdEmptyError}</small><small>${ErrorMsgKey.PwdFormatError}</small>
-								</div></td>
+<!-- 							<td><input type="text" style="width: 90px" -->
+<!-- 								class="form-control" id="memAccount" name="memAccount" -->
+<%-- 								placeholder="會員帳號" value="${param.memAccount}"> --%>
+<!-- 								<div class="error-data-style"> -->
+<%-- 									<small id="ajax-check-account"></small><small>${ErrorMsgKey.AccountEmptyError}</small><small>${ErrorMsgKey.AccountFormatError}</small> --%>
+<!-- 								</div></td> -->
+<!-- 							<td><input type="text" style="width: 90px" -->
+<!-- 								class="form-control" id="memPwd" name="memPwd" -->
+<%-- 								placeholder="會員密碼" value="${param.memPwd}"> --%>
+<!-- 								<div class="error-data-style"> -->
+<%-- 									<small>${ErrorMsgKey.PwdEmptyError}</small><small>${ErrorMsgKey.PwdFormatError}</small> --%>
+<!-- 								</div></td> -->
 							<td><input type="text" style="width: 90px"
 								class="form-control" id="memName" name="memName"
 								placeholder="會員姓名" value="${param.memName}">
@@ -242,7 +242,7 @@
 						var cell2 = $('<td></td>').html('<img height="50" width="50" src="'+v.memImage+'">');
 						var cell3 = $('<td></td>').text(v.memTel);
 						var cell4 = $('<td></td>').text(v.memAccount);
-						var cell5 = $('<td></td>').text(v.memPwd);
+// 						var cell5 = $('<td></td>').text(v.memPwd);
 						var cell6 = $('<td></td>').text(v.memName);
 						var cell7 = $('<td></td>').text(v.memGender);
 						var cell8 = $('<td></td>').text(v.memEmail);
@@ -251,7 +251,8 @@
 						var cell11 = $('<td></td>').text(v.memInfract);
 						var cell12 = $('<td></td>').html('<button type="button" title="移除" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button> <button type="button" title="選取" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button>');
 
-						var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10,cell11,cell12]);
+// 						var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10,cell11,cell12]);
+						var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell6,cell7,cell8,cell9,cell10,cell11,cell12]);
 						fragment.append(row);
 					});
 					$('#myTable1>tbody').html(fragment);
@@ -299,26 +300,26 @@
 						// 為了顯示memImage埋標籤<span></span>，使用者維持無法修改
 						$('#presentImg').html(tds.eq(1).html());
 						$('#memTel').val(tds.eq(2).text());
-						$('#memAccount').val(tds.eq(3).text());
-						$('#memPwd').val(tds.eq(4).text());
-						$('#memName').val(tds.eq(5).text());
-						if (tds.eq(6).text() == '女')
+// 						$('#memAccount').val(tds.eq(3).text());
+// 						$('#memPwd').val(tds.eq(4).text());
+						$('#memName').val(tds.eq(4).text());
+						if (tds.eq(5).text() == '女')
 							$('#memGender option:eq(1)').prop('selected',true);
 						else
 							$('#memGender option:eq(0)').prop('selected',true);
-						$('#memEmail').val(tds.eq(7).text());
-						$('#memRegister').val(tds.eq(8).text());
-						if (tds.eq(9).text() == '一般會員驗證')
+						$('#memEmail').val(tds.eq(6).text());
+						$('#memRegister').val(tds.eq(7).text());
+						if (tds.eq(8).text() == '一般會員驗證')
 							$('#memStatus option:eq(0)').prop('selected',true);
-						else if (tds.eq(9).text() == 'FB驗證')
+						else if (tds.eq(8).text() == 'FB驗證')
 							$('#memStatus option:eq(1)').prop('selected',true);
-						else if (tds.eq(9).text() == 'Google驗證')
+						else if (tds.eq(8).text() == 'Google驗證')
 							$('#memStatus option:eq(2)').prop('selected',true);
-						else if (tds.eq(9).text() == '黑名單會員')
+						else if (tds.eq(8).text() == '黑名單會員')
 							$('#memStatus option:eq(3)').prop('selected',true);
 						else
 							$('#memStatus option:eq(4)').prop('selected',true);
-						$('#memInfract').val(tds.eq(10).text());
+						$('#memInfract').val(tds.eq(9).text());
 						$('#resultImg').css('display','none');
 						$('#presentImg').css('display','inline');
 						txres = tds.find('img').attr('src');
