@@ -208,9 +208,11 @@ a:link, a:visited, a:hover, a:active {
 										</select>
 									</div>
 									<div class="col-md-12">
+										<div>
 										<label for="qDetail" class="form-label"> 申訴內容： </label>
 										<textarea id="commentArea" class="commentArea" name="qDetail"
 											style="resize: none;"></textarea>
+									</div>
 									</div>
 									<div class="col-md-4 col-md-offset-5">
 										<button class="btn btn-secondary btn-lg" type="button"
