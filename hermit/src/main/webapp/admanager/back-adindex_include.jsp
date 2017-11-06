@@ -12,16 +12,16 @@
 }
 
 img {
-	width:150px;
-	height:150px;
-	padding: 5px 5px 5px 5px;
+	width:200px;
+	height:100px;
+	padding: 1px 1px 1px 1px;
 }
 
 
 
 td {
-	width:450px;
-	height:150px;
+	width:500px;
+	height:100px;
 }
 
 th {
@@ -31,7 +31,7 @@ th {
 
 
 tr {
-	width:200px;
+	width:300px;
 	height:100px;
 }
 
