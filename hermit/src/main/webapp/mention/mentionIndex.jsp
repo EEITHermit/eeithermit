@@ -555,6 +555,26 @@ table {
 			$("#qaForm>form")[0].submit();
 		}
 	}
+	//定時取值
+	var t = setTimeout(match,3000);
+	function match(){
+		$.get("<%=request.getContextPath()%>/mentionServlet?mission=match",{empNO:"${empLoginOK.empNO}"},function(data){
+			var json = JSON.parse(data);
+			if(json["resSize"] != "${resArray.size()}"){
+				location.reload();
+			}
+			if(json["qaSize"] != "${qaArray.size()}"){
+				location.reload();
+			}
+			if(json["eventSize"] != "${eventArray.size()}"){
+				location.reload();
+			}
+			if(json["dispatchSize"] != "${dispatchArray.size()}"){
+				location.reload();
+			}
+		});
+		setTimeout(match,3000);
+	}
 </script>
 </body>
 </html>

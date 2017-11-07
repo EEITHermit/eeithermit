@@ -165,13 +165,13 @@ a:link, a:visited, a:hover, a:active {
 											</tr>
 										</thead>
 								<style>
-								a:link, a:visited, a:hover ,a:active{
+								a:link,a:hover{
 									color : blue;
 	    							text-decoration: none;
 	    							padding: 0px;
-	    							text-align: center;	
+	    							text-align: left;	
 	    							text-decoration: none;
-	    							display: block;
+	    							display: inline-block;
 								}
 								</style>
 										<tbody>
@@ -188,16 +188,20 @@ a:link, a:visited, a:hover, a:active {
 														style="color: blue; text-decoration: underline;"
 														href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 													<c:if test="${qaVO.qDetail.length()>10}">
-														<td><span>${qaVO.qDetail.substring(0,10)}...</span></span><a style="font-size:10px;float:right;">展開內容</a></td>
-														<td style="display:none;">${qaVO.qDetail}<a style="font-size:10px;float:right;">收起</a></td>
+														<td>
+															<p><span>${qaVO.qDetail.substring(0,10)}...</span><a onclick="more(event)" style="font-size:10px;float:right;">展開內容</a></p>
+															<p style="display:none;"><span>${qaVO.qDetail}</span><a onclick="less(event)" style="font-size:10px;float:right;">收起</a></p>
+														</td>
 													</c:if>
 													<c:if test="${qaVO.qDetail.length()<=10}">
 														<td>${qaVO.qDetail}</td>
 													</c:if>
 													<td>${qaVO.aTime}</td>
 													<c:if test="${qaVO.aDetail.length()>10}">
-														<td>${qaVO.aDetail.substring(0,10)}...<a style="font-size:10px;float:right;">展開內容</a></td>
-														<td style="display:none;">${qaVO.aDetail}<a style="font-size:10px;float:right;">收起</a></td>
+														<td>
+															<p><span>${qaVO.aDetail.substring(0,10)}...</span><a onclick="more(event)" style="font-size:10px;float:right;">展開內容</a></p>
+															<p style="display:none;"><span>${qaVO.aDetail}</span><a onclick="less(event)" style="font-size:10px;float:right;">收起</a></p>
+														</td>
 													</c:if>
 													<c:if test="${qaVO.aDetail.length()<=10||qaVO.aDetail==null}">
 														<td>${qaVO.aDetail}</td>
@@ -299,7 +303,15 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", work);
-
+		//縮減回覆及回報內容
+		function more(event){
+			$(event.target).parents("td").find("p").eq(0).toggle(false);
+			$(event.target).parents("td").find("p").eq(1).toggle(true);
+		}
+		function less(event){
+			$(event.target).parents("td").find("p").eq(0).toggle(true);
+			$(event.target).parents("td").find("p").eq(1).toggle(false);
+		}
 		function work() {
 			
 			//跳出查詢畫面
@@ -354,34 +366,32 @@ a:link, a:visited, a:hover, a:active {
 					"targets" : [ 3 ],
 					"width" : "30%"
 				}, {
-					"targets" : [ 5 ],
+					"targets" : [ 4 ],
 					"width" : "20%"
 				}, {
-					"targets" : [ 6 ],
+					"targets" : [ 5 ],
 					"width" : "10%"
 				}]
 			});
-			//縮減回覆及回報內容
-			var qBT4 = $("#queryTable>tbody td:nth-child(4)");
-			var qBT5 = $("#queryTable>tbody td:nth-child(5)");
-			qBT4.find("a").on("click",function(){
-				$(this).parents("tr").find("td").eq(3).toggle(false);
-				$(this).parents("tr").find("td").eq(4).toggle(true);
-			});
-			qBT5.find("a").on("click",function(){
-				$(this).parents("tr").find("td").eq(3).toggle(true);
-				$(this).parents("tr").find("td").eq(4).toggle(false);
-			});
-			var aBT7 = $("#queryTable>tbody td:nth-child(7)");
-			var aBT8 = $("#queryTable>tbody td:nth-child(8)");
-			aBT7.find("a").on("click",function(){
-				$(this).parents("tr").find("td").eq(6).toggle(false);
-				$(this).parents("tr").find("td").eq(7).toggle(true);
-			});
-			aBT8.find("a").on("click",function(){
-				$(this).parents("tr").find("td").eq(6).toggle(true);
-				$(this).parents("tr").find("td").eq(7).toggle(false);
-			});
+			
+// 			var qBT3 = $("#queryTable>tbody tr>td");
+// 			qBT3.find("a").eq(0).on("click",function(){
+// 				$(this).parents("td").find("p").eq(0).toggle(false);
+// 				$(this).parents("td").find("p").eq(1).toggle(true);
+// 			});
+// 			qBT3.find("a").eq(1).on("click",function(){
+// 				$(this).parents("td").find("p").eq(0).toggle(true);
+// 				$(this).parents("td").find("p").eq(1).toggle(false);
+// 			});
+// 			var aBT7 = $("#queryTable>tbody td:nth-child(7)");
+// 			aBT7.find("a").eq(0).on("click",function(){
+// 				$(this).parents("td").find("p").eq(0).toggle(false);
+// 				$(this).parents("td").find("p").eq(1).toggle(true);
+// 			});
+// 			aBT7.find("a").eq(1).on("click",function(){
+// 				$(this).parents("td").find("p").eq(0).toggle(true);
+// 				$(this).parents("td").find("p").eq(1).toggle(false);
+// 			});
 		};
 
 		function check() {
