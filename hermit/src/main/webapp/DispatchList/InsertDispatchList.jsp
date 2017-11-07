@@ -48,7 +48,7 @@
 				<div class="form-group">
 				 	<label for="dlNote">備註</label>
 				 	<br>
-				 	<textarea rows="8" cols="75" wrap="hard" id="dlNote" style="border-radius: 5px;resize: none" name="dlNote"></textarea>
+				 	<textarea rows="8" cols="75" wrap="hard" id="dlNote" maxlength="199" style="border-radius: 5px;resize: none" name="dlNote"></textarea>
 				</div>
 				<input type="hidden" name="action" value="InsertDispatchList">
 				<button class="btn btn-primary" style="margin:auto" type="sumbit">送出</button>&nbsp;&nbsp;
