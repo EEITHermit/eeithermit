@@ -287,9 +287,9 @@ nav.main-nav:hover {
 				<span>Close &times</span>
 			</button>
 			<a href="<%=request.getContextPath()%>/index.jsp"
-				class="w3-bar-item w3-button"><span>首頁</span></a> <a href=""
-				class="w3-bar-item w3-button" id="mbi"><span>會員中心</span></a> <a
-				href="" class="w3-bar-item w3-button" id="mbf"><span>我的收藏</span></a>
+				class="w3-bar-item w3-button"><span>首頁</span></a>
+			<a href="" class="w3-bar-item w3-button" id="mbi"><span>會員中心</span></a> 
+			<a href="" class="w3-bar-item w3-button" id="mbf"><span>我的收藏</span></a>
 			<a href="" class="w3-bar-item w3-button" id="mbc"><span>我的預約</span></a>
 			<a href="" class="w3-bar-item w3-button" id="mbq"><span>Q&A</span></a>
 			<a href="" class="w3-bar-item w3-button" id="mbl"><span>租賃紀錄</span></a>
@@ -1050,7 +1050,7 @@ nav.main-nav:hover {
 				event.preventDefault();
 				$.post('<%=request.getContextPath()%>/Login/memlogin.do',{"action":"check"},function(data){
 					if(data=="OK"){
-						window.location = "<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp?action=check";
+						window.location = "<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease&memNO=${LoginOK.memNO}";
 					}else if(data=="NO"){
 						$main_nav.children('ul').removeClass('is-visible');
 						$form_modal.addClass('is-visible');	

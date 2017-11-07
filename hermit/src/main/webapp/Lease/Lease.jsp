@@ -98,26 +98,26 @@ font-size: 16px;
 		</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="width:70px" value="${param.houseNO}" name="houseNO" class="form-control"></td>
+					<td><input type="text" style="width:70px" value="${param.houseNO}" name="houseNO" class="form-control" id="houseNO"><span id="houseAddr"></span></td>
 					<td><input type="date" style="width:140px" value="${param.leaseBeginDate}" name="leaseBeginDate" class="form-control"></td>
 					<td><input type="date" style="width:140px" value="${param.leaseEndDate}" name="leaseEndDate" class="form-control"></td>
-					<td><input type="text" style="width:70px" value="${param.memNO}" name="memNO" class="form-control"></td>
-					<td><input type="text" style="width:70px" value="${param.empNO}" name="empNO" class="form-control"></td>
-					<td><input type="text" style="width:90px" value="${param.leaseRent}" name="leaseRent" class="form-control"></td>
-					<td><input type="text" style="width:90px" value="${param.leaseDeposit}" name="leaseDeposit" class="form-control"></td>
-					<td><input type="text" style="width:90px" value="${param.leaseRelief}" name="leaseRelief" class="form-control"></td>
+					<td><input type="text" style="width:70px" value="${param.memNO}" name="memNO" class="form-control" id="memNO"><span id="memName"></span></td>
+					<td><input type="text" style="width:70px" value="${param.empNO}" name="empNO" class="form-control" id="empNO"><span id="empName"></span></td>
+					<td><input type="text" style="width:90px" value="${param.leaseRent}" name="leaseRent" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+					<td><input type="text" style="width:90px" value="${param.leaseDeposit}" name="leaseDeposit" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+					<td><input type="text" style="width:90px" value="${param.leaseRelief}" name="leaseRelief" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
 					<td><input type="date" style="width:140px" value="${param.leaseDate}" name="leaseDate" class="form-control"></td>
 					<td><textarea name="houseNote"></textarea></td>
 <%-- 					<td><input type="text" style="width:70px" value="${param.houseNote}" name="houseNote"></td> --%>
 					<td><select name="leaseRefund" id="selectleaseRefund"><option value=1>是</option><option value=0>否</option></select></td>
 					<td><button id="addBtn" class="btn">新增</button></td>
-					
+				</tr>
 			</tbody>		
 	</table>
 	<table class="table">
 				<tr>
 					<th>合約圖片
-					<input type="file" style="width:75px" value="${param.leasePic}" id="file">
+					<input type="file" style="width:80px" value="${param.leasePic}" id="file">
 					<input type="hidden" id="leasePic" name="leasePic">
 					<img id="result" width="200" src="" name="leasePic">
 					</th>
@@ -173,8 +173,8 @@ $(document).ready(function(){
 		})
 		var Refund=$(".Refund");
 		$.each(Refund,function(index,Ref){
-		console.log($(Ref).text());
-		console.log(index);//告訴你到第幾個迴圈了
+// 		console.log($(Ref).text());
+// 		console.log(index);//告訴你到第幾個迴圈了
 		if($(Ref).text()=="0"){
 			$(Ref).text("否");
 		}else if($(Ref).text()=="1"){
@@ -220,6 +220,39 @@ $(document).ready(function(){
 		  })
 		  console.log($("#result").attr("src"));
 	});
+	$("#memNO").change(function(){
+		var inputNO=$("#memNO");
+		var NO=inputNO.val();
+		$.post("<%= request.getContextPath() %>/member.do?action=queryMem",{memNO:NO},function(data){
+// 			console.log(data);
+			var memName=$("#memName");
+			if(!confirm("你輸入的會員為:\n"+data)){
+				$("#memNO").val("");
+			}
+		})
+	})
+	$("#empNO").change(function(){
+		var inputNO=$("#empNO");
+		var NO=inputNO.val();
+		$.post("<%= request.getContextPath() %>/emp/EmpServlet?action=queryEmp",{empNO:NO},function(data){
+// 			console.log(data);
+			var empName=$("#empName");
+			if(!confirm("你輸入的員工為:\n"+data)){
+				$("#empNO").val("");
+			}
+		})
+	})
+	$("#houseNO").change(function(){
+		var inputNO=$("#houseNO");
+		var NO=inputNO.val();
+	$.post("<%=request.getContextPath()%>/House.do?action=queryHouse",{houseNO:NO},function(data){
+		console.log(data);
+		var houseAddr=$("#houseAddr");
+		if(!confirm("你輸入的房屋物件住址為:\n"+data)){
+			$("#houseNO").val("");
+		}
+		})
+	})
 })
 </script>
 </body>
