@@ -5,15 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/datatables.min.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/iEdit.min.css">
-
 <!-- 合約表格用↓ -->
 <link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/tmplt-default.css">
 <!-- 合約表格用↑ class="table"	 -->
 </head>
 <style>
@@ -26,6 +26,9 @@ textarea{
 .all-fonts{
 font-family:Microsoft JhengHei;
 font-size: 16px;
+}
+span{
+	
 }
 </style>
 <body>
@@ -98,7 +101,7 @@ font-size: 16px;
 		</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="width:70px" value="${param.houseNO}" name="houseNO" class="form-control" id="houseNO"><span id="houseAddr"></span></td>
+					<td><input type="text" style="width:70px" value="${param.houseNO}" name="houseNO" class="form-control" id="houseNO"><span>${ErrorMsgKey.houseNO}</span></td>
 					<td><input type="date" style="width:140px" value="${param.leaseBeginDate}" name="leaseBeginDate" class="form-control"></td>
 					<td><input type="date" style="width:140px" value="${param.leaseEndDate}" name="leaseEndDate" class="form-control"></td>
 					<td><input type="text" style="width:70px" value="${param.memNO}" name="memNO" class="form-control" id="memNO"><span id="memName"></span></td>
@@ -132,7 +135,9 @@ font-size: 16px;
 <script src="../js/flashcanvas.js"></script>
 <script src="../js/jSignature.min.js"></script>
 <script src="../js/datatables.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>		
+<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/ajsr-jq-confirm.js"></script>
+		
 <script>
 $(document).ready(function(){
 	var dataJson;
@@ -226,9 +231,14 @@ $(document).ready(function(){
 		$.post("<%= request.getContextPath() %>/member.do?action=queryMem",{memNO:NO},function(data){
 // 			console.log(data);
 			var memName=$("#memName");
-			if(!confirm("你輸入的會員為:\n"+data)){
-				$("#memNO").val("");
-			}
+			$.ajsrConfirm({
+				  message: "你輸入的會員為:\n"+data,
+				  confirmButton: "是",
+				  cancelButton : "否",
+				  onCancel:function(){
+					  $("#houseNO").val("");
+				  },
+			});
 		})
 	})
 	$("#empNO").change(function(){
@@ -237,20 +247,30 @@ $(document).ready(function(){
 		$.post("<%= request.getContextPath() %>/emp/EmpServlet?action=queryEmp",{empNO:NO},function(data){
 // 			console.log(data);
 			var empName=$("#empName");
-			if(!confirm("你輸入的員工為:\n"+data)){
-				$("#empNO").val("");
-			}
+			$.ajsrConfirm({
+				  message: "你輸入的員工為:\n"+data,
+				  confirmButton: "是",
+				  cancelButton : "否",
+				  onCancel:function(){
+					  $("#houseNO").val("");
+				  },
+			});
 		})
 	})
 	$("#houseNO").change(function(){
 		var inputNO=$("#houseNO");
 		var NO=inputNO.val();
-	$.post("<%=request.getContextPath()%>/House.do?action=queryHouse",{houseNO:NO},function(data){
-		console.log(data);
-		var houseAddr=$("#houseAddr");
-		if(!confirm("你輸入的房屋物件住址為:\n"+data)){
-			$("#houseNO").val("");
-		}
+		$.post("<%=request.getContextPath()%>/House.do?action=queryHouse",{houseNO:NO},function(data){
+			console.log(data);
+			var houseAddr=$("#houseAddr");
+			$.ajsrConfirm({
+				  message: "你輸入的房屋物件住址為:\n"+data,
+				  confirmButton: "是",
+				  cancelButton : "否",
+				  onCancel:function(){
+					  $("#houseNO").val("");
+				  }
+			});
 		})
 	})
 })
