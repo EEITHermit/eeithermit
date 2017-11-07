@@ -70,55 +70,91 @@ public class HouseServlet extends HttpServlet {
 		Double houseSize = null;
 		String houseInfo=null;
 		if ("insertHouse".equals(action)) {
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			request.setAttribute("ErrorMsgKey", errorMsgMap);
 			ConvertToBase64 ctb = new ConvertToBase64();
 			HouseVO houseVO = new HouseVO();
 			String strBase64 = null;
 			Set<HousePictureVO> set = new HashSet<HousePictureVO>();
 			houseTitle = request.getParameter("houseTitle");
 			houseVO.setHouseTitle(houseTitle);
-			cityNO = Integer.valueOf(request.getParameter("cityNO"));
-			CityVO cityVO = new CityVO();
-			cityVO.setCityNO(cityNO);
-			houseVO.setCityVO(cityVO);
-			boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
-			BoroughsVO boroughsVO = new BoroughsVO();
-			boroughsVO.setBoroughNO(boroughNO);
-			houseVO.setBoroughsVO(boroughsVO);
+			try{
+				cityNO = Integer.valueOf(request.getParameter("cityNO"));
+				CityVO cityVO = new CityVO();
+				cityVO.setCityNO(cityNO);
+				houseVO.setCityVO(cityVO);
+			}catch(Exception e){
+					errorMsgMap.put("city", "請選擇縣市");
+			}
+			try{
+				boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
+				BoroughsVO boroughsVO = new BoroughsVO();
+				boroughsVO.setBoroughNO(boroughNO);
+				houseVO.setBoroughsVO(boroughsVO);
+			}catch(Exception e){
+				errorMsgMap.put("borough", "請選擇地區");
+			}
+			
 			previewPic = request.getParameter("previewPic");
 			houseVO.setPreviewPic(previewPic);
+			try{
 			highestFloor = Integer.valueOf(request.getParameter("highestFloor"));
 			houseVO.setHighestFloor(highestFloor);
+			}catch(Exception e){
+				errorMsgMap.put("highestFloor", "請勿空白");
+			}
+			try{
 			nowFloor = Integer.valueOf(request.getParameter("nowFloor"));
 			houseVO.setNowFloor(nowFloor);
+			}catch(Exception e){
+				errorMsgMap.put("nowFloor", "請勿空白");
+			}
 			houseStatus = request.getParameter("houseStatus");
 			houseVO.setHouseStatus(houseStatus);
+			try{
 			houseRent = Integer.valueOf(request.getParameter("houseRent"));
 			houseVO.setHouseRent(houseRent);
+			}catch(Exception e){
+				errorMsgMap.put("houseRent", "請勿空白");
+			}
+			try{
 			houseCharge = Integer.valueOf(request.getParameter("houseCharge"));
 			houseVO.setHouseCharge(houseCharge);
+			}catch(Exception e){
+				errorMsgMap.put("houseCharge", "請勿空白");
+			}
 			waterRate = request.getParameter("waterRate");
 			houseVO.setWaterRate(waterRate);
 			powerRate = request.getParameter("powerRate");
 			houseVO.setPowerRate(powerRate);
 			houseVideo = request.getParameter("houseVideo");
 			houseVO.setHouseVideo(houseVideo);
+			try{
 			typeNO = Integer.valueOf(request.getParameter("typeNO"));
 			HouseTypeVO typeVO = new HouseTypeVO();
 			typeVO.setTypeNO(typeNO);
 			houseVO.setHouseTypeVO(typeVO);
-			
+			}catch(Exception e){
+				errorMsgMap.put("typeNO", "請勿空白");
+			}
+			try{
 			formNO = Integer.valueOf(request.getParameter("formNO"));
 			HouseFormVO formVO = new HouseFormVO();
 			formVO.setFormNO(formNO);
 			houseVO.setHouseFormVO(formVO);
-			
+			}catch(Exception e){
+				errorMsgMap.put("formNO", "請勿空白");
+			}
 			houseAddr = request.getParameter("houseAddr");
 			houseVO.setHouseAddr(houseAddr);
+			try{
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
 			houseVO.setHouseSize(houseSize);
 			houseInfo=request.getParameter("houseInfo");
 			houseVO.setHouseInfo(houseInfo);
-			
+			}catch(Exception e){
+				errorMsgMap.put("houseSize","請勿空白");
+			}
 			Collection<Part> parts = request.getParts();
 			for (Part item : request.getParts()) {
 				strBase64 = ctb.encode(item);
@@ -139,12 +175,12 @@ public class HouseServlet extends HttpServlet {
 				TV = 1;
 			}
 			Byte aircondition=0;
-			if("on".equals(request.getParameter("air"))){
-						aircondition=1;
+			if("on".equals(request.getParameter("aircondition"))){
+				aircondition=1;
 			}
 			Byte refrigerator=0;
 			
-			if("on".equals(request.getParameter("rerefrigerator"))){
+			if("on".equals(request.getParameter("refrigerator"))){
 				refrigerator=1;
 			}
 			Byte waterHeater=0;
@@ -203,10 +239,33 @@ public class HouseServlet extends HttpServlet {
 			if("on".equals(request.getParameter("closeMRT"))){
 				closeMRT=1;
 			}
+			
+			//放錯誤訊息
+			if (houseTitle.trim().length() == 0||houseTitle==null) {
+				errorMsgMap.put("title", "請勿空白");
+			}
+			
+			if(waterRate.trim().length()==0||waterRate==null){
+				errorMsgMap.put("waterRate", "請勿空白");
+			}
+			if(powerRate.trim().length()==0||powerRate==null){
+				errorMsgMap.put("powerRate", "請勿空白");
+			}
+			if(houseAddr.trim().length()==0||houseAddr==null){
+				errorMsgMap.put("houseAddr", "請勿空白");
+			}
+			
+			if(!errorMsgMap.isEmpty()){
+				RequestDispatcher failureView = request.getRequestDispatcher("/House/House_management.jsp");
+				failureView.forward(request, response);
+				return;
+			}
+			
 			houseNO= svc.insertHouseAndHousePicture(houseVO, set);
 			eqsvc.addEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
 			response.sendRedirect("/hermit/House/House_management.jsp");
 			return;
+			
 		}
 		if ("updateHouse".equals(action)) {
 
@@ -307,7 +366,6 @@ public class HouseServlet extends HttpServlet {
 			eqsvc.updateEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
 			
 			response.sendRedirect("/hermit/House/House_management.jsp");
-			System.out.println("Update Success");
 			return;
 		}
 		if ("deleteHouse".equals(action)) {
