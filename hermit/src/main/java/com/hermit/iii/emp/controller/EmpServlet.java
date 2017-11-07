@@ -22,6 +22,7 @@ import org.json.simple.JSONValue;
 import com.hermit.iii.emp.model.EmpService;
 import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.mention.model.MentionService;
+import com.hermit.iii.util.SecurityCipher;
 
 @WebServlet("/emp/EmpServlet")
 public class EmpServlet extends HttpServlet {
@@ -62,18 +63,20 @@ public class EmpServlet extends HttpServlet {
 			}
 			
 			empAccount = request.getParameter("empAccount");
-			empPwd = request.getParameter("empPwd");
+			empPwd = SecurityCipher.encryptString(request.getParameter("empPwd"));
 			empPhone = request.getParameter("empPhone");
 			empName = request.getParameter("empName");
 			postNO = Integer.valueOf(request.getParameter("empPostVO"));
 			empStatus = "0".equals(request.getParameter("empStatus"));
 			es.insertEmp(empAccount, empPwd, empPhone, empName, postNO, empStatus);
 			System.out.println("Servlet Insert success");
+			RequestDispatcher rd = request.getRequestDispatcher("empIndex_include.jsp");
+			rd.forward(request, response);
 		}
 		
-		if("updateEmp".equals(action)){
+		if("UpdateEmp".equals(action)){
+			System.out.println("00000000000000000000000000000");
 			es = new EmpService();
-			
 			Map<String, String> errorMsgMap = checkData(request);
 			if (!errorMsgMap.isEmpty()) {
 				RequestDispatcher failureView = request.getRequestDispatcher("empUpdate_include.jsp");//尚未輸入
@@ -82,15 +85,15 @@ public class EmpServlet extends HttpServlet {
 			}
 			empNO = Integer.valueOf(request.getParameter("empNO"));
 			empAccount = request.getParameter("empAccount");
-			empPwd = request.getParameter("empPwd");
+			empPwd = SecurityCipher.encryptString(request.getParameter("empPwd"));
 			empPhone = request.getParameter("empPhone");
 			empName = request.getParameter("empName");
 			postNO = Integer.valueOf(request.getParameter("empPostVO")); 
 			empStatus = "0".equals(request.getParameter("empStatus"));
 			es.updateEmp(empNO, empAccount, empPwd, empPhone, empName, postNO, empStatus);
 			System.out.println("Update success");
-			RequestDispatcher rd =request.getRequestDispatcher("empIndex_include.jsp");
-			rd.forward(request, response);
+			
+			response.sendRedirect(request.getContextPath()+"/emp/empIndex_include.jsp");
 
 		}
 		
@@ -172,6 +175,19 @@ public class EmpServlet extends HttpServlet {
 			out.flush();
 			return;
 			}
+		if("queryEmp".equals(action)){
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			EmpService empdao=new EmpService();
+			empNO=Integer.valueOf(request.getParameter("empNO"));
+			EmpVO vo=new EmpVO();
+			vo=empdao.getOneEmp(empNO);
+			empName=vo.getEmpName();
+			PrintWriter out = response.getWriter();
+			out.print(empName);
+			out.flush();
+			return;
+		}
 		
 		}
 	

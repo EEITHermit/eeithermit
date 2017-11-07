@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/datatables.min.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
 <!-- 房屋表格用↓ -->
 <link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -36,6 +36,9 @@ color: 	#F9F900;
 }
 #houseeq{
 font-size:18px;
+}
+.error{
+	color: red;
 }
 </style>-
 </head>
@@ -124,24 +127,97 @@ font-size:18px;
 						<td><input type="text" style="width: 75px" value="${param.houseTitle}" name="houseTitle" class="form-control"></td>
 						<td><select name="cityNO" id="cityNO" class="form-control"><option>請選擇</option></select></td>
 						<td><select name="boroughNO" id="boroughNO" class="form-control"></select></td>
-						<td><input type="text" style="width: 75px" value="${param.hightestFloor}" name="highestFloor" class="form-control"></td>
-						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.highestFloor}" name="highestFloor" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2"></td>
+						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2"></td>
 						<td><select name="houseStatus" id="SelectStatus" class="form-control">
 								<option>未出租</option>
 								<option>已出租</option>
 								<option>修繕中</option>
 							</select> 
 						</td>
-						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent" class="form-control"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
 						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate" class="form-control"></td>
 						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate" class="form-control"></td>
 						<td><select id="houseType" name="typeNO" class="form-control"></select></td>
 						<td><select id="houseForm" name="formNO" class="form-control"></select></td>
 						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr" class="form-control"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize" class="form-control"></td>
+						<td><input type="number" style="width: 75px" value="${param.houseSize}" name="houseSize" class="form-control" step="0.01"></td>
 						<td><button id="addHouse" class="btn">新增</button></td>
 					</tr>
+				<tr>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.title}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.city}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.borough}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.highestFloor}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.nowFloor}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small></small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseRent}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseCharge}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.waterRate}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.powerRate}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small></small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small></small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseAddr}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseSize}</small>	
+						</div>
+					</td>
+					
+				</tr>
 						<input type="hidden" name=action>
 				</tbody>
 		</table>
@@ -237,9 +313,9 @@ font-size:18px;
 </div>	
 <%-- <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script> --%>
 <!-- <script src="../js/bootstrap.js"></script> -->
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
-<script src="../js/datatables.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
+<script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
 <script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 <script>
@@ -387,7 +463,6 @@ $(document).ready(function(){
 				$('input[name="action"]').val("insertHouse");
 			})
 			$('#houseInfo').jqte();
-		
 		
 })
 </script>

@@ -85,7 +85,15 @@ public class LeaseServlet extends HttpServlet {
 		}
 
 		if ("insertLease".equals(action)) {
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			request.setAttribute("ErrorMsgKey", errorMsgMap); 
+			try{
 			houseNO = Integer.valueOf(request.getParameter("houseNO"));
+			}catch(Exception e){
+				if(houseNO==null){
+					errorMsgMap.put("houseNO", "請勿空白");
+				}
+			}
 			leaseBeginDate = java.sql.Date.valueOf(request.getParameter("leaseBeginDate"));
 			leaseEndDate = java.sql.Date.valueOf(request.getParameter("leaseEndDate"));
 			memNO = Integer.valueOf(request.getParameter("memNO"));
@@ -99,6 +107,11 @@ public class LeaseServlet extends HttpServlet {
 			System.out.println(leasePic);
 			houseNote = request.getParameter("houseNote");
 			leaseRefund = Byte.valueOf(request.getParameter("leaseRefund"));
+			if(!errorMsgMap.isEmpty()){
+				RequestDispatcher failureView = request.getRequestDispatcher("/Lease/Lease.jsp");
+				failureView.forward(request, response);
+				return;
+			}
 			svc.addLease(houseNO, leaseBeginDate, leaseEndDate, memNO, empNO,leaseRent, leaseDeposit, leaseRelief, leaseDate,
 					leasePic, houseNote, leaseRefund);
 			response.sendRedirect("/hermit/Lease/Lease.jsp");
