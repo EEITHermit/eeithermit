@@ -12,10 +12,17 @@
 		<many-to-one name="houseVO" class="com.hermit.iii.house.model.HouseVO" lazy="false">
 			<column name="houseNO"></column>
 		</many-to-one>
+		<many-to-one name="memberVO" class="com.hermit.iii.member.model.MemberVO" lazy="false">
+			<column name="memNO"></column>
+		</many-to-one>
+		<many-to-one name="empVO" class="com.hermit.iii.emp.model.EmpVO" lazy="false">
+			<column name="empNO"></column>
+		</many-to-one>
 		<property name="leaseBeginDate" column="leaseBeginDate" />
 		<property name="leaseEndDate" column="leaseEndDate" />
-		<property name="memNO" column="memNO" />
-		<property name="empNO" column="empNO" />
+<!-- 		<property name="memNO" column="memNO" /> -->
+<!-- 		<property name="empNO" column="empNO" /> -->
+		
 		<property name="leaseRent" column="leaseRent" />
 		<property name="leaseDeposit" column="leaseDeposit" />
 		<property name="leaseRelief" column="leaseRelief" />

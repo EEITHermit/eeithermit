@@ -80,7 +80,7 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<i class="glyphicon glyphicon-file" style="font-size: 20px"><a
-								href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp"
+								href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease&memNO=${LoginOK.memNO}"
 								style="font-size: 20px">個人租賃紀錄</a></i>
 						</div>
 						<div class="panel-body">存放以往簽約的合約，確保雙方的權利。</div>

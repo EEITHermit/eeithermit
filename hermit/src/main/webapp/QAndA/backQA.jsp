@@ -53,10 +53,19 @@
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 <script>
 	$(document).ready(work);
-	
+	//展開縮起留言內容
+	function more(event){
+		console.log($(event.target));
+		$($(event.target).parents("td").find("li")[0]).toggle(false);
+		$($(event.target).parents("td").find("li")[1]).toggle(true);
+	};
+	function less(event){
+		$($(event.target).parents("td").find("li")[0]).toggle(true);
+		$($(event.target).parents("td").find("li")[1]).toggle(false);
+	};
 	function work(){
+				
 		//套用datatable
-		
 		//選擇
 		$("#querySelect").on("change",function(){
 			var mission = $(this).val();
@@ -72,16 +81,32 @@
 						type="客服";
 					}else if(vo.qaType == 1){
 						type="問題"
+					};
+					//設定回報內容
+					var q ;
+					if(vo.QDetail.length > 8){
+						q ="<ul style='list-style-type:none;margin:0px;padding:0px;'><li>"+vo.QDetail.substring(0,8)+"...<a onclick='more(event)'><span style='font-size:10px;float:right;'>[更多內容]</span></a></li>"
+							+"<li style='display:none;'>"+vo.QDetail+"<a onclick='less(event)'><span style='font-size:10px;float:right;'>[收起]</span></a></li></ul>";
+					}else{
+						q = vo.QDetail;
+					}
+					//設定回應內容
+					var a;
+					if(vo.ADetail != null && vo.ADetail.length > 8){
+						a = "<ul style='list-style-type:none;margin:0px;padding:0px;'><li>"+vo.ADetail.substring(0,8)+"...<a onclick='more(event)'><span style='font-size:10px;float:right;'>[更多內容]</span></a></li>"
+						+"<li style='display:none;'>"+vo.ADetail+"<a onclick='less(event)'><span style='font-size:10px;float:right;'>[收起]</span></a></li></ul>";
+					}else{
+						a = vo.ADetail;
 					}
 					var data = [vo.qaNO
 								,type
 								,vo.memberVO.memNO+" "+vo.memberVO.memName
 								,"<a href='"+vo.houseVO.houseNO+"'>"+vo.houseVO.houseTitle+"</a>"
 								,vo.QTime
-								,vo.QDetail
+								,q
 								,vo.ATime
 								,vo.empNO
-								,vo.ADetail];
+								,a];
 					datas.push(data);
 				};
 				$("#showTable").DataTable({
@@ -102,19 +127,20 @@
 					},
 					data:datas,
 					columns: [
-			            { title: "留言編號" },
-			            { title: "留言類型" },
-			            { title: "留言會員" },
-			            { title: "留言房屋" },
-			            { title: "提問時間" },
-			            { title: "留言內容" },
-			            { title: "回覆時間","defaultContent": "----"},
-			            { title: "回覆員工","defaultContent": "----"},
-			            { title: "回覆內容","defaultContent": "尚未回覆"}
+			            { title: "留言編號" ,width:"10%"},
+			            { title: "留言類型" ,width:"6%"},
+			            { title: "留言會員" ,width:"10%"},
+			            { title: "留言房屋" ,width:"10%"},
+			            { title: "提問時間" ,width:"10%"},
+			            { title: "留言內容" ,width:"17%"},
+			            { title: "回覆時間" ,width:"10%","defaultContent": "----"},
+			            { title: "回覆員工" ,width:"10%","defaultContent": "----"},
+			            { title: "回覆內容" ,width:"17%","defaultContent": "尚未回覆"}
 			        ]
 				})
 			});
 		});
+		
 	};
 </script>
 </body>

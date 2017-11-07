@@ -5,9 +5,9 @@ import java.util.Set;
 
 public interface EquipmentConditionDAO_interface_hibernate {
 
-	public void insert(EquipmentConditionVO eqiupmentConditionVO_orignal);
+	public void insert(EquipmentConditionVO eqiupmentConditionVO);
 					   
-	public void update(EquipmentConditionVO eqiupmentConditionVO_orignal);
+	public void update(EquipmentConditionVO eqiupmentConditionVO);
 
 	public void delete(Integer houseNO);
 

@@ -101,7 +101,7 @@ a:link, a:visited, a:hover, a:active {
 						</a></li>
 
 						<li><a
-							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease">
+							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease&memNO=${LoginOK.memNO}">
 								<i class="glyphicon glyphicon-file"
 								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
@@ -238,7 +238,7 @@ a:link, a:visited, a:hover, a:active {
 					var tr = $("<tr></tr>");
 					var tdId = $("<td>"+res["eventNO"]+"</td>");
 					var tdName = $("<td>"+res["empVO"]["empName"]+"</td>");
-					var tdTitle = $("<td>"+res["houseVO"]["houseTitle"]+"</td>");
+					var tdTitle = $("<td></td>").append($("<a  style='color:blue;' href='/hermit/HousePage?NO="+res["houseVO"]["houseNO"]+"'>"+res["houseVO"]["houseTitle"]+"</a>"));
 					var tdAddr = $("<td>"+res["houseVO"]["houseAddr"]+"</td>");
 					var tdTel = $("<td>"+res["empVO"]["empPhone"]+"</td>");
 					var tdStart = $("<td>"+res["eventStartTime"]+"</td>");

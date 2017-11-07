@@ -19,6 +19,21 @@
 
 
 <style>
+.eq1{
+width:78px;
+}
+.eq2{
+width:72px;
+}
+.eq3{
+width:86px;
+}
+.eq4{
+width:86px;
+}
+.eq5{
+width:70px;
+}
 input{
 width:100px;
 }
@@ -38,6 +53,7 @@ label{
 .form-group{
 padding-right:200px;
 }
+
 </style>
 </head>
 <body>
@@ -51,7 +67,7 @@ padding-right:200px;
 		<div>
 			<label class="col-md-5 control-label">房屋編號</label> 
 			<div class="col-xs-2">
-			 <input type="text" readonly value="${vo.houseNO}" name="houseNO" class="form-control">
+			 <input type="text" readonly value="${vo.houseNO}" name="houseNO" class="form-control" id="houseNO">
 			</div>	
 		</div>
 		<div>
@@ -181,11 +197,48 @@ padding-right:200px;
 					<textarea name="houseInfo" class="form-control" id="houseInfo">${vo.houseInfo}</textarea>
 				</div>
 		</div>
+
 		<div class="form-group" >
 			<div class="col-md-6 control-label">
 				<input type="submit" value="修改">
 			</div>
 		</div>
+	<div id="houseeq">
+		<input type="checkbox" name="TV" id="TV" class="eq">
+		<label for="TV">電視</label>
+		<input type="checkbox" name="aircondition" id="aircondition" class="eq">
+		<label for="aircondition">冷氣</label>
+		<input type="checkbox" name="refrigerator" id="refrigerator" class="eq">
+		<label for="refrigerator">冰箱</label>
+		<input type="checkbox" name="gas" id="gas" class="eq">
+		<label for="gas">瓦斯</label>
+		<input type="checkbox" name="net" id="net" class="eq">
+		<label for="net">網路</label>
+		<input type="checkbox" name="wardrobe" id="wardrobe" class="eq">
+		<label for="wardrobe">衣櫃</label>
+		<input type="checkbox" name="bed" id="bed" class="eq">
+		<label for="bed">床</label>
+		<input type="checkbox" name="sofa" id="sofa" class="eq">
+		<label for="sofa">沙發</label>
+		<input type="checkbox" name="elevator" id="elevator" class="eq">
+		<label for="elevator">電梯</label>
+		<input type="checkbox" name="balcony" id="balcony" class="eq">
+		<label for="balcony">陽台</label>
+		<input type="checkbox" name="permitCook" id="permitCook" class="eq">
+		<label for="permitCook">開伙</label>
+		<input type="checkbox" name="theFourthStation" id="theFourthStation" class="eq">
+		<label for="theFourthStation">第四台</label>
+		<input type="checkbox" name="pet" id="pet" class="eq2">
+		<label for="pet">養寵物</label>
+		<input type="checkbox" name="waterHeater" id="waterHeater" class="eq3">
+		<label for="waterHeater">熱水器</label>
+		<input type="checkbox" name="closeMRT" id="closeMRT" class="eq4">
+		<label for="closeMRT">近捷運</label>
+		<input type="checkbox" name="washing" id="washing" class="eq5">
+		<label for="washing">洗衣機</label>
+		<input type="checkbox" name="parking" id="parking" class="eq6">
+		<label for="parking">停車位</label>
+	</div>
 		</form>
 		<form id="insertPicForm" method="post" action="<%=request.getContextPath()%>/HousePictureServlet" enctype="multipart/form-data">
 			<div class="form-group">
@@ -216,8 +269,7 @@ padding-right:200px;
 			var dataJson;
 			var houseDiv=$("#HousePicture>div");
 			var hPics = $.parseJSON('<%= request.getAttribute("hPics")%>');
-// 			console.log(hPics);
-
+			
 			$.each(hPics,function(index,pic){
 				var cell1 = $("<div class='col-xs-2'></div>");
 				var cell2=$("<img style='border:none;height:200px;width:200px' id='hpic'>").attr("src",pic.housepic);
@@ -235,33 +287,7 @@ padding-right:200px;
 							e.preventDefault();
 						}
 					})
-				})
-// 					
-// // 					$('input[name="action"]').val("insertHousePicture");
-// 					$.post("/hermit/HousePictureServlet",{action:"insertHousePicture"},function(){
-						
-// 					})
-// 					}
-				
-// 			$("#file2").change(function(e){
-				  
-// 				  var img = e.target.files[0];
-
-// 				  if(!img.type.match('image.*')){
-// 				    alert("Whoops! That is not an image.");
-// 				    return;
-// 				  }
-// 				  iEdit.open(img, true, function(res){
-// 					  console.log(res);
-// 				    $("#hpic").attr("src", res);
-// 				  });
-				  
-// 				  $("#updatePicForm").submit(function(event){
-// // 						console.log($("#hPicture"));				  
-// 					  $("#hPicture").val($("#hpic").attr("src"));
-// 				  })
-// 				  });
-				
+				})				
 				
 			$(".delBtn").on('click',function(){
 				var picNO =$(this).parent().children("input").val();
@@ -272,7 +298,29 @@ padding-right:200px;
 				})
 				}
 			})
-			
+			var dataeq;
+			var houseNO=$("#houseNO").val();
+			var checkbox=$("#houseeq input:checkbox")
+// 			console.log(houseNO);
+			$.post("/hermit/EquipmentConditionServlet",{action:"getOneEquip","houseNO":houseNO},function(data){
+// 				console.log(data);
+				dataeq=$.parseJSON(data);
+// 				console.log(dataeq);
+				
+				$.each(checkbox,function(index,box){
+					//name=box.name
+					a=box.name
+					console.log(dataeq.a);
+					$.each(dataeq,function(index1,box1){
+						if(box.name==index1&&box1){
+							box.checked = true;
+						}
+						
+					})
+					
+				})
+				
+			})
 			
 			var dataJson;
 			var selectForm= $("#houseForm");
@@ -290,7 +338,6 @@ padding-right:200px;
 			$.post("/hermit/HouseFormServlet.do", {action : "getAllForm"}, function(data) {
 				dataJson = $.parseJSON(data).list;
 // 				console.log(data);
-// 				console.log(dataJson);
 				$.each(dataJson,function(index,VO){
 					var cell1= $("<option></option>").text(VO.hForm);
 					cell1.val(VO.formNO);
