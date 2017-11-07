@@ -13,6 +13,11 @@
 $(document).ready(function(){
 	$("#submitBtn").click(function(){
 		var box;
+		// 清除錯誤訊息
+		$("#putacc").text("");
+		$("#putpwd").text("");
+		$("#loginErr").text("");
+		
 		if($("#remember").prop("checked")){
 			box = "on";
 		}
