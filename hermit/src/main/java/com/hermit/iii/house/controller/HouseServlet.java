@@ -559,6 +559,19 @@ public class HouseServlet extends HttpServlet {
 			out.flush();
 			return;
 		}
+		if("queryHouse".equals(action)){
+			HouseService housedao=new HouseService();
+			houseNO=Integer.valueOf(request.getParameter("houseNO"));
+			vo=housedao.getOneHouse(houseNO);
+			String cityName=vo.getCityVO().getCityName();
+			String boroughName=vo.getBoroughsVO().getBoroughName();
+			houseAddr=vo.getHouseAddr();
+			String Addr=cityName+boroughName+houseAddr;
+			PrintWriter out = response.getWriter();
+			out.print(Addr);
+			out.flush();
+			return;
+		}
 
 	}
 

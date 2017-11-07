@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.json.*;
+import org.json.simple.JSONValue;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -634,6 +635,16 @@ public class MemberServlet extends HttpServlet {
 			session.setAttribute("SMScode", smscode);
 			session.setAttribute("telholder", memTel);
 			response.sendRedirect("register/register_notice_page.jsp?memAccount=" + memAccount);
+		}
+		if("queryMem".equals(action)){
+			MemberService memdao=new MemberService();
+			Integer memNO=Integer.valueOf(request.getParameter("memNO"));
+			MemberVO vo=new MemberVO();
+			vo=memdao.getOneMember(memNO);
+			String memName=vo.getMemName();
+			out.print(memName);
+			out.flush();
+			return;
 		}
 	}
 }
