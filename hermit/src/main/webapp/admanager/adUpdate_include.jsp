@@ -29,41 +29,57 @@ float:left;
 
 <div class="container">
 	<form method="post" action="ADManagerServlet" enctype="multipart/form-data" >
-<div id="DIV1">
-	<label for="adImage">廣告圖片</label><br>
-	<img id="result" src="${adVO.adImage}" height="360" width="1000" ><br>
-	<input id="file" name="adImage" type="file" value="${adVO.adImage}">
-	<input type="hidden" name="adImage" id="adImage" ><p/><br>
-</div>
-<div class="form-group" id="DIV2">
-	<label for="adNO">廣告編號</label><br>
-	<input id="text" name="adNO"  readonly type="text" value="${adVO.adNO}" ><p/><br>
-	<label for="adTimeStart">廣告上架日期</label><br>
-	<input type="date" name="adTimeStart" value="${adVO.adTimeStart}" id="date1" size="60" placeholder="2014-09-18"><p/><br>
+	<div id="DIV1">
+		<label for="adImage">廣告圖片</label><br>
+		<img id="result" src="${adVO.adImage}" height="360" width="1000" ><br>
+		<input id="file" type="file" value="${adVO.adImage}">
+		<input type="hidden" name="adImage" id="adImage" ><p/><br>
+	</div>
+	<div class="form-group" id="DIV2">
 	
-	<label for="adTimeEnd">廣告下架日期</label><br>
-	<input type="date" name="adTimeEnd" value="${adVO.adTimeEnd}" id="date1" size="60" placeholder="2015-09-18"><p/><br>
+		<table style="width:100%;">
+			<tr>
+				<td>
+					<label for="adNO">廣告編號</label><br>
+					<input id="text" name="adNO"  readonly type="text" value="${adVO.adNO}" ><p/><br>
+				
+					<label for="adLink">圖片連結網址</label><br>
+					<input type="text" name="adLink" value="${adVO.adLink}"  size="40" placeholder="請輸入範例格式:http://www.example.com.tw" ><p/><br>
+					
+					<label for="adModify">修改人員</label><br>
+					<input type='text' readonly value="${empLoginOK.empName}" size="40"><P/>
+					<input type='hidden' class="form-control" id="adModify" name='adModify' readonly value="${empLoginOK.empNO}" size="40"><P/><br>
+					
+					
+					<label for="adMessage">廣告訊息(限10字內)</label><br>
+					<input type="text" id="adMessage" name="adMessage" size="40" value="${adVO.adMessage}" placeholder="請輸入訊息..."><br><br>
+		
+				</td>
+				<td>
+					<label for="adTimeStart">廣告上架日期</label><br>
+					<input type="date" name="adTimeStart" value="${adVO.adTimeStart}" id="date1" size="60" placeholder="2014-09-18"><p/><br>
+					
+					<label for="adTimeEnd">廣告下架日期</label><br>
+					<input type="date" name="adTimeEnd" value="${adVO.adTimeEnd}" id="date1" size="60" placeholder="2015-09-18"><p/><br>
+				
+					<label for="adStatus">狀態 </label><br>
+					<input type="radio" name="adStatus" value="${adVO.adStatus}" checked>下架
+					<input type="radio" name="adStatus" checked>上架
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" style="text-align: center;">
+				
+				</td>
+			</tr>
+			
+		</table>
 	
-	<label for="adLink">圖片連結網址</label><br>
-	<input type="text" name="adLink" value="${adVO.adLink}"  size="40" placeholder="請輸入範例格式:http://www.example.com.tw" name="adLink" ><p/><br>
-	
-	<label for="adModify">修改人員</label><br>
-	<input type='text' readonly value="${empLoginOK.empName}" size="40"><P/>
-	<input type='hidden' class="form-control" id="adModify" name='adModify' readonly value="${empLoginOK.empNO}" size="40"><P/><br>
-	
-<!-- 	<label for="adModify">修改人員</label><br> -->
-<%-- 			<input type="text" readonly value="${empLoginOK.empName}" size="40"><br> --%>
-<%-- 			<input type='hidden' class="form-control" id="adModify" name='adModify' readonly value="${empLoginOK.empNO}" size="40"><P/><br> --%>
-	
-	
-	<label for="adMessage">廣告訊息(限10字內)</label><br>
-	<input type="text" id="adMessage" name="adMessage" size="40" value="${adVO.adMessage}" placeholder="請輸入訊息..."><br><br>
-	
-	<label for="adStatus">狀態 </label><br>
-	<input type="radio" name="adStatus" value="${adVO.adStatus}" checked>下架
-	<input type="radio" name="adStatus" checked>上架
-	
-</div>
+	<!-- 	<label for="adModify">修改人員</label><br> -->
+	<%-- 			<input type="text" readonly value="${empLoginOK.empName}" size="40"><br> --%>
+	<%-- 			<input type='hidden' class="form-control" id="adModify" name='adModify' readonly value="${empLoginOK.empNO}" size="40"><P/><br> --%>
+	</div>
 	<input type="hidden" name="action" value="updateADManager">	
 	<button type="submit" class="btn btn-default" id="submit" onclick="javascrtpt:window.location.href='back-adindex_include.jsp'">確認</button>
 	<button type="reset" class="btn btn-default">清除</button>	
@@ -80,7 +96,7 @@ $("#file").change(function(e){
 	    alert("Whoops! That is not an image.");
 	    return;
 	  }
-	  iEdit.open(img, true, function(res){
+	  iEdit.open(img, false, function(res){
 	    $("#result").attr("src", res);
  		  $("#adImage").val($("#result").attr("src"));
 	  });

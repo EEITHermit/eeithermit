@@ -135,7 +135,7 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 				m1.put("empPwd", vo.getEmpPwd());
 				m1.put("empPhone",vo.getEmpPhone());
 				m1.put("empName",vo.getEmpName());
-				m1.put("postNO",vo.getPostVO().getPostNO());
+				m1.put("postNO",vo.getPostVO().getPostName());
 				m1.put("empStatus",vo.getEmpStatus());
 				list.add(m1);
 			}

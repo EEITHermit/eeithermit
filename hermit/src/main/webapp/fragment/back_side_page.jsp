@@ -20,7 +20,12 @@
 </head>
 <style>
 	body{
- 		background-color: #ADADAD; 
+ 		background-color: #ADADAD;
+ 		background-image:
+		url("<%=request.getContextPath()%>/images/Hermit-ADADAD.png");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: 100% 100%;
 	}
 	.main{
  		background-color:#ADADAD; 

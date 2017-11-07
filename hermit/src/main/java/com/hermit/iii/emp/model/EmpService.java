@@ -34,6 +34,7 @@ public class EmpService {
 		PostVO postVO = new PostVO();
 		postVO.setPostNO(postNO);
 		empVO.setPostVO(postVO);
+		
 		empVO.setEmpStatus(empStatus);
 	}
 

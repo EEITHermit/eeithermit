@@ -265,7 +265,6 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			int rdm = (int)((Math.random()*maxCount));
 			int getNum = maxCount+1;
 			while(true){
-				System.out.println("getNum = " + getNum + ", rdm = " + rdm );
 				if( getNum != rdm && list.size() < 3){
 					getNum = rdm; 
 					list.add(fullList.get(getNum));

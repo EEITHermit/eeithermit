@@ -30,7 +30,7 @@ float:right;
 	<form method="post" action="empServlet" >
 		<label for="EmpNO">員工編號</label><br>
 		<span>${empVO.empNO}</span>
-		<input type="hidden" name="EmpNO" readonly value="${empVO.empNO}" id="text" size="20">&nbsp;<br>
+		<input type="hidden" name="empNO" readonly value="${empVO.empNO}" id="text" size="20">&nbsp;<br>
 		
 		<label for="empName">員工姓名</label><br>
 		<input type="text" name="empName" value="${empVO.empName}" id="text" size="20"><p/><br>
@@ -86,11 +86,10 @@ $(function(){
 // });
 
 
-	if('${emp.empStatus}' === 'false'){
-	  $("#empStatus option[value='1']").prop("selected", true);
-	  
-	 }
-	});
+	if('${emp.empStatus}' === '1'){
+		$("#empStatus option[value='1']").prop("selected", true);
+	}
+});
 
 var mapping = {
 		"empName" : "員工姓名", 
