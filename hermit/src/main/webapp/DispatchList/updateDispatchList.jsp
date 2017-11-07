@@ -51,7 +51,7 @@
 		</div>
 		<div class="form-group">
 		 	<label for="qano">備註</label><br>
-		 	<textarea rows="8" cols="75" wrap="hard" id="dlNote" style="border-radius: 5px;resize: none" name="dlnote">${dlVO.dlNote}</textarea>
+		 	<textarea rows="8" cols="75" wrap="hard" id="dlNote" maxlength="199" style="border-radius: 5px;resize: none" name="dlnote">${dlVO.dlNote}</textarea>
 		</div>
 			<button type="button" class="btn btn-default" id="clear">清除簽名</button>
 			<button type="submit" class="btn btn-default" id="submit">送出</button>

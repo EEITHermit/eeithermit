@@ -9,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.hermit.iii.member.model.*;
 
 @WebServlet("/Login/resetpwd.do")
@@ -42,11 +46,13 @@ public class ResetPasswordServlet extends HttpServlet {
 			return;
 		}
 
-		MemberDAO_hibernate dao = new MemberDAO_hibernate();
-		MemberVO memVO = dao.findByAccount(memAccount);// 取得帳號資訊
+		// 為方便一般應用程式main方的測試,所以底下的model-config1內部dataSource設定是採用org.springframework.jdbc.datasource.DriverManagerDataSource
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-model-JDBCcfg.xml");
+		// 建立DAO物件
+		MemberDAO_interface_hibernate daSP = (MemberDAO_interface_hibernate) context.getBean("memDAO");
+		MemberVO memVO = daSP.findByAccount(memAccount);// 取得帳號資訊
 		memVO.setMemPwd(newPassword);
-		dao.update(memVO);
-
+		daSP.update(memVO);
 		request.setAttribute("pwdModifyMsg", "密碼修改成功！");
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}

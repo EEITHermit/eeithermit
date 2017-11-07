@@ -28,12 +28,12 @@ float:left;
 <jsp:include page="/fragment/back_side_page.jsp" />
 
 <div class="container">
-	<form method="post" action="ADManagerServlet" enctype="multipart/form-data" >
+	<form method="post" action="<%=request.getContextPath()%>/ADManagerServlet" id="form" enctype="multipart/form-data" >
 	<div id="DIV1">
 		<label for="adImage">廣告圖片</label><br>
-		<img id="result" src="${adVO.adImage}" height="360" width="1000" ><br>
-		<input id="file" type="file" value="${adVO.adImage}">
-		<input type="hidden" name="adImage" id="adImage" ><p/><br>
+		<input id="file" type="file">
+		<input type="hidden" name="adImage" id="adImage" value="${adVO.adImage}"><p/><br>
+		<img id="result" src="${adVO.adImage}" name="adImage" id="adImage" height="360" width="1000" ><br>
 	</div>
 	<div class="form-group" id="DIV2">
 	
@@ -67,21 +67,17 @@ float:left;
 					<input type="radio" name="adStatus" checked>上架
 				</td>
 			</tr>
-			
 			<tr>
 				<td colspan="2" style="text-align: center;">
-				
 				</td>
 			</tr>
-			
 		</table>
-	
 	<!-- 	<label for="adModify">修改人員</label><br> -->
 	<%-- 			<input type="text" readonly value="${empLoginOK.empName}" size="40"><br> --%>
 	<%-- 			<input type='hidden' class="form-control" id="adModify" name='adModify' readonly value="${empLoginOK.empNO}" size="40"><P/><br> --%>
 	</div>
 	<input type="hidden" name="action" value="updateADManager">	
-	<button type="submit" class="btn btn-default" id="submit" onclick="javascrtpt:window.location.href='back-adindex_include.jsp'">確認</button>
+	<input type="submit" class="btn btn-default" id="submit" value="確認">
 	<button type="reset" class="btn btn-default">清除</button>	
 </form>
 </div>

@@ -74,9 +74,9 @@ public class EmpServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 		
-		if("updateEmp".equals(action)){
+		if("UpdateEmp".equals(action)){
+			System.out.println("00000000000000000000000000000");
 			es = new EmpService();
-			
 			Map<String, String> errorMsgMap = checkData(request);
 			if (!errorMsgMap.isEmpty()) {
 				RequestDispatcher failureView = request.getRequestDispatcher("empUpdate_include.jsp");//尚未輸入
@@ -92,8 +92,8 @@ public class EmpServlet extends HttpServlet {
 			empStatus = "0".equals(request.getParameter("empStatus"));
 			es.updateEmp(empNO, empAccount, empPwd, empPhone, empName, postNO, empStatus);
 			System.out.println("Update success");
-			RequestDispatcher rd =request.getRequestDispatcher("empIndex_include.jsp");
-			rd.forward(request, response);
+			
+			response.sendRedirect(request.getContextPath()+"/emp/empIndex_include.jsp");
 
 		}
 		
