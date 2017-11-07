@@ -22,6 +22,7 @@ import org.json.simple.JSONValue;
 import com.hermit.iii.emp.model.EmpService;
 import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.mention.model.MentionService;
+import com.hermit.iii.util.SecurityCipher;
 
 @WebServlet("/emp/EmpServlet")
 public class EmpServlet extends HttpServlet {
@@ -62,13 +63,15 @@ public class EmpServlet extends HttpServlet {
 			}
 			
 			empAccount = request.getParameter("empAccount");
-			empPwd = request.getParameter("empPwd");
+			empPwd = SecurityCipher.encryptString(request.getParameter("empPwd"));
 			empPhone = request.getParameter("empPhone");
 			empName = request.getParameter("empName");
 			postNO = Integer.valueOf(request.getParameter("empPostVO"));
 			empStatus = "0".equals(request.getParameter("empStatus"));
 			es.insertEmp(empAccount, empPwd, empPhone, empName, postNO, empStatus);
 			System.out.println("Servlet Insert success");
+			RequestDispatcher rd = request.getRequestDispatcher("empIndex_include.jsp");
+			rd.forward(request, response);
 		}
 		
 		if("updateEmp".equals(action)){
@@ -82,7 +85,7 @@ public class EmpServlet extends HttpServlet {
 			}
 			empNO = Integer.valueOf(request.getParameter("empNO"));
 			empAccount = request.getParameter("empAccount");
-			empPwd = request.getParameter("empPwd");
+			empPwd = SecurityCipher.encryptString(request.getParameter("empPwd"));
 			empPhone = request.getParameter("empPhone");
 			empName = request.getParameter("empName");
 			postNO = Integer.valueOf(request.getParameter("empPostVO")); 
