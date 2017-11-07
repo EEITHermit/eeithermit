@@ -108,7 +108,7 @@ a:link, a:visited, a:hover, a:active {
 						</a></li>
 
 						<li><a
-							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease">
+							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease&memNO=${LoginOK.memNO}">
 								<i class="glyphicon glyphicon-file"
 								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
@@ -164,6 +164,16 @@ a:link, a:visited, a:hover, a:active {
 												<th>回覆內容</th>
 											</tr>
 										</thead>
+								<style>
+								a:link, a:visited, a:hover ,a:active{
+									color : blue;
+	    							text-decoration: none;
+	    							padding: 0px;
+	    							text-align: center;	
+	    							text-decoration: none;
+	    							display: block;
+								}
+								</style>
 										<tbody>
 											<c:forEach var="qaVO" items="${array}">
 												<tr>
@@ -177,9 +187,21 @@ a:link, a:visited, a:hover, a:active {
 													<td><a
 														style="color: blue; text-decoration: underline;"
 														href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
-													<td>${qaVO.qDetail}</td>
+													<c:if test="${qaVO.qDetail.length()>10}">
+														<td><span>${qaVO.qDetail.substring(0,10)}...</span></span><a style="font-size:10px;float:right;">展開內容</a></td>
+														<td style="display:none;">${qaVO.qDetail}<a style="font-size:10px;float:right;">收起</a></td>
+													</c:if>
+													<c:if test="${qaVO.qDetail.length()<=10}">
+														<td>${qaVO.qDetail}</td>
+													</c:if>
 													<td>${qaVO.aTime}</td>
-													<td>${qaVO.aDetail}</td>
+													<c:if test="${qaVO.aDetail.length()>10}">
+														<td>${qaVO.aDetail.substring(0,10)}...<a style="font-size:10px;float:right;">展開內容</a></td>
+														<td style="display:none;">${qaVO.aDetail}<a style="font-size:10px;float:right;">收起</a></td>
+													</c:if>
+													<c:if test="${qaVO.aDetail.length()<=10||qaVO.aDetail==null}">
+														<td>${qaVO.aDetail}</td>
+													</c:if>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -208,9 +230,11 @@ a:link, a:visited, a:hover, a:active {
 										</select>
 									</div>
 									<div class="col-md-12">
+										<div>
 										<label for="qDetail" class="form-label"> 申訴內容： </label>
 										<textarea id="commentArea" class="commentArea" name="qDetail"
 											style="resize: none;"></textarea>
+									</div>
 									</div>
 									<div class="col-md-4 col-md-offset-5">
 										<button class="btn btn-secondary btn-lg" type="button"
@@ -319,23 +343,44 @@ a:link, a:visited, a:hover, a:active {
 				//設定各個欄位屬性
 				"columnDefs" : [ {
 					"targets" : [ 0 ],
-					"width" : "13%"
-				}, {
+					"width" : "10%"
+				},{
 					"targets" : [ 1 ],
 					"width" : "10%"
 				}, {
 					"targets" : [ 2 ],
-					"width" : "16%"
+					"width" : "15%"
 				}, {
 					"targets" : [ 3 ],
-					"width" : "26%"
-				}, {
-					"targets" : [ 4 ],
-					"width" : "13%"
+					"width" : "30%"
 				}, {
 					"targets" : [ 5 ],
-					"width" : "22%"
-				} ]
+					"width" : "20%"
+				}, {
+					"targets" : [ 6 ],
+					"width" : "10%"
+				}]
+			});
+			//縮減回覆及回報內容
+			var qBT4 = $("#queryTable>tbody td:nth-child(4)");
+			var qBT5 = $("#queryTable>tbody td:nth-child(5)");
+			qBT4.find("a").on("click",function(){
+				$(this).parents("tr").find("td").eq(3).toggle(false);
+				$(this).parents("tr").find("td").eq(4).toggle(true);
+			});
+			qBT5.find("a").on("click",function(){
+				$(this).parents("tr").find("td").eq(3).toggle(true);
+				$(this).parents("tr").find("td").eq(4).toggle(false);
+			});
+			var aBT7 = $("#queryTable>tbody td:nth-child(7)");
+			var aBT8 = $("#queryTable>tbody td:nth-child(8)");
+			aBT7.find("a").on("click",function(){
+				$(this).parents("tr").find("td").eq(6).toggle(false);
+				$(this).parents("tr").find("td").eq(7).toggle(true);
+			});
+			aBT8.find("a").on("click",function(){
+				$(this).parents("tr").find("td").eq(6).toggle(true);
+				$(this).parents("tr").find("td").eq(7).toggle(false);
 			});
 		};
 

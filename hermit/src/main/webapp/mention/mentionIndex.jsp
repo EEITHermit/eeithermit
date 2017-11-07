@@ -206,7 +206,13 @@ table {
 									<td style="display:none">${qaVO.memberVO.memNO}</td>
 									<td style="display:none">${qaVO.houseVO.houseNO}</td>
 									<td style="width:15%"><a href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
+									<c:if test = "${qaVO.qDetail.length() > 5}">
+									<td style="width:30%;word-break:break-all;">${qaVO.qDetail.substring(0,5)}...<br/><a><span style="font-size:10px;float:right">[查看更多]</span></a></td>
+									<td style="width:30%;word-break:break-all;display:none">${qaVO.qDetail}<br/><a><span style="font-size:10px;float:right">[收起]</span></a></td>
+									</c:if>
+									<c:if test = "${qaVO.qDetail.length() <= 5}">
 									<td style="width:30%;word-break:break-all;">${qaVO.qDetail}</td>
+									</c:if>
 									<c:if test="${qaVO.qaType == 1}">
 										<td style="width:10%"><button type="button" class="btn btn-primary btn-lg"
 												name="answer">回覆</button></td>
@@ -255,7 +261,13 @@ table {
 									<td>${eventVO.eventNO}</td>
 									<td>${eventVO.memberVO.memName}</td>
 									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${eventVO.houseVO.houseNO}">${eventVO.houseVO.houseTitle}</a></td>
-									<td style="word-break:break-all;">${eventVO.ps}</td>
+									<c:if test="${eventVO.ps.length()>30}">
+									<td style="word-break:break-all;">${eventVO.ps.substring(0,30)}...<br/><a><span style="font-size:10px;float:right">[查看更多]</span></a></td>
+									<td style="word-break:break-all;display:none;">${eventVO.ps}<a><span style="font-size:10px;float:right">[收起]</span></a></td>
+									</c:if>
+									<c:if test="${eventVO.ps.length()<=30}">
+										<td style="word-break:break-all;">${eventVO.ps}</td>
+									</c:if>
 										<td><button type="button" class="btn btn-primary btn-lg"
 												name="known">我知道了</button></td>
 								</tr>
@@ -285,7 +297,13 @@ table {
 									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${dispatchVO.qaVO.houseVO.houseNO}">${dispatchVO.qaVO.houseVO.houseTitle}</a></td>
 									<td>${dispatchVO.dlStime}</td>
 									<td>${dispatchVO.dempVO.empName}</td>
+									<c:if test="${dispatchVO.dlNote.length()<=7}">
 									<td>${dispatchVO.dlNote}</td>
+									</c:if>
+									<c:if test="${dispatchVO.dlNote.length()>7}">
+									<td>${dispatchVO.dlNote.substring(0,7)}...<br/><a><span style="font-size:10px;float:right">[查看更多]</span></a></td>
+									<td style="display:none">${dispatchVO.dlNote}<br/><a><span style="font-size:10px;float:right">[收起內容]</span></a></td>
+									</c:if>
 									<td><button class="btn btn-primary btn-lg" type="button"
 											id="dispatchBT">前往處理此派工</button></td>
 								</tr>
@@ -488,6 +506,39 @@ table {
 		$("#dispatchTable>tbody button").on("click",function(){
 			var dlNO = $(this).parents("tr").children("td").eq(0).text();
 			window.location = "<%=request.getContextPath()%>/Dispatch?action=getOneDispatchList&dlno="+dlNO;
+		})
+		//設定會員回報內容縮減
+ 		var qDetail7 = $("#qaTable>tbody td:nth-child(7)");
+		var qDetail8 = $("#qaTable>tbody td:nth-child(8)");
+		qDetail7.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(6).toggle(false);
+			$(this).parents("tr").find("td").eq(7).toggle(true);
+		});
+		qDetail8.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(6).toggle(true);
+			$(this).parents("tr").find("td").eq(7).toggle(false);
+		})
+		//設定會員取消預約事由縮減顯示
+		var eventPs4 = $("#eventTable>tbody td:nth-child(4)");
+		var eventPs5 = $("#eventTable>tbody td:nth-child(5)");
+		eventPs4.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(3).toggle(false);
+			$(this).parents("tr").find("td").eq(4).toggle(true);
+		});
+		eventPs5.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(3).toggle(true);
+			$(this).parents("tr").find("td").eq(4).toggle(false);
+		})
+		//設定派工備註縮減顯示
+		var dispatchPs6 = $("#dispatchTable>tbody td:nth-child(6)");
+		var dispatchPs7 = $("#dispatchTable>tbody td:nth-child(7)");
+		dispatchPs6.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(5).toggle(false);
+			$(this).parents("tr").find("td").eq(6).toggle(true);
+		});
+		dispatchPs7.find("a").on("click",function(){
+			$(this).parents("tr").find("td").eq(5).toggle(true);
+			$(this).parents("tr").find("td").eq(6).toggle(false);
 		})
 	};
 	//回應表單取消按鈕

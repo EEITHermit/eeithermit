@@ -40,8 +40,8 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
-			pstmt.setInt(4, leaseVO.getMemNO());
-			pstmt.setInt(5, leaseVO.getEmpNO());
+//			pstmt.setInt(4, leaseVO.getMemNO());
+//			pstmt.setInt(5, leaseVO.getEmpNO());
 			pstmt.setInt(6, leaseVO.getLeaseRent());
 			pstmt.setInt(7, leaseVO.getLeaseDeposit());
 			pstmt.setInt(8, leaseVO.getLeaseRelief());
@@ -65,8 +65,8 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 			pstmt.setInt(1, leaseVO.getHouseVO().getHouseNO());
 			pstmt.setDate(2, leaseVO.getLeaseBeginDate());
 			pstmt.setDate(3, leaseVO.getLeaseEndDate());
-			pstmt.setInt(4, leaseVO.getMemNO());
-			pstmt.setInt(5, leaseVO.getEmpNO());
+//			pstmt.setInt(4, leaseVO.getMemNO());
+//			pstmt.setInt(5, leaseVO.getEmpNO());
 			pstmt.setInt(6, leaseVO.getLeaseRent());
 			pstmt.setInt(7, leaseVO.getLeaseDeposit());
 			pstmt.setInt(8, leaseVO.getLeaseRelief());
@@ -118,8 +118,8 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
-				leaseVO.setMemNO(rs.getInt("memNO"));
-				leaseVO.setEmpNO(rs.getInt("empNO"));
+//				leaseVO.setMemNO(rs.getInt("memNO"));
+//				leaseVO.setEmpNO(rs.getInt("empNO"));
 				leaseVO.setLeaseRent(rs.getInt("leaseRent"));
 				leaseVO.setLeaseDeposit(rs.getInt("leaseDeposit"));
 				leaseVO.setLeaseRelief(rs.getInt("leaseRelief"));
@@ -155,8 +155,8 @@ public class LeaseJNDIDAO implements LeaseDAO_interface {
 				leaseVO.setHouseVO(houseVO);
 				leaseVO.setLeaseBeginDate(rs.getDate("leaseBeginDate"));
 				leaseVO.setLeaseEndDate(rs.getDate("leaseEndDate"));
-				leaseVO.setMemNO(rs.getInt("memNO"));
-				leaseVO.setEmpNO(rs.getInt("empNO"));
+//				leaseVO.setMemNO(rs.getInt("memNO"));
+//				leaseVO.setEmpNO(rs.getInt("empNO"));
 				leaseVO.setLeaseRent(rs.getInt("leaseRent"));
 				leaseVO.setLeaseDeposit(rs.getInt("leaseDeposit"));
 				leaseVO.setLeaseRelief(rs.getInt("leaseRelief"));

@@ -488,8 +488,6 @@
 			var header1 = data.split("*")[0];
 			var header2 = data.split("*")[1];
 			if(header1 == "ok"){
-				console.log(data);
-				console.log(header2);
 				window.location = header2;
 				location.reload();
 			}

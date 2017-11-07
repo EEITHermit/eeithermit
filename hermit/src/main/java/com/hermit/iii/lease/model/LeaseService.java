@@ -1,8 +1,12 @@
 package com.hermit.iii.lease.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
+import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.member.model.MemberVO;
 
 public class LeaseService {
 
@@ -24,8 +28,12 @@ public class LeaseService {
 		leaseVO.setHouseVO(houseVO);
 		leaseVO.setLeaseBeginDate(leaseBeginDate);
 		leaseVO.setLeaseEndDate(leaseEndDate);
-		leaseVO.setMemNO(memNO);
-		leaseVO.setEmpNO(empNO);
+		MemberVO memberVO=new MemberVO();
+		memberVO.setMemNO(memNO);
+		leaseVO.setMemberVO(memberVO);
+		EmpVO empVO=new EmpVO();
+		empVO.setEmpNO(empNO);
+		leaseVO.setEmpVO(empVO);
 		leaseVO.setLeaseRent(leaseRent);
 		leaseVO.setLeaseDeposit(leaseDeposit);
 		leaseVO.setLeaseRelief(leaseRelief);
@@ -54,8 +62,12 @@ public class LeaseService {
 		leaseVO.setHouseVO(houseVO);
 		leaseVO.setLeaseBeginDate(leaseBeginDate);
 		leaseVO.setLeaseEndDate(leaseEndDate);
-		leaseVO.setMemNO(memNO);
-		leaseVO.setEmpNO(empNO);
+		MemberVO memberVO=new MemberVO();
+		memberVO.setMemNO(memNO);
+		leaseVO.setMemberVO(memberVO);
+		EmpVO empVO=new EmpVO();
+		empVO.setEmpNO(empNO);
+		leaseVO.setEmpVO(empVO);
 		leaseVO.setLeaseRent(leaseRent);
 		leaseVO.setLeaseDeposit(leaseDeposit);
 		leaseVO.setLeaseRelief(leaseRelief);

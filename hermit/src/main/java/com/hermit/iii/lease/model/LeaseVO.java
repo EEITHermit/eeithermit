@@ -3,15 +3,17 @@ package com.hermit.iii.lease.model;
 import java.io.Serializable;
 import java.sql.*;
 
+import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.house.model.HouseVO;
+import com.hermit.iii.member.model.MemberVO;
 
 public class LeaseVO implements Serializable {
 	private Integer leaseNO;
 	private HouseVO houseVO;
 	private Date leaseBeginDate;
 	private Date leaseEndDate;
-	private Integer memNO;
-	private Integer empNO;
+//	private Integer memNO;
+//	private Integer empNO;
 	private Integer leaseRent;
 	private Integer leaseDeposit;
 	private Integer leaseRelief;
@@ -19,6 +21,26 @@ public class LeaseVO implements Serializable {
 	private String leasePic;
 	private String houseNote;
 	private Byte leaseRefund;
+	//子傑加
+	private MemberVO memberVO;
+	private EmpVO empVO;
+	
+	
+	public EmpVO getEmpVO() {
+		return empVO;
+	}
+
+	public void setEmpVO(EmpVO empVO) {
+		this.empVO = empVO;
+	}
+
+	public MemberVO getMemberVO() {
+		return memberVO;
+	}
+
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
+	}
 
 	public Integer getLeaseNO() {
 		return leaseNO;
@@ -53,21 +75,21 @@ public class LeaseVO implements Serializable {
 		this.leaseEndDate = leaseEndDate;
 	}
 
-	public Integer getMemNO() {
-		return memNO;
-	}
+//	public Integer getMemNO() {
+//		return memNO;
+//	}
+//
+//	public void setMemNO(Integer memNO) {
+//		this.memNO = memNO;
+//	}
 
-	public void setMemNO(Integer memNO) {
-		this.memNO = memNO;
-	}
-
-	public Integer getEmpNO() {
-		return empNO;
-	}
-
-	public void setEmpNO(Integer empNO) {
-		this.empNO = empNO;
-	}
+//	public Integer getEmpNO() {
+//		return empNO;
+//	}
+//
+//	public void setEmpNO(Integer empNO) {
+//		this.empNO = empNO;
+//	}
 
 	public Integer getLeaseRent() {
 		return leaseRent;

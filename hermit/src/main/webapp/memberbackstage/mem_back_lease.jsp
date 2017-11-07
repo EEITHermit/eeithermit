@@ -85,7 +85,7 @@ a:link, a:visited, a:hover, a:active {
 						</a></li>
 
 						<li class="active"><a
-							href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp">
+							href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease&memNO=${LoginOK.memNO}">
 								<i class="glyphicon glyphicon-file"
 								style="height: 30px; font-size: 30px"></i> <span
 								style="font-size: 15px; font-family: Microsoft JhengHei">租賃紀錄</span>
@@ -144,7 +144,7 @@ a:link, a:visited, a:hover, a:active {
 											<td>${Lease.leaseBeginDate}</td>
 											<td>${Lease.leaseEndDate}</td>
 											
-											<td>${Lease.empNO}</td>
+											<td>${Lease.empVO.empName}</td>
 											<td>${Lease.leaseRent}</td>
 											<td>${Lease.leaseDeposit}</td>
 											<td>${Lease.leaseRelief}</td>
@@ -152,7 +152,7 @@ a:link, a:visited, a:hover, a:active {
 											<td>${Lease.houseNote}</td>
 											<td>${Lease.leaseRefund}</td>
 										</tr>
-										<input type="hidden" value="${Lease.memNO}" name="memNO" readonly>
+										<input type="hidden" value="${Lease.memberVO.memNO}" name="memNO" readonly>
 										<input type="hidden" value="${Lease.leaseNO}" name="leaseNO">
 									</c:forEach>
 								</table>

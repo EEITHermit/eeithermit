@@ -33,17 +33,19 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 	private static final String GET_TOP_THREE_BY_POST_TIME="FROM HouseVO WHERE houseStatus='未出租' ORDER BY houseNO DESC";
 	private static final String GET_HOT_HOUSE ="FROM HouseVO WHERE houseStatus='未出租'";
 	@Override
-	public void insert(HouseVO houseVO) {
+	public Integer insert(HouseVO houseVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer houseNO=null;
 		try {
 			session.beginTransaction();
-			session.save(houseVO);
+			houseNO=(Integer)session.save(houseVO);
+			System.out.println(houseNO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		
+		return houseNO;
 	}
 
 	@Override
@@ -206,11 +208,12 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		}
 		
 	}
-	public void insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
+	public Integer insertHouseAndHousePicture(HouseVO houseVO,Set<HousePictureVO> set){
 		Session session =HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer houseNO=null;
 		try{
 			session.beginTransaction();
-			session.save(houseVO);
+			houseNO=(Integer)session.save(houseVO);
 			for(HousePictureVO housePictureVO:set){
 			housePictureVO.setHouseNO(houseVO.getHouseNO());
 			session.save(housePictureVO);
@@ -220,6 +223,7 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			session.getTransaction().rollback();
 			ex.printStackTrace();
 		}
+		return houseNO;
 	}
 	@Override
 	public HouseVO getPic(Integer houseNO) {
@@ -261,7 +265,6 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			int rdm = (int)((Math.random()*maxCount));
 			int getNum = maxCount+1;
 			while(true){
-				System.out.println("getNum = " + getNum + ", rdm = " + rdm );
 				if( getNum != rdm && list.size() < 3){
 					getNum = rdm; 
 					list.add(fullList.get(getNum));

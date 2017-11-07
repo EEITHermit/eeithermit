@@ -304,8 +304,8 @@ nav.main-nav:hover {
 		<div class="row" style="height: auto">
 			<div class="col-md-6 col-sm-12 col-md-offset-3 subscribe">
 				<form class="form-horizontal" role="form"
-					action="<%=request.getContextPath()%>/index.jsp"
-					id="subscribeForm" method="POST">
+					action="<%=request.getContextPath()%>/index.jsp" id="subscribeForm"
+					method="POST">
 					<div class="form-group" style="overflow: hidden">
 						<div class="input-group">
 							<input class="form-control input-lg" name="houstTitle"
@@ -564,7 +564,7 @@ nav.main-nav:hover {
 
 					<p class="fieldset">
 						<button class="loginBtn loginBtn--facebook" type="button"
-							id="facebook" style="margin-left: 48px">Login with
+							id="facebook" style="margin-left: 43px">Login with
 							Facebook</button>
 
 						<button class="loginBtn loginBtn--google" type="button"
