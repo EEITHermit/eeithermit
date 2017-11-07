@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src='<%=request.getContextPath()%>/js/jquery-3.2.1.min.js'></script>
 <script src='<%=request.getContextPath()%>/js/tupianqiehuan.js'></script>
 <link href='<%=request.getContextPath()%>/css/tupianqiehuan.css' rel='stylesheet' />
 <style>

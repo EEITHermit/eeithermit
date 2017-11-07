@@ -123,7 +123,7 @@ tr {
 					var cell4 = $("<td></td>").text(VO.empPhone);
 					var cell5 = $("<td></td>").text(VO.empName);
 					var cell6 = $("<td></td>").text(VO.postNO);
-					var cell7 = $("<td></td>").text(VO.empStatus == "0" ? "已離職" : "可上班");
+					var cell7 = $("<td></td>").text(VO.empStatus == true ? "在職" : "離職");
 					var cell8 = $("<td></td>").html('<button class="btn btn-primary" onclick="toUpdate('+VO.empNO+');">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
 					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]);
 					tbody.append(row);
