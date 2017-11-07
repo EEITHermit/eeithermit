@@ -62,7 +62,7 @@ font-size:18px;
 				<th>管理費</th>
 				<th>水費</th>
 				<th>電費</th>
-<!-- 				<th>影片</th> -->
+				<th>影片</th>
 				<th>類型</th>
 				<th>形態</th>
 				<th>地址</th>
@@ -85,7 +85,7 @@ font-size:18px;
 						<th>管理費</th>
 						<th>水費</th>
 						<th>電費</th>
-<!-- 						<th>影片</th> -->
+						<th>影片</th>
 						<th>類型</th>
 						<th>形態</th>
 						<th>地址</th>
@@ -356,15 +356,19 @@ $(document).ready(function(){
 				var cell9=$("<td></td>").text(VO.houseCharge);
 				var cell10=$("<td></td>").text(VO.waterRate);
 				var cell11=$("<td></td>").text(VO.powerRate);
-// 				var cell12=$("<a></a>").text("房屋影片");
-// 					cell12.attr("href",VO.houseVideo);
+				var cell12;
+				if(VO.houseVideo != ""){
+					cell12=$("<td></td>").html("<a href='https://www.youtube.com/watch?v="+VO.houseVideo+"'>"+VO.houseNO+"</a>");
+				}else{
+					cell12=$("<td></td>").text("無影片");
+				};
 				var cell13=$("<td></td>").text(VO.hType);
 				var cell14=$("<td></td>").text(VO.hForm);
 				var cell15=$("<td></td>").text(VO.houseAddr);
 				var cell16=$("<td></td>").text(VO.houseSize);
 				var cell17=$("<td></td>").html('<button class="btn btn-primary">修改</button>');
 				var row=$("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5
-					,cell6,cell7,cell8,cell9,cell10,cell11,cell13,
+					,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,
 					cell14,cell15,cell16,cell17]);
 				tbody.append(row);
 			})

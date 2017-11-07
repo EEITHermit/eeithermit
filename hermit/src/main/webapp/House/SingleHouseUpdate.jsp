@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -188,6 +189,26 @@ padding-right:200px;
 						<input type="file" id="file">
 						<input type="hidden" id="previewPic" name="previewPic" value="${vo.previewPic}" />
 						<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
+					</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label class="col-md-5 control-label" for="houseSize">影片連結</label>
+					<div class="col-xs-2"  style="background-color:white;">
+						<input type="hidden" value="${vo.houseVideo}" name="houseVideo" id="houseVideo" class="form-control">
+						<c:if test="${vo.houseVideo != ''}">
+							<a id="link" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
+						</c:if>
+						<c:if test="${vo.houseVideo == ''}">
+							<a id="link"style="display:none" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
+							<h3 style="margin-top:10px;margin-left:10px;">無影片</h3>
+						</c:if>
+					</div>
+			</div>
+			<div>
+					<div class="col-xs-2">	
+						<input type="button" id="flash" value="擷取影片">
 					</div>
 			</div>
 		</div>
@@ -440,6 +461,29 @@ padding-right:200px;
 				  }) 
 				});
 			$('#houseInfo').jqte();
+			//設定擷取影片
+			var houseNO = "${vo.houseNO}";
+			$("#flash").on("click",function(){
+				$.get("https://www.googleapis.com/youtube/v3/playlistItems",
+						{"playlistId":"UUDSox71tKcU7rgORkVZg2Kg","part":"snippet",
+						 "maxResults":"25",			
+						 "key":"AIzaSyDGn6cCVOXBpeABaTbt_RINlOo1oNAla2U"},
+						 function(data){
+							console.log(data);
+							var items = data.items;
+							$.each(items,function(i,item){
+								if(item.snippet.title == houseNO){
+									var videoId = item.snippet.resourceId.videoId						
+									$("#houseVideo").val(videoId);
+									$("#link").toggle(true).attr("href","https://www.youtube.com/watch?v=" + videoId);
+									$("#link").next().toggle(false);
+									alert("擷取成功!");
+									return;
+								};
+								alert("無此房屋影片");
+							});
+						});
+			});
 		})
 	</script>
 </body>

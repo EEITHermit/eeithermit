@@ -69,6 +69,7 @@ public class HouseServlet extends HttpServlet {
 		String houseAddr = null;
 		Double houseSize = null;
 		String houseInfo=null;
+		String houseVedio = null;
 		if ("insertHouse".equals(action)) {
 			Map<String, String> errorMsgMap = new HashMap<String, String>();
 			request.setAttribute("ErrorMsgKey", errorMsgMap);
@@ -155,6 +156,8 @@ public class HouseServlet extends HttpServlet {
 			}catch(Exception e){
 				errorMsgMap.put("houseSize","請勿空白");
 			}
+			houseVideo = request.getParameter("houseVideo");
+			houseVO.setHouseVideo(houseVideo);
 			Collection<Part> parts = request.getParts();
 			for (Part item : request.getParts()) {
 				strBase64 = ctb.encode(item);
