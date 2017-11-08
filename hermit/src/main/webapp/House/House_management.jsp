@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/datatables.min.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
 <!-- 房屋表格用↓ -->
 <link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,6 +37,9 @@ color: 	#F9F900;
 #houseeq{
 font-size:18px;
 }
+.error{
+	color: red;
+}
 </style>-
 </head>
 <body>
@@ -59,7 +62,7 @@ font-size:18px;
 				<th>管理費</th>
 				<th>水費</th>
 				<th>電費</th>
-<!-- 				<th>影片</th> -->
+				<th>影片</th>
 				<th>類型</th>
 				<th>形態</th>
 				<th>地址</th>
@@ -82,7 +85,7 @@ font-size:18px;
 						<th>管理費</th>
 						<th>水費</th>
 						<th>電費</th>
-<!-- 						<th>影片</th> -->
+						<th>影片</th>
 						<th>類型</th>
 						<th>形態</th>
 						<th>地址</th>
@@ -124,24 +127,97 @@ font-size:18px;
 						<td><input type="text" style="width: 75px" value="${param.houseTitle}" name="houseTitle" class="form-control"></td>
 						<td><select name="cityNO" id="cityNO" class="form-control"><option>請選擇</option></select></td>
 						<td><select name="boroughNO" id="boroughNO" class="form-control"></select></td>
-						<td><input type="text" style="width: 75px" value="${param.hightestFloor}" name="highestFloor" class="form-control"></td>
-						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.highestFloor}" name="highestFloor" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2"></td>
+						<td><input type="text" style="width: 75px" value="${param.nowFloor}" name="nowFloor" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2"></td>
 						<td><select name="houseStatus" id="SelectStatus" class="form-control">
 								<option>未出租</option>
 								<option>已出租</option>
 								<option>修繕中</option>
 							</select> 
 						</td>
-						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent" class="form-control"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge" class="form-control"></td>
+						<td><input type="text" style="width: 75px" value="${param.houseRent}" name="houseRent" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+						<td><input type="text" style="width: 75px" value="${param.houseCharge}" name="houseCharge" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
 						<td><input type="text" style="width: 75px" value="${param.waterRate}" name="waterRate" class="form-control"></td>
 						<td><input type="text" style="width: 75px" value="${param.powerRate}" name="powerRate" class="form-control"></td>
 						<td><select id="houseType" name="typeNO" class="form-control"></select></td>
 						<td><select id="houseForm" name="formNO" class="form-control"></select></td>
 						<td><input type="text" style="width: 75px" value="${param.houseAddr}" name="houseAddr" class="form-control"></td>
-						<td><input type="text" style="width: 75px" value="${param.houseSize}" name="houseSize" class="form-control"></td>
+						<td><input type="number" style="width: 75px" value="${param.houseSize}" name="houseSize" class="form-control" step="0.01"></td>
 						<td><button id="addHouse" class="btn">新增</button></td>
 					</tr>
+				<tr>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.title}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.city}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.borough}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.highestFloor}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.nowFloor}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small></small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseRent}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseCharge}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.waterRate}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.powerRate}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small></small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small></small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseAddr}</small>	
+						</div>
+					</td>
+					<td>
+						<div class="error">
+							<small>${ErrorMsgKey.houseSize}</small>	
+						</div>
+					</td>
+					
+				</tr>
 						<input type="hidden" name=action>
 				</tbody>
 		</table>
@@ -237,9 +313,9 @@ font-size:18px;
 </div>	
 <%-- <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script> --%>
 <!-- <script src="../js/bootstrap.js"></script> -->
-<script src="../js/flashcanvas.js"></script>
-<script src="../js/jSignature.min.js"></script>
-<script src="../js/datatables.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script>
+<script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
 <script src='<%=request.getContextPath()%>/js/jquery-te-1.4.0.min.js'></script>
 <script>
@@ -280,15 +356,19 @@ $(document).ready(function(){
 				var cell9=$("<td></td>").text(VO.houseCharge);
 				var cell10=$("<td></td>").text(VO.waterRate);
 				var cell11=$("<td></td>").text(VO.powerRate);
-// 				var cell12=$("<a></a>").text("房屋影片");
-// 					cell12.attr("href",VO.houseVideo);
+				var cell12;
+				if(VO.houseVideo != ""){
+					cell12=$("<td></td>").html("<a href='https://www.youtube.com/watch?v="+VO.houseVideo+"'>"+VO.houseNO+"</a>");
+				}else{
+					cell12=$("<td></td>").text("無影片");
+				};
 				var cell13=$("<td></td>").text(VO.hType);
 				var cell14=$("<td></td>").text(VO.hForm);
 				var cell15=$("<td></td>").text(VO.houseAddr);
 				var cell16=$("<td></td>").text(VO.houseSize);
 				var cell17=$("<td></td>").html('<button class="btn btn-primary">修改</button>');
 				var row=$("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5
-					,cell6,cell7,cell8,cell9,cell10,cell11,cell13,
+					,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,
 					cell14,cell15,cell16,cell17]);
 				tbody.append(row);
 			})
@@ -387,7 +467,6 @@ $(document).ready(function(){
 				$('input[name="action"]').val("insertHouse");
 			})
 			$('#houseInfo').jqte();
-		
 		
 })
 </script>

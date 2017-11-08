@@ -5,15 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/datatables.min.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/iEdit.min.css">
-
 <!-- 合約表格用↓ -->
 <link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/tmplt-default.css">
 <!-- 合約表格用↑ class="table"	 -->
 </head>
 <style>
@@ -26,6 +26,9 @@ textarea{
 .all-fonts{
 font-family:Microsoft JhengHei;
 font-size: 16px;
+}
+span{
+	
 }
 </style>
 <body>
@@ -98,26 +101,26 @@ font-size: 16px;
 		</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="width:70px" value="${param.houseNO}" name="houseNO" class="form-control"></td>
+					<td><input type="text" style="width:70px" value="${param.houseNO}" name="houseNO" class="form-control" id="houseNO"><span>${ErrorMsgKey.houseNO}</span></td>
 					<td><input type="date" style="width:140px" value="${param.leaseBeginDate}" name="leaseBeginDate" class="form-control"></td>
 					<td><input type="date" style="width:140px" value="${param.leaseEndDate}" name="leaseEndDate" class="form-control"></td>
-					<td><input type="text" style="width:70px" value="${param.memNO}" name="memNO" class="form-control"></td>
-					<td><input type="text" style="width:70px" value="${param.empNO}" name="empNO" class="form-control"></td>
-					<td><input type="text" style="width:90px" value="${param.leaseRent}" name="leaseRent" class="form-control"></td>
-					<td><input type="text" style="width:90px" value="${param.leaseDeposit}" name="leaseDeposit" class="form-control"></td>
-					<td><input type="text" style="width:90px" value="${param.leaseRelief}" name="leaseRelief" class="form-control"></td>
+					<td><input type="text" style="width:70px" value="${param.memNO}" name="memNO" class="form-control" id="memNO"><span id="memName"></span></td>
+					<td><input type="text" style="width:70px" value="${param.empNO}" name="empNO" class="form-control" id="empNO"><span id="empName"></span></td>
+					<td><input type="text" style="width:90px" value="${param.leaseRent}" name="leaseRent" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+					<td><input type="text" style="width:90px" value="${param.leaseDeposit}" name="leaseDeposit" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+					<td><input type="text" style="width:90px" value="${param.leaseRelief}" name="leaseRelief" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
 					<td><input type="date" style="width:140px" value="${param.leaseDate}" name="leaseDate" class="form-control"></td>
 					<td><textarea name="houseNote"></textarea></td>
 <%-- 					<td><input type="text" style="width:70px" value="${param.houseNote}" name="houseNote"></td> --%>
 					<td><select name="leaseRefund" id="selectleaseRefund"><option value=1>是</option><option value=0>否</option></select></td>
 					<td><button id="addBtn" class="btn">新增</button></td>
-					
+				</tr>
 			</tbody>		
 	</table>
 	<table class="table">
 				<tr>
 					<th>合約圖片
-					<input type="file" style="width:75px" value="${param.leasePic}" id="file">
+					<input type="file" style="width:80px" value="${param.leasePic}" id="file">
 					<input type="hidden" id="leasePic" name="leasePic">
 					<img id="result" width="200" src="" name="leasePic">
 					</th>
@@ -132,7 +135,9 @@ font-size: 16px;
 <script src="../js/flashcanvas.js"></script>
 <script src="../js/jSignature.min.js"></script>
 <script src="../js/datatables.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>		
+<script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/ajsr-jq-confirm.js"></script>
+		
 <script>
 $(document).ready(function(){
 	var dataJson;
@@ -173,8 +178,8 @@ $(document).ready(function(){
 		})
 		var Refund=$(".Refund");
 		$.each(Refund,function(index,Ref){
-		console.log($(Ref).text());
-		console.log(index);//告訴你到第幾個迴圈了
+// 		console.log($(Ref).text());
+// 		console.log(index);//告訴你到第幾個迴圈了
 		if($(Ref).text()=="0"){
 			$(Ref).text("否");
 		}else if($(Ref).text()=="1"){
@@ -220,6 +225,54 @@ $(document).ready(function(){
 		  })
 		  console.log($("#result").attr("src"));
 	});
+	$("#memNO").change(function(){
+		var inputNO=$("#memNO");
+		var NO=inputNO.val();
+		$.post("<%= request.getContextPath() %>/member.do?action=queryMem",{memNO:NO},function(data){
+// 			console.log(data);
+			var memName=$("#memName");
+			$.ajsrConfirm({
+				  message: "你輸入的會員為:\n"+data,
+				  confirmButton: "是",
+				  cancelButton : "否",
+				  onCancel:function(){
+					  $("#houseNO").val("");
+				  },
+			});
+		})
+	})
+	$("#empNO").change(function(){
+		var inputNO=$("#empNO");
+		var NO=inputNO.val();
+		$.post("<%= request.getContextPath() %>/emp/EmpServlet?action=queryEmp",{empNO:NO},function(data){
+// 			console.log(data);
+			var empName=$("#empName");
+			$.ajsrConfirm({
+				  message: "你輸入的員工為:\n"+data,
+				  confirmButton: "是",
+				  cancelButton : "否",
+				  onCancel:function(){
+					  $("#houseNO").val("");
+				  },
+			});
+		})
+	})
+	$("#houseNO").change(function(){
+		var inputNO=$("#houseNO");
+		var NO=inputNO.val();
+		$.post("<%=request.getContextPath()%>/House.do?action=queryHouse",{houseNO:NO},function(data){
+			console.log(data);
+			var houseAddr=$("#houseAddr");
+			$.ajsrConfirm({
+				  message: "你輸入的房屋物件住址為:\n"+data,
+				  confirmButton: "是",
+				  cancelButton : "否",
+				  onCancel:function(){
+					  $("#houseNO").val("");
+				  }
+			});
+		})
+	})
 })
 </script>
 </body>

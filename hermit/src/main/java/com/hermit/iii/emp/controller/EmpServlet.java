@@ -175,6 +175,19 @@ public class EmpServlet extends HttpServlet {
 			out.flush();
 			return;
 			}
+		if("queryEmp".equals(action)){
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			EmpService empdao=new EmpService();
+			empNO=Integer.valueOf(request.getParameter("empNO"));
+			EmpVO vo=new EmpVO();
+			vo=empdao.getOneEmp(empNO);
+			empName=vo.getEmpName();
+			PrintWriter out = response.getWriter();
+			out.print(empName);
+			out.flush();
+			return;
+		}
 		
 		}
 	

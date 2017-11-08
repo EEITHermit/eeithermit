@@ -124,7 +124,7 @@ a:link, a:visited, a:hover, a:active {
 						<div class="widget-content">
 							<div id="leaseDiv">
 								<div>
-								<table border="1px">
+								<table border="1px" id="myTable" class="table">
 									<tr>
 										<td>合約編號</td>
 										<td>合約起始日期</td>
@@ -140,10 +140,8 @@ a:link, a:visited, a:hover, a:active {
 									<c:forEach var="Lease" items="${list}">
 										<tr>
 											<td>${Lease.leaseNO}</td>
-											
 											<td>${Lease.leaseBeginDate}</td>
 											<td>${Lease.leaseEndDate}</td>
-											
 											<td>${Lease.empVO.empName}</td>
 											<td>${Lease.leaseRent}</td>
 											<td>${Lease.leaseDeposit}</td>

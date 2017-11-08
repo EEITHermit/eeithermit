@@ -39,13 +39,17 @@ public class EmpLoginServlet extends HttpServlet {
 			out.print(errMsg);
 			return;
 		}
-
 		// LoginService類別new為物件，存放參考的變數為ls
 		EmpLoginService ls = new EmpLoginService();
 		// 呼叫 ls物件的 check()，要記得傳入accont與pwd兩個參數
 		// 同時將傳回值放入EmpVO型別的變數vo之內。
 		EmpVO vo = ls.check(account, pwd);
 		if (vo != null) {
+			if (vo.getEmpStatus() == false) {
+				errMsg += "3.該員工已離職;";
+				out.print(errMsg);
+				return;
+			}
 			session.setAttribute("empLoginOK", vo);
 		} else {
 			errMsg += "3.該帳號不存在或密碼錯誤;";

@@ -28,6 +28,7 @@
 		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a style="color:#555" href="#newHouse" aria-controls="newHouse" role="tab" data-toggle="tab">新屋上架</a></li>
 		    <li role="presentation"><a href="#hotHouse" style="color:#555" aria-controls="hotHouse" role="tab" data-toggle="tab">熱門物件</a></li>
+		    <li role="presentation"><a href="#HouseVideo" style="color:#555" aria-controls="HouseVideo" role="tab" data-toggle="tab">看屋直播</a></li>
 		  </ul>
 		
 		  <!-- Tab panes -->
@@ -35,6 +36,13 @@
 		    <div role="tabpanel" class="tab-pane active" style="margin-bottom:20px;" id="newHouse">
 		    </div>
 		    <div role="tabpanel" class="tab-pane"  style="margin-bottom:20px;"  id="hotHouse">
+		    </div>
+		     <div role="tabpanel" class="tab-pane"  style="margin-bottom:20px;"  id="HouseVideo">
+		     	<div class="row">
+		     		<div class="col-md-8 col-md-offset-2" style="margin-top:40px">
+ 					<iframe  id="youtube" class="embed-responsive-item" width="800" height="600" src="https://www.youtube.com/embed/"></iframe>
+					</div>
+				</div>
 		    </div>
 		  </div>
 		</div>
@@ -109,6 +117,17 @@
 		}
 		getNewestHouse();
 		getHotHouse();
+		//youtube直播設定
+		var videoId;
+		$.get("https://www.googleapis.com/youtube/v3/playlistItems",
+				{"playlistId":"UUDSox71tKcU7rgORkVZg2Kg","part":"snippet",
+				 "maxResults":"1",			
+				 "key":"AIzaSyDGn6cCVOXBpeABaTbt_RINlOo1oNAla2U"},
+				 function(data){
+					videoId = data.items[0].snippet.resourceId.videoId;
+					$("#youtube").attr("src",$("#youtube").attr("src") + videoId);
+		})
+						
 	})
 </script>
 </body>
