@@ -198,10 +198,10 @@ padding-right:200px;
 				<label class="col-md-5 control-label" for="houseSize">影片連結</label>
 					<div class="col-xs-2"  style="background-color:white;">
 						<input type="hidden" value="${vo.houseVideo}" name="houseVideo" id="houseVideo" class="form-control">
-						<c:if test="${vo.houseVideo != ''}">
+						<c:if test="${vo.houseVideo != null}">
 							<a id="link" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
 						</c:if>
-						<c:if test="${vo.houseVideo == ''}">
+						<c:if test="${vo.houseVideo == null}">
 							<a id="link"style="display:none" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
 							<h3 style="margin-top:10px;margin-left:10px;">無影片</h3>
 						</c:if>
@@ -467,7 +467,7 @@ padding-right:200px;
 			$("#flash").on("click",function(){
 				$.get("https://www.googleapis.com/youtube/v3/playlistItems",
 						{"playlistId":"UUDSox71tKcU7rgORkVZg2Kg","part":"snippet",
-						 "maxResults":"25",			
+						 "maxResults":"25",	
 						 "key":"AIzaSyDGn6cCVOXBpeABaTbt_RINlOo1oNAla2U"},
 						 function(data){
 							console.log(data);
@@ -479,9 +479,11 @@ padding-right:200px;
 									$("#link").toggle(true).attr("href","https://www.youtube.com/watch?v=" + videoId);
 									$("#link").next().toggle(false);
 									alert("擷取成功!");
-									return;
+									return false;
 								};
-								alert("無此房屋影片");
+								if(i == items.length-1){
+									alert("無此房屋影片");
+								}
 							});
 						});
 			});
