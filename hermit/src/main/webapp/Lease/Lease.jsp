@@ -236,7 +236,7 @@ $(document).ready(function(){
 				  confirmButton: "是",
 				  cancelButton : "否",
 				  onCancel:function(){
-					  $("#houseNO").val("");
+					  $("#memNO").val("");
 				  },
 			});
 		})
@@ -252,7 +252,7 @@ $(document).ready(function(){
 				  confirmButton: "是",
 				  cancelButton : "否",
 				  onCancel:function(){
-					  $("#houseNO").val("");
+					  $("#empNO").val("");
 				  },
 			});
 		})
@@ -273,6 +273,7 @@ $(document).ready(function(){
 			});
 		})
 	})
+	
 })
 </script>
 </body>

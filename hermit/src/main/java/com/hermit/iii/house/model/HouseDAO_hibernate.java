@@ -284,6 +284,18 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 			throw ex;
 		}
 	}
+	@Override
+	public void updateStatus(HouseVO houseVO) {
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.update(houseVO);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			ex.printStackTrace();
+		}
+	}
 	
 	public static void main (String args[]){
 		HouseDAO_hibernate dao = new HouseDAO_hibernate();
@@ -587,6 +599,8 @@ public class HouseDAO_hibernate implements HouseDAO_interface_hibernate {
 		}
 		
 	}
+
+	
 
 	
 }

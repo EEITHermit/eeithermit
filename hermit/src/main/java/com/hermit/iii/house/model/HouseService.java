@@ -82,6 +82,13 @@ public class HouseService {
 		return vo;
 	}
 	
+	public HouseVO updateHouseStatus(Integer houseNO){
+		HouseVO vo=dao.findByPrimaryKey(houseNO);
+		vo.setHouseStatus("已出租");
+		dao.updateStatus(vo);
+		return vo;
+	}
+	
 	public void dateHouse(Integer houseNO){
 		dao.delete(houseNO);
 	}
