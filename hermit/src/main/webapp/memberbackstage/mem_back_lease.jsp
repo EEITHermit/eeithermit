@@ -148,7 +148,7 @@ a:link, a:visited, a:hover, a:active {
 											<td>${Lease.leaseRelief}</td>
 											<td>${Lease.leaseDate}</td>
 											<td>${Lease.houseNote}</td>
-											<td>${Lease.leaseRefund}</td>
+											<td id="leaseRefund">${Lease.leaseRefund}</td>
 										</tr>
 										<input type="hidden" value="${Lease.memberVO.memNO}" name="memNO" readonly>
 										<input type="hidden" value="${Lease.leaseNO}" name="leaseNO">
@@ -210,21 +210,15 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 	<script>
-// 	$(document).ready(function(){
-// 		var leasediv=$("#leaseDiv>div");
-// 		var memNO="${LoginOK.memNO}";
-// 		var dataJson;
-// // 		console.log(memNO);
-// 		$.post("/hermit/LeaseServlet.do",{action:"getOneLeaseForJson","memNO":memNO},function(data){
-// 			console.log(data);
-// 			dataJson=$.parseJSON(data);
-// 			$.each(dataJson,function(index,vo){
-// 				var cell1 = $("<input type='text' readonly name='leaseNO'>");
-// 				var div = $("<div></div>").append(cell1);
-// 				leasediv.append(div);
-// 			})
-// 		})
-// 	});
+	$(document).ready(function(){
+		var leaseRefund =$("#leaseRefund");
+		console.log(leaseRefund.text());
+		if(leaseRefund.text()==0){
+			leaseRefund.text("否");
+		}else{
+			leaseRefund.text("是");
+		}
+	});
 	</script>
 </body>
 </html>

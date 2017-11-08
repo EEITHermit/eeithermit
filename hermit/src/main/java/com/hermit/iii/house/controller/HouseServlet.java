@@ -577,8 +577,26 @@ public class HouseServlet extends HttpServlet {
 			out.flush();
 			return;
 		}
-		
-		
+		if("queryRent".equals(action)){
+			HouseService housedao=new HouseService();
+			houseNO=Integer.valueOf(request.getParameter("houseNO"));
+			vo=housedao.getOneHouse(houseNO);
+			houseRent=vo.getHouseRent();
+			PrintWriter out = response.getWriter();
+			out.print(houseRent);
+			out.flush();
+			return;
+		}
+		if("queryStatus".equals(action)){
+			HouseService housedao=new HouseService();
+			houseNO=Integer.valueOf(request.getParameter("houseNO"));
+			vo=housedao.getOneHouse(houseNO);
+			houseStatus=vo.getHouseStatus();
+			PrintWriter out = response.getWriter();
+			out.print(houseStatus);
+			out.flush();
+			return;
+		}
 
 	}
 
