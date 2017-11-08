@@ -52,7 +52,7 @@
 		<a href="<%=request.getContextPath()%>/admanager/back-adindex_include.jsp">廣告輪播管理</a> 
 		<a href="<%=request.getContextPath()%>/QAndA/backQA.jsp">會員留言查詢</a>
 	    <a href="<%=request.getContextPath()%>/management/manage_member_page.jsp">會員資料管理</a>
-		<a href="<%=request.getContextPath()%>/emp/empIndex_include.jsp">員工資料管理</a> 
+		<a href="<%=request.getContextPath()%>/emp/empIndex_include.jsp">員工資料管理</a>
 		<a href="<%=request.getContextPath()%>/infraction/infraction.jsp">黑名單申請</a>
 		<a href="<%=request.getContextPath()%>/wetalk/WebSocketBackground.jsp">線上客服</a>
 		</nav> </aside>
