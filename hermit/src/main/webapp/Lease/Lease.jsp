@@ -233,7 +233,7 @@ $(document).ready(function(){
 			var memName=$("#memName");
 			$.ajsrConfirm({
 				  message: "你輸入的會員為:\n"+data,
-				  confirmButton: "是",
+				  okButton: "是",
 				  cancelButton : "否",
 				  onCancel:function(){
 					  $("#memNO").val("");
@@ -249,7 +249,7 @@ $(document).ready(function(){
 			var empName=$("#empName");
 			$.ajsrConfirm({
 				  message: "你輸入的員工為:\n"+data,
-				  confirmButton: "是",
+				  okButton: "是",
 				  cancelButton : "否",
 				  onCancel:function(){
 					  $("#empNO").val("");
@@ -268,7 +268,7 @@ $(document).ready(function(){
 					var houseAddr=$("#houseAddr");
 					$.ajsrConfirm({	
 						  message: "你輸入的房屋物件住址為:\n"+data,
-						  confirmButton: "是",
+						  okButton: "是",
 						  cancelButton : "否",
 						  onCancel:function(){
 							  $("#houseNO").val("");
