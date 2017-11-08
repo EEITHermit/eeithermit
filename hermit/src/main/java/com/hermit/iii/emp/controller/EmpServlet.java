@@ -50,7 +50,6 @@ public class EmpServlet extends HttpServlet {
 		Integer postNO = null;
 		Boolean empStatus = null;
 		
-		System.out.println("action="+action);
 		
 		if("InsertEmp".equals(action)){
 			es = new EmpService();
@@ -69,13 +68,11 @@ public class EmpServlet extends HttpServlet {
 			postNO = Integer.valueOf(request.getParameter("empPostVO"));
 			empStatus = "0".equals(request.getParameter("empStatus"));
 			es.insertEmp(empAccount, empPwd, empPhone, empName, postNO, empStatus);
-			System.out.println("Servlet Insert success");
 			RequestDispatcher rd = request.getRequestDispatcher("empIndex_include.jsp");
 			rd.forward(request, response);
 		}
 		
 		if("UpdateEmp".equals(action)){
-			System.out.println("00000000000000000000000000000");
 			es = new EmpService();
 			Map<String, String> errorMsgMap = checkData(request);
 			if (!errorMsgMap.isEmpty()) {
@@ -91,7 +88,6 @@ public class EmpServlet extends HttpServlet {
 			postNO = Integer.valueOf(request.getParameter("empPostVO")); 
 			empStatus = "0".equals(request.getParameter("empStatus"));
 			es.updateEmp(empNO, empAccount, empPwd, empPhone, empName, postNO, empStatus);
-			System.out.println("Update success");
 			
 			response.sendRedirect(request.getContextPath()+"/emp/empIndex_include.jsp");
 
@@ -100,11 +96,9 @@ public class EmpServlet extends HttpServlet {
 		if("deleteEmp".equals(action)){
 			es = new EmpService();
 			es.deleteEmp(Integer.valueOf(request.getParameter("empNO")));
-			System.out.println("Servlet delete success");
 		}
 		
 		if("getOneEmp".equals(action)){
-			System.out.println("Get One success");
 			EmpVO empVO = new EmpVO();
 			es = new EmpService();
 			empVO = es.getOneEmp(Integer.valueOf(request.getParameter("empNO")));
@@ -114,7 +108,6 @@ public class EmpServlet extends HttpServlet {
 		}
 		
 		if("getAllEmp".equals(action)){
-			System.out.println("test getall");
 			es = new EmpService();
 			List<EmpVO> list = es.getAllEmp();
 			request.setAttribute("list", list);
@@ -122,7 +115,6 @@ public class EmpServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 		if("getAllEmpJson".equals(action)){
-			System.out.println("Get All For JSON");
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
@@ -160,7 +152,7 @@ public class EmpServlet extends HttpServlet {
 				Map m1 = new LinkedHashMap();
 				ArrayList<Integer> boroughNOs = mention.getBoroughNOByEmpNO(empVO.getEmpNO());
 				for(Integer boro : boroughNOs){
-					if((boro == borough) && (!empVO.getEmpStatus()) ){
+					if((boro == borough) && (empVO.getEmpStatus()) ){
 						m1.put("empName",empVO.getEmpName());
 						m1.put("empNO",empVO.getEmpNO());
 						toJsonList.add(m1);

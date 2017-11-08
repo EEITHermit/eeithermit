@@ -8,10 +8,10 @@
 		<id name="businNO" column="businNO">
 			<generator class="identity" />
 		</id>
-
 		<property name="businName" column="businName" />
-		<property name="manager" column="manager" />
-
+		<many-to-one name="managerVO" class="com.hermit.iii.emp.model.EmpVO" lazy="false">
+			<column name="manager"></column>
+		</many-to-one>
 		<set name="teammemberlists" table="TeamMemberList" lazy="false"
 			cascade="all" inverse="true" order-by="memberListNO asc">
 			<key>

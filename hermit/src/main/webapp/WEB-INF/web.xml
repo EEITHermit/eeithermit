@@ -63,6 +63,22 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>EmpLoginFilter</filter-name>
+    <url-pattern>/DispatchList/DispatchList.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>EmpLoginFilter</filter-name>
+    <url-pattern>/DispatchList/updateDispatchList.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>EmpLoginFilter</filter-name>
+    <url-pattern>/DispatchList/InsertDispatchList.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>EmpLoginFilter</filter-name>
+    <url-pattern>/DispatchList/queryDispatchList.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>EmpLoginFilter</filter-name>
     <url-pattern>/management/manage_member_page.jsp</url-pattern>
   </filter-mapping>
   <filter-mapping>

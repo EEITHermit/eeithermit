@@ -87,38 +87,38 @@ public class BusinTeamDAO_hibernate implements BusinTeamDAO_interface_hibernate 
 	public static void main(String[] args) {
 		BusinTeamDAO_hibernate dao = new BusinTeamDAO_hibernate();
 
-		// insert
-		BusinTeamVO businTeamVO1 = new BusinTeamVO();
-		businTeamVO1.setBusinName("第二組");
-		businTeamVO1.setManager(30002);
-		dao.insert(businTeamVO1);
-
-		// update
-		BusinTeamVO businTeamVO2 = new BusinTeamVO();
-		businTeamVO2.setBusinNO(30010);
-		businTeamVO2.setBusinName("第七組");
-		businTeamVO2.setManager(30003);
-		dao.update(businTeamVO2);
-
-		// delete
-		// dao.delete(30020);
-
-		// select one
-		BusinTeamVO businTeamVO3 = dao.findByPrimaryKey(30010);
-		System.out.print(businTeamVO3.getBusinNO() + ",");
-		System.out.print(businTeamVO3.getBusinName() + ",");
-		System.out.println(businTeamVO3.getManager());
-		System.out.println("----------------------");
-
-		// select all
-		Set<BusinTeamVO> set = dao.getAll();
-		for (BusinTeamVO businTeamVO : set) {
-			System.out.print(businTeamVO.getBusinNO() + ",");
-			System.out.print(businTeamVO.getBusinName() + ",");
-			System.out.print(businTeamVO.getManager());
-			System.out.println("");
-		}
-		System.out.println("----------------------");
+//		// insert
+//		BusinTeamVO businTeamVO1 = new BusinTeamVO();
+//		businTeamVO1.setBusinName("第二組");
+//		businTeamVO1.setManager(30002);
+//		dao.insert(businTeamVO1);
+//
+//		// update
+//		BusinTeamVO businTeamVO2 = new BusinTeamVO();
+//		businTeamVO2.setBusinNO(30010);
+//		businTeamVO2.setBusinName("第七組");
+//		businTeamVO2.setManager(30003);
+//		dao.update(businTeamVO2);
+//
+//		// delete
+//		// dao.delete(30020);
+//
+//		// select one
+//		BusinTeamVO businTeamVO3 = dao.findByPrimaryKey(30010);
+//		System.out.print(businTeamVO3.getBusinNO() + ",");
+//		System.out.print(businTeamVO3.getBusinName() + ",");
+//		System.out.println(businTeamVO3.getManager());
+//		System.out.println("----------------------");
+//
+//		// select all
+//		Set<BusinTeamVO> set = dao.getAll();
+//		for (BusinTeamVO businTeamVO : set) {
+//			System.out.print(businTeamVO.getBusinNO() + ",");
+//			System.out.print(businTeamVO.getBusinName() + ",");
+//			System.out.print(businTeamVO.getManager());
+//			System.out.println("");
+//		}
+//		System.out.println("----------------------");
 	}
 
 }

@@ -91,22 +91,24 @@
 					}else{
 						var dlNote = $("<td></td>").text("無備註");
 					}
-					var mod = $("<td></td>").html('<button class="btn btn-info">查詢</button>  <button class="btn btn-primary">修改</button>  <button class="btn btn-danger">刪除</button>');
+					var mod = $("<td></td>").html('<button class="btn btn-info">查詢</button>  <button class="btn btn-primary">修改</button>'); 
+					
+					// 上面的html加入  <button class="btn btn-danger">刪除</button> 並開啟下面on語法就可以有刪除功能
 					var tr = $("<tr></tr");
 					tr.append(dlNO,dEmp,aEmp,qaNO,qDetail,sTime,eTime,status,dlNote,mod);
 					dlTableBody.append(tr);
 				})
-				$(".btn-danger").on("click",function(){
-					var tr = $(this).parents("tr");
-					var dlno = $(this).parents("tr").children("td:eq(0)").text();
-					if (confirm("您確定要刪除?") == true) {
-						$.get("<%= request.getContextPath() %>/Dispatch",{"action":"deleteDispatchList","dlno":dlno},function(){
-							window.location.reload();
-						})  
-					} else {
+// 				$(".btn-danger").on("click",function(){
+// 					var tr = $(this).parents("tr");
+// 					var dlno = $(this).parents("tr").children("td:eq(0)").text();
+// 					if (confirm("您確定要刪除?") == true) {
+<%-- 						$.get("<%= request.getContextPath() %>/Dispatch",{"action":"deleteDispatchList","dlno":dlno},function(){ --%>
+// 							window.location.reload();
+// 						})  
+// 					} else {
 						
-					}
-				})
+// 					}
+// 				})
 				
 				$(".btn-primary").on("click",function(){
 					var tr = $(this).parents("tr");
