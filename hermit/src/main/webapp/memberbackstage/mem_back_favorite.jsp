@@ -260,9 +260,7 @@ a:link, a:visited, a:hover, a:active {
 
 	<script>
 		$(function() {
-			
 			loadFavorite();
-
 		});
 		
 		function loadFavorite() {
