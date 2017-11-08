@@ -62,6 +62,7 @@ public class EmpServlet extends HttpServlet {
 			}
 			
 			empAccount = request.getParameter("empAccount");
+//			empPwd = SecurityCipher.encryptString(request.getParameter("empPwd"));
 			empPwd = SecurityCipher.encryptString(request.getParameter("empPwd"));
 			empPhone = request.getParameter("empPhone");
 			empName = request.getParameter("empName");
@@ -74,15 +75,15 @@ public class EmpServlet extends HttpServlet {
 		
 		if("UpdateEmp".equals(action)){
 			es = new EmpService();
-			Map<String, String> errorMsgMap = checkData(request);
-			if (!errorMsgMap.isEmpty()) {
-				RequestDispatcher failureView = request.getRequestDispatcher("empUpdate_include.jsp");//尚未輸入
-				failureView.forward(request, response);
-				return;
-			}
+//			Map<String, String> errorMsgMap = checkData(request);
+//			if (!errorMsgMap.isEmpty()) {
+//				RequestDispatcher failureView = request.getRequestDispatcher("empUpdate_include.jsp");//尚未輸入
+//				failureView.forward(request, response);
+//				return;
+//			}
 			empNO = Integer.valueOf(request.getParameter("empNO"));
 			empAccount = request.getParameter("empAccount");
-			empPwd = SecurityCipher.encryptString(request.getParameter("empPwd"));
+			empPwd = request.getParameter("empPwd");
 			empPhone = request.getParameter("empPhone");
 			empName = request.getParameter("empName");
 			postNO = Integer.valueOf(request.getParameter("empPostVO")); 

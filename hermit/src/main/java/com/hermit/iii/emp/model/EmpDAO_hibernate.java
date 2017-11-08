@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.json.simple.JSONValue;
 
 import com.hermit.iii.admanager.model.ADManagerVO;
+import com.hermit.iii.post.model.PostVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
@@ -184,10 +185,12 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 //		 EmpVO empVO2 = new EmpVO();
 //		 empVO2.setEmpNO(30002);
 //		 empVO2.setEmpAccount("eeit97087");
-//		 empVO2.setEmpPwd("12312311");
+//		 empVO2.setEmpPwd("12");
 //		 empVO2.setEmpPhone("0957057006");
 //		 empVO2.setEmpName("徐漢勳");
-//		 empVO2.getPostVO().setPostNO(330);
+//		 PostVO povo = new PostVO();
+//		 povo.setPostNO(310);
+//		 empVO2.setPostVO(povo);
 //		 empVO2.setEmpStatus(true);
 //		 dao.update(empVO2);
 
@@ -220,18 +223,18 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 //			System.out.println("");
 //		}
 //		System.out.println("----------------------");
-		List<EmpVO> list = dao.getByPost(340);
-		for (EmpVO empVO1 : list) {
-			System.out.print(empVO1.getEmpNO() + ",");
-			System.out.print(empVO1.getEmpAccount() + ",");
-			System.out.print(empVO1.getEmpPwd() + ",");
-			System.out.print(empVO1.getEmpPhone() + ",");
-			System.out.print(empVO1.getEmpName() + ",");
-			System.out.print(empVO1.getPostVO().getPostNO() + ",");
-			System.out.print(empVO1.getEmpStatus());
-			System.out.println("");
-		}
-		System.out.println("----------------------");
+//		List<EmpVO> list = dao.getByPost(340);
+//		for (EmpVO empVO1 : list) {
+//			System.out.print(empVO1.getEmpNO() + ",");
+//			System.out.print(empVO1.getEmpAccount() + ",");
+//			System.out.print(empVO1.getEmpPwd() + ",");
+//			System.out.print(empVO1.getEmpPhone() + ",");
+//			System.out.print(empVO1.getEmpName() + ",");
+//			System.out.print(empVO1.getPostVO().getPostNO() + ",");
+//			System.out.print(empVO1.getEmpStatus());
+//			System.out.println("");
+//		}
+
 		// select account
 //		EmpVO empVO4 = dao.findByAccount("Vir3");
 //		System.out.print(empVO4.getEmpNO() + ",");

@@ -113,11 +113,12 @@ padding-right:200px;
 			<div>
 				<label class="col-md-5 control-label">房屋狀態</label>
 					<div class="col-xs-2">
-						<select name="houseStatus" id="SelectStatus" class="form-control">
-							<option>未出租</option>
-							<option>已出租</option>
-							<option>修繕中</option>
-						</select> 
+						<input type="text" readonly value="${vo.houseStatus}" name="houseStatus" class="form-control">
+<!-- 						<select name="houseStatus" id="SelectStatus" class="form-control"> -->
+<!-- 							<option>未出租</option> -->
+<!-- 							<option>已出租</option> -->
+<!-- 							<option>修繕中</option> -->
+<!-- 						</select>  -->
 					</div>
 			</div>
 			<div>

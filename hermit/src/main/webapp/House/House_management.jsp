@@ -31,14 +31,17 @@ textarea{
 }
 #quickinsert{
 font-size: 50px;
-
-color: 	#F9F900;
+font-family:Meiryo;
+color:#F75000;
 }
 #houseeq{
 font-size:18px;
 }
 .error{
 	color: red;
+}
+#insertTable{
+back-ground-color:black;
 }
 </style>-
 </head>
@@ -101,25 +104,25 @@ font-size:18px;
 <div class="container col-md-10 col-md-offset-2">
 <form action="<%=request.getContextPath()%>/House.do" method="POST" id="form" enctype="multipart/form-data">
 	<div class="insertHouseDiv">
-		<table class="insertTable" class="table">
+		<table class="insertTable" class="table" id="insertTable">
 			<thead>
 				<tr>
-					<th scope="col">房屋標題</th>
-					<th scope="col">縣市</th>
-					<th scope="col">地區</th>
-					<th scope="col">最高樓層</th>
-					<th scope="col">房屋樓層</th>
-					<th scope="col">房屋狀態</th>
-					<th scope="col">租金</th>
-					<th scope="col">管理費</th>
-					<th scope="col">水費</th>
-					<th scope="col">電費</th>
+					<th scope="col" bgcolor="white">房屋標題</th>
+					<th scope="col" bgcolor="white">縣市</th>
+					<th scope="col" bgcolor="white">地區</th>
+					<th scope="col" bgcolor="white">最高樓層</th>
+					<th scope="col" bgcolor="white">房屋樓層</th>
+					<th scope="col" bgcolor="white">房屋狀態</th>
+					<th scope="col" bgcolor="white">租金</th>
+					<th scope="col" bgcolor="white">管理費</th>
+					<th scope="col" bgcolor="white">水費</th>
+					<th scope="col" bgcolor="white">電費</th>
 					
-					<th scope="col">類型</th>
-					<th scope="col">形態</th>
-					<th scope="col">地址</th>
-					<th scope="col">坪數</th>
-					<th scope="col">編輯</th>
+					<th scope="col" bgcolor="white">類型</th>
+					<th scope="col" bgcolor="white">形態</th>
+					<th scope="col" bgcolor="white">地址</th>
+					<th scope="col" bgcolor="white">坪數</th>
+					<th scope="col" bgcolor="white">編輯</th>
 				</tr>
 			</thead>
 				<tbody>
@@ -225,55 +228,55 @@ font-size:18px;
 
 	<div class="container col-md-10" id="houseeq">
 		<input type="checkbox" name="TV" id="TV">
-		<label for="TV">電視</label>
+		<label for="TV" style="background-color:white">電視</label>
 	
 		<input type="checkbox" name="aircondition" id="aircondition">
-		<label for="aircondition">冷氣</label>
+		<label for="aircondition" style="background-color:white">冷氣</label>
 	
 		<input type="checkbox" name="refrigerator" id="refrigerator">
-		<label for="refrigerator">冰箱</label>
+		<label for="refrigerator" style="background-color:white">冰箱</label>
 	
 		<input type="checkbox" name="waterHeater" id="waterHeater">
-		<label for="waterHeater">熱水器</label>
+		<label for="waterHeater" style="background-color:white">熱水器</label>
 	
 		<input type="checkbox" name="gas" id="gas">
-		<label for="gas">瓦斯</label>
+		<label for="gas" style="background-color:white">瓦斯</label>
 	
 		<input type="checkbox" name="theFourthStation" id="theFourthStation">
-		<label for="theFourthStation">第四台</label>
+		<label for="theFourthStation" style="background-color:white">第四台</label>
 	
 		<input type="checkbox" name="net" id="net">
-		<label for="net">網路</label>
+		<label for="net" style="background-color:white">網路</label>
 	
 		<input type="checkbox" name="washing" id="washing">
-		<label for="washing">洗衣機</label>
+		<label for="washing" style="background-color:white">洗衣機</label>
 	
 		<input type="checkbox" name="bed" id="bed">
-		<label for="bed">床</label>
+		<label for="bed" style="background-color:white">床</label>
 	
 		<input type="checkbox" name="wardrobe" id="wardrobe">
-		<label for="wardrobe">衣櫃</label>
+		<label for="wardrobe" style="background-color:white">衣櫃</label>
 	
 		<input type="checkbox" name="sofa" id="sofa">
-		<label for="sofa">沙發</label>
+		<label for="sofa" style="background-color:white">沙發</label>
 
 		<input type="checkbox" name="parking" id="parking">
-		<label for="parking">停車位</label>
+		<label for="parking" style="background-color:white">停車位</label>
 	
 		<input type="checkbox" name="elevator" id="elevator">
-		<label for="elevator">電梯</label>
+		<label for="elevator" style="background-color:white">電梯</label>
 	
 		<input type="checkbox" name="balcony" id="balcony">
-		<label for="balcony">陽台</label>
+		<label for="balcony" style="background-color:white">陽台</label>
 	
 		<input type="checkbox" name="permitCook" id="permitCook">
-		<label for="permitCook">開伙</label>
+		<label for="permitCook" style="background-color:white">開伙</label>
 
 		<input type="checkbox" name="pet" id="pet">
-		<label for="pet">養寵物</label>
+		<label for="pet" style="background-color:white">養寵物</label>
 	
 		<input type="checkbox" name="closeMRT" id="closeMRT">
-		<label for="closeMRT">近捷運</label>
+		<label for="closeMRT" style="background-color:white">近捷運</label>
 	</div>
 	<div>
 		<table class="table">

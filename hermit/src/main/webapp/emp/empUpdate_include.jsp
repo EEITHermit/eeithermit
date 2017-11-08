@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改廣告</title>
+<title>修改員工資料</title>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 <script src="../js/flashcanvas.js"></script>
@@ -28,6 +28,7 @@ float:right;
 
 <div class="container" id="DIV2">
 	<form method="post" action="EmpServlet" id="empForm">
+	<table>
 		<label for="EmpNO">員工編號</label><br>
 		<input type="text" name="empNO" readonly value="${empVO.empNO}" id="text" size="20">&nbsp;<br>
 		
@@ -35,10 +36,10 @@ float:right;
 		<input type="text" name="empName" value="${empVO.empName}" id="text" size="20"><p/><br>
 		
 		<label for="empAccount">員工帳號</label><br>
-		<input type="text" value="${empVO.empAccount}"  size="20" name="empAccount" >(請輸入6~12位英文字含數字、不可輸入中文字及特殊字元)<p/><br>
+		<input type="text" value="${empVO.empAccount}" readonly size="20" name="empAccount" >(請輸入6~12位英文字含數字、不可輸入中文字及特殊字元)<p/><br>
 		
-		<label for="empPwd">員工密碼</label><br>
-		<input type='text' name='empPwd' size="20" value="${empVO.empPwd}">(此為加密密碼請重新輸入6~12位大小寫英文含數字、大小寫區分)<P/><br>
+<!-- 		<label for="empPwd">員工密碼</label><br> -->
+		<input type='hidden' name='empPwd' size="20" value="${empVO.empPwd}">
 		
 		<label for="empPhone">員工電話</label><br>
 		<input type="text" name="empPhone" id="empPhone" size="20" value="${empVO.empPhone}">(請輸入手機號碼0987-654-321)<p/><br>
@@ -54,10 +55,10 @@ float:right;
 	
 		<label for="empStatus">員工狀態 </label>
 		<select name="empStatus" id="empStatus">
-			<option value="0">可上班</option>
-			<option value="1">已離職</option>
+			<option value="0">在職</option>
+			<option value="1">停用</option>
 		</select><br><br><br>
-	
+	</table>
 		<input type="hidden" name="action" value="UpdateEmp">	
 		<button type="button" class="btn btn-default" id="submit" onclick="doSubmit(this);">確認</button>
 		<button type="reset" class="btn btn-default">清除</button>

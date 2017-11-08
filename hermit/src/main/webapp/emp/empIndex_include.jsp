@@ -73,7 +73,7 @@ tr {
 			<tr>
 				<th>員工編號</th>
 				<th>員工帳號</th>
-				<th>員工密碼</th>
+<!-- 				<th>員工密碼</th> -->
 				<th>員工電話</th>
 				<th>員工姓名</th>
 				<th>職位</th>
@@ -86,7 +86,7 @@ tr {
 			<tr>
 				<th>員工編號</th>
 				<th>員工帳號</th>
-				<th>員工密碼</th>
+<!-- 				<th>員工密碼</th> -->
 				<th>員工電話</th>
 				<th>員工姓名</th>
 				<th>職位</th>
@@ -100,6 +100,11 @@ tr {
 		<input type="hidden" id="empNO" name="empNO" >
 	</form>
 </div>
+<!-- <script type="text/javascript"> -->
+// 	function setFontSize(){
+// 		document.getElementById("p1").style.fontSize="larger";
+// 	}
+<!-- </script> -->
 <script> 
 	$(document).ready(function(){
 		var dataJson;
@@ -119,13 +124,13 @@ tr {
 					
 					var cell1 = $("<td></td>").text(VO.empNO);
 					var cell2 = $("<td></td>").text(VO.empAccount);
-					var cell3 = $("<td></td>").text(VO.empPwd);
+// 					var cell3 = $("<td></td>").text(VO.empPwd);
 					var cell4 = $("<td></td>").text(VO.empPhone);
 					var cell5 = $("<td></td>").text(VO.empName);
 					var cell6 = $("<td></td>").text(VO.postNO);
-					var cell7 = $("<td></td>").text(VO.empStatus == true ? "在職" : "離職");
+					var cell7 = $("<td></td>").text(VO.empStatus == true ? "在職" : "停用");
 					var cell8 = $("<td></td>").html('<button class="btn btn-primary" onclick="toUpdate('+VO.empNO+');">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
-					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]);
+					var row = $("<tr></tr>").append([cell1,cell2,cell4,cell5,cell6,cell7,cell8]);
 					tbody.append(row);
 				})
 // 				刪除
