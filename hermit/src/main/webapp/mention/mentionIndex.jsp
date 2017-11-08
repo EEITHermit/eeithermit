@@ -127,7 +127,7 @@ table {
 								<th style="width:15%">申請時間</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="background-color:rgba(255, 255, 255, 0.6)">
 							<c:forEach var="resVO" items="${resArray}">
 								<tr>
 									<td>${resVO.reservationNO}</td>
@@ -137,7 +137,7 @@ table {
 											id="check">查看</button></td>
 									<td style="display: none;">${resVO.exceptTime}</td>
 									<td style="display: none;">${resVO.houseVO.houseNO}</td>
-									<td>${resVO.houseVO.houseAddr}</td>
+									<td><a href="<%=request.getContextPath()%>/HousePage?NO=${resVO.houseVO.houseNO}">${resVO.houseVO.houseAddr}</a></td>
 									<td>${resVO.applyTime}</td>
 									<td><button class="btn btn-primary btn-lg" type="button"
 											id="takeBT">接案</button></td>
@@ -197,7 +197,7 @@ table {
 								<th width="200px">留言內容</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="background-color:rgba(255, 255, 255, 0.6)">
 							<c:forEach var="qaVO" items="${qaArray}">
 								<tr>
 									<td style="width:15%">${qaVO.qaNO}</td>
@@ -255,7 +255,7 @@ table {
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="background-color:rgba(255, 255, 255, 0.6)">
 							<c:forEach var="eventVO" items="${eventArray}">
 								<tr>
 									<td>${eventVO.eventNO}</td>
@@ -289,7 +289,7 @@ table {
 								<th style="width:25%">派工備註</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody  style="background-color:rgba(255, 255, 255, 0.6)">
 							<c:forEach var="dispatchVO" items="${dispatchArray}">
 								<tr>
 									<td>${dispatchVO.dlNO}</td>

@@ -478,9 +478,11 @@ padding-right:200px;
 									$("#link").toggle(true).attr("href","https://www.youtube.com/watch?v=" + videoId);
 									$("#link").next().toggle(false);
 									alert("擷取成功!");
-									return;
+									return false;
 								};
-								alert("無此房屋影片");
+								if(i == items.length-1){
+									alert("無此房屋影片");
+								}
 							});
 						});
 			});
