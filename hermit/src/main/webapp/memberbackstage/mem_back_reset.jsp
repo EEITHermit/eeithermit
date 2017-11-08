@@ -162,7 +162,14 @@ label {
 									<label class="col-md-5 control-label">密碼</label>
 									<div class="col-xs-2">
 										<input type="password" value="${realPwd}" name="memPwd"
-											class="form-control"> <font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
+											class="form-control" id="memPwd2"> <font size="-1" color="#FF0000">${MsgMap.memPwd}</font>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-5 control-label">再次確認密碼</label>
+									<div class="col-xs-2">
+										<input type="password" value="${realPwd}" name="memPwdCheck" class="form-control" id="memPwd2"> 
+										<font size="-1" color="#FF0000">${MsgMap.memPwdCheck}</font>
 									</div>
 								</div>
 								<div class="form-group">
@@ -303,6 +310,7 @@ label {
 				$("#memImage").val($("#result").attr("src"));
 			})
 		});
+		
 	</script>
 </body>
 </html>

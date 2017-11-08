@@ -376,11 +376,14 @@ public class MemberServlet extends HttpServlet {
 			String memTel = request.getParameter("memTel");
 
 			String memPwd = request.getParameter("memPwd");
+			String memPwdCheck=request.getParameter("memPwdCheck");
 			String memPwdReg = "^[(a-zA-Z0-9@)]{2,10}$";
 			if (memPwd.trim().length() == 0) {
 				errorMsg.put("memPwd", "請輸入密碼");
 			} else if (!memPwd.trim().matches(memPwdReg)) {
 				errorMsg.put("memPwd", "格式不符合");
+			}else if(!memPwd.equals(memPwdCheck)){
+				errorMsg.put("memPwdCheck", "與修改的密碼不符");
 			}
 			String memName = request.getParameter("memName");
 			String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,10}$";
