@@ -69,14 +69,15 @@
 				}
 				$.post("<%=request.getContextPath()%>/House.do",{"action":"getOneHouseToJSON","houseNO":houseNO},function(data){
 					var houseData = $.parseJSON(data);
-					console.log(houseData)
 					$("#houseAddr").val(houseData.houseAddress)
 					$.post("<%=request.getContextPath()%>/emp/EmpServlet",{"action":"findByFixPostAndBorough","post":340,"borough":houseData.borough},function(data){
+						console.log(data);
 						var fixEmp = $.parseJSON(data).fixEmp;
 						aemp.empty();
 						$.each(fixEmp,function(index,emp){
 							var opt = $("<option></option>").val(emp.empNO);
 							opt.text(emp.empName);
+							
 							aemp.append(opt)
 						})
 					})
@@ -87,7 +88,6 @@
 				houseNO = $(this).val();
 				getQA();
 			});
-			
 		})
 	</script>
 </body>

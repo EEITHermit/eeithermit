@@ -357,7 +357,7 @@ nav.main-nav:hover {
 								<div class="col-md-11  w3-margin text-left"
 									style="background-color: rgba(255, 255, 255, 0.6); height: auto; overflow: auto">
 									<div style="height: 30px">
-										<div class="w3-left" style="width: 92%;">
+										<div class="w3-left" style="width: 100%;">
 											<label class="radio-inline" style="margin-right: 6%">
 												<span class="glcwTeXYen" style="font-size: 1.3em">租金
 													&gt;</span>

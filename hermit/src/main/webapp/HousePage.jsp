@@ -220,6 +220,7 @@
 <body>
 	<div class="container" style="margin-top:2%;margin-bottom:2%;padding-top:3%;">
 		<div class="col-md-12" id="addressTag"><a style="color:black;padding-right:0px;" href="<%= request.getContextPath() %>">Hermit&nbsp;&nbsp;&gt;&nbsp;&nbsp;</a><span id="cityName"></span><span id="boroughName"></span><span id="houseAddr"></span></div>
+		<div class="col-md-12" id="houseTitle" style="font-family:Microsoft JhengHei;text-align: center;"></div>
 		<div class="col-md-12" style="height:550px">
 			<div id="carousel">
 			</div>
@@ -1907,6 +1908,7 @@
 				$("#cityName").text(house.cityName+"  >  ");
 				$("#boroughName").text(house.boroughName+"  >  ");
 				$("#houseAddr").text(house.houseAddr);
+				$("#houseTitle").html("<h2>"+house.houseTitle+"</h2>");
 				$(".houseInformation>#Rent").html("<span style='font-size:20px'>租金:&nbsp;&nbsp;</span><span style='font-size:2.3em;color:red;'>"+house.houseRent+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")
 				$(".houseInformation>#Size").html("<span style='font-size:20px'>房屋大小:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseSize+"</span><span  style='font-size:20px'>&nbsp;&nbsp;坪</span>")
 				$(".houseInformation>#Charge").html("<span style='font-size:20px'>管理費:&nbsp;&nbsp;</span><span style='font-size:1.5em;;'>"+house.houseCharge+"</span><span  style='font-size:20px'>&nbsp;&nbsp;元/月</span>")

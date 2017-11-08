@@ -58,7 +58,6 @@ public class DispatchListServlet extends HttpServlet {
 		
 		if("updateDispatchList".equals(action)){
 			dls = new DispatchListService();
-			
 			dlno = Integer.valueOf(request.getParameter("dlNO"));
 			dempno = Integer.valueOf(request.getParameter("dempNO"));
 			aempno = Integer.valueOf(request.getParameter("aempNO"));

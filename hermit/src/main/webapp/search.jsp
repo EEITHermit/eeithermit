@@ -8,8 +8,8 @@
 <jsp:include page="/fragment/index_include.jsp" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/appstore.css">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
-<!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
 <script src="<%=request.getContextPath()%>/js/appstore.js"></script>
+<link href='<%=request.getContextPath()%>/css/tupianqiehuan.css' rel='stylesheet' />
 <style>
 	a:link, a:visited, a:hover ,a:active{
 		color : white;
@@ -25,7 +25,7 @@
 </head>
 <body id="body">
 
-	<div class="container" style="margin:40px auto;height:900px">
+	<div class="container" style="margin:40px auto;height:600px">
 		<div id="appstore-container" style="margin-bottom:150px"></div>
 	</div>
 	<footer class="w3-bottom w3-black container-fluid text-center">
@@ -49,7 +49,7 @@
 				location.replace("<%= request.getContextPath()%>/index.jsp");
 			};
 			if(houseItems.items.length == 0){
-				$("#body").HTML("<h2 style='margin:auto auto;'>找不到這個條件下的房屋物件，是否考慮再看看其他條件的房屋呢？</h2>")
+				$(".container").append("<h1 style='text-align:center'>找不到這個條件下的房屋物件，是否考慮再看看其他條件的房屋呢？</h1>")
 			}
 			$.appstore({json:houseItems});
 		})
