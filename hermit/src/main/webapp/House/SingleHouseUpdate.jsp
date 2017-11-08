@@ -466,7 +466,7 @@ padding-right:200px;
 			$("#flash").on("click",function(){
 				$.get("https://www.googleapis.com/youtube/v3/playlistItems",
 						{"playlistId":"UUDSox71tKcU7rgORkVZg2Kg","part":"snippet",
-						 "maxResults":"25",			
+						 "maxResults":"25",	
 						 "key":"AIzaSyDGn6cCVOXBpeABaTbt_RINlOo1oNAla2U"},
 						 function(data){
 							console.log(data);

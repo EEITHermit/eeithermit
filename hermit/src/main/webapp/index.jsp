@@ -124,6 +124,7 @@
 				 "maxResults":"1",			
 				 "key":"AIzaSyDGn6cCVOXBpeABaTbt_RINlOo1oNAla2U"},
 				 function(data){
+					 console.log(data);
 					videoId = data.items[0].snippet.resourceId.videoId;
 					$("#youtube").attr("src",$("#youtube").attr("src") + videoId);
 		})
