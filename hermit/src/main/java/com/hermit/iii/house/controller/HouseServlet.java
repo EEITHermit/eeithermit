@@ -271,7 +271,8 @@ public class HouseServlet extends HttpServlet {
 			
 		}
 		if ("updateHouse".equals(action)) {
-
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			request.setAttribute("ErrorMsgKey", errorMsgMap);
 			svc = new HouseService();
 
 			houseNO = Integer.valueOf(request.getParameter("houseNO"));
@@ -293,8 +294,7 @@ public class HouseServlet extends HttpServlet {
 			houseSize = Double.valueOf(request.getParameter("houseSize"));
 			houseInfo=request.getParameter("houseInfo");
 			
-			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO, previewPic, highestFloor, nowFloor, houseStatus,
-					houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize,houseInfo);
+			
 			
 			EquipmentConditionService eqsvc=new EquipmentConditionService();
 			Byte TV=0;
@@ -366,6 +366,8 @@ public class HouseServlet extends HttpServlet {
 				closeMRT=1;
 			}
 			
+			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO, previewPic, highestFloor, nowFloor, houseStatus,
+					houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize,houseInfo);
 			eqsvc.updateEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
 			
 			response.sendRedirect("/hermit/House/House_management.jsp");
@@ -575,6 +577,8 @@ public class HouseServlet extends HttpServlet {
 			out.flush();
 			return;
 		}
+		
+		
 
 	}
 
