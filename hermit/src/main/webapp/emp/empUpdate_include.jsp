@@ -38,7 +38,7 @@ float:right;
 		<input type="text" value="${empVO.empAccount}"  size="20" name="empAccount" >(請輸入6~12位英文字含數字、不可輸入中文字及特殊字元)<p/><br>
 		
 		<label for="empPwd">員工密碼</label><br>
-		<input type='text' name='empPwd' size="20" value="${empVO.empPwd}">(請輸入6~12位大小寫英文含數字、大小寫區分)<P/><br>
+		<input type='text' name='empPwd' size="20" value="${empVO.empPwd}">(此為加密密碼請重新輸入6~12位大小寫英文含數字、大小寫區分)<P/><br>
 		
 		<label for="empPhone">員工電話</label><br>
 		<input type="text" name="empPhone" id="empPhone" size="20" value="${empVO.empPhone}">(請輸入手機號碼0987-654-321)<p/><br>
@@ -97,10 +97,8 @@ var mapping = {
 function doSubmit(src){
 	//lock button
 	$(src).prop("disabled", true);
-	
 	// begin check data
 	var ele = $("[name^='emp']");
-	
 	var value;
 	$.each(ele, function(index, obj){
 		value = $(obj).val();
@@ -111,7 +109,6 @@ function doSubmit(src){
 			alert(text+"為空")	//modify here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			$(src).prop("disabled", false);
 			return false;
-			
 		}
 	});
 	$("#submitBtn").click();
