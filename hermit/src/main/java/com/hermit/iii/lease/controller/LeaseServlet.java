@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.hermit.iii.house.model.HouseService;
 import com.hermit.iii.lease.model.LeaseService;
 import com.hermit.iii.lease.model.LeaseVO;
 
@@ -107,6 +108,10 @@ public class LeaseServlet extends HttpServlet {
 			System.out.println(leasePic);
 			houseNote = request.getParameter("houseNote");
 			leaseRefund = Byte.valueOf(request.getParameter("leaseRefund"));
+			
+			HouseService housesvc=new HouseService();
+			housesvc.updateHouseStatus(houseNO);
+			
 			if(!errorMsgMap.isEmpty()){
 				RequestDispatcher failureView = request.getRequestDispatcher("/Lease/Lease.jsp");
 				failureView.forward(request, response);
