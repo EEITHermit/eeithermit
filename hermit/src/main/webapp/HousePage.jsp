@@ -269,7 +269,11 @@
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="pet" src='images/pet.png'><span>&nbsp;養寵物</span></div>
 					<div class="col-md-2"  style="height:32px;margin:9px auto"><img style="height:32px;width:32px" id="closeMRT" src='images/closeMRT.png'><span>&nbsp;近捷運</span></div>
 			  </div>
-			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%"  class="tab-pane" id="houseVideo"></div>
+			  <div role="tabpanel" style="border-radius:10px;padding:40px;height:auto;width:100%"  class="tab-pane" id="houseVideo">
+			  		<div>
+ 						 <iframe  id="youtube" width="640" height="480" src="https://www.youtube.com/embed/"></iframe>
+					</div>
+			  </div>
 			</div>
 		</div>
 	</div>
@@ -473,7 +477,7 @@
 								var jsonlat, jsonlng;
 								var activeFlag = '';
 								var timeout = 1000;
-								console.log('<%= request.getAttribute("House")%>')
+<%-- 								console.log('<%= request.getAttribute("House")%>') --%>
 								var hInfo = $.parseJSON('<%= request.getAttribute("House")%>');
 								
 								// 一開始啟動Google API的CB
@@ -2107,6 +2111,13 @@
 			
 		});
 		//question js code end
+		//youtube程式碼
+		if(house.houseVideo == ""){
+			$("#youtube").parent("div").html("<h2>此房屋無建立影片</h2>");
+		}else{
+			$("#youtube").attr("src",$("#youtube").attr("src") + house.houseVideo);
+		}
+		//youtube程式碼 end
 	</script>
 </body>
 </html>

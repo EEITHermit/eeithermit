@@ -15,7 +15,7 @@
 <style type="text/css">
 #DIV2{
 margin-top:35px;
-width:1100px;
+width:1400px;
 padding:20px;
 
 margin-right:10px;
@@ -27,10 +27,9 @@ float:right;
 <jsp:include page="/fragment/back_side_page.jsp" />
 
 <div class="container" id="DIV2">
-	<form method="post" action="empServlet" >
+	<form method="post" action="EmpServlet" id="empForm">
 		<label for="EmpNO">員工編號</label><br>
-		<span>${empVO.empNO}</span>
-		<input type="hidden" name="EmpNO" readonly value="${empVO.empNO}" id="text" size="20">&nbsp;<br>
+		<input type="text" name="empNO" readonly value="${empVO.empNO}" id="text" size="20">&nbsp;<br>
 		
 		<label for="empName">員工姓名</label><br>
 		<input type="text" name="empName" value="${empVO.empName}" id="text" size="20"><p/><br>
@@ -59,7 +58,7 @@ float:right;
 			<option value="1">已離職</option>
 		</select><br><br><br>
 	
-		<input type="hidden" name="action" value="UpdatetEmp">	
+		<input type="hidden" name="action" value="UpdateEmp">	
 		<button type="button" class="btn btn-default" id="submit" onclick="doSubmit(this);">確認</button>
 		<button type="reset" class="btn btn-default">清除</button>
 		
@@ -84,13 +83,10 @@ $(function(){
 // 		$("#empStatus option[value='1']").prop("selected", true);
 // 	}
 // });
-
-
-	if('${emp.empStatus}' === 'false'){
-	  $("#empStatus option[value='1']").prop("selected", true);
-	  
-	 }
-	});
+	if('${emp.empStatus}' === '1'){
+		$("#empStatus option[value='1']").prop("selected", true);
+	}
+});
 
 var mapping = {
 		"empName" : "員工姓名", 

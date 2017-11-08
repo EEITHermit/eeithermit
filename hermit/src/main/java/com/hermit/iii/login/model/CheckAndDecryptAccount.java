@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.hermit.iii.member.model.MemberDAO_hibernate;
+import com.hermit.iii.member.model.MemberDAO_interface_hibernate;
 import com.hermit.iii.member.model.MemberJNDIDAO;
 import com.hermit.iii.member.model.MemberVO;
 import com.hermit.iii.util.CipherUtils;
@@ -25,8 +29,11 @@ public class CheckAndDecryptAccount extends HttpServlet {
 		String account = request.getParameter("account"); // 接收到BASE64編碼的帳號資訊
 		String memAccount = decryptAccount(account); // BASE64解碼後再解密的帳號
 
-		MemberDAO_hibernate dao = new MemberDAO_hibernate();
-		MemberVO memVO = dao.findByAccount(memAccount);
+		// 為方便一般應用程式main方的測試,所以底下的model-config1內部dataSource設定是採用org.springframework.jdbc.datasource.DriverManagerDataSource
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-model-JDBCcfg.xml");
+		// 建立DAO物件
+		MemberDAO_interface_hibernate daSP = (MemberDAO_interface_hibernate) context.getBean("memDAO");
+		MemberVO memVO = daSP.findByAccount(memAccount);
 
 		if (memAccount.equals(memVO.getMemAccount())) {
 			request.setAttribute("memAccount", memAccount);

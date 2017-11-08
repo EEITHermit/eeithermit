@@ -1,6 +1,4 @@
 package com.hermit.iii.admanager.model;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,11 +7,15 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.json.simple.JSONValue;
 
+import com.hermit.iii.emp.model.EmpService;
+import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.util.HibernateUtil;
 
 
 public class ADManagerDAO_hebernate implements ADManagerDAO_interface_hibernate{
 	private static final String GET_ALL_STMT =	"from ADManagerVO order by adNO";
+	
+	private EmpService empService = new EmpService();
 		
 	@Override
 	public void insert(ADManagerVO adManagerVO) {
@@ -88,11 +90,11 @@ public class ADManagerDAO_hebernate implements ADManagerDAO_interface_hibernate{
 			}
 	}
 	
-		@Override
-		public String getAllForJson() {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			String jsonString = null;
-		
+	@Override
+	public String getAllForJson() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		String jsonString = null;
+	
 		try {
 			session.beginTransaction();
 			@SuppressWarnings("unchecked")
@@ -109,7 +111,7 @@ public class ADManagerDAO_hebernate implements ADManagerDAO_interface_hibernate{
 				m1.put("adTimeEnd",vo.getAdTimeEnd().toString());
 				m1.put("adStatus",vo.getAdStatus());
 				m1.put("adBrowse",vo.getAdBrowse());
-				m1.put("adModify",vo.getAdModify());
+				m1.put("adModify",getEmpName(vo.getAdModify()));
 				list.add(m1);
 			}
 			Map m2 = new LinkedHashMap();
@@ -119,10 +121,34 @@ public class ADManagerDAO_hebernate implements ADManagerDAO_interface_hibernate{
 			session.getTransaction().rollback();
 			throw ex;
 		}
+//		List list = new LinkedList();
+//		for (int i = 0 ; i < 5 ; i++) {
+//			Map m1 = new LinkedHashMap();
+//			m1.put("adNO", i);
+//			m1.put("adImage", "C:\\Users\\Linchehong\\Desktop\\photo"+i+".jpg");
+//			m1.put("adLink", "https://tw.yahoo.com");
+//			m1.put("adMessage","112334");
+//			m1.put("adTimeStart","2017/12/34");
+//			m1.put("adTimeEnd","1208/5416516");
+//			m1.put("adStatus","0");
+////			m1.put("adBrowse",vo.getAdBrowse());
+//			m1.put("adModify","123456789"+i);
+//			list.add(m1);
+//		}
+//		Map m2 = new LinkedHashMap();
+//		m2.put("list",list);
+//		String jsonString = JSONValue.toJSONString(m2);
+//		
+		
 		return jsonString;
 	}
 		
 
+	private String getEmpName(Integer empNo){
+		EmpVO emp = empService.getOneEmp(empNo);
+		return emp.getEmpName();
+	}
+		
 		public static void main (String args[]){
 			ADManagerVO adVO = new ADManagerVO();
 			ADManagerDAO_hebernate adDAO = new ADManagerDAO_hebernate();

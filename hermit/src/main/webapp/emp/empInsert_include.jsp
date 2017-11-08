@@ -14,7 +14,7 @@
 <style type="text/css">
 #DIV2{
 margin-top:35px;
-width:1100px;
+width:1400px;
 padding:20px;
 
 margin-right:10px;

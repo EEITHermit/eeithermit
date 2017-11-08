@@ -78,7 +78,7 @@ tr {
 				<th>上架日期</th>
 				<th>下架日期</th>
 				<th>狀態</th>
-				<th>瀏覽次數</th>
+<!-- 				<th>瀏覽次數</th> -->
 				<th>修改人員編號</th>
 				<th>編輯</th>
 			</tr>
@@ -93,7 +93,7 @@ tr {
 				<th>上架日期</th>
 				<th>下架日期</th>
 				<th>狀態</th>
-				<th>瀏覽次數</th>
+<!-- 				<th>瀏覽次數</th> -->
 				<th>修改人員編號</th>
 				<th>編輯</th>
 			</tr>
@@ -125,11 +125,12 @@ tr {
 					var cell4 = $("<td></td>").text(VO.adMessage);
 					var cell5 = $("<td></td>").text(VO.adTimeStart);
 					var cell6 = $("<td></td>").text(VO.adTimeEnd);
-					var cell7 = $("<td></td>").text(VO.adStatus);
-					var cell8 = $("<td></td>").text(VO.adBrowse);
+					var cell7 = $("<td></td>").text(getStatusString(VO.adStatus));
+// 					var cell8 = $("<td></td>").text(VO.adBrowse);
 					var cell9 = $("<td></td>").text(VO.adModify);
 					var cell10 = $("<td></td>").html('<button class="btn btn-primary" onclick="javascrtpt:window.location.reload("adUpdate_include.jsp")">修改</button>  <button class="btn btn-danger" onclick="javascrtpt:window.location.reload()">刪除</button>');
-					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
+// 					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
+					var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell9,cell10]);
 					tbody.append(row);
 				})
 // 				刪除
@@ -179,6 +180,19 @@ tr {
 		ajaxPost();
 
 	});
+	
+	
+	function getStatusString(status){
+		switch (status) {
+			case 0 : return "已下架";
+			case 1 : return "已上架";
+			case "0" : return "已下架";
+			case "1" : return "已上架";
+			case true : return "已下架";
+			case false : return "已上架";
+			default: return "";
+		}
+	}
 	</script>
 </body>
 </html>

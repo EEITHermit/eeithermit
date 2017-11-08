@@ -252,7 +252,7 @@
 		<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_favorite.jsp" class="w3-bar-item w3-button"><span>我的收藏</span></a>
 		<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_calendar.jsp" class="w3-bar-item w3-button"><span>我的預約</span></a>
 		<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_qanda.jsp" class="w3-bar-item w3-button"><span>Q&A</span></a>
-		<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_lease.jsp" class="w3-bar-item w3-button"><span>租賃紀錄</span></a>
+		<a href="<%=request.getContextPath()%>/LeaseServlet.do?action=getAllLease&memNO=${LoginOK.memNO}" class="w3-bar-item w3-button"><span>租賃紀錄</span></a>
 		<a href="<%=request.getContextPath()%>/memberbackstage/mem_back_reset.jsp" class="w3-bar-item w3-button"><span>修改會員資料</span></a>
 		</div>	   
 	</div>
