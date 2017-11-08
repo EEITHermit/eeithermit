@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新增廣告</title>
+<title>新增員工資料</title>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 <script src="../js/flashcanvas.js"></script>
@@ -54,8 +54,8 @@ float:right;
 	
 		<label for="empStatus">員工狀態 </label>
 		<select name="empStatus" id="empStatus">
-			<option value="0">可上班</option>
-			<option value="1">已離職</option>
+			<option value="0">在職</option>
+			<option value="1">停用</option>
 		</select><br><br><br>
 	
 		<input type="hidden" name="action" value="InsertEmp">	

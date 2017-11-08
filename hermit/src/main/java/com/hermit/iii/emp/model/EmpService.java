@@ -34,8 +34,9 @@ public class EmpService {
 		PostVO postVO = new PostVO();
 		postVO.setPostNO(postNO);
 		empVO.setPostVO(postVO);
-		
 		empVO.setEmpStatus(empStatus);
+		
+		dao.update(empVO);
 	}
 
 	public void deleteEmp(Integer empNO) {

@@ -22,6 +22,7 @@
 			<jsp:include page="/admanager/index.jsp" />
 		</div>
 		<hr style="visibility: hidden;">
+		<hr style="visibility: hidden;">
 		<div>
 
 		  <!-- Nav tabs -->

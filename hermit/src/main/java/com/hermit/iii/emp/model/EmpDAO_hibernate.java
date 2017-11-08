@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.json.simple.JSONValue;
 
 import com.hermit.iii.admanager.model.ADManagerVO;
+import com.hermit.iii.post.model.PostVO;
 import com.hermit.iii.util.HibernateUtil;
 
 public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
@@ -181,15 +182,17 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 //		 dao.insert(empVO1);
 
 		// update
-//		 EmpVO empVO2 = new EmpVO();
-//		 empVO2.setEmpNO(30002);
-//		 empVO2.setEmpAccount("eeit97087");
-//		 empVO2.setEmpPwd("12312311");
-//		 empVO2.setEmpPhone("0957057006");
-//		 empVO2.setEmpName("徐漢勳");
-//		 empVO2.getPostVO().setPostNO(330);
-//		 empVO2.setEmpStatus(true);
-//		 dao.update(empVO2);
+		 EmpVO empVO2 = new EmpVO();
+		 empVO2.setEmpNO(30002);
+		 empVO2.setEmpAccount("eeit97087");
+		 empVO2.setEmpPwd("12");
+		 empVO2.setEmpPhone("0957057006");
+		 empVO2.setEmpName("徐漢勳");
+		 PostVO povo = new PostVO();
+		 povo.setPostNO(310);
+		 empVO2.setPostVO(povo);
+		 empVO2.setEmpStatus(true);
+		 dao.update(empVO2);
 
 //		 delete
 //		 System.out.println("delete start");
@@ -222,15 +225,15 @@ public class EmpDAO_hibernate implements EmpDAO_interface_hibernate {
 //		System.out.println("----------------------");
 
 		// select account
-		EmpVO empVO4 = dao.findByAccount("Vir3");
+		EmpVO empVO4 = dao.findByPrimaryKey(30002);
 		System.out.print(empVO4.getEmpNO() + ",");
 		System.out.print(empVO4.getEmpAccount() + ",");
 		System.out.print(empVO4.getEmpPwd() + ",");
 		System.out.print(empVO4.getEmpPhone() + ",");
 		System.out.print(empVO4.getEmpName() + ",");
 		// 改寫成以下三行寫法
-		System.out.print(empVO.getPostVO().getPostNO() + ",");
-		System.out.println(empVO.getEmpStatus());
+		System.out.print(empVO4.getPostVO().getPostNO() + ",");
+		System.out.println(empVO4.getEmpStatus());
 		System.out.println("----------------------");
 
 		System.out.println("Finish.");

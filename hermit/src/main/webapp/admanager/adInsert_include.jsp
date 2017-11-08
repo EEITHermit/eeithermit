@@ -36,7 +36,7 @@ float:left
 	<form method="post" action="../ADManagerServlet" enctype="multipart/form-data" >
 		<div id="DIV1">
 			<label for="adImage">廣告圖片</label><br>
-			<img id="result" src="../images/admanager_photoicon.jpg" height="360" width="1000" ><br>
+			<img id="result" src="../images/admanager_photoicon1.jpg" height="600" width="1024" ><br>
 			<input id="file" src="" name="adImage" type="file" value="${adImage}">
 			<input type="hidden" name="adImage" id="adImage"><p/><br>
 		</div>
