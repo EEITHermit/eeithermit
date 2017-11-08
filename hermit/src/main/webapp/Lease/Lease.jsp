@@ -106,8 +106,8 @@ span{
 					<td><input type="date" style="width:140px" value="${param.leaseEndDate}" name="leaseEndDate" class="form-control"></td>
 					<td><input type="text" style="width:70px" value="${param.memNO}" name="memNO" class="form-control" id="memNO"><span id="memName"></span></td>
 					<td><input type="text" style="width:70px" value="${param.empNO}" name="empNO" class="form-control" id="empNO"><span id="empName"></span></td>
-					<td><input type="text" style="width:90px" value="${param.leaseRent}" name="leaseRent" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
-					<td><input type="text" style="width:90px" value="${param.leaseDeposit}" name="leaseDeposit" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+					<td><input type="text" style="width:90px" value="${param.leaseRent}" name="leaseRent" class="form-control" id="leaseRent" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
+					<td><input type="text" style="width:90px" value="${param.leaseDeposit}" name="leaseDeposit" class="form-control" id="leaseDeposit" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
 					<td><input type="text" style="width:90px" value="${param.leaseRelief}" name="leaseRelief" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></td>
 					<td><input type="date" style="width:140px" value="${param.leaseDate}" name="leaseDate" class="form-control"></td>
 					<td><textarea name="houseNote"></textarea></td>
@@ -223,7 +223,7 @@ $(document).ready(function(){
 		  $("#form").submit(function(event){
 			  $("#leasePic").val($("#result").attr("src"));
 		  })
-		  console.log($("#result").attr("src"));
+// 		  console.log($("#result").attr("src"));
 	});
 	$("#memNO").change(function(){
 		var inputNO=$("#memNO");
@@ -260,20 +260,36 @@ $(document).ready(function(){
 	$("#houseNO").change(function(){
 		var inputNO=$("#houseNO");
 		var NO=inputNO.val();
-		$.post("<%=request.getContextPath()%>/House.do?action=queryHouse",{houseNO:NO},function(data){
-			console.log(data);
-			var houseAddr=$("#houseAddr");
-			$.ajsrConfirm({
-				  message: "你輸入的房屋物件住址為:\n"+data,
-				  confirmButton: "是",
-				  cancelButton : "否",
-				  onCancel:function(){
-					  $("#houseNO").val("");
-				  }
-			});
+		var leaseRent=$("#leaseRent");
+		var leaseDeposit=$("#leaseDeposit");
+		$.post("<%=request.getContextPath()%>/House.do?action=queryStatus",{houseNO:NO},function(Status){
+			if(Status=="未出租"){
+				$.post("<%=request.getContextPath()%>/House.do?action=queryHouse",{houseNO:NO},function(data){
+					var houseAddr=$("#houseAddr");
+					$.ajsrConfirm({	
+						  message: "你輸入的房屋物件住址為:\n"+data,
+						  confirmButton: "是",
+						  cancelButton : "否",
+						  onCancel:function(){
+							  $("#houseNO").val("");
+							  leaseDeposit.val("");
+						  },
+						  onConfirm: function() {
+							  $.post("<%=request.getContextPath()%>/House.do?action=queryRent",{houseNO:NO},function(data){
+									leaseRent.val(data);
+									leaseDeposit.val(data*2);
+								})
+						  }
+					})
+				})
+			}else{
+				alert("房屋物件為不可出租狀態，請再確認房屋資訊是否正確。");
+				 $("#houseNO").val("");
+				 $("#leaseRent").val("");
+				 leaseDeposit.val("");
+			}
 		})
 	})
-	
 })
 </script>
 </body>
