@@ -8,10 +8,10 @@
 <link href='<%=request.getContextPath()%>/css/tupianqiehuan.css' rel='stylesheet' />
 <style>
 ul, li {padding: 0;	margin: 0; list-style: none;}
-#abgne-block-20110317 {width: 1000px;	/* 圖片的寬 */	height: 390px;	/* 圖片的高 + 30 */}
-.abgne-player {width: 1000px;	/* 圖片的寬跟下一張的距離 */	height: 360px;	/* 圖片的高 */	position: relative;	overflow: hidden;}
+#abgne-block-20110317 {width: 1200px;	/* 圖片的寬 */	height: 600px;	/* 圖片的高 + 30 */}
+.abgne-player {width: 1200px;	/* 圖片的寬跟下一張的距離 */	height: 600px;	/* 圖片的高 */	position: relative;	overflow: hidden;}
 .abgne-player ul.abgne-list {position: absolute; width: 9999px;	height: 100%;}
-.abgne-player ul.abgne-list li {float: left; width: 1000px;	/* 圖片的寬 */	height: 100%;}
+.abgne-player ul.abgne-list li {float: left; width: 1200px;	/* 圖片的寬 */	height: 100%;}
 .abgne-player ul.abgne-list img{width: 100%;height: 100%; border: 0;}
 .abgne-control {height: 24px; padding: 3px;	color: #fff; font-size: 13px; background: #333;}
 .abgne-control ul {float: left;}
