@@ -114,6 +114,7 @@ padding-right:200px;
 				<label class="col-md-5 control-label">房屋狀態</label>
 					<div class="col-xs-2">
 						<select name="houseStatus" id="SelectStatus" class="form-control">
+							<option>已出租</option>
 							<option>未出租</option>
 							<option>修繕中</option>
 							<option>已下架</option>
@@ -224,7 +225,7 @@ padding-right:200px;
 				<input type="submit" value="修改">
 			</div>
 		</div>
-	<div id="houseeq">
+	<div id="houseeq" style="background-color:RGBA(255,255,255,0.8);border-radius:5px;">
 		<input type="checkbox" name="TV" id="TV" class="eq">
 		<label for="TV">電視</label>
 		<input type="checkbox" name="aircondition" id="aircondition" class="eq">
@@ -435,14 +436,14 @@ padding-right:200px;
 				})
 			
 			var houseStatus = "${vo.houseStatus}";
-			if(houseStatus == "修繕中"){
-				SelectStatus.find("option").eq(1).prop("selected","true");
-				console.log(SelectStatus.find("option").eq(2));
-			}else if(houseStatus == "未出租"){
+			if(houseStatus == "已出租"){
 				SelectStatus.find("option").eq(0).prop("selected","true");
-// 				console.log(SelectStatus.find("option").eq(1));
-			}else if(houseStatus=="已下架"){
+			}else if(houseStatus == "未出租"){
+				SelectStatus.find("option").eq(1).prop("selected","true");
+			}else if(houseStatus=="修繕中"){
 				SelectStatus.find("option").eq(2).prop("selected","true");
+			}else if(houseStatus=="已下架"){
+				SelectStatus.find("option").eq(3).prop("selected","true");
 			}
 			$("#file").change(function(e){
 				  

@@ -12,6 +12,7 @@
 	href="<%=request.getContextPath()%>/css/iEdit.min.css">
 	
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/lightbox.css" >
 <style>
 .container{
 padding-bottom:40px;
@@ -95,9 +96,11 @@ label{
 	
 	<div class="form-group">
 	<label>合約照片</label>
-<%-- 	<input type="file" style="width:75px" value="${vo.leasePic}" id="file"> --%>
-	<input type="hidden" id="leasePic" name="leasePic">
-	<img id="result" style="width:75px" src="${vo.leasePic}" />
+	<input type="file" style="width:75px" value="${vo.leasePic}" id="file">
+	<input type="hidden" id="leasePic" name="leasePic" >
+<%-- 	<img id="result" style="width:75px" src="${vo.leasePic}" data-lightbox="image-1"/> --%>
+	<a class="example-image-link" href="${vo.leasePic}" data-lightbox="example-1">
+	<img class="example-image" src="${vo.leasePic}" alt="image-1" style="width:75px" id="result"/></a>
 	</div>
 	
 	<div class="form-group">
@@ -125,6 +128,7 @@ label{
 <script src="/hermit/js/datatables.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/iEdit.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/lightbox.js"></script>
 <script>
 $(document).ready(function(){
 	var SelectVal=${vo.leaseRefund};
@@ -139,7 +143,10 @@ $(document).ready(function(){
 	}
 	//
 	
-	
+	 lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true,
+    })
 		
 	
 	
