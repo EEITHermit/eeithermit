@@ -270,6 +270,107 @@ public class HouseServlet extends HttpServlet {
 			return;
 			
 		}
+		if("updateHouseStatus".equals(action)){
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			request.setAttribute("ErrorMsgKey", errorMsgMap);
+			svc = new HouseService();
+
+			houseNO = Integer.valueOf(request.getParameter("houseNO"));
+			houseTitle = request.getParameter("houseTitle");
+			cityNO = Integer.valueOf(request.getParameter("cityNO"));
+			boroughNO = Integer.valueOf(request.getParameter("boroughNO"));
+			previewPic = request.getParameter("previewPic");
+			highestFloor = Integer.valueOf(request.getParameter("highestFloor"));
+			nowFloor = Integer.valueOf(request.getParameter("nowFloor"));
+			houseStatus = request.getParameter("houseStatus");
+			houseRent = Integer.valueOf(request.getParameter("houseRent"));
+			houseCharge = Integer.valueOf(request.getParameter("housecharge"));
+			waterRate = request.getParameter("waterRate");
+			powerRate = request.getParameter("powerRate");
+			houseVideo = request.getParameter("houseVideo");
+			typeNO = Integer.valueOf(request.getParameter("typeNO"));
+			formNO = Integer.valueOf(request.getParameter("formNO"));
+			houseAddr = request.getParameter("houseAddr");
+			houseSize = Double.valueOf(request.getParameter("houseSize"));
+			houseInfo=request.getParameter("houseInfo");
+			
+			EquipmentConditionService eqsvc=new EquipmentConditionService();
+			Byte TV=0;
+			if("on".equals(request.getParameter("TV"))){
+				TV=1;
+			}
+			Byte aircondition=0;
+			if("on".equals(request.getParameter("aircondition"))){
+				aircondition=1;
+			}
+			Byte refrigerator=0;
+			if("on".equals(request.getParameter("refrigerator"))){
+				refrigerator=1;
+			}
+			Byte waterHeater=0;
+			if("on".equals(request.getParameter("waterHeater"))){
+				waterHeater=1;
+			}
+			Byte gas=0;
+			if("on".equals(request.getParameter("gas"))){
+				gas=1;
+			}
+			Byte theFourthStation=0;
+			if("on".equals(request.getParameter("theFourthStation"))){
+				theFourthStation=1;
+			}
+			Byte net=0;
+			if("on".equals(request.getParameter("net"))){
+				net=1;
+			}
+			Byte washing=0;
+			if("on".equals(request.getParameter("washing"))){
+				washing=1;
+			}
+			Byte bed=0;
+			if("on".equals(request.getParameter("bed"))){
+				bed=1;
+			}
+			Byte wardrobe=0;
+			if("on".equals(request.getParameter("wardrobe"))){
+				wardrobe=1;
+			}
+			Byte sofa=0;
+			if("on".equals(request.getParameter("sofa"))){
+				sofa=1;
+			}
+			Byte parking=0;
+			if("on".equals(request.getParameter("parking"))){
+				parking=1;
+			}
+			Byte elevator=0;
+			if("on".equals(request.getParameter("elevator"))){
+				elevator=1;
+			}
+			Byte balcony=0;
+			if("on".equals(request.getParameter("balcony"))){
+				balcony=1;
+			}
+			Byte permitCook=0;
+			if("on".equals(request.getParameter("permitCook"))){
+				permitCook=1;
+			}
+			Byte pet=0;
+			if("on".equals(request.getParameter("pet"))){
+				pet=1;
+			}
+			Byte closeMRT=0;
+			if("on".equals(request.getParameter("closeMRT"))){
+				closeMRT=1;
+			}
+			
+			svc.updateHouse(houseNO, houseTitle, cityNO, boroughNO, previewPic, highestFloor, nowFloor, houseStatus,
+					houseRent, houseCharge, waterRate, powerRate, houseVideo, typeNO, formNO, houseAddr, houseSize,houseInfo);
+			eqsvc.updateEquipmentCondition(houseNO, TV, aircondition, refrigerator, waterHeater, gas, theFourthStation, net, washing, bed, wardrobe, sofa, parking, elevator, balcony, permitCook, pet, closeMRT);
+			
+			response.sendRedirect("/hermit/House/HouseStatusChange.jsp");
+			return;
+		}
 		if ("updateHouse".equals(action)) {
 			Map<String, String> errorMsgMap = new HashMap<String, String>();
 			request.setAttribute("ErrorMsgKey", errorMsgMap);
@@ -387,6 +488,14 @@ public class HouseServlet extends HttpServlet {
 			//
 			rd.forward(request, response);
 			System.out.println("Search One Success");
+		}
+		if("getOneHouseStatus".equals(action)){
+			houseNO=Integer.valueOf(request.getParameter("houseNO"));
+			svc=new HouseService();
+			vo=svc.GET_ONE_HOUSE_FK(houseNO);
+			request.setAttribute("vo", vo);
+			RequestDispatcher rd = request.getRequestDispatcher("/House/SingleHouseStatusUpdate.jsp");
+			rd.forward(request, response);
 		}
 		if ("getOneHouse_FK".equals(action)) {
 			houseNO = Integer.valueOf(request.getParameter("houseNO"));
