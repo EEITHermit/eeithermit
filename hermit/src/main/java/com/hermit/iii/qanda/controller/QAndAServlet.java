@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.JSONValue;
 
+import com.hermit.iii.emp.model.EmpService;
 import com.hermit.iii.emp.model.EmpVO;
 import com.hermit.iii.member.model.MemberVO;
 import com.hermit.iii.qanda.model.QandAService;
@@ -40,15 +41,24 @@ public class QAndAServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String mission = request.getParameter("mission");
 		QandAService qaService = new QandAService();
+		EmpService empService = new EmpService();
 		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
+		HashMap<Integer,String> map = new HashMap<Integer,String>();
 		if ("all".equals(mission)) {
 			array.addAll(qaService.getAll());
 			for (QandAVO vo : array) {
 				vo.getHouseVO().setHousePictureVO(null);
 				vo.getHouseVO().setPreviewPic(null);
 				vo.getMemberVO().setMemImage(null);
+				//取得empName放在map給前端顯示
+				if(vo.getEmpNO() != null){
+					String empName = empService.getOneEmp(vo.getEmpNO()).getEmpName();
+					map.put(vo.getEmpNO(), empName);
+				}
 			}
-			JSONArray json = new JSONArray(array);
+			JSONObject json = new JSONObject();
+			json.put("array", array);
+			json.put("map", map);
 			out.print(json);
 			return;
 		} else if ("notDeal".equals(mission)) {
@@ -57,8 +67,15 @@ public class QAndAServlet extends HttpServlet {
 				vo.getHouseVO().setHousePictureVO(null);
 				vo.getHouseVO().setPreviewPic(null);
 				vo.getMemberVO().setMemImage(null);
+				//取得empName放在map給前端顯示
+				if(vo.getEmpNO() != null){
+					String empName = empService.getOneEmp(vo.getEmpNO()).getEmpName();
+					map.put(vo.getEmpNO(), empName);
+				}
 			}
-			JSONArray json = new JSONArray(array);
+			JSONObject json = new JSONObject();
+			json.put("array", array);
+			json.put("map", map);
 			out.print(json);
 			return;
 		} else if ("dealed".equals(mission)) {
@@ -67,8 +84,15 @@ public class QAndAServlet extends HttpServlet {
 				vo.getHouseVO().setHousePictureVO(null);
 				vo.getHouseVO().setPreviewPic(null);
 				vo.getMemberVO().setMemImage(null);
+				//取得empName放在map給前端顯示
+				if(vo.getEmpNO() != null){
+					String empName = empService.getOneEmp(vo.getEmpNO()).getEmpName();
+					map.put(vo.getEmpNO(), empName);
+				}
 			}
-			JSONArray json = new JSONArray(array);
+			JSONObject json = new JSONObject();
+			json.put("array", array);
+			json.put("map", map);
 			out.print(json);
 			return;
 		}

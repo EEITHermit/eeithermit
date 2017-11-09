@@ -75,7 +75,10 @@
 				var divBody = $("#showTable>tbody");
 				var json = JSON.parse(data);
 				var datas = [];
-				for(var vo of json){
+				console.log(json);
+				console.log(json['array']);
+				console.log(json['map']);
+				for(var vo of json['array']){
 					var type;
 					if(vo.qaType == 0){
 						type="客服";
@@ -105,7 +108,7 @@
 								,vo.QTime
 								,q
 								,vo.ATime
-								,vo.empNO
+								,json["map"][vo.empNO]      //其實是empName喔!!
 								,a];
 					datas.push(data);
 				};

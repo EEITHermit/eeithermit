@@ -2114,7 +2114,7 @@
 		});
 		//question js code end
 		//youtube程式碼
-		if(house.houseVideo == ""){
+		if(house.houseVideo == "" || house.houseVideo == null){
 			$("#youtube").parent("div").html("<h2>此房屋無建立影片</h2>");
 		}else{
 			$("#youtube").attr("src",$("#youtube").attr("src") + house.houseVideo);
