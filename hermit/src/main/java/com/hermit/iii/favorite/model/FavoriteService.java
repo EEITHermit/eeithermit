@@ -101,6 +101,8 @@ public class FavoriteService {
 			jm.put("houseAddr", favorite.getHouseVO().getHouseAddr());
 			jm.put("houseSize", favorite.getHouseVO().getHouseSize());
 			jm.put("favDate", favorite.getFavDate());
+			jm.put("cityName", favorite.getHouseVO().getCityVO().getCityName());
+			jm.put("boroughName", favorite.getHouseVO().getBoroughsVO().getBoroughName());
 
 			jsonList.add(jm);
 		}
