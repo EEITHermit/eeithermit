@@ -200,7 +200,7 @@ padding-right:200px;
 						<c:if test="${vo.houseVideo != null}">
 							<a id="link" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
 						</c:if>
-						<c:if test="${vo.houseVideo == null}">
+						<c:if test="${vo.houseVideo == null || vo.houseVideo == ''}">
 							<a id="link"style="display:none" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
 							<h3 style="margin-top:10px;margin-left:10px;">無影片</h3>
 						</c:if>
