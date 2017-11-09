@@ -111,8 +111,8 @@ label{
 	<div class="form-group">
 	<label>押金是否返還</label>
 	<select name="leaseRefund" id="SelectRefund" class="form-control">
-	<option value="1">是</option>
 	<option value="0">否</option>
+	<option value="1">是</option>
 	</select>
 	</div>
 	
@@ -137,9 +137,9 @@ $(document).ready(function(){
 	
 	//取全部，判斷狀態用
 	if(SelectVal==0){
-		SelectRefund.children("option").eq(1).prop("selected","true");
-	}else if(SelectVal==1){
 		SelectRefund.children("option").eq(0).prop("selected","true");
+	}else if(SelectVal==1){
+		SelectRefund.children("option").eq(1).prop("selected","true");
 	}
 	//
 	

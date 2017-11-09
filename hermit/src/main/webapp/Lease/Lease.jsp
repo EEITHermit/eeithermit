@@ -112,7 +112,7 @@ span{
 					<td><input type="date" style="width:140px" value="${param.leaseDate}" name="leaseDate" class="form-control"></td>
 					<td><textarea name="houseNote"></textarea></td>
 <%-- 					<td><input type="text" style="width:70px" value="${param.houseNote}" name="houseNote"></td> --%>
-					<td><select name="leaseRefund" id="selectleaseRefund"><option value=1>是</option><option value=0>否</option></select></td>
+					<td><select name="leaseRefund" id="selectleaseRefund"><option value=0>否</option><option value=1>是</option></select></td>
 					<td><button id="addBtn" class="btn">新增</button></td>
 				</tr>
 			</tbody>		
