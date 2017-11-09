@@ -292,7 +292,7 @@ a:link, a:visited, a:hover, a:active {
 														+ '</span>'
 														+ addlink
 														+'<button type="button" class="close">&times;</button><p class="favaddr">'
-														+ v.houseAddr
+														+ v.cityName + v.boroughName + '&nbsp;' + v.houseAddr
 														+ '</p><hr /><img height="50" width="50" src="'+v.previewPic+'"><span class="favrent">租金：'
 														+ v.houseRent
 														+ '</span><span class="favsize">坪數：'
