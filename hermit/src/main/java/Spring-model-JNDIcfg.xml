@@ -20,6 +20,7 @@
         <property name="mappingResources"> 
             <list> 
                 <value>com/hermit/iii/member/model/Member.hbm.xml</value> 
+<!--                 <value>com/hermit/iii/calendar/model/CalendarEvent.hbm.xml</value>  -->
             </list> 
         </property> 
         <property name="hibernateProperties"> 
@@ -40,6 +41,9 @@
     <bean id="memDAO" class="com.hermit.iii.member.model.MemberDAO_hibernate">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
+<!--     <bean id="CalendarEventDAO" class="com.hermit.iii.calendar.model.CalendarEventJNDIDAO_spring"> -->
+<!--         <property name="hibernateTemplate" ref="hibernateTemplate"/>  -->
+<!--     </bean> -->
 
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate5.HibernateTransactionManager">

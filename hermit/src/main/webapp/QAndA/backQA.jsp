@@ -108,7 +108,7 @@
 								,vo.QTime
 								,q
 								,vo.ATime
-								,json["map"][vo.empNO]      //其實是empName喔!!
+								,json["map"][vo.empNO]      //是empName喔!!
 								,a];
 					datas.push(data);
 				};
