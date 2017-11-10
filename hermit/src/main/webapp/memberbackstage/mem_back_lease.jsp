@@ -20,6 +20,7 @@
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/pages/dashboard.css"
 	rel="stylesheet" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/lightbox.css" >
 </head>
 <body>
 	<jsp:include page="/fragment/member_page.jsp"></jsp:include>
@@ -150,6 +151,9 @@ a:link, a:visited, a:hover, a:active {
 											<td>${Lease.houseNote}</td>
 											<td id="leaseRefund">${Lease.leaseRefund}</td>
 										</tr>
+										<tr>
+												<td>合約照片<a class="example-image-link" href="${Lease.leasePic}" data-lightbox="example-1"><img class="example-image" src="${Lease.leasePic}" alt="image-1" style="width:75px" id="result"/></a></td>
+										</tr>
 										<input type="hidden" value="${Lease.memberVO.memNO}" name="memNO" readonly>
 										<input type="hidden" value="${Lease.leaseNO}" name="leaseNO">
 									</c:forEach>
@@ -209,6 +213,7 @@ a:link, a:visited, a:hover, a:active {
 	<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/excanvas.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+	<script src="<%=request.getContextPath()%>/js/lightbox.js"></script>
 	<script>
 	$(document).ready(function(){
 		var leaseRefund =$("#leaseRefund");
@@ -218,6 +223,10 @@ a:link, a:visited, a:hover, a:active {
 		}else{
 			leaseRefund.text("是");
 		}
+		lightbox.option({
+		      'resizeDuration': 200,
+		      'wrapAround': true,
+		    })
 	});
 	</script>
 </body>

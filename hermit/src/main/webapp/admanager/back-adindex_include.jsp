@@ -59,13 +59,10 @@ tr {
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
 <jsp:include page="/fragment/back_side_page.jsp" />
-<%-- <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script> --%>
-<%-- <script src="<%=request.getContextPath()%>/js/bootstrap.js"></script> --%>
-<%-- <script src="<%=request.getContextPath()%>/js/flashcanvas.js"></script> --%>
-<%-- <script src="<%=request.getContextPath()%>/js/jSignature.min.js"></script> --%>
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </head>
 <body>
+<h1 style="text-align: center;margin-bottom:50px;margin-left:70px;">廣告輪播管理</h1>
 <div class="container" >
 <button class="btn info" onclick="javascrtpt:window.location.href='adInsert_include.jsp'">新增廣告</button><p>
 	<table id="myTable"style="width:1130px;height:600px;" border="1">
