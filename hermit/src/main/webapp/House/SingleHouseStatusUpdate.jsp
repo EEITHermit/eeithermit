@@ -63,7 +63,7 @@ padding-right:200px;
 	<!-- bootstrap -->
 	<div class="container">
 	
-	<form method="POST" action="/hermit/House.do?action=updateHouse" id="form" class="form-horizontal">
+	<form method="POST" action="/hermit/House.do?action=updateHouseStatus" id="form" class="form-horizontal">
 	<div class="form-group">
 		<div>
 			<label class="col-md-5 control-label">房屋編號</label> 
@@ -71,82 +71,70 @@ padding-right:200px;
 			 <input type="text" readonly value="${vo.houseNO}" name="houseNO" class="form-control" id="houseNO">
 			</div>	
 		</div>
-		<div>
-			<label for="houseTitle" class="col-md-1 control-label">房屋標題</label>
+		
+	</div>
+	<div class="form-group">
+	<div>
+			<label for="houseTitle" class="col-md-5 control-label">房屋標題</label>
 			<div class="col-xs-2">
-		    <input type="text" value="${vo.houseTitle}" name="houseTitle" id="houseTitle" class="form-control">
+		    <input type="text" readonly value="${vo.houseTitle}" name="houseTitle" id="houseTitle" class="form-control">
 		    </div>
 		</div>
-	</div>
 		
-		<div class="form-group">
-			<div>
-				<label class="col-md-5 control-label">縣市</label>
 					<div class="col-xs-2">
-						<select id="cityName" name="cityNO" class="form-control"></select> 
+						<input type="hidden" readonly value="${vo.cityVO.cityNO}" id="cityNO" name="cityNO">
 					</div>
-				<input type="hidden" value="${vo.cityVO.cityNO}" id="cityNO" name="cityNO">
-			</div>
-			<div>
-				<label class="col-md-1 control-label">地區</label> 
-					<div class="col-xs-2"> 
-						<select id="boroughName" name="boroughNO" class="form-control"></select>
-					</div>
-				<input type="hidden" value="${vo.boroughsVO.boroughNO}" name="boroughNOe" id="boroughNO">
-			</div>
+				<div>
+					<input type="hidden" readonly value="${vo.boroughsVO.boroughNO}" name="boroughNO" id="boroughNO">
+				</div>
 		</div>
 		<div class="form-group">
 			<div>
-				<label class="col-md-5 control-label" for="highestFloor">最高樓層</label> 
 					<div class="col-xs-2">
-						<input type="text" value="${vo.highestFloor}" name="highestFloor" id="highestFloor" class="form-control">
+						<input type="hidden" readonly value="${vo.highestFloor}" name="highestFloor" id="highestFloor" class="form-control">
 					</div>
 			</div>
 			<div>
-				<label class="col-md-1 control-label" for="nowfloor">現在樓層</label> 
 					<div class="col-xs-2">
-						<input type="text" value="${vo.nowFloor}" name="nowFloor" id="newfloor" class="form-control">
+						<input type="hidden" value="${vo.nowFloor}" name="nowFloor" id="newfloor" class="form-control">
 					</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<div>
-				<label class="col-md-5 control-label">房屋狀態</label>
-					<div class="col-xs-2">
+		
+		<div>
+			<label for="houseStatus" class="col-md-5 control-label">房屋狀態</label>
+				<div class="col-xs-2">
 						<select name="houseStatus" id="SelectStatus" class="form-control">
-							<option>已出租</option>
 							<option>未出租</option>
-							<option>修繕中</option>
-							<option>已下架</option>
+							<option>已出租</option>
+							
+							
 						</select> 
-					</div>
-			</div>
+				</div>
+		</div>
 			<div>
-				<label class="col-md-1 control-label" for="houseRent">租金</label>
 					<div class="col-xs-2">
-						<input type="text" value="${vo.houseRent}" name="houseRent" id="houserent"  class="form-control">
+						<input type="hidden" readonly value="${vo.houseRent}" name="houseRent" id="houserent"  class="form-control">
 					</div> 
 			</div>
 		</div>
 		<div class="form-group">
 			<div>
-				<label class="col-md-5 control-label" for="housecharge">管理費</label> 
 					<div class="col-xs-2">
-						<input type="text" value="${vo.houseCharge}" name="housecharge" id="housecharge" class="form-control">
+						<input type="hidden" readonly value="${vo.houseCharge}" name="housecharge" id="housecharge" class="form-control">
 					</div>
 			</div>
 			<div>
-				<label class="col-md-1 control-label" for="waterRate">水費</label> 
 					<div class="col-xs-2">
-						<input type="text" value="${vo.waterRate}" name="waterRate" id="waterRate" class="form-control">
+						<input type="hidden" readonly value="${vo.waterRate}" name="waterRate" id="waterRate" class="form-control">
 					</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<div>
-				<label class="col-md-5 control-label" for="col-md-4">電費</label> 
 					<div class="col-xs-2">
-						<input type="text" value="${vo.powerRate}" name="powerRate" class="form-control">
+						<input type="hidden" readonly value="${vo.powerRate}" name="powerRate" class="form-control">
 					</div>
 			</div>
 <!-- 		<div class="form-group"> -->
@@ -154,69 +142,50 @@ padding-right:200px;
 <%-- 			 <input type="text" value="${vo.houseVideo}" name="houseVideo"> --%>
 <!-- 		</div> -->
 			<div>
-				<label class="col-md-1 control-label">房屋類型</label>
 					<div class="col-xs-2">
-						<select id="houseType" name="typeNO" class="form-control"></select>
-							<input id="typeNO" type="hidden" value="${vo.houseTypeVO.typeNO}" name="typeNO" class="form-control">
+							<input id="typeNO" type="hidden" readonly value="${vo.houseTypeVO.typeNO}" name="typeNO" class="form-control">
 					</div> 
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<div>
-				<label class="col-md-5 control-label">形態</label>
 					<div class="col-xs-2">
-						<select id="houseForm" name="formNO" class="form-control"></select>
-						<input id="formNO" type="hidden" value="${vo.houseFormVO.formNO}" name="formNO" class="form-control">
+						<input id="formNO" type="hidden" readonly value="${vo.houseFormVO.formNO}" name="formNO" class="form-control">
 					</div>
 			</div>
 			<div>
-				<label class="col-md-1 control-label" for="houseAddr">地址</label> 
 					<div class="col-xs-2">
-						<input type="text" value="${vo.houseAddr}" name="houseAddr" id="houseAddr" class="form-control">
+						<input type="hidden" readonly value="${vo.houseAddr}" name="houseAddr" id="houseAddr" class="form-control">
 					</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<div>
-				<label class="col-md-5 control-label" for="houseSize">坪數</label>
 					<div class="col-xs-2">
-						<input type="text" value="${vo.houseSize}" name="houseSize" id="houseSize" class="form-control">
+						<input type="hidden" readonly value="${vo.houseSize}" name="houseSize" id="houseSize" class="form-control">
 					</div>
 			</div>
 			<div>
-				<label class="col-md-1 control-label">圖片</label>
 					<div class="col-xs-2">	
-						<input type="file" id="file">
 						<input type="hidden" id="previewPic" name="previewPic" value="${vo.previewPic}" />
-						<img id="result" src="${vo.previewPic}" border="0" style="border:none;max-height:200px;max-width:200px;">
 					</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<div>
-				<label class="col-md-5 control-label" for="houseSize">影片連結</label>
 					<div class="col-xs-2"  style="background-color:white;">
-						<input type="hidden" value="${vo.houseVideo}" name="houseVideo" id="houseVideo" class="form-control">
-						<c:if test="${vo.houseVideo != null}">
-							<a id="link" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
-						</c:if>
-						<c:if test="${vo.houseVideo == null || vo.houseVideo == ''}">
-							<a id="link"style="display:none" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
-							<h3 style="margin-top:10px;margin-left:10px;">無影片</h3>
-						</c:if>
+						<input type="hidden" readonly value="${vo.houseVideo}" name="houseVideo" id="houseVideo" class="form-control">
 					</div>
 			</div>
 			<div>
 					<div class="col-xs-2">	
-						<input type="button" id="flash" value="擷取影片">
 					</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-5 control-label">房屋介紹</label>
 				<div class="col-md-6 col-offset-1">
-					<textarea name="houseInfo" class="form-control" id="houseInfo">${vo.houseInfo}</textarea>
+					<input type="hidden" readonly value="{vo.houseInfo}" name="houseInfo">
 				</div>
 		</div>
 
@@ -225,50 +194,31 @@ padding-right:200px;
 				<input type="submit" value="修改">
 			</div>
 		</div>
-	<div id="houseeq" style="background-color:RGBA(255,255,255,0.8);border-radius:5px;">
-		<input type="checkbox" name="TV" id="TV" class="eq">
-		<label for="TV">電視</label>
-		<input type="checkbox" name="aircondition" id="aircondition" class="eq">
-		<label for="aircondition">冷氣</label>
-		<input type="checkbox" name="refrigerator" id="refrigerator" class="eq">
-		<label for="refrigerator">冰箱</label>
-		<input type="checkbox" name="gas" id="gas" class="eq">
-		<label for="gas">瓦斯</label>
-		<input type="checkbox" name="net" id="net" class="eq">
-		<label for="net">網路</label>
-		<input type="checkbox" name="wardrobe" id="wardrobe" class="eq">
-		<label for="wardrobe">衣櫃</label>
-		<input type="checkbox" name="bed" id="bed" class="eq">
-		<label for="bed">床</label>
-		<input type="checkbox" name="sofa" id="sofa" class="eq">
-		<label for="sofa">沙發</label>
-		<input type="checkbox" name="elevator" id="elevator" class="eq">
-		<label for="elevator">電梯</label>
-		<input type="checkbox" name="balcony" id="balcony" class="eq">
-		<label for="balcony">陽台</label>
-		<input type="checkbox" name="permitCook" id="permitCook" class="eq">
-		<label for="permitCook">開伙</label>
-		<input type="checkbox" name="theFourthStation" id="theFourthStation" class="eq">
-		<label for="theFourthStation">第四台</label>
-		<input type="checkbox" name="pet" id="pet" class="eq2">
-		<label for="pet">養寵物</label>
-		<input type="checkbox" name="waterHeater" id="waterHeater" class="eq3">
-		<label for="waterHeater">熱水器</label>
-		<input type="checkbox" name="closeMRT" id="closeMRT" class="eq4">
-		<label for="closeMRT">近捷運</label>
-		<input type="checkbox" name="washing" id="washing" class="eq5">
-		<label for="washing">洗衣機</label>
-		<input type="checkbox" name="parking" id="parking" class="eq6">
-		<label for="parking">停車位</label>
+	<div id="houseeq">
+		<input type="hidden" readonly name="TV" id="TV" class="eq">
+		<input type="hidden" readonly name="aircondition" id="aircondition" class="eq">
+		<input type="hidden" readonly name="refrigerator" id="refrigerator" class="eq">
+		<input type="hidden" readonly name="gas" id="gas" class="eq">
+		<input type="hidden" readonly name="net" id="net" class="eq">
+		<input type="hidden" readonly name="wardrobe" id="wardrobe" class="eq">
+		<input type="hidden" readonly name="bed" id="bed" class="eq">
+		<input type="hidden" readonly name="sofa" id="sofa" class="eq">
+		<input type="hidden" readonly name="elevator" id="elevator" class="eq">
+		<input type="hidden" readonly name="balcony" id="balcony" class="eq">
+		<input type="hidden" readonly name="permitCook" id="permitCook" class="eq">
+		<input type="hidden" readonly name="theFourthStation" id="theFourthStation" class="eq">
+		<input type="hidden" readonly name="pet" id="pet" class="eq2">
+		<input type="hidden" readonly name="waterHeater" id="waterHeater" class="eq3">
+		<input type="hidden" readonly name="closeMRT" id="closeMRT" class="eq4">
+		<input type="hidden" readonly name="washing" id="washing" class="eq5">
+		<input type="hidden" readonly name="parking" id="parking" class="eq6">
 	</div>
 		</form>
 		<form id="insertPicForm" method="post" action="<%=request.getContextPath()%>/HousePictureServlet" enctype="multipart/form-data">
 			<div class="form-group">
 				<div class="col-md-12 control-label">
-					<input type="hidden" value="${vo.houseNO}" name="houseNO">
+					<input type="hidden" readonly value="${vo.houseNO}" name="houseNO">
 					<input type="hidden" name="action" action="insertHousePicture" >
-					<input type="file" name="imgFile" accept="image/png,image/gif,image/jpeg" multiple="multiple" >
-					<button id="addhPicture" class="addhPicture">新增廣告圖</button>
 				</div>
 			</div>
 		</form>
@@ -434,16 +384,12 @@ padding-right:200px;
 						selectBorough.append(cell1);
 					})
 				})
-			
+							
 			var houseStatus = "${vo.houseStatus}";
 			if(houseStatus == "已出租"){
-				SelectStatus.find("option").eq(0).prop("selected","true");
-			}else if(houseStatus == "未出租"){
 				SelectStatus.find("option").eq(1).prop("selected","true");
-			}else if(houseStatus=="修繕中"){
-				SelectStatus.find("option").eq(2).prop("selected","true");
-			}else if(houseStatus=="已下架"){
-				SelectStatus.find("option").eq(3).prop("selected","true");
+			}else if(houseStatus == "未出租"){
+				SelectStatus.find("option").eq(0).prop("selected","true");
 			}
 			$("#file").change(function(e){
 				  

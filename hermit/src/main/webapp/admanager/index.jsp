@@ -12,12 +12,12 @@ ul, li {padding: 0;	margin: 0; list-style: none;}
 .abgne-player ul.abgne-list li {float: left; width: 1200px;	/* 圖片的寬 */	height: 100%;}
 .abgne-player ul.abgne-list img{width: 100%;height: 100%; border: 0;}
 
-/* .abgne-control {height: 0px; padding: 3px;	color: #fff; font-size: 1px; background: #333;} */
+.abgne-control {margin: auto; width: 1150px; height: 54px; padding: 3px;	color: #fff; font-size: 1px; background: #666666;}
 .abgne-control ul {margin-left:20px;}
-.abgne-control ul li {float: left; padding: 0 5px 0px 10px; line-height: 40px; margin: 6px;	background: #FFBB66;	cursor: pointer;}
+.abgne-control ul li {float: left; padding: 0 5px 0px 10px; line-height: 40px; margin: 6px;	background: #666666;	cursor: pointer;}
 .abgne-control ul.numbers {	margin-left: 2px;}
-.abgne-control ul li.current {	background: #fff; color:#FF8800;}
-.abgne-control ul li.hover { background: #fff; color:#FF8800;}
+.abgne-control ul li.current {background: #fff; color:#666666;}
+.abgne-control ul li.hover { background: #fff; color:#666666;}
 </style>
 </head>
 <body>

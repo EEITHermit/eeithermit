@@ -3,7 +3,11 @@ package com.hermit.iii.calendar.model;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class CalendarEventService {
+	//暫時不要用spring
+//	CalendarEventDAO_interface_hibernate resDAO = (CalendarEventJNDIDAO_spring)(new ClassPathXmlApplicationContext("Spring-model-JNDIcfg.xml")).getBean("CalendarEventDAO");
 	CalendarEventDAO_interface_hibernate resDAO = new CalendarEventJNDIDAO_hibernate();
 	public ArrayList<CalendarEventVO> selectByEmpAndTime(Integer empID,Timestamp start,Timestamp end){
 		return resDAO.selectByEmpAndTime(empID, start, end);

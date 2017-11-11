@@ -66,6 +66,7 @@ tr {
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </head>
 <body>
+<h1 style="text-align: center;margin-bottom:50px;margin-left:70px;">員工資料管理</h1>
 <div class="container" >
 <button class="btn info" onclick="javascrtpt:window.location.href='empInsert_include.jsp'">新增員工資料</button><p>
 	<table id="myTable"style="width:1130px;height:600px;" border="1">
