@@ -120,7 +120,7 @@ public class MemberNewServlet {
 			session.setAttribute("SMScode", smscode);
 			session.setAttribute("telholder", memTel);
 
-			return "redirect:/register/register_notice_page.jsp";
+			return "redirect:/register/register_notice_page.jsp?memAccount="+memAccount;
 		} catch (Exception e) {
 			errorMsgMap.put("Exception", e.getMessage());
 			return "register_page";
