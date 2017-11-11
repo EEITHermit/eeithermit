@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/appstore.css">
 <link href="http://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/appstore.js"></script>
-<link href='<%=request.getContextPath()%>/css/tupianqiehuan.css' rel='stylesheet' />
 <style>
 	a:link, a:visited, a:hover ,a:active{
 		color : white;

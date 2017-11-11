@@ -4,8 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src='<%=request.getContextPath()%>/js/tupianqiehuan.js'></script>
-<link href='<%=request.getContextPath()%>/css/tupianqiehuan.css' rel='stylesheet' />
 <style>
 ul, li {padding: 0;	margin: 0; list-style: none;}
 #abgne-block-20110317 {width: 1200px;	/* 圖片的寬 */	height: 600px;	/* 圖片的高 + 30 */}
