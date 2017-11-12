@@ -43,7 +43,7 @@ color: red;
 #insertTable{
 
 }
-</style>-
+</style>
 </head>
 <body>
 	<!-- 載入框架 -->
