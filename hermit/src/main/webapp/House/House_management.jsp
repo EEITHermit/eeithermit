@@ -46,6 +46,7 @@ color: red;
 </style>
 </head>
 <body>
+
 	<!-- 載入框架 -->
 	<jsp:include page="/fragment/back_side_page.jsp" />
 	<!-- bootstrap -->
