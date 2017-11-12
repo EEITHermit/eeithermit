@@ -128,7 +128,7 @@ ul, li {padding: 0;	margin: 0; list-style: none;}
 
 	</script>
 	<div>
-		<form id="modify" method="get" action="ADManagerServlet">
+		<form id="modify" method="get" action="<%=request.getContextPath()%>/admanager/ADManagerServlet">
 			<input type="hidden" name="action" value="getOneADManager"> <input
 				type="hidden" id="adNO" name="adNO">
 		</form>

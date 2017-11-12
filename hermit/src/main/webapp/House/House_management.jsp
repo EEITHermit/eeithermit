@@ -362,10 +362,10 @@ $(document).ready(function(){
 				var cell10=$("<td></td>").text(VO.waterRate);
 				var cell11=$("<td></td>").text(VO.powerRate);
 				var cell12;
-				if(VO.houseVideo != null){
-					cell12=$("<td></td>").html("<a href='https://www.youtube.com/watch?v="+VO.houseVideo+"'>"+VO.houseNO+"</a>");
-				}else{
+				if(VO.houseVideo == null || VO.houseVideo == ""){
 					cell12=$("<td></td>").text("無影片");
+				}else{
+					cell12=$("<td></td>").html("<a href='https://www.youtube.com/watch?v="+VO.houseVideo+"'>"+VO.houseNO+"</a>");
 				};
 				var cell13=$("<td></td>").text(VO.hType);
 				var cell14=$("<td></td>").text(VO.hForm);
