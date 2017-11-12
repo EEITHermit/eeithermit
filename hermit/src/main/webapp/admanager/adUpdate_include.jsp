@@ -28,7 +28,7 @@ float:left;
 <jsp:include page="/fragment/back_side_page.jsp" />
 
 <div class="container">
-	<form method="post" action="<%=request.getContextPath()%>/ADManagerServlet" id="form" enctype="multipart/form-data" >
+	<form method="post" action="<%=request.getContextPath()%>/EmpServlet" id="form" enctype="multipart/form-data" >
 	<div id="DIV1">
 		<label for="adImage">廣告圖片</label><br>
 		<input id="file" type="file">

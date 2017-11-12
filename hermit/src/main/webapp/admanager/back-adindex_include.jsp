@@ -62,7 +62,7 @@ tr {
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </head>
 <body>
-<h1 style="text-align: center;margin-bottom:50px;margin-left:70px;">廣告輪播管理</h1>
+<h1 style="text-align: center;margin-bottom:50px;margin-left:70px;margin-top:0px;">廣告輪播管理</h1>
 <div class="container" >
 <button class="btn info" onclick="javascrtpt:window.location.href='adInsert_include.jsp'">新增廣告</button><p>
 	<table id="myTable"style="width:1130px;height:600px;" border="1">
