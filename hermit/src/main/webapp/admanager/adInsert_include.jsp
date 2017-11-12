@@ -55,8 +55,7 @@ float:left
 						
 						<label for="adMessage">廣告訊息(限10字內)</label><br>
 						<input type="text" id="adMessage" name="adMessage" size="40" value="${adMessage}" placeholder="請輸入訊息..."><br><br>
-					</td>
-					<td>
+					
 						<label for="adTimeStart">廣告上架日期</label><br>
 						<input type="date" name="adTimeStart" value="${adTimeStart}" id="date1" size="60" placeholder="2014-09-18"><p/><br>
 						
