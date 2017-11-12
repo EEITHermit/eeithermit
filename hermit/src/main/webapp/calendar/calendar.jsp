@@ -35,7 +35,7 @@
 				結束時間：<input id="endTime"type="text" name="end"value=""readonly/><br/>
 				預約房屋：<input id="house"type="text" value="" disabled/><br/>
 					   <input id="house"type="hidden" name="house"value="" readonly/>
-				<p style="float:left">備註內容：</p><textarea id="ps" name="ps"style="resize:none"> </textarea><br/>
+				<p style="float:left">備註內容：</p><textarea id="ps" name="ps"style="resize:none" autofocus> </textarea><br/>
 			</fieldset>
 		</form>
 	</div>

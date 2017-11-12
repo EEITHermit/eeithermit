@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>房屋租賃狀態管理</title>
 <link rel="stylesheet" href="/hermit/css/bootstrap.min.css">
 <link rel="stylesheet" href="/hermit/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/hermit/css/datatables.min.css"/>
