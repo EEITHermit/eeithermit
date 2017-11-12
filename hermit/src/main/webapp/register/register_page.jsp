@@ -235,7 +235,7 @@
 			alert("Whoops! That is not an image.");
 			return;
 		}
-		iEdit.open(img, true, function(res) {
+		iEdit.open(img, false, function(res) {
 			$("#resultImg").attr("src", res);
 			txres = res;
 		});

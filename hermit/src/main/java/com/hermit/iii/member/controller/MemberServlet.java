@@ -213,6 +213,7 @@ public class MemberServlet extends HttpServlet {
 				Integer memInfract = 0;
 				memberSvc.addMember(memTel, memAccount, memPwd, memName, memGender, memEmail, memRegister, memStatus,
 						memInfract, memImage);
+
 				/**** 3.新增完成 ****/
 				smscode = new SendBySMS().Process(memTel); // 傳送簡訊驗證
 				session.setAttribute("SMScode", smscode);
@@ -376,13 +377,13 @@ public class MemberServlet extends HttpServlet {
 			String memTel = request.getParameter("memTel");
 
 			String memPwd = request.getParameter("memPwd");
-			String memPwdCheck=request.getParameter("memPwdCheck");
+			String memPwdCheck = request.getParameter("memPwdCheck");
 			String memPwdReg = "^[(a-zA-Z0-9@)]{2,10}$";
 			if (memPwd.trim().length() == 0) {
 				errorMsg.put("memPwd", "請輸入密碼");
 			} else if (!memPwd.trim().matches(memPwdReg)) {
 				errorMsg.put("memPwd", "格式不符合");
-			}else if(!memPwd.equals(memPwdCheck)){
+			} else if (!memPwd.equals(memPwdCheck)) {
 				errorMsg.put("memPwdCheck", "與修改的密碼不符");
 			}
 			String memName = request.getParameter("memName");
@@ -639,12 +640,12 @@ public class MemberServlet extends HttpServlet {
 			session.setAttribute("telholder", memTel);
 			response.sendRedirect("register/register_notice_page.jsp?memAccount=" + memAccount);
 		}
-		if("queryMem".equals(action)){
-			MemberService memdao=new MemberService();
-			Integer memNO=Integer.valueOf(request.getParameter("memNO"));
-			MemberVO vo=new MemberVO();
-			vo=memdao.getOneMember(memNO);
-			String memName=vo.getMemName();
+		if ("queryMem".equals(action)) {
+			MemberService memdao = new MemberService();
+			Integer memNO = Integer.valueOf(request.getParameter("memNO"));
+			MemberVO vo = new MemberVO();
+			vo = memdao.getOneMember(memNO);
+			String memName = vo.getMemName();
 			out.print(memName);
 			out.flush();
 			return;

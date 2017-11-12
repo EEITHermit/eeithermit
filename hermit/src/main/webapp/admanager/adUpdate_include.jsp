@@ -28,7 +28,7 @@ float:left;
 <jsp:include page="/fragment/back_side_page.jsp" />
 
 <div class="container">
-	<form method="post" action="<%=request.getContextPath()%>/ADManagerServlet" id="form" enctype="multipart/form-data" >
+	<form method="post" action="<%=request.getContextPath()%>/EmpServlet" id="form" enctype="multipart/form-data" >
 	<div id="DIV1">
 		<label for="adImage">廣告圖片</label><br>
 		<input id="file" type="file">
@@ -54,8 +54,6 @@ float:left;
 					<label for="adMessage">廣告訊息(限10字內)</label><br>
 					<input type="text" id="adMessage" name="adMessage" size="40" value="${adVO.adMessage}" placeholder="請輸入訊息..."><br><br>
 		
-				</td>
-				<td>
 					<label for="adTimeStart">廣告上架日期</label><br>
 					<input type="date" name="adTimeStart" value="${adVO.adTimeStart}" id="date1" size="60" placeholder="2014-09-18"><p/><br>
 					
