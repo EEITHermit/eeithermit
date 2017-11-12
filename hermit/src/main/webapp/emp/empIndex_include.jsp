@@ -17,8 +17,6 @@ img {
 	padding: 5px 5px 5px 5px;
 }
 
-
-
 td {
 	width:450px;
 	height:150px;
@@ -29,12 +27,10 @@ th {
 	height:100px;
 }
 
-
 tr {
 	width:200px;
 	height:100px;
 }
-
 
 .success {background-color: #4CAF50;} /* Green */
 .success:hover {background-color: #46a049;}
@@ -66,7 +62,7 @@ tr {
 <script src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </head>
 <body>
-<h1 style="text-align: center;margin-bottom:50px;margin-left:70px;">員工資料管理</h1>
+<h1 style="text-align: center;margin-bottom:50px;margin-left:70px;margin-top:0px;">員工資料管理</h1>
 <div class="container" >
 <button class="btn info" onclick="javascrtpt:window.location.href='empInsert_include.jsp'">新增員工資料</button><p>
 	<table id="myTable"style="width:1130px;height:600px;" border="1">
