@@ -198,10 +198,10 @@ padding-right:200px;
 				<label class="col-md-5 control-label" for="houseSize">影片連結</label>
 					<div class="col-xs-2"  style="background-color:white;">
 						<input type="hidden" value="${vo.houseVideo}" name="houseVideo" id="houseVideo" class="form-control">
-						<c:if test="${vo.houseVideo != null}">
+						<c:if test="${vo.houseVideo != null && vo.houseVideo != ''}">
 							<a id="link" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
 						</c:if>
-						<c:if test="${vo.houseVideo == null || vo.houseVideo == ''}">
+						<c:if test="${vo.houseVideo == null || empty vo.houseVideo}">
 							<a id="link"style="display:none" href="https://www.youtube.com/watch?v=${vo.houseVideo}">${vo.houseTitle}</a>
 							<h3 style="margin-top:10px;margin-left:10px;">無影片</h3>
 						</c:if>
