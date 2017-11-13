@@ -30,6 +30,12 @@ public class AdvancedSearch extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		//子查詢抓取 firsthousePicture 版
+		String searchStr2 = "select h.houseNO,h.houseTitle,h.houseStatus,t.hType,f.hForm,c.cityName,b.boroughName,h.houseAddr,h.houseRent,h.cityNO,h.houseSize,hPic.hPicture"
+							+"from housePicture hPic join (select HouseNO, min(housePictureNO) firstHousePicNO from HousePicture group by HouseNO ) as minPic on (hPic.houseNO = minPic.houseNO) and (hPic.housePictureNO = minPic.firstHousePicNO)"
+							+"join House h on hPic.houseNO =  h.houseNO join HouseForm f on f.formNO = h.formNO join HouseType t on t.typeNO = h.typeNO join Boroughs b on b.boroughNO = h.boroughNO join city c on c.cityNO = h.cityNO join equipmentCondition eq on eq.houseNO = h.houseNO" +
+							"order by h.houseNO";
+		//利用preview欄位查詢版
 		String searchStr =  
 				"SELECT DISTINCT h.houseNO,h.houseTitle,c.cityName,b.boroughName,h.previewPic,h.highestFloor,h.nowFloor,h.houseRent,t.hType,f.hForm,h.houseAddr,h.houseSize "
 				+ "FROM house h JOIN equipmentCondition eq ON h.houseNO = eq.houseNO JOIN City c ON h.cityNO = c.cityNO JOIN Boroughs b ON h.boroughNO = b.boroughNO JOIN HouseType t ON h.typeNO = t.typeNO JOIN HouseForm f ON h.formNO = f.formNO "
