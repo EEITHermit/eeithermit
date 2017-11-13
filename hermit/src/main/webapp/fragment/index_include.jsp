@@ -585,8 +585,8 @@ nav.main-nav:hover {
 
 			<div id="cd-reset-password">
 				<!-- reset password form -->
-				<p class="cd-form-message">Lost your password? Please enter your
-					Account. You will receive a link to create a new password.</p>
+				<p class="cd-form-message">忘記你的密碼了嗎?請輸入你申請的帳號，
+				會寄送重新設定密碼的Mail到你的信箱內，再點選裡面的連結設定你的新密碼。</p>
 
 				<form class="cd-form" method="POST">
 

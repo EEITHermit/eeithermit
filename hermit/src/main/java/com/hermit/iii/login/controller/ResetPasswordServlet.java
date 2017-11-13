@@ -53,8 +53,10 @@ public class ResetPasswordServlet extends HttpServlet {
 		MemberVO memVO = daSP.findByAccount(memAccount);// 取得帳號資訊
 		memVO.setMemPwd(newPassword);
 		daSP.update(memVO);
-		request.setAttribute("pwdModifyMsg", "密碼修改成功！");
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		// request.setAttribute("pwdModifyMsg", "密碼修改成功！");
+		// request.getRequestDispatcher("/index.jsp").forward(request,
+		// response);
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
