@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>合約管理</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>

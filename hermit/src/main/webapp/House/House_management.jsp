@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>房屋物件管理</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
@@ -460,7 +460,7 @@ $(document).ready(function(){
 		    alert("Whoops! That is not an image.");
 		    return;
 		  }
-		  iEdit.open(img, true, function(res){
+		  iEdit.open(img, false, function(res){
 		    $("#result").attr("src", res);
 		  });
 		  //在檔案送出前，讓image的src送到input裡

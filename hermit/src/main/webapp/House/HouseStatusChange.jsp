@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>房屋租賃狀態管理</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datatables.min.css"/>
@@ -43,7 +43,7 @@ font-size:18px;
 #insertTable{
 back-ground-color:black;
 }
-</style>-
+</style>
 </head>
 <body>
 	<!-- 載入框架 -->
