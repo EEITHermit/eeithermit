@@ -25,11 +25,11 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 	private static final String GET_ALL_STMT = "SELECT qaNO,memNO,empNO,houseNO,qTime,aTime,qaType,qDetail,aDetail FROM QandA ORDER BY qaNO";
 	//用memberNO查詢Q&A
 	private static final String GET_ALL_BY_MEMBER_NO = "SELECT * FROM QandA Q "
-			+ " JOIN house H ON Q.houseNO = H.houseNO where memNO = ? ORDER BY qTime DESC";
+			+ " JOIN house H ON Q.houseNO = H.houseNO where memNO = ? ORDER BY qaNO DESC";
 	//用emp查詢boroughNO 來查詢Q&A
 	private static final String GET_ALL_BY_BOROUGH_NO = "SELECT * FROM QandA Q "
 			+ " JOIN house H ON Q.houseNO = H.houseNO "
-			+ "JOIN Member M ON Q.memNO = M.memNO where boroughNO = ? AND empNO IS NULL";
+			+ "JOIN Member M ON Q.memNO = M.memNO where boroughNO = ? AND empNO IS NULL ORDER BY qaNO";
 	@Override
 	public void insert(QandAVO qandaVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -120,7 +120,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 		return array;
 	}
 	//OK
-	private static String GET_ALL_BY_BOROUGH_NO0_H = "FROM QandAVO where qaType = 0 AND houseVO.boroughsVO.boroughNO = ? AND empNO IS NULL";
+	private static String GET_ALL_BY_BOROUGH_NO0_H = "FROM QandAVO where qaType = 0 AND (houseVO.boroughsVO.boroughNO = ?) AND (empNO IS NULL) ORDER BY qaNO";
 	@Override
 	public ArrayList<QandAVO> getAllByBoroughNO0(Integer boroughNO) {
 		ArrayList<QandAVO> array = new ArrayList<QandAVO>();
@@ -129,7 +129,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 			session.getTransaction().begin();
 			Query query = session.createQuery(GET_ALL_BY_BOROUGH_NO0_H);
 			query.setParameter(0, boroughNO);
-			List list = query.list();
+			List<QandAVO> list = query.list();
 			array.addAll(list);
 			session.getTransaction().commit();
 		}catch(Exception se) { // Handle any SQL errors
@@ -139,7 +139,7 @@ public class QandAJNDIDAO_hibernate implements QandADAO_interface_hibernate {
 		return array;
 	}
 	//OK
-		private static String GET_ALL_BY_BOROUGH_NO1_H = "FROM QandAVO where qaType = 1 AND houseVO.boroughsVO.boroughNO = ? AND empNO IS NULL";
+		private static String GET_ALL_BY_BOROUGH_NO1_H = "FROM QandAVO where qaType = 1 AND houseVO.boroughsVO.boroughNO = ? AND empNO IS NULL ORDER BY qaNO";
 		@Override
 		public ArrayList<QandAVO> getAllByBoroughNO1(Integer boroughNO) {
 			ArrayList<QandAVO> array = new ArrayList<QandAVO>();
