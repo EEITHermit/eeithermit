@@ -575,6 +575,7 @@ table {
 		});
 		setTimeout(match,3000);
 	}
+	
 </script>
 </body>
 </html>

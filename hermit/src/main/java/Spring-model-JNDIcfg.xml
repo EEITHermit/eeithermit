@@ -21,6 +21,15 @@
             <list> 
                 <value>com/hermit/iii/member/model/Member.hbm.xml</value> 
 <!--                 <value>com/hermit/iii/calendar/model/CalendarEvent.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/emp/model/Emp.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/teammemberlist/model/TeamMemberList.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/businTeam/model/BusinTeam.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/teamArea/model/TeamArea.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/boroughs/model/Boroughs.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/house/model/House_hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/houseform/model/HouseForm.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/housepicture/model/HousePicture.hbm.xml</value>  -->
+<!--                 <value>com/hermit/iii/housepicture/model/HousePicture.hbm.xml</value>  -->
             </list> 
         </property> 
         <property name="hibernateProperties"> 

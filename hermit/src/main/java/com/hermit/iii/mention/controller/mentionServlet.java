@@ -86,9 +86,9 @@ public class mentionServlet extends HttpServlet {
 						qaArray.addAll(qaService.getAllByBoroughNO0(boroughNO));
 					//管理員帳戶
 					}else if(postNO == 310){
-						resArray.addAll(reservation.selectByArea(boroughNO));
-						qaArray.addAll(qaService.getAllByBoroughNO1(boroughNO));
-						qaArray.addAll(qaService.getAllByBoroughNO0(boroughNO));
+//						resArray.addAll(reservation.selectByArea(boroughNO));
+//						qaArray.addAll(qaService.getAllByBoroughNO1(boroughNO));
+//						qaArray.addAll(qaService.getAllByBoroughNO0(boroughNO));
 					
 					}
 				}
