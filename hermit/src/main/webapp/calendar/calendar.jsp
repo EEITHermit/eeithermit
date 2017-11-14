@@ -346,8 +346,8 @@
 		//設定推播頁面傳來之請求，開啟新增方塊
 		if("${param.mission}" == "mentionInsert"){
 			dialogIn.dialog("open");
-			var memberIn = "${param.member}\t";
-			var houseIn = "${param.house}\t";
+			var memberIn = "${param.member}\t${param.memberName}";
+			var houseIn = "${param.house}\t${param.houseAddr}";
 			$("#memberIn").val(memberIn);
 			$("#houseIn").val(houseIn);
 		}

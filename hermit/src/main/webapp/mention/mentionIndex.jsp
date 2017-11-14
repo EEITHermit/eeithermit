@@ -479,10 +479,12 @@ table {
 				var resNO = $($(this).parents("tr").find("td")[0]).text();
 				var empNO = $("#empNO").val();
 				var memNO = $($(this).parents("tr").find("td")[1]).text();
+				var memName = $($(this).parents("tr").find("td")[2]).text();
 				var houseNO = $($(this).parents("tr").find("td")[5]).text();
+				var houseAddr = $($(this).parents("tr").find("td")[6]).children("a").text();
 				$.post("<%=request.getContextPath()%>/mentionServlet?mission=takeOver",{resNO:resNO,empNO:empNO},function(data){
 					alert(data);
-					window.location = "<%=request.getContextPath()%>/calendar/calendar.jsp?mission=mentionInsert&member="+memNO+"&house="+houseNO;
+					window.location = "<%=request.getContextPath()%>/calendar/calendar.jsp?mission=mentionInsert&member="+memNO+"&memberName="+memName+"&houseAddr="+houseAddr+"&house="+houseNO;
 				});
 				$(this).text("已處理").attr("disabled",true);
 			}
