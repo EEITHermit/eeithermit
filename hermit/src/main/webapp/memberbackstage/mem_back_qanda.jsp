@@ -165,7 +165,7 @@ a:link, a:visited, a:hover, a:active {
 											</tr>
 										</thead>
 								<style>
-								a:link,a:hover{
+								a:hover{
 									color : blue;
 	    							text-decoration: none;
 	    							padding: 0px;
@@ -189,8 +189,8 @@ a:link, a:visited, a:hover, a:active {
 														href="<%=request.getContextPath()%>/HousePage?NO=${qaVO.houseVO.houseNO}">${qaVO.houseVO.houseTitle}</a></td>
 													<c:if test="${qaVO.qDetail.length()>10}">
 														<td>
-															<p><span>${qaVO.qDetail.substring(0,10)}...</span><a onclick="more(event)" style="font-size:10px;float:right;">展開內容</a></p>
-															<p style="display:none;"><span>${qaVO.qDetail}</span><a onclick="less(event)" style="font-size:10px;float:right;">收起</a></p>
+															<div><span>${qaVO.qDetail.substring(0,10)}...</span><a onclick="more(event)" style="font-size:10px;float:right;">展開內容</a></div>
+															<div style="display:none;"><span>${qaVO.qDetail}</span><a onclick="less(event)" style="font-size:10px;float:right;">收起</a></div>
 														</td>
 													</c:if>
 													<c:if test="${qaVO.qDetail.length()<=10}">
@@ -199,8 +199,8 @@ a:link, a:visited, a:hover, a:active {
 													<td>${qaVO.aTime}</td>
 													<c:if test="${qaVO.aDetail.length()>10}">
 														<td>
-															<p><span>${qaVO.aDetail.substring(0,10)}...</span><a onclick="more(event)" style="font-size:10px;float:right;">展開內容</a></p>
-															<p style="display:none;"><span>${qaVO.aDetail}</span><a onclick="less(event)" style="font-size:10px;float:right;">收起</a></p>
+															<div><span>${qaVO.aDetail.substring(0,10)}...</span><a onclick="more(event)" style="font-size:10px;float:right;">展開內容</a></div>
+															<div style="display:none;"><span>${qaVO.aDetail}</span><a onclick="less(event)" style="font-size:10px;float:right;">收起</a></div>
 														</td>
 													</c:if>
 													<c:if test="${qaVO.aDetail.length()<=10||qaVO.aDetail==null}">
@@ -305,12 +305,12 @@ a:link, a:visited, a:hover, a:active {
 		document.addEventListener("DOMContentLoaded", work);
 		//縮減回覆及回報內容
 		function more(event){
-			$(event.target).parents("td").find("p").eq(0).toggle(false);
-			$(event.target).parents("td").find("p").eq(1).toggle(true);
+			$(event.target).parents("td").find("div").eq(0).toggle(false);
+			$(event.target).parents("td").find("div").eq(1).toggle(true);
 		}
 		function less(event){
-			$(event.target).parents("td").find("p").eq(0).toggle(true);
-			$(event.target).parents("td").find("p").eq(1).toggle(false);
+			$(event.target).parents("td").find("div").eq(0).toggle(true);
+			$(event.target).parents("td").find("div").eq(1).toggle(false);
 		}
 		function work() {
 			
